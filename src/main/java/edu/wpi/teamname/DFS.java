@@ -1,59 +1,21 @@
 package edu.wpi.teamname;
+import java.util.Hashtable;
 
 public class DFS {
-  private boolean[] marked; // marked[v] = is there an s-v path?
-  private int count; // number of vertices connected to s
+  public Hashtable<node, Boolean> marked; // passes in node as key, returns true if node is marked, null otherwise
 
-  public DFS(UndirectedGraph G, int s) {
-    marked = new boolean[G.V()];
-    validateVertex(s);
-    dfs(G, s);
+  public DFS(node s) {
+    marked = new Hashtable<node, Boolean>();
+    dfs(s);
   }
 
-  // depth first search from v
-  private void dfs(UndirectedGraph G, int v) {
-    count++;
-    marked[v] = true;
-    for (int w : G.adj(v)) {
-      if (!marked[w]) {
-        dfs(G, w);
+  // depth first search from node s
+  private void dfs(node s) {
+    marked.put(s, true); //marks current node as visited
+    for (edge w : s.edges) { // for every edge beginning from node s (source)
+      if (marked.get(w.endNode) == null) { // if node has not been reached yet, search it
+        dfs(w.endNode);
       }
     }
-  }
-
-  public boolean marked(int v) {
-    validateVertex(v);
-    return marked[v];
-  }
-
-  public int count() {
-    return count;
-  }
-
-  // throw an IllegalArgumentException unless {@code 0 <= v < V}
-  private void validateVertex(int v) {
-    int V = marked.length;
-    if (v < 0 || v >= V)
-      throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
-  }
-
-  public static void main(String[] args) {
-    UndirectedGraph G = new UndirectedGraph(6);
-    G.addEdge(0, 3);
-    G.addEdge(0, 2);
-    G.addEdge(1, 4);
-    G.addEdge(2, 4);
-    G.addEdge(4, 5);
-    G.addEdge(2, 5);
-
-    int source = 5;
-    DFS search = new DFS(G, source);
-    for (int v = 0; v < G.V(); v++) {
-      if (search.marked(v)) System.out.print(v + " ");
-    }
-
-    System.out.println();
-    if (search.count() != G.V()) System.out.println("NOT connected");
-    else System.out.println("connected");
   }
 }

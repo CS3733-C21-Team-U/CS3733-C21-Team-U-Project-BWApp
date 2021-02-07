@@ -11,6 +11,7 @@ public class edge {
     this.startNode = _startNode;
     this.endNode = _endNode;
     this.weight = calcWeight(_startNode, _endNode);
+    _startNode.edges.add(this); // links this edge to beginning node
   }
 
   private double calcWeight(node _startNode, node _endNode) {

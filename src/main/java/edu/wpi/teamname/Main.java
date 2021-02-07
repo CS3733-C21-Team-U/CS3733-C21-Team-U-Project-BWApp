@@ -8,20 +8,19 @@ public class Main {
     node C = new node(3, 2.5, 1.5);
     node D = new node(4, 1, 2.5);
     node E = new node(5, -0.5, 1.5);
+    node F = new node(6, -1, 2);
 
-    edge F = new edge(1, A, B);
-    edge G = new edge(2, B, C);
-    edge H = new edge(3, C, D);
-    edge I = new edge(4, D, E);
-    edge J = new edge(5, E, A);
-    edge K = new edge(6, A, D);
-    edge L = new edge(7, A, C);
+    edge G = new edge(1, A, D);
+    edge H = new edge(2, B, E);
+    edge I = new edge(3, C, E);
+    edge J = new edge(4, E, F);
+    edge K = new edge(5, C, F);
+    edge L = new edge(6, F, C);
 
-    edge[] edges = {F, G, H, I, J, K, L};
+    DFS search = new DFS(E); // starting node
 
-    weightedGraph theGraph = new weightedGraph(edges);
-
-    theGraph.printGraph();
+    if (search.marked.get(C) != null) System.out.println("C is connected");
+    else System.out.println("NOT connected");
     App.launch(App.class, args);
   }
 }
