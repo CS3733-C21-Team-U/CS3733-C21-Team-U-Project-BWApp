@@ -40,21 +40,14 @@ public class weightedGraph {
     }
   }
 
-  public node[] adj(node _curNode){
+  public node[] adj(node _curNode) {
     LinkedList<edge> list = adjacencyList[_curNode.nodeID];
-    node[] returnMe = new node [list.size()];
+    node[] returnMe = new node[list.size()];
 
-    for(int i = 0; i  < list.size(); i++){
+    for (int i = 0; i < list.size(); i++) {
       returnMe[i] = list.get(i).endNode;
     }
 
-    return  returnMe;
+    return returnMe;
   }
-
-  public node[] listAllNodes(){
-    node[] returnMe = new node[];
-
-
-  }
-
 }
