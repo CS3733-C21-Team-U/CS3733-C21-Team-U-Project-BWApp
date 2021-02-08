@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainPage {
@@ -18,11 +21,27 @@ public class MainPage {
   @FXML private Button btnKaamil;
 
   // Kaamil section
-  @FXML private Button btnKaamilHome;
+  @FXML private TextField inputKaamil;
 
-  @FXML private Button setText;
+  @FXML private Label msgKaamil;
 
-  @FXML private Button textSet;
+  @FXML private AnchorPane anchor;
+
+  private String cssSheet =
+      "file:/C:/Users/Kaam9/Documents/WPI/CS/Soft/CS3733-C21-Team-U-Project-BWApp/build/resources/main/edu/wpi/teamname/views/styles/Kaamil2.css";
+
+  @FXML
+  private void updateMessage() {
+    msgKaamil.setText(inputKaamil.getText());
+  }
+
+  @FXML
+  private void toggleColor() {
+    // edit css code here
+    String oldCss = cssSheet;
+    cssSheet = anchor.getStylesheets().get(0);
+    anchor.getStylesheets().set(0, oldCss); // switch css sheet
+  }
 
   @FXML
   private void handleButtonAction(ActionEvent event) throws IOException {
