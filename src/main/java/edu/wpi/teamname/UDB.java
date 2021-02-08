@@ -3,17 +3,32 @@ package edu.wpi.teamname;
 import java.sql.*;
 
 public class UDB {
+
   private Connection conn = null;
   private Statement stmt;
   private ResultSet rset;
   private String url = "jdbc:derby:UDB;create=true";
+  private static int option;
+
+  public static void main(String args[]) {
+    if (args.length < 5) {
+      System.out.println(
+          "1 - Report Museum Information\n"
+              + "2 - Report Paintings in Museums\n"
+              + "3 - Update Museum Phone Number\n"
+              + "4 - Exit Program\n");
+    } else {
+      option = Integer.parseInt(args[4]);
+    }
+  }
 
   public UDB() {
     driver();
     connect();
-    init();
-    insertData();
-    printMuseums();
+    // init();
+    // insertData();
+    // printMuseums();
+    printByName();
     // stop();
   }
 
@@ -101,11 +116,11 @@ public class UDB {
       stmt = conn.createStatement();
       String str = "select * from Museums";
       rset = stmt.executeQuery(str);
-      int id = rset.getInt("id");
-      String name = rset.getString("name");
-      String phone = rset.getString("phone");
       while (rset.next()) {
-        System.out.println("ID: " + id + " Name: " + name + " Location: " + phone + "\n");
+        int id = rset.getInt("id");
+        String name = rset.getString("name");
+        String phone = rset.getString("phone");
+        System.out.println("ID:" + id + " Name:" + name + " Location:" + phone + "\n");
       }
       rset.close();
     } catch (Exception e) {
@@ -116,7 +131,38 @@ public class UDB {
   /*
   Needs to be written
   */
-  public void printByName() {}
+  public void printByName() {
+    // prints name of each museum followed by the paintings in them
+    try {
+      String str2;
+      ResultSet rset2;
+      stmt = conn.createStatement();
+      String str = "select * from Paintings";
+      rset = stmt.executeQuery(str);
+      while (rset.next()) {
+        int museum_id = rset.getInt("museum");
+        String name = rset.getString("name");
+        String artist = rset.getString("artist");
+        str2 = "select name from Museums where id=?";
+        PreparedStatement ps = conn.prepareStatement(str2);
+        ps.setInt(1, museum_id);
+        rset2 = ps.executeQuery();
+        if (rset2.next()) {
+          System.out.println(
+              "Museum: "
+                  + rset2.getString("name")
+                  + " Name of Painting: "
+                  + name
+                  + " Artist: "
+                  + artist);
+        }
+        rset2.next();
+      }
+    } catch (Exception e) {
+      System.out.println("Failed to get museums and paintings");
+      e.printStackTrace();
+    }
+  }
 
   /*
   Needs to be written
