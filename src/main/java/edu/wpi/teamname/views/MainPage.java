@@ -18,6 +18,11 @@ public class MainPage {
 
   @FXML private Button btnKohmei;
 
+
+  @FXML private Button btnTyler;
+
+  @FXML private Button btnLily;
+
   @FXML private Button btnKaamil;
 
   // Kaamil section
@@ -43,6 +48,7 @@ public class MainPage {
     anchor.getStylesheets().set(0, oldCss); // switch css sheet
   }
 
+
   @FXML
   private void handleButtonAction(ActionEvent event) throws IOException {
     Stage stage;
@@ -63,12 +69,24 @@ public class MainPage {
       // load up OTHER FXML document
       root = FXMLLoader.load(getClass().getResource("../views/Kohmei.fxml"));
 
+
+    } else if (btnTyler == source) {
+
+      // get reference to the button's stage
+      stage = (Stage) btnTyler.getScene().getWindow();
+      // load up OTHER FXML document
+      root = FXMLLoader.load(getClass().getResource("../views/tyler.fxml"));
+
+    } else if (btnLily == source) {
+
     } else if (btnKaamil == source) {
+
 
       // get reference to the button's stage
       stage = (Stage) btnKohmei.getScene().getWindow();
       // load up OTHER FXML document
       root = FXMLLoader.load(getClass().getResource("../views/Kaamil.fxml"));
+
 
     } else { // code block
       System.out.println("Switch for button handler had a non-exsistent source");
