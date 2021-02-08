@@ -4,14 +4,15 @@ import java.util.LinkedList;
 
 public class node {
   int nodeID;
-  public double xcoord;
-  public double ycoord;
+  double xcoord;
+  double ycoord;
   String building;
   String nodeType;
   String longName;
   String shortName;
   String teamAssigned;
   LinkedList<edge> edges;
+  double distanceToGoal;
 
   // full constructor
   public node(
@@ -33,11 +34,23 @@ public class node {
     this.teamAssigned = _teamAssigned;
     this.edges = new LinkedList<edge>();
   }
+
+  // For AStar
+  public void setDistToGoal(node destination) {
+    double dx = Math.abs(this.xcoord - destination.xcoord);
+    double dy = Math.abs(this.ycoord - destination.ycoord);
+
+    double distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+    this.distanceToGoal = distance;
+  }
+
   // simple constructor
-  public node(int _nodeID, double _xcoord, double _ycoord) {
+  public node(int _nodeID, double _xcoord, double _ycoord, Graph graph) {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
     this.edges = new LinkedList<edge>();
+    graph.addNode(this);
   }
 }
