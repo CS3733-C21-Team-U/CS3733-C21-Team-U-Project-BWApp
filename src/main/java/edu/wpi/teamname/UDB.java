@@ -4,37 +4,40 @@ import java.sql.*;
 
 public class UDB {
 
-  private Connection conn = null;
-  private Statement stmt;
-  private ResultSet rset;
-  private String url = "jdbc:derby:UDB;create=true";
-  private static int option;
+  private Connection conn = null; // used for connection
+  private Statement stmt; // used for sql statements
+  private ResultSet rset; // used to store returns from sql queries
+  private String url =
+      "jdbc:derby:UDB;create=true;user=admin;password=admin"; // link of embedded database
+  private static int option; // used to know what function to run
+
+  private int flag; // flag for detecting if first time running 
 
   public static void main(String args[]) {
-    if (args.length < 5) {
-      System.out.println(
-          "1 - Report Museum Information\n"
-              + "2 - Report Paintings in Museums\n"
-              + "3 - Update Museum Phone Number\n"
-              + "4 - Exit Program\n");
-    } else {
-      option = Integer.parseInt(args[4]);
-    }
+    // Input logic
   }
 
   public UDB() {
+    /*
+    Always run driver() & connect().
+    init(), insertData() only run on creation
+    stop() only run on exit (option 4)
+    All other functions are options based
+     */
     driver();
     connect();
+    // createAdmin();
     // init();
     // insertData();
     // printMuseums();
-    printByName();
+    // printByName();
     // stop();
   }
 
   public void driver() {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      // registers the driver for the database
     } catch (Exception e) {
       System.out.println("Driver registration failed");
       e.printStackTrace();
@@ -45,6 +48,7 @@ public class UDB {
   public void connect() {
     try {
       conn = DriverManager.getConnection(url);
+      // establishes a connection to the database
     } catch (Exception e) {
       System.out.println("Connection failed");
       e.printStackTrace();
@@ -52,12 +56,24 @@ public class UDB {
     System.out.println("Connection succeeded");
   }
 
+  public void createAdmin() {
+    try {
+      stmt = conn.createStatement();
+      String str = "call syscs_util.syscs_create_user('admin', 'admin')";
+      stmt.execute(str);
+    } catch (Exception e) {
+      System.out.println("Failed to create user");
+      e.printStackTrace();
+    }
+  }
+
   public void init() {
     try {
-      Statement stmt = conn.createStatement();
+      Statement stmt = conn.createStatement(); // creates statement
       String tbl1 =
           "create table Museums (id int not null generated always as identity, paintings int not null, name varchar(50), phone varchar(50), primary key (id))";
-      stmt.execute(tbl1);
+      // code for creating table of Museums
+      stmt.execute(tbl1); // executes the sql in tbl1 string
       String tbl2 =
           "create table Paintings (id int not null generated always as identity, name varchar(50), artist varchar(50), museum int not null references Museums, primary key(id))";
       stmt.execute(tbl2);
@@ -115,35 +131,36 @@ public class UDB {
     try {
       stmt = conn.createStatement();
       String str = "select * from Museums";
+      // gets all column data from Museums
       rset = stmt.executeQuery(str);
-      while (rset.next()) {
-        int id = rset.getInt("id");
-        String name = rset.getString("name");
-        String phone = rset.getString("phone");
+      // store the data inside of a ResultSet object
+      while (rset.next()) { // iterates through the object row by row
+        int id = rset.getInt("id"); // gets value at column id
+        String name = rset.getString("name"); // gets value at column name
+        String phone = rset.getString("phone"); // gets value at column phone
         System.out.println("ID:" + id + " Name:" + name + " Location:" + phone + "\n");
       }
-      rset.close();
+      rset.close(); // close the object
     } catch (Exception e) {
       System.out.println("Failed to select from Museums");
     }
   }
 
-  /*
-  Needs to be written
-  */
   public void printByName() {
     // prints name of each museum followed by the paintings in them
     try {
       String str2;
       ResultSet rset2;
       stmt = conn.createStatement();
-      String str = "select * from Paintings";
+      String str = "select * from Paintings"; // we want all paintings info
       rset = stmt.executeQuery(str);
       while (rset.next()) {
-        int museum_id = rset.getInt("museum");
+        int museum_id = rset.getInt("museum"); // get the id from the museum
         String name = rset.getString("name");
         String artist = rset.getString("artist");
-        str2 = "select name from Museums where id=?";
+        str2 =
+            "select name from Museums where id=?"; // will get the museum name given it equals the
+        // corresponding 'Paintings' museum id
         PreparedStatement ps = conn.prepareStatement(str2);
         ps.setInt(1, museum_id);
         rset2 = ps.executeQuery();
@@ -167,18 +184,29 @@ public class UDB {
   /*
   Needs to be written
   */
-  public void updatePhoneNumber(int museum_number) {}
+  public void updatePhoneNumber(String museum, int new_phone_number) {
+    try {
+      String str = "update Museums set phone=? where name=?";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ps.setInt(1, new_phone_number);
+      ps.setString(1, museum);
+      ps.execute();
+    } catch (Exception e) {
+      System.out.println("Failed to update phone number");
+      e.printStackTrace();
+    }
+  }
   /*
   Only run when given the stop command of '4'
    */
   public void stop() {
     try {
       stmt = conn.createStatement();
-      String str = "alter table Paintings drop column museum";
+      String str = "alter table Paintings drop column museum"; // drops the foreign key
       stmt.execute(str);
-      str = "drop table Paintings";
+      str = "drop table Paintings"; // drops the table
       stmt.execute(str);
-      str = "drop table Museums";
+      str = "drop table Museums"; // drops the table
       stmt.execute(str);
       stmt.close();
       conn.close();
