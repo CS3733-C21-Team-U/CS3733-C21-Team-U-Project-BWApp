@@ -17,7 +17,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("views/Kohmei.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("views/MainPage.fxml"));
 
     //
     // root.getStylesheets().add(getClass().getResource("views/stylesheet.css").toExternalForm());
