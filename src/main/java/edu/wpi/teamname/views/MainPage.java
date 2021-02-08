@@ -15,6 +15,8 @@ public class MainPage {
 
   @FXML private Button btnKohmei;
 
+  @FXML private Button btnTyler;
+
   @FXML
   private void handleButtonAction(ActionEvent event) throws IOException {
     Stage stage;
@@ -34,6 +36,13 @@ public class MainPage {
       stage = (Stage) btnKohmei.getScene().getWindow();
       // load up OTHER FXML document
       root = FXMLLoader.load(getClass().getResource("../views/Kohmei.fxml"));
+
+    } else if (btnTyler == source) {
+
+      // get reference to the button's stage
+      stage = (Stage) btnTyler.getScene().getWindow();
+      // load up OTHER FXML document
+      root = FXMLLoader.load(getClass().getResource("../views/tyler.fxml"));
 
     } else { // code block
       System.out.println("Switch for button handler had a non-exsistent source");
