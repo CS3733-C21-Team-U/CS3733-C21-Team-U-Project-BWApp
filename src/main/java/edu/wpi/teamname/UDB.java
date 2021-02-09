@@ -1,7 +1,9 @@
 package edu.wpi.teamname;
 
+
 import java.sql.*;
 import java.util.Scanner;
+import java.util.*;
 import static java.lang.System.exit;
 
 public class UDB {
@@ -13,20 +15,25 @@ public class UDB {
       "jdbc:derby:UDB;user=admin;password=admin;create=true"; // link of embedded database
   private static int option; // used to know what function to run
 
-  public static void main(String[] args) {
 
+  public static void main(String[] args) { // java -jar path username admin option
     Scanner s = new Scanner(System.in);
-    System.out.println(
-        "1-Report Museum Information\n"
-            + "2-Report Paintings in Museums\n"
-            + "3-Update Museum Phone Number\n"
-            + "4-Exit Program");
+    if (args.length > 2 && Integer.parseInt(args[2]) < 5){
+      option = Integer.parseInt(args[2]);
+    }
+    else {
+      System.out.println(
+              "1-Report Museum Information\n"
+                      + "2-Report Paintings in Museums\n"
+                      + "3-Update Museum Phone Number\n"
+                      + "4-Exit Program");
+      System.out.println("Please enter an option");
+      option = s.nextInt();
+    }
     driver();
     connect();
     init();
     insertData();
-    System.out.println("Please enter an option");
-    option = s.nextInt();
     while (option != 4) {
       switch (option) {
         case 1:
@@ -46,10 +53,10 @@ public class UDB {
           break;
         default:
           System.out.println(
-              "1-Report Museum Information\n"
-                  + "2-Report Paintings in Museums\n"
-                  + "3-Update Museum Phone Number"
-                  + "4-Exit Program");
+                  "1-Report Museum Information\n"
+                          + "2-Report Paintings in Museums\n"
+                          + "3-Update Museum Phone Number"
+                          + "4-Exit Program");
           option = s.nextInt();
           break;
       }
@@ -58,9 +65,9 @@ public class UDB {
     stop();
   }
 
-  public UDB() {
-    String[] arr = {};
-    main(arr);
+  public UDB(List<String> p) {
+    String[] s = p.toArray(new String[0]);
+    main(s);
   }
 
   public static void driver() {
