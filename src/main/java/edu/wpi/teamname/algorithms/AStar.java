@@ -1,4 +1,4 @@
-package edu.wpi.teamname;
+package edu.wpi.teamname.algorithms;
 
 public class AStar {
 
@@ -7,11 +7,10 @@ public class AStar {
     for (node n : graph.getNodes()) { // sets optimistic distance from any node to the goal
       n.setDistToGoal(goal);
     }
-
-    System.out.println(this.ToString(graph)); // Test print showing distToGoal worked
   }
 
-  private String ToString(Graph graph) {
+  //Print Strings for testing
+  public String Heuristic(Graph graph) {
     String NEWLINE = System.getProperty("line.separator");
     StringBuilder s = new StringBuilder();
     int N = graph.getNodes().size();
