@@ -31,8 +31,7 @@ public class MainPage {
 
   @FXML private AnchorPane anchor;
 
-  private String cssSheet =
-      "file:/C:/Users/Kaam9/Documents/WPI/CS/Soft/CS3733-C21-Team-U-Project-BWApp/build/resources/main/edu/wpi/teamname/views/styles/Kaamil2.css";
+  private String cssSheet = null;
 
   @FXML
   private void updateMessage() {
@@ -42,6 +41,11 @@ public class MainPage {
   @FXML
   private void toggleColor() {
     // edit css code here
+    if (cssSheet == null) {
+      cssSheet = anchor.getStylesheets().get(0);
+      cssSheet = cssSheet.substring(0, cssSheet.length() - 10).concat("Kaamil2.css");
+    }
+
     String oldCss = cssSheet;
     cssSheet = anchor.getStylesheets().get(0);
     anchor.getStylesheets().set(0, oldCss); // switch css sheet

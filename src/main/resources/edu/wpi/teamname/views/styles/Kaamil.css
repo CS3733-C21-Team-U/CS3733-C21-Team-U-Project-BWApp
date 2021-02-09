@@ -13,7 +13,7 @@
 }
 
 .vertical-box{
-    -fx-background-color: #EED6D3;
+    -fx-background-color: #A49393;
     -fx-background-radius: 20;
     -fx-border-width: 3;
     -fx-border-radius: 20;
@@ -23,7 +23,7 @@
 .button{
     -fx-background-color: #E8B4B8;
     -fx-background-radius: 20;
-    -fx-border-color: #67595E;
+    -fx-border-color: #EED6D3;
     -fx-border-width: 3;
     -fx-border-radius: 20;
     -fx-background-insets: 2;
@@ -37,18 +37,15 @@
     -fx-background-color: #171105;
 }
 
-.check-box {
-    -fx-border-width: 3px;
-    -fx-border-color: #67595E;
-    -fx-border-radius: 15px;
-    -fx-padding: 4px;
-}
 .check-box:hover{
     -fx-background-color: #bf8b2c;
 }
 
 .text-field {
     -fx-background-radius: 15px;
-    -fx-padding: 8px;
     /*-fx-background-color: #003aad;*/
+}
+
+.label{
+    -fx-text-fill: white;
 }

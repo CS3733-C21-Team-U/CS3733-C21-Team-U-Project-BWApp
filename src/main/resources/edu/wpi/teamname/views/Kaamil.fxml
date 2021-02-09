@@ -13,7 +13,7 @@
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="21.0" prefHeight="35.0" prefWidth="478.0" text="Welcome to Kaamil's Page" textAlignment="CENTER" AnchorPane.bottomAnchor="362.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="21.0">
          <font>
-            <Font size="28.0" />
+            <Font name="Candara" size="28.0" />
          </font>
       </Label>
       <VBox alignment="TOP_CENTER" layoutX="164.0" layoutY="77.0" prefHeight="335.0" prefWidth="307.0" styleClass="vertical-box" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="164.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="77.0">
@@ -23,17 +23,24 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#updateMessage" text="Set String" />
-            <Label fx:id="msgKaamil" alignment="TOP_LEFT" text="Custom Message" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#updateMessage" text="Set String">
                <font>
-                  <Font size="25.0" />
+                  <Font name="Candara" size="20.0" />
+               </font></Button>
+            <Label fx:id="msgKaamil" alignment="CENTER" prefHeight="102.0" prefWidth="181.0" text="Custom Message" textAlignment="CENTER">
+               <font>
+                  <Font name="Candara" size="25.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" onAction="#toggleColor" text="Change Color" />
-            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleButtonAction" text="toHome" />
+            <CheckBox mnemonicParsing="false" onAction="#toggleColor" prefHeight="36.0" prefWidth="135.0" text="Change Color" textFill="WHITE">
+               <font>
+                  <Font name="Candara" size="18.0" />
+               </font>
+            </CheckBox>
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleButtonAction" text="Home">
+               <font>
+                  <Font name="Candara" size="20.0" />
+               </font></Button>
          </children>
       </VBox>
    </children>
