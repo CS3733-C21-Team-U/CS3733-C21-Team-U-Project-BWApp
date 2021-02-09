@@ -49,6 +49,7 @@ def codeCoverageExcludes = [
         'edu.wpi.teamname.App',
         'edu.wpi.teamname.Main',
         'edu.wpi.teamname.UDB',
+        'edu.wpi.teamname.views.MainPage',
 ]
 
 jacoco {
