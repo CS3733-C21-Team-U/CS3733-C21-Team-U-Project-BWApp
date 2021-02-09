@@ -13,7 +13,9 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) {}
+  public void start(Stage primaryStage) {
+    UDB db = new UDB();
+  }
 
   @Override
   public void stop() {

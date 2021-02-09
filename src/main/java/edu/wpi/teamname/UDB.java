@@ -1,9 +1,8 @@
 package edu.wpi.teamname;
 
-import static java.lang.System.exit;
-
 import java.sql.*;
 import java.util.Scanner;
+import static java.lang.System.exit;
 
 public class UDB {
 
@@ -11,11 +10,11 @@ public class UDB {
   private static Statement stmt; // used for sql statements
   private static ResultSet rset; // used to store returns from sql queries
   private static String url =
-      "jdbc:derby:UDB;create=true;user=admin;password=admin"; // link of embedded database
+      "jdbc:derby:UDB;user=admin;password=admin;create=true"; // link of embedded database
   private static int option; // used to know what function to run
 
   public static void main(String[] args) {
-    // Input logic
+
     Scanner s = new Scanner(System.in);
     System.out.println(
         "1-Report Museum Information\n"
@@ -59,11 +58,11 @@ public class UDB {
     stop();
   }
 
-  public UDB() {}
+  public UDB() {
+    String[] arr = {};
+    main(arr);
+  }
 
-  /*
-  Runs everytime
-   */
   public static void driver() {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -73,9 +72,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Runs everytime
-   */
+
   public static void connect() {
     try {
       conn = DriverManager.getConnection(url);
@@ -85,9 +82,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Runs at start
-   */
+
   public static void init() {
     try {
       DatabaseMetaData dmd = conn.getMetaData();
@@ -108,9 +103,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Runs at start
-   */
+
   public static void insertData() {
     try {
       String test = "select name from Museums";
@@ -159,9 +152,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Only run when given the command of '1'
-   */
+
   public static void printMuseums() {
     try {
       String str = "select * from Museums";
@@ -180,9 +171,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Only run when given the command of '2'
-   */
+
   public static void printByName() {
     // prints name of each museum followed by the paintings in them
     try {
@@ -217,9 +206,6 @@ public class UDB {
     }
   }
 
-  /*
-  Only run when given the command of '3'
-  */
   public static void updatePhoneNumber() {
     try {
       Scanner s = new Scanner(System.in);
@@ -237,9 +223,7 @@ public class UDB {
       e.printStackTrace();
     }
   }
-  /*
-  Only run when given the stop command of '4'
-   */
+
   public static void stop() {
     try {
       stmt = conn.createStatement();
