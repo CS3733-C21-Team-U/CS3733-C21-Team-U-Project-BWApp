@@ -48,6 +48,7 @@ jar {
 def codeCoverageExcludes = [
         'edu.wpi.teamname.App',
         'edu.wpi.teamname.Main',
+        'edu.wpi.teamname.UDB',
 ]
 
 jacoco {
@@ -94,6 +95,6 @@ compileJava.dependsOn 'spotlessApply'
 
 spotless {
     java {
-        googleJavaFormat()
+
     }
 }
