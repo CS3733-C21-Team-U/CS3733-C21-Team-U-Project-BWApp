@@ -17,6 +17,11 @@ public class UDB {
 
 
   public static void main(String[] args) { // java -jar path username admin option
+    if(!args[0].equals("admin") || !args[1].equals("admin")){
+      System.out.println("Invalid credentials: "+ args[0] + " " + args[1]);
+      System.out.println("Please enter in the form <username> <password> <option>");
+      exit(1);
+    }
     Scanner s = new Scanner(System.in);
     if (args.length > 2 && Integer.parseInt(args[2]) < 5){
       option = Integer.parseInt(args[2]);
@@ -116,6 +121,9 @@ public class UDB {
       String test = "select name from Museums";
       PreparedStatement t = conn.prepareStatement(test);
       ResultSet rs = t.executeQuery();
+      if (option == 4){
+        rs.close();
+      }
       if (!rs.next()) {
         String str =
             "insert into Museums("
