@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.stage.Stage;
 
 public class MainPage {
@@ -66,7 +65,7 @@ public class MainPage {
       // get reference to the button's stage
       stage = (Stage) btnKohmei.getScene().getWindow();
       // load up OTHER FXML document
-      root = FXMLLoader.load(getClass().getResource("../views/Kohmei.fxml"))
+      root = FXMLLoader.load(getClass().getResource("../views/Kohmei.fxml"));
 
     } else if (btnTyler == source) {
 
@@ -76,7 +75,7 @@ public class MainPage {
       root = FXMLLoader.load(getClass().getResource("../views/tyler.fxml"));
 
     } else if (btnLily == source) {
-      
+
       // get reference to the button's stage
       stage = (Stage) btnLily.getScene().getWindow();
       // load up OTHER FXML document
