@@ -12,7 +12,6 @@ public class node {
   String shortName;
   String teamAssigned;
   LinkedList<edge> edges;
-  double distanceToGoal;
 
   // full constructor
   public node(
@@ -32,7 +31,7 @@ public class node {
     this.longName = _LongName;
     this.shortName = _ShortName;
     this.teamAssigned = _teamAssigned;
-    this.edges = new LinkedList<edge>();
+    this.edges = new LinkedList<>();
   }
 
   // simple constructor
@@ -40,18 +39,8 @@ public class node {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
-    this.edges = new LinkedList<edge>();
+    this.edges = new LinkedList<>();
     graph.addNode(this);
-  }
-
-  // For AStar
-  public void setDistToGoal(node destination) {
-    double dx = Math.abs(this.xcoord - destination.xcoord);
-    double dy = Math.abs(this.ycoord - destination.ycoord);
-
-    double distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-
-    this.distanceToGoal = distance;
   }
 
   public LinkedList<node> adjNodes() {

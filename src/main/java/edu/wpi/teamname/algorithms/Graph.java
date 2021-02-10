@@ -7,12 +7,16 @@ public class Graph {
   private final LinkedList<edge> allEdges;
 
   public Graph() {
-    allNodes = new LinkedList<node>();
-    allEdges = new LinkedList<edge>();
+    allNodes = new LinkedList<>();
+    allEdges = new LinkedList<>();
   }
 
   public LinkedList<node> getNodes() {
     return allNodes;
+  }
+
+  public int getNumNodes() {
+    return allNodes.size();
   }
 
   public LinkedList<edge> getEdges() {
