@@ -18,7 +18,7 @@
                <children>
                   <ImageView fitHeight="460.0" fitWidth="975.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Pictures/Other%20Characters/La%20La%20Land%20Planetarium.jpg" />
+                        <Image url="@media/La%20La%20Land%20Planetarium.jpg" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="30.0" layoutY="105.0" prefHeight="77.0" prefWidth="413.0" text="Welcome To Lily's Page" textFill="WHITE">
