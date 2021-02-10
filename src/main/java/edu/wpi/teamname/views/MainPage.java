@@ -76,7 +76,7 @@ public class MainPage {
       // get reference to the button's stage
       stage = (Stage) btnTyler.getScene().getWindow();
       // load up OTHER FXML document
-      root = FXMLLoader.load(getClass().getResource("../views/tyler.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../views/tyler2.fxml"));
 
     } else if (btnLily == source) {
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.views.MainPage">
+   <children>
+      <Text layoutX="251.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is Tyler's page" />
+      <Text layoutX="55.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's pretty ugly, and that's because I made my beautified page in the wrong version of JavaFX" />
+      <Text layoutX="151.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="So this page only has the bare minimum to save on time" />
+      <Text layoutX="106.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you'd like to see the full page, please see the project document, thanks!" />
+      <Button fx:id="btnHome" layoutX="237.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction" text="This sucks, go home!" />
+      <CheckBox layoutX="180.0" layoutY="192.0" mnemonicParsing="false" text="Did you look at the real page on the doc?" />
+      <Slider layoutX="230.0" layoutY="259.0" />
+      <Text layoutX="260.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Did you like it?" />
+      <Text layoutX="162.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not really" />
+      <Label layoutX="380.0" layoutY="258.0" text="Ya it was alright" />
+   </children>
+</AnchorPane>
