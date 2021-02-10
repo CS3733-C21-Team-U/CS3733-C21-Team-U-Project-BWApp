@@ -17,7 +17,7 @@ public class UDB {
 
 
   public static void main(String[] args) { // java -jar path username admin option
-    if(!args[0].equals("admin") || !args[1].equals("admin")){
+    if(args.length >= 2 && !args[0].equals("admin") || !args[1].equals("admin")){
       System.out.println("Invalid credentials: "+ args[0] + " " + args[1]);
       System.out.println("Please enter in the form <username> <password> <option>");
       exit(1);
