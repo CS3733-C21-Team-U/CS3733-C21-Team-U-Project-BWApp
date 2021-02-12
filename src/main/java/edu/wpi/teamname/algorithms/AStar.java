@@ -37,7 +37,7 @@ public class AStar {
         break;
       }
       // iterate through the linked list of adjacent nodes
-      for (node adjNode : current.adjNodes()) {
+      for (node adjNode : current.getAdjNodes()) {
         // calculate the cost to get to get from the start to the adjacent node
         double nextNodeCost = cost.get(current) + distBetweenNodes(current, adjNode);
         // if the adjacent node has not been seen yet add it

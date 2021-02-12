@@ -12,6 +12,7 @@ public class node {
   private String shortName;
   private String teamAssigned;
   private LinkedList<edge> edges;
+  private LinkedList<node> adjNodes;
 
   // full constructor
   public node(
@@ -35,12 +36,12 @@ public class node {
   }
 
   // simple constructor
-  public node(int _nodeID, double _xcoord, double _ycoord, Graph graph) {
+  public node(int _nodeID, double _xcoord, double _ycoord) {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
     this.edges = new LinkedList<>();
-    graph.addNode(this);
+    this.adjNodes = new LinkedList<>();
   }
 
   public double[] getCords() {
@@ -52,16 +53,16 @@ public class node {
     return this.nodeID;
   }
 
+  public void addAdjNode(node _node) {
+    this.adjNodes.add(_node);
+  }
+
   public void addEdge(edge _edge) {
     this.edges.add(_edge);
   }
 
-  public LinkedList<node> adjNodes() {
-    LinkedList<node> result = new LinkedList<>();
-    for (edge e : this.edges) {
-      result.add(e.endNode);
-    }
-    return result;
+  public LinkedList<node> getAdjNodes() {
+    return this.adjNodes;
   }
 
   public LinkedList<edge> getEdges() {

@@ -6,12 +6,14 @@ public class edge {
   node endNode;
   public double weight;
 
-  public edge(int _edgeID, node _startNode, node _endNode, Graph g) {
+  public edge(int _edgeID, node _startNode, node _endNode) {
     this.edgeID = _edgeID;
     this.startNode = _startNode;
     this.endNode = _endNode;
     this.weight = calcWeight(_startNode, _endNode);
     _startNode.addEdge(this); // links this edge to beginning node
+    _startNode.addAdjNode(_endNode);
+    _endNode.addAdjNode(_startNode);
   }
 
   private double calcWeight(node _startNode, node _endNode) {
