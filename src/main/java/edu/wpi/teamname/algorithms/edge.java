@@ -11,17 +11,16 @@ public class edge {
     this.startNode = _startNode;
     this.endNode = _endNode;
     this.weight = calcWeight(_startNode, _endNode);
-    _startNode.edges.add(this); // links this edge to beginning node
-    g.addEdge(this);
+    _startNode.addEdge(this); // links this edge to beginning node
   }
 
   private double calcWeight(node _startNode, node _endNode) {
     // calculate the rise and run
-    double dx = Math.abs(_startNode.xcoord - _endNode.xcoord);
-    double dy = Math.abs(_startNode.ycoord - _endNode.ycoord);
-    // calculate the distance
-    double weight = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    double[][] nodeLocation = {_startNode.getCords(), _endNode.getCords()};
+    double dx = Math.abs(nodeLocation[0][0] - nodeLocation[1][0]);
+    double dy = Math.abs(nodeLocation[0][1] - nodeLocation[1][1]);
+    // calculate the distance then
     // return the distance (weight)
-    return weight;
+    return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
 }

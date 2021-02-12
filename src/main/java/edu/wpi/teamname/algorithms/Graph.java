@@ -11,6 +11,12 @@ public class Graph {
     allEdges = new LinkedList<>();
   }
 
+  public void makeEdge(int _edgeID, node _startNode, node _endNode, Graph graph) {
+    edge realEdge = new edge(_edgeID, _startNode, _endNode, graph);
+    new edge(-_edgeID, _endNode, _startNode, graph);
+    allEdges.addLast(realEdge);
+  }
+
   public LinkedList<node> getNodes() {
     return allNodes;
   }
@@ -32,9 +38,7 @@ public class Graph {
     allEdges.removeIf(e -> e.startNode == n || e.endNode == n);
   }
 
-  public void addEdge(edge e) {
-    allEdges.addLast(e);
-  }
+  public void addEdge(edge e) {}
 
   public void removeEdge(edge e) {
     allEdges.remove(e);

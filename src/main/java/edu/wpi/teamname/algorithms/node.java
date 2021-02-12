@@ -3,15 +3,15 @@ package edu.wpi.teamname.algorithms;
 import java.util.LinkedList;
 
 public class node {
-  int nodeID;
-  double xcoord;
-  double ycoord;
-  String building;
-  String nodeType;
-  String longName;
-  String shortName;
-  String teamAssigned;
-  LinkedList<edge> edges;
+  private int nodeID;
+  private double xcoord;
+  private double ycoord;
+  private String building;
+  private String nodeType;
+  private String longName;
+  private String shortName;
+  private String teamAssigned;
+  private LinkedList<edge> edges;
 
   // full constructor
   public node(
@@ -43,11 +43,28 @@ public class node {
     graph.addNode(this);
   }
 
+  public double[] getCords() {
+    double[] returnMe = {this.xcoord, this.ycoord};
+    return returnMe;
+  }
+
+  public int getNodeID() {
+    return this.nodeID;
+  }
+
+  public void addEdge(edge _edge) {
+    this.edges.add(_edge);
+  }
+
   public LinkedList<node> adjNodes() {
     LinkedList<node> result = new LinkedList<>();
     for (edge e : this.edges) {
       result.add(e.endNode);
     }
     return result;
+  }
+
+  public LinkedList<edge> getEdges() {
+    return edges;
   }
 }
