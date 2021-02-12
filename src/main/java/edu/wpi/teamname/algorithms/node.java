@@ -57,6 +57,10 @@ public class node {
     this.adjNodes.add(_node);
   }
 
+  public void removeAdjNode(node _node) {
+    this.adjNodes.remove(_node);
+  }
+
   public void addEdge(edge _edge) {
     this.edges.add(_edge);
   }

@@ -40,6 +40,9 @@ public class Graph {
   }
 
   public void removeNode(node n) {
+    for (node adjNode : n.getAdjNodes()){
+      adjNode.removeAdjNode(n);
+    }
     allNodes.remove(n);
     allEdges.removeIf(e -> e.startNode == n || e.endNode == n);
   }
