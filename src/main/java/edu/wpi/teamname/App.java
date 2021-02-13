@@ -3,6 +3,7 @@ package edu.wpi.teamname;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @Slf4j
 public class App extends Application {
@@ -14,7 +15,11 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) {}
+  public void start(Stage primaryStage) {
+    Parameters p = getParameters();
+    List<String> l = p.getRaw();
+    UDB db = new UDB(l);
+  }
 
   @Override
   public void stop() {
