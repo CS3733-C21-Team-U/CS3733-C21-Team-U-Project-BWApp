@@ -2,22 +2,20 @@ package edu.wpi.teamname;
 
 import java.sql.*;
 
-public class UDB {
+public class BWdb {
 
   private Connection conn = null; // used for connection
   private Statement stmt; // used for sql statements
   private ResultSet rset; // used to store returns from sql queries
   private String url =
-      "jdbc:derby:UDB;create=true;user=admin;password=admin"; // link of embedded database
+      "jdbc:derby:BWdb;create=true;user=admin;password=admin"; // link of embedded database
   private static int option; // used to know what function to run
 
-  private int flag; // flag for detecting if first time running 
+  private int flag; // flag for detecting if first time running
 
-  public static void main(String args[]) {
-    // Input logic
-  }
+  public static void main(String args[]) {}
 
-  public UDB() {
+  public BWdb() {
     /*
     Always run driver() & connect().
     init(), insertData() only run on creation
@@ -26,8 +24,9 @@ public class UDB {
      */
     driver();
     connect();
-    // createAdmin();
-    // init();
+    createAdmin();
+    System.out.println("Setup done");
+    init();
     // insertData();
     // printMuseums();
     // printByName();
@@ -59,6 +58,7 @@ public class UDB {
   public void createAdmin() {
     try {
       stmt = conn.createStatement();
+      System.out.println("debug");
       String str = "call syscs_util.syscs_create_user('admin', 'admin')";
       stmt.execute(str);
     } catch (Exception e) {
@@ -71,11 +71,11 @@ public class UDB {
     try {
       Statement stmt = conn.createStatement(); // creates statement
       String tbl1 =
-          "create table Museums (id int not null generated always as identity, paintings int not null, name varchar(50), phone varchar(50), primary key (id))";
+          "create table BWNodes (nodeID int not null, xcoord int not null, ycoord int not null, floor int not null, building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(10), teamAssigned varchar(50), primary key (nodeID))";
       // code for creating table of Museums
       stmt.execute(tbl1); // executes the sql in tbl1 string
       String tbl2 =
-          "create table Paintings (id int not null generated always as identity, name varchar(50), artist varchar(50), museum int not null references Museums, primary key(id))";
+          "create table BWEdges (edgeID int not null, startNode varchar(50), endNode varchar(50), primary key(edgeID))";
       stmt.execute(tbl2);
     } catch (Exception e) {
       System.out.println("Table creation failed");
