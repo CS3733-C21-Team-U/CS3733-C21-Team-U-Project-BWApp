@@ -9,14 +9,14 @@ public class AStar {
   public AStar() { // initial map for AStar
   }
 
-  public void run(node _startNode, node _goalNode) {
-    Set<node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
+  public void run(Node _startNode, Node _goalNode) {
+    Set<Node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
     reachableNodes.add(_startNode); // add the start node to the seen nodes
-    HashMap<node, node> cameFrom =
+    HashMap<Node, Node> cameFrom =
         new HashMap<>(); // record what node leads to which for shortest path
-    HashMap<node, Double> cost =
+    HashMap<Node, Double> cost =
         new HashMap<>(); // record the cost to get to each node from the start node
-    HashMap<node, Double> priority =
+    HashMap<Node, Double> priority =
         new HashMap<>(); // priority the cost + euclidean distance to the goal
 
     // setup the start node in the data
@@ -25,7 +25,7 @@ public class AStar {
     cameFrom.put(_startNode, _startNode);
 
     // create the variable used in A*
-    node current = _startNode;
+    Node current = _startNode;
 
     // while there is reachable nodes loop
     while (!reachableNodes.isEmpty()) {
@@ -37,7 +37,7 @@ public class AStar {
         break;
       }
       // iterate through the linked list of adjacent nodes
-      for (node adjNode : current.getAdjNodes()) {
+      for (Node adjNode : current.getAdjNodes()) {
         // calculate the cost to get to get from the start to the adjacent node
         double nextNodeCost = cost.get(current) + distBetweenNodes(current, adjNode);
         // if the adjacent node has not been seen yet add it
@@ -72,7 +72,7 @@ public class AStar {
   }
 
   // takes in two nodes and returns the distance between them
-  private double distBetweenNodes(node n1, node n2) {
+  private double distBetweenNodes(Node n1, Node n2) {
     // calculate the rise and run
     double[][] nodeLocation = {n1.getCords(), n2.getCords()};
     double dx = Math.abs(nodeLocation[0][0] - nodeLocation[1][0]);
@@ -82,14 +82,14 @@ public class AStar {
   }
 
   // returns the node with the lowest priority from the set of reachable nodes
-  private node getNextNode(Set<node> _reachableNodes, HashMap<node, Double> priority) {
+  private Node getNextNode(Set<Node> _reachableNodes, HashMap<Node, Double> priority) {
     // convert the set of reachable nodes into an array
-    node[] nodes = new node[_reachableNodes.size()];
+    Node[] nodes = new Node[_reachableNodes.size()];
     _reachableNodes.toArray(nodes);
     // initialize a first node for comparison
-    node returnNode = nodes[0];
+    Node returnNode = nodes[0];
     // iterate through the array and find the node with the lowest priority
-    for (node curNode : nodes) {
+    for (Node curNode : nodes) {
       if (priority.get(returnNode) > priority.get(curNode)) {
         returnNode = curNode;
       }

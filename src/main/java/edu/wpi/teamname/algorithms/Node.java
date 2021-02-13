@@ -2,8 +2,8 @@ package edu.wpi.teamname.algorithms;
 
 import java.util.LinkedList;
 
-public class node {
-  private int nodeID;
+public class Node {
+  private String nodeID;
   private double xcoord;
   private double ycoord;
   private String building;
@@ -11,12 +11,12 @@ public class node {
   private String longName;
   private String shortName;
   private String teamAssigned;
-  private LinkedList<edge> edges;
-  private LinkedList<node> adjNodes;
+  private LinkedList<Edge> edges;
+  private LinkedList<Node> adjNodes;
 
   // full constructor
-  public node(
-      int _nodeID,
+  public Node(
+      String _nodeID,
       double _xcoord,
       double _ycoord,
       String _building,
@@ -36,7 +36,7 @@ public class node {
   }
 
   // simple constructor
-  public node(int _nodeID, double _xcoord, double _ycoord) {
+  public Node(String _nodeID, double _xcoord, double _ycoord) {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
@@ -49,27 +49,27 @@ public class node {
     return returnMe;
   }
 
-  public int getNodeID() {
+  public String getNodeID() {
     return this.nodeID;
   }
 
-  public void addAdjNode(node _node) {
+  public void addAdjNode(Node _node) {
     this.adjNodes.add(_node);
   }
 
-  public void removeAdjNode(node _node) {
+  public void removeAdjNode(Node _node) {
     this.adjNodes.remove(_node);
   }
 
-  public void addEdge(edge _edge) {
+  public void addEdge(Edge _edge) {
     this.edges.add(_edge);
   }
 
-  public LinkedList<node> getAdjNodes() {
+  public LinkedList<Node> getAdjNodes() {
     return this.adjNodes;
   }
 
-  public LinkedList<edge> getEdges() {
+  public LinkedList<Edge> getEdges() {
     return edges;
   }
 }

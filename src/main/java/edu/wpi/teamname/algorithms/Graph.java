@@ -5,24 +5,24 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Graph {
-  private final Set<node> allNodes;
-  private final LinkedList<edge> allEdges;
+  private final Set<Node> allNodes;
+  private final LinkedList<Edge> allEdges;
 
   public Graph() {
     allNodes = new HashSet<>();
     allEdges = new LinkedList<>();
   }
 
-  public void makeEdge(int _edgeID, node _startNode, node _endNode) {
-    edge realEdge = new edge(_edgeID, _startNode, _endNode);
+  public void makeEdge(String _edgeID, Node _startNode, Node _endNode) {
+    Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
     this.allEdges.addLast(realEdge);
     this.addNode(_startNode);
     this.addNode(_endNode);
   }
 
-  public LinkedList<node> getNodes() {
-    LinkedList<node> nodes = new LinkedList<>();
-    for (node _node : allNodes) nodes.add(_node);
+  public LinkedList<Node> getNodes() {
+    LinkedList<Node> nodes = new LinkedList<>();
+    for (Node _node : allNodes) nodes.add(_node);
 
     return nodes;
   }
@@ -31,25 +31,25 @@ public class Graph {
     return allNodes.size();
   }
 
-  public LinkedList<edge> getEdges() {
+  public LinkedList<Edge> getEdges() {
     return allEdges;
   }
 
-  public void addNode(node n) {
+  public void addNode(Node n) {
     allNodes.add(n);
   }
 
-  public void removeNode(node n) {
-    for (node adjNode : n.getAdjNodes()){
+  public void removeNode(Node n) {
+    for (Node adjNode : n.getAdjNodes()) {
       adjNode.removeAdjNode(n);
     }
     allNodes.remove(n);
-    allEdges.removeIf(e -> e.startNode == n || e.endNode == n);
+    allEdges.removeIf(e -> e.getStartNode() == n || e.getEndNode() == n);
   }
 
-  public void addEdge(edge e) {}
+  public void addEdge(Edge e) {}
 
-  public void removeEdge(edge e) {
+  public void removeEdge(Edge e) {
     allEdges.remove(e);
   }
 }
