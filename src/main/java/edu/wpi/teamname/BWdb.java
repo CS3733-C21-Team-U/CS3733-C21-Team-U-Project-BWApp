@@ -73,10 +73,16 @@ public class BWdb {
 
   public static void insertData() {
     try {
-        String str =
-            "insert into Nodes("
-                + "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned) values "
-                + "('ULABS00101', 10, 10, 1, 'Faulkner', 'LABS', 'Big Lab', 'L1', 'TeamU')";
+        // TODO: fix this statement
+      String str = ""; // COMMENT OUT WHEN UNCOMMENTING BELOW
+
+      /*
+      String str =
+            "call SYSCS_UTIL.SYSCS_IMPORT_TABLE_BULK"
+        + " (null, 'NODES', 'src/main/resources/edu/wpi/teamname/OutsideMapNodes.csv', ',', null, null, 0, 1";
+      */
+
+
         PreparedStatement ps = conn.prepareStatement(str);
         ps.execute();
         str =
