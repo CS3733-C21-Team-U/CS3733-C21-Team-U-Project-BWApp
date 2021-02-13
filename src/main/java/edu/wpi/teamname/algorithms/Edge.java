@@ -1,7 +1,7 @@
 package edu.wpi.teamname.algorithms;
 
 public class Edge {
-  private String edgeID;
+  private String edgeID; // should be private
   private Node startNode;
   private Node endNode;
   private double weight;
@@ -27,11 +27,15 @@ public class Edge {
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
 
-  public Node getStartNode(){
+  public Node getStartNode() {
     return this.startNode;
   }
 
-  public Node getEndNode(){
+  public Node getEndNode() {
     return this.endNode;
+  }
+
+  public String getEdgeID() {
+    return this.edgeID;
   }
 }
