@@ -79,7 +79,7 @@ public class BWdb {
 
       String str =
             "call SYSCS_UTIL.SYSCS_IMPORT_TABLE_BULK"
-        + " (null, 'NODES', 'src/main/resources/edu/wpi/teamname/OutsideMapNodes.csv', ',', null, null, 0, 1";
+        + " (null, 'NODES', 'src/main/resources/edu/wpi/teamname/OutsideMapNodes.csv', ',', null, null, 0, 1)";
 
 
 
@@ -114,75 +114,5 @@ public class BWdb {
       System.out.println("Failed to select from Museums");
       e.printStackTrace();
     }
-  }
-
-  public static void printByName() {
-    // prints name of each museum followed by the paintings in them
-    try {
-      String str2;
-      ResultSet rset2;
-      String str = "select * from Paintings"; // we want all paintings info
-      PreparedStatement ps1 = conn.prepareStatement(str);
-      rset = ps1.executeQuery();
-      while (rset.next()) {
-        int museum_id = rset.getInt("museum"); // get the id from the museum
-        String name = rset.getString("name");
-        String artist = rset.getString("artist");
-        str2 =
-            "select name from Museums where id=?"; // will get the museum name given it equals the
-        // corresponding 'Paintings' museum id
-        PreparedStatement ps = conn.prepareStatement(str2);
-        ps.setInt(1, museum_id);
-        rset2 = ps.executeQuery();
-        if (rset2.next()) {
-          System.out.printf(
-              "%-5s %-5s %-5s",
-              "Museum: " + rset2.getString("name"),
-              " Name of Painting: " + name,
-              " Artist: " + artist + "\n");
-        }
-        rset2.next();
-      }
-      rset.close();
-    } catch (Exception e) {
-      System.out.println("Failed to get museums and paintings");
-      e.printStackTrace();
-    }
-  }
-
-  public static void updatePhoneNumber() {
-    try {
-      Scanner s = new Scanner(System.in);
-      System.out.println("Please enter the museum name (Case sensitive)");
-      String museum = s.nextLine();
-      System.out.println("Please enter a new phone number");
-      int new_phone_number = s.nextInt();
-      String str = "update Museums set phone=? where name=?";
-      PreparedStatement ps = conn.prepareStatement(str);
-      ps.setInt(1, new_phone_number);
-      ps.setString(2, museum);
-      ps.execute();
-    } catch (Exception e) {
-      System.out.println("Failed to update phone number");
-      e.printStackTrace();
-    }
-  }
-
-  public static void stop() {
-    try {
-      stmt = conn.createStatement();
-      String str = "alter table Paintings drop column museum"; // drops the foreign key
-      stmt.execute(str);
-      str = "drop table Paintings"; // drops the table
-      stmt.execute(str);
-      str = "drop table Museums"; // drops the table
-      stmt.execute(str);
-      stmt.close();
-      conn.close();
-    } catch (Exception e) {
-      System.out.println("Failed to drop tables");
-      e.printStackTrace();
-    }
-    exit(0);
   }
 }
