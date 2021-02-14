@@ -2,14 +2,19 @@ package edu.wpi.u.models;
 
 public class Message {
 
-  private String msg;
-  private String author;
+  public String message;
+  public String author;
 
-  public void getDataFromDB(){
+  public Message() {
+    message = null;
+    author = null;
+  }
+
+  public void getDataFromDB() {
     System.out.println("I will now make a call to the DB to get some data");
 
-    //Do some error checking
+    // Do some error checking
 
-    //Save the data in a class variable
+    // Save the data in a class variable
   }
 }

@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="tab2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.Tab2Controller">
    <children>
-      <Text fill="WHITE" layoutX="158.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 1 is BLUE">
+      <Text fill="WHITE" layoutX="34.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tab 1 is BLUE">
          <font>
             <Font size="52.0" />
          </font>
