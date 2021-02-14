@@ -15,5 +15,7 @@
       <TextField fx:id="author" layoutX="204.0" layoutY="33.0" promptText="Author" />
       <TextField fx:id="message" layoutX="204.0" layoutY="69.0" promptText="Message" />
       <Button layoutX="204.0" layoutY="103.0" mnemonicParsing="false" onAction="#saveTextToModel" text="Save Data in Model" />
+      <TextField fx:id="authorLabel" layoutX="204.0" layoutY="295.0" />
+      <TextField fx:id="messageLabel" layoutX="204.0" layoutY="329.0" />
    </children>
 </AnchorPane>

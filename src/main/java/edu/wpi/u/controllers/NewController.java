@@ -10,19 +10,20 @@ public class NewController {
 
   @FXML public TextField author;
   @FXML public TextField message;
+  @FXML public TextField authorLabel;
+  @FXML public TextField messageLabel;
 
   @FXML
   private void saveTextToModel() throws Exception {
-    App.savedData.author = author.getText();
-    App.savedData.message = message.getText();
+    App.savedData.author.setValue(author.getText());
+    App.savedData.message.setValue(message.getText());
   }
 
   @FXML
   private void initialize() {
-    if (App.savedData.author != null && App.savedData.message != null) {
-      author.setText(App.savedData.author);
-      message.setText(App.savedData.message);
-    }
+    System.out.println("New Init");
+    messageLabel.textProperty().bind(App.savedData.message);
+    authorLabel.textProperty().bind(App.savedData.author);
   }
 
   @FXML

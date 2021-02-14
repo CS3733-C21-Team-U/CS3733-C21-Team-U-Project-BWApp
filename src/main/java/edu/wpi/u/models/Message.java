@@ -1,13 +1,15 @@
 package edu.wpi.u.models;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Message {
 
-  public String message;
-  public String author;
+  public SimpleStringProperty author;
+  public SimpleStringProperty message;
 
   public Message() {
-    message = null;
-    author = null;
+    message = new SimpleStringProperty();
+    author = new SimpleStringProperty();
   }
 
   public void getDataFromDB() {

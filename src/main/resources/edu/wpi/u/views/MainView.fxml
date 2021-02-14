@@ -26,14 +26,26 @@
                       </Tab>
                       <Tab text="Scene 2">
                            <content>
-                              <fx:include fx:id="tab2" source="Tab2.fxml" />
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;">
+                                 <children>
+                                    <SplitPane dividerPositions="0.4747252747252747" prefHeight="398.0" prefWidth="457.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <fx:include fx:id="tab3" source="Tab3.fxml" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <fx:include fx:id="tab2" source="Tab2.fxml" />
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
                            </content>
                       </Tab>
-                        <Tab text="Scene 3">
-                           <content>
-                              <fx:include fx:id="tab3" source="Tab3.fxml" />
-                           </content>
-                        </Tab>
                     </tabs>
                   </TabPane>
                </children>
