@@ -74,13 +74,13 @@ public class BWdb {
   public static void insertData() {
     try {
         // TODO: fix this statement
-      String str = ""; // COMMENT OUT WHEN UNCOMMENTING BELOW
+      // String str = ""; // COMMENT OUT WHEN UNCOMMENTING BELOW
 
-      /*
+
       String str =
             "call SYSCS_UTIL.SYSCS_IMPORT_TABLE_BULK"
         + " (null, 'NODES', 'src/main/resources/edu/wpi/teamname/OutsideMapNodes.csv', ',', null, null, 0, 1";
-      */
+
 
 
         PreparedStatement ps = conn.prepareStatement(str);
