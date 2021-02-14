@@ -28,7 +28,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/MainView.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("views/MainPage.fxml"));
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
     App.primaryStage.show();
