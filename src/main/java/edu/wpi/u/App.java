@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
-  Graph graph = new Graph();
+  public static Graph graph = new Graph();
 
   public App(){
     Node A = new Node("A", 0, 0);
