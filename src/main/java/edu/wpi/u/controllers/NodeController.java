@@ -1,3 +1,47 @@
 package edu.wpi.u.controllers;
 
-public class NodeController {}
+import edu.wpi.u.algorithms.Node;
+import javafx.fxml.FXML;
+
+import java.awt.*;
+
+public class NodeController {
+
+    @FXML
+    public TextField enterNodeID;
+
+    @FXML
+    public TextField enterXCoo;
+
+    @FXML
+    public TextField enterYCoo;
+
+    @FXML
+    public void addNode() {
+
+        if(enterNodeID.getText().equals("")) {
+            System.out.println("Missing Node ID.");
+            return;
+        }
+
+        if(enterXCoo.getText().equals("")) {
+            System.out.println("Missing x-coordinate.");
+            return;
+        }
+
+        if(enterYCoo.getText().equals("")) {
+            System.out.println("Missing y-coordinate");
+            return;
+        }
+
+        Node myNode = new Node(enterNodeID.getText(),)
+
+    }
+
+    @FXML
+    public void editNode() { }
+
+    @FXML
+    public void deleteNode() { }
+
+}
