@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DatabaseManager {
 
-    private static Connection conn = null; // used for connection
+    private static Connection conn = null;
     private static String url =
-            "jdbc:derby:BWdb;user=admin;password=admin"; // link of embedded database
+            "jdbc:derby:BWdb;user=admin;password=admin";
 
     public static void main(String[] args) {
     }
