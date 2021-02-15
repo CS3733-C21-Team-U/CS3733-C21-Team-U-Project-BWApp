@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainController">
-    <children>
-        <SplitPane dividerPositions="0.29797979797979796" layoutX="55.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <Button layoutX="31.0" layoutY="127.0" mnemonicParsing="false" onAction="#buttonPressNode" text="Edit Node Lily" />
-                        <Button layoutX="29.0" layoutY="216.0" mnemonicParsing="false" onAction="#buttonPressEdge" text="Edit Edge Nick" />
-                  <Button layoutX="31.0" layoutY="42.0" mnemonicParsing="false" onAction="#buttonPressMain" prefHeight="31.0" prefWidth="112.0" text="Main Page" />
-                  <Button disable="true" layoutX="31.0" layoutY="297.0" mnemonicParsing="false" onAction="#buttonPressAS" prefHeight="31.0" prefWidth="112.0" text="A* Tyler" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.298" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="150.0">
                <children>
-                  <Label layoutX="182.0" layoutY="160.0" text="A* Page" />
-               </children></AnchorPane>
-            </items>
-        </SplitPane>
-    </children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Mapping">
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="23.0" top="7.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXTextField promptText="Node 1">
+                           <VBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField promptText="node 2">
+                           <VBox.margin>
+                              <Insets left="7.0" right="7.0" top="7.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXButton text="Find">
+                           <VBox.margin>
+                              <Insets left="7.0" top="7.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+   </children>
 </AnchorPane>

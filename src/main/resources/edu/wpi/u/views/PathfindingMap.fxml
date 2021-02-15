@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane pannable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="549.0" prefWidth="673.0">
+               <children>
+                  <ImageView fitHeight="552.0" fitWidth="956.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-88.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-283.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        
+                     </image>
+                  </ImageView>
+                  <Line fx:id="line1" endX="-66.4000244140625" endY="25.20001220703125" layoutX="257.0" layoutY="204.0" startX="-114.79998779296875" startY="25.20001220703125" />
+                  <Line fx:id="line2" endX="100.0" layoutX="257.0" layoutY="232.0" startX="-100.0" strokeWidth="0.0" />
+                  <Line fx:id="line3" endX="100.0" layoutX="267.0" layoutY="242.0" startX="-100.0" strokeWidth="0.0" />
+                  <Line fx:id="line4" endX="100.0" layoutX="267.0" layoutY="242.0" startX="-83.20001220703125" startY="-16.79998779296875" strokeWidth="0.0" />
+                  <Line fx:id="line5" endX="100.0" layoutX="267.0" layoutY="242.0" startX="-73.20001220703125" startY="-35.600006103515625" strokeWidth="0.0" />
+                  <Line fx:id="line6" endX="100.0" layoutX="267.0" layoutY="242.0" startX="-50.0" startY="-66.0" strokeWidth="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
