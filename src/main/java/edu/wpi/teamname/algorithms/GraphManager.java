@@ -1,15 +1,91 @@
 package edu.wpi.teamname.algorithms;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-public class AStar {
+public class GraphManager {
+  private final HashMap<String, Node> allNodes;
+  private final HashMap<String, Edge> allEdges;
 
-  public AStar() { // initial map for AStar
+  public GraphManager() {
+    allNodes = new HashMap<>();
+    allEdges = new HashMap<>();
   }
 
-  public void run(Node _startNode, Node _goalNode) {
+  public void makeEdge(String _edgeID, String _startNodeID, String _endNodeID) {
+    Node _startNode = this.allNodes.get(_startNodeID);
+    Node _endNode = this.allNodes.get(_endNodeID);
+    Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
+    this.allEdges.put(_edgeID, realEdge);
+    this.allNodes.put(_startNode.getNodeID(), _startNode);
+    this.allNodes.put(_endNode.getNodeID(), _endNode);
+  }
+
+  public void removeEdge(String edgeId) {
+    Edge e = this.allEdges.get(edgeId);
+    allEdges.remove(edgeId);
+    e.getStartNode().removeEdge(e);
+    e.getEndNode().removeEdge(e);
+  }
+
+  public void disableEdge(String edgeId) {
+    Edge e = this.allEdges.get(edgeId);
+    e.setWalkable(false);
+  }
+
+  public void enableEdge(String edgeID) {
+    Edge e = this.allEdges.get(edgeID);
+    e.setWalkable(true);
+  }
+
+  public void makeNode(
+      String _nodeID,
+      double _xcoord,
+      double _ycoord,
+      String _building,
+      String _nodeType,
+      String _LongName,
+      String _ShortName,
+      String _teamAssigned) {
+    Node n =
+        new Node(
+            _nodeID, _xcoord, _ycoord, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
+    allNodes.put(n.getNodeID(), n);
+  }
+
+  public void addNode(Node n) {
+    this.allNodes.put(n.getNodeID(), n);
+  }
+
+  public void removeNode(String nodeID) {
+    Node n = this.allNodes.get(nodeID);
+
+    LinkedList<String> edgeIDsToRemove = new LinkedList<>();
+    // removes a node and all edges that make it up
+    allNodes.remove(nodeID);
+    for (Map.Entry<String, Edge> entry : this.allEdges.entrySet()) {
+      if (entry.getValue().getStartNode().equals(n) || entry.getValue().getEndNode().equals(n)) {
+        edgeIDsToRemove.add(entry.getValue().getEdgeID());
+      }
+    }
+    for (String ID : edgeIDsToRemove) {
+      removeEdge(ID);
+    }
+  }
+
+  public void disableNode(String nodeID) {
+    Node _node = this.allNodes.get(nodeID);
+    _node.setWalkable(false);
+  }
+
+  public void enableNode(String nodeID) {
+    Node _node = this.allNodes.get(nodeID);
+    _node.setWalkable(true);
+  }
+
+  public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) {
+    Node _startNode = this.allNodes.get(_startNodeID);
+    Node _goalNode = this.allNodes.get(_goalNodeID);
+
     Set<Node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
     reachableNodes.add(_startNode); // add the start node to the seen nodes
     HashMap<Node, Node> cameFrom =
@@ -59,16 +135,17 @@ public class AStar {
         }
       }
     } // end of while
-
+    LinkedList<Node> returnMe = new LinkedList<>();
     // print out the path if there is one
     if (cameFrom.containsKey(_goalNode)) { // if exited with a path
-      System.out.print("[END] ");
       while (current != _startNode) {
-        System.out.print("[Node " + current.getNodeID() + "] <- ");
+        returnMe.addFirst(current);
         current = cameFrom.get(current);
       }
-      System.out.println("[Node " + current.getNodeID() + "] [START]");
+      returnMe.addFirst(_startNode);
     }
+
+    return returnMe;
   }
 
   // takes in two nodes and returns the distance between them

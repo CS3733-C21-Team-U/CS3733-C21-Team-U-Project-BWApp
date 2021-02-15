@@ -13,7 +13,7 @@ public class Node {
   private String teamAssigned;
   private LinkedList<Edge> edges;
   private LinkedList<Node> adjNodes;
-
+  private boolean walkable = true;
   // full constructor
   public Node(
       String _nodeID,
@@ -58,6 +58,7 @@ public class Node {
   }
 
   public void removeAdjNode(Node _node) {
+    //needs work? might never get used but should also remove adjNode from the connected node
     this.adjNodes.remove(_node);
   }
 
@@ -65,8 +66,40 @@ public class Node {
     this.edges.add(_edge);
   }
 
+  public void removeEdge(Edge _edge) {
+    if (this.equals(_edge.getEndNode())) {
+      adjNodes.remove(_edge.getStartNode());
+    } else {
+      adjNodes.remove(_edge.getEndNode());
+    }
+    this.edges.remove(_edge);
+  }
+
   public LinkedList<Node> getAdjNodes() {
-    return this.adjNodes;
+    LinkedList<Node> returnMe = new LinkedList<>();
+    for (Node n : this.adjNodes) {
+      if (n.walkable() && this.reachableNode(n)) returnMe.add(n);
+    }
+    return returnMe;
+  }
+
+  public boolean walkable() {
+    return this.walkable;
+  }
+
+  public void setWalkable(Boolean value) {
+    this.walkable = value;
+  }
+
+  private boolean reachableNode(Node n) {
+    for (Edge e : this.edges) {
+      if (e.isWalkable()) {
+        if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
+          if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) return true;
+        }
+      }
+    }
+    return false;
   }
 
   public LinkedList<Edge> getEdges() {
