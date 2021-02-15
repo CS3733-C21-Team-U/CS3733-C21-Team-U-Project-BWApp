@@ -5,6 +5,7 @@ public class Edge {
   private Node startNode;
   private Node endNode;
   private double weight;
+  private boolean walkable = true;
 
   public Edge(String _edgeID, Node _startNode, Node _endNode) {
     this.edgeID = _edgeID;
@@ -27,11 +28,23 @@ public class Edge {
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
 
-  public Node getStartNode(){
+  public String getEdgeID() {
+    return this.edgeID;
+  }
+
+  public Node getStartNode() {
     return this.startNode;
   }
 
-  public Node getEndNode(){
+  public Node getEndNode() {
     return this.endNode;
+  }
+
+  public void setWalkable(boolean value) {
+    this.walkable = value;
+  }
+
+  public boolean isWalkable() {
+    return this.walkable;
   }
 }
