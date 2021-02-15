@@ -28,7 +28,7 @@ public class NewController {
 
   @FXML
   private void toMainScene() throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainView.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("edu/wpi/u/views/MainPage.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }

@@ -12,21 +12,43 @@ public class MainController {
 
   // Super important, the name of the vairble must be "[fxid]+Controller" where fxid matches in
   // Mainveiw.fxml and Tab1.fxml
-  @FXML private Tab1Controller tab1Controller;
-  @FXML private Tab2Controller tab2Controller;
-  @FXML private Tab3Controller tab3Controller;
 
   @FXML
   private void toNewScene() throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewView.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("edu/wpi/u/views/MainPage.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   private void initialize() {
     System.out.println("Main Init");
-    tab1Controller.injectMainController(this);
-    tab2Controller.injectMainController(this);
-    tab3Controller.injectMainController(this);
+  }
+
+  @FXML
+  public void buttonPressMain() throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainPage.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  public void buttonPressNode() throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditNodeLily.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  public void buttonPressEdge() throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditEdgeNick.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  public void buttonPressAS() throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
   }
 }
