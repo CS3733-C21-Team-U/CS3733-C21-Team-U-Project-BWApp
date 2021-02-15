@@ -1,3 +1,1 @@
-# Team_Exercise1
-This repository is for the team exercise needed for Project A
-test
+Gradle Build Status on main: ![.github/workflows/test.yml](https://github.com/CS3733-C21-Team-U/CS3733-C21-Team-U-Project-BWApp/workflows/.github/workflows/test.yml/badge.svg)
