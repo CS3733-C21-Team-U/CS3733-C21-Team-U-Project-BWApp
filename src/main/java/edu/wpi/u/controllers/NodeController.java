@@ -80,7 +80,7 @@ public class NodeController {
     int tempY = Integer.parseInt(enterYCoo.getText());
     if (App.getInstance().graph.updateNode(tempID, tempX, tempY).equals(tempID))
       errorLabel.setText("Node does not exists.");
-    else{
+    else {
       update();
       errorLabel.setText("node edited successfully.");
     }
@@ -89,11 +89,10 @@ public class NodeController {
   @FXML
   public void deleteNode() {
     String tempID = enterNodeID.getText();
-    if (tempID.equals(""))
-      errorLabel.setText("Missing Node ID.");
-    else{
+    if (tempID.equals("")) errorLabel.setText("Missing Node ID.");
+    else {
       if (App.getInstance().graph.deleteNode(tempID).equals(tempID))
-          errorLabel.setText("Node does not exists.");
+        errorLabel.setText("Node does not exists.");
       else {
         update();
         errorLabel.setText("node deleted successfully.");
