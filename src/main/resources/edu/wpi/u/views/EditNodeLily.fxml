@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeController">
+    <children>
+        <SplitPane dividerPositions="0.29797979797979796" layoutX="55.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <Button disable="true" layoutX="31.0" layoutY="127.0" mnemonicParsing="false" text="Edit Node Lily" />
+                        <Button layoutX="29.0" layoutY="216.0" mnemonicParsing="false" onAction="#buttonPressEdge" text="Edit Edge Nick" />
+                        <Button layoutX="31.0" layoutY="42.0" mnemonicParsing="false" onAction="#buttonPressMain" prefHeight="31.0" prefWidth="112.0" text="Main Page" />
+                        <Button layoutX="31.0" layoutY="297.0" mnemonicParsing="false" onAction="#buttonPressAS" prefHeight="31.0" prefWidth="112.0" text="A* Tyler" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="171.0" layoutY="44.0" text="Node Page" />
+                  <Button layoutX="43.0" layoutY="112.0" mnemonicParsing="false" onAction="#addNode" prefHeight="31.0" prefWidth="104.0" text="Add Node" />
+                  <Button layoutX="43.0" layoutY="184.0" mnemonicParsing="false" onAction="#editNode" prefHeight="31.0" prefWidth="104.0" text="Edit Node" />
+                  <Button layoutX="43.0" layoutY="260.0" mnemonicParsing="false" onAction="#deleteNode" text="Delete Node" />
+                  <TextField fx:id="enterNodeID" layoutX="194.0" layoutY="112.0" promptText="Enter Node ID" />
+                  <TextField fx:id="enterXCoo" layoutX="194.0" layoutY="184.0" promptText="Enter x-Coordinate" />
+                  <TextField fx:id="enterYCoo" layoutX="194.0" layoutY="260.0" promptText="Enter y-Coordinate" />
+                  <Label fx:id="errorLabel" layoutX="154.0" layoutY="332.0" text="No Errors Found" />
+               </children></AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

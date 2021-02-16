@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeController">
+    <children>
+        <SplitPane dividerPositions="0.29797979797979796" layoutX="55.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <Button layoutX="31.0" layoutY="127.0" mnemonicParsing="false" onAction="#buttonPressNode" text="Edit Node Lily" />
+                        <Button disable="true" layoutX="29.0" layoutY="216.0" mnemonicParsing="false" onAction="#loadData" text="Edit Edge Nick" />
+                        <Button layoutX="31.0" layoutY="42.0" mnemonicParsing="false" onAction="#buttonPressMain" prefHeight="31.0" prefWidth="112.0" text="Main Page" />
+                        <Button layoutX="31.0" layoutY="297.0" mnemonicParsing="false" onAction="#buttonPressAS" prefHeight="31.0" prefWidth="112.0" text="A* Tyler" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="178.0" layoutY="14.0" text="Edge Page" />
+                  <Button fx:id="createButton" layoutX="42.0" layoutY="137.0" mnemonicParsing="false" onAction="#addEdge" text="Create Edge" />
+                  <Button fx:id="deleteButton" disable="true" layoutX="291.0" layoutY="137.0" mnemonicParsing="false" onAction="#deleteEdge" text="Delete Edge" />
+                  <Button fx:id="updateButton" disable="true" layoutX="163.0" layoutY="137.0" mnemonicParsing="false" onAction="#editEdge" text="Update Edge" />
+                  <TextField fx:id="startNode" layoutX="128.0" layoutY="39.0" promptText="Starting Node" />
+                  <TextField fx:id="endNode" layoutX="128.0" layoutY="68.0" promptText="Ending Node" />
+                  <TextField fx:id="edgeId" layoutX="128.0" layoutY="97.0" promptText="Edge ID" />
+                  <ListView fx:id="edgeList" layoutX="109.0" layoutY="174.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="200.0" />
+               </children></AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

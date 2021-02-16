@@ -14,6 +14,7 @@ public class Node {
   private LinkedList<Edge> edges;
   private LinkedList<Node> adjNodes;
   private boolean walkable = true;
+  
   // full constructor
   public Node(
       String _nodeID,
