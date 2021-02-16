@@ -2,6 +2,7 @@ package edu.wpi.u;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
+import javafx.application.Application;
 import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,12 @@ public class App extends Application {
   // Gets the current instance of App
   public static App getInstance() {
     return instance;
+  }
+
+
+  @Override
+  public void init() {
+    log.info("Starting Up");
   }
 
   private static Stage primaryStage; // This is a static variable!!
@@ -43,6 +50,7 @@ public class App extends Application {
     App.primaryStage.setScene(scene);
     App.primaryStage.show();
   }
+
 
   @Override
   public void stop() {
