@@ -6,9 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.Scanner;
-import java.util.*;
-import static java.lang.System.exit;
+import java.util.Comparator;
+
 
 public class BWdb {
 
@@ -20,11 +19,20 @@ public class BWdb {
   private static int option; // used to know what function to run
 
 
-  public static void main(String[] args) throws SQLException {
-    BWdb db = new BWdb();
+  public static void main(String[] args) throws SQLException, IOException{
+    if(Paths.get("BWdb") != null){
+      Files.walk(Paths.get("BWdb"))
+              .sorted(Comparator.reverseOrder())
+              .map(Path::toFile)
+              .forEach(File::delete);
+      BWdb db = new BWdb();
+    }
+  else{
+      BWdb db = new BWdb();
+    }
   }
 
-  public BWdb() throws SQLException {
+  public BWdb() throws SQLException, IOException {
     driver();
     connect();
     init();
@@ -32,6 +40,8 @@ public class BWdb {
     insertNodeData();
     insertEdgeData();
     printNodes();
+    saveNodesCSV();
+    saveEdgesCSV();
     // stop();
   }
 
@@ -98,13 +108,15 @@ public class BWdb {
       String DELIMITER = ",";
 
       // read the file line by line
-      String line;
-      while ((line = br.readLine()) != null) {
+      //String line;
+      br.readLine(); // this will read the first line
+      String line1 = null;
+      while ((line1 = br.readLine()) != null) {
         str = "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(str);
 
         // convert line into columns
-        String[] columns = line.split(DELIMITER);
+        String[] columns = line1.split(DELIMITER);
         ps.setString(1, columns[0]);
         ps.setInt(2, Integer.parseInt(columns[1]));
         ps.setInt(3, Integer.parseInt(columns[2]));
@@ -115,6 +127,7 @@ public class BWdb {
         ps.setString(8, columns[7]);
         ps.setString(9, columns[8]);
         ps.execute();
+
 
 
         // print all columns
@@ -136,22 +149,22 @@ public class BWdb {
       String DELIMITER = ",";
 
       // read the file line by line
-      String line;
-      while ((line = br.readLine()) != null) {
+      //String line;
+      br.readLine(); // this will read the first line
+      String line1 = null;
+      while ((line1 = br.readLine()) != null) {
         str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
         PreparedStatement ps = conn.prepareStatement(str);
 
         // convert line into columns
-        String[] columns = line.split(DELIMITER);
+        String[] columns = line1.split(DELIMITER);
         ps.setString(1, columns[0]);
         ps.setString(2, columns[1]);
         ps.setString(3, columns[2]);
         ps.execute();
-
-
-        // print all columns
-        //System.out.println("User["+ String.join(", ", columns) +"]");
       }
+
+      System.out.println();
 
     } catch (Exception e) {
       System.out.println("Failed to insert into table");
@@ -201,7 +214,7 @@ public class BWdb {
         String shortName = result.getString("shortName");
         String teamAssigned = result.getString("teamAssigned");
 
-        String line = String.format("\"%s\",%s,%.1f,%s,%s",
+        String line = String.format("%s,%d,%d,%d,%s,%s,%s,%s,%s",
                 nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned);
 
         fileWriter.newLine();
@@ -229,7 +242,7 @@ public class BWdb {
 
       ResultSet result = statement.executeQuery(str);
 
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter("OutsideMapNodes.csv"));
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter("OutsideMapEdges.csv"));
 
       // write header line containing column names
       fileWriter.write("edgeID, startID, endID");
@@ -239,7 +252,7 @@ public class BWdb {
         String startID = result.getString("startID");
         String endID = result.getString("endID");
 
-        String line = String.format("\"%s\",%s,%.1f,%s,%s",
+        String line = String.format("%s,%s,%s",
                 edgeID, startID, endID);
 
         fileWriter.newLine();
