@@ -1,4 +1,4 @@
-package edu.wpi.teamname.algorithms;
+package edu.wpi.u.algorithms;
 
 public class Edge {
   private String edgeID;

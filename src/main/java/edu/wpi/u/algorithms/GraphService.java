@@ -1,4 +1,4 @@
-package edu.wpi.teamname.algorithms;
+package edu.wpi.u.algorithms;
 
 import java.util.*;
 
