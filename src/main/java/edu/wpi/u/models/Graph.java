@@ -59,6 +59,16 @@ public class Graph {
     return "";
   }
 
+  public String deleteNode(int x, int y) {
+    /*
+    Check if valid node_id
+    Return "" is a success
+    Return node_id if node already exists / invalid
+     */
+    dm.delNodeCoord(x, y);
+    return "";
+  }
+
   public String addEdge(String edge_id, String start_node, String end_node) {
     /*
     Check if valid edge_id

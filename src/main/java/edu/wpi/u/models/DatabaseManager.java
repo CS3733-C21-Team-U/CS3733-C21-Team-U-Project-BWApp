@@ -22,7 +22,7 @@ public class DatabaseManager {
     init();
     insertNodeData();
     insertEdgeData();
-    addNode("PSA113", 101, 101, 3, "Faulkner", "lete", "Long", "short");
+    // addNode("PSA113", 101, 101, 3, "Faulkner", "lete", "Long", "short");
     printNodes();
     saveNodesCSV();
     saveEdgesCSV();
@@ -324,9 +324,10 @@ public class DatabaseManager {
 
   public int updCoords(String node_id, int new_x, int new_y) {
     try {
-      String str = "update Nodes set nodeID=? where nodeID=?";
+      String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
-      ps.setString(1, node_id);
+      ps.setInt(1, new_x);
+      ps.setInt(2, new_y);
       ps.setString(2, node_id);
       ps.execute();
     } catch (SQLException e) {
@@ -411,6 +412,22 @@ public class DatabaseManager {
     return 1;
   }
 
+  public int delNodeCoord(int x, int y) {
+    try {
+      String str = "delete from Nodes where xcoord=? and ycoord=?";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ps.setInt(1, x);
+      ps.setInt(2, y);
+      ps.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Failed to delete node");
+      return 0;
+    }
+    System.out.println("Successful delete");
+    return 1;
+  }
+
   public int addEdge(String edge_id, String start_node_id, String end_node_id) {
     try {
       String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
@@ -470,6 +487,21 @@ public class DatabaseManager {
     }
     return 1;
   }
+
+//  public int delEdge(Node startNode, Node endNote) {
+//    try {
+//      String str = "delete from Edges where startID=? and endID=?";
+//      PreparedStatement ps = conn.prepareStatement(str);
+////      ps.setString(1, Node.id);
+////      ps.setString(2, Node.id);
+//      ps.execute();
+//    } catch (SQLException e) {
+//      e.printStackTrace();
+//      System.out.println("Failed to update start ID");
+//      return 0;
+//    }
+//    return 1;
+//  }
 
   public static boolean isNode(String node_id) {
     try {
