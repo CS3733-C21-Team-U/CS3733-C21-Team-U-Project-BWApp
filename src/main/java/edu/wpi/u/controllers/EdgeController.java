@@ -3,7 +3,7 @@ package edu.wpi.u.controllers;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.Graph;
+import edu.wpi.u.models.GraphService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,9 +71,9 @@ public class EdgeController {
 
   @FXML
   public void loadData() {
-    Graph graph = App.getInstance().graph;
+    GraphService graphService = App.getInstance().graphService;
     list.removeAll(list);
-    edgeList.getItems().addAll(graph.getEdges());
+    edgeList.getItems().addAll(graphService.getEdges());
   }
 
   @FXML

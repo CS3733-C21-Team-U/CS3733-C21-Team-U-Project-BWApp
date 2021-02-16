@@ -5,9 +5,9 @@ import edu.wpi.u.algorithms.Node;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Graph {
+public class GraphService {
 
-  public Graph() {
+  public GraphService() {
     initializeGraph();
   }
 

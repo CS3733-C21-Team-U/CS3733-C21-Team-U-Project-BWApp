@@ -1,7 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.Graph;
+import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class App extends Application {
   // per open application)
   // Can be accessed by all controllers and classes by calling App.getInstance();
   private static final App instance = new App();
-  public Graph graph = new Graph();
+  public GraphService graphService = new GraphService();
 
   // Gets the current instance of App
   public static App getInstance() {
@@ -31,15 +31,15 @@ public class App extends Application {
     Node E = new Node("E", 1, 30);
     Node F = new Node("F", 0, 1);
 
-    graph.addEdge("1", "A", "B");
-    graph.addEdge("2", "B", "C");
-    graph.addEdge("3", "D", "C");
-    graph.addEdge("4", "D", "E");
-    graph.addEdge("5", "E", "F");
-    graph.addEdge("6", "F", "A");
-    graph.addEdge("7", "F", "B");
-    graph.addEdge("8", "E", "A");
-    graph.addEdge("9", "B", "D");
+    graphService.addEdge("1", "A", "B");
+    graphService.addEdge("2", "B", "C");
+    graphService.addEdge("3", "D", "C");
+    graphService.addEdge("4", "D", "E");
+    graphService.addEdge("5", "E", "F");
+    graphService.addEdge("6", "F", "A");
+    graphService.addEdge("7", "F", "B");
+    graphService.addEdge("8", "E", "A");
+    graphService.addEdge("9", "B", "D");
   }
 
   public static Message savedData = new Message();

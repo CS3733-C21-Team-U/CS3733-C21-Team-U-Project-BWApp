@@ -1,7 +1,6 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
-import edu.wpi.u.algorithms.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -57,7 +56,7 @@ public class NodeController {
     int tempX = Integer.parseInt(enterXCoo.getText());
     int tempY = Integer.parseInt(enterYCoo.getText());
 
-    String ret = App.getInstance().graph.addNode(tempID, tempX, tempY);
+    String ret = App.getInstance().graphService.addNode(tempID, tempX, tempY);
     if (ret.equals(tempID)) {
       errorLabel.setText("Node already exists");
       return;
@@ -78,7 +77,7 @@ public class NodeController {
     if (checkTextBoxesErrorCoordiantes()) return;
     int tempX = Integer.parseInt(enterXCoo.getText());
     int tempY = Integer.parseInt(enterYCoo.getText());
-    if (App.getInstance().graph.updateNode(tempID, tempX, tempY).equals(tempID))
+    if (App.getInstance().graphService.updateNode(tempID, tempX, tempY).equals(tempID))
       errorLabel.setText("Node does not exists.");
     else {
       update();
@@ -91,7 +90,7 @@ public class NodeController {
     String tempID = enterNodeID.getText();
     if (tempID.equals("")) errorLabel.setText("Missing Node ID.");
     else {
-      if (App.getInstance().graph.deleteNode(tempID).equals(tempID))
+      if (App.getInstance().graphService.deleteNode(tempID).equals(tempID))
         errorLabel.setText("Node does not exists.");
       else {
         update();

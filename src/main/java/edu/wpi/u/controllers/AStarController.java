@@ -2,7 +2,7 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.Graph;
+import edu.wpi.u.models.GraphService;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class AStarController {
 
-  Graph g = new Graph();
+  GraphService g = new GraphService();
 
   @FXML public TextField startNode;
   @FXML public TextField endNode;
