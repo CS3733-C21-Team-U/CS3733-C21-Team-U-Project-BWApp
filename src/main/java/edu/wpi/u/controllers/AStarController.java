@@ -1,12 +1,14 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.Graph;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class AStarController {
@@ -16,6 +18,7 @@ public class AStarController {
   @FXML public TextField startNode;
   @FXML public TextField endNode;
   @FXML public Label errorMessage;
+  @FXML public ListView listOfNodes;
 
   @FXML
   public void buttonPressMain() throws Exception {
@@ -47,23 +50,28 @@ public class AStarController {
 
   @FXML
   public void buttonPressFind() throws Exception {
-    if (startNode.toString() == ""
-        || endNode.toString() == ""
-        || startNode.toString() == null
-        || endNode.toString() == null) {
+    if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");
     } else {
       // try {
-      LinkedList N = g.aStar(startNode.toString(), endNode.toString());
-      // }
-      // catch (Exception) {
-      errorMessage.setText("Please input valid nodes!");
-      // }
 
+      LinkedList<Node> N = new LinkedList<Node>();
+      N = g.aStar(startNode.toString(), endNode.toString());
+      /*
+      N.add(new Node("Ay", 100, 200));
+      N.add(new Node(" Yo", 100, 200));
+      N.add(new Node("Wassup", 100, 200));
+      */
+
+      for (int i = 0; i < N.size(); i++) {
+        listOfNodes.getItems().add(N.get(i).getNodeID());
+      }
+      // } This is code that allows for an exception to be thrown from the A* part.
+      // It will be caught here and an error message will be displayed.
+      // catch (Exception) {
+      // errorMessage.setText("Please input valid nodes!");
+      // }
       errorMessage.setText("Pathfinding complete!");
     }
-
-    // Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
-    // App.getPrimaryStage().getScene().setRoot(root);
   }
 }
