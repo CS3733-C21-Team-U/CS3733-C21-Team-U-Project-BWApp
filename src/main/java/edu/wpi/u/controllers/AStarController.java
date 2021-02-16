@@ -42,13 +42,6 @@ public class AStarController {
   }
 
   @FXML
-  public void buttonPressAS() throws Exception {
-
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
-    App.getPrimaryStage().getScene().setRoot(root);
-  }
-
-  @FXML
   public void buttonPressFind() throws Exception {
     if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");

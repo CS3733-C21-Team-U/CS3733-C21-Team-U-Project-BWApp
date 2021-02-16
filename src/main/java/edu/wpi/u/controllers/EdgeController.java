@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class EdgeController {
-  public void buttonPressAS(ActionEvent actionEvent) {}
 
   ObservableList list = FXCollections.observableArrayList();
 
@@ -72,7 +71,7 @@ public class EdgeController {
 
   @FXML
   public void loadData() {
-    Graph graph = App.graph;
+    Graph graph = App.getInstance().graph;
     list.removeAll(list);
     edgeList.getItems().addAll(graph.getEdges());
   }
