@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class AStarController {
 
-  GraphService g = new GraphService();
+
 
   @FXML public TextField startNode;
   @FXML public TextField endNode;
@@ -43,11 +43,11 @@ public class AStarController {
 
   @FXML
   public void buttonPressFind() throws Exception {
+    GraphService g = App.getInstance().graphService;
     if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");
     } else {
       // try {
-
       LinkedList<Node> N = new LinkedList<Node>();
       N = g.aStar(startNode.toString(), endNode.toString());
       /*
@@ -55,7 +55,10 @@ public class AStarController {
       N.add(new Node(" Yo", 100, 200));
       N.add(new Node("Wassup", 100, 200));
       */
-
+      if(N == null){//This is temporary until the Astar function throws actual exceptions.
+        errorMessage.setText("Pathfinding error");
+        return;
+      }
       for (int i = 0; i < N.size(); i++) {
         listOfNodes.getItems().add(N.get(i).getNodeID());
       }
