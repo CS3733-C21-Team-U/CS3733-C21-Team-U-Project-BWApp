@@ -58,7 +58,7 @@ public class Node {
   }
 
   public void removeAdjNode(Node _node) {
-    //needs work? might never get used but should also remove adjNode from the connected node
+    // needs work? might never get used but should also remove adjNode from the connected node
     this.adjNodes.remove(_node);
   }
 

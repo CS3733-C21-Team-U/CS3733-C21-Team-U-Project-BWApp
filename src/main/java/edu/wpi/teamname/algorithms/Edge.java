@@ -36,7 +36,7 @@ public class Edge {
     return this.startNode;
   }
 
-  public Node getEndNode(){
+  public Node getEndNode() {
     return this.endNode;
   }
 

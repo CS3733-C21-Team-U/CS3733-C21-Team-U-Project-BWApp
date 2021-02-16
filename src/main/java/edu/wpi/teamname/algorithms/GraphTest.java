@@ -40,10 +40,8 @@ public class GraphTest {
     graph.enableEdge("8");
     graph.removeEdge("10");
 
-    graph.runAStar("A", "D");
-
-    //    DFS search = new DFS(B); // starting node
-    //    if (search.marked.get(F) != null) System.out.println("\nC is connected");
-    //    else System.out.println("\nNOT connected");
+    for (Edge e : graph.EdgesFollowed(graph.runAStar("A", "D"))) {
+      System.out.print(e.getEdgeID());
+    }
   }
 }
