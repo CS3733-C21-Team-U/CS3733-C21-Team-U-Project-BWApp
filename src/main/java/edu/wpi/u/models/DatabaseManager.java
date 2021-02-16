@@ -189,4 +189,8 @@ public class DatabaseManager {
         }
         return 1;
     }
+
+    /*
+    Write function to validate nodes and edges
+     */
 }
