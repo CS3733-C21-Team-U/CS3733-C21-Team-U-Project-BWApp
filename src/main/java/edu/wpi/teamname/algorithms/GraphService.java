@@ -2,11 +2,11 @@ package edu.wpi.teamname.algorithms;
 
 import java.util.*;
 
-public class GraphManager {
+public class GraphService {
   private final HashMap<String, Node> allNodes;
   private final HashMap<String, Edge> allEdges;
 
-  public GraphManager() {
+  public GraphService() {
     allNodes = new HashMap<>();
     allEdges = new HashMap<>();
   }
