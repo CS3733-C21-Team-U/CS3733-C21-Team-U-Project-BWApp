@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import javafx.application.Application;
 import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
+
+
+  @Override
+  public void init() {
+    log.info("Starting Up");
+  }
+
+  @Override
 
   public static Message savedData = new Message();
 
@@ -33,6 +42,7 @@ public class App extends Application {
     App.primaryStage.setScene(scene);
     App.primaryStage.show();
   }
+
 
   @Override
   public void stop() {
