@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Graph {
 
   // GraphManager gm = new GraphManager();
-  DatabaseManager dm = new DatabaseManager();
+  DatabaseService dm = new DatabaseService();
   Edge e = new Edge();
   Node n = new Node();
 

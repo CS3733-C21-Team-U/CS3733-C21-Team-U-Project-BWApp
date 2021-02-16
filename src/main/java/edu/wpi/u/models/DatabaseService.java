@@ -5,19 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.Comparator;
 
-public class DatabaseManager {
+public class DatabaseService {
 
   private static Connection conn = null;
   private static ResultSet rset;
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
-    DatabaseManager db = new DatabaseManager();
+    DatabaseService db = new DatabaseService();
   }
 
-  public DatabaseManager() throws IOException, SQLException {
+  public DatabaseService() throws IOException, SQLException {
     /*
     Run these next 4 only on boot/start
      */
@@ -29,7 +28,7 @@ public class DatabaseManager {
 
     // Prints nodes
 
-    printNodes();
+    // printNodes();
     /*
     Only run these two below on exit / finish
      */

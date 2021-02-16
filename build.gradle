@@ -56,11 +56,11 @@ jar {
 def codeCoverageExcludes = [
         'edu.wpi.teamname.App',
         'edu.wpi.teamname.Main',
-        'edu.wpi.teamname.models.DataBaseManager',
+        'edu.wpi.teamname.models.DatabaseManager',
         'edu.wpi.teamname.models.Edge',
         'edu.wpi.teamname.models.Node',
         'edu.wpi.teamname.models.Message',
-        'edu.wpi.teamname.models.Node',
+        'edu.wpi.teamname.models.Graph',
         'edu.wpi.teamname.controllers.MainController',
         'edu.wpi.teamname.controllers.NewController',
         'edu.wpi.teamname.controllers.Tab1Controller',
