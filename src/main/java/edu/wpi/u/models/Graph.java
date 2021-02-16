@@ -9,8 +9,6 @@ public class Graph {
 
   // GraphManager gm = new GraphManager();
   DatabaseService dm = new DatabaseService();
-  Edge e = new Edge();
-  Node n = new Node();
 
   public Graph() throws IOException, SQLException {
     initializeGraph();
