@@ -1,5 +1,9 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.algorithms.GraphService;
+import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.algorithms.Edge;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +11,7 @@ import java.util.LinkedList;
 
 public class Graph {
 
-  // GraphManager gm = new GraphManager();
+  GraphService gs = new GraphService();
   DatabaseService dm = new DatabaseService();
 
   public Graph() throws IOException, SQLException {
