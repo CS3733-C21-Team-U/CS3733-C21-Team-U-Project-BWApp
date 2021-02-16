@@ -12,12 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
-  //Allows for globally accessible instance of app to allow instance based editing (separate info per open application)
-  //Can be accessed by all controllers and classes by calling App.getInstance();
+  // Allows for globally accessible instance of app to allow instance based editing (separate info
+  // per open application)
+  // Can be accessed by all controllers and classes by calling App.getInstance();
   private static final App instance = new App();
   public Graph graph = new Graph();
 
-  //Gets the current instance of App
+  // Gets the current instance of App
   public static App getInstance() {
     return instance;
   }
