@@ -27,7 +27,7 @@ public class Graph {
   */
   public String addNode(String node_id, int x, int y) {
     if (validateNode(node_id)) {
-      dm.addNode(node_id, x, y, 1, "Test", "Long", "short");
+      dm.addNode(node_id, x, y, 1, "Test", "nodetype", "Long", "short");
       return "";
     } else {
       return node_id;

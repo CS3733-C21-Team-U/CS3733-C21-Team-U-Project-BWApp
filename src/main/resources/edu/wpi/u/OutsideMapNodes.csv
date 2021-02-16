@@ -57,3 +57,5 @@ PDEPT00201,1091,810,1,Faulkner,DEPT,Special testing,SPTEST,P
 PSTAI00101,1239,1066,1,Faulkner,STAI,Staircase C,STAIRC,P
 PSTAI00201,2347,1195,1,Faulkner,STAI,Staircase D,STAIRD,P
 PSTAI00301,1288,405,1,Faulkner,STAI,Staircase E,STAIRE,P
+PSA111,100,100,5,Faulkner,test,Long,short,u
+PSA113,101,101,3,Faulkner,lete,Long,short,u
