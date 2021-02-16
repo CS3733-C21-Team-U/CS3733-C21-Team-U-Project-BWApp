@@ -1,8 +1,6 @@
 package edu.wpi.u;
 
-import edu.wpi.u.algorithms.GraphManager;
 import edu.wpi.u.models.Graph;
-import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,7 @@ public class App extends Application {
   public static Graph graph = new Graph();
 
   private static Stage primaryStage; // This is a static variable!!
-  // We only ever have one primary stage, each time we switch scenes, we swap this out
+  // We only ever have one primary stage, each time we switch scenes, we swap the root out
 
   public static Stage getPrimaryStage() {
     return primaryStage;
