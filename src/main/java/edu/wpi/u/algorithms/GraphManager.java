@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class Graph {
+public class GraphManager {
   private final Set<Node> allNodes;
   private final LinkedList<Edge> allEdges;
 
-  public Graph() {
+  public GraphManager() {
     allNodes = new HashSet<>();
     allEdges = new LinkedList<>();
   }

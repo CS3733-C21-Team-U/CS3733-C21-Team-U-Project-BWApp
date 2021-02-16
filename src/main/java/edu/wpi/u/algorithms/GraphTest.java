@@ -3,7 +3,7 @@ package edu.wpi.u.algorithms;
 public class GraphTest {
 
   public static void main(String[] args) {
-    Graph graph = new Graph();
+    GraphManager graph = new GraphManager();
     Node A = new Node("A", 0, 0);
     Node B = new Node("B", 1, 0);
     Node C = new Node("C", 2, 0);
