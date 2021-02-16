@@ -4,16 +4,11 @@ import java.sql.*;
 
 public class DatabaseManager {
 
-    private static Connection conn = null; // used for connection
-    private static Statement stmt; // used for sql statements
-    private static ResultSet rset; // used to store returns from sql queries
+    private static Connection conn = null;
     private static String url =
-            "jdbc:derby:BWdb;user=admin;password=admin"; // link of embedded database
-    private static int option; // used to know what function to run
-
+            "jdbc:derby:BWdb;user=admin;password=admin";
 
     public static void main(String[] args) {
-        BWdb db = new BWbd();
     }
 
     public static void driver() {
@@ -34,6 +29,9 @@ public class DatabaseManager {
         }
     }
 
+    /*
+    All functions will return 1 on success & return 0 on failure
+     */
     public int addNode(String node_id, int x, int y, int floor, String building, String longname, String shortname) {
         try {
             String str = "insert into Nodes (nodeID, xcoord, ycoord, floor, building, longname, shortname, 'U') values (?,?,?,?,?,?,?)";
@@ -191,4 +189,8 @@ public class DatabaseManager {
         }
         return 1;
     }
+
+    /*
+    Write function to validate nodes and edges
+     */
 }
