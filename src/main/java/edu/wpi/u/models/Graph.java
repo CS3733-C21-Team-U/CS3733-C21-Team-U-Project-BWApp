@@ -96,7 +96,21 @@ public class Graph {
     /*
     Returns an ArrayList of all Edge Objects in the graph
      */
-    return null;
+    Node A = new Node("A", 0, 0);
+    Node B = new Node("B", 1, 0);
+    Node C = new Node("C", 2, 0);
+
+    ArrayList<Edge> returnList = new ArrayList<Edge>();
+
+    Edge One = new Edge("One", A, B);
+    Edge Two = new Edge("Two", B, C);
+    Edge Three = new Edge("Three", A, C);
+
+    returnList.add(One);
+    returnList.add(Two);
+    returnList.add(Three);
+
+    return returnList;
   }
 
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
