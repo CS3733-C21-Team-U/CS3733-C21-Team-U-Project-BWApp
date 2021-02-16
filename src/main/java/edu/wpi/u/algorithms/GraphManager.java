@@ -53,18 +53,18 @@ public class GraphManager {
     allEdges.remove(e);
   }
 
-  public Node getNodeById(String nodeID){
-    for (Node node: allNodes ){
-      if (node.getNodeID().equals(nodeID)){
+  public Node getNodeById(String nodeID) {
+    for (Node node : allNodes) {
+      if (node.getNodeID().equals(nodeID)) {
         return node;
       }
     }
     return null;
   }
 
-  public Edge getEdgeByNodes(Node startNode, Node endNode){
-    for (Edge edge : allEdges){
-      if(edge.getStartNode().equals(startNode) && edge.getEndNode().equals(endNode)){
+  public Edge getEdgeByNodes(Node startNode, Node endNode) {
+    for (Edge edge : allEdges) {
+      if (edge.getStartNode().equals(startNode) && edge.getEndNode().equals(endNode)) {
         return edge;
       }
     }
@@ -73,13 +73,13 @@ public class GraphManager {
 
   public Edge updateEdge(String _edgeID, Node _startNode, Node _endNode) {
     Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
-    for (Edge edge : allEdges){
-      if(edge.getEdgeID().equals(_edgeID)){
+    for (Edge edge : allEdges) {
+      if (edge.getEdgeID().equals(_edgeID)) {
         allEdges.remove(edge);
         allEdges.add(realEdge);
         return realEdge;
       }
     }
-   return null;
+    return null;
   }
 }
