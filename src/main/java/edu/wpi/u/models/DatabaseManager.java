@@ -488,20 +488,20 @@ public class DatabaseManager {
     return 1;
   }
 
-//  public int delEdge(Node startNode, Node endNote) {
-//    try {
-//      String str = "delete from Edges where startID=? and endID=?";
-//      PreparedStatement ps = conn.prepareStatement(str);
-////      ps.setString(1, Node.id);
-////      ps.setString(2, Node.id);
-//      ps.execute();
-//    } catch (SQLException e) {
-//      e.printStackTrace();
-//      System.out.println("Failed to update start ID");
-//      return 0;
-//    }
-//    return 1;
-//  }
+  //  public int delEdge(Node startNode, Node endNote) {
+  //    try {
+  //      String str = "delete from Edges where startID=? and endID=?";
+  //      PreparedStatement ps = conn.prepareStatement(str);
+  ////      ps.setString(1, Node.id);
+  ////      ps.setString(2, Node.id);
+  //      ps.execute();
+  //    } catch (SQLException e) {
+  //      e.printStackTrace();
+  //      System.out.println("Failed to update start ID");
+  //      return 0;
+  //    }
+  //    return 1;
+  //  }
 
   public static boolean isNode(String node_id) {
     try {
