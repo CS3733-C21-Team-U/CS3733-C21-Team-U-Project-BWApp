@@ -18,8 +18,6 @@ public class App extends Application {
     log.info("Starting Up");
   }
 
-  @Override
-
   public static Message savedData = new Message();
 
   private static Stage primaryStage; // This is a static variable!!
