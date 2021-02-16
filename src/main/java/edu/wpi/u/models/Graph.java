@@ -89,6 +89,15 @@ public class Graph {
     dm.delEdge(edge_id);
     return "";
   }
+  public String deleteEdgeByNodes(String start_node_id, String end_node_id) {
+    /*
+    Check if valid edge_id
+    Return "" is a success
+    Return edge_id if edge already exists / invalid
+     */
+    dm.delEdgeByNodes(start_node_id, end_node_id);
+    return "";
+  }
 
   public ArrayList<Node> getNodes() {
     return null;

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.Comparator;
 
 public class DatabaseManager {
 
@@ -17,20 +18,21 @@ public class DatabaseManager {
   }
 
   public DatabaseManager() throws IOException, SQLException {
+    /*
+    Run these next 4 only on boot/start
+     */
     driver();
     connect();
     init();
     insertNodeData();
     insertEdgeData();
-    addNode("PSA113", 101, 101, 3, "Faulkner", "lete", "Long", "short");
+    // Prints nodes
     printNodes();
+    /*
+    Only run these two below on exit / finish
+     */
     saveNodesCSV();
     saveEdgesCSV();
-    // dropValues();
-    // dropTables();
-    /*
-    Run stop() when closing program
-     */
   }
 
   public static void driver() {
@@ -82,18 +84,6 @@ public class DatabaseManager {
     }
   }
 
-  public static void dropTables() {
-    try {
-      String str = "drop table Nodes";
-      PreparedStatement ps = conn.prepareStatement(str);
-      ps.execute();
-      str = "drop table Edges";
-      ps.execute();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
-    }
-  }
-
   public static void insertNodeData() throws SQLException {
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
@@ -124,9 +114,6 @@ public class DatabaseManager {
           ps.setString(8, columns[7]);
           ps.setString(9, columns[8]);
           ps.execute();
-
-          // print all columns
-          // System.out.println("User["+ String.join(", ", columns) +"]");
         }
       } catch (Exception e) {
         System.out.println("Failed to insert into table");
@@ -324,10 +311,11 @@ public class DatabaseManager {
 
   public int updCoords(String node_id, int new_x, int new_y) {
     try {
-      String str = "update Nodes set nodeID=? where nodeID=?";
+      String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
-      ps.setString(1, node_id);
-      ps.setString(2, node_id);
+      ps.setInt(1, new_x);
+      ps.setInt(2, new_y);
+      ps.setString(3,node_id);
       ps.execute();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -471,13 +459,28 @@ public class DatabaseManager {
     return 1;
   }
 
+  public int delEdgeByNodes(String start_node_id, String end_node_id){
+    try {
+      String str = "delete from Edges where startID=?, endID=?";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ps.setString(1, start_node_id);
+      ps.setString(2, end_node_id);
+      ps.execute();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+      return 0;
+    }
+  return 1;
+  }
   public static boolean isNode(String node_id) {
     try {
       String str = "select nodeID from Nodes where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
       ps.setString(1, node_id);
       rset = ps.executeQuery();
-      return !rset.next();
+      return rset.next();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -490,7 +493,7 @@ public class DatabaseManager {
       PreparedStatement ps = conn.prepareStatement(str);
       ps.setString(1, edge_id);
       rset = ps.executeQuery();
-      return !rset.next();
+      return rset.next();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -501,6 +504,5 @@ public class DatabaseManager {
     saveNodesCSV();
     saveEdgesCSV();
     dropValues();
-    dropTables();
   }
 }
