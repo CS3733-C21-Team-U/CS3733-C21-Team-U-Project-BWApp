@@ -3,6 +3,8 @@ package edu.wpi.u;
 import static org.junit.Assert.*;
 
 import edu.wpi.u.algorithms.*;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import org.junit.Test;
 
@@ -51,7 +53,7 @@ public class GraphTest {
 
   private boolean FindNodeID(LinkedList<Node> answer, String id) {
     for (Node n : answer) {
-      if (n.getNodeID() == "A") {
+      if (n.getNodeID() == id) {
         return true;
       }
     }
@@ -71,5 +73,11 @@ public class GraphTest {
     LinkedList<Node> nodeP = ExampleGraph().runAStar("A", "D");
     LinkedList<Edge> answer = ExampleGraph().EdgesFollowed(nodeP);
     assertEquals(3, answer.size());
+  }
+
+  @Test
+  public void allNodesTest(){
+    ArrayList<Node> allNodes = ExampleGraph().getAllNodes();
+    assertEquals(5, allNodes.size());
   }
 }
