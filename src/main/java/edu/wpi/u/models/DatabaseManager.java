@@ -6,17 +6,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 
-public class DatabaseService {
+public class DatabaseManager {
 
   private static Connection conn = null;
   private static ResultSet rset;
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
-    DatabaseService db = new DatabaseService();
+    DatabaseManager db = new DatabaseManager();
   }
 
-  public DatabaseService() throws IOException, SQLException {
+  public DatabaseManager() {
     /*
     Run these next 4 only on boot/start
      */
@@ -85,7 +85,7 @@ public class DatabaseService {
     }
   }
 
-  public static void insertNodeData() throws SQLException {
+  public static void insertNodeData() {
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
     if (isTableEmpty()) {
@@ -123,7 +123,7 @@ public class DatabaseService {
     }
   }
 
-  public static void insertEdgeData() throws SQLException {
+  public static void insertEdgeData() {
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapEdges.csv");
     if (isTableEmpty()) {
@@ -493,7 +493,7 @@ public class DatabaseService {
   return 1;
   }
 
-  public static boolean isNode(String node_id) {
+  public boolean isNode(String node_id) {
     try {
       String str = "select nodeID from Nodes where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -506,7 +506,7 @@ public class DatabaseService {
     return false;
   }
 
-  public static boolean isEdge(String edge_id) {
+  public boolean isEdge(String edge_id) {
     try {
       String str = "select edgeID from Edges where edgeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
