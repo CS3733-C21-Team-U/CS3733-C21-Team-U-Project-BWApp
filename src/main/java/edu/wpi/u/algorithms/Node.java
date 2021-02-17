@@ -54,6 +54,16 @@ public class Node {
     return returnMe;
   }
 
+  //These are super temporary
+  public String getXString(){
+    return String.valueOf(this.xcoord);
+  }
+
+  //These are super temporary
+  public String getYString(){
+    return String.valueOf(this.ycoord);
+  }
+
   public void updateCords(double x, double y){
     this.xcoord = x;
     this.ycoord = y;

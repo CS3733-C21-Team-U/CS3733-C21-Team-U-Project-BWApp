@@ -2,6 +2,10 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
+import edu.wpi.u.models.GraphService;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+
 import java.util.Observable;
 
 public class NodeController {
@@ -29,9 +35,11 @@ public class NodeController {
 
   @FXML public TableColumn<Node, String> colNodeID;
 
-  @FXML public TableColumn<Node, Integer> colXCoo;
+  @FXML public TableColumn<Node, String> colXCoo;
 
-  @FXML public TableColumn<Node, Integer> colYCoo;
+  @FXML public TableColumn<Node, String> colYCoo;
+
+  ObservableList<Node> list = FXCollections.observableArrayList();
 
   private ObservableList<Node> allNodes;
 
@@ -40,16 +48,26 @@ public class NodeController {
     colXCoo.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
     colYCoo.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
     update();
+
+    GraphService graphService = App.graphService;
+    list.removeAll();
+    list.addAll(graphService.getNodes());
+    colNodeID.setCellValueFactory(new PropertyValueFactory<Node, String>("nodeID"));
+    colXCoo.setCellValueFactory(
+            cellData -> new SimpleStringProperty(cellData.getValue().getXString()));
+    colYCoo.setCellValueFactory(
+            cellData -> new SimpleStringProperty(cellData.getValue().getYString()));
+    nodeTable.setItems(list);
   }
 
   public void update() {
-    if (App.graphService.getNodes().isEmpty()) {
-      editNodeButton.setDisable(true);
-      deleteNodeButton.setDisable(true);
-    } else {
-      editNodeButton.setDisable(false);
-      deleteNodeButton.setDisable(false);
-    }
+//    if (App.graphService.getNodes().isEmpty()) {
+//      editNodeButton.setDisable(true);
+//      deleteNodeButton.setDisable(true);
+//    } else {
+//      editNodeButton.setDisable(false);
+//      deleteNodeButton.setDisable(false);
+//    }
 
     allNodes = FXCollections.observableList(App.graphService.getNodes());
     nodeTable.setItems(allNodes);
@@ -159,6 +177,18 @@ public class NodeController {
 
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  public void displaySelected(MouseEvent mouseEvent) {
+    Node node = nodeTable.getSelectionModel().getSelectedItem();
+    if (node != null) {
+      enterNodeID.setText(node.getNodeID());
+      enterXCoo.setText(node.getXString());
+      enterYCoo.setText(node.getYString());
+      editNodeButton.setDisable(false);
+      deleteNodeButton.setDisable(false);
+    }
   }
 
 }

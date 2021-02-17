@@ -29,11 +29,11 @@
                   <TextField fx:id="startNode" layoutX="128.0" layoutY="69.0" promptText="Starting Node" />
                   <TextField fx:id="endNode" layoutX="128.0" layoutY="99.0" promptText="Ending Node" />
                   <TextField fx:id="edgeId" layoutX="129.0" layoutY="38.0" promptText="Edge ID" />
-                  <TableView fx:id="edgeTable" layoutX="96.0" layoutY="174.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="226.0">
+                  <TableView fx:id="edgeTable" layoutY="206.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="226.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="edgeIdCol" prefWidth="75.0" text="Edge ID" />
-                      <TableColumn fx:id="startNodeCol" prefWidth="75.0" text="Start Node" />
-                        <TableColumn fx:id="endNodeCol" prefWidth="75.0" text="End Node" />
+                      <TableColumn fx:id="edgeIdCol" minWidth="0.0" prefWidth="160.0" text="Edge ID" />
+                      <TableColumn fx:id="startNodeCol" prefWidth="125.0" text="Start Node" />
+                        <TableColumn fx:id="endNodeCol" prefWidth="125.0" text="End Node" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

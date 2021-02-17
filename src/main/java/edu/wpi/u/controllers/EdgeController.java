@@ -40,7 +40,7 @@ public class EdgeController {
   ObservableList<Edge> list = FXCollections.observableArrayList();
 
   public void initialize() {
-    GraphService graphService = App.getInstance().graphService;
+    GraphService graphService = App.graphService;
     list.removeAll();
     list.addAll(graphService.getEdges());
     edgeIdCol.setCellValueFactory(new PropertyValueFactory<Edge, String>("edgeID"));
@@ -87,7 +87,7 @@ public class EdgeController {
   public void loadData() {
     GraphService graphService = App.graphService;
     list.removeAll(list);
-    edgeList.getItems().addAll(graphService.getEdges());
+//    list.getItems().addAll(graphService.getEdges());
   }
 
   @FXML
