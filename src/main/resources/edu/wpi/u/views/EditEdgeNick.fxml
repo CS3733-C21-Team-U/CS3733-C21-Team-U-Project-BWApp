@@ -26,6 +26,7 @@
                   <Button fx:id="createButton" layoutX="42.0" layoutY="137.0" mnemonicParsing="false" onAction="#addEdge" text="Create Edge" />
                   <Button fx:id="deleteButton" disable="true" layoutX="291.0" layoutY="137.0" mnemonicParsing="false" onAction="#deleteEdge" text="Delete Edge" />
                   <Button fx:id="updateButton" disable="true" layoutX="163.0" layoutY="137.0" mnemonicParsing="false" onAction="#editEdge" text="Update Edge" />
+                  <Label fx:id="errorLabel" layoutX="195.0" layoutY="174.0" textFill="RED" />
                   <TextField fx:id="startNode" layoutX="128.0" layoutY="69.0" promptText="Starting Node" />
                   <TextField fx:id="endNode" layoutX="128.0" layoutY="99.0" promptText="Ending Node" />
                   <TextField fx:id="edgeId" layoutX="129.0" layoutY="38.0" promptText="Edge ID" />

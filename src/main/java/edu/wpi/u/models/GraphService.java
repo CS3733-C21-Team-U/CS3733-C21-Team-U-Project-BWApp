@@ -63,8 +63,8 @@ public class GraphService {
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addNode(String node_id, int x, int y) {
-    dm.addNode(node_id,x,y,0, "Default", "Default", "Default", "Default");
-    gm.makeNode(node_id,x,y,0,"Default", "Default", "Default", "Default", "u");
+    dm.addNode(node_id,x,y,0, "Def", "Def", "Def", "Def");
+    gm.makeNode(node_id,x,y,0,"Def", "Def", "Def", "Def", "u");
     return "";
     /*
     Check if valid node_id

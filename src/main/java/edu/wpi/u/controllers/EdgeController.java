@@ -37,6 +37,8 @@ public class EdgeController {
 
   @FXML public TableColumn<Edge, String> endNodeCol;
 
+  @FXML public Label errorLabel;
+
   ObservableList<Edge> list = FXCollections.observableArrayList();
 
   public void initialize() {
@@ -52,7 +54,29 @@ public class EdgeController {
   }
 
   @FXML
-  public void addEdge(ActionEvent actionEvent) {}
+  public void addEdge(ActionEvent actionEvent) {
+    String tempEdgeID = edgeId.getText();
+    String tempStartID = startNode.getText();
+    String tempEndID = endNode.getText();
+
+
+
+    if(tempEdgeID.trim().equals("") || tempStartID.trim().equals("") || tempEndID.trim().equals("")){
+      errorLabel.setText("Missing Fields");
+      System.out.println("Adding edge attempt");
+      return;
+    }
+
+    if(App.graphService.addEdge(tempEdgeID, tempStartID, tempEndID).equals(tempEdgeID)){
+      errorLabel.setText("At least one node may not exist");
+      return;
+    }
+    else{
+      errorLabel.setText("Edge addition successful");
+      list = FXCollections.observableList(App.graphService.getEdges());
+      edgeTable.setItems(list);
+    }
+  }
 
   @FXML
   // check while database

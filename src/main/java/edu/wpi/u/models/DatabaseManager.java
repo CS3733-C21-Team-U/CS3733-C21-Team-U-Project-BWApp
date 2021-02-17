@@ -310,7 +310,7 @@ public class DatabaseManager {
       ps.setInt(1, new_x);
       ps.setInt(2, new_y);
       ps.setString(3,node_id);
-      ps.setString(2, node_id);
+  //    ps.setString(2, node_id);
       ps.execute();
     } catch (SQLException e) {
       e.printStackTrace();

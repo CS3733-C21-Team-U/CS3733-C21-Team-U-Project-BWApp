@@ -104,9 +104,10 @@ public class NodeController {
     }
     if (checkTextBoxesErrorCoordinatesEmpty()) return;
     if (checkTextBoxesErrorCoordinates()) return;
-    int tempX = Integer.parseInt(enterXCoo.getText());
-    int tempY = Integer.parseInt(enterYCoo.getText());
-    if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
+    int tempX = (int)Double.parseDouble(enterXCoo.getText());
+    int tempY = (int)Double.parseDouble(enterYCoo.getText());
+    if (App.graphService.deleteNode(tempID).equals(tempID) || App.graphService.addNode(tempID, tempX, tempY).equals(tempID))
+   // if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
       errorLabel.setText("Node does not exists.");
     else {
       update();
@@ -129,13 +130,13 @@ public class NodeController {
 
   private boolean checkTextBoxesErrorCoordinates() {
     try {
-      Integer.parseInt(enterXCoo.getText());
+      Double.parseDouble(enterXCoo.getText());
     } catch (NumberFormatException e) {
       errorLabel.setText("x-coordinate is not a valid number");
       return true;
     }
     try {
-      Integer.parseInt(enterYCoo.getText());
+      Double.parseDouble(enterYCoo.getText());
     } catch (NumberFormatException e) {
       errorLabel.setText("y-coordinate is not a valid number");
       return true;
