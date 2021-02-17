@@ -83,6 +83,10 @@ public class GraphManager {
     _node.setWalkable(true);
   }
 
+  public void updateCoords(String node_id, int x, int y){
+    this.allNodes.get(node_id).updateCords(x,y);
+  }
+
   public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _goalNode = this.allNodes.get(_goalNodeID);
@@ -195,5 +199,31 @@ public class GraphManager {
       }
     }
     return output;
+  }
+
+  public void updateEdgeStart(String edge_id, String start_node) {
+    Edge edge = this.allEdges.get(edge_id);
+    String endNodeId = edge.getEndNode().getNodeID();
+    this.removeEdge(edge_id);
+    this.makeEdge(edge_id, start_node,endNodeId);
+  }
+
+  public void updateEdgeEnd(String edge_id, String end_node) {
+    Edge edge = this.allEdges.get(edge_id);
+    String startNodeId = edge.getStartNode().getNodeID();
+    this.removeEdge(edge_id);
+    this.makeEdge(edge_id, startNodeId,end_node);
+  }
+
+  public ArrayList<Node> getAllNodes() {
+    Collection<Node> allValues = this.allNodes.values();
+    ArrayList<Node> nodeArrayList = new ArrayList<>(allValues);
+    return nodeArrayList;
+  }
+
+  public ArrayList<Edge> getAllEdges() {
+    Collection<Edge> allValues = this.allEdges.values();
+    ArrayList<Edge> edgeArrayList = new ArrayList<>(allValues);
+    return edgeArrayList;
   }
 }
