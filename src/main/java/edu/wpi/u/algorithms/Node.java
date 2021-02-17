@@ -37,6 +37,7 @@ public class Node {
     this.shortName = _ShortName;
     this.teamAssigned = _teamAssigned;
     this.edges = new LinkedList<>();
+    this.adjNodes = new LinkedList<>();
   }
 
   // simple constructor

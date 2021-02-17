@@ -1,5 +1,7 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.algorithms.GraphManager;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,11 +22,7 @@ public class DatabaseManager {
     /*
     Run these next 4 only on boot/start
      */
-    driver();
-    connect();
-    init();
-    insertNodeData();
-    insertEdgeData();
+
 
     // Prints nodes
 
@@ -32,8 +30,20 @@ public class DatabaseManager {
     /*
     Only run these two below on exit / finish
      */
+  }
+
+  public void start() {
+    driver();
+    connect();
+    init();
+    insertNodeData();
+    insertEdgeData();
+  }
+
+  public void stop() {
     saveNodesCSV();
     saveEdgesCSV();
+    dropValues();
   }
 
   public static void driver() {
@@ -54,6 +64,38 @@ public class DatabaseManager {
     }
   }
 
+  public void loadGraph(GraphManager gm){
+    try{
+      String str = "select * from Nodes";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()){
+        String id = rs.getString("nodeID");
+        int x = rs.getInt("xcoord");
+        int y = rs.getInt("ycoord");
+        int floor = rs.getInt("floor");
+        String building = rs.getString("building");
+        String nodeType = rs.getString("nodeType");
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
+        gm.makeNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+      }
+      String str2 = "select * from Edges";
+      PreparedStatement ps2 = conn.prepareStatement(str2);
+      ResultSet rs2 = ps2.executeQuery();
+      while (rs2.next()){
+        String id = rs2.getString("edgeID");
+        String start = rs2.getString("startID");
+        String end = rs2.getString("endID");
+        gm.makeEdge(id,start,end);
+      }
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      System.out.println("Failed to load graph");
+    }
+  }
+
   public static void init() {
     try {
       if (isTableEmpty()) {
@@ -71,29 +113,6 @@ public class DatabaseManager {
       System.out.println("Table creation failed");
       e.printStackTrace();
     }
-  }
-
-  public void loadGraph() {
-      try{
-        String str = "select * from Nodes";
-        PreparedStatement ps = conn.prepareStatement(str);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){
-          String id = rs.getString("nodeID");
-          int x = rs.getInt("xcoord");
-          int y = rs.getInt("ycoord");
-          int floor = rs.getInt("floor");
-          String building = rs.getString("building");
-          String nodeType = rs.getString("nodeType");
-          String longName = rs.getString("longName");
-          String shortName = rs.getString("shortName");
-
-        }
-      }
-      catch (Exception e){
-        e.printStackTrace();
-        System.out.println("Failed to load graph");
-      }
   }
 
   public static void dropValues() {
@@ -191,7 +210,7 @@ public class DatabaseManager {
     return false;
   }
 
-  public static void printNodes() {
+  public void printNodes() {
     try {
       String str = "select * from Nodes";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -540,11 +559,5 @@ public class DatabaseManager {
       e.printStackTrace();
     }
     return false;
-  }
-
-  public static void stop() {
-    saveNodesCSV();
-    saveEdgesCSV();
-    dropValues();
   }
 }

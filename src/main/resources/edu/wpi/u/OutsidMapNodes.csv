@@ -1,4 +1,4 @@
-nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned
+id,xcoord,ycoord,floor,building,nodetype,longname,shortname,teamassigned
 PSERV00201,1020,492,1,Faulkner,SERV,Admitting,ADM,P
 PLAB00101,1091,594,1,Faulkner,LAB,Blood Draw Lab,BDLAB,P
 PDEPT00401,1192,536,1,Faulkner,DEPT,Cardiac Rehab,CREHAB,P
@@ -57,4 +57,5 @@ PDEPT00201,1091,810,1,Faulkner,DEPT,Special testing,SPTEST,P
 PSTAI00101,1239,1066,1,Faulkner,STAI,Staircase C,STAIRC,P
 PSTAI00201,2347,1195,1,Faulkner,STAI,Staircase D,STAIRD,P
 PSTAI00301,1288,405,1,Faulkner,STAI,Staircase E,STAIRE,P
-PSA111,100,100,5,Faulkner,test,Long,short,u
+PSTAI00401,1283,300,1,Faulkner,STAI,Staircase F,STAIRF,P
+PLAB00301,1275,923,1,Faulkner,LAB,VASC Lab,VASCLAB,P

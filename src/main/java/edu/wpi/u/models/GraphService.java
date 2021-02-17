@@ -6,6 +6,8 @@ import edu.wpi.u.algorithms.Node;
 
 import java.io.IOException;
 import java.lang.reflect.Parameter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,10 +18,13 @@ public class GraphService {
   GraphManager gm = new GraphManager();
 
   public GraphService() {
+    dm.start();
+    dm.printNodes();
     initializeGraph();
   }
 
   private void initializeGraph() {
+    dm.loadGraph(this.gm);
     // nodes then edges
     /*
     Read from database, and make Graph in graphManager
