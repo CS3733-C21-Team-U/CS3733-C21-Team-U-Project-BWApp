@@ -53,6 +53,11 @@ public class Node {
     return returnMe;
   }
 
+  public void updateCords(double x, double y){
+    this.xcoord = x;
+    this.ycoord = y;
+  }
+
   public String getNodeID() {
     return this.nodeID;
   }

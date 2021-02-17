@@ -43,7 +43,7 @@ public class GraphService {
   public String updateNode(String node_id, int x, int y) {
     if (dm.isNode(node_id)){
       dm.updCoords(node_id, x, y);
-      // gm.updateCoords
+      gm.updateCoords(node_id, x, y);
       return "";
     }
     else {
@@ -97,7 +97,7 @@ public class GraphService {
   public String updateStartEdge(String edge_id, String start_node) {
     if (dm.isNode(start_node)){
       dm.updEdgeStart(edge_id, start_node);
-      //gm.updateEdgeStart
+      gm.updateEdgeStart(edge_id, start_node);
       return "";
     }
     else {
@@ -108,13 +108,12 @@ public class GraphService {
     Return "" is a success
     Return edge_id if edge already exists / invalid
      */
-    //        dm.updEdgeStart(edge_id, start_node);
-    //        dm.updEdgeEnd(edge_id, end_node);
   }
+
   public String updateEndEdge(String edge_id, String end_node) {
     if (dm.isNode(end_node)){
       dm.updEdgeEnd(edge_id, end_node);
-      //gm.updateEdgeStart
+      gm.updateEdgeEnd(edge_id, end_node);
       return "";
     }
     else {
@@ -125,8 +124,6 @@ public class GraphService {
     Return "" is a success
     Return edge_id if edge already exists / invalid
      */
-    //        dm.updEdgeStart(edge_id, start_node);
-    //        dm.updEdgeEnd(edge_id, end_node);
   }
 
   public String deleteEdge(String edge_id) {
@@ -148,18 +145,17 @@ public class GraphService {
   }
 
   public ArrayList<Node> getNodes() {
-
+    return gm.getAllNodes();
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
-    return null;
   }
 
   public ArrayList<Edge> getEdges() {
+    return gm.getAllEdges();
     /*
     Returns an ArrayList of all Edge Objects in the graph
      */
-    return null;
   }
 
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
