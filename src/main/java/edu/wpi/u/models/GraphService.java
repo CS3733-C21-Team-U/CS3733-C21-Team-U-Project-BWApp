@@ -18,9 +18,11 @@ public class GraphService {
   GraphManager gm = new GraphManager();
 
   public GraphService() {
-    dm.start();
-    dm.printNodes();
-    initializeGraph();
+    dm.stop();
+    //dm.start();
+    //dm.printNodes();
+
+    //initializeGraph();
   }
 
   private void initializeGraph() {

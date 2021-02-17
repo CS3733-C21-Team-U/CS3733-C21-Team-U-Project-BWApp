@@ -11,7 +11,6 @@ import java.sql.*;
 public class DatabaseManager {
 
   private static Connection conn = null;
-  private static ResultSet rset;
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
@@ -22,8 +21,6 @@ public class DatabaseManager {
     /*
     Run these next 4 only on boot/start
      */
-
-
     // Prints nodes
 
     // printNodes();
@@ -117,13 +114,16 @@ public class DatabaseManager {
 
   public static void dropValues() {
     try {
-      String str = "delete from Nodes";
-      PreparedStatement ps = conn.prepareStatement(str);
-      ps.execute();
-      str = "delete from Edges";
-      ps.execute();
-    } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      Statement stmt = conn.createStatement();
+      String str = "drop table Nodes"; // drops the foreign key
+      stmt.execute(str);
+      str = "drop table Edges"; // drops the table
+      stmt.execute(str);
+      stmt.close();
+      conn.close();
+    } catch (Exception e) {
+      System.out.println("Failed to drop tables");
+      e.printStackTrace();
     }
   }
 
@@ -214,14 +214,13 @@ public class DatabaseManager {
     try {
       String str = "select * from Nodes";
       PreparedStatement ps = conn.prepareStatement(str);
-      rset = ps.executeQuery();
+      ResultSet rset = ps.executeQuery();
       // store the data inside of a ResultSet object
       while (rset.next()) { // iterates through the object row by row
         String nodeID = rset.getString("nodeID");
         int xcoord = rset.getInt("xcoord"); // gets value at column name
         System.out.println("ID:" + nodeID + " " + "xcoord:" + xcoord + "\n");
       }
-      rset.close(); // close the object
     } catch (Exception e) {
       System.out.println("Failed to select from Museums");
       e.printStackTrace();
@@ -540,7 +539,7 @@ public class DatabaseManager {
       String str = "select nodeID from Nodes where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
       ps.setString(1, node_id);
-      rset = ps.executeQuery();
+      ResultSet rset = ps.executeQuery();
       return rset.next();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -553,7 +552,7 @@ public class DatabaseManager {
       String str = "select edgeID from Edges where edgeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
       ps.setString(1, edge_id);
-      rset = ps.executeQuery();
+      ResultSet rset = ps.executeQuery();
       return rset.next();
     } catch (SQLException e) {
       e.printStackTrace();
