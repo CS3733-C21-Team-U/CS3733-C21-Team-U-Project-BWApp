@@ -17,7 +17,6 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static GraphService graphService = new GraphService();
 
-
   @Override
   public void init() {
     log.info("Starting Up");

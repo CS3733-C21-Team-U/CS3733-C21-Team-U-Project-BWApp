@@ -23,21 +23,25 @@ public class DatabaseManager {
     /*
     Run these next 4 only on boot/start
      */
-    System.out.println("Constrctor for Database Manager");
+    System.out.println("Constructor for Database Manager");
     driver();
     connect();
+    deleteTables();
     init();
     insertNodeData();
     insertEdgeData();
 
     // Prints nodes
     //printNodes();
+    printEdges();
     /*
     Only run these two below on exit / finish
      */
 //    saveNodesCSV();
 //    saveEdgesCSV();
   }
+
+
 
   public static void driver() {
     try {
@@ -91,7 +95,6 @@ public class DatabaseManager {
   public static void insertNodeData(){
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
-    if (isTableEmpty()) {
       try {
         BufferedReader br = Files.newBufferedReader(p);
 
@@ -123,13 +126,11 @@ public class DatabaseManager {
         System.out.println("Failed to insert into table");
         e.printStackTrace();
       }
-    }
   }
 
   public static void insertEdgeData() {
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapEdges.csv");
-    if (isTableEmpty()) {
       try {
         BufferedReader br = Files.newBufferedReader(p);
 
@@ -157,7 +158,6 @@ public class DatabaseManager {
         System.out.println("Failed to insert into table");
         e.printStackTrace();
       }
-    }
   }
 
   public static boolean isTableEmpty() {
@@ -184,7 +184,23 @@ public class DatabaseManager {
       }
       rset.close(); // close the object
     } catch (Exception e) {
-      System.out.println("Failed to select from Museums");
+      e.printStackTrace();
+    }
+  }
+
+  public static void printEdges() {
+    try {
+      String str = "select * from Edges";
+      PreparedStatement ps = conn.prepareStatement(str);
+      rset = ps.executeQuery();
+      // store the data inside of a ResultSet object
+      while (rset.next()) { // iterates through the object row by row
+        String edgeID = rset.getString("edgeID");
+        System.out.println("ID:" + edgeID+ "\n");
+      }
+      rset.close(); // close the object
+    } catch (Exception e) {
+
       e.printStackTrace();
     }
   }
@@ -281,7 +297,7 @@ public class DatabaseManager {
     }
   }
 
-  public int addNode(
+  public static int addNode(
           String node_id,
           int x,
           int y,
@@ -313,7 +329,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updCoords(String node_id, int new_x, int new_y) {
+  public static int updCoords(String node_id, int new_x, int new_y) {
     try {
       String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -330,7 +346,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updFloor(String node_id, int new_floor_number) {
+  public static int updFloor(String node_id, int new_floor_number) {
     try {
       String str = "update Nodes set floor=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -345,7 +361,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updBuilding(String node_id, String new_building) {
+  public static int updBuilding(String node_id, String new_building) {
     try {
       String str = "update Nodes set building=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -360,7 +376,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updLongname(String node_id, String new_longname) {
+  public static int updLongname(String node_id, String new_longname) {
     try {
       String str = "update Nodes set longname=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -375,7 +391,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updShortname(String node_id, String new_shortname) {
+  public static int updShortname(String node_id, String new_shortname) {
     try {
       String str = "update Nodes set shortname=? where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -390,7 +406,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int delNode(String node_id) {
+  public static int delNode(String node_id) {
     try {
       String str = "delete from Nodes where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -404,7 +420,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int delNodeCoord(int x, int y) {
+  public static int delNodeCoord(int x, int y) {
     try {
       String str = "delete from Nodes where xcoord=? and ycoord=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -420,7 +436,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int addEdge(String edge_id, String start_node_id, String end_node_id) {
+  public static int addEdge(String edge_id, String start_node_id, String end_node_id) {
     try {
       String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -436,7 +452,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updEdgeStart(String edge_id, String new_start_node_id) {
+  public static int updEdgeStart(String edge_id, String new_start_node_id) {
     try {
       String str = "update Edges set startID=? where edgeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -451,7 +467,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int updEdgeEnd(String edge_id, String new_end_node_id) {
+  public static int updEdgeEnd(String edge_id, String new_end_node_id) {
     try {
       String str = "update Edges set endID=? where edgeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -466,7 +482,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int delEdge(String edge_id) {
+  public static int delEdge(String edge_id) {
     try {
       String str = "delete from Edges where edgeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -480,7 +496,7 @@ public class DatabaseManager {
     return 1;
   }
 
-  public int delEdgeByNodes(String start_node_id, String end_node_id){
+  public static int delEdgeByNodes(String start_node_id, String end_node_id){
     try {
       String str = "delete from Edges where startID=?, endID=?";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -496,11 +512,13 @@ public class DatabaseManager {
     return 1;
   }
 
-  public void loadGraph(GraphManager gm){
+  public static void loadGraph(GraphManager gm){
+    System.out.println(conn);
+
     try{
+      Statement ps = conn.createStatement();
       String str = "select * from Nodes";
-      PreparedStatement ps = conn.prepareStatement(str);
-      rset = ps.executeQuery();
+      rset = ps.executeQuery(str);
       // store the data inside of a ResultSet object
       while (rset.next()) { // iterates through the object row by row
         String id = rset.getString("nodeID");
@@ -555,9 +573,23 @@ public class DatabaseManager {
     return false;
   }
 
+  public static void deleteTables() {
+    try {
+      String str = "drop table Nodes";
+      Statement s = conn.createStatement();
+      s.execute(str);
+      str = "drop table Edges";
+      s.execute(str);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+
   public static void stop() {
     saveNodesCSV();
     saveEdgesCSV();
     dropValues();
+    deleteTables();
   }
 }

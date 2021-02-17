@@ -14,8 +14,8 @@ import java.util.LinkedList;
 
 public class GraphService {
 
-  GraphManager gm = new GraphManager();
-  DatabaseManager dm = new DatabaseManager();
+  static GraphManager gm = new GraphManager();
+  static DatabaseManager dm;
 
 
   public static void main (String[] args){
@@ -23,10 +23,12 @@ public class GraphService {
   }
 
   public GraphService() {
+
     System.out.println("Constrctor for Graph SERVICE");
 //    dm.start();
 //    dm.stop();
-    dm.loadGraph(this.gm);
+    dm = new DatabaseManager();
+    dm.loadGraph(gm);
     /*
     Node A = new Node("A", 0, 0);
     Node B = new Node("B", 1, 0);
