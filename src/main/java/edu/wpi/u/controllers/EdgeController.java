@@ -71,7 +71,7 @@ public class EdgeController {
 
   @FXML
   public void loadData() {
-    GraphService graphService = App.getInstance().graphService;
+    GraphService graphService = App.graphService;
     list.removeAll(list);
     edgeList.getItems().addAll(graphService.getEdges());
   }

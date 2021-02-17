@@ -43,7 +43,7 @@ public class AStarController {
 
   @FXML
   public void buttonPressFind() throws Exception {
-    GraphService g = App.getInstance().graphService;
+    GraphService g = App.graphService;
     if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");
     } else {
