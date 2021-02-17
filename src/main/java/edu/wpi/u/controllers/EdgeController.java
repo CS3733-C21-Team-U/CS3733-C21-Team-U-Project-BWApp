@@ -4,7 +4,6 @@ import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
-import edu.wpi.u.models.Graph;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +42,7 @@ public class EdgeController {
   public void initialize() {
     GraphService graphService = App.getInstance().graphService;
     list.removeAll();
-    list.addAll(graph.getEdges());
+    list.addAll(graphService.getEdges());
     edgeIdCol.setCellValueFactory(new PropertyValueFactory<Edge, String>("edgeID"));
     startNodeCol.setCellValueFactory(
         cellData -> new SimpleStringProperty(cellData.getValue().getStartNode().getNodeID()));
