@@ -20,28 +20,20 @@ public class DatabaseManager {
   }
 
   public DatabaseManager() {
-    /*
-    Run these next 4 only on boot/start
-     */
-    System.out.println("Constructor for Database Manager");
     driver();
     connect();
     deleteTables();
     init();
     insertNodeData();
     insertEdgeData();
-
-    // Prints nodes
     //printNodes();
-    printEdges();
+    //printEdges();
     /*
     Only run these two below on exit / finish
      */
-//    saveNodesCSV();
-//    saveEdgesCSV();
+    //saveNodesCSV();
+    //saveEdgesCSV();
   }
-
-
 
   public static void driver() {
     try {
@@ -176,13 +168,12 @@ public class DatabaseManager {
       String str = "select * from Nodes";
       PreparedStatement ps = conn.prepareStatement(str);
       rset = ps.executeQuery();
-      // store the data inside of a ResultSet object
-      while (rset.next()) { // iterates through the object row by row
+      while (rset.next()) {
         String nodeID = rset.getString("nodeID");
-        int xcoord = rset.getInt("xcoord"); // gets value at column name
+        int xcoord = rset.getInt("xcoord");
         System.out.println("ID:" + nodeID + " " + "xcoord:" + xcoord + "\n");
       }
-      rset.close(); // close the object
+      rset.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -193,14 +184,12 @@ public class DatabaseManager {
       String str = "select * from Edges";
       PreparedStatement ps = conn.prepareStatement(str);
       rset = ps.executeQuery();
-      // store the data inside of a ResultSet object
-      while (rset.next()) { // iterates through the object row by row
+      while (rset.next()) {
         String edgeID = rset.getString("edgeID");
         System.out.println("ID:" + edgeID+ "\n");
       }
-      rset.close(); // close the object
+      rset.close();
     } catch (Exception e) {
-
       e.printStackTrace();
     }
   }
@@ -208,15 +197,11 @@ public class DatabaseManager {
   public static void saveNodesCSV() {
     try {
       String str = "SELECT * FROM Nodes";
-
       Statement statement = conn.createStatement();
-
       ResultSet result = statement.executeQuery(str);
-
       BufferedWriter fileWriter =
               new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
 
-      // write header line containing column names
       fileWriter.write(
               "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
 
@@ -247,10 +232,8 @@ public class DatabaseManager {
         fileWriter.newLine();
         fileWriter.write(line);
       }
-
       statement.close();
       fileWriter.close();
-
     } catch (SQLException e) {
       System.out.println("Database error:");
       e.printStackTrace();
@@ -263,31 +246,23 @@ public class DatabaseManager {
   public static void saveEdgesCSV() {
     try {
       String str = "SELECT * FROM Edges";
-
       Statement statement = conn.createStatement();
-
       ResultSet result = statement.executeQuery(str);
-
       BufferedWriter fileWriter =
               new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
 
-      // write header line containing column names
       fileWriter.write("edgeID, startID, endID");
 
       while (result.next()) {
         String edgeID = result.getString("edgeID");
         String startID = result.getString("startID");
         String endID = result.getString("endID");
-
         String line = String.format("%s,%s,%s", edgeID, startID, endID);
-
         fileWriter.newLine();
         fileWriter.write(line);
       }
-
       statement.close();
       fileWriter.close();
-
     } catch (SQLException e) {
       System.out.println("Database error:");
       e.printStackTrace();
@@ -307,7 +282,6 @@ public class DatabaseManager {
           String longname,
           String shortname) {
     try {
-      // nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned
       String str =
               "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
       PreparedStatement ps = conn.prepareStatement(str);
@@ -513,14 +487,11 @@ public class DatabaseManager {
   }
 
   public static void loadGraph(GraphManager gm){
-    System.out.println(conn);
-
     try{
       Statement ps = conn.createStatement();
       String str = "select * from Nodes";
       rset = ps.executeQuery(str);
-      // store the data inside of a ResultSet object
-      while (rset.next()) { // iterates through the object row by row
+      while (rset.next()) {
         String id = rset.getString("nodeID");
         int x = rset.getInt("xcoord");
         int y = rset.getInt("ycoord");
