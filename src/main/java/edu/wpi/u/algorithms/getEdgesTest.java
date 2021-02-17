@@ -28,8 +28,8 @@ public class getEdgesTest {
     Node B = new Node("B", 1, 0);
     Node D = new Node("D", 2, 1);
 
-    graph.makeEdge("1", A, B);
-    graph.makeEdge("9", B, D);
+    graph.makeEdge("1", "A", "B");
+    graph.makeEdge("9", "B", "D");
 
     LinkedList<Node> exampleOutput = new LinkedList<>();
     exampleOutput.add(D);

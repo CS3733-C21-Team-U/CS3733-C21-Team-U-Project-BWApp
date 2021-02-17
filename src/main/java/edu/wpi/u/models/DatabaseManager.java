@@ -1,25 +1,29 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.algorithms.GraphManager;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 
-public class DatabaseService {
+public class DatabaseManager {
 
   private static Connection conn = null;
+
   private static ResultSet rset;
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
-    DatabaseService db = new DatabaseService();
+   DatabaseManager db = new DatabaseManager();
   }
 
-  public DatabaseService() throws IOException, SQLException {
+  public DatabaseManager() {
     /*
     Run these next 4 only on boot/start
      */
+    System.out.println("Constrctor for Database Manager");
     driver();
     connect();
     init();
@@ -28,12 +32,12 @@ public class DatabaseService {
 
     // Prints nodes
 
-    // printNodes();
+    printNodes();
     /*
     Only run these two below on exit / finish
      */
-    saveNodesCSV();
-    saveEdgesCSV();
+//    saveNodesCSV();
+//    saveEdgesCSV();
   }
 
   public static void driver() {
@@ -58,12 +62,12 @@ public class DatabaseService {
     try {
       if (isTableEmpty()) {
         String tbl1 =
-            "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
+                "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
         // code for creating table of Museums
         PreparedStatement ps1 = conn.prepareStatement(tbl1);
         ps1.execute();
         String tbl2 =
-            "create table Edges (edgeID varchar(50) not null, startID varchar(50), endID varchar(50), primary key(edgeID))";
+                "create table Edges (edgeID varchar(50) not null, startID varchar(50), endID varchar(50), primary key(edgeID))";
         PreparedStatement ps2 = conn.prepareStatement(tbl2);
         ps2.execute();
       }
@@ -85,7 +89,7 @@ public class DatabaseService {
     }
   }
 
-  public static void insertNodeData() throws SQLException {
+  public static void insertNodeData(){
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
     if (isTableEmpty()) {
@@ -100,7 +104,7 @@ public class DatabaseService {
         String line1 = null;
         while ((line1 = br.readLine()) != null) {
           str =
-              "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
+                  "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
           PreparedStatement ps = conn.prepareStatement(str);
 
           // convert line into columns
@@ -123,7 +127,7 @@ public class DatabaseService {
     }
   }
 
-  public static void insertEdgeData() throws SQLException {
+  public static void insertEdgeData() {
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapEdges.csv");
     if (isTableEmpty()) {
@@ -195,11 +199,11 @@ public class DatabaseService {
       ResultSet result = statement.executeQuery(str);
 
       BufferedWriter fileWriter =
-          new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
+              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
 
       // write header line containing column names
       fileWriter.write(
-          "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
+              "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
 
       while (result.next()) {
         String nodeID = result.getString("nodeID");
@@ -213,17 +217,17 @@ public class DatabaseService {
         String teamAssigned = result.getString("teamAssigned");
 
         String line =
-            String.format(
-                "%s,%d,%d,%d,%s,%s,%s,%s,%s",
-                nodeID,
-                xcoord,
-                ycoord,
-                floor,
-                building,
-                nodeType,
-                longName,
-                shortName,
-                teamAssigned);
+                String.format(
+                        "%s,%d,%d,%d,%s,%s,%s,%s,%s",
+                        nodeID,
+                        xcoord,
+                        ycoord,
+                        floor,
+                        building,
+                        nodeType,
+                        longName,
+                        shortName,
+                        teamAssigned);
 
         fileWriter.newLine();
         fileWriter.write(line);
@@ -250,7 +254,7 @@ public class DatabaseService {
       ResultSet result = statement.executeQuery(str);
 
       BufferedWriter fileWriter =
-          new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
+              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
 
       // write header line containing column names
       fileWriter.write("edgeID, startID, endID");
@@ -279,18 +283,18 @@ public class DatabaseService {
   }
 
   public int addNode(
-      String node_id,
-      int x,
-      int y,
-      int floor,
-      String building,
-      String node_type,
-      String longname,
-      String shortname) {
+          String node_id,
+          int x,
+          int y,
+          int floor,
+          String building,
+          String node_type,
+          String longname,
+          String shortname) {
     try {
       // nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned
       String str =
-          "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
+              "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
       PreparedStatement ps = conn.prepareStatement(str);
       ps.setString(1, node_id);
       ps.setInt(2, x);
@@ -490,7 +494,39 @@ public class DatabaseService {
       e.printStackTrace();
       return 0;
     }
-  return 1;
+    return 1;
+  }
+
+  public void loadGraph(GraphManager gm){
+    try{
+      String str = "select * from Nodes";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()){
+        String id = rs.getString("nodeID");
+        int x = rs.getInt("xcoord");
+        int y = rs.getInt("ycoord");
+        int floor = rs.getInt("floor");
+        String building = rs.getString("building");
+        String nodeType = rs.getString("nodeType");
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
+        gm.makeNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+      }
+      String str2 = "select * from Edges";
+      PreparedStatement ps2 = conn.prepareStatement(str2);
+      ResultSet rs2 = ps2.executeQuery();
+      while (rs2.next()){
+        String id = rs2.getString("edgeID");
+        String start = rs2.getString("startID");
+        String end = rs2.getString("endID");
+        gm.makeEdge(id,start,end);
+      }
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      System.out.println("Failed to load graph");
+    }
   }
 
   public static boolean isNode(String node_id) {

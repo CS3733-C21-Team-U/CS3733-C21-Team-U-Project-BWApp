@@ -6,6 +6,7 @@ public class Node {
   private String nodeID;
   private double xcoord;
   private double ycoord;
+  private int floor;
   private String building;
   private String nodeType;
   private String longName;
@@ -14,26 +15,29 @@ public class Node {
   private LinkedList<Edge> edges;
   private LinkedList<Node> adjNodes;
   private boolean walkable = true;
-  
+
   // full constructor
   public Node(
-      String _nodeID,
-      double _xcoord,
-      double _ycoord,
-      String _building,
-      String _nodeType,
-      String _LongName,
-      String _ShortName,
-      String _teamAssigned) {
+          String _nodeID,
+          double _xcoord,
+          double _ycoord,
+          int floor,
+          String _building,
+          String _nodeType,
+          String _LongName,
+          String _ShortName,
+          String _teamAssigned) {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
+    this.floor = floor;
     this.building = _building;
     this.nodeType = _nodeType;
     this.longName = _LongName;
     this.shortName = _ShortName;
     this.teamAssigned = _teamAssigned;
     this.edges = new LinkedList<>();
+    this.adjNodes = new LinkedList<>();
   }
 
   // simple constructor
@@ -48,6 +52,11 @@ public class Node {
   public double[] getCords() {
     double[] returnMe = {this.xcoord, this.ycoord};
     return returnMe;
+  }
+
+  public void updateCords(double x, double y){
+    this.xcoord = x;
+    this.ycoord = y;
   }
 
   public String getNodeID() {
