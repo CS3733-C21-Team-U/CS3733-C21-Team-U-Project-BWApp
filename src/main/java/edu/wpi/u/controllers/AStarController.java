@@ -43,13 +43,14 @@ public class AStarController {
 
   @FXML
   public void buttonPressFind() throws Exception {
+    listOfNodes.getItems().clear();
     GraphService g = App.graphService;
     if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");
     } else {
       // try {
       LinkedList<Node> N = new LinkedList<Node>();
-      N = g.aStar(startNode.toString(), endNode.toString());
+      N = g.aStar(startNode.getText(), endNode.getText());
       /*
       N.add(new Node("Ay", 100, 200));
       N.add(new Node(" Yo", 100, 200));

@@ -16,7 +16,7 @@ public class DatabaseManager {
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
-   DatabaseManager db = new DatabaseManager();
+   //DatabaseManager db = new DatabaseManager();
   }
 
   public DatabaseManager() {
@@ -31,8 +31,7 @@ public class DatabaseManager {
     insertEdgeData();
 
     // Prints nodes
-
-    printNodes();
+    //printNodes();
     /*
     Only run these two below on exit / finish
      */
@@ -501,16 +500,17 @@ public class DatabaseManager {
     try{
       String str = "select * from Nodes";
       PreparedStatement ps = conn.prepareStatement(str);
-      ResultSet rs = ps.executeQuery();
-      while (rs.next()){
-        String id = rs.getString("nodeID");
-        int x = rs.getInt("xcoord");
-        int y = rs.getInt("ycoord");
-        int floor = rs.getInt("floor");
-        String building = rs.getString("building");
-        String nodeType = rs.getString("nodeType");
-        String longName = rs.getString("longName");
-        String shortName = rs.getString("shortName");
+      rset = ps.executeQuery();
+      // store the data inside of a ResultSet object
+      while (rset.next()) { // iterates through the object row by row
+        String id = rset.getString("nodeID");
+        int x = rset.getInt("xcoord");
+        int y = rset.getInt("ycoord");
+        int floor = rset.getInt("floor");
+        String building = rset.getString("building");
+        String nodeType = rset.getString("nodeType");
+        String longName = rset.getString("longName");
+        String shortName = rset.getString("shortName");
         gm.makeNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
       }
       String str2 = "select * from Edges";
