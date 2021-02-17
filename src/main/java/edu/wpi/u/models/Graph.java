@@ -1,13 +1,20 @@
 package edu.wpi.u.models;
 
-import edu.wpi.u.algorithms.Edge;
+import edu.wpi.u.algorithms.GraphService;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.algorithms.Edge;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Graph {
 
-  public Graph() {
+  GraphService gs = new GraphService();
+  DatabaseService dm = new DatabaseService();
+
+  public Graph() throws IOException, SQLException {
     initializeGraph();
   }
 
@@ -22,7 +29,7 @@ public class Graph {
   */
   public String addNode(String node_id, int x, int y) {
     if (validateNode(node_id)) {
-      //            dm.addNode(node_id, x, y, 1, "Test", "Long", "short");
+      dm.addNode(node_id, x, y, 1, "Test", "nodetype", "Long", "short");
       return "";
     } else {
       return node_id;
@@ -35,7 +42,7 @@ public class Graph {
   }
 
   public String updateNode(String node_id, int x, int y) {
-    //        dm.updCoords(node_id, x, y);
+    dm.updCoords(node_id, x, y);
     /*
     Check if valid node_id
     Return "" is a success
@@ -50,7 +57,17 @@ public class Graph {
     Return "" is a success
     Return node_id if node already exists / invalid
      */
-    //        dm.delNode(node_id);
+    dm.delNode(node_id);
+    return "";
+  }
+
+  public String deleteNode(int x, int y) {
+    /*
+    Check if valid node_id
+    Return "" is a success
+    Return node_id if node already exists / invalid
+     */
+    dm.delNodeCoord(x, y);
     return "";
   }
 
@@ -60,7 +77,7 @@ public class Graph {
     Return "" is a success
     Return edge_id if edge already exists / invalid
     */
-    //        dm.addEdge(edge_id, start_node, end_node);
+    dm.addEdge(edge_id, start_node, end_node);
     return "";
   }
 
@@ -70,8 +87,8 @@ public class Graph {
     Return "" is a success
     Return edge_id if edge already exists / invalid
      */
-    //        dm.updEdgeStart(edge_id, start_node);
-    //        dm.updEdgeEnd(edge_id, end_node);
+    dm.updEdgeStart(edge_id, start_node);
+    dm.updEdgeEnd(edge_id, end_node);
     return "";
   }
 
@@ -81,30 +98,28 @@ public class Graph {
     Return "" is a success
     Return edge_id if edge already exists / invalid
      */
-    //        dm.delEdge(edge_id);
+    dm.delEdge(edge_id);
+    return "";
+  }
+  public String deleteEdgeByNodes(String start_node_id, String end_node_id) {
+    /*
+    Check if valid edge_id
+    Return "" is a success
+    Return edge_id if edge already exists / invalid
+     */
+    dm.delEdgeByNodes(start_node_id, end_node_id);
     return "";
   }
 
   public ArrayList<Node> getNodes() {
-    /*
-    Returns an ArrayList of all Node Objects in the graph
-     */
     return null;
   }
 
   public ArrayList<Edge> getEdges() {
-    /*
-    Returns an ArrayList of all Edge Objects in the graph
-     */
     return null;
   }
 
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
-    /*
-    Reutrn the A* path given the start and end node ids
-    Return LinkedList of Nodes if path is found
-    Return Return null if either id is invalid or path is not found
-     */
     // gm.aStar(start_node_id, end_node_id);
     return null;
   }

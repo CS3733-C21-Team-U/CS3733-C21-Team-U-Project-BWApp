@@ -1,10 +1,11 @@
 package edu.wpi.u.algorithms;
 
 public class Edge {
-  private String edgeID; // should be private
+  private String edgeID;
   private Node startNode;
   private Node endNode;
   private double weight;
+  private boolean walkable = true;
 
   public Edge(String _edgeID, Node _startNode, Node _endNode) {
     this.edgeID = _edgeID;
@@ -27,6 +28,10 @@ public class Edge {
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
 
+  public String getEdgeID() {
+    return this.edgeID;
+  }
+
   public Node getStartNode() {
     return this.startNode;
   }
@@ -35,7 +40,11 @@ public class Edge {
     return this.endNode;
   }
 
-  public String getEdgeID() {
-    return this.edgeID;
+  public void setWalkable(boolean value) {
+    this.walkable = value;
+  }
+
+  public boolean isWalkable() {
+    return this.walkable;
   }
 }
