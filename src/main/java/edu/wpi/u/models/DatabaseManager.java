@@ -73,6 +73,29 @@ public class DatabaseManager {
     }
   }
 
+  public void loadGraph() {
+      try{
+        String str = "select * from Nodes";
+        PreparedStatement ps = conn.prepareStatement(str);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+          String id = rs.getString("nodeID");
+          int x = rs.getInt("xcoord");
+          int y = rs.getInt("ycoord");
+          int floor = rs.getInt("floor");
+          String building = rs.getString("building");
+          String nodeType = rs.getString("nodeType");
+          String longName = rs.getString("longName");
+          String shortName = rs.getString("shortName");
+
+        }
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        System.out.println("Failed to load graph");
+      }
+  }
+
   public static void dropValues() {
     try {
       String str = "delete from Nodes";

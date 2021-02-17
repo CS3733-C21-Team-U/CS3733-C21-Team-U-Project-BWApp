@@ -20,6 +20,7 @@ public class GraphService {
   }
 
   private void initializeGraph() {
+    // nodes then edges
     /*
     Read from database, and make Graph in graphManager
      */
