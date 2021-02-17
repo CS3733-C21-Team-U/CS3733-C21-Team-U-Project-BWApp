@@ -17,22 +17,16 @@ public class GraphService {
   DatabaseManager dm = new DatabaseManager();
   GraphManager gm = new GraphManager();
 
+  public static void main (String[] args){
+
+  }
+
   public GraphService() {
+    dm.start();
+    dm.printNodes();
     dm.stop();
-    //dm.start();
-    //dm.printNodes();
-
-    //initializeGraph();
+    //dm.loadGraph(this.gm);
   }
-
-  private void initializeGraph() {
-    dm.loadGraph(this.gm);
-    // nodes then edges
-    /*
-    Read from database, and make Graph in graphManager
-     */
-  }
-
   /*
   Make sure x & y are positive integers within the map coordinate range
   */

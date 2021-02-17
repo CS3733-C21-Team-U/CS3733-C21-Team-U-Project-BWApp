@@ -22,7 +22,6 @@ public class DatabaseManager {
     Run these next 4 only on boot/start
      */
     // Prints nodes
-
     // printNodes();
     /*
     Only run these two below on exit / finish
@@ -32,12 +31,14 @@ public class DatabaseManager {
   public void start() {
     driver();
     connect();
-    init();
+    loadTables();
     insertNodeData();
     insertEdgeData();
   }
 
   public void stop() {
+    driver();
+    connect();
     saveNodesCSV();
     saveEdgesCSV();
     dropValues();
@@ -93,7 +94,7 @@ public class DatabaseManager {
     }
   }
 
-  public static void init() {
+  public static void loadTables() {
     try {
       if (isTableEmpty()) {
         String tbl1 =
@@ -128,6 +129,7 @@ public class DatabaseManager {
   }
 
   public static void insertNodeData() {
+    System.out.println("Insert Node");
     String str = "";
     Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
     if (isTableEmpty()) {
@@ -228,94 +230,105 @@ public class DatabaseManager {
   }
 
   public static void saveNodesCSV() {
-    try {
-      String str = "SELECT * FROM Nodes";
+    System.out.println("SaveNodes");
+    if (isTableEmpty()){
+      System.out.println("Trying to save an empty node table");
+    }
+    else {
+      try {
+        String str = "SELECT * FROM Nodes";
 
-      Statement statement = conn.createStatement();
+        Statement statement = conn.createStatement();
 
-      ResultSet result = statement.executeQuery(str);
+        ResultSet result = statement.executeQuery(str);
 
-      BufferedWriter fileWriter =
-          new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
+        BufferedWriter fileWriter =
+                new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
 
-      // write header line containing column names
-      fileWriter.write(
-          "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
+        // write header line containing column names
+        fileWriter.write(
+                "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
 
-      while (result.next()) {
-        String nodeID = result.getString("nodeID");
-        int xcoord = result.getInt("xcoord");
-        int ycoord = result.getInt("ycoord");
-        int floor = result.getInt("floor");
-        String building = result.getString("building");
-        String nodeType = result.getString("nodeType");
-        String longName = result.getString("longName");
-        String shortName = result.getString("shortName");
-        String teamAssigned = result.getString("teamAssigned");
+        while (result.next()) {
+          String nodeID = result.getString("nodeID");
+          int xcoord = result.getInt("xcoord");
+          int ycoord = result.getInt("ycoord");
+          int floor = result.getInt("floor");
+          String building = result.getString("building");
+          String nodeType = result.getString("nodeType");
+          String longName = result.getString("longName");
+          String shortName = result.getString("shortName");
+          String teamAssigned = result.getString("teamAssigned");
 
-        String line =
-            String.format(
-                "%s,%d,%d,%d,%s,%s,%s,%s,%s",
-                nodeID,
-                xcoord,
-                ycoord,
-                floor,
-                building,
-                nodeType,
-                longName,
-                shortName,
-                teamAssigned);
+          String line =
+                  String.format(
+                          "%s,%d,%d,%d,%s,%s,%s,%s,%s",
+                          nodeID,
+                          xcoord,
+                          ycoord,
+                          floor,
+                          building,
+                          nodeType,
+                          longName,
+                          shortName,
+                          teamAssigned);
 
-        fileWriter.newLine();
-        fileWriter.write(line);
+          fileWriter.newLine();
+          fileWriter.write(line);
+        }
+
+        statement.close();
+        fileWriter.close();
+
+      } catch (SQLException e) {
+        System.out.println("Database error:");
+        e.printStackTrace();
+      } catch (IOException e) {
+        System.out.println("File IO error:");
+        e.printStackTrace();
       }
-
-      statement.close();
-      fileWriter.close();
-
-    } catch (SQLException e) {
-      System.out.println("Database error:");
-      e.printStackTrace();
-    } catch (IOException e) {
-      System.out.println("File IO error:");
-      e.printStackTrace();
     }
   }
 
   public static void saveEdgesCSV() {
-    try {
-      String str = "SELECT * FROM Edges";
+    if (isTableEmpty()){
+      System.out.println("Trying to save an empty edge table");
+    }
+    else {
+      try {
+        String str = "SELECT * FROM Edges";
 
-      Statement statement = conn.createStatement();
+        Statement statement = conn.createStatement();
 
-      ResultSet result = statement.executeQuery(str);
+        ResultSet result = statement.executeQuery(str);
 
-      BufferedWriter fileWriter =
-          new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
+        BufferedWriter fileWriter =
+                new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
 
-      // write header line containing column names
-      fileWriter.write("edgeID, startID, endID");
+        // write header line containing column names
+        fileWriter.write("edgeID, startID, endID");
 
-      while (result.next()) {
-        String edgeID = result.getString("edgeID");
-        String startID = result.getString("startID");
-        String endID = result.getString("endID");
+        while (result.next()) {
+          String edgeID = result.getString("edgeID");
+          String startID = result.getString("startID");
+          String endID = result.getString("endID");
 
-        String line = String.format("%s,%s,%s", edgeID, startID, endID);
+          String line = String.format("%s,%s,%s", edgeID, startID, endID);
 
-        fileWriter.newLine();
-        fileWriter.write(line);
+          fileWriter.newLine();
+          fileWriter.write(line);
+        }
+
+        statement.close();
+        fileWriter.close();
+
+      } catch (SQLException e) {
+        System.out.println("Database error:");
+        e.printStackTrace();
+      } catch (IOException e) {
+        System.out.println("File IO error:");
+        e.printStackTrace();
       }
-
-      statement.close();
-      fileWriter.close();
-
-    } catch (SQLException e) {
-      System.out.println("Database error:");
-      e.printStackTrace();
-    } catch (IOException e) {
-      System.out.println("File IO error:");
-      e.printStackTrace();
     }
   }
 

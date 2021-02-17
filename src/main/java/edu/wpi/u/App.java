@@ -21,7 +21,10 @@ public class App extends Application {
 
   // Gets the current instance of App
   public static App getInstance() {
-    return instance;
+    if (instance != null){
+      return instance;
+    }
+  return null;
   }
 
 
