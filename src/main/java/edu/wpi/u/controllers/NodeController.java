@@ -43,7 +43,7 @@ public class NodeController {
   }
 
   public void update() {
-    if (App.getInstance().graphService.getNodes().isEmpty()) {
+    if (App.graphService.getNodes().isEmpty()) {
       editNodeButton.setDisable(true);
       deleteNodeButton.setDisable(true);
     } else {
@@ -51,7 +51,7 @@ public class NodeController {
       deleteNodeButton.setDisable(false);
     }
 
-    allNodes = FXCollections.observableList(App.getInstance().graphService.getNodes());
+    allNodes = FXCollections.observableList(App.graphService.getNodes());
     nodeTable.setItems(allNodes);
   }
 
