@@ -1,8 +1,14 @@
-package edu.wpi.teamname.algorithms;
+package edu.wpi.teamname;
+
+import static org.junit.Assert.*;
+
+import edu.wpi.teamname.algorithms.*;
+import java.util.LinkedList;
+import org.junit.Test;
 
 public class GraphTest {
 
-  public static void main(String[] args) {
+  private static GraphManager ExampleGraph() {
     GraphManager graph = new GraphManager();
     Node A = new Node("A", 0, 0);
     Node B = new Node("B", 1, 0);
@@ -40,8 +46,30 @@ public class GraphTest {
     graph.enableEdge("8");
     graph.removeEdge("10");
 
-    for (Edge e : graph.EdgesFollowed(graph.runAStar("A", "D"))) {
-      System.out.print(e.getEdgeID());
+    return graph;
+  }
+
+  private boolean TestNodeID(LinkedList<Node> answer, String id) {
+    for (Node n : answer) {
+      if (n.getNodeID() == "A") {
+        return true;
+      }
     }
+    return false;
+  }
+
+  @Test
+  public void AStarNodeTest() {
+    LinkedList<Node> answer = ExampleGraph().runAStar("A", "D");
+    assertTrue(TestNodeID(answer, "A"));
+    assertTrue(TestNodeID(answer, "D"));
+    assertTrue(TestNodeID(answer, "B"));
+  }
+
+  @Test
+  public void AStarEdgeTest() {
+    LinkedList<Node> nodeP = ExampleGraph().runAStar("A", "D");
+    LinkedList<Edge> answer = ExampleGraph().EdgesFollowed(nodeP);
+    assertEquals(3, answer.size());
   }
 }
