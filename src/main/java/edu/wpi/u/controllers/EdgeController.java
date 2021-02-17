@@ -3,6 +3,7 @@ package edu.wpi.u.controllers;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.Graph;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class EdgeController {
-  public void buttonPressAS(ActionEvent actionEvent) {}
 
   @FXML public TextField edgeId;
 
@@ -41,7 +41,7 @@ public class EdgeController {
   ObservableList<Edge> list = FXCollections.observableArrayList();
 
   public void initialize() {
-    Graph graph = App.graph;
+    GraphService graphService = App.getInstance().graphService;
     list.removeAll();
     list.addAll(graph.getEdges());
     edgeIdCol.setCellValueFactory(new PropertyValueFactory<Edge, String>("edgeID"));
@@ -88,7 +88,7 @@ public class EdgeController {
   public void displaySelected(MouseEvent mouseEvent) {
     Edge edge = edgeTable.getSelectionModel().getSelectedItem();
     if (edge != null) {
-      Node start = edge.getStartNode(); //it can be read directly from the table.
+      Node start = edge.getStartNode();
       Node end = edge.getEndNode();
       edgeId.setText(edge.getEdgeID());
       startNode.setText(start.getNodeID());

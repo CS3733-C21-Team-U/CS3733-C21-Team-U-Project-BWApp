@@ -12,7 +12,7 @@
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <Button disable="true" layoutX="31.0" layoutY="127.0" mnemonicParsing="false" onAction="#buttonPressNode" text="Edit Node Lily" />
+                        <Button disable="true" layoutX="31.0" layoutY="127.0" mnemonicParsing="false" text="Edit Node Lily" />
                         <Button layoutX="29.0" layoutY="216.0" mnemonicParsing="false" onAction="#buttonPressEdge" text="Edit Edge Nick" />
                         <Button layoutX="31.0" layoutY="42.0" mnemonicParsing="false" onAction="#buttonPressMain" prefHeight="31.0" prefWidth="112.0" text="Main Page" />
                         <Button layoutX="31.0" layoutY="297.0" mnemonicParsing="false" onAction="#buttonPressAS" prefHeight="31.0" prefWidth="112.0" text="A* Tyler" />

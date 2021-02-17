@@ -1,6 +1,9 @@
 package edu.wpi.u;
 
-import edu.wpi.u.models.Graph;
+import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.GraphService;
+import javafx.application.Application;
+import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,11 +13,28 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
+  // Allows for globally accessible instance of app to allow instance based editing (separate info
+  // per open application)
+  // Can be accessed by all controllers and classes by calling App.getInstance();
+  private static final App instance = new App();
+  public GraphService graphService = new GraphService();
 
-  public static Graph graph = new Graph();
+  // Gets the current instance of App
+  public static App getInstance() {
+    if (instance != null){
+      return instance;
+    }
+  return null;
+  }
+
+
+  @Override
+  public void init() {
+    log.info("Starting Up");
+  }
 
   private static Stage primaryStage; // This is a static variable!!
-  // We only ever have one primary stage, each time we switch scenes, we swap the root out
+  // We only ever have one primary stage, each time we switch scenes, we swap this out
 
   public static Stage getPrimaryStage() {
     return primaryStage;
@@ -33,6 +53,7 @@ public class App extends Application {
     App.primaryStage.setScene(scene);
     App.primaryStage.show();
   }
+
 
   @Override
   public void stop() {
