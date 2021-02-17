@@ -84,6 +84,13 @@ public class EdgeController {
   }
 
   @FXML
+  public void loadData() {
+    GraphService graphService = App.graphService;
+    list.removeAll(list);
+    edgeList.getItems().addAll(graphService.getEdges());
+  }
+
+  @FXML
   public void displaySelected(MouseEvent mouseEvent) {
     Edge edge = edgeTable.getSelectionModel().getSelectedItem();
     if (edge != null) {

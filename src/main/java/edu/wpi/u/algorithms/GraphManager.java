@@ -7,6 +7,7 @@ public class GraphManager {
   private final HashMap<String, Edge> allEdges;
 
   public GraphManager() {
+    System.out.println("Constrctor for Graph Manager");
     allNodes = new HashMap<>();
     allEdges = new HashMap<>();
   }
@@ -38,18 +39,18 @@ public class GraphManager {
   }
 
   public void makeNode(
-      String _nodeID,
-      double _xcoord,
-      double _ycoord,
-      int floor,
-      String _building,
-      String _nodeType,
-      String _LongName,
-      String _ShortName,
-      String _teamAssigned) {
+          String _nodeID,
+          double _xcoord,
+          double _ycoord,
+          int floor,
+          String _building,
+          String _nodeType,
+          String _LongName,
+          String _ShortName,
+          String _teamAssigned) {
     Node n =
-        new Node(
-            _nodeID, _xcoord, _ycoord, floor, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
+            new Node(
+                    _nodeID, _xcoord, _ycoord, floor, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
     allNodes.put(n.getNodeID(), n);
   }
 
@@ -94,11 +95,11 @@ public class GraphManager {
     Set<Node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
     reachableNodes.add(_startNode); // add the start node to the seen nodes
     HashMap<Node, Node> cameFrom =
-        new HashMap<>(); // record what node leads to which for shortest path
+            new HashMap<>(); // record what node leads to which for shortest path
     HashMap<Node, Double> cost =
-        new HashMap<>(); // record the cost to get to each node from the start node
+            new HashMap<>(); // record the cost to get to each node from the start node
     HashMap<Node, Double> priority =
-        new HashMap<>(); // priority the cost + euclidean distance to the goal
+            new HashMap<>(); // priority the cost + euclidean distance to the goal
 
     // setup the start node in the data
     cost.put(_startNode, 0.0);
@@ -130,8 +131,7 @@ public class GraphManager {
         }
         // if the cost to get to the adjacent node is less update its cost and add it back to the
         // reachable nodes
-        else if (cost.get(adjNode)
-            > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
+        else if (cost.get(adjNode) > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
           // NULL
           cost.put(adjNode, nextNodeCost);
           priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));

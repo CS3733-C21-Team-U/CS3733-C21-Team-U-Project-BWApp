@@ -14,26 +14,58 @@ import java.util.LinkedList;
 
 public class GraphService {
 
-  DatabaseManager dm = new DatabaseManager();
-  GraphManager gm = new GraphManager();
+  static GraphManager gm = new GraphManager();
+  static DatabaseManager dm;
+
 
   public static void main (String[] args){
 
   }
 
   public GraphService() {
-    dm.start();
-    dm.printNodes();
-    dm.stop();
-    //dm.loadGraph(this.gm);
+
+    System.out.println("Constrctor for Graph SERVICE");
+//    dm.start();
+//    dm.stop();
+    dm = new DatabaseManager();
+    dm.loadGraph(gm);
+    /*
+    Node A = new Node("A", 0, 0);
+    Node B = new Node("B", 1, 0);
+    Node C = new Node("C", 2, 0);
+    Node D = new Node("D", 2, 1);
+    Node E = new Node("E", 1, 30);
+    Node F = new Node("F", 0, 1);
+
+    gm.addNode(A);
+    gm.addNode(B);
+    gm.addNode(C);
+    gm.addNode(D);
+    gm.addNode(E);
+    gm.addNode(F);
+
+    gm.makeEdge("1", "A", "B");
+    gm.makeEdge("2", "B", "C");
+    gm.makeEdge("3", "D", "C");
+    gm.makeEdge("4", "D", "E");
+    gm.makeEdge("5", "E", "F");
+    gm.makeEdge("6", "F", "A");
+    gm.makeEdge("7", "F", "B");
+    gm.makeEdge("8", "E", "A");
+    gm.makeEdge("9", "B", "D");
+    gm.makeEdge("10", "A", "D");
+    gm.makeEdge("11", "F", "D");
+    gm.makeEdge("12", "E", "C");
+
+     */
   }
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addNode(String node_id, int x, int y) {
-      dm.addNode(node_id,x,y,0, "Default", "Default", "Default", "Default");
-      gm.makeNode(node_id,x,y,0,"Default", "Default", "Default", "Default", "u");
-      return "";
+    dm.addNode(node_id,x,y,0, "Default", "Default", "Default", "Default");
+    gm.makeNode(node_id,x,y,0,"Default", "Default", "Default", "Default", "u");
+    return "";
     /*
     Check if valid node_id
     Return "" is a success
@@ -160,12 +192,12 @@ public class GraphService {
   }
 
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
-    if (dm.isNode(start_node_id) && dm.isNode(end_node_id)){
+    //if (dm.isNode(start_node_id) && dm.isNode(end_node_id)){
       return gm.runAStar(start_node_id, end_node_id);
-    }
+    /*}
     else {
       return null;
-    }
+    }*/
     /*
     Reutrn the A* path given the start and end node ids
     Return LinkedList of Nodes if path is found
