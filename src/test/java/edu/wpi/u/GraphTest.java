@@ -3,8 +3,11 @@ package edu.wpi.u;
 import static org.junit.Assert.*;
 
 import edu.wpi.u.algorithms.*;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
 public class GraphTest {
 
@@ -51,7 +54,16 @@ public class GraphTest {
 
   private boolean FindNodeID(LinkedList<Node> answer, String id) {
     for (Node n : answer) {
-      if (n.getNodeID() == "A") {
+      if (n.getNodeID() == id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean FindNodeID(ArrayList<Node> answer, String id) {
+    for (Node n : answer) {
+      if (n.getNodeID() == id) {
         return true;
       }
     }
@@ -59,17 +71,34 @@ public class GraphTest {
   }
 
   @Test
+  @DisplayName("AStarNodeTest")
   public void AStarNodeTest() {
     LinkedList<Node> answer = ExampleGraph().runAStar("A", "D");
     assertTrue(FindNodeID(answer, "A"));
     assertTrue(FindNodeID(answer, "D"));
-    assertTrue(FindNodeID(answer, "B"));
+    assertTrue(FindNodeID(answer, "E"));
+    assertTrue(FindNodeID(answer, "C"));
   }
 
   @Test
+  @DisplayName("AStarEdgeTest")
   public void AStarEdgeTest() {
     LinkedList<Node> nodeP = ExampleGraph().runAStar("A", "D");
     LinkedList<Edge> answer = ExampleGraph().EdgesFollowed(nodeP);
     assertEquals(3, answer.size());
   }
+
+  @Test
+  @DisplayName("AllNodes")
+  public void allNodesTest(){
+    ArrayList<Node> allNodes = ExampleGraph().getAllNodes();
+    assertTrue(FindNodeID(allNodes, "A"));
+    assertFalse(FindNodeID(allNodes, "B"));
+    assertTrue(FindNodeID(allNodes, "C"));
+    assertTrue(FindNodeID(allNodes, "D"));
+    assertTrue(FindNodeID(allNodes, "E"));
+    assertTrue(FindNodeID(allNodes, "F"));
+  }
+
+
 }
