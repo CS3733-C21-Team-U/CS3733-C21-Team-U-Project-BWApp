@@ -27,7 +27,7 @@ public class GraphService {
     System.out.println("Constrctor for Graph SERVICE");
 //    dm.start();
 //    dm.stop();
-    dm = new DatabaseManager();
+    dm = new DatabaseManager("");
     dm.loadGraph(gm);
     /*
     Node A = new Node("A", 0, 0);

@@ -1,15 +1,19 @@
 package edu.wpi.u;
 
 import static org.junit.Assert.*;
+
+import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.DatabaseManager;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DatabaseTest {
-    private static Connection conn = null;
-    private static String url = "jdbc:derby:testDB;create=true";
+
+    DatabaseManager dm = new DatabaseManager("jdbc:derby:testDB;create=true");
 
     public DatabaseTest() {
     }
@@ -45,10 +49,24 @@ public class DatabaseTest {
     }
     @Test
     private boolean testAddNode(){
+        Node n = new Node("Test", 5, 10, 3, "test", "test", "test", "test", "u");
         try {
             String str = "select * from Nodes";
             PreparedStatement ps = conn.prepareStatement(str);
-
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String nodeID = rs.getString("nodeID");
+                int xcoord = rs.getInt("xcoord");
+                int ycoord = rs.getInt("ycoord");
+                int floor = rs.getInt("floor");
+                String building = rs.getString("building");
+                String nodeType = rs.getString("nodeType");
+                String longName = rs.getString("longName");
+                String shortName = rs.getString("shortName");
+                String teamAssigned = rs.getString("teamAssigned");
+                Node test = new Node(nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned);
+                assertEquals(n,test);
+            }
         }
         catch (Exception e){
             e.printStackTrace();
