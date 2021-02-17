@@ -131,8 +131,7 @@ public class GraphManager {
         }
         // if the cost to get to the adjacent node is less update its cost and add it back to the
         // reachable nodes
-        else if (cost.get(adjNode)
-                > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
+        else if (cost.get(adjNode) > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
           // NULL
           cost.put(adjNode, nextNodeCost);
           priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
@@ -194,7 +193,7 @@ public class GraphManager {
 
       for (Edge e : n1.getEdges()) { // for every edge starting at node n1
         if ((e.getEndNode() == n2 && e.getStartNode() == n1)
-                || (e.getEndNode() == n1 && e.getStartNode() == n2)) { // if the end node is n2
+            || (e.getEndNode() == n1 && e.getStartNode() == n2)) { // if the end node is n2
           output.add(e); // add it to the output list
         }
       }

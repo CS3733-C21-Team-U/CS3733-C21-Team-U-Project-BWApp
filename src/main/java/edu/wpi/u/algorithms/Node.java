@@ -18,15 +18,15 @@ public class Node {
 
   // full constructor
   public Node(
-          String _nodeID,
-          double _xcoord,
-          double _ycoord,
-          int floor,
-          String _building,
-          String _nodeType,
-          String _LongName,
-          String _ShortName,
-          String _teamAssigned) {
+      String _nodeID,
+      double _xcoord,
+      double _ycoord,
+      int floor,
+      String _building,
+      String _nodeType,
+      String _LongName,
+      String _ShortName,
+      String _teamAssigned) {
     this.nodeID = _nodeID;
     this.xcoord = _xcoord;
     this.ycoord = _ycoord;
