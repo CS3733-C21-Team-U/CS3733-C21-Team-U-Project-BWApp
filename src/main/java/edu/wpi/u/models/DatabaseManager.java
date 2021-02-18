@@ -20,7 +20,7 @@ public class DatabaseManager {
    //DatabaseManager db = new DatabaseManager();
   }
 
-  public DatabaseManager(String url) {
+  public DatabaseManager() {
     driver();
     connect();
     deleteTables();
