@@ -5,7 +5,7 @@ plugins {
     id 'com.diffplug.gradle.spotless' version '3.27.1'
     id "io.freefair.lombok" version "5.0.0-rc6"
 }
-mainClassName = 'edu.wpi.teamname.Main'
+mainClassName = 'edu.wpi.u.Main'
 
 repositories {
     mavenCentral()
@@ -30,6 +30,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.30'
     compile 'org.slf4j:slf4j-simple:1.7.30'
     compile 'org.apache.derby:derby:10.14.2.0'
+    compile 'com.jfoenix:jfoenix:8.0.10'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
@@ -55,18 +56,21 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.teamname.App',
-        'edu.wpi.teamname.Main',
-        'edu.wpi.teamname.models.DatabaseManager',
-        'edu.wpi.teamname.models.Edge',
-        'edu.wpi.teamname.models.Node',
-        'edu.wpi.teamname.models.Message',
-        'edu.wpi.teamname.models.Graph',
-        'edu.wpi.teamname.controllers.MainController',
-        'edu.wpi.teamname.controllers.NewController',
-        'edu.wpi.teamname.controllers.Tab1Controller',
-        'edu.wpi.teamname.controllers.Tab2Controller',
-        'edu.wpi.teamname.controllers.Tab3Controller',
+        'edu.wpi.u.App',
+        'edu.wpi.u.Main',
+        'edu.wpi.u.models.DatabaseManager',
+        'edu.wpi.u.models.Message',
+        'edu.wpi.u.algorithms.Edge',
+        'edu.wpi.u.algorithms.Node',
+        'edu.wpi.u.algorithms.getEdgesTest',
+        'edu.wpi.u.algorithms.GraphTest',
+        'edu.wpi.u.algorithms.GraphManager',
+        'edu.wpi.u.models.GraphService',
+        'edu.wpi.u.controllers.MainController',
+        'edu.wpi.u.controllers.NewController',
+        'edu.wpi.u.controllers.AStarController',
+        'edu.wpi.u.controllers.NodeController',
+        'edu.wpi.u.controllers.EdgeController',
 ]
 
 jacoco {
