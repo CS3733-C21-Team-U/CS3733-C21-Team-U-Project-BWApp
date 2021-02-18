@@ -165,4 +165,21 @@ public class DefaultTest {
         tester.setWalkable(false);
         assertFalse(tester.walkable());
     }
+
+    @Test
+    public void WalkableEdge(){//Kohmei
+        Node A = new Node("A", 0, 0);
+        Node B = new Node("B", 0, 0);
+        Edge e = new Edge("TEST", A, B);
+        e.setWalkable(false);
+        assertFalse(e.isWalkable());
+    }
+
+    @Test
+    public void addEdgeTest(){//Kaamil
+        GraphManager gm = ExampleGraph();
+        gm.makeEdge("13","A","C");
+        ArrayList<Edge> edges = gm.getAllEdges();
+        assertTrue(FindEdgeID(edges, "13"));
+    }
 }
