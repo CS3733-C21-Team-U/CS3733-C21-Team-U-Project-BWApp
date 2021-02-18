@@ -5,7 +5,7 @@ plugins {
     id 'com.diffplug.gradle.spotless' version '3.27.1'
     id "io.freefair.lombok" version "5.0.0-rc6"
 }
-mainClassName = 'edu.wpi.teamname.Main'
+mainClassName = 'edu.wpi.u.Main'
 
 repositories {
     mavenCentral()
@@ -30,6 +30,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.30'
     compile 'org.slf4j:slf4j-simple:1.7.30'
     compile 'org.apache.derby:derby:10.14.2.0'
+    compile 'com.jfoenix:jfoenix:8.0.10'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
