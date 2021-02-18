@@ -1,5 +1,7 @@
 package edu.wpi.u.algorithms;
 
+import edu.wpi.u.models.GraphManager;
+
 import java.util.LinkedList;
 
 public class getEdgesTest {
