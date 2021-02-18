@@ -46,6 +46,7 @@ public class App extends Application {
 
   @Override
   public void stop() {
-    log.info("Shutting Down");
+    System.out.println("Shutting Down");
+    graphService.saveAndExitDB();
   }
 }

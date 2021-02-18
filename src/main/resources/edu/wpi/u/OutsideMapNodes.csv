@@ -1,4 +1,4 @@
-nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
+nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned
 UPARK00101,1468,714,1,Faulkner,PARK,Parking spot 1,P1,Team U
 UPARK00201,1484,714,1,Faulkner,PARK,Parking spot 2,P2,Team U
 UPARK00301,1503,714,1,Faulkner,PARK,Parking spot 3,P3,Team U
@@ -74,3 +74,5 @@ UWALK04401,1171,1265,1,Faulkner,WALK,Walkway 43,W43,Team U
 UEXIT00201,1184,1265,1,Faulkner,EXIT,Entrance/Exit 2,E2,Team U
 UWALK04501,1588,929,1,Faulkner,WALK,Walkway 45,W45,Team U
 UWALK04601,873,968,1,Faulkner,WALK,Walkway 46,W46,Team U
+A,1,1,0,Def,Def,Def,Def,u
+B,1,1,0,Def,Def,Def,Def,u

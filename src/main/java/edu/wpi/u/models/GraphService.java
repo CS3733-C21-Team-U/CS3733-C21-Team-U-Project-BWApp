@@ -59,6 +59,11 @@ public class GraphService {
 
      */
   }
+
+  public void saveAndExitDB(){
+    dm.stop();
+  }
+
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
