@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application {
 
-  // Allows for globally accessible instance of app to allow instance based editing (separate info
-  // per open application)
+  // Allows for globally accessible instance of app to allow instance based editing
+  // (separate info per open application)
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static GraphService graphService = new GraphService();
 
