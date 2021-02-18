@@ -37,6 +37,7 @@ dependencies {
             'org.junit.jupiter:junit-jupiter:5.6.0',
             'org.testfx:testfx-junit5:4.0.16-alpha',
     )
+    implementation 'junit:junit:4.12'
 }
 
 

@@ -1,6 +1,7 @@
 package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.GraphManager;
+import edu.wpi.u.algorithms.Node;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -555,6 +556,19 @@ public class DatabaseManager {
     catch (Exception e){
       e.printStackTrace();
     }
+  }
+
+  public static Node getNode(String node_id){
+    try {
+      String str = "select * from Nodes where nodeID=?";
+      PreparedStatement ps = conn.prepareStatement(str);
+      ResultSet rs = ps.executeQuery();
+      return new Node(rs.getString("nodeId"), rs.getInt("xcoord"), rs.getInt("ycoord"), rs.getInt("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public static void stop() {
