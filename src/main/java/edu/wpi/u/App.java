@@ -1,9 +1,7 @@
 package edu.wpi.u;
 
-import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.DatabaseManager;
 import edu.wpi.u.models.GraphService;
-import javafx.application.Application;
-import edu.wpi.u.models.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,11 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application {
 
-  // Allows for globally accessible instance of app to allow instance based editing (separate info
-  // per open application)
+  // Allows for globally accessible instance of app to allow instance based editing
+  // (separate info per open application)
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static GraphService graphService = new GraphService();
-
 
   @Override
   public void init() {
@@ -49,6 +46,7 @@ public class App extends Application {
 
   @Override
   public void stop() {
-    log.info("Shutting Down");
+    System.out.println("Shutting Down");
+    graphService.saveAndExitDB();
   }
 }

@@ -1,12 +1,21 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.*;
+import edu.wpi.u.models.GraphService;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+
+import java.util.Observable;
 
 public class NodeController {
 
@@ -22,27 +31,48 @@ public class NodeController {
 
   @FXML public Button deleteNodeButton;
 
+  @FXML public TableView<Node> nodeTable;
+
+  @FXML public TableColumn<Node, String> colNodeID;
+
+  @FXML public TableColumn<Node, String> colXCoo;
+
+  @FXML public TableColumn<Node, String> colYCoo;
+
+  ObservableList<Node> list = FXCollections.observableArrayList();
+
+  private ObservableList<Node> allNodes;
+
   public void initialize() {
+    colNodeID.setCellValueFactory(new PropertyValueFactory<>("nodeID"));
+    colXCoo.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+    colYCoo.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
     update();
+
+    GraphService graphService = App.graphService;
+    list.removeAll();
+    list.addAll(graphService.getNodes());
+    colNodeID.setCellValueFactory(new PropertyValueFactory<Node, String>("nodeID"));
+    colXCoo.setCellValueFactory(
+            cellData -> new SimpleStringProperty(cellData.getValue().getXString()));
+    colYCoo.setCellValueFactory(
+            cellData -> new SimpleStringProperty(cellData.getValue().getYString()));
+    nodeTable.setItems(list);
   }
 
   public void update() {
-    // Uncomment when graph implements empty check or properly implements getNodes()
-    // If getNodes() gets functionality first then put
-    //
-    // App.getInstance().graph.getNodes().isEmpty() into if statement below
-    /*
-    if (App.getInstance().graph.isEmpty()) {
-      editNodeButton.setDisable(true);
-      deleteNodeButton.setDisable(true);
-    } else {
-      editNodeButton.setDisable(false);
-      deleteNodeButton.setDisable(false);
-    }
-     */
+//    if (App.graphService.getNodes().isEmpty()) {
+//      editNodeButton.setDisable(true);
+//      deleteNodeButton.setDisable(true);
+//    } else {
+//      editNodeButton.setDisable(false);
+//      deleteNodeButton.setDisable(false);
+//    }
+
+    allNodes = FXCollections.observableList(App.graphService.getNodes());
+    nodeTable.setItems(allNodes);
   }
 
-  @FXML
   public void addNode() {
 
     String tempID = enterNodeID.getText();
@@ -51,7 +81,7 @@ public class NodeController {
       errorLabel.setText("Missing Node ID.");
       return;
     }
-    if (checkTextBoxesErrorCoordiantes()) return;
+    if (checkTextBoxesErrorCoordinates()) return;
 
     int tempX = Integer.parseInt(enterXCoo.getText());
     int tempY = Integer.parseInt(enterYCoo.getText());
@@ -66,18 +96,18 @@ public class NodeController {
     errorLabel.setText("Node added successfully.");
   }
 
-  @FXML
   public void editNode() {
     String tempID = enterNodeID.getText();
     if (tempID.equals("")) {
       errorLabel.setText("Missing Node ID.");
       return;
     }
-    if (checkTextBoxesErrorCoordiantesEmpty()) return;
-    if (checkTextBoxesErrorCoordiantes()) return;
-    int tempX = Integer.parseInt(enterXCoo.getText());
-    int tempY = Integer.parseInt(enterYCoo.getText());
-    if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
+    if (checkTextBoxesErrorCoordinatesEmpty()) return;
+    if (checkTextBoxesErrorCoordinates()) return;
+    int tempX = (int)Double.parseDouble(enterXCoo.getText());
+    int tempY = (int)Double.parseDouble(enterYCoo.getText());
+    if (App.graphService.deleteNode(tempID).equals(tempID) || App.graphService.addNode(tempID, tempX, tempY).equals(tempID))
+   // if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
       errorLabel.setText("Node does not exists.");
     else {
       update();
@@ -85,7 +115,6 @@ public class NodeController {
     }
   }
 
-  @FXML
   public void deleteNode() {
     String tempID = enterNodeID.getText();
     if (tempID.equals("")) errorLabel.setText("Missing Node ID.");
@@ -99,15 +128,15 @@ public class NodeController {
     }
   }
 
-  private boolean checkTextBoxesErrorCoordiantes() {
+  private boolean checkTextBoxesErrorCoordinates() {
     try {
-      Integer.parseInt(enterXCoo.getText());
+      Double.parseDouble(enterXCoo.getText());
     } catch (NumberFormatException e) {
       errorLabel.setText("x-coordinate is not a valid number");
       return true;
     }
     try {
-      Integer.parseInt(enterYCoo.getText());
+      Double.parseDouble(enterYCoo.getText());
     } catch (NumberFormatException e) {
       errorLabel.setText("y-coordinate is not a valid number");
       return true;
@@ -116,7 +145,7 @@ public class NodeController {
     return false;
   }
 
-  private boolean checkTextBoxesErrorCoordiantesEmpty() {
+  private boolean checkTextBoxesErrorCoordinatesEmpty() {
     if (enterXCoo.getText().equals("")) {
       errorLabel.setText("Missing x-coordinate.");
       return true;
@@ -127,6 +156,8 @@ public class NodeController {
     }
     return false;
   }
+
+
 
   @FXML
   public void buttonPressMain() throws Exception {
@@ -148,4 +179,17 @@ public class NodeController {
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
+
+  @FXML
+  public void displaySelected(MouseEvent mouseEvent) {
+    Node node = nodeTable.getSelectionModel().getSelectedItem();
+    if (node != null) {
+      enterNodeID.setText(node.getNodeID());
+      enterXCoo.setText(node.getXString());
+      enterYCoo.setText(node.getYString());
+      editNodeButton.setDisable(false);
+      deleteNodeButton.setDisable(false);
+    }
+  }
+
 }
