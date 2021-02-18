@@ -87,7 +87,7 @@ public class DatabaseManager {
 
   public static void insertNodeData(){
     String str = "";
-    Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapNodes.csv");
+    Path p = Paths.get("OutsideMapNodes.csv");
       try {
         BufferedReader br = Files.newBufferedReader(p);
 
@@ -123,7 +123,7 @@ public class DatabaseManager {
 
   public static void insertEdgeData() {
     String str = "";
-    Path p = Paths.get("src/", "main", "resources", "edu", "wpi", "u", "OutsideMapEdges.csv");
+    Path p = Paths.get("OutsideMapEdges.csv");
       try {
         BufferedReader br = Files.newBufferedReader(p);
 
@@ -201,7 +201,7 @@ public class DatabaseManager {
       Statement statement = conn.createStatement();
       ResultSet result = statement.executeQuery(str);
       BufferedWriter fileWriter =
-              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
+              new BufferedWriter(new FileWriter("OutsideMapNodes.csv"));
 
       fileWriter.write(
               "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
@@ -250,7 +250,7 @@ public class DatabaseManager {
       Statement statement = conn.createStatement();
       ResultSet result = statement.executeQuery(str);
       BufferedWriter fileWriter =
-              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
+              new BufferedWriter(new FileWriter("OutsideMapEdges.csv"));
 
       fileWriter.write("edgeID, startID, endID");
 
