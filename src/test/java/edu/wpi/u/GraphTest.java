@@ -116,7 +116,15 @@ public class GraphTest {
     ArrayList<Node> nodes = ExampleGraph().getAllNodes();
     assertTrue(FindNodeID(nodes, "Test"));
   }
-
+  @Test
+  @DisplayName("DeleteNodeTest")
+  public void deleteNodeTest(){
+    Node n1 = new Node("TestID", 1, 5);
+    ExampleGraph().addNode(n1);
+    ExampleGraph().removeNode("TestID");
+    ArrayList<Node> testList = ExampleGraph().getAllNodes();
+    assertFalse(FindNodeID(testList,"TestID"));
+  }
 
   @Test
   @DisplayName("DeleteEdge")
