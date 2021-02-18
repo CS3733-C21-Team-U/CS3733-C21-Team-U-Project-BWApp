@@ -60,10 +60,7 @@ public class GraphService {
      */
   }
 
-  public GraphService(boolean a) {
-    System.out.println("TEST Constrctor for Graph SERVICE");
-    dm = new DatabaseManager();
-  }
+
 
   /*
   Make sure x & y are positive integers within the map coordinate range

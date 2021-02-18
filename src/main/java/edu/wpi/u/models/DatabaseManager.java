@@ -14,20 +14,13 @@ public class DatabaseManager {
   private static Connection conn = null;
 
   private static ResultSet rset;
-  private String url;
+  private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
    //DatabaseManager db = new DatabaseManager();
   }
 
   public DatabaseManager(String url) {
-    if (url.equals("")){
-      this.url =  "jdbc:derby:BWdb;user=admin;password=admin;create=true";
-    }
-    else {
-      this.url = "jdbc:derby:testDB;create=true";
-    }
-
     driver();
     connect();
     deleteTables();

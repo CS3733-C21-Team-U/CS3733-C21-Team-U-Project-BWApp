@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 public class GraphTest {
+  static GraphManager graph = new GraphManager();
 
   private static GraphManager ExampleGraph() {
-    GraphManager graph = new GraphManager();
     Node A = new Node("A", 0, 0);
     Node B = new Node("B", 1, 0);
     Node C = new Node("C", 2, 0);
@@ -99,6 +99,12 @@ public class GraphTest {
     assertTrue(FindNodeID(allNodes, "E"));
     assertTrue(FindNodeID(allNodes, "F"));
   }
-
-
+  @Test
+  @DisplayName("AddNodeTest")
+  public void addNodeTest(){
+    Node n = new Node("Test", 1, 5);
+    ExampleGraph().addNode(n);
+    ArrayList<Node> nodes = ExampleGraph().getAllNodes();
+    assertTrue(FindNodeID(nodes, "Test"));
+  }
 }
