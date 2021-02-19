@@ -65,13 +65,13 @@
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: white;
     -fx-border-width: 3;
-    -fx-background-color: #58C0F2;
+    -fx-background-color: white;
 }
 
 .split-pane:vertical > .split-pane-divider {
     -fx-border-color: white;
     -fx-border-width: 3;
-    -fx-background-color: #58C0F2;
+    -fx-background-color: white;
 }
 
 .scroll-pane {
@@ -107,6 +107,7 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Arial";
 }
+
 
 /*
  * Metro style Push Button
