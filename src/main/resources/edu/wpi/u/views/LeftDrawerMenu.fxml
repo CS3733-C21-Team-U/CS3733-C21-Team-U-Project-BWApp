@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="250.0" prefHeight="668.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="6.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -207,16 +207,16 @@
             </HBox>
             <HBox prefHeight="7.0" prefWidth="110.0">
                <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(93, 147, 240);" text="Service Needed" textFill="#0f0094">
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: #b2c2ff;" text="Service Needed" textFill="#2e5bff">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets left="9.0" />
+                        <Insets left="5.0" />
                      </padding>
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
                   </Label>
                   <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="20.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
                      <font>
@@ -231,12 +231,15 @@
                   </JFXToggleButton>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
             </HBox>
             <HBox prefHeight="7.0" prefWidth="110.0">
                <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(228, 189, 255);" text="Waiting" textAlignment="CENTER" textFill="#4a2762">
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(60, 232, 215);" text="In Progress" textFill="#306f71">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -244,7 +247,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                      <padding>
-                        <Insets left="40.0" />
+                        <Insets left="23.0" />
                      </padding>
                   </Label>
                   <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
@@ -265,7 +268,7 @@
             </HBox>
             <HBox prefHeight="7.0" prefWidth="110.0">
                <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(60, 232, 215);" text="In Progress" textFill="#306f71">
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(228, 189, 255);" text="Waiting" textAlignment="CENTER" textFill="#4a2762">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -273,7 +276,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                      <padding>
-                        <Insets left="23.0" />
+                        <Insets left="40.0" />
                      </padding>
                   </Label>
                   <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
