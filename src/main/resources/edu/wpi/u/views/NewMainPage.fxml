@@ -1,382 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXToggleButton?>
-<?import com.jfoenix.controls.JFXToggleNode?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
-    <children>
-        <SplitPane dividerPositions="0.20066889632107024" prefHeight="160.0" prefWidth="200.0" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-                <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="170.0" prefHeight="160.0" prefWidth="170.0">
-                    <children>
-                        <VBox layoutX="6.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <MenuButton contentDisplay="TEXT_ONLY" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Options">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Close" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                    </items>
-                                    <VBox.margin>
-                                        <Insets left="10.0" top="10.0" />
-                                    </VBox.margin>
-                                </MenuButton>
-                                <Separator prefHeight="16.0" />
-                                <HBox prefHeight="38.0" prefWidth="117.0">
-                                    <VBox.margin>
-                                        <Insets left="7.0" right="7.0" />
-                                    </VBox.margin>
-                                    <children>
-                                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                            <HBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </HBox.margin>
-                                            <image>
-                                                <Image url="@Images/download.jpg" />
-                                            </image>
-                                        </ImageView>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <Label text="Welcome">
-                                                    <font>
-                                                        <Font name="Arial Bold" size="12.0" />
-                                                    </font>
-                                                    <VBox.margin>
-                                                        <Insets top="6.0" />
-                                                    </VBox.margin>
-                                                    <padding>
-                                                        <Insets bottom="-2.0" top="-2.0" />
-                                                    </padding>
-                                                </Label>
-                                                <Label text="Carol Baker">
-                                                    <font>
-                                                        <Font name="Arial" size="12.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Map">
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                            <padding>
-                                                <Insets left="-68.0" />
-                                            </padding>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                    <padding>
-                                        <Insets top="3.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Analytics">
-                                            <padding>
-                                                <Insets left="-48.0" />
-                                            </padding>
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="  New Request">
-                                            <padding>
-                                                <Insets left="-37.0" />
-                                            </padding>
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="  Admin Tools">
-                                            <padding>
-                                                <Insets left="-39.0" />
-                                            </padding>
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="  Support">
-                                            <padding>
-                                                <Insets left="-60.0" />
-                                            </padding>
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="9.0" prefWidth="130.0">
-                                    <children>
-                                        <JFXToggleNode minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="110.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="  Settings">
-                                            <padding>
-                                                <Insets left="-60.0" />
-                                            </padding>
-                                            <HBox.margin>
-                                                <Insets left="-7.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font size="10.0" />
-                                            </font>
-                                        </JFXToggleNode>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets left="-1.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <Separator prefHeight="9.0" prefWidth="130.0" />
-                                <HBox prefHeight="15.0" prefWidth="130.0">
-                                    <children>
-                                        <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@Images/Filter.png" />
-                                            </image>
-                                            <HBox.margin>
-                                                <Insets left="3.0" />
-                                            </HBox.margin>
-                                        </ImageView>
-                                        <Label text="Filter Map">
-                                            <HBox.margin>
-                                                <Insets top="3.0" />
-                                            </HBox.margin></Label>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="7.0" prefWidth="110.0">
-                                    <children>
-                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="115.0" style="-fx-background-radius: 2; -fx-background-color: rgb(93, 147, 240);" text="Service Needed" textFill="#0f0094">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font name="Arial Bold" size="10.0" />
-                                            </font>
-                                            <padding>
-                                                <Insets left="5.0" />
-                                            </padding>
-                                        </Label>
-                                        <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="8.0" prefWidth="115.0" size="4.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                                            <font>
-                                                <Font name="Arial" size="10.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets />
-                                            </HBox.margin>
-                                            <padding>
-                                                <Insets bottom="-3.0" top="-3.0" />
-                                            </padding>
-                                        </JFXToggleButton>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets bottom="3.0" top="3.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="7.0" prefWidth="110.0">
-                                    <children>
-                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="115.0" style="-fx-background-radius: 2; -fx-background-color: rgb(228, 189, 255); -fx-border-width: 2;" text="Waiting" textAlignment="CENTER" textFill="#4a2762">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font name="Arial Bold" size="10.0" />
-                                            </font>
-                                            <padding>
-                                                <Insets left="33.0" />
-                                            </padding>
-                                        </Label>
-                                        <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="8.0" prefWidth="115.0" size="4.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                                            <font>
-                                                <Font name="Arial" size="10.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets />
-                                            </HBox.margin>
-                                            <padding>
-                                                <Insets bottom="-3.0" top="-3.0" />
-                                            </padding>
-                                        </JFXToggleButton>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets bottom="3.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="7.0" prefWidth="110.0">
-                                    <children>
-                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="115.0" style="-fx-background-radius: 2; -fx-background-color: rgb(60, 232, 215);" text="In Progress" textFill="#306f71">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font name="Arial Bold" size="10.0" />
-                                            </font>
-                                            <padding>
-                                                <Insets left="19.0" />
-                                            </padding>
-                                        </Label>
-                                        <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="8.0" prefWidth="115.0" size="4.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                                            <font>
-                                                <Font name="Arial" size="10.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets />
-                                            </HBox.margin>
-                                            <padding>
-                                                <Insets bottom="-3.0" top="-3.0" />
-                                            </padding>
-                                        </JFXToggleButton>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets bottom="3.0" />
-                                    </VBox.margin>
-                                </HBox>
-                                <HBox prefHeight="7.0" prefWidth="110.0">
-                                    <children>
-                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="115.0" style="-fx-background-radius: 2; -fx-background-color: rgb(171, 171, 171);" text="Fully Serviced">
-                                            <HBox.margin>
-                                                <Insets left="10.0" />
-                                            </HBox.margin>
-                                            <font>
-                                                <Font name="Arial Bold" size="10.0" />
-                                            </font>
-                                            <padding>
-                                                <Insets left="11.0" />
-                                            </padding>
-                                        </Label>
-                                        <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="8.0" prefWidth="115.0" size="4.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                                            <font>
-                                                <Font name="Arial" size="10.0" />
-                                            </font>
-                                            <HBox.margin>
-                                                <Insets />
-                                            </HBox.margin>
-                                            <padding>
-                                                <Insets bottom="-3.0" top="-3.0" />
-                                            </padding>
-                                        </JFXToggleButton>
-                                    </children>
-                                </HBox>
-                            </children>
-                            <padding>
-                                <Insets left="7.0" right="7.0" />
-                            </padding>
-                        </VBox>
-                    </children></AnchorPane>
-                <SplitPane dividerPositions="0.1" orientation="VERTICAL" stylesheets="@RegularTheme.css" SplitPane.resizableWithParent="false">
-                    <items>
-                        <AnchorPane maxHeight="40.0" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                        <AnchorPane>
-                            <children>
-                                <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <items>
-                                        <AnchorPane minHeight="300.0" minWidth="400.0">
-                                            <children>
-                                                <ScrollPane pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <content>
-                                                        <AnchorPane>
-                                                            <children>
-                                                                <ImageView fitHeight="735.0" fitWidth="1214.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
-                                                                    <image>
-                                                                        <Image url="@Images/FaulknerCampus.png" />
-                                                                    </image></ImageView>
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </content>
-                                                </ScrollPane>
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="160.0" prefWidth="160.0">
-                                            <children>
-                                                <ScrollPane hbarPolicy="NEVER" prefHeight="453.0" prefWidth="139.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <content>
-                                                        <AnchorPane maxWidth="-Infinity" minHeight="600.0" minWidth="158.0" prefWidth="158.0">
-                                                            <children>
-                                                                <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                    <panes>
-                                                                        <TitledPane animated="false" maxWidth="-Infinity" minWidth="130.0" prefWidth="130.0" text="Suspicous Person">
-                                                                            <content>
-                                                                                <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="130.0" prefHeight="180.0" prefWidth="130.0">
-                                                                                    <children>
-                                                                                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                            <children>
-                                                                                                <Label prefWidth="118.0" text="Suspicous person in Main lobby with alpaca" wrapText="true" />
-                                                                                            </children>
-                                                                                        </VBox>
-                                                                                    </children>
-                                                                                </AnchorPane>
-                                                                            </content>
-                                                                        </TitledPane>
-                                                                    </panes>
-                                                                </Accordion>
-                                                            </children>
-                                                        </AnchorPane>
-                                                    </content>
-                                                </ScrollPane>
-                                            </children>
-                                        </AnchorPane>
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-            </items>
-        </SplitPane>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
+   <children>
+      <SplitPane dividerPositions="0.09554730983302412" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0">
+               <children>
+                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="17.0" layoutY="25.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="25.0" />
+                  <Button layoutX="1543.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" text="EXIT (Or Esc Key)">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="1000.0" prefWidth="1920.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <ImageView fitHeight="3000.0" fitWidth="3000.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/FaulknerCampus.png" />
+                           </image>
+                        </ImageView>
+                     </content>
+                  </ScrollPane>
+                  <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1000.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
 </AnchorPane>

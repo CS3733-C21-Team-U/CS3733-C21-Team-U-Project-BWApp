@@ -1,10 +1,8 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.OldControllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
 import edu.wpi.u.models.GraphService;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,8 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
-import java.util.Observable;
 
 public class NodeController {
 
@@ -162,21 +158,21 @@ public class NodeController {
   @FXML
   public void buttonPressMain() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/MainPage.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressEdge() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditEdgeNick.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/EditEdgeNick.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressAS() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/AStarTyler.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 

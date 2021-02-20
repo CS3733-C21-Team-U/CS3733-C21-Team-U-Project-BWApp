@@ -571,9 +571,9 @@ public class DatabaseManager {
   }
 
   public static void stop() {
-    saveNodesCSV();
-    saveEdgesCSV();
-    dropValues();
-    deleteTables();
+//    saveNodesCSV();
+//    saveEdgesCSV();
+//    dropValues();
+//    deleteTables();
   }
 }
