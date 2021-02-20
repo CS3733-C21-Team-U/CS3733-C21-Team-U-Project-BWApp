@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class ViewServiceRequestsController {
+public class ViewRequestController {
 
 
 
@@ -24,7 +24,7 @@ public class ViewServiceRequestsController {
 
     @FXML
     public void handleChangeToEditRequest(){
-        App.rightDrawerRoot.set( "../views/EditServiceRequests.fxml");
+        App.rightDrawerRoot.set( "../views/EditRequests.fxml");
     }
 
 

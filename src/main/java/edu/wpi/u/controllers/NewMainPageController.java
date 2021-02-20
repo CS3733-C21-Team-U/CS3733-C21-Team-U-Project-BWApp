@@ -28,7 +28,7 @@ public class NewMainPageController {
         leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewServiceRequests.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewRequests.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 
