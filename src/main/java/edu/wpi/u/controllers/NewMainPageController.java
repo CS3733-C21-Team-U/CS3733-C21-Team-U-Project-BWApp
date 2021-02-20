@@ -68,16 +68,7 @@ public class NewMainPageController {
     }
 
 
-    //Listener here for the global drawerstare variable
-    @FXML
-    public void rightDrawerSwitchEdit() throws Exception {
 
-
-        serviceRequestDrawer.close();
-        AnchorPane rightServiceRequestPane = FXMLLoader.load(getClass().getResource("../views/EditServiceRequests.fxml"));
-        serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-        serviceRequestDrawer.open();
-    }
 
     @FXML
     public void handleExitButton() {

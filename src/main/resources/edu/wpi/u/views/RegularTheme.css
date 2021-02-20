@@ -120,11 +120,12 @@
     -fx-padding: 5 22 5 22;
     -fx-border-color: #243667;
     -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: #6b90ff;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-background-color: #3d69ff;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #ffffff;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 

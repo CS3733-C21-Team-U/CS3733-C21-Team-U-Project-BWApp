@@ -13,13 +13,11 @@ public class ViewServiceRequestsController {
 
 
 
-    @FXML
-    Accordion viewAccordian;
+
 
     public void initialize() throws IOException {
         //This is how you add title panes here
-        TitledPane t = new TitledPane();
-        viewAccordian.getPanes().add(t);
+
 
     }
 
