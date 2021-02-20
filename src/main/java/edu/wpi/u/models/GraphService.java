@@ -24,7 +24,8 @@ public class GraphService {
   }
 
   public void saveAndExitDB(){
-    dm.stop();
+    //For testing UI
+//    dm.stop();
   }
 
 
