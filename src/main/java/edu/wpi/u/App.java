@@ -16,6 +16,7 @@ public class App extends Application {
   // (separate info per open application)
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static GraphService graphService = new GraphService();
+  public String DrawerState;
 
   @Override
   public void init() {
@@ -37,7 +38,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/MainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
     App.primaryStage.show();

@@ -32,7 +32,7 @@ public class MainController {
 
   @FXML
   public void buttonPressNode() throws Exception {
-
+  //change the variable
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditNodeLily.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
