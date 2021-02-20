@@ -2,7 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,7 +16,7 @@
    <children>
       <VBox prefHeight="660.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="35.0" prefWidth="483.0" text="View Service Requests full 500 px goes he">
+            <Label prefHeight="35.0" prefWidth="483.0" styleClass="label-header" text="View Service Requests full 500 px goes here">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -20,20 +24,45 @@
                   <Insets left="7.0" top="7.0" />
                </VBox.margin>
             </Label>
-            <Accordion fx:id="viewAccordian">
-               <panes>
-                  <TitledPane text="untitled">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="10.0" text="untitled">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </TitledPane>
-               </panes>
-            </Accordion>
+            <Accordion fx:id="viewAccordian" />
+            <TitledPane text="untitled">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane text="untitled">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane text="untitled">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="87.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleChangeToEditRequest" text="Button" />
+                        <MenuBar layoutX="113.0" layoutY="78.0">
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
          </children>
       </VBox>
    </children>

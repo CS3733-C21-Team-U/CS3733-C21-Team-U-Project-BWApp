@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class ViewServiceRequestsController {
 
 
+
     @FXML
     Accordion viewAccordian;
 
@@ -20,4 +22,12 @@ public class ViewServiceRequestsController {
         viewAccordian.getPanes().add(t);
 
     }
+
+
+    @FXML
+    public void handleChangeToEditRequest(){
+        App.rightDrawerRoot.set( "../views/EditServiceRequests.fxml");
+    }
+
+
 }

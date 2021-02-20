@@ -4,6 +4,7 @@ import edu.wpi.u.models.DatabaseManager;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,13 +21,15 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
+  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewServiceRequests.fxml");//This is where we store what scene the right drawer is in.
+
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
 
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
 
-  public String DrawerState;
+
 
   public App(){
     System.out.println("App constructor");

@@ -20,15 +20,42 @@ public class NewMainPageController {
     @FXML
     JFXDrawer serviceRequestDrawer;
 
+    AnchorPane rightServiceRequestPane;
+
 
     public void initialize() throws IOException {
         AnchorPane leftMenuPane;
         leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
-        AnchorPane rightServiceRequestPane = FXMLLoader.load(getClass().getResource("../views/ViewServiceRequests.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewServiceRequests.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
+
+        App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
+        {
+            try {
+                rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
+                serviceRequestDrawer.setSidePane(rightServiceRequestPane);
+
+
+                /*
+                serviceRequestDrawer.close();
+                serviceRequestDrawer.onDrawerClosedProperty(new EventHandler<JFXDrawerEvent>() {
+
+                    public void handle(JFXDrawerEvent me) {
+                        System.out.println("Mouse exited");
+                    }
+                });
+*/
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
     }
+
+
 
     @FXML
     public void leftMenuToggle() throws Exception {
@@ -38,6 +65,18 @@ public class NewMainPageController {
             leftMenuDrawer.open();
         }
 
+    }
+
+
+    //Listener here for the global drawerstare variable
+    @FXML
+    public void rightDrawerSwitchEdit() throws Exception {
+
+
+        serviceRequestDrawer.close();
+        AnchorPane rightServiceRequestPane = FXMLLoader.load(getClass().getResource("../views/EditServiceRequests.fxml"));
+        serviceRequestDrawer.setSidePane(rightServiceRequestPane);
+        serviceRequestDrawer.open();
     }
 
     @FXML
