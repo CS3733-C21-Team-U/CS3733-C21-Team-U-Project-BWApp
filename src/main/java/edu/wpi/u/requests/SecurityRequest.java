@@ -1,6 +1,7 @@
 package edu.wpi.u.requests;
 
 import java.util.List;
+import java.util.Date;
 
 //TODO: Private or protected fields?
 public class SecurityRequest extends Request {
