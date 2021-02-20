@@ -1,5 +1,6 @@
 package edu.wpi.u.requests;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -7,8 +8,7 @@ import java.util.Date;
 public abstract class Request {
     protected Date dateCreated, dateCompleted;
     protected String description;
-    protected List<Staff> assignees; //TODO: What kind of list?
-
+    protected ArrayList<Staff> assignees;
 
     protected void resolveRequest() { //TODO: Belongs in request?
 

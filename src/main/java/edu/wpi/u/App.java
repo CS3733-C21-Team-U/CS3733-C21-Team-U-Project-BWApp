@@ -1,6 +1,5 @@
 package edu.wpi.u;
 
-import edu.wpi.u.models.DatabaseManager;
 import edu.wpi.u.models.GraphService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

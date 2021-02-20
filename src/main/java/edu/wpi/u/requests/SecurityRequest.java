@@ -1,5 +1,6 @@
 package edu.wpi.u.requests;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ public class SecurityRequest extends Request {
     private String codeLevel;
 
     public SecurityRequest(Date dateCreated, Date dateCompleted, String description,
-                           List<Staff> assignees, String codeLevel) {
+                           ArrayList<Staff> assignees, String codeLevel) {
         super.dateCreated = dateCreated;
         super.dateCompleted = dateCompleted;
         super.description = description;

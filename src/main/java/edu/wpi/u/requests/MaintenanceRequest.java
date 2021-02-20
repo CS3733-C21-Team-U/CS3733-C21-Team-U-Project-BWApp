@@ -1,6 +1,6 @@
 package edu.wpi.u.requests;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 //TODO: Private or protected fields?
 public class MaintenanceRequest extends Request {
@@ -8,7 +8,7 @@ public class MaintenanceRequest extends Request {
     private int priority;
 
     public MaintenanceRequest(Date dateCreated, Date dateCompleted, String description,
-                              List<Staff> assignees, String machine, int priority) {
+                              ArrayList<Staff> assignees, String machine, int priority) {
         super.dateCreated = dateCreated;
         super.dateCompleted = dateCompleted;
         super.description = description;
