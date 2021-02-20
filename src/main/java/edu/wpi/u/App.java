@@ -2,6 +2,7 @@ package edu.wpi.u;
 
 import edu.wpi.u.models.DatabaseManager;
 import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,8 @@ public class App extends Application {
   // (separate info per open application)
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static GraphService graphService = new GraphService();
+  public static RequestService requestService = new RequestService();
+
   public String DrawerState;
 
   @Override
