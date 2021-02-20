@@ -1,5 +1,7 @@
 package edu.wpi.u.algorithms;
 
+import edu.wpi.u.models.GraphManager;
+
 public class GraphTest {
 
   public static void main(String[] args) {

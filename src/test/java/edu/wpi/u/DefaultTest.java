@@ -3,9 +3,8 @@
 /*-------------------------*/
 
 package edu.wpi.u;
-import edu.wpi.u.algorithms.GraphManager;
+import edu.wpi.u.models.GraphManager;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphService;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import edu.wpi.u.algorithms.Edge;

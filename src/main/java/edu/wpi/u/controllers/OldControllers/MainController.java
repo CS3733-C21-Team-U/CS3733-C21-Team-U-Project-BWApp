@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.OldControllers;
 
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
@@ -26,28 +26,28 @@ public class MainController {
   @FXML
   public void buttonPressMain() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/MainPage.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressNode() throws Exception {
-
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditNodeLily.fxml"));
+  //change the variable
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/EditNodeLily.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressEdge() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditEdgeNick.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/EditEdgeNick.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressAS() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/AStarTyler.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }
