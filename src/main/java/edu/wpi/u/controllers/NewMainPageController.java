@@ -2,6 +2,8 @@ package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import edu.wpi.u.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -38,10 +40,9 @@ public class NewMainPageController {
 
     }
 
-
-
-
-
-
+    @FXML
+    public void handleExitButton() {
+        App.getInstance().stop();
+    }
 
 }
