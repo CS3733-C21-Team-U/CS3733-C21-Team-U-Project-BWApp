@@ -48,6 +48,6 @@ public class RequestItemController {
     //Listener here for the global drawerstare variable
     @FXML
     public void handleEditRequest() throws Exception {
-        App.rightDrawerRoot.set("../views/EditServiceRequests.fxml");
+        App.rightDrawerRoot.set("../views/EditRequests.fxml");
     }
 }
