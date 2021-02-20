@@ -27,6 +27,7 @@ public class NewMainPageController {
         AnchorPane leftMenuPane;
         leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
+        leftMenuDrawer.open();
         rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewServiceRequests.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
@@ -38,15 +39,6 @@ public class NewMainPageController {
                 serviceRequestDrawer.setSidePane(rightServiceRequestPane);
 
 
-                /*
-                serviceRequestDrawer.close();
-                serviceRequestDrawer.onDrawerClosedProperty(new EventHandler<JFXDrawerEvent>() {
-
-                    public void handle(JFXDrawerEvent me) {
-                        System.out.println("Mouse exited");
-                    }
-                });
-*/
             } catch (IOException e) {
                 e.printStackTrace();
             }
