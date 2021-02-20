@@ -19,6 +19,8 @@
                </VBox.margin>
             </Label>
             <fx:include source="RequestItem.fxml" />
+            <fx:include source="RequestItem.fxml" />
+            <fx:include source="RequestItem.fxml" />
          </children>
       </VBox>
    </children>

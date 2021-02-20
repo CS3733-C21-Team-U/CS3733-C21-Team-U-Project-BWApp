@@ -24,6 +24,7 @@ public class ViewServiceRequestsController {
 
     @FXML
     public void handleChangeToEditRequest(){
+        //Switdh to a new right drawer
         App.rightDrawerRoot.set( "../views/EditServiceRequests.fxml");
     }
 
