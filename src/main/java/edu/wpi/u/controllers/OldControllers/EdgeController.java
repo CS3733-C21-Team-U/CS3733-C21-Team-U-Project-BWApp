@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.OldControllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
@@ -146,21 +146,21 @@ public class EdgeController {
   @FXML
   public void buttonPressMain() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/MainPage.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressNode() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditNodeLily.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/EditNodeLily.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 
   @FXML
   public void buttonPressAS() throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AStarTyler.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Oldfxml/AStarTyler.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 

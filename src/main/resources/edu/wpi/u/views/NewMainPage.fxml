@@ -2,71 +2,41 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
-    <SplitPane dividerPositions="0.1" orientation="VERTICAL" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <AnchorPane maxHeight="100.0" minHeight="100.0" prefHeight="100.0" style="-fx-background-color: white;">
-            <JFXHamburger fx:id="leftHamburgerMenu" maxHeight="70.0" maxWidth="70.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#menuButtonPressed" prefHeight="50.0" prefWidth="50.0" scaleX="2.0" scaleY="2.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
-        </AnchorPane>
-        <AnchorPane>
-            <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <AnchorPane minHeight="300.0" minWidth="400.0">
-                    <ScrollPane pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@RegularTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <AnchorPane minHeight="1000.0" minWidth="2000.0" style="-fx-background-color: #cbcbcb;">
-                            <ImageView fitHeight="1500.0" fitWidth="2000.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
-                                <Image url="@Images/FaulknerCampus.png" />
-                            </ImageView>
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
+   <children>
+      <SplitPane dividerPositions="0.10667903525046382" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="-Infinity" minHeight="100.0" minWidth="0.0" prefHeight="100.0">
+               <children>
+                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="128.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" scaleX="2.0" scaleY="2.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="660.0" prefWidth="1364.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="1500.0" minWidth="2000.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="1500.0" fitWidth="2000.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="@Images/FaulknerCampus.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
                         </AnchorPane>
-                    </ScrollPane>
-                </AnchorPane>
-                <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="160.0" prefWidth="160.0">
-                    <ScrollPane hbarPolicy="NEVER" prefHeight="453.0" prefWidth="139.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <AnchorPane maxWidth="-Infinity" minHeight="600.0" minWidth="158.0" prefWidth="158.0">
-                            <Accordion style="-fx-border-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <panes>
-                                    <TitledPane animated="false" maxWidth="-Infinity" minWidth="130.0" prefWidth="130.0" style="-fx-border-width: 0;" text="Suspicious Person">
-                                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="130.0" prefHeight="180.0" prefWidth="130.0">
-                                            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <Label prefWidth="118.0" text="Suspicious person in Main lobby with alpaca" wrapText="true" />
-                                            </VBox>
-                                        </AnchorPane>
-                                    </TitledPane>
-                                    <TitledPane animated="false" layoutX="11.0" layoutY="11.0" maxWidth="-Infinity" minWidth="130.0" prefWidth="130.0" style="-fx-border-width: 0;" text="Suspicious Person">
-                                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="130.0" prefHeight="180.0" prefWidth="130.0">
-                                            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <Label prefWidth="118.0" text="Suspicious person in Main lobby with alpaca" wrapText="true" />
-                                            </VBox>
-                                        </AnchorPane>
-                                    </TitledPane>
-                                    <TitledPane animated="false" layoutX="11.0" layoutY="11.0" maxWidth="-Infinity" minWidth="130.0" prefWidth="130.0" style="-fx-border-width: 0;" text="Suspicious Person">
-                                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="130.0" prefHeight="180.0" prefWidth="130.0">
-                                            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <Label prefWidth="118.0" text="Suspicious person in Main lobby with alpaca" wrapText="true" />
-                                                <CheckBox mnemonicParsing="false" text="CheckBox" />
-                                            </VBox>
-                                        </AnchorPane>
-                                    </TitledPane>
-                                </panes>
-                            </Accordion>
-                        </AnchorPane>
-                    </ScrollPane>
-                </AnchorPane>
-            </SplitPane>
-        </AnchorPane>
-    </SplitPane>
-   <JFXDrawer fx:id="leftDrawer" defaultDrawerSize="300.0" layoutX="10.0" layoutY="10.0" miniDrawerSize="0.0" prefHeight="980.0" prefWidth="300.0" style="-fx-background-color: FFFFFF;">
-      <children>
-         <fx:include source="LeftDrawerMenu.fxml" />
-      </children>
-   </JFXDrawer>
+                    </content>
+                  </ScrollPane>
+                  <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="250.0" direction="RIGHT" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" maxWidth="250.0" minWidth="250.0" miniDrawerSize="0.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
 </AnchorPane>
