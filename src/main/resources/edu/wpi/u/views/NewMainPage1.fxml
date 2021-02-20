@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPage1Controller">
+   <children>
+      <SplitPane dividerPositions="0.10667903525046382" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="-Infinity" minHeight="100.0" minWidth="0.0" prefHeight="100.0">
+               <children>
+                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="128.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" scaleX="2.0" scaleY="2.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <fx:include source="LeftDrawerMenu.fxml" />
+                  <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" layoutX="-18.0" layoutY="-3.0" maxWidth="250.0" minWidth="250.0" miniDrawerSize="0.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

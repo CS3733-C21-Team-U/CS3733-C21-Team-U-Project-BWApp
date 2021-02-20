@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="-Infinity" minHeight="900.0" minWidth="300.0" prefHeight="900.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="250.0" prefHeight="668.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.LeftDrawerMenuController">
    <children>
       <VBox layoutX="6.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox minHeight="80.0" minWidth="300.0" prefHeight="80.0" prefWidth="300.0">
+            <HBox minHeight="80.0" minWidth="250.0" prefHeight="80.0" prefWidth="250.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -62,17 +62,17 @@
                   <Insets top="10.0" />
                </padding>
             </Separator>
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+            <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Map">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Map">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-225.0" />
+                        <Insets left="-170.0" />
                      </padding>
                   </JFXToggleNode>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -85,17 +85,17 @@
                   <Insets top="3.0" />
                </padding>
             </HBox>
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+            <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Analytics">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Analytics">
                      <HBox.margin>
-                        <Insets left="1.0" right="-40.0" />
+                        <Insets right="-40.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-175.0" />
+                        <Insets left="-125.0" />
                      </padding>
                   </JFXToggleNode>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -105,23 +105,23 @@
                   </ImageView>
                </children>
                <VBox.margin>
-                  <Insets left="-1.0" />
+                  <Insets />
                </VBox.margin>
                <padding>
                   <Insets top="3.0" />
                </padding>
             </HBox>
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+            <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Service Requests">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Service Requests">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-87.0" />
+                        <Insets left="-40.0" />
                      </padding>
                   </JFXToggleNode>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -134,17 +134,17 @@
                   <Insets top="3.0" />
                </padding>
             </HBox>
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+            <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Admin">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Admin">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-207.0" />
+                        <Insets left="-150.0" />
                      </padding>
                   </JFXToggleNode>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -157,17 +157,17 @@
                   <Insets top="3.0" />
                </padding>
             </HBox>
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
+            <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Settings">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Settings">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Arial" size="24.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-190.0" />
+                        <Insets left="-135.0" />
                      </padding>
                   </JFXToggleNode>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">

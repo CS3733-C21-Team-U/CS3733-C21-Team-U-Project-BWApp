@@ -3,16 +3,16 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
-import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class NewMainPageController {
 
-public class NewMainController {
+    public void initialize() throws Exception{
+        AnchorPane anchor = FXMLLoader.load(getClass().getResource("LeftDrawerMenu.fxml"));
+        leftDrawer.setSidePane(anchor);
+    }
     @FXML
     JFXHamburger leftHamburgerMenu;
 
@@ -21,10 +21,8 @@ public class NewMainController {
 
     HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(leftHamburgerMenu);
 
-    public void initialize(URL url, ResourceBundle rb) throws Exception{
-        AnchorPane anchor = FXMLLoader.load(getClass().getResource("LeftDrawerMenu.fxml"));
-        leftDrawer.setSidePane(anchor);
-    }
+
+
 
 
 
