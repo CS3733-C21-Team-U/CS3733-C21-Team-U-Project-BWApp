@@ -1,6 +1,7 @@
-package edu.wpi.u.models;
+package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.GraphManager;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -26,15 +27,8 @@ public class DatabaseManager {
     init();
     insertNodeData();
     insertEdgeData();
-    //printNodes();
-    //printEdges();
-    /*
-    Only run these two below on exit / finish
-     */
-    //saveNodesCSV();
-    //saveEdgesCSV();
   }
-
+  //moved
   public static void driver() {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -43,16 +37,18 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-
+  //moved
   public static void connect() {
     try {
       conn = DriverManager.getConnection(url);
+      //conn.setAutoCommit(false);
+      //conn.commit();
     } catch (Exception e) {
       System.out.println("Connection failed");
       e.printStackTrace();
     }
   }
-
+  //moved
   public static void init() {
     try {
       if (isTableEmpty()) {
@@ -71,7 +67,7 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-
+  //moved
   public static void dropValues() {
     try {
       String str = "delete from Nodes";
@@ -83,7 +79,7 @@ public class DatabaseManager {
       throwables.printStackTrace();
     }
   }
-
+  //moved
   public static void insertNodeData(){
     String str = "";
     Path p = Paths.get("src/","main","resources","edu","wpi","u","OutsideMapNodes.csv");
@@ -112,6 +108,7 @@ public class DatabaseManager {
           ps.setString(7, columns[6]);
           ps.setString(8, columns[7]);
           ps.setString(9, columns[8]);
+          //ps.executeUpdate
           ps.execute();
         }
       } catch (Exception e) {
@@ -119,7 +116,7 @@ public class DatabaseManager {
         e.printStackTrace();
       }
   }
-
+  //moved
   public static void insertEdgeData() {
     String str = "";
     Path p = Paths.get("src/","main","resources","edu","wpi","u","OutsideMapEdges.csv");
@@ -151,18 +148,19 @@ public class DatabaseManager {
         e.printStackTrace();
       }
   }
-
+  //moved
   public static boolean isTableEmpty() {
     try {
       DatabaseMetaData dmd = conn.getMetaData();
       ResultSet rs = dmd.getTables(null, "ADMIN", "NODES", null);
       return !rs.next();
+      // nowhere to put rs.close
     } catch (Exception e) {
       e.printStackTrace();
     }
     return false;
   }
-
+  //not used
   public static void printNodes() {
     try {
       String str = "select * from Nodes";
@@ -178,7 +176,7 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-
+  //not used
   public static void printEdges() {
     try {
       String str = "select * from Edges";
@@ -194,6 +192,7 @@ public class DatabaseManager {
     }
   }
 
+  //moved
   public static void saveNodesCSV() {
     try {
       String str = "SELECT * FROM Nodes";
@@ -232,6 +231,7 @@ public class DatabaseManager {
         fileWriter.newLine();
         fileWriter.write(line);
       }
+      rset.close();
       statement.close();
       fileWriter.close();
     } catch (SQLException e) {
@@ -242,7 +242,7 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-
+  //moved
   public static void saveEdgesCSV() {
     try {
       String str = "SELECT * FROM Edges";
@@ -272,6 +272,8 @@ public class DatabaseManager {
     }
   }
 
+
+  //moved
   public static int addNode(
           String node_id,
           int x,
@@ -302,7 +304,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updCoords(String node_id, int new_x, int new_y) {
     try {
       String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
@@ -319,7 +321,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updFloor(String node_id, int new_floor_number) {
     try {
       String str = "update Nodes set floor=? where nodeID=?";
@@ -334,7 +336,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updBuilding(String node_id, String new_building) {
     try {
       String str = "update Nodes set building=? where nodeID=?";
@@ -349,7 +351,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updLongname(String node_id, String new_longname) {
     try {
       String str = "update Nodes set longname=? where nodeID=?";
@@ -364,7 +366,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updShortname(String node_id, String new_shortname) {
     try {
       String str = "update Nodes set shortname=? where nodeID=?";
@@ -379,7 +381,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int delNode(String node_id) {
     try {
       String str = "delete from Nodes where nodeID=?";
@@ -393,7 +395,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int delNodeCoord(int x, int y) {
     try {
       String str = "delete from Nodes where xcoord=? and ycoord=?";
@@ -409,7 +411,7 @@ public class DatabaseManager {
     System.out.println("Successful delete");
     return 1;
   }
-
+  //moved
   public static int addEdge(String edge_id, String start_node_id, String end_node_id) {
     try {
       String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
@@ -425,7 +427,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updEdgeStart(String edge_id, String new_start_node_id) {
     try {
       String str = "update Edges set startID=? where edgeID=?";
@@ -440,7 +442,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int updEdgeEnd(String edge_id, String new_end_node_id) {
     try {
       String str = "update Edges set endID=? where edgeID=?";
@@ -455,7 +457,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int delEdge(String edge_id) {
     try {
       String str = "delete from Edges where edgeID=?";
@@ -469,7 +471,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static int delEdgeByNodes(String start_node_id, String end_node_id){
     try {
       String str = "delete from Edges where startID=?, endID=?";
@@ -485,7 +487,7 @@ public class DatabaseManager {
     }
     return 1;
   }
-
+  //moved
   public static void loadGraph(GraphManager gm){
     try{
       Statement ps = conn.createStatement();
@@ -511,13 +513,14 @@ public class DatabaseManager {
         String end = rs2.getString("endID");
         gm.makeEdge(id,start,end);
       }
+      rs2.close();
     }
     catch (Exception e){
       e.printStackTrace();
       System.out.println("Failed to load graph");
     }
   }
-
+  //moved
   public static boolean isNode(String node_id) {
     try {
       String str = "select nodeID from Nodes where nodeID=?";
@@ -530,7 +533,7 @@ public class DatabaseManager {
     }
     return false;
   }
-
+  //moved
   public static boolean isEdge(String edge_id) {
     try {
       String str = "select edgeID from Edges where edgeID=?";
@@ -543,7 +546,7 @@ public class DatabaseManager {
     }
     return false;
   }
-
+  //moved
   public static void deleteTables() {
     try {
       String str = "drop table Nodes";
@@ -556,24 +559,49 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-
+  //moved
   public static Node getNode(String node_id){
     try {
       String str = "select * from Nodes where nodeID=?";
       PreparedStatement ps = conn.prepareStatement(str);
       ResultSet rs = ps.executeQuery();
-      return new Node(rs.getString("nodeId"), rs.getInt("xcoord"), rs.getInt("ycoord"), rs.getInt("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
+      Node n = new Node(rs.getString("nodeId"), rs.getInt("xcoord"), rs.getInt("ycoord"), rs.getInt("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
+      rs.close();
+      return n;
     }
     catch (Exception e){
       e.printStackTrace();
     }
     return null;
   }
-
+  //moved
   public static void stop() {
-//    saveNodesCSV();
-//    saveEdgesCSV();
-//    dropValues();
-//    deleteTables();
+    saveNodesCSV();
+    saveEdgesCSV();
+    dropValues();
+    deleteTables();
+    try{
+      conn.close();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    /*
+     try {
+         DriverManager.getConnection
+            ("jdbc:derby:;shutdown=true");
+      } catch (SQLException ex) {
+         if (((ex.getErrorCode() == 50000) &&
+            ("XJ015".equals(ex.getSQLState())))) {
+               System.out.println("Derby shut down
+                  normally");
+         } else {
+            System.err.println("Derby did not shut down
+               normally");
+            System.err.println(ex.getMessage());
+         }
+      }
+   }
+     */
   }
 }
