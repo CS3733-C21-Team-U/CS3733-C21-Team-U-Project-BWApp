@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.models.Request;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
@@ -35,11 +36,15 @@ public class ViewRequestController {
     }
 
     public void initialize() throws IOException {
-        //This is how you add title panes here
-        AnchorPane request;
-        request = FXMLLoader.load(getClass().getResource("../views/RequestItem.fxml"));
 
-        requestList.getChildren().add(request);
+
+        //This is how you add title panes here
+        FXMLLoader requestloader = new FXMLLoader(getClass().getResource("../views/RequestItem.fxml"));
+        AnchorPane request = requestloader.load();
+        RequestItemController controller = requestloader.getController();
+        controller.descriptionLabel.setText("Text");
+
+        //requestList.getChildren().add(request);
 
     }
 
