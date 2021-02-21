@@ -1,29 +1,37 @@
+@font-face {
+    font-family: 'Rubik Regular', sans-serif;
+    src: url('Rubik-Regular.ttf');
+}
+
+.serialConn{
+    -fx-font-family: 'Rubik Regular', sans-serif;
+}
+
+.root{
+    -fx-font-family: 'Rubik Regular', sans-serif;
+}
+
 .background {
     -fx-background-color: #cbcbcb;
+    -fx-font-family: 'Rubik Regular', sans-serif;
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Arial";
     -fx-text-fill: black;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Arial";
     -fx-text-fill: Black;
 }
 
 .label-header {
     -fx-font-size: 16pt;
-    -fx-font-family: "Arial";
     -fx-text-fill: Black;
 }
 
-
-
 .label-Other {
-    -fx-font-family: "Arial";
     -fx-text-fill: Black;
 }
 
@@ -107,7 +115,7 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Arial";
+    -fx-font-family: "Rubik";
 }
 
 
@@ -123,7 +131,7 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-background-color: #3d69ff;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: 'Rubik', sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #ffffff;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;

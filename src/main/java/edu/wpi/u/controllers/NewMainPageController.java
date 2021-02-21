@@ -49,7 +49,7 @@ public class NewMainPageController {
 
         AnchorPane scrollPaneRoot = new AnchorPane(mapView);
         ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
-        map.setPrefWidth(1920);
+        map.setPrefWidth(1420);
         map.setPrefHeight(1000);
         map.setPannable(true);
         mainAnchorPane.getChildren().add(map);

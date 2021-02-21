@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,6 +57,9 @@ public class App extends Application {
   //
   //    }
 
+//  Font.loadFont(getClass().getResourceAsStream("/resources/fonts/marck.ttf"), 14);
+
+
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
@@ -64,6 +68,8 @@ public class App extends Application {
     App.primaryStage.setScene(scene);
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
+
+    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
