@@ -1,12 +1,25 @@
-.background {
-    -fx-background-color: #cbcbcb;
+@font-face {
+    font-family: 'Rubik Regular', sans-serif;
+    src: url('Rubik-Regular.ttf');
 }
 
-.label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Arial";
-    -fx-text-fill: black;
+.serialConn{
+    -fx-font-family: 'Rubik Regular', sans-serif;
 }
+
+.root{
+    -fx-font-family: 'Rubik Regular', sans-serif;
+}
+
+.background {
+    -fx-background-color: #cbcbcb;
+    -fx-font-family: 'Rubik Regular', sans-serif;
+}
+
+/*.label {*/
+/*    -fx-font-size: 11pt;*/
+/*    -fx-text-fill: black;*/
+/*}*/
 
 .label-sub-header {
     -fx-font-size: 18pt;
@@ -15,7 +28,7 @@
 }
 
 .label-header {
-    -fx-font-size: 42pt;
+    -fx-font-size: 36pt;
     -fx-font-family: "Arial";
     -fx-text-fill: Black;
 }
@@ -66,13 +79,13 @@
 
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: white;
-    -fx-border-width: 3;
+    -fx-border-width: 0;
     -fx-background-color: white;
 }
 
 .split-pane:vertical > .split-pane-divider {
     -fx-border-color: white;
-    -fx-border-width: 3;
+    -fx-border-width: 0;
     -fx-background-color: white;
 }
 
@@ -94,15 +107,21 @@
     -fx-background-color: derive(#1d1d1d,50%);
 }
 
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
 
 .menu .left-container {
     -fx-background-color: black;
 }
 
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Arial";
-}
+/*.text-field {*/
+/*    -fx-font-size: 12pt;*/
+/*    -fx-font-family: "Rubik";*/
+/*}*/
 
 
 /*
@@ -139,6 +158,13 @@
     -fx-text-fill: #1d1d1d;
 }
 
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
@@ -155,3 +181,27 @@
     -fx-background-color: derive(-fx-focus-color,30%);
 }
 
+.map-btn{
+    -fx-background-color: #FFFFFF;
+}
+
+
+.nav-item:selected{
+    -fx-background-color: #E9EEFF;
+
+}
+
+
+.nav-item > {
+
+}
+
+.jfx-toggle-node{
+    -jfx-toggle-color: #E9EEFF;
+
+    -jfx-disable-animation: True;
+}
+
+.jfx-rippler{
+    -jfx-rippler-fill: #b7bfd2;
+}

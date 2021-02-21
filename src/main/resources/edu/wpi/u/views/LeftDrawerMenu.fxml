@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.LeftDrawerMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="6.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -65,7 +65,7 @@
             </Separator>
             <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode fx:id="navigationButton" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleNavigationButton" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Navigation">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Map">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
@@ -73,7 +73,7 @@
                         <Font name="Arial" size="22.0" />
                      </font>
                      <padding>
-                        <Insets left="-112.0" />
+                        <Insets left="-170.0" />
                      </padding>
                      <toggleGroup>
                         <ToggleGroup fx:id="navBar" />
@@ -117,7 +117,7 @@
             </HBox>
             <HBox minHeight="40.0" minWidth="250.0" prefHeight="40.0" prefWidth="250.0">
                <children>
-                  <JFXToggleNode fx:id="serviceRequestButton" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleServiceRequestButton" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Service Requests" toggleGroup="$navBar">
+                  <JFXToggleNode maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: rgb(201, 229, 255); -fx-background-radius: 0;" text="Service Requests" toggleGroup="$navBar">
                      <HBox.margin>
                         <Insets right="-40.0" />
                      </HBox.margin>
