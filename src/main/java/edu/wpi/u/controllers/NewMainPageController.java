@@ -67,4 +67,12 @@ public class NewMainPageController {
         App.getInstance().stop();
     }
 
+    @FXML
+    public void handleZoomOutButton() {
+
+    }
+
+    @FXML
+    public void handleZoomInButton() {
+    }
 }

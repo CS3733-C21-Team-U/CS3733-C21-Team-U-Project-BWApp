@@ -66,7 +66,7 @@
 
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: white;
-    -fx-border-width: 3;
+    -fx-border-width: 0;
     -fx-background-color: white;
 }
 
@@ -161,3 +161,6 @@
     -fx-background-color: derive(-fx-focus-color,30%);
 }
 
+.map-btn{
+    -fx-background-color: #FFFFFF;
+}

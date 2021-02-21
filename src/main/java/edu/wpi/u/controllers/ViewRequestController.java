@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
@@ -29,5 +30,8 @@ public class ViewRequestController {
 
     }
 
-
+    @FXML
+    public void handleNewRequestButton() {
+        App.rightDrawerRoot.set( "../views/NewRequest.fxml");
+    }
 }

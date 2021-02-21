@@ -8,33 +8,50 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
+<?import edu.wpi.u.uiComponents.ZoomableScrollPane?>
+<?import com.jfoenix.controls.JFXScrollPane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
    <children>
       <SplitPane dividerPositions="0.09554730983302412" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0">
                <children>
-                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="17.0" layoutY="25.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="25.0" />
-                  <Button layoutX="1543.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" text="EXIT (Or Esc Key)">
+                  <Button alignment="CENTER" contentDisplay="TOP" layoutX="1526.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" text="EXIT (Or Esc Key)">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Button>
+                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="19.0" layoutY="14.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="1000.0" prefWidth="1920.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <ImageView fitHeight="3000.0" fitWidth="3000.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="1649.0" fitWidth="2205.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Images/FaulknerCampus.png" />
                            </image>
                         </ImageView>
                      </content>
                   </ScrollPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button layoutX="1048.0" layoutY="872.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
+                           <graphic>
+                              <SVGPath content="M 0,0 H 30 V 5 H 0 Z" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="1048.0" layoutY="795.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
+                           <graphic>
+                              <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z&#10;" fillRule="EVEN_ODD" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
                   <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1000.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
