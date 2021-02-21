@@ -28,7 +28,7 @@
                <children>
                   <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="1000.0" prefWidth="1920.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <ImageView fitHeight="3000.0" fitWidth="3000.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="3000.0" fitWidth="2239.41" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Images/FaulknerCampus.png" />
                            </image>

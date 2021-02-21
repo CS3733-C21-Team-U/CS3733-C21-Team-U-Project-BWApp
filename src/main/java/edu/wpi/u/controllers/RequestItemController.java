@@ -42,12 +42,11 @@ public class RequestItemController {
             deleteRequestButton.setVisible(false);
             editRequestButton.setVisible(false);
         }
-
     }
 
     //Listener here for the global drawerstare variable
     @FXML
     public void handleEditRequest() throws Exception {
-        App.rightDrawerRoot.set("../views/EditRequests.fxml");
+        App.rightDrawerRoot.set("../views/EditRequest.fxml");
     }
 }

@@ -28,23 +28,18 @@ public class NewMainPageController {
         leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewRequests.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewRequest.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
-
         App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
         {
             try {
                 rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
                 serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-
-
     }
 
 
@@ -56,10 +51,7 @@ public class NewMainPageController {
         } else{
             leftMenuDrawer.open();
         }
-
     }
-
-
 
 
     @FXML

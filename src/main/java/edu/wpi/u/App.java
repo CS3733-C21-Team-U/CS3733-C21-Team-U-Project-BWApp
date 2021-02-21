@@ -20,7 +20,7 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequests.fxml");//This is where we store what scene the right drawer is in.
+  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
 
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
@@ -47,9 +47,7 @@ public class App extends Application {
   }
 
 
-  public static Stage getPrimaryStage() {
-    return primaryStage;
-  }
+
 
   //    @Override
   //    public void init() throws Exception {
@@ -71,6 +69,10 @@ public class App extends Application {
         App.getInstance().stop();
       }
     });
+  }
+
+  public static Stage getPrimaryStage() {
+    return primaryStage;
   }
 
   public void stop() {
