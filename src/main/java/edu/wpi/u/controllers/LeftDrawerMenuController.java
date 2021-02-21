@@ -34,7 +34,7 @@ public class LeftDrawerMenuController {
     @FXML
     public void initialize() throws IOException{
 //        toPathPlanningBtn.onActionProperty()
-        toggle4.setDisable(true);
+//        toggle4.setDisable(true);
         setTextColor(-1);
 //        setRectVisibility(-1);
 //        toggle4.setDisableAnimation(true);
@@ -86,5 +86,11 @@ public class LeftDrawerMenuController {
         App.rightDrawerRoot.set( "../views/AdminTools.fxml");
         setRectVisibility(3);
         setTextColor(3);
+    }
+
+    public void handleChangeToSettings(ActionEvent actionEvent) {
+        App.rightDrawerRoot.set( "../views/Settings.fxml");
+        setRectVisibility(4);
+        setTextColor(4);
     }
 }
