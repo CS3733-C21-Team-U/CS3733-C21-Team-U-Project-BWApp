@@ -51,7 +51,6 @@ public class DatabaseManager {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
     //String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', 'NODES', 'src/main/resources/edu/wpi/u/temp.csv', ', ', null, null,1)";
     try {
       PreparedStatement p = conn.prepareStatement(str1);
@@ -158,9 +157,37 @@ public class DatabaseManager {
     }
   }
 
+  public static void saveCSV(String tableName, String filePath, String header){
+    File f = new File(filePath);
+    if(f.delete()){
+      System.out.println("file deleted");
+    }
+    String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('ADMIN','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
+    try {
+      PreparedStatement ps = conn.prepareStatement(str);
+      ps.execute();
+     // ps.close();
+    } catch (SQLException throwables) {
+      System.out.println("wants new file");
+      //throwables.printStackTrace();
+    }
+
+    try {
+      String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+      FileWriter fw = new FileWriter(filePath);
+      fw.write(header);
+      fw.write("\n");
+      fw.write(content);
+      fw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   //moved
   public static void saveNodesCSV() {
-    try {
+    saveCSV("Nodes", "src/main/resources/edu/wpi/u/OutsideMapNodes.csv", "column names");
+/*    try {
       String str = "SELECT * FROM Nodes";
       Statement statement = conn.createStatement();
       ResultSet result = statement.executeQuery(str);
@@ -206,11 +233,12 @@ public class DatabaseManager {
     } catch (IOException e) {
       System.out.println("File IO error:");
       e.printStackTrace();
-    }
+    }*/
   }
   //moved
   public static void saveEdgesCSV() {
-    try {
+    saveCSV("Edges", "src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "column names");
+   /* try {
       String str = "SELECT * FROM Edges";
       Statement statement = conn.createStatement();
       ResultSet result = statement.executeQuery(str);
@@ -235,7 +263,7 @@ public class DatabaseManager {
     } catch (IOException e) {
       System.out.println("File IO error:");
       e.printStackTrace();
-    }
+    }*/
   }
 
 
