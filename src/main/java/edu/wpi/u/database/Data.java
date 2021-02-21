@@ -1,5 +1,10 @@
 package edu.wpi.u.database;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 
 public abstract class Data {
@@ -22,7 +27,120 @@ public abstract class Data {
         }
     }
 
-    public int addNode(
+    public void readCSV(String filePath, String tableName){
+
+        String tempPath = "src/main/resources/edu/wpi/u/temp.csv";
+        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
+
+        try {
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            String[] columns = content.split("\n", 2);
+            String[] attributes = content.split(",");
+            columns[1] += "\n";
+            File temp = new File(tempPath);
+            if(temp.createNewFile()){
+                System.out.println("File created");
+            }
+            System.out.println(temp.exists());
+            FileWriter myWriter = new FileWriter(tempPath);
+            myWriter.write(columns[1]);
+            myWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', 'NODES', 'src/main/resources/edu/wpi/u/temp.csv', ', ', null, null,1)";
+        try {
+            PreparedStatement p = conn.prepareStatement(str1);
+            p.execute();
+        }
+        catch (Exception e){
+            System.out.println("\nTRACE:");
+            e.printStackTrace();
+            System.out.println("rewrite being weird");
+        }
+    }
+
+    public void saveCSV(String tableName, String filePath, String header){
+        File f = new File(filePath);
+        if(f.delete()){
+            System.out.println("file deleted");
+        }
+        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('ADMIN','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.execute();
+            // ps.close();
+        } catch (SQLException throwables) {
+            System.out.println("wants new file");
+            //throwables.printStackTrace();
+        }
+
+        try {
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(header);
+            fw.write("\n");
+            fw.write(content);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean updateField(String tableName, String idField, String id, String field, String val) {
+        try {
+            String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, val);
+            ps.setString(2, id);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update " + tableName + "'s " + field );
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updateField(String tableName, String idField, String id, String field, int val) {
+        try {
+            String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setInt(1, val);
+            ps.setString(2, id);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update " + tableName + "'s " + field );
+            return false;
+        }
+        return true;
+    }
+    /*public int add(String tableName, Object element) {
+        element.
+        try {
+            String str =
+                    "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, node_id);
+            ps.setInt(2, x);
+            ps.setInt(3, y);
+            ps.setInt(4, floor);
+            ps.setString(5, building);
+            ps.setString(6, node_type);
+            ps.setString(7, longname);
+            ps.setString(8, shortname);
+            ps.setString(9, "u");
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to add node");
+            return 0;
+        }
+        return 1;
+    }
+    public static int addNode(
             String node_id,
             int x,
             int y,
@@ -51,5 +169,5 @@ public abstract class Data {
             return 0;
         }
         return 1;
-    }
+    }*/
 }

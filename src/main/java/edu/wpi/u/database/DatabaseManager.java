@@ -187,83 +187,10 @@ public class DatabaseManager {
   //moved
   public static void saveNodesCSV() {
     saveCSV("Nodes", "src/main/resources/edu/wpi/u/OutsideMapNodes.csv", "column names");
-/*    try {
-      String str = "SELECT * FROM Nodes";
-      Statement statement = conn.createStatement();
-      ResultSet result = statement.executeQuery(str);
-      BufferedWriter fileWriter =
-              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapNodes.csv"));
-
-      fileWriter.write(
-              "nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned");
-
-      while (result.next()) {
-        String nodeID = result.getString("nodeID");
-        int xcoord = result.getInt("xcoord");
-        int ycoord = result.getInt("ycoord");
-        int floor = result.getInt("floor");
-        String building = result.getString("building");
-        String nodeType = result.getString("nodeType");
-        String longName = result.getString("longName");
-        String shortName = result.getString("shortName");
-        String teamAssigned = result.getString("teamAssigned");
-
-        String line =
-                String.format(
-                        "%s,%d,%d,%d,%s,%s,%s,%s,%s",
-                        nodeID,
-                        xcoord,
-                        ycoord,
-                        floor,
-                        building,
-                        nodeType,
-                        longName,
-                        shortName,
-                        teamAssigned);
-
-        fileWriter.newLine();
-        fileWriter.write(line);
-      }
-      rset.close();
-      statement.close();
-      fileWriter.close();
-    } catch (SQLException e) {
-      System.out.println("Database error:");
-      e.printStackTrace();
-    } catch (IOException e) {
-      System.out.println("File IO error:");
-      e.printStackTrace();
-    }*/
   }
   //moved
   public static void saveEdgesCSV() {
     saveCSV("Edges", "src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "column names");
-   /* try {
-      String str = "SELECT * FROM Edges";
-      Statement statement = conn.createStatement();
-      ResultSet result = statement.executeQuery(str);
-      BufferedWriter fileWriter =
-              new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/OutsideMapEdges.csv"));
-
-      fileWriter.write("edgeID, startID, endID");
-
-      while (result.next()) {
-        String edgeID = result.getString("edgeID");
-        String startID = result.getString("startID");
-        String endID = result.getString("endID");
-        String line = String.format("%s,%s,%s", edgeID, startID, endID);
-        fileWriter.newLine();
-        fileWriter.write(line);
-      }
-      statement.close();
-      fileWriter.close();
-    } catch (SQLException e) {
-      System.out.println("Database error:");
-      e.printStackTrace();
-    } catch (IOException e) {
-      System.out.println("File IO error:");
-      e.printStackTrace();
-    }*/
   }
 
 
