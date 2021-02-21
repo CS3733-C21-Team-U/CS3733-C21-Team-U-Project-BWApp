@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.Scanner;
 
 public class DatabaseManager {
 
@@ -18,19 +17,53 @@ public class DatabaseManager {
   private static String url = "jdbc:derby:BWdb;user=admin;password=admin;create=true";
 
   public static void main(String[] args) throws SQLException, IOException {
-   DatabaseManager db = new DatabaseManager();
+    //DatabaseManager db = new DatabaseManager();
   }
 
   public DatabaseManager() {
     driver();
     connect();
-    //deleteTables();
+    deleteTables();
     init();
-    insertNodeData();
-    insertEdgeData();
+    readCSV("src/main/resources/edu/wpi/u/OutsideMapNodes.csv", "Nodes");
+    readCSV("src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "Edges");
+  }
+
+  public static void readCSV(String filePath, String tableName){
+
+    String tempPath = "src/main/resources/edu/wpi/u/temp.csv";
+    String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
+
+    try {
+      String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+      String[] columns = content.split("\n", 2);
+      String[] attributes = content.split(",");
+      columns[1] += "\n";
+      File temp = new File(tempPath);
+      if(temp.createNewFile()){
+        System.out.println("File created");
+      }
+      System.out.println(temp.exists());
+      FileWriter myWriter = new FileWriter(tempPath);
+      myWriter.write(columns[1]);
+      myWriter.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    //String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', 'NODES', 'src/main/resources/edu/wpi/u/temp.csv', ', ', null, null,1)";
+    try {
+      PreparedStatement p = conn.prepareStatement(str1);
+      p.execute();
+    }
+    catch (Exception e){
+      System.out.println("\nTRACE:");
+      e.printStackTrace();
+      System.out.println("rewrite being weird");
+    }
   }
   //moved
-  //keep the same
   public static void driver() {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -39,7 +72,7 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-  //pass in URL
+  //moved
   public static void connect() {
     try {
       conn = DriverManager.getConnection(url);
@@ -50,7 +83,7 @@ public class DatabaseManager {
       e.printStackTrace();
     }
   }
-  //rename to create tables
+  //moved
   public static void init() {
     try {
       if (isTableEmpty()) {
@@ -70,7 +103,6 @@ public class DatabaseManager {
     }
   }
   //moved
-  //rename to clear tables
   public static void dropValues() {
     try {
       String str = "delete from Nodes";
@@ -81,141 +113,6 @@ public class DatabaseManager {
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
-  }
-
-  public static void readCSV(String filePath, String tableName){
-
-    try {
-      String content = new String ( Files.readAllBytes( Paths.get("src/main/resources/edu/wpi/u/OutsideMapNodes.csv") ) );
-      String[] columns = content.split("\n", 2);
-
-      //use to create tables
-      String[] attributes = content.split(",");
-      //System.out.println(columns[0]);
-      String tempContent = "";
-      columns[1] += "\n";
-      File temp = new File("src/main/resources/edu/wpi/u/temp.csv");
-      if(temp.createNewFile()){
-        System.out.println("File created");
-      }
-      System.out.println(temp.exists());
-      FileWriter myWriter = new FileWriter("src/main/resources/edu/wpi/u/temp.csv");
-      myWriter.write(columns[1]);
-      myWriter.close();
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', 'NODES', 'src/main/resources/edu/wpi/u/temp.csv', ', ', null, null,1)";
-    try {
-      PreparedStatement p = conn.prepareStatement(str1);
-      p.execute();
-    }
-    catch (Exception e){
-      System.out.println("\nTRACE:");
-      e.printStackTrace();
-      System.out.println("rewrite being weird");
-    }
-
-
-
-//    try {
-//      BufferedWriter fileWriter = new BufferedWriter(new FileWriter("src/main/resources/edu/wpi/u/temp.csv"));
-//
-//
-//      BufferedReader br = Files.newBufferedReader(p);
-//      String DELIMITER = ",";
-//      String attributesString = br.readLine(); // this will read the first line
-//
-//      String line1 = null;
-//      while ((line1 = br.readLine()) != null) {
-//        //write to temp file for reading
-//        fileWriter.write(line1);
-//      }
-//      PreparedStatement ps = conn.prepareStatement(str);
-//      ps.execute();
-//    } catch (Exception e) {
-//      System.out.println("Failed to insert into table");
-//      e.printStackTrace();
-//    }
-
-  }
-  //refer to a path to read CSV
-  //rename to readCSV
-  public static void insertNodeData(){
-    //rewritten
-   readCSV("", "");
-
-    //
-   /* String str = "";
-    Path p = Paths.get("src/","main","resources","edu","wpi","u","OutsideMapNodes.csv");
-
-
-    try {
-        BufferedReader br = Files.newBufferedReader(p);
-
-        String DELIMITER = ",";
-
-        // read the file line by line
-        // String line;
-        br.readLine(); // this will read the first line
-        String line1 = null;
-        while ((line1 = br.readLine()) != null) {
-          str =
-                  "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
-          PreparedStatement ps = conn.prepareStatement(str);
-
-          // convert line into columns
-          String[] columns = line1.split(DELIMITER);
-          ps.setString(1, columns[0]);
-          ps.setInt(2, Integer.parseInt(columns[1]));
-          ps.setInt(3, Integer.parseInt(columns[2]));
-          ps.setInt(4, Integer.parseInt(columns[3]));
-          ps.setString(5, columns[4]);
-          ps.setString(6, columns[5]);
-          ps.setString(7, columns[6]);
-          ps.setString(8, columns[7]);
-          ps.setString(9, columns[8]);
-          //ps.executeUpdate
-          ps.execute();
-        }
-      } catch (Exception e) {
-        System.out.println("Failed to insert into table");
-        e.printStackTrace();
-      }*/
-  }
-  //moved
-  public static void insertEdgeData() {
-    String str = "";
-    Path p = Paths.get("src/","main","resources","edu","wpi","u","OutsideMapEdges.csv");
-      try {
-        BufferedReader br = Files.newBufferedReader(p);
-
-        String DELIMITER = ",";
-
-        // read the file line by line
-        // String line;
-        br.readLine(); // this will read the first line
-        String line1 = null;
-        while ((line1 = br.readLine()) != null) {
-          str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
-          PreparedStatement ps = conn.prepareStatement(str);
-
-          // convert line into columns
-          String[] columns = line1.split(DELIMITER);
-          ps.setString(1, columns[0]);
-          ps.setString(2, columns[1]);
-          ps.setString(3, columns[2]);
-          ps.execute();
-        }
-
-        System.out.println();
-
-      } catch (Exception e) {
-        System.out.println("Failed to insert into table");
-        e.printStackTrace();
-      }
   }
   //moved
   public static boolean isTableEmpty() {
@@ -381,7 +278,7 @@ public class DatabaseManager {
       ps.setInt(1, new_x);
       ps.setInt(2, new_y);
       ps.setString(3,node_id);
-  //    ps.setString(2, node_id);
+      //    ps.setString(2, node_id);
       ps.execute();
     } catch (SQLException e) {
       e.printStackTrace();
