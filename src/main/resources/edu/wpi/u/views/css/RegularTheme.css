@@ -16,10 +16,10 @@
     -fx-font-family: 'Rubik Regular', sans-serif;
 }
 
-.label {
-    -fx-font-size: 11pt;
-    -fx-text-fill: black;
-}
+/*.label {*/
+/*    -fx-font-size: 11pt;*/
+/*    -fx-text-fill: black;*/
+/*}*/
 
 .label-bright {
     -fx-font-size: 11pt;
@@ -80,7 +80,7 @@
 
 .split-pane:vertical > .split-pane-divider {
     -fx-border-color: white;
-    -fx-border-width: 3;
+    -fx-border-width: 0;
     -fx-background-color: white;
 }
 
@@ -113,10 +113,10 @@
     -fx-background-color: black;
 }
 
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Rubik";
-}
+/*.text-field {*/
+/*    -fx-font-size: 12pt;*/
+/*    -fx-font-family: "Rubik";*/
+/*}*/
 
 
 /*
@@ -171,4 +171,25 @@
 
 .map-btn{
     -fx-background-color: #FFFFFF;
+}
+
+
+.nav-item:selected{
+    -fx-background-color: #E9EEFF;
+
+}
+
+
+.nav-item > {
+
+}
+
+.jfx-toggle-node{
+    -jfx-toggle-color: #E9EEFF;
+
+    -jfx-disable-animation: True;
+}
+
+.jfx-rippler{
+    -jfx-rippler-fill: #b7bfd2;
 }
