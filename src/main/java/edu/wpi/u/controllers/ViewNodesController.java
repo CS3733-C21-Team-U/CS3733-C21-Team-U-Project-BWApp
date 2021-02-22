@@ -11,13 +11,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewNodesController {
-    @FXML
-    public VBox nodeList;
+    @FXML public VBox nodeList;
+    @FXML public VBox test;
 
     public void initialize() throws IOException {
 
-//            //This is how you add title panes here
+        //Nodes
         ArrayList<Node> nodes = App.graphService.getNodes();
+        ArrayList<Edge> edges = App.graphService.getEdges();
+
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);
             FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
@@ -31,6 +33,18 @@ public class ViewNodesController {
             }
             controller.nodeAdj.setText(adjacencies.toString());
             nodeList.getChildren().add(node);
+        }
+
+        //Edges
+        for (int i = 0; i < edges.size(); i++) {
+            Edge currentEdgeInfo = edges.get(i);
+            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("../views/EdgeListItem.fxml"));
+            AnchorPane node = edgeLoader.load();
+            EdgeItemController controller = edgeLoader.getController();
+            controller.edgeID.setText(currentEdgeInfo.getEdgeID());
+            controller.startingNode.setText(currentEdgeInfo.getStartNode().getNodeID());
+            controller.endingNode.setText(currentEdgeInfo.getEndNode().getNodeID());
+            test.getChildren().add(node);
         }
 
     }
