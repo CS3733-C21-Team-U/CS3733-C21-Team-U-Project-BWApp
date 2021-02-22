@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.models.Request;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -9,38 +10,34 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class ViewRequestController {
 
-    @FXML
-    VBox requestList;
-    @FXML
-    private Text responseText;
 
-    public void newCSV() {
-        FileChooser csvWindow = new FileChooser();
-        String currentPath = Paths.get(".\\src\\main\\resources\\edu\\wpi\\u").toAbsolutePath().normalize().toString();
-        csvWindow.setInitialDirectory(new File(currentPath));
-        csvWindow.getExtensionFilters().add
-                (0, new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-        File csvFile = csvWindow.showOpenDialog(null);
+    @FXML public VBox requestList;
 
-        responseText.setText(csvFile.getName());
-    }
+
+
 
     public void initialize() throws IOException {
 
-
-        //This is how you add title panes here
-        FXMLLoader requestloader = new FXMLLoader(getClass().getResource("../views/RequestItem.fxml"));
-        AnchorPane request = requestloader.load();
-        RequestItemController controller = requestloader.getController();
-        controller.descriptionLabel.setText("Text");
-
-        //requestList.getChildren().add(request);
-
+        ArrayList<Request> listOfRequests = App.requestService.getRequests();
+        for (int i = 0; i < listOfRequests.size(); i++) {
+            //This is how you add title panes here
+            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("../views/RequestItem.fxml"));
+            AnchorPane request = requestLoader.load();
+            RequestItemController controller = requestLoader.getController();
+            String temp = listOfRequests.get(i).getTitle();
+            controller.titleLabel.setText(temp);
+            controller.locationLabel.setText(listOfRequests.get(i).getLocation());
+            controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());
+            requestList.getChildren().add(request);
+        }
     }
 
 

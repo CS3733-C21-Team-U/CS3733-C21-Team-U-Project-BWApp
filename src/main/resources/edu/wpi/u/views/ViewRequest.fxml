@@ -19,9 +19,6 @@
                   </JFXButton>
                </children>
             </HBox>
-            <fx:include source="RequestItem.fxml" />
-            <fx:include source="RequestItem.fxml" />
-            <fx:include source="RequestItem.fxml" />
          </children>
       </VBox>
    </children>

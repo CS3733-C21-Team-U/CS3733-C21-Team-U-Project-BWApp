@@ -6,28 +6,32 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class RequestItemController {
-    @FXML
-    AnchorPane requestAnchor;
 
-    @FXML
-    Label descriptionLabel;
 
-    @FXML
-    Button expandCollapseButton;
+    @FXML public Button expandCollapseButton;
+    @FXML public Button editRequestButton;
+    @FXML public AnchorPane requestAnchor;
 
-    @FXML
-    Button deleteRequestButton;
+    @FXML public Button deleteRequestButton;
 
-    @FXML
-    Button editRequestButton;
+    @FXML public Label descriptionLabel;
+//    @FXML public Label title;
+//    @FXML public Label location;
+    //@FXML public TextField title;
+    //@FXML public TextField location;
 
     public boolean isCollapsed = true;
+    @FXML public Label titleLabel;
+    @FXML public Label locationLabel;
+
 
     @FXML
     public void handleExpandCollapseButton(){
@@ -53,4 +57,6 @@ public class RequestItemController {
     public void handleEditRequest() throws Exception {
         App.rightDrawerRoot.set("../views/EditRequest.fxml");
     }
+
+
 }

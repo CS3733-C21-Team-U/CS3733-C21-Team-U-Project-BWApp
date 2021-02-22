@@ -70,7 +70,13 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    return new ArrayList<Request>();
+    Request request1 = new Request("Lobby Request","Need help in the lobby ","First Floor");
+    Request request2 = new Request("Floor Request","Need help in the Second Floor ","Second Floor");
+    ArrayList<Request> list1 = new ArrayList<Request>();
+    list1.add(request1);
+    list1.add(request2);
+    //return new ArrayList<Request>();
+    return list1;
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
