@@ -5,30 +5,33 @@ import java.util.List;
 import java.util.Date;
 
 //TODO: Private or protected fields?
-public abstract class Request {
+public class Request {
     protected String requestID;
     protected Date dateCreated, dateCompleted;
     protected String description;
     protected String title;
-    protected ArrayList<Staff> assignees;
     protected String location;
     protected String type;
+
+    public Request(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String type) {
+        this.requestID = requestID;
+        this.dateCreated = dateCreated;
+        this.dateCompleted = dateCompleted;
+        this.description = description;
+        this.title = title;
+        this.location = location;
+        this.type = type;
+    }
 
     protected void resolveRequest() { //TODO: Belongs in request?
 
     }
-
-    protected void editRequest(Date startDate, Date endDate, String description, String title, ArrayList<Staff> assignees, String location) {
-        this.dateCreated = startDate;
+    public void editRequest(Date endDate, String description, String title, String location, String type) {
         this.dateCompleted = endDate;
         this.description = description;
         this.title = title;
-        this.assignees = assignees;
         this.location = location;
-    }
-
-    protected boolean getStatus() {
-        return true;
+        this.type = type;
     }
 
     public String getRequestID() {
@@ -49,10 +52,6 @@ public abstract class Request {
 
     public String getTitle() {
         return title;
-    }
-
-    public ArrayList<Staff> getAssignees() {
-        return assignees;
     }
 
     public String getLocation() {
@@ -81,10 +80,6 @@ public abstract class Request {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setAssignees(ArrayList<Staff> assignees) {
-        this.assignees = assignees;
     }
 
     public void setLocation(String location) {
