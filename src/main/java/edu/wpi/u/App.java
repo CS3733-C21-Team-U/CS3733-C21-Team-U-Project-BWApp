@@ -83,7 +83,7 @@ public class App extends Application {
 
   public void stop() {
     System.out.println("Shutting Down");
-    graphService.saveAndExitDB();
+    graphService.saveAndExitDB(); //TODO: change where we stop
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

@@ -245,6 +245,7 @@ public class MapData extends Data{
                 String shortName = rset.getString("shortName");
                 gm.makeNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
             }
+            rset.close();
             String str2 = "select * from Edges";
             PreparedStatement ps2 = conn.prepareStatement(str2);
             ResultSet rs2 = ps2.executeQuery();

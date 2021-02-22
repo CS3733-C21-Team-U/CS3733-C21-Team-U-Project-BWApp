@@ -36,7 +36,7 @@ public abstract class Data {
         try {
             String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
             String[] columns = content.split("\n", 2);
-            String[] attributes = content.split(",");
+            //String[] attributes = content.split(","); TODO: Make table columns from header values
             columns[1] += "\n";
             File temp = new File(tempPath);
             if(temp.createNewFile()){
@@ -49,30 +49,29 @@ public abstract class Data {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', 'NODES', 'src/main/resources/edu/wpi/u/temp.csv', ', ', null, null,1)";
         try {
             PreparedStatement p = conn.prepareStatement(str1);
             p.execute();
         }
         catch (Exception e){
-            System.out.println("\nTRACE:");
+            System.out.println("Rewrite being weird");
             e.printStackTrace();
-            System.out.println("rewrite being weird");
         }
     }
 
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
-            System.out.println("file deleted");
+            System.out.println("File deleted");
         }
         String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.execute();
-            // ps.close();
-        } catch (SQLException throwables) {
-            System.out.println("wants new file");
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Wants new file");
+            e.printStackTrace();
             //throwables.printStackTrace();
         }
 

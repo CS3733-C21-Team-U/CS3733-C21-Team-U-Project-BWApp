@@ -50,6 +50,11 @@ public class Database {
                         "create table Edges (edgeID varchar(50) not null, startID varchar(50), endID varchar(50), primary key(edgeID))";
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
+
+                String tbl3 =
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),location varchar(50),type varchar(50), primary key(requestID))";
+                PreparedStatement ps3 = conn.prepareStatement(tbl3);
+                ps3.execute();
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
@@ -60,7 +65,7 @@ public class Database {
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
-            ResultSet rs = dmd.getTables(null, "ADMIN", "NODES", null);
+            ResultSet rs = dmd.getTables(null, "APP", "NODES", null);
             return !rs.next();
             // nowhere to put rs.close
         } catch (Exception e) {
@@ -76,6 +81,8 @@ public class Database {
             s.execute(str);
             str = "drop table Edges";
             s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -88,6 +95,8 @@ public class Database {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.execute();
             str = "delete from Edges";
+            ps.execute();
+            str = "delete from Requests";
             ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

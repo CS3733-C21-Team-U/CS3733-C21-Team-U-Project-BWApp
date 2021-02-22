@@ -23,13 +23,12 @@ public class GraphService {
     md.loadGraph(gm);
   }
 
-  public void saveAndExitDB(){
+  public void saveAndExitDB() {
 
     //For testing UI
 //    dm.stop();
     md.stop();
   }
-
 
   /*
   Make sure x & y are positive integers within the map coordinate range
