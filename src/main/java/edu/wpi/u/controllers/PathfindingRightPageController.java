@@ -50,7 +50,7 @@ public class PathfindingRightPageController {
 
 
 
-    /*  This toggles the list/text entry button and shows/hides teh applicable fields
+    /*  This toggles the list/text entry button and shows/hides the applicable fields
         In the future, it may be smart to select the node in the drop-down that was
         typed in the text entry and vice-versa. Only if the typed node is valid, obviously.
     */
