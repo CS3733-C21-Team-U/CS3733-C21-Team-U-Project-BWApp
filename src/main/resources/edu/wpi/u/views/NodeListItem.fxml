@@ -2,10 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Separator?>
 
 <AnchorPane fx:id="nodeAnchor" maxHeight="-Infinity" maxWidth="500.0" minHeight="-Infinity" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeItemController">
    <children>
@@ -41,6 +41,11 @@
                </children>
             </HBox>
             <Label prefHeight="35.0" prefWidth="124.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Adjacent Nodes:">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="nodeAdj" alignment="TOP_LEFT" prefHeight="82.0" prefWidth="500.0" style="-fx-font-size: 16; -fx-wrap-text: true;" text="PARK A12345, PARK A12345, PARK A12345, PARK A12345, PARK A12345, PARK A12345,">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>

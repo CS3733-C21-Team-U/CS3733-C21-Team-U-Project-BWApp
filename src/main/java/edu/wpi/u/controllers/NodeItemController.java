@@ -7,5 +7,6 @@ public class NodeItemController {
 
     @FXML public Label nodeID;
     @FXML public Label nodeLocation;
+    @FXML public Label nodeAdj;
 
 }

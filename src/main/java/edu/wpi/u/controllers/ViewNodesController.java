@@ -25,7 +25,11 @@ public class ViewNodesController {
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
             controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
-            //TODO: Node Adjacency List
+            StringBuilder adjacencies = new StringBuilder();
+            for(Node a : currentNodeInfo.getAdjNodes()) {
+                adjacencies.append(a.getNodeID() + ", ");
+            }
+            controller.nodeAdj.setText(adjacencies.toString());
             nodeList.getChildren().add(node);
         }
 
