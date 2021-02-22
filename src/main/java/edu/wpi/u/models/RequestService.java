@@ -29,6 +29,8 @@ public class RequestService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
+
+  // THIS CONSTRUCTOR SHOULD HAVE LOCATION, CONTACT INFO(?), SERVICE REQUEST TYPE
   public String addRequest(String requestID, String title, String description, Date dateCreated, Date dateCompleted, ArrayList<String> staffList) {
     //Scucess
     return "";
