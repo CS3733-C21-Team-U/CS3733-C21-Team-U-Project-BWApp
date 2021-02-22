@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import edu.wpi.u.database.Database;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
@@ -25,7 +26,7 @@ public class App extends Application {
 
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
-
+  public static Database db = new Database();
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
 

@@ -123,6 +123,8 @@ public abstract class Data {
             s.execute(str);
             str = "drop table Edges";
             s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -132,10 +134,12 @@ public abstract class Data {
     public void dropValues() {
         try {
             String str = "delete from Nodes";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.execute();
+            Statement ps = conn.createStatement();
+            ps.execute(str);
             str = "delete from Edges";
-            ps.execute();
+            ps.execute(str);
+            str = "delete from Requests";
+            ps.execute(str);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

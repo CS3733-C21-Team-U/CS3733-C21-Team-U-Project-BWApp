@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class RequestService {
 
 
-  static RequestData RD = new RequestData();
+  static RequestData rd = new RequestData();
   ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
@@ -22,10 +22,18 @@ public class RequestService {
   Saves the model data into csvs and drops tables
    */
   public void saveAndExitDB(){
-    RD.stop();
+    rd.stop();
   }
 
+  public void loadCSVFile(String path, String tableName){
+    rd.dropValues();
+    rd.readCSV(path,tableName);
+  }
 
+  public void saveCSVFile(String path, String tableName){
+    rd.dropValues();
+    rd.saveCSV(path,tableName, "test"); // TODO: Provide header
+  }
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
@@ -33,7 +41,7 @@ public class RequestService {
     //Scucess
     Request newRequest = new Request(requestID, dateCreated, dateCompleted, description, title, location, type);
     this.activeRequests.add(newRequest);
-    RD.addRequest(newRequest);
+    rd.addRequest(newRequest);
     return "";
     //Fail
     //return requestID;
@@ -49,7 +57,7 @@ public class RequestService {
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
         r.editRequest(dateCompleted,description,title,location,type);
-        RD.updateRequest(r);
+        rd.updateRequest(r);
         return "";
       }
     }
@@ -69,7 +77,7 @@ public class RequestService {
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
         r.setDateCompleted(now);
-        RD.delRequest(r);
+        rd.delRequest(r);
         return "";
       }
     }

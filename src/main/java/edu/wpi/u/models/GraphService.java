@@ -18,9 +18,14 @@ public class GraphService {
   }
 
   public GraphService() {
-    System.out.println("Constrctor for Graph SERVICE");
+    System.out.println("Constructor for Graph SERVICE");
     md = new MapData();
     md.loadGraph(gm);
+  }
+
+  public void saveCSVFile(String path, String tableName){
+    md.dropValues();
+    md.saveCSV(path,tableName, "test"); // TODO: Provide header
   }
 
   public void saveAndExitDB() {
@@ -28,6 +33,11 @@ public class GraphService {
     //For testing UI
 //    dm.stop();
     //md.stop();
+  }
+
+  public void loadCSVFile(String path, String tableName){
+    md.dropValues();
+    md.readCSV(path,tableName);
   }
 
   /*
