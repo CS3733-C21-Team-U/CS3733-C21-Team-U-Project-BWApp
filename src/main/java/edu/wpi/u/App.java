@@ -23,7 +23,6 @@ public class App extends Application {
   public static App app_instance = null;
 
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
-
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = new Database();
