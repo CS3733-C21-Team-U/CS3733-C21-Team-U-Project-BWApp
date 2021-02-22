@@ -9,10 +9,8 @@ import java.util.LinkedList;
 
 public class RequestService {
 
-
-  public static void main (String[] args){
-
-  }
+  Static RequestData RD = new RequestData();
+  ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
     System.out.println("Constrctor for Request SERVICE");
@@ -30,7 +28,7 @@ public class RequestService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addRequest(String requestID, String title, String description, Date dateCreated, Date dateCompleted, ArrayList<String> staffList) {
+  public String addRequest(String requestID, Date startDate, Date endDate, String description, String title, ArrayList<Staff> assignees, String location, String machine, int priority) {
     //Scucess
     return "";
     //Fail
