@@ -55,10 +55,10 @@ public class NewMainPageController {
 
 
         Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
-        AnchorPane outerNode = new AnchorPane(node);
-        outerNode.getStyleClass().add("blue");
-        outerNode.applyCss();
-        GesturePane map = new GesturePane(outerNode);
+        App.pane = new AnchorPane(node);
+        App.pane.getStyleClass().add("blue");
+        App.pane.applyCss();
+        GesturePane map = new GesturePane(App.pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
 //        mapView.setFitWidth(4000.0);
@@ -100,8 +100,6 @@ public class NewMainPageController {
                 e.printStackTrace();
             }
         });
-
-
     }
 
 
@@ -113,7 +111,6 @@ public class NewMainPageController {
         } else{
             leftMenuDrawer.open();
         }
-
     }
 
 

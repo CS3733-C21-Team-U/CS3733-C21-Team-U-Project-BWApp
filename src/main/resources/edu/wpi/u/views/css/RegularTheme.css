@@ -8,6 +8,12 @@
     url('./Rubik-Bold.ttf');
     -fx-font-weight: bold;
 }
+/*Base colors here------------------------*/
+
+/*Base colors here------------------------*/
+
+
+
 
 .blue{
     /*-fx-background-color: blue;*/
@@ -142,33 +148,62 @@
  */
 
 .button-green {
-    -fx-font-size: 10pt;
+    -fx-font-size: 14pt;
     -fx-font-family: 'Rubik Regular', sans-serif;
     -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
     -fx-background-color: #33ab2e;
     -fx-background-radius: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-yellow {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
+    -fx-background-color: #f6c037;
+    -fx-background-radius: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-blue {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #2e5bfe;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-lightBlue {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #d4ddfe;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #2e5bfe;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-lightYellow {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #fbefcb;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #f6c037;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 
 .button-regular {
     -fx-padding: 5 10 5 10;
     -fx-background-radius: 2;
-    -fx-background-color: #6585ff;
+    -fx-background-color: #2e5bfe;
     -fx-font-family: Arial;
     -fx-font-size: 11pt;
     -fx-text-fill: #ffffff;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
-.button-medium {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 2;
-    -fx-background-color: #6585ff;
-    -fx-font-family: Arial;
-    -fx-font-size: 14pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
 
 .button:hover {
     -fx-background-color: #3a3a3a;
