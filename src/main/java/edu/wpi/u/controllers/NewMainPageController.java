@@ -4,14 +4,18 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
 import edu.wpi.u.uiComponents.ZoomableScrollPane;
+import javafx.animation.Interpolator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
@@ -28,6 +32,8 @@ public class NewMainPageController {
     public JFXDrawer serviceRequestDrawer;
 
     public ImageView mapView;
+
+    static final Duration DURATION = Duration.millis(300);
 
     AnchorPane rightServiceRequestPane;
 
@@ -52,12 +58,28 @@ public class NewMainPageController {
 //
 //        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
 //        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
-        map.setPrefWidth(1420);
+        map.setPrefWidth(1920);
         map.setPrefHeight(1000);
-        map.setFitMode("FIT");
+        map.setFitMode(GesturePane.FitMode.UNBOUNDED);
+        map.setScrollMode(GesturePane.ScrollMode.ZOOM);
 //        map.setPannable(true);
         mainAnchorPane.getChildren().add(map);
         map.toBack();
+
+        map.setOnMouseClicked(e -> {
+            Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
+                    .orElse(map.targetPointAtViewportCentre());
+            if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
+                // increment of scale makes more sense exponentially instead of linearly
+                map.animate(DURATION)
+                        .interpolateWith(Interpolator.EASE_BOTH)
+                        .zoomBy(map.getCurrentScale(), pivotOnTarget);
+            } else if (e.getButton() == MouseButton.SECONDARY && e.getClickCount() == 1) {
+                map.animate(DURATION)
+                        .interpolateWith(Interpolator.EASE_BOTH)
+                        .zoomTo(map.getMinScale(), pivotOnTarget);
+            }
+        });
 
         App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
         {
