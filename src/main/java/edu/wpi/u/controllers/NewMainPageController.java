@@ -7,10 +7,12 @@ import edu.wpi.u.uiComponents.ZoomableScrollPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 
@@ -40,18 +42,21 @@ public class NewMainPageController {
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 
-        Image img = new Image("/edu/wpi/u/views/Images/FaulknerCampus.png");
-        mapView = new ImageView(img);
 
-        mapView.setFitWidth(4000.0);
-        mapView.setFitHeight(4000.0);
-        mapView.setPreserveRatio(true);
 
-        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
-        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
+        Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
+        GesturePane map = new GesturePane(node);
+
+//        mapView.setFitWidth(4000.0);
+//        mapView.setFitHeight(4000.0);
+//        mapView.setPreserveRatio(true);
+//
+//        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
+//        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
         map.setPrefWidth(1420);
         map.setPrefHeight(1000);
-        map.setPannable(true);
+        map.setFitMode("FIT");
+//        map.setPannable(true);
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
