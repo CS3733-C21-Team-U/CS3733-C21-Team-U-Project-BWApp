@@ -23,12 +23,14 @@ public class RequestItemController {
     @FXML public Button deleteRequestButton;
 
     @FXML public Label descriptionLabel;
+//    @FXML public Label title;
+//    @FXML public Label location;
     //@FXML public TextField title;
     //@FXML public TextField location;
 
     public boolean isCollapsed = true;
-    @FXML public Label title;
-    @FXML public Label location;
+    @FXML public Label titleLabel;
+    @FXML public Label locationLabel;
 
 
     @FXML
@@ -56,11 +58,5 @@ public class RequestItemController {
         App.rightDrawerRoot.set("../views/EditRequest.fxml");
     }
 
-    public void setTitle(String newTitle){
-        title.setText(newTitle);
-    }
-    public void setLocation(String newLocation){
-        location.setText(newLocation);
-    }
 
 }
