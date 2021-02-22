@@ -1,7 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
-import edu.wpi.u.models.Request;
+import edu.wpi.u.algorithms.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -17,9 +17,14 @@ public class ViewNodesController {
     public void initialize() throws IOException {
 
 //            //This is how you add title panes here
-            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
-            AnchorPane node = nodeLoader.load();
-            nodeList.getChildren().add(node);
+        ArrayList<Node> nodes = App.graphService.getNodes();
+        Node nodeOne = nodes.get(0);
+        FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
+        AnchorPane node = nodeLoader.load();
+        NodeItemController controller = nodeLoader.getController();
+        //controller.nodeID.setText(nodes.get(0).getNodeID());
+
+        nodeList.getChildren().add(node);
     }
 
     @FXML
