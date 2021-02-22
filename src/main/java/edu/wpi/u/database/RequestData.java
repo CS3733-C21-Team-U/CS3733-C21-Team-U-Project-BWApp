@@ -9,6 +9,13 @@ public class RequestData extends Data{
     //Load from CSV into table - if any
     //send Request data from tables into Java objects
     //accessors/deleters
+    public void updateRequest(Request request){
+        this.updRequestDescription(request.getRequestID(), request.getDescription());
+        this.updRequestTitle(request.getRequestID(), request.getTitle());
+        this.updRequestLocation(request.getRequestID(), request.getLocation());
+        this.updRequestType(request.getRequestID(), request.getType());
+    }
+
     public void addRequest(Request request) {
         String str = "insert into Request (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
         try{
