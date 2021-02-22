@@ -146,7 +146,8 @@ public abstract class Data {
         dropValues();
         deleteTables();
         try{
-            conn.close();
+            System.out.println("herro");
+            //conn.close();
         }
         catch (Exception e){
             e.printStackTrace();

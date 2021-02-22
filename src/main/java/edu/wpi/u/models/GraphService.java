@@ -27,7 +27,7 @@ public class GraphService {
 
     //For testing UI
 //    dm.stop();
-    md.stop();
+    //md.stop();
   }
 
   /*

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Date;
 
 //TODO: Private or protected fields?
-public abstract class Request {
+public class Request {
     protected String requestID;
     protected Date dateCreated, dateCompleted;
     protected String description;

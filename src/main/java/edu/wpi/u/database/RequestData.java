@@ -12,7 +12,9 @@ public class RequestData extends Data{
     //accessors/deleters
 
     public RequestData(){
+        connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
+        Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
         printRequests();
     }
 
@@ -105,6 +107,7 @@ public class RequestData extends Data{
             ResultSet rset = ps.executeQuery();
             while (rset.next()) {
                 String id = rset.getString("requestID");
+                System.out.println("Request id: " + id);
             }
             rset.close();
         } catch (Exception e) {
