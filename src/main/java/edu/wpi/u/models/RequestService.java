@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 public class RequestService {
 
+
   static RequestData RD = new RequestData();
   ArrayList<Request> activeRequests = new ArrayList<>();
 
@@ -21,16 +22,18 @@ public class RequestService {
   Saves the model data into csvs and drops tables
    */
   public void saveAndExitDB(){
-
-
+    RD.stop();
   }
 
 
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addRequest(String requestID, Date startDate, Date endDate, String description, String title, ArrayList<Staff> assignees, String location, String machine, int priority) {
+  public String addRequest(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String type) {
     //Scucess
+    Request newRequest = new Request(requestID, dateCreated, dateCompleted, description, title, location, type);
+    this.activeRequests.add(newRequest);
+    RD.addRequest(newRequest);
     return "";
     //Fail
     //return requestID;
@@ -41,13 +44,18 @@ public class RequestService {
      */
   }
 
-  public String updateRequest(String requestID, String title, String description, Date dateCreated, Date dateCompleted, ArrayList<String> staffList){
+  public String updateRequest(String requestID, String title, String description,Date dateCompleted, String location, String type){
     //Scucess
-    return "";
+    for(Request r : this.activeRequests){
+      if(r.getRequestID() == requestID){
+        r.editRequest(dateCompleted,description,title,location,type);
+        RD.updateRequest(r);
+        return "";
+      }
+    }
+    return requestID;
     //Fail
     //return requestID;
-
-    // gm needs to write
     /*
     Check if valid node_id
     Return "" is a success
@@ -57,6 +65,14 @@ public class RequestService {
 
   public String deleteRequest(String requestID) {
     //Scucess
+    Date now = new Date();
+    for(Request r : this.activeRequests){
+      if(r.getRequestID() == requestID){
+        r.setDateCompleted(now);
+        RD.delRequest(r);
+        return "";
+      }
+    }
     return "";
     //Fail
     //return requestID;
@@ -69,7 +85,7 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    return new ArrayList<Request>();
+    return new ArrayList<Request>(this.activeRequests);
     /*
     Returns an ArrayList of all Node Objects in the graph
      */

@@ -1,3 +1,5 @@
+//
+//
 //package edu.wpi.u.requests;
 //import java.util.ArrayList;
 //import java.util.Date;
@@ -7,13 +9,13 @@
 //    private String machine;
 //    private int priority;
 //
-//    public MaintenanceRequest(Date dateCreated, Date dateCompleted, String description, String title,
-//                              ArrayList<Staff> assignees, String location, String machine, int priority) {
+//    public MaintenanceRequest(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String machine, int priority) {
+//        super();
+//        super.requestID = requestID;
 //        super.dateCreated = dateCreated;
 //        super.dateCompleted = dateCompleted;
 //        super.description = description;
 //        super.title = title;
-//        super.assignees = assignees;
 //        super.location = location;
 //        this.machine = machine;
 //        this.priority = priority;
@@ -24,7 +26,6 @@
 //        super.dateCompleted = endDate;
 //        super.description = description;
 //        super.title = title;
-//        super.assignees = assignees;
 //        super.location = location;
 //    }
 //
@@ -32,3 +33,4 @@
 //
 //    }
 //}
+//

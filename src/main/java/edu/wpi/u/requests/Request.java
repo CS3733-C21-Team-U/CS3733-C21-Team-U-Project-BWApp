@@ -26,17 +26,12 @@ public class Request {
     protected void resolveRequest() { //TODO: Belongs in request?
 
     }
-
-    protected void editRequest(Date startDate, Date endDate, String description, String title, ArrayList<Staff> assignees, String location) {
-        this.dateCreated = startDate;
+    public void editRequest(Date endDate, String description, String title, String location, String type) {
         this.dateCompleted = endDate;
         this.description = description;
         this.title = title;
         this.location = location;
-    }
-
-    protected boolean getStatus() {
-        return true;
+        this.type = type;
     }
 
     public String getRequestID() {
