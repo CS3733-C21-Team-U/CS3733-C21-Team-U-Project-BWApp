@@ -14,7 +14,9 @@ public class RequestData extends Data{
     public RequestData(){
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
+        //Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
+        //addRequest(r);
+        saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Odee requests");
         printRequests();
     }
 
