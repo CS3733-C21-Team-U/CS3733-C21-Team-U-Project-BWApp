@@ -1,6 +1,7 @@
 package edu.wpi.u.requests;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Date;
 
@@ -10,28 +11,34 @@ public class Request {
     protected Date dateCreated, dateCompleted;
     protected String description;
     protected String title;
-    protected String location;
+    protected LinkedList<String> location;
     protected String type;
+    protected LinkedList<String> assignee;
+    protected String creator;
 
-    public Request(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String type) {
+    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
         this.requestID = requestID;
+        this.assignee = assignee;
         this.dateCreated = dateCreated;
         this.dateCompleted = dateCompleted;
         this.description = description;
         this.title = title;
         this.location = location;
         this.type = type;
+        this.creator = creator;
     }
 
     protected void resolveRequest() { //TODO: Belongs in request?
 
     }
-    public void editRequest(Date endDate, String description, String title, String location, String type) {
+    public void editRequest(Date endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
         this.dateCompleted = endDate;
         this.description = description;
         this.title = title;
         this.location = location;
         this.type = type;
+        this.assignee = assignee;
+        this.creator = creator;
     }
 
     public String getRequestID() {
@@ -54,7 +61,7 @@ public class Request {
         return title;
     }
 
-    public String getLocation() {
+    public LinkedList<String> getLocation() {
         return location;
     }
 
@@ -82,7 +89,7 @@ public class Request {
         this.title = title;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(LinkedList<String> location) {
         this.location = location;
     }
 

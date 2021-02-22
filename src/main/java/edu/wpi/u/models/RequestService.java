@@ -7,6 +7,7 @@ import edu.wpi.u.requests.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class RequestService {
 
@@ -28,6 +29,7 @@ public class RequestService {
   public void loadCSVFile(String path, String tableName){
     rd.dropValues();
     rd.readCSV(path,tableName);
+    this.activeRequests = rd.loadActiveRequests();
   }
 
   public void saveCSVFile(String path, String tableName){
@@ -37,9 +39,12 @@ public class RequestService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addRequest(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String type) {
+  public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
     //Scucess
-    Request newRequest = new Request(requestID, dateCreated, dateCompleted, description, title, location, type);
+    Random rand = new Random();
+    int requestID = rand.nextInt();
+    String ID = Integer.toString(requestID);//make a random id
+    Request newRequest = new Request(ID, assignee, new Date(), null, description, title, location, type, creator);
     this.activeRequests.add(newRequest);
     rd.addRequest(newRequest);
     return "";
@@ -52,11 +57,11 @@ public class RequestService {
      */
   }
 
-  public String updateRequest(String requestID, String title, String description,Date dateCompleted, String location, String type){
+  public String updateRequest(String requestID, String title, String description,Date dateCompleted, LinkedList<String> location, String type, LinkedList<String> assignee, String creator){
     //Scucess
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
-        r.editRequest(dateCompleted,description,title,location,type);
+        r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
         rd.updateRequest(r);
         return "";
       }
