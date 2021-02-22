@@ -14,7 +14,6 @@ public class MapData extends Data{
         readCSV("src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "Edges");
     }
 
-
     public int addNode(
             String node_id,
             int x,
