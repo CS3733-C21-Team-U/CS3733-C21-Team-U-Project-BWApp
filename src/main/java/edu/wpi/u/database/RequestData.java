@@ -17,7 +17,7 @@ public class RequestData extends Data{
         //Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
         //addRequest(r);
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Odee requests");
-        printRequests();
+        //printRequests();
     }
 
     public void updateRequest(Request request){
@@ -46,7 +46,7 @@ public class RequestData extends Data{
 
     }
     public void delRequest(Request request) {
-        String str = "update Requests set dateCompleted=? requestID=?";
+        String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setDate(1, (java.sql.Date) request.getDateCompleted());

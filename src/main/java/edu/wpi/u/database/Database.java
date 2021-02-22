@@ -43,7 +43,7 @@ public class Database {
             if (isTableEmpty()) {
                 String tbl1 =
                         "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
-                // code for creating table of Museums
+
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
                 String tbl2 =
@@ -67,7 +67,6 @@ public class Database {
             DatabaseMetaData dmd = conn.getMetaData();
             ResultSet rs = dmd.getTables(null, "APP", "NODES", null);
             return !rs.next();
-            // nowhere to put rs.close
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,8 +103,6 @@ public class Database {
     }
 
     public static void stop() {
-//        saveNodesCSV();
-//        saveEdgesCSV();
         dropValues();
         deleteTables();
         try{
@@ -114,22 +111,6 @@ public class Database {
         catch (Exception e){
             e.printStackTrace();
         }
-    /*
-     try {
-         DriverManager.getConnection
-            ("jdbc:derby:;shutdown=true");
-      } catch (SQLException ex) {
-         if (((ex.getErrorCode() == 50000) &&
-            ("XJ015".equals(ex.getSQLState())))) {
-               System.out.println("Derby shut down
-                  normally");
-         } else {
-            System.err.println("Derby did not shut down
-               normally");
-            System.err.println(ex.getMessage());
-         }
-      }
-   }
-     */
+
     }
 }
