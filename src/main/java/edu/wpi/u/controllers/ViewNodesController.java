@@ -18,13 +18,17 @@ public class ViewNodesController {
 
 //            //This is how you add title panes here
         ArrayList<Node> nodes = App.graphService.getNodes();
-        Node nodeOne = nodes.get(0);
-        FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
-        AnchorPane node = nodeLoader.load();
-        NodeItemController controller = nodeLoader.getController();
-        //controller.nodeID.setText(nodes.get(0).getNodeID());
+        for (int i = 0; i < nodes.size(); i++) {
+            Node currentNodeInfo = nodes.get(i);
+            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
+            AnchorPane node = nodeLoader.load();
+            NodeItemController controller = nodeLoader.getController();
+            controller.nodeID.setText(currentNodeInfo.getNodeID());
+            controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
+            //TODO: Node Adjacency List
+            nodeList.getChildren().add(node);
+        }
 
-        nodeList.getChildren().add(node);
     }
 
     @FXML
