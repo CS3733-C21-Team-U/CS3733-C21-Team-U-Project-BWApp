@@ -1,17 +1,22 @@
 package edu.wpi.u.controllers;
-
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import java.util.*;
+import java.util.stream.*;
 
 import java.util.Date;
 
@@ -28,9 +33,7 @@ public class NewRequestController {
     @FXML
     public TextField assigneeTextField;
     @FXML
-    public TextField contactTextField;
-    @FXML
-    public SplitMenuButton serviceTypeMenu;
+    public TextField serviceTypeTextField;
     @FXML
     public Button submitRequestButton;
     @FXML
@@ -38,19 +41,31 @@ public class NewRequestController {
     @FXML
     public ListView assigneeList;
     @FXML
+    public ListView locationList;
+    @FXML
+    public Button locationButton;
+    @FXML
     public Button cancelButton;
     @FXML
     public Label errorMessage;
     @FXML
     public Label errorMessage2;
+    @FXML
+    public Label errorMessage3;
+    @FXML
+    ComboBox locationDropField;
 
-    public String exampleID;
 
-    public Date start = new Date();
+    GraphService gs = new GraphService();
 
-    public Date end;
+    ObservableList<Node> oList;
 
-    private ArrayList<String> assignee = new ArrayList<String>();
+    //string placeholder for USDERID
+    public String userID = "ADMIN";
+
+    public ArrayList<String> assignee = new ArrayList<String>();
+
+    public ArrayList<String> location = new ArrayList<String>();
 
     public void handleAssigneeList() {
         if (titleTextField.getText().equals("")) {
@@ -63,13 +78,43 @@ public class NewRequestController {
         }
     }
 
-    //there exist fields for contact info, location, and service type, this is not currently reflected in the constructor
+    //This initialize function mostly fills in the correct nodes to the drop-down menu
+    public void initialize() throws IOException {
+        ArrayList<Node> L = gs.getNodes();//This gets the list of all the nodes
+        ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
+        for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
+            nodeIDs.add(N.getNodeID());
+        }
+        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
+        locationDropField.setItems(oList); //This sets the observablelist that just got created to the stuff thats in the dropdown
+    }
+
+    public void handleAddLocation(){
+        if (locationDropField.getValue().toString().equals("")) {
+            errorMessage3.setText("Please enter a node!");
+        } else {
+            location.add(locationDropField.getValue().toString());
+            locationList.getItems().add(locationDropField.getValue().toString());
+            locationDropField.setItems(null);
+            //System.out.println("call");}
+        }
+
+    }
+
+    // Array list to linkedlist converter
+    public static List<String> lLConverter(ArrayList<String> arrayList)
+    {
+        List<String> newLL = new LinkedList<String>(arrayList);
+
+        return newLL;
+    }
+
     public void handleSubmitRequestButton() {
 
         if (titleTextField.getText().equals("")) {
             errorMessage.setText("Please enter a title!");}
             else{
-                App.requestService.addRequest(exampleID, titleTextField.getText(), descriptionTextField.getText(), start, end, assignee);
+                App.requestService.addRequest(descriptionTextField.getText(), lLConverter(assignee),  titleTextField.getText(), lLConverter(location), serviceTypeTextField.getText(), userID );
                 App.rightDrawerRoot.set("../views/ViewRequest.fxml");
 
             }
