@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" style="-fx-background-color: hotpink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" style="-fx-background-color: hotpink;" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
    <children>
-      <TextField layoutX="176.0" layoutY="148.0" promptText="Title" />
+      <TextField layoutX="176.0" layoutY="155.0" promptText="Title" styleClass="label" />
       <TextField layoutX="146.0" layoutY="206.0" prefHeight="107.0" prefWidth="210.0" promptText="Description" />
       <TextField layoutX="176.0" layoutY="352.0" promptText="Location Node(s)" />
-      <TextField layoutX="176.0" layoutY="451.0" promptText="Assigned Staff Member" />
+      <TextField layoutX="130.0" layoutY="416.0" prefHeight="23.0" prefWidth="240.0" promptText="Assigned Staff Member" />
+      <Button layoutX="220.0" layoutY="464.0" mnemonicParsing="false" text="Submit" />
    </children>
 </AnchorPane>
