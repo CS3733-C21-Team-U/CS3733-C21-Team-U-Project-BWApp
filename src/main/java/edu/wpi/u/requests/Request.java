@@ -10,9 +10,18 @@ public abstract class Request {
     protected Date dateCreated, dateCompleted;
     protected String description;
     protected String title;
-    protected ArrayList<Staff> assignees;
     protected String location;
     protected String type;
+
+    public Request(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String type) {
+        this.requestID = requestID;
+        this.dateCreated = dateCreated;
+        this.dateCompleted = dateCompleted;
+        this.description = description;
+        this.title = title;
+        this.location = location;
+        this.type = type;
+    }
 
     protected void resolveRequest() { //TODO: Belongs in request?
 
@@ -23,7 +32,6 @@ public abstract class Request {
         this.dateCompleted = endDate;
         this.description = description;
         this.title = title;
-        this.assignees = assignees;
         this.location = location;
     }
 
@@ -49,10 +57,6 @@ public abstract class Request {
 
     public String getTitle() {
         return title;
-    }
-
-    public ArrayList<Staff> getAssignees() {
-        return assignees;
     }
 
     public String getLocation() {
@@ -81,10 +85,6 @@ public abstract class Request {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setAssignees(ArrayList<Staff> assignees) {
-        this.assignees = assignees;
     }
 
     public void setLocation(String location) {

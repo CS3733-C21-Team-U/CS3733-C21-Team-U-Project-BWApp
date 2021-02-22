@@ -14,7 +14,7 @@ public class RequestService {
   ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
-    System.out.println("Constrctor for Request SERVICE");
+    System.out.println("Constructor for Request SERVICE");
   }
 
   /*
