@@ -1,4 +1,7 @@
-package edu.wpi.u.algorithms;
+package edu.wpi.u.models;
+
+import edu.wpi.u.algorithms.Edge;
+import edu.wpi.u.algorithms.Node;
 
 import java.util.*;
 
