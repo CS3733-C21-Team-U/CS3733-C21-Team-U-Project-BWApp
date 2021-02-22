@@ -56,8 +56,10 @@ public class NewRequestController {
 
     }
 
+    //there exist fields for contact info, location, and service type, this is not currently reflected in the constructor
     public void handleSubmitRequestButton(){
     App.requestService.addRequest(exampleID, titleTextField.getText(), descriptionTextField.getText(), start, end, assignee);
+    App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
 
     }
 
