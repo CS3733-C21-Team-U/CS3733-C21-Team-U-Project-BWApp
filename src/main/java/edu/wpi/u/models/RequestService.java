@@ -2,7 +2,6 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.requests.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -70,9 +69,11 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    Request request1 = new Request("request1","test1  ","first floor");
+    Request request1 = new Request("Lobby Request","Need help in the lobby ","First Floor");
+    Request request2 = new Request("Floor Request","Need help in the Second Floor ","Second Floor");
     ArrayList<Request> list1 = new ArrayList<Request>();
     list1.add(request1);
+    list1.add(request2);
     //return new ArrayList<Request>();
     return list1;
     /*
