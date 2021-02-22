@@ -2,7 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-
+import edu.wpi.u.requests.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;

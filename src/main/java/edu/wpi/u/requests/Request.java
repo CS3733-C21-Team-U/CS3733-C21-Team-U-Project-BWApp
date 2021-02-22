@@ -6,9 +6,11 @@ import java.util.Date;
 
 //TODO: Private or protected fields?
 public abstract class Request {
+    protected String requestID;
     protected Date dateCreated, dateCompleted;
     protected String description;
     protected ArrayList<Staff> assignees;
+    protected String location;//nodeID of where the request is
 
     protected void resolveRequest() { //TODO: Belongs in request?
 

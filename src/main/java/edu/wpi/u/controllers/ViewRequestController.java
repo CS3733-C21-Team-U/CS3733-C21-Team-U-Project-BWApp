@@ -1,19 +1,14 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
-import edu.wpi.u.models.Request;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Paths;
 
