@@ -5,6 +5,7 @@ import edu.wpi.u.requests.Request;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class RequestData extends Data{
     //Load from CSV into table - if any
@@ -25,6 +26,29 @@ public class RequestData extends Data{
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestLocation(request.getRequestID(), request.getLocation());
         this.updRequestType(request.getRequestID(), request.getType());
+    }
+
+    public ArrayList<Request> loadActiveRequests(){
+        ArrayList<Request> results = new ArrayList<Request>();
+        String str = "select * from Requests where dateCompleted is null";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String id = rs.getString("requestID");
+                Date created = rs.getDate("dateCreated");
+                String desc = rs.getString("description");
+                String title = rs.getString("title");
+                String location = rs.getString("location");
+                String type = rs.getString("type");
+                results.add(new Request(id,created,null,desc,title,location,type));
+            }
+            rs.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
     }
 
     public void addRequest(Request request) {
