@@ -39,6 +39,10 @@ public class NewRequestController {
     public ListView assigneeList;
     @FXML
     public Button cancelButton;
+    @FXML
+    public Label errorMessage;
+    @FXML
+    public Label errorMessage2;
 
     public String exampleID;
 
@@ -48,18 +52,27 @@ public class NewRequestController {
 
     private ArrayList<String> assignee = new ArrayList<String>();
 
-    public void handleAssigneeList(){
-        assignee.add(assigneeTextField.getText());
-        assigneeList.getItems().add(assigneeTextField.getText());
-        assigneeTextField.setText("");
-        //System.out.println("call");
-
+    public void handleAssigneeList() {
+        if (titleTextField.getText().equals("")) {
+            errorMessage2.setText("Please enter an assignee!");
+        } else {
+            assignee.add(assigneeTextField.getText());
+            assigneeList.getItems().add(assigneeTextField.getText());
+            assigneeTextField.setText("");
+            //System.out.println("call");}
+        }
     }
 
     //there exist fields for contact info, location, and service type, this is not currently reflected in the constructor
-    public void handleSubmitRequestButton(){
-    App.requestService.addRequest(exampleID, titleTextField.getText(), descriptionTextField.getText(), start, end, assignee);
-    App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
+    public void handleSubmitRequestButton() {
+
+        if (titleTextField.getText().equals("")) {
+            errorMessage.setText("Please enter a title!");}
+            else{
+                App.requestService.addRequest(exampleID, titleTextField.getText(), descriptionTextField.getText(), start, end, assignee);
+                App.rightDrawerRoot.set("../views/ViewRequest.fxml");
+
+            }
 
     }
 
