@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
+
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -28,21 +31,36 @@ public class NewRequestController {
     public TextField assigneeTextField;
     @FXML
     public Button submitRequestButton;
+    @FXML
+    public Button assigneeButton;
+    @FXML
+    public ListView assigneeList;
+    @FXML
+    public Button cancelButton;
 
+    public String exampleID;
 
-    public String getTitle(TextField titleTextField){
-    return "";
+    public Date start = new Date();
+
+    public Date end;
+
+    private ArrayList<String> assignee = new ArrayList<String>();
+
+    public void handleAssigneeList(){
+        assignee.add(assigneeTextField.getText());
+        assigneeList.getItems().add(assigneeTextField.getText());
+        assigneeTextField.setText("");
+        //System.out.println("call");
+
     }
 
-    public String getDescription(TextField descriptionTextFieldTextField){
-    return "";
+    public void handleSubmitRequestButton(){
+    App.requestService.addRequest(exampleID, titleTextField.getText(), descriptionTextField.getText(), start, end, assignee);
+
     }
 
-    public String getLocation(TextField titleTextField){
-    return"";
+    public void handleLeaveAdd(){
+        App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
     }
 
-   // public ArrayList<String> getStaff(TextField assigneeTextField){
-  //  return staff;
-  //  }
 }
