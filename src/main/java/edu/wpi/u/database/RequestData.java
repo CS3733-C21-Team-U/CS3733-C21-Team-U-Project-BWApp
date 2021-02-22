@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class RequestData extends Data{
     //Load from CSV into table - if any
@@ -24,7 +25,7 @@ public class RequestData extends Data{
     public void updateRequest(Request request){
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestLocation(request.getRequestID(), request.getLocation());
+        //this.updRequestLocation(request.getRequestID(), request.getLocation()); TODO: Change to list
         this.updRequestType(request.getRequestID(), request.getType());
     }
 
@@ -40,8 +41,12 @@ public class RequestData extends Data{
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
                 String location = rs.getString("location");
+                LinkedList<String> test = new LinkedList<String>();  //TODO: Change to list
+                test.add(location);
+                LinkedList<String> test2 = new LinkedList<String>(); //TODO: Change to list
+                test2.add("Test assignee");
                 String type = rs.getString("type");
-                results.add(new Request(id,created,null,desc,title,location,type));
+                results.add(new Request(id,test2, created,null,desc,title,test,type, "Test creator"));
             }
             rs.close();
         }
@@ -60,7 +65,7 @@ public class RequestData extends Data{
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
-            ps.setString(6,request.getLocation());
+            //ps.setString(6,request.getLocation());
             ps.setString(7,request.getType());
             ps.execute();
         }

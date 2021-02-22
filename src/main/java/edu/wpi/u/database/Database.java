@@ -9,7 +9,7 @@ import java.sql.*;
 public class Database {
 
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true";
+    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
     /*
     connect 'jdbc:derby:myEncryptedDatabaseName;create=true;
     dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;

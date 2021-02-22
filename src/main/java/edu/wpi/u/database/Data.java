@@ -10,7 +10,7 @@ import java.sql.*;
 public abstract class Data {
     protected Connection conn = null;
     protected ResultSet rset;
-    protected String url = "jdbc:derby:BWdb";
+    protected String url = "jdbc:derby:BWdb;bootPassword=bwdbpassword";
     protected static Database db;
 
     public Data(){
