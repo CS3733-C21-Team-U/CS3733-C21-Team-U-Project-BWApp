@@ -11,6 +11,7 @@ public abstract class Data {
     protected Connection conn = null;
     protected ResultSet rset;
     protected String url = "jdbc:derby:BWdb";
+    protected static Database db;
 
     public Data(){
 
@@ -30,7 +31,7 @@ public abstract class Data {
     public void readCSV(String filePath, String tableName){
 
         String tempPath = "src/main/resources/edu/wpi/u/temp.csv";
-        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
+        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
 
         try {
             String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
@@ -41,7 +42,6 @@ public abstract class Data {
             if(temp.createNewFile()){
                 System.out.println("File created");
             }
-            System.out.println(temp.exists());
             FileWriter myWriter = new FileWriter(tempPath);
             myWriter.write(columns[1]);
             myWriter.close();
@@ -66,7 +66,7 @@ public abstract class Data {
         if(f.delete()){
             System.out.println("file deleted");
         }
-        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('ADMIN','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
+        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.execute();
@@ -116,6 +116,42 @@ public abstract class Data {
             return false;
         }
         return true;
+    }
+
+    public void deleteTables() {
+        try {
+            String str = "drop table Nodes";
+            Statement s = conn.createStatement();
+            s.execute(str);
+            str = "drop table Edges";
+            s.execute(str);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void dropValues() {
+        try {
+            String str = "delete from Nodes";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.execute();
+            str = "delete from Edges";
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        dropValues();
+        deleteTables();
+        try{
+            conn.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     /*public int add(String tableName, Object element) {
         element.

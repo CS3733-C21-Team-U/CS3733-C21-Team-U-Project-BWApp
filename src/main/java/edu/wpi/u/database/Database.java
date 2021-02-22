@@ -14,10 +14,8 @@ public class Database {
     public Database() {
         driver();
         connect();
-        //deleteTables();
+        deleteTables();
         init();
-        //insertNodeData();
-        //insertEdgeData();
     }
 
     public static void driver() {
