@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.DatabaseManager;
+import edu.wpi.u.database.MapData;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ import java.util.LinkedList;
 public class GraphService {
 
   static GraphManager gm = new GraphManager();
-  static DatabaseManager dm;
+  static MapData dm;
 
 
   public static void main (String[] args){
@@ -19,7 +20,7 @@ public class GraphService {
 
   public GraphService() {
     System.out.println("Constrctor for Graph SERVICE");
-    dm = new DatabaseManager();
+    dm = new MapData();
     dm.loadGraph(gm);
   }
 

@@ -10,6 +10,8 @@ import java.sql.*;
 
 public class MapData extends Data{
     public MapData(){
+        db = new Database();
+        connect();
         readCSV("src/main/resources/edu/wpi/u/OutsideMapNodes.csv", "Nodes");
         readCSV("src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "Edges");
     }
@@ -301,5 +303,6 @@ public class MapData extends Data{
         }
         return null;
     }
+
 
 }
