@@ -9,6 +9,9 @@
     -fx-font-weight: bold;
 }
 
+.blue{
+    /*-fx-background-color: blue;*/
+}
 
 .serialConn{
     -fx-font-family: 'Rubik Regular', sans-serif;

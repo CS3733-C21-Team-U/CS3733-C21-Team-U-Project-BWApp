@@ -5,20 +5,24 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
 import edu.wpi.u.uiComponents.ZoomableScrollPane;
 import javafx.animation.Interpolator;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.Observable;
 
 public class NewMainPageController {
 
@@ -51,8 +55,12 @@ public class NewMainPageController {
 
 
         Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
-        GesturePane map = new GesturePane(node);
-
+        AnchorPane outerNode = new AnchorPane(node);
+        outerNode.getStyleClass().add("blue");
+        outerNode.applyCss();
+        GesturePane map = new GesturePane(outerNode);
+        map.setMinScale(0.3);
+        map.setMaxScale(2);
 //        mapView.setFitWidth(4000.0);
 //        mapView.setFitHeight(4000.0);
 //        mapView.setPreserveRatio(true);
