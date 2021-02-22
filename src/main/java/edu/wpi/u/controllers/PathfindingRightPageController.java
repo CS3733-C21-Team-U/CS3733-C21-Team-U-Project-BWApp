@@ -10,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.util.*;
@@ -29,6 +30,11 @@ public class PathfindingRightPageController {
     @FXML
     JFXComboBox endDropField;
 
+    @FXML
+    ListView list;
+
+
+
     GraphService gs = new GraphService();
 
     ObservableList<Node> oList;
@@ -44,6 +50,8 @@ public class PathfindingRightPageController {
         ObservableList<String> oList = FXCollections.observableList(nodeIDs);
         startDropField.setItems(oList); //This sets the observablelist that just got created to the stuff thats in the dropdown
         endDropField.setItems(oList);
+
+
 
     }
 

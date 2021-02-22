@@ -102,13 +102,13 @@ public class LeftDrawerMenuController {
 
 
     public void handleChangeToPathPlanning(ActionEvent actionEvent) {
-        App.rightDrawerRoot.set( "../views/PathPlanning.fxml");
+        App.rightDrawerRoot.set( "../views/PathfindingRightPage.fxml");
         setRectVisibility(1);
         setTextColor(1);
     }
 
     public void handleChangeToRequests(ActionEvent actionEvent) {
-        App.rightDrawerRoot.set( "../views/ViewRequests.fxml");
+        App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
         setRectVisibility(2);
         setTextColor(2);
     }

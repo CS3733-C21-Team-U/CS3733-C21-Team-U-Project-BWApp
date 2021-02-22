@@ -17,13 +17,14 @@ import java.io.IOException;
 public class NewMainPageController {
 
     @FXML
-    public AnchorPane mainAnchorPane;
+    private AnchorPane mainAnchorPane;
     @FXML
-    public JFXHamburger leftMenuHamburger;
+    private JFXHamburger leftMenuHamburger;
     @FXML
-    public JFXDrawer leftMenuDrawer;
+    private JFXDrawer leftMenuDrawer;
     @FXML
-    public JFXDrawer serviceRequestDrawer;
+    private JFXDrawer serviceRequestDrawer;
+
 
     public ImageView mapView;
 
@@ -54,13 +55,13 @@ public class NewMainPageController {
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
+
         App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
         {
             try {
                 rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
                 serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-
-
+                serviceRequestDrawer.open();
             } catch (IOException e) {
                 e.printStackTrace();
             }
