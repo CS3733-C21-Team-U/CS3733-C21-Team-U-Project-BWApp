@@ -31,7 +31,7 @@ public abstract class Data {
     public void readCSV(String filePath, String tableName){
 
         String tempPath = "src/main/resources/edu/wpi/u/temp.csv";
-        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('ADMIN', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
+        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
 
         try {
             String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
@@ -66,7 +66,7 @@ public abstract class Data {
         if(f.delete()){
             System.out.println("file deleted");
         }
-        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('ADMIN','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
+        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.execute();
