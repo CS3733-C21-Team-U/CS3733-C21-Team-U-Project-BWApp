@@ -11,10 +11,8 @@ import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -29,6 +27,10 @@ public class NewRequestController {
     public TextField nodeTextField;
     @FXML
     public TextField assigneeTextField;
+    @FXML
+    public TextField contactTextField;
+    @FXML
+    public SplitMenuButton serviceTypeMenu;
     @FXML
     public Button submitRequestButton;
     @FXML
