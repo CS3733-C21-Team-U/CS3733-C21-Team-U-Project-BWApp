@@ -8,33 +8,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="edgeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="250.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeItemController">
+<AnchorPane fx:id="edgeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeItemController">
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="250.0">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="250.0" />
+      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0" spacing="10.0">
          <children>
-            <Label fx:id="edgeID" prefHeight="25.0" prefWidth="142.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="(Edge A12345)">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Label>
-            <Button fx:id="expandButton" mnemonicParsing="false" onAction="#handleEdgeExpandButton" text="Expand" />
+            <Label fx:id="edgeID" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="251.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="(Edge A12345)" />
+            <Button fx:id="expandButton" mnemonicParsing="false" onAction="#handleEdgeExpandButton" styleClass="button-lightBlue" text="Expand" />
          </children>
-      </HBox>
-      <VBox fx:id="extendedInfo" prefHeight="122.0" prefWidth="250.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      </VBox>
+      <VBox fx:id="extendedInfo" layoutY="56.0" prefHeight="239.0" prefWidth="250.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
          <children>
-            <Label fx:id="startingNode" prefHeight="19.0" prefWidth="228.0" style="-fx-font-size: 16;" text="StartingNode" />
-            <Label fx:id="endingNode" prefHeight="35.0" prefWidth="124.0" style="-fx-font-size: 16;" text="EndingNode">
+            <Label fx:id="startingNode" alignment="CENTER" prefHeight="19.0" prefWidth="294.0" style="-fx-font-size: 14;" text="StartingNode" />
+            <Label fx:id="endingNode" alignment="CENTER" prefHeight="19.0" prefWidth="274.0" style="-fx-font-size: 14;" text="EndingNode">
                <VBox.margin>
-                  <Insets />
+                  <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="250.0" spacing="20.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleEdgeDeleteButton" text="Delete" />
-                  <Button mnemonicParsing="false" onAction="#handleEdgeModifyButton" text="Modify" />
-                  <Button fx:id="collapseButton" mnemonicParsing="false" onAction="#handleEdgeCollapseButton" text="Collapse" />
+                  <Button mnemonicParsing="false" onAction="#handleEdgeDeleteButton" prefWidth="314.0" styleClass="button-lightBlue" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#handleEdgeModifyButton" prefWidth="390.0" styleClass="button-lightBlue" text="Modify" />
+                  <Button fx:id="collapseButton" mnemonicParsing="false" onAction="#handleEdgeCollapseButton" prefWidth="321.0" styleClass="button-lightBlue" text="Collapse" />
                </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="250.0" spacing="20.0">
                <padding>
                   <Insets bottom="20.0" left="-10.0" />
                </padding>

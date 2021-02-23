@@ -20,14 +20,14 @@ public class NodeItemController {
 
     @FXML
     public void handleNodeExpandButton() {
-        nodeAnchor.setPrefHeight(225);
+        nodeAnchor.setPrefHeight(300);
         extendedInfo.setVisible(true);
         expandButton.setVisible(false);
     }
 
     @FXML
     public void handleNodeCollapseButton() {
-        nodeAnchor.setPrefHeight(75);
+        nodeAnchor.setPrefHeight(100);
         extendedInfo.setVisible(false);
         expandButton.setVisible(true);
     }
