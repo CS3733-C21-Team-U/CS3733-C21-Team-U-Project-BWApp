@@ -18,9 +18,11 @@ public class RequestData extends Data{
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
-        s1.add("Kaamil");
+        s1.add("Mary");
         Date d = new Date(900);
-//        addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
+        //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
+      //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
+
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
         saveCSV("Locations", "src/main/resources/edu/wpi/u/Locations.csv", "Location");
         saveCSV("Assignments", "src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
@@ -105,11 +107,12 @@ public class RequestData extends Data{
         }
     }
     public void addAssignee(String userID, String requestID){
-        String str = "insert into Assignments(requestID, userID) values (?,?)";
+        String str = "insert into Assignments(assignmentID, requestID, userID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID);
-            ps.setString(2,userID);
+            ps.setString(1,requestID+"_"+userID);
+            ps.setString(2,requestID);
+            ps.setString(3,userID);
             ps.execute();
         }
         catch (Exception e) {
@@ -117,11 +120,12 @@ public class RequestData extends Data{
         }
     }
     public void addLocation(String nodeID, String requestID){
-        String str = "insert into Locations(requestID, nodeID) values (?,?)";
+        String str = "insert into Locations(locationID, requestID, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID);
-            ps.setString(2,nodeID);
+            ps.setString(1,requestID+"_"+nodeID);
+            ps.setString(2,requestID);
+            ps.setString(3,nodeID);
             ps.execute();
         }
         catch (Exception e) {

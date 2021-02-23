@@ -54,11 +54,11 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                String tbl4 = "create table Assignments(assignmentID int generated always as identity, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
+                String tbl4 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
-                String tbl5 = "create table Locations(locationID int generated always as identity, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl5 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
