@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="nodeAnchor" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" prefHeight="175.0" prefWidth="250.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeItemController">
+   <children>
+      <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox prefHeight="122.0" prefWidth="250.0" AnchorPane.bottomAnchor="-22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="42.0" prefWidth="500.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="119.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Edge ID:">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="edgeID" prefHeight="39.0" prefWidth="200.0" style="-fx-font-size: 16;" text="(Edge A12345)">
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="16.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="8.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="startingNode" prefHeight="19.0" prefWidth="228.0" style="-fx-font-size: 16;" text="StartingNode">
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="endingNode" prefHeight="35.0" prefWidth="124.0" style="-fx-font-size: 16;" text="EndingNode">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
