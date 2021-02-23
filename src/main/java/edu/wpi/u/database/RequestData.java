@@ -63,6 +63,19 @@ public class RequestData extends Data{
         }
     }
 
+    public void addLocation(Request request, String nodeID){
+        String str = "update Location set nodeID=? where requestID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,nodeID);
+            ps.setString(2,request.getRequestID());
+            ps.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void addRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
         String str2 = "insert into Assignments (assignemnetID, requestID, userID) values (?,?,?)";

@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.models.RequestService;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +24,6 @@ public class RequestItemController {
     @FXML public Button deleteRequestButton;
 
     @FXML public Label descriptionLabel;
-//    @FXML public Label title;
-//    @FXML public Label location;
     //@FXML public TextField title;
     //@FXML public TextField location;
 
@@ -54,9 +53,16 @@ public class RequestItemController {
 
     //Listener here for the global drawerstare variable
     @FXML
-    public void handleEditRequest() throws Exception {
-        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml");
+    public void handleChangeToEditRequest() throws Exception {
+        App.rightDrawerRoot.set("../views/EditRequest.fxml");
     }
 
+    @FXML
+    public void handleDeleteRequest() { }
+
+    public void setTitle(String newTitle){
+        titleLabel.setText(newTitle);
+    }
+    public void setLocation(String newLocation){ locationLabel.setText(newLocation); }
 
 }
