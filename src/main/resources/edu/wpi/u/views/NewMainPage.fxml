@@ -14,7 +14,7 @@
         <items>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="TOP" layoutX="1526.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" styleClass="button-blue" text="EXIT (Or Esc Key)">
+                  <Button alignment="CENTER" contentDisplay="TOP" layoutX="1526.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" styleClass="button-blue" stylesheets="@css/RegularTheme.css" text="EXIT (Or Esc Key)">
                      <font>
                         <Font size="32.0" />
                      </font>
