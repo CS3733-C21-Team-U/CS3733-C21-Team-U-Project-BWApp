@@ -94,7 +94,7 @@ public class RequestData extends Data{
             ps.setString(7,request.getType());
 
             // TODO: update other tables as necessary
-
+            
             ps.execute();
 
         }
