@@ -102,9 +102,9 @@ public class NewRequestController {
     }
 
     // Array list to linkedlist converter
-    public static List<String> lLConverter(ArrayList<String> arrayList)
+    public static LinkedList<String> lLConverter(ArrayList<String> arrayList)
     {
-        List<String> newLL = new LinkedList<String>(arrayList);
+        LinkedList<String> newLL = new LinkedList<>(arrayList);
 
         return newLL;
     }
