@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -21,7 +20,7 @@
          <children>
             <HBox>
                <VBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+                  <Insets bottom="18.0" left="10.0" right="20.0" top="20.0" />
                </VBox.margin>
                <children>
                   <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -70,7 +69,7 @@
                         <Rectangle fx:id="flair1" fill="#2e5bff" height="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="5.0" />
                         <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z&#10;&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
                            <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="23.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </SVGPath>
                         <Label fx:id="text1" prefHeight="28.0" prefWidth="618.0" text="Path Planning" textFill="#8a93a0" HBox.hgrow="SOMETIMES">
@@ -95,7 +94,7 @@
                         <Rectangle fx:id="flair2" fill="#2e5bff" height="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="5.0" />
                         <SVGPath content="M3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08z&#10;M18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29z&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
                            <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="23.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </SVGPath>
                         <Label fx:id="text2" prefHeight="28.0" prefWidth="618.0" text="Service Requests" textFill="#8a93a0" HBox.hgrow="SOMETIMES">
@@ -124,7 +123,7 @@
                         </Rectangle>
                         <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 Z&#10;M17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5z&#10;M18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
                            <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="23.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </SVGPath>
                         <Label fx:id="text3" prefHeight="28.0" prefWidth="618.0" text="Admin Tools" textFill="#8a93a0" HBox.hgrow="SOMETIMES">
@@ -149,7 +148,7 @@
                         <Rectangle fx:id="flair4" fill="#2e5bff" height="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="5.0" />
                         <SVGPath content="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
                            <HBox.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="23.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </SVGPath>
                         <Label fx:id="text4" prefHeight="28.0" prefWidth="618.0" text="Settings" textFill="#8a93a0" HBox.hgrow="SOMETIMES">
@@ -165,137 +164,37 @@
                </graphic>
             </JFXToggleNode>
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Label text="Filter Map">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="7.0" prefWidth="110.0">
-               <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: #b2c2ff;" text="Service Needed" textFill="#2e5bff">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                  </Label>
-                  <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="20.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                     <font>
-                        <Font name="Arial" size="10.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="-7.0" top="-6.0" />
-                     </padding>
-                  </JFXToggleButton>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="7.0" prefWidth="110.0">
-               <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(60, 232, 215);" text="In Progress" textFill="#306f71">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="23.0" />
-                     </padding>
-                  </Label>
-                  <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                     <font>
-                        <Font name="Arial" size="10.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="-7.0" top="-6.0" />
-                     </padding>
-                  </JFXToggleButton>
-               </children>
+            <JFXToggleNode fx:id="toggle5" layoutX="10.0" layoutY="277.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="2.0" onAction="#handleExit" prefHeight="55.0" prefWidth="250.0" style="-fx-background-radius: 0;" styleClass="navBtn">
+               <toggleGroup>
+                  <ToggleGroup fx:id="navBar1" />
+               </toggleGroup>
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+               <graphic>
+                  <HBox alignment="CENTER" minWidth="250.0" prefHeight="39.0" prefWidth="746.0" styleClass="nav-item">
+                     <children>
+                        <Rectangle fx:id="flair5" fill="#2e5bff" height="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="5.0" />
+                        <SVGPath content="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="23.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </SVGPath>
+                        <Label fx:id="text5" prefHeight="28.0" prefWidth="618.0" text="Exit Application" textFill="#8a93a0" HBox.hgrow="SOMETIMES">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
-            </HBox>
-            <HBox prefHeight="7.0" prefWidth="110.0">
-               <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(228, 189, 255);" text="Waiting" textAlignment="CENTER" textFill="#4a2762">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="40.0" />
-                     </padding>
-                  </Label>
-                  <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                     <font>
-                        <Font name="Arial" size="10.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="-7.0" top="-6.0" />
-                     </padding>
-                  </JFXToggleButton>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="7.0" prefWidth="110.0">
-               <children>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 2; -fx-background-color: rgb(171, 171, 171);" text="Fully Serviced">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="13.0" />
-                     </padding>
-                  </Label>
-                  <JFXToggleButton contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="30.0" size="8.0" text="Service Needed" toggleColor="#c9e1ff" toggleLineColor="#70bfff" unToggleLineColor="#c9e5ff">
-                     <font>
-                        <Font name="Arial" size="10.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="8.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="-7.0" top="-6.0" />
-                     </padding>
-                  </JFXToggleButton>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
+            </JFXToggleNode>
          </children>
       </VBox>
    </children>

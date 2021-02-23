@@ -1,7 +1,10 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
+import edu.wpi.u.models.AdminToolStorage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +16,11 @@ import java.util.ArrayList;
 public class AdminToolsController {
     @FXML public VBox nodeList;
     @FXML public VBox test;
+
+    @FXML public JFXButton editNodeButton;
+    @FXML public JFXButton editEdgeButton;
+    @FXML public JFXButton newNodeButton;
+    @FXML public JFXButton newEdgeButton;
 
     public void initialize() throws IOException {
 
@@ -27,11 +35,8 @@ public class AdminToolsController {
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
             controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
-            StringBuilder adjacencies = new StringBuilder();
-            for(Node a : currentNodeInfo.getAdjNodes()) {
-                adjacencies.append(a.getNodeID() + ", ");
-            }
-            controller.nodeAdj.setText(adjacencies.toString());
+            controller.XPos = (int)(nodes.get(i).getCords()[0]);
+            controller.YPos = (int)(nodes.get(i).getCords()[1]);
             nodeList.getChildren().add(node);
         }
 
@@ -47,27 +52,30 @@ public class AdminToolsController {
             test.getChildren().add(edge);
         }
 
+        App.AdminStorage.haveSelectedNode.addListener((observable, oldValue, newValue)  ->
+        {
+            if(AdminToolStorage.nodeIsSelected){
+                editNodeButton.setVisible(true);
+                newNodeButton.setVisible(false);
+            }
+        });
+
     }
 
-    @FXML
-    public void handleChangeToEditRequest(){
-        //Switch to a new right drawer
-        App.rightDrawerRoot.set( "../views/EditRequest.fxml");
 
-    }
 
-    @FXML
-    public void handleNewRequestButton() {
-        App.rightDrawerRoot.set( "../views/NewRequest.fxml");
-    }
-
-    @FXML
     public void handleNewNodeButton() {
         App.rightDrawerRoot.set( "../views/NewNode.fxml");
     }
 
-    @FXML
     public void handleNewEdgeButton() {
         App.rightDrawerRoot.set( "../views/NewEdge.fxml");
+    }
+
+    public void handleEditNodeButton(){
+
+    }
+    public void handleEditEdgeButton(){
+
     }
 }
