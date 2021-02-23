@@ -69,25 +69,25 @@ import java.io.IOException;
 
 
         public void handleChangeToPathPlanning(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/PathfindingRightPage.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/PathfindingRightPage.fxml");
             setRectVisibility(1);
             setTextColor(1);
         }
 
         public void handleChangeToRequests(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
             setRectVisibility(2);
             setTextColor(2);
         }
 
         public void handleChangeToAdmin(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
             setRectVisibility(3);
             setTextColor(3);
         }
 
         public void handleChangeToSettings(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/Settings.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/Settings.fxml");
             setRectVisibility(4);
             setTextColor(4);
         }

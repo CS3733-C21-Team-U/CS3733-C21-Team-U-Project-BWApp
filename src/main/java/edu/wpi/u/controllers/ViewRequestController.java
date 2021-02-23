@@ -29,7 +29,7 @@ public class ViewRequestController {
         ArrayList<Request> listOfRequests = App.requestService.getRequests();
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
-            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("../views/RequestItem.fxml"));
+            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/RequestItem.fxml"));
             AnchorPane request = requestLoader.load();
             RequestItemController controller = requestLoader.getController();
             String temp = listOfRequests.get(i).getTitle();
@@ -44,12 +44,12 @@ public class ViewRequestController {
     @FXML
     public void handleChangeToEditRequest(){
         //Switch to a new right drawer
-        App.rightDrawerRoot.set( "../views/EditRequest.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/EditRequest.fxml");
 
     }
 
     @FXML
     public void handleNewRequestButton() {
-        App.rightDrawerRoot.set( "../views/NewRequest.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/NewRequest.fxml");
     }
 }
