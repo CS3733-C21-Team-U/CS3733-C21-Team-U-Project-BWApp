@@ -132,7 +132,7 @@ public abstract class Data {
             e.printStackTrace();
         }
     }
-
+    //Deprecated
     public void dropValues() {
         try {
             Statement ps = conn.createStatement();

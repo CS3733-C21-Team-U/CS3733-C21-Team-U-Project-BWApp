@@ -103,31 +103,32 @@ public class Database {
             s.execute(str);
         }
         catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
     public void dropValues() {
+        System.out.println("here2");
         try {
-            Statement ps = conn.createStatement();
-            String str = "alter table Locations drop constraint nodeID";
-            ps.execute(str);
+            Statement s = conn.createStatement();
+            String str = "alter table Locations drop column nodeID";
+            s.execute(str);
+            str = "alter table Locations drop column requestID";
+            s.execute(str);
+            str = "alter table Assignments drop column requestID";
+            s.execute(str);
             str = "delete from Nodes";
-            ps.execute(str);
+            s.execute(str);
             str = "delete from Edges";
-            ps.execute(str);
-            str = "alter table Locations drop constraint requestID";
-            ps.execute(str);
-            str = "alter table Assignments drop constraint requestID";
-            ps.execute(str);
+            s.execute(str);
             str = "delete from Requests";
-            ps.execute(str);
+            s.execute(str);
             str = "delete from Locations";
-            ps.execute(str);
+            s.execute(str);
             str = "delete from Assigments";
-            ps.execute(str);
+            s.execute(str);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            //throwables.printStackTrace();
         }
     }
 
