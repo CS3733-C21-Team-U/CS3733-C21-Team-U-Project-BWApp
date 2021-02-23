@@ -98,6 +98,7 @@ public class PathfindingRightPageController {
                 } else {
                     System.out.println("SENDING THE LIST TO PATHHANDLING");
                     App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+
                 }
             }
         } catch (Exception e){

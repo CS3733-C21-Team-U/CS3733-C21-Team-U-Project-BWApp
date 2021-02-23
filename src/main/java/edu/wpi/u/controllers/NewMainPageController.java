@@ -46,6 +46,7 @@ public class NewMainPageController {
     AnchorPane rightServiceRequestPane;
 
 
+
     public void initialize() throws IOException {
         AnchorPane leftMenuPane;
         leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
@@ -57,13 +58,15 @@ public class NewMainPageController {
 
 
 
-        Node node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
+        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
+        node.setFitWidth(3000);
+        node.setPreserveRatio(true);
         AnchorPane pane = new AnchorPane(node);
-        SVGPath pathFindingPath = new SVGPath();
-        pathFindingPath.setContent(PathHandling.SVGPath);
+        App.pathFindingPath = new SVGPath();
+        pathFindingPath.setContent(App.PathHandling.SVGPath);
         pathFindingPath.setStrokeWidth(5);
         pane.getChildren().add(pathFindingPath);
-        pane.getChildren().get(1).toFront();
+        pathFindingPath.toFront();
         GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
@@ -106,6 +109,10 @@ public class NewMainPageController {
                 e.printStackTrace();
             }
         });
+
+
+
+
 
         map.scaleXProperty().addListener((observable, oldValue, newValue)  ->
         {

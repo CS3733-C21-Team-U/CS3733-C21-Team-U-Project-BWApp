@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -32,6 +34,7 @@ public class App extends Application {
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
   public static PathHandling PathHandling = new PathHandling();
+  public SVGPath pathFindingPath;
 
 
   public App(){
@@ -87,6 +90,12 @@ public class App extends Application {
       }
     });
   }
+
+  public void updateMap(){
+    NewMainPageController.
+  }
+
+
 
   public static Stage getPrimaryStage() {
     return primaryStage;
