@@ -64,11 +64,19 @@ public class EditRequestController {
 
     private boolean doesLocationExist() {
         for(int i = 0; i < request.getLocation().size(); i++) {
-
+            if (editLocField.equals(request.getLocation().get(i))) {
+                return true;
+            } return false;
         }
     }
 
-    private boolean doesPersonExist() {}
+    private boolean doesPersonExist() {
+        for(int i = 0; i < request.getStaff().size(); i++) {
+            if (editPeopleField.equals(request.getStaff().get(i))) {
+                return true;
+            } return false;
+        }
+    }
 
     private Request makeDummyRequest(){
         Request request = new Request("Bobby", "Bobby wants a good steak.", "King of the Hill");
@@ -80,13 +88,37 @@ public class EditRequestController {
         return request;
     }
 
-    public void handleAddLocation() {}
+    public void handleAddLocation() {
+        String newLoc = editLocField.getText();
+        if(!doesLocationExist()) {
+            location.add(newLoc);
+        } editLocationErrorLabel.setText("Location Already Listed.");
+    }
 
-    public void handleDeleteLocation() {}
+    public void handleDeleteLocation() {
+        for(int i = 0; i < request.getLocation().size(); i++) {
+            if (editLocField.equals(request.getLocation().get(i))) {
+                request.getLocation().remove(request.getLocation().get(i));
+                return;
+            }
+        } editLocationErrorLabel.setText("Location Does Not Exist");
+    }
 
-    public void handleAddPeople() {}
+    public void handleAddPeople() {
+        String newPer = editPeopleField.getText();
+        if(!doesPersonExist()) {
+            staff.add(newPer);
+        } editPeopleErrorLabel.setText("Person Already Listed.");
+    }
 
-    public void handleDeletePeople() {}
+    public void handleDeletePeople() {
+        for(int i = 0; i < request.getStaff().size(); i++) {
+            if (editPeopleField.equals(request.getStaff().get(i))) {
+                request.getStaff().remove(request.getStaff().get(i));
+                return;
+            }
+        } editPeopleErrorLabel.setText("Person Does Not Exist");
+    }
 
     public void handleCancel() { App.rightDrawerRoot.set("../views/ViewRequest.fxml"); }
 
