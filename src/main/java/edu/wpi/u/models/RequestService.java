@@ -17,6 +17,9 @@ public class RequestService {
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
+    for (Request x : this.activeRequests){
+      System.out.println("Req: "+ x.getRequestID());
+    }
   }
 
   /*
@@ -96,7 +99,7 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    boolean debug = true;
+    boolean debug = false;
     if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array
       ArrayList<Request> temp = new ArrayList<Request>();
       LinkedList<String> list = new LinkedList<String>();
