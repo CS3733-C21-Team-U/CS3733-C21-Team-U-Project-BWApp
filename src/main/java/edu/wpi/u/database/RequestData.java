@@ -136,7 +136,7 @@ public class RequestData extends Data{
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1, (java.sql.Date) request.getDateCompleted());
+            ps.setDate(1, (Date) request.getDateCompleted());
             ps.setString(2,request.getRequestID());
             ps.execute();
         }
