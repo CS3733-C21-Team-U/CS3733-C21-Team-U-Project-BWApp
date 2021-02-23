@@ -16,6 +16,9 @@ public class ViewRequestController {
 
     @FXML public VBox requestList;
 
+
+
+
     public void initialize() throws IOException {
 
         ArrayList<Request> listOfRequests = App.requestService.getRequests();
