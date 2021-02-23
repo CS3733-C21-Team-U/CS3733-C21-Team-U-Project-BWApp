@@ -109,4 +109,8 @@ import java.io.IOException;
             setRectVisibility(4);
             setTextColor(4);
         }
+
+        public void handleExit(ActionEvent actionEvent) {
+            App.getInstance().stop();
+        }
     }

@@ -147,13 +147,6 @@ public class NewMainPageController {
     }
 
 
-
-
-    @FXML
-    public void handleExitButton() {
-        App.getInstance().stop();
-    }
-
     @FXML
     public void handleZoomOutButton() {
 //        map.currentScaleProperty().setValue(map.getCurrentScale()/1.4);

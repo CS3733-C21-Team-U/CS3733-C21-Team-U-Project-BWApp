@@ -57,4 +57,8 @@ public class LeftDrawerMenuSmallController {
         App.rightDrawerRoot.set( "/edu/wpi/u/views/Settings.fxml");
         App.leftMenuScreenNum = 4;
     }
+
+    public void handleExit(ActionEvent actionEvent) {
+        App.getInstance().stop();
+    }
 }

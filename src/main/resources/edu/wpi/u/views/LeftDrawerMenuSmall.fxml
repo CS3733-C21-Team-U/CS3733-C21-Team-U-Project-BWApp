@@ -83,6 +83,28 @@
                </graphic>
             </JFXToggleNode>
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <JFXToggleNode fx:id="toggle5" layoutX="10.0" layoutY="274.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="2.0" onAction="#handleExit" prefHeight="55.0" prefWidth="80.0" style="-fx-background-radius: 0;" styleClass="navBtn">
+               <toggleGroup>
+                  <ToggleGroup fx:id="navBar1" />
+               </toggleGroup>
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+               <graphic>
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="80.0" styleClass="nav-item">
+                     <children>
+                        <SVGPath content="&#10;M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z&#10;" fill="#8a93a0" fillRule="EVEN_ODD" stroke="#ff000000">
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </SVGPath>
+                     </children>
+                  </HBox>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </JFXToggleNode>
          </children>
       </VBox>
    </children>

@@ -39,10 +39,6 @@ public class NewRequestController {
     @FXML
     public Button assigneeButton;
     @FXML
-    public ListView assigneeList;
-    @FXML
-    public ListView locationList;
-    @FXML
     public Button locationButton;
     @FXML
     public Button cancelButton;
@@ -53,7 +49,11 @@ public class NewRequestController {
     @FXML
     public Label errorMessage3;
     @FXML
-    ComboBox locationDropField;
+    public ListView locationList;
+    @FXML
+    public ListView assigneeList;
+    @FXML
+    ChoiceBox locationDropField;
 
 
     GraphService gs = new GraphService();
