@@ -28,7 +28,7 @@ public class NewRequestController {
 
     @FXML public Button cancelButton;
     @FXML public TextField titleTextField;
-    @FXML public TextField descriptionTextField;
+    @FXML public TextArea descriptionTextField;
     @FXML public Label errorMessage2;
     @FXML public TextField assigneeTextField;
     @FXML public Button assigneeButton;
@@ -53,12 +53,13 @@ public class NewRequestController {
     public ArrayList<String> locationArrayList = new ArrayList<String>();
 //
     public void handleAssigneeList() {
-        if (titleTextField.getText().equals("")) {
+        if (assigneeTextField.getText().equals("")) {
             errorMessage2.setText("Please enter an assignee!");
         } else {
             assigneeArrayList.add(assigneeTextField.getText());
             assigneeList.getItems().add(assigneeTextField.getText());
             assigneeTextField.setText("");
+            errorMessage2.setText("");
             //System.out.println("call");}
         }
     }
@@ -75,13 +76,14 @@ public class NewRequestController {
     }
 
     public void handleAddLocation(){
-        if (locationDropField.getValue().toString().equals("")) {
+        if (locationDropField.getValue() == null) {
             errorMessage3.setText("Please enter a node!");
         } else {
             locationArrayList.add(locationDropField.getValue().toString());
             locationList.getItems().add(locationDropField.getValue().toString());
-            locationDropField.setItems(null);
-            //System.out.println("call");}
+            // clears combobox
+            locationDropField.setValue(null);
+            errorMessage3.setText("");
         }
 
     }

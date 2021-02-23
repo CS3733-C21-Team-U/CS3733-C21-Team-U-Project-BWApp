@@ -79,6 +79,19 @@
     -fx-background-color: -blueTint;
 }
 
+.text-area{
+
+    -fx-min-height: 40px;
+    -fx-border-radius: 5;
+    -fx-border-style: solid;
+
+    -fx-border-color: -lightBlue;
+    -fx-text-fill: -blue;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: -grey;
+    -fx-background-color: -blueTint;
+}
+
 .button{
     -fx-font-family: 'Rubik Medium';
     -fx-pref-height: 40px;
