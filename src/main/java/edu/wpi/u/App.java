@@ -1,7 +1,7 @@
 package edu.wpi.u;
 
-import edu.wpi.u.database.Database;
 import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -25,13 +26,14 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static AnchorPane pane;
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = new Database();
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
+  public static PathHandling PathHandling = new PathHandling();
+  public SVGPath pathFindingPath;
 
 
 
@@ -89,12 +91,19 @@ public class App extends Application {
     });
   }
 
+  public void updateMap(){
+    NewMainPageController.
+  }
+
+
+
   public static Stage getPrimaryStage() {
     return primaryStage;
   }
 
   public void stop() {
     System.out.println("Shutting Down");
+    graphService.saveAndExitDB();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
