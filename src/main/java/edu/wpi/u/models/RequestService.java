@@ -96,7 +96,20 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    return new ArrayList<Request>(this.activeRequests);
+    boolean debug = true;
+    if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array
+      ArrayList<Request> temp = new ArrayList<Request>();
+      LinkedList<String> list = new LinkedList<String>();
+      list.add("Nothing");
+      list.add("Here");
+      Request r1 = new Request("FakeID",list ,new Date(1000), new Date(2000),"No Description","Fake Title",list, "No Type","Admin");
+      temp.add(r1);
+      return temp;
+
+    }else{
+      return new ArrayList<Request>(this.activeRequests);
+    }
+
     /*
     Returns an ArrayList of all Node Objects in the graph
      */

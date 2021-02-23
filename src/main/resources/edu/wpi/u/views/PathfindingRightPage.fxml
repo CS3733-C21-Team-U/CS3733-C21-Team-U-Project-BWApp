@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.PathfindingRightPageController">
    <children>
-      <VBox prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" prefWidth="500.0" styleClass="label-header" text="Navigation" />
             <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0">
@@ -21,49 +24,68 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="entryTypeButton" mnemonicParsing="false" onAction="#handleEntryTypeButton" prefWidth="130.0" styleClass="button-blue" text="List Entry">
+            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="500.0" VBox.vgrow="NEVER">
+               <children>
+                  <JFXToggleNode fx:id="listEntryButton" onAction="#handleListEntryButton" prefHeight="40.0" prefWidth="150.0" text="List Entry">
+                     <styleClass>
+                        <String fx:value="button-lightBlue" />
+                        <String fx:value="button" />
+                        <String fx:value="attached-left" />
+                     </styleClass>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="textList" />
+                     </toggleGroup>
+                  </JFXToggleNode>
+                  <JFXToggleNode fx:id="textEntryButton" onAction="#handleTextEntryButton" prefHeight="40.0" prefWidth="150.0" selected="true" text="Text Entry" toggleGroup="$textList">
+                     <styleClass>
+                        <String fx:value="button-lightBlue" />
+                        <String fx:value="button" />
+                        <String fx:value="attached-right" />
+                     </styleClass>
+                  </JFXToggleNode>
+               </children>
                <VBox.margin>
-                  <Insets left="360.0" top="5.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
-            </Button>
+            </HBox>
             <HBox prefHeight="40.0" prefWidth="500.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="80.0" styleClass="label-sub-header" text="Start:">
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="65.0" styleClass="label-sub-header" text="Start:">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <JFXTextField fx:id="startTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
-                  <JFXComboBox fx:id="startDropField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" visible="false">
+                  <TextField fx:id="startTextField" prefWidth="300.0" promptText="Enter Node" />
+                  <ChoiceBox fx:id="startDropField" prefHeight="50.0" prefWidth="280.0" visible="false">
                      <HBox.margin>
-                        <Insets left="-200.0" />
+                        <Insets left="-280.0" />
                      </HBox.margin>
-                  </JFXComboBox>
+                  </ChoiceBox>
                </children>
             </HBox>
             <HBox prefHeight="40.0" prefWidth="500.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="80.0" styleClass="label-sub-header" text="End:">
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="65.0" styleClass="label-sub-header" text="End:">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <JFXTextField fx:id="endTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
-                  <JFXComboBox fx:id="endDropField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" visible="false">
+                  <TextField fx:id="endTextField" prefWidth="300.0" promptText="Enter Node" />
+                  <ChoiceBox fx:id="endDropField" prefHeight="75.0" prefWidth="280.0" visible="false">
                      <HBox.margin>
-                        <Insets left="-200.0" />
+                        <Insets left="-280.0" />
                      </HBox.margin>
-                  </JFXComboBox>
+                  </ChoiceBox>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="findPathButton" mnemonicParsing="false" onAction="#handleFindPathButton" prefWidth="110.0" styleClass="button-yellow" text="Find Path">
+            <JFXButton fx:id="findPathButton" alignment="TOP_CENTER" contentDisplay="CENTER" onAction="#handleFindPathButton" styleClass="button-blue" text="Find Path">
                <VBox.margin>
-                  <Insets left="195.0" top="20.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
-            </Button>
+            </JFXButton>
             <JFXDrawer fx:id="errorDrawer" defaultDrawerSize="500.0" direction="RIGHT" miniDrawerSize="0.0" onMouseClicked="#handleErrorMessageClear" prefHeight="50.0">
                <VBox.margin>
                   <Insets top="20.0" />

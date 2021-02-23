@@ -20,7 +20,7 @@ public class ViewRequestController {
 
 
     public void initialize() throws IOException {
-
+        System.out.println("In Init for View Request");
         ArrayList<Request> listOfRequests = App.requestService.getRequests();
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
