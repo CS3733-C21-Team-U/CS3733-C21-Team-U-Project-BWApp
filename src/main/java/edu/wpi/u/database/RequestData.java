@@ -85,6 +85,7 @@ public class RequestData extends Data{
 
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            // PreparedStatement ps2 = conn.prepareStatement(str2);
 
             ps.setString(1,request.getRequestID());
             ps.setDate(2, (java.sql.Date) request.getDateCreated());
@@ -92,10 +93,23 @@ public class RequestData extends Data{
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
             ps.setString(7,request.getType());
+            ps.execute();
 
             // TODO: update other tables as necessary
+
             
             ps.execute();
+
+
+            ps.setString(1, request.getRequestID());
+
+            // Adding data into joint tables
+            for(String locationID : request.getLocation()){
+                addLocation(locationID, request.getRequestID());
+            }
+            for(String assignmentID : request.getAssignee()){
+                addAssignee(assignmentID, request.getRequestID());
+            }
 
         }
         catch (Exception e){
@@ -103,6 +117,37 @@ public class RequestData extends Data{
         }
 
     }
+
+    public void addAssignee(String userID, String requestID){
+        String str = "insert into Assignments(requestID, userID) values (?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+
+            ps.setString(1,requestID);
+            ps.setString(2,userID);
+
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addLocation(String nodeID, String requestID){
+        String str = "insert into Locations(requestID, nodeID) values (?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+
+            ps.setString(1,requestID);
+            ps.setString(2,nodeID);
+
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void delRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
