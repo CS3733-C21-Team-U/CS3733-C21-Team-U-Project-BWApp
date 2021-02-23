@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.svg.SVGGlyph?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,17 +12,21 @@
    <children>
       <SplitPane dividerPositions="0.09554730983302412" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0">
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0" style="-fx-background-color: white;">
                <children>
                   <Button alignment="CENTER" contentDisplay="TOP" layoutX="1526.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="0.0" prefWidth="364.0" styleClass="button-blue" stylesheets="@css/RegularTheme.css" text="EXIT (Or Esc Key)">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Button>
-                  <JFXHamburger fx:id="leftMenuHamburger" layoutX="19.0" layoutY="14.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" onMouseClicked="#leftMenuToggle" prefHeight="50.0" prefWidth="50.0" />
+                  <SVGGlyph fill="TRANSPARENT" layoutX="15.0" layoutY="8.0" onMouseClicked="#leftMenuToggle">
+                     <children>
+                        <SVGPath fx:id="leftMenuHamburger" content="M0,13.225V11.336H11v1.889ZM0,7.557V5.668H18V7.557ZM0,1.889V0H18V1.889Z" fill="#bfc5d2" layoutX="22.0" layoutY="25.0" scaleX="1.5" scaleY="1.5" />
+                     </children>
+                  </SVGGlyph>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #edf1ff;">
                <children>
                   <Button layoutX="1310.0" layoutY="880.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
                      <graphic>
@@ -33,7 +37,8 @@
                      <graphic>
                         <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
                      </graphic></Button>
-                   <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1000.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <fx:include source="LeftDrawerMenuSmall.fxml" />
+                   <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" layoutY="-88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1082.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                    <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>

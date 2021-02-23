@@ -23,9 +23,10 @@ import java.io.IOException;
 public class NewMainPageController {
 
     @FXML
-    private AnchorPane mainAnchorPane;
+    public SVGPath leftMenuHamburger;
     @FXML
-    private JFXHamburger leftMenuHamburger;
+    private AnchorPane mainAnchorPane;
+
     @FXML
     private JFXDrawer leftMenuDrawer;
     @FXML
@@ -37,14 +38,15 @@ public class NewMainPageController {
     static final Duration DURATION = Duration.millis(300);
 
     AnchorPane rightServiceRequestPane;
+    AnchorPane leftMenuPane;
 
 
 
     public void initialize() throws IOException {
-        AnchorPane leftMenuPane;
         leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
+
         rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequest.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
@@ -117,6 +119,17 @@ public class NewMainPageController {
             }
         });
 
+        App.leftDrawerRoot.addListener((observable, oldValue, newValue)  ->
+        {
+            try {
+                leftMenuPane = FXMLLoader.load(getClass().getResource(newValue));
+                leftMenuDrawer.setSidePane(leftMenuPane);
+                leftMenuDrawer.open();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
 
 
     }
@@ -125,10 +138,11 @@ public class NewMainPageController {
 
     @FXML
     public void leftMenuToggle() throws Exception {
-        if(leftMenuDrawer.isOpened()){
-            leftMenuDrawer.close();
-        } else{
-            leftMenuDrawer.open();
+        if(App.leftDrawerRoot.getValue().equals("/edu/wpi/u/views/LeftDrawerMenu.fxml")){
+            leftMenuDrawer.setPrefSize(80,1000);
+            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenuSmall.fxml");
+        }else{
+            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenu.fxml");
         }
     }
 
