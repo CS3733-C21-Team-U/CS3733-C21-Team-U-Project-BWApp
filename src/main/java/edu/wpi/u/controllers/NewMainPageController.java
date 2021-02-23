@@ -3,29 +3,18 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
-import edu.wpi.u.models.PathHandling;
-import edu.wpi.u.uiComponents.ZoomableScrollPane;
 import javafx.animation.Interpolator;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
-import java.util.Observable;
 
 public class NewMainPageController {
 
@@ -63,7 +52,7 @@ public class NewMainPageController {
         node.setPreserveRatio(true);
         AnchorPane pane = new AnchorPane(node);
         App.pathFindingPath = new SVGPath();
-        App.pathFindingPath.setContent(App.PathHandling.SVGPath);
+        App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
         App.pathFindingPath.setStrokeWidth(5);
         pane.getChildren().add(App.pathFindingPath);
         App.pathFindingPath.toFront();
