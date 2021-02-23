@@ -58,9 +58,7 @@ public class RequestItemController {
     }
 
     @FXML
-    public void handleDeleteRequest() {
-
-    }
+    public void handleDeleteRequest() { }
 
     public void setTitle(String newTitle){
         titleLabel.setText(newTitle);
