@@ -8,9 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,6 +66,12 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
+//    Label label = new Label("Hello World");
+////    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
+//    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
+//    Scene scene = new Scene(label);
+//    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
+    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
     App.primaryStage.setScene(scene);
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();

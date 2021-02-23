@@ -45,10 +45,10 @@ public class NewMainPageController {
 
     public void initialize() throws IOException {
         AnchorPane leftMenuPane;
-        leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
+        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewRequest.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequest.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 

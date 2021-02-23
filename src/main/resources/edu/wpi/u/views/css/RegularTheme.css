@@ -1,12 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
 @font-face {
-    font-family: 'Rubik Regular', sans-serif;
-    src: url('./Rubik-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Rubik Bold';
-    url('./Rubik-Bold.ttf');
-    -fx-font-weight: bold;
+    -fx-font-family: 'Rubik';
+    src: url('Rubik-Regular.ttf');
+    /*-fx-font-weight: bold;*/
 }
 /*Base colors here------------------------*/
 
@@ -19,7 +15,7 @@
 }
 
 .root{
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-font-family: 'Rubik';
 }
 
 .background {
