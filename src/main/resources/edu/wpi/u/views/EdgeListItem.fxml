@@ -28,8 +28,8 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleEdgeDeleteButton" prefWidth="314.0" styleClass="button-lightBlue" text="Delete" />
-                  <Button mnemonicParsing="false" onAction="#handleEdgeModifyButton" prefWidth="390.0" styleClass="button-lightBlue" text="Modify" />
+                  <Button mnemonicParsing="false" onAction="#handleEdgeDeleteButton" prefWidth="314.0" styleClass="button-red" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#handleEdgeModifyButton" prefWidth="390.0" styleClass="button-green" text="Modify" />
                   <Button fx:id="collapseButton" mnemonicParsing="false" onAction="#handleEdgeCollapseButton" prefWidth="321.0" styleClass="button-lightBlue" text="Collapse" />
                </children>
                <VBox.margin>
