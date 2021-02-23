@@ -34,7 +34,7 @@ public class App extends Application {
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
   public static PathHandling PathHandling = new PathHandling();
-  public SVGPath pathFindingPath;
+  public static SVGPath pathFindingPath;
 
 
   public App(){
@@ -91,9 +91,9 @@ public class App extends Application {
     });
   }
 
-  public void updateMap(){
-    NewMainPageController.
-  }
+//  public void updateMap(){
+//    NewMainPageController.
+//  }
 
 
 

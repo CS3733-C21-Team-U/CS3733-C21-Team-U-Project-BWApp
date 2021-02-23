@@ -63,10 +63,10 @@ public class NewMainPageController {
         node.setPreserveRatio(true);
         AnchorPane pane = new AnchorPane(node);
         App.pathFindingPath = new SVGPath();
-        pathFindingPath.setContent(App.PathHandling.SVGPath);
-        pathFindingPath.setStrokeWidth(5);
-        pane.getChildren().add(pathFindingPath);
-        pathFindingPath.toFront();
+        App.pathFindingPath.setContent(App.PathHandling.SVGPath);
+        App.pathFindingPath.setStrokeWidth(5);
+        pane.getChildren().add(App.pathFindingPath);
+        App.pathFindingPath.toFront();
         GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
@@ -116,11 +116,11 @@ public class NewMainPageController {
 
         map.scaleXProperty().addListener((observable, oldValue, newValue)  ->
         {
-            pathFindingPath.setScaleX((Double) newValue);
+            App.pathFindingPath.setScaleX((Double) newValue);
         });
         map.scaleYProperty().addListener((observable, oldValue, newValue)  ->
         {
-            pathFindingPath.setScaleY((Double) newValue);
+            App.pathFindingPath.setScaleY((Double) newValue);
         });
 
 
