@@ -50,27 +50,39 @@ public class RequestData extends Data{
         return results;
     }
 
+    public void addAssignee(Request request, String userID){
+        String str = "update Assignments set userID=? where requestID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,userID);
+            ps.setString(2,request.getRequestID());
+            ps.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void addRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
-        String str2 = "insert into RANJoint (requestID, assigneeID, nodeID) values (?,?,?)";
+        String str2 = "insert into Assignments (assignemnetID, requestID, userID) values (?,?,?)";
+        String str3 = "insert into Locations (locationID, requestID, nodeID) values (?,?,?)";
+
         // NODES IN locations LinkedList SHOULD ALREADY EXIST -> might neeed to maek sure they do?
 
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            PreparedStatement ps2 = conn.prepareStatement(str2);
 
             ps.setString(1,request.getRequestID());
             ps.setDate(2, (java.sql.Date) request.getDateCreated());
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
-            //ps.setString(6,request.getLocation()); TODO: Change this
             ps.setString(7,request.getType());
 
             // TODO: update other tables as necessary
 
             ps.execute();
-            ps2.execute();
 
         }
         catch (Exception e){

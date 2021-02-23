@@ -5,16 +5,15 @@ import java.util.Date;
 
 public class  Request {
     String title;
-    String description;;
-    String location;
+    String description;
     Date dateCreated;
     Date dateCompleted;
-    ArrayList<String> staff;
 
-    public Request(String title, String description, String location) {
+    public Request(String title, String description, Date dateCreated, Date dateCompleted) {
         this.title = title;
         this.description = description;
-        this.location = location;
+        this.dateCreated = dateCreated;
+        this.dateCompleted = dateCompleted;
     }
 
     public String getTitle() {
