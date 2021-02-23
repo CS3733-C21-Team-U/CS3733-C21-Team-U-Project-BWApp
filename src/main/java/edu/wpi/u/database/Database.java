@@ -63,13 +63,19 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
+                /*
                 String tbl4 = "create table Assignees(assigneeID varchar(50) not null, name varchar(50), primary key(assigneeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
+                 */
 
-                String tbl5 = "create table RANJoint(requestID varchar(50) not null , assigneeID varchar(50), nodeID varchar(50) not null)";
+                String tbl5 = "create table Assignments(assignmentID varchar(50) generated as identity, requestID references Requests, userID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
+
+                String tbl6 = "create table Locations(locationID varchar(50) generated as identity, requestID references Requests, nodeID references Nodes, primary key(locationID))";
+                PreparedStatement ps6 = conn.prepareStatement(tbl6);
+                ps6.execute();
 
             }
         } catch (SQLException e) {

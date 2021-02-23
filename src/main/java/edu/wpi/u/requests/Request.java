@@ -65,6 +65,10 @@ public class Request {
         return location;
     }
 
+    public LinkedList<String> getAssignee() {
+        return assignee;
+    }
+
     public String getType() {
         return type;
     }
