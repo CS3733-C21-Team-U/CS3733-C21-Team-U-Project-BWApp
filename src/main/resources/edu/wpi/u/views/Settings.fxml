@@ -177,7 +177,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#HandleRequestLocation" prefHeight="30.0" text="attached-right">
+                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" text="attached-right">
                      <HBox.margin>
                         <Insets left="-3.0" />
                      </HBox.margin>
