@@ -60,4 +60,14 @@ public class AdminToolsController {
     public void handleNewRequestButton() {
         App.rightDrawerRoot.set( "../views/NewRequest.fxml");
     }
+
+    @FXML
+    public void handleNewNodeButton() {
+        App.rightDrawerRoot.set( "../views/NewNode.fxml");
+    }
+
+    @FXML
+    public void handleNewEdgeButton() {
+        App.rightDrawerRoot.set( "../views/NewEdge.fxml");
+    }
 }
