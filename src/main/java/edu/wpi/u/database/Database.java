@@ -108,7 +108,7 @@ public class Database {
     }
 
     public void dropValues() {
-        System.out.println("here2");
+        //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
             String str = "alter table Locations drop column nodeID";
