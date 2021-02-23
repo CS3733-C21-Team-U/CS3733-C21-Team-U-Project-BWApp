@@ -54,11 +54,13 @@ public class RequestItemController {
     //Listener here for the global drawerstare variable
     @FXML
     public void handleChangeToEditRequest() throws Exception {
-        App.rightDrawerRoot.set("../views/EditRequest.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml");
     }
 
     @FXML
-    public void handleDeleteRequest() { }
+    public void handleDeleteRequest() {
+        App.requestService.deleteRequest(App.requestService.getRequests().get(App.getInstance().requestClicked).getRequestID());
+    }
 
     public void setTitle(String newTitle){
         titleLabel.setText(newTitle);
