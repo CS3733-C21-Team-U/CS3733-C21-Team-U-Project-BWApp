@@ -26,7 +26,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Label fx:id="locationLabel" alignment="TOP_CENTER" layoutX="72.0" layoutY="68.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="357.0" text="Location" wrapText="true">
+      <Label fx:id="locationLabel" alignment="TOP_CENTER" layoutX="35.0" layoutY="54.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" prefWidth="394.0" text="Location" wrapText="true">
          <effect>
             <Lighting>
                <bumpInput>
@@ -37,9 +37,6 @@
                </light>
             </Lighting>
          </effect>
-         <font>
-            <Font name="Rubik Bold" size="26.0" />
-         </font>
       </Label>
    </children>
 </AnchorPane>
