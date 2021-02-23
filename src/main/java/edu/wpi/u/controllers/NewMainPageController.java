@@ -3,6 +3,7 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
+import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.uiComponents.ZoomableScrollPane;
 import javafx.animation.Interpolator;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -54,10 +56,11 @@ public class NewMainPageController {
 
 
 
-        Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
+        Node node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
         AnchorPane pane = new AnchorPane(node);
-        pane.getStyleClass().add("blue");
-        pane.applyCss();
+        SVGPath pathFindingPath = new SVGPath();
+        pathFindingPath.setContent(PathHandling.SVGPath);
+        pane.getChildren().add(pathFindingPath);
         GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
