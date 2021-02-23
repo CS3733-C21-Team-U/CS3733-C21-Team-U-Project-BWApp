@@ -25,7 +25,7 @@ public class App extends Application {
   public static App app_instance = null;
 
   public static AnchorPane pane;
-  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
+  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
 
@@ -65,7 +65,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
 ////    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
@@ -84,6 +84,10 @@ public class App extends Application {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");
         App.getInstance().stop();
+      }
+      if (e.getCode() == KeyCode.CAPS) {
+        System.out.println("Control button pressed, exiting fullscreen");
+        App.primaryStage.setFullScreen(false);
       }
     });
   }
