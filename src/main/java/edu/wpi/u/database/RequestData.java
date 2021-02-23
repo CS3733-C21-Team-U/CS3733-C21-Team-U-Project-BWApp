@@ -10,20 +10,20 @@ import java.util.LinkedList;
 
 public class RequestData extends Data{
 
-    public RequestData(){
+    public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
     }
 
-    public void updateRequest(Request request){
+    public void updateRequest(Request request){ // TODO: Add assignee and location stuff
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         //this.updRequestLocation(request.getRequestID(), request.getLocation()); TODO: Change to list
         this.updRequestType(request.getRequestID(), request.getType());
     }
 
-    public ArrayList<Request> loadActiveRequests(){
+    public ArrayList<Request> loadActiveRequests(){ // TODO: Add assignee and location stuff
         ArrayList<Request> results = new ArrayList<Request>();
         String str = "select * from Requests where dateCompleted is null";
         try{
@@ -50,10 +50,17 @@ public class RequestData extends Data{
         return results;
     }
 
-    public void addRequest(Request request) {
+    public void addRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
+        String str2 = "insert into Assignees (assigneeID, name) values (?, ?)";
+        String str3 = "insert into RANJoint (requestID, assigneeID, nodeID) values (?,?,?)";
+        // NODES IN locations LinkedList SHOULD ALREADY EXIST -> might neeed to maek sure they do?
+
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            PreparedStatement ps2 = conn.prepareStatement(str2);
+            PreparedStatement ps3 = conn.prepareStatement(str3);
+
             ps.setString(1,request.getRequestID());
             ps.setDate(2, (java.sql.Date) request.getDateCreated());
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
@@ -61,14 +68,20 @@ public class RequestData extends Data{
             ps.setString(5,request.getTitle());
             //ps.setString(6,request.getLocation()); TODO: Change this
             ps.setString(7,request.getType());
+
+            // TODO: update other tables as necessary
+
             ps.execute();
+            ps2.execute();
+            ps3.execute();
+
         }
         catch (Exception e){
             e.printStackTrace();
         }
 
     }
-    public void delRequest(Request request) {
+    public void delRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -144,6 +157,5 @@ public class RequestData extends Data{
 
     }
     public void getRequestByID(String id) {
-
     }
 }
