@@ -21,6 +21,7 @@
     -blue: #2e5bff;
     -yellow: #f7c137;
     -green: #33ac2e;
+    -red: #d63649;
     -lightBlue: #d4ddfe;
     -lightYellow: #fbefcb;
     -blueTint: #f9faff;
@@ -99,6 +100,9 @@
 }
 .button-blue {
     -fx-background-color: -blue;
+}
+.button-red{
+    -fx-background-color: -red;
 }
 .button-lightBlue {
     -fx-background-color: -lightBlue;
