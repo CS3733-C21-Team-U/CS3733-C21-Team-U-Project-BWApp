@@ -26,7 +26,6 @@ public class PathOverlayController {
             //line1.set
             loadedLines.add(line);
             App.pane.getChildren().add(line);
-
         }
     }
 }

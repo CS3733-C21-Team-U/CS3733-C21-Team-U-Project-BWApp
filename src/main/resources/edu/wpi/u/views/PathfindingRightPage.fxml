@@ -20,7 +20,7 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="entryTypeButton" mnemonicParsing="false" onAction="#handleEntryTypeButton" prefWidth="120.0" styleClass="button-medium" text="List Entry">
+            <Button fx:id="entryTypeButton" mnemonicParsing="false" onAction="#handleEntryTypeButton" prefWidth="120.0" styleClass="button-blue" text="List Entry">
                <VBox.margin>
                   <Insets left="370.0" top="5.0" />
                </VBox.margin>
@@ -58,7 +58,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="findPathButton" mnemonicParsing="false" prefWidth="110.0" styleClass="button-medium" text="Find Path">
+            <Button fx:id="findPathButton" mnemonicParsing="false" prefWidth="110.0" styleClass="button-yellow" text="Find Path">
                <VBox.margin>
                   <Insets left="185.0" top="20.0" />
                </VBox.margin>
