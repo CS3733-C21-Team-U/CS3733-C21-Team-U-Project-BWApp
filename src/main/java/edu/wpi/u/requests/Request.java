@@ -96,4 +96,20 @@ public class Request {
     public void setType(String type) {
         this.type = type;
     }
+
+    public LinkedList<String> getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(LinkedList<String> assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
 }

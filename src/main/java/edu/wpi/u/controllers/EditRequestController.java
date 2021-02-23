@@ -1,12 +1,10 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
-import edu.wpi.u.models.Request;
-import edu.wpi.u.models.RequestService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import edu.wpi.u.requests.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -53,8 +51,8 @@ public class EditRequestController {
             showCurrentLocListView.getItems().add(currRequest.getLocation().get(i));
         }
 
-        for (int i = 0; i < currRequest.getStaff().size(); i++) {
-            showCurrentPeopleListView.getItems().add(currRequest.getStaff().get(i));
+        for (int i = 0; i < currRequest.getAssignee().size(); i++) {
+            showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
         }
     }
 
@@ -68,16 +66,16 @@ public class EditRequestController {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 return true;
-            } return false;
-        }
+            }
+        } return false;
     }
 
     private boolean doesPersonExist() {
-        for(int i = 0; i < currRequest.getStaff().size(); i++) {
-            if (editPeopleField.equals(currRequest.getStaff().get(i))) {
+        for(int i = 0; i < currRequest.getAssignee().size(); i++) {
+            if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
                 return true;
-            } return false;
-        }
+            }
+        } return false;
     }
 
     public void handleAddLocation() {
@@ -99,14 +97,14 @@ public class EditRequestController {
     public void handleAddPeople() {
         String newPer = editPeopleField.getText();
         if(!doesPersonExist()) {
-            currRequest.getStaff().add(newPer);
+            currRequest.getAssignee().add(newPer);
         } editPeopleErrorLabel.setText("Person Already Listed.");
     }
 
     public void handleDeletePeople() {
-        for(int i = 0; i < currRequest.getStaff().size(); i++) {
-            if (editPeopleField.equals(currRequest.getStaff().get(i))) {
-                currRequest.getStaff().remove(currRequest.getStaff().get(i));
+        for(int i = 0; i < currRequest.getAssignee().size(); i++) {
+            if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
+                currRequest.getAssignee().remove(currRequest.getAssignee().get(i));
                 return;
             }
         } editPeopleErrorLabel.setText("Person Does Not Exist");
@@ -123,8 +121,14 @@ public class EditRequestController {
             dateCompleted = null;
         }
 
-        App.requestService.updateRequest(currRequest.getRequestID(), editTitleField.getText(), editDescripArea.getText(),
-                dateCompleted, showCurrentPeopleListView.getItems(), editTypeOfRequestField.getText(),
-                showCurrentPeopleListView.getItems(), editCreatorField.getText());
+        App.requestService.updateRequest(
+                currRequest.getRequestID(),
+                editTitleField.getText(),
+                editDescripArea.getText(),
+                dateCompleted,
+                (LinkedList<String>) showCurrentLocListView.getItems(),
+                editTypeOfRequestField.getText(),
+                (LinkedList<String>) showCurrentPeopleListView.getItems(),
+                editCreatorField.getText());
     }
 }
