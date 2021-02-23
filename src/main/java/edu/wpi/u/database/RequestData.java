@@ -52,14 +52,12 @@ public class RequestData extends Data{
 
     public void addRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
-        String str2 = "insert into Assignees (assigneeID, name) values (?, ?)";
-        String str3 = "insert into RANJoint (requestID, assigneeID, nodeID) values (?,?,?)";
+        String str2 = "insert into RANJoint (requestID, assigneeID, nodeID) values (?,?,?)";
         // NODES IN locations LinkedList SHOULD ALREADY EXIST -> might neeed to maek sure they do?
 
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             PreparedStatement ps2 = conn.prepareStatement(str2);
-            PreparedStatement ps3 = conn.prepareStatement(str3);
 
             ps.setString(1,request.getRequestID());
             ps.setDate(2, (java.sql.Date) request.getDateCreated());
@@ -73,7 +71,6 @@ public class RequestData extends Data{
 
             ps.execute();
             ps2.execute();
-            ps3.execute();
 
         }
         catch (Exception e){
