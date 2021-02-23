@@ -9,17 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class RequestData extends Data{
-    //Load from CSV into table - if any
-    //send Request data from tables into Java objects
-    //accessors/deleters
 
     public RequestData(){
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        //Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
-        //addRequest(r);
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        //printRequests();
     }
 
     public void updateRequest(Request request){
@@ -65,7 +59,7 @@ public class RequestData extends Data{
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
-            //ps.setString(6,request.getLocation());
+            //ps.setString(6,request.getLocation()); TODO: Change this
             ps.setString(7,request.getType());
             ps.execute();
         }

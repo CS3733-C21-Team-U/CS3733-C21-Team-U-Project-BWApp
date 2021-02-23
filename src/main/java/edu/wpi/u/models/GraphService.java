@@ -28,13 +28,6 @@ public class GraphService {
     md.saveCSV(path,tableName, "test"); // TODO: Provide header
   }
 
-  public void saveAndExitDB() {
-
-    //For testing UI
-//    dm.stop();
-    //md.stop();
-  }
-
   public void loadCSVFile(String path, String tableName){
     md.dropValues();
     md.readCSV(path,tableName);

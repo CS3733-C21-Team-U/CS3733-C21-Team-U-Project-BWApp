@@ -45,7 +45,7 @@ public class Database {
         }
     }
 
-    public static void init() {
+    public static void init() { //TODO : Rename to createTables()
         try {
             if (isTableEmpty()) {
                 String tbl1 =
@@ -93,31 +93,5 @@ public class Database {
         catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    public static void dropValues() {
-        try {
-            String str = "delete from Nodes";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.execute();
-            str = "delete from Edges";
-            ps.execute();
-            str = "delete from Requests";
-            ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public static void stop() {
-        dropValues();
-        deleteTables();
-        try{
-            conn.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 }
