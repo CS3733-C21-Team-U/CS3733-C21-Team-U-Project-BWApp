@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewNodesController {
+public class AdminToolsController {
     @FXML public VBox nodeList;
     @FXML public VBox test;
 
