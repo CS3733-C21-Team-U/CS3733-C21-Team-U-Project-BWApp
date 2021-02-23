@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -9,34 +9,26 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminToolsController">
    <children>
-      <ScrollPane fx:id="sasd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0">
-      <content>
-          <HBox prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <children>
-                  <VBox fx:id="nodeList" prefHeight="660.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                      <children>
-                          <HBox alignment="CENTER" />
-                      </children>
-                  </VBox>
-                  <VBox fx:id="test" prefHeight="660.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                      <children>
-                          <HBox alignment="CENTER" />
-                      </children>
-                  </VBox>
-              </children>
-          </HBox>
-      </content>
-      </ScrollPane>
       <VBox prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="500.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleNewEdgeButton" styleClass="button-lightBlue" text="New Edge">
+                  <JFXButton maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleNewNodeButton" prefWidth="150.0" styleClass="button-lightBlue" text="New Node" />
+                  <JFXButton fx:id="editNodeButton" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleEditNodeButton" prefWidth="150.0" styleClass="button-lightBlue" text="Edit Node" visible="false">
                      <HBox.margin>
-                        <Insets right="100.0" />
+                        <Insets left="-150.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#handleNewNodeButton" styleClass="button-lightBlue" text="New Node" />
+                  </JFXButton>
+                  <JFXButton maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleNewEdgeButton" prefWidth="150.0" styleClass="button-lightBlue" text="New Edge">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="editEdgeButton" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleEditEdgeButton" prefWidth="150.0" styleClass="button-lightBlue" text="Edit Edge" visible="false">
+                     <HBox.margin>
+                        <Insets left="-150.0" />
+                     </HBox.margin>
+                  </JFXButton>
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="20.0" />
@@ -46,12 +38,18 @@
                <children>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="250.0">
+                           <children>
+                              <VBox fx:id="nodeList" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
                     </content>
                   </ScrollPane>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="250.0">
+                           <children>
+                              <VBox fx:id="test" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
                     </content>
                   </ScrollPane>
                </children>

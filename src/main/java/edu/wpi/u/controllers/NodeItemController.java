@@ -1,6 +1,8 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
+import edu.wpi.u.models.AdminToolStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,33 +14,25 @@ public class NodeItemController {
     @FXML public AnchorPane nodeAnchor;
     @FXML public Label nodeID;
     @FXML public Label nodeLocation;
-    @FXML public Label nodeAdj;
-    @FXML public Button expandButton;
-    @FXML public Button collapseButton;
-    @FXML public VBox extendedInfo;
+    @FXML public JFXToggleNode toggleNodeNode;
+    public int XPos;
+    public int YPos;
+
 
     @FXML
-    public void handleNodeExpandButton() {
-        nodeAnchor.setPrefHeight(225);
-        extendedInfo.setVisible(true);
-        expandButton.setVisible(false);
-    }
+    public void handleSelectNode(){
+        App.AdminStorage.selectedNode.toggleNodeNode.setSelected(false);
+        App.AdminStorage.selectedNode = this;
+        App.AdminStorage.xloc = XPos;
+        App.AdminStorage.yloc = YPos;
+        if(this.toggleNodeNode.isSelected()){
+            App.AdminStorage.nodeIsSelected = true;
+            App.AdminStorage.haveSelectedNode.set(AdminToolStorage.haveSelectedNode.get()+1);
+        }else{
+            App.AdminStorage.nodeIsSelected = false;
+            App.AdminStorage.haveSelectedNode.set(AdminToolStorage.haveSelectedNode.get()+1);
+        }
 
-    @FXML
-    public void handleNodeCollapseButton() {
-        nodeAnchor.setPrefHeight(50);
-        extendedInfo.setVisible(false);
-        expandButton.setVisible(true);
-    }
-
-    @FXML
-    public void handleNodeCancelButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
-    }
-
-    @FXML
-    public void handleNodeModifyButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
     }
 
 }

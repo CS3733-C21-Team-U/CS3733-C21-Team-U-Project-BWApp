@@ -1,72 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="nodeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeItemController">
+<AnchorPane fx:id="nodeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="250.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeItemController">
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="250.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="nodeID" prefHeight="25.0" prefWidth="116.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="(Node A12345)">
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
-            </Label>
-            <Button fx:id="expandButton" mnemonicParsing="false" onAction="#handleNodeExpandButton" styleClass="button-blue" text="Expand">
-               <HBox.margin>
-                  <Insets left="-10.0" top="10.0" />
-               </HBox.margin></Button>
-         </children>
-         <padding>
-            <Insets bottom="10.0" />
-         </padding>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </HBox>
-      <VBox fx:id="extendedInfo" prefHeight="122.0" prefWidth="250.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-         <children>
-            <HBox prefHeight="8.0" prefWidth="500.0">
+      <JFXToggleNode fx:id="toggleNodeNode" onAction="#handleSelectNode" prefHeight="125.0" prefWidth="250.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <VBox fx:id="extendedInfo" alignment="TOP_CENTER" prefHeight="50.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="0.0" prefWidth="77.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Position:">
-                     <HBox.margin>
-                        <Insets left="10.0" right="5.0" top="10.0" />
-                     </HBox.margin>
+                  <Label fx:id="nodeID" alignment="TOP_CENTER" prefHeight="25.0" prefWidth="250.0" styleClass="label-sub-header" text="(Node A12345)">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label fx:id="nodeLocation" prefHeight="35.0" prefWidth="112.0" style="-fx-font-size: 16;" text="(xxx, yyy)">
-                     <HBox.margin>
-                        <Insets right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </Label>
+                  <HBox alignment="TOP_CENTER" prefHeight="7.0" prefWidth="250.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="84.0" text="Position:" />
+                        <Label fx:id="nodeLocation" alignment="TOP_CENTER" prefHeight="35.0" text="(xxx, yyy)" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <Label prefHeight="35.0" prefWidth="124.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Adjacent Nodes:">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="nodeAdj" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="240.0" style="-fx-font-size: 16; -fx-wrap-text: true;" text="PARKA12345, PARKA12345, PARKA12345">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="250.0" spacing="20.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#handleNodeCancelButton" text="Delete" />
-                  <Button mnemonicParsing="false" onAction="#handleNodeModifyButton" text="Modify" />
-                  <Button fx:id="collapseButton" mnemonicParsing="false" onAction="#handleNodeCollapseButton" text="Collapse" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
+            </VBox>
+         </graphic>
+         <toggleGroup>
+            <ToggleGroup fx:id="nodeToggle" />
+         </toggleGroup></JFXToggleNode>
    </children>
 </AnchorPane>

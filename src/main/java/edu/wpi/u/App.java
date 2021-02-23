@@ -2,6 +2,7 @@ package edu.wpi.u;
 
 import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.database.Database;
+import edu.wpi.u.models.AdminToolStorage;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
@@ -36,6 +37,7 @@ public class App extends Application {
   public static Database db = new Database();
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
+  public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
@@ -75,7 +77,7 @@ public class App extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
-////    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
+//    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
