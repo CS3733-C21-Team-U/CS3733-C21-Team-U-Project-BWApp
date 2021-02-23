@@ -52,7 +52,7 @@ public class App extends Application {
   @Override
   public void init() {
     System.out.println("Starting Up");
-    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
+//    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
 
 
