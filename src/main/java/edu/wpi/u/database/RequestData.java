@@ -1,5 +1,6 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.Request;
 
 import java.sql.Date;
@@ -19,7 +20,6 @@ public class RequestData extends Data{
     public void updateRequest(Request request){ // TODO: Add assignee and location stuff
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
-        //this.updRequestLocation(request.getRequestID(), request.getLocation()); TODO: Change to list
         this.updRequestType(request.getRequestID(), request.getType());
     }
 
@@ -50,43 +50,10 @@ public class RequestData extends Data{
         return results;
     }
 
-    public void addAssignee(Request request, String userID){
-        String str = "update Assignments set userID=? where requestID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,userID);
-            ps.setString(2,request.getRequestID());
-            ps.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void addLocation(Request request, String nodeID){
-        String str = "update Location set nodeID=? where requestID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,nodeID);
-            ps.setString(2,request.getRequestID());
-            ps.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     public void addRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
-        String str2 = "insert into Assignments (assignemnetID, requestID, userID) values (?,?,?)";
-        String str3 = "insert into Locations (locationID, requestID, nodeID) values (?,?,?)";
-
-        // NODES IN locations LinkedList SHOULD ALREADY EXIST -> might neeed to maek sure they do?
-
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            // PreparedStatement ps2 = conn.prepareStatement(str2);
-
             ps.setString(1,request.getRequestID());
             ps.setDate(2, (java.sql.Date) request.getDateCreated());
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
@@ -94,15 +61,6 @@ public class RequestData extends Data{
             ps.setString(5,request.getTitle());
             ps.setString(7,request.getType());
             ps.execute();
-
-            // TODO: update other tables as necessary
-
-            
-            ps.execute();
-
-
-            ps.setString(1, request.getRequestID());
-
             // Adding data into joint tables
             for(String locationID : request.getLocation()){
                 addLocation(locationID, request.getRequestID());
@@ -110,22 +68,18 @@ public class RequestData extends Data{
             for(String assignmentID : request.getAssignee()){
                 addAssignee(assignmentID, request.getRequestID());
             }
-
         }
         catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     public void addAssignee(String userID, String requestID){
         String str = "insert into Assignments(requestID, userID) values (?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-
             ps.setString(1,requestID);
             ps.setString(2,userID);
-
             ps.execute();
         }
         catch (Exception e) {
@@ -137,10 +91,8 @@ public class RequestData extends Data{
         String str = "insert into Locations(requestID, nodeID) values (?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-
             ps.setString(1,requestID);
             ps.setString(2,nodeID);
-
             ps.execute();
         }
         catch (Exception e) {
@@ -182,17 +134,33 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void updRequestLocation(String requestID, String location) {
-        String str = "update Requests set location=? where requestID=?";
-        try {
+
+    public void deleteLocation(String requestID, String nodeID){
+        String str = "delete * from Locations where requestID=? and nodeID=?";
+        try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,location);
-            ps.setString(2,requestID);
+            ps.setString(1,requestID);
+            ps.setString(2,nodeID);
+            ps.execute();
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    public void deleteAssignment(String requestID, String userID){
+        String str = "delete * from Assignments where requestID=? and userID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,userID);
+            ps.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void updRequestType(String requestID, String type) {
         String str = "update Requests set type=? where requestID=?";
         try {
