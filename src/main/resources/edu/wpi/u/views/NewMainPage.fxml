@@ -32,9 +32,6 @@
                      </graphic>
                   </Button>
                   <Button layoutX="1310.0" layoutY="800.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
-                     <graphic>
-                        <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z&#10;" fillRule="EVEN_ODD" />
-                     </graphic>
                   </Button>
                    <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1000.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                    <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

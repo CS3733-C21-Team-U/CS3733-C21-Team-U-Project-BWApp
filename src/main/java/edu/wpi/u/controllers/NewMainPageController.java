@@ -55,10 +55,10 @@ public class NewMainPageController {
 
 
         Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
-        App.pane = new AnchorPane(node);
-        App.pane.getStyleClass().add("blue");
-        App.pane.applyCss();
-        GesturePane map = new GesturePane(App.pane);
+        AnchorPane pane = new AnchorPane(node);
+        pane.getStyleClass().add("blue");
+        pane.applyCss();
+        GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
 //        mapView.setFitWidth(4000.0);
