@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');*/
 @font-face {
     -fx-font-family: 'Rubik';
     src: url('Rubik-Regular.ttf');
@@ -10,17 +10,13 @@
 
 
 
-.serialConn{
-    -fx-font-family: 'Rubik Regular', sans-serif;
-}
-
 .root{
     -fx-font-family: 'Rubik';
 }
 
 .background {
     -fx-background-color: #cbcbcb;
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-font-family: 'Rubik', sans-serif;
 }
 
 /*.label {*/
@@ -30,17 +26,13 @@
 
 .label-sub-header {
     -fx-font-size: 18pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
     -fx-text-fill: Black;
 }
 
 .label-header {
     -fx-font-size: 36pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
     -fx-text-fill: Black;
 }
-
-
 
 .label-Other {
     -fx-font-size: 10pt;

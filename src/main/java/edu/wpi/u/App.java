@@ -47,16 +47,17 @@ public class App extends Application {
 
   @Override
   public void init() {
-    log.info("Starting Up");
+    System.out.println("Starting Up");
+    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
 
 
 
 
-  //    @Override
-  //    public void init() throws Exception {
-  //
-  //    }
+//      @Override
+//      public void init() throws Exception {
+//
+//      }
 
 //  Font.loadFont(getClass().getResourceAsStream("/resources/fonts/marck.ttf"), 14);
 
@@ -71,12 +72,13 @@ public class App extends Application {
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
-    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
+    scene.getStylesheets().add(getClass().getResource("RegularTheme.css").toExternalForm());
     App.primaryStage.setScene(scene);
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
-    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
+//    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
