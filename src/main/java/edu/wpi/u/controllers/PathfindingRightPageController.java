@@ -4,6 +4,7 @@ import com.jfoenix.assets.JFoenixResources;
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.GraphService;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
@@ -70,18 +71,25 @@ public class PathfindingRightPageController {
     public void handleFindPathButton(){
 
             if (listEntryButton.isSelected()) {
-                if (startDropField.valueProperty().getValue().equals("") || endDropField.valueProperty().getValue().equals("") || startDropField.valueProperty().getValue() == null || endDropField.valueProperty().getValue() == null) {
+                if (startDropField.getValue() == null || endDropField.getValue() == null) {
                     errorDrawer.open();
                 } else {
-                    App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
-                }
+                    try {
+                        App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
+                    } catch(PathNotFoundException p) {
+                        errorDrawer.open();
+                    }
+                    }
             } else {
                 if (startTextField.getText().equals("") || endTextField.getText().equals("")) {
                     errorDrawer.open();
                 } else {
                     System.out.println("SENDING THE LIST TO PATHHANDLING");
-                    App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
-
+                    try {
+                        App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+                    } catch(PathNotFoundException p) {
+                        errorDrawer.open();
+                    }
                 }
             }
 
