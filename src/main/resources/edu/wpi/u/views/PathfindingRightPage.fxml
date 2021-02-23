@@ -14,7 +14,7 @@
    <children>
       <VBox prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="202.0" prefWidth="513.0" text="Navigation" />
+            <Label alignment="CENTER" prefWidth="500.0" styleClass="label-header" text="Navigation" />
             <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0">
                <VBox.margin>
                   <Insets top="5.0" />

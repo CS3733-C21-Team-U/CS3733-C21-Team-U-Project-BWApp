@@ -8,10 +8,11 @@
     url('./Rubik-Bold.ttf');
     -fx-font-weight: bold;
 }
+/*Base colors here------------------------*/
 
-.blue{
-    /*-fx-background-color: blue;*/
-}
+/*Base colors here------------------------*/
+
+
 
 .serialConn{
     -fx-font-family: 'Rubik Regular', sans-serif;
@@ -51,43 +52,6 @@
     -fx-text-fill: Grey;
 }
 
-.table-view {
-    -fx-base: #ffffff;
-    -fx-control-inner-background: #ffffff;
-    -fx-background-color: #ffffff;
-    -fx-table-cell-border-color: #003d8c;
-    -fx-table-header-border-color: #00255a;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: #ffffff;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-            transparent
-            transparent
-            derive(-fx-base, 80%)
-            transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
-
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: white;
     -fx-border-width: 0;
@@ -110,25 +74,6 @@
     -fx-padding: 0 0 0 0;
 }
 
-.menu-bar {
-    -fx-background-color: derive(#1d1d1d,20%);
-}
-
-.context-menu {
-    -fx-background-color: derive(#1d1d1d,50%);
-}
-
-.menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-opacity: 0.9;
-}
-
-.menu .left-container {
-    -fx-background-color: black;
-}
-
 /*.text-field {*/
 /*    -fx-font-size: 12pt;*/
 /*    -fx-font-family: "Rubik";*/
@@ -142,33 +87,62 @@
  */
 
 .button-green {
-    -fx-font-size: 10pt;
+    -fx-font-size: 14pt;
     -fx-font-family: 'Rubik Regular', sans-serif;
     -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
     -fx-background-color: #33ab2e;
     -fx-background-radius: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-yellow {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-text-fill: white;
+    -fx-padding: 5 10 5 10;
+    -fx-background-color: #f6c037;
+    -fx-background-radius: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-blue {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #2e5bfe;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-lightBlue {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #d4ddfe;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #2e5bfe;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-lightYellow {
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 3;
+    -fx-background-color: #fbefcb;
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-text-fill: #f6c037;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 
 .button-regular {
     -fx-padding: 5 10 5 10;
     -fx-background-radius: 2;
-    -fx-background-color: #6585ff;
+    -fx-background-color: #2e5bfe;
     -fx-font-family: Arial;
     -fx-font-size: 11pt;
     -fx-text-fill: #ffffff;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
-.button-medium {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 2;
-    -fx-background-color: #6585ff;
-    -fx-font-family: Arial;
-    -fx-font-size: 14pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
 
 .button:hover {
     -fx-background-color: #3a3a3a;
@@ -178,14 +152,7 @@
     -fx-background-color: white;
     -fx-text-fill: #1d1d1d;
 }
-/*This just makes the buttons look weird after you click them
-/*.button:focused {*/
-/*    -fx-border-color: white, white;*/
-/*    -fx-border-width: 1, 1;*/
-/*    -fx-border-style: solid;*/
-/*    -fx-border-radius: 0, 0;*/
-/*    -fx-border-insets: 1 1 1 1, 0;*/
-/*}*/
+
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
