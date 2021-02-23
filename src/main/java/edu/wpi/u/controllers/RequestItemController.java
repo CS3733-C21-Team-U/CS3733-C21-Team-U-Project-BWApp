@@ -39,15 +39,15 @@ public class RequestItemController {
             requestAnchor.setPrefHeight(700);
             expandCollapseButton.setText("Collapse");
             descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
-            deleteRequestButton.setVisible(true);
-            editRequestButton.setVisible(true);
+//            deleteRequestButton.setVisible(true);
+//            editRequestButton.setVisible(true);
         } else{
             isCollapsed = true;
             requestAnchor.setPrefHeight(200);
             expandCollapseButton.setText("Expand");
             descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
-            deleteRequestButton.setVisible(false);
-            editRequestButton.setVisible(false);
+//            deleteRequestButton.setVisible(false);
+//            editRequestButton.setVisible(false);
         }
     }
 

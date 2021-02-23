@@ -14,6 +14,7 @@ public class RequestData extends Data{
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
+        readCSV("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
