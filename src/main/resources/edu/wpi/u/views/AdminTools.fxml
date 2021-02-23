@@ -13,10 +13,20 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="500.0">
                <children>
-                  <JFXButton onAction="#handleNewNodeButton" styleClass="button-lightBlue" text="New Node" />
-                  <JFXButton onAction="#handleNewEdgeButton" styleClass="button-lightBlue" text="New Edge">
+                  <JFXButton maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleNewNodeButton" prefWidth="150.0" styleClass="button-lightBlue" text="New Node" />
+                  <JFXButton fx:id="editNodeButton" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleEditNodeButton" prefWidth="150.0" styleClass="button-lightBlue" text="Edit Node" visible="false">
+                     <HBox.margin>
+                        <Insets left="-150.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleNewEdgeButton" prefWidth="150.0" styleClass="button-lightBlue" text="New Edge">
                      <HBox.margin>
                         <Insets left="100.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="editEdgeButton" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleEditEdgeButton" prefWidth="150.0" styleClass="button-lightBlue" text="Edit Edge" visible="false">
+                     <HBox.margin>
+                        <Insets left="-150.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
