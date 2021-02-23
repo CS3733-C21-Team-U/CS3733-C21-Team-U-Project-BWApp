@@ -55,7 +55,7 @@
             </Label>
             <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="250.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleNodeCancelButton" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#handleNodeDeleteButton" text="Delete" />
                   <Button mnemonicParsing="false" onAction="#handleNodeModifyButton" text="Modify" />
                   <Button fx:id="collapseButton" mnemonicParsing="false" onAction="#handleNodeCollapseButton" text="Collapse" />
                </children>

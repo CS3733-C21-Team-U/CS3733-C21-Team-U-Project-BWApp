@@ -2,6 +2,7 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -32,13 +33,21 @@ public class NodeItemController {
     }
 
     @FXML
-    public void handleNodeCancelButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+    public void handleNodeDeleteButton() {
+        App.graphService.deleteNode(nodeID.getText());
+        nodeAnchor.setPrefHeight(0);
+        nodeAnchor.setVisible(false);
+        //could be consider 'sloppy delete' on UI side until AdminTool is reloaded
     }
 
     @FXML
     public void handleNodeModifyButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        //TODO: Make better way of doing this
+//        FXMLLoader windowLoader = new FXMLLoader(getClass().getResource("../views/ModifyNode.fxml"));
+//        ModifyNodeController controller = windowLoader.getController();
+//        controller.modifyNodeID.setText(nodeID.getText());
+
+        App.rightDrawerRoot.set( "../views/ModifyNode.fxml");
     }
 
 }
