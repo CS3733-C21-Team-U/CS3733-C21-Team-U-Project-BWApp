@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.controllers.NewMainPageController;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
@@ -105,5 +106,8 @@ public class App extends Application {
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
+
+
+  public int requestClicked;
 
 }
