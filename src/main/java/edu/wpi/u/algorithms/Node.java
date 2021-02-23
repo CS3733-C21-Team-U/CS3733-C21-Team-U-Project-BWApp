@@ -125,4 +125,24 @@ public class Node {
   public LinkedList<Edge> getEdges() {
     return edges;
   }
+
+  public int getFloor() {
+    return floor;
+  }
+
+  public String getBuilding() {
+    return building;
+  }
+
+  public String getNodeType() {
+    return nodeType;
+  }
+
+  public String getLongName() {
+    return longName;
+  }
+
+  public String getShortName() {
+    return shortName;
+  }
 }

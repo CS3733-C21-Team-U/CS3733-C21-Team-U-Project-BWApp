@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
+
+
+<AnchorPane prefHeight="1277.406" prefWidth="2239.41" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.PathOverlayController">
+   <children>
+      <SVGPath content="m 500, 800 -200, -400 1000, 100 10, 10 " fillRule="EVEN_ODD" smooth="false" stroke="BLACK" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

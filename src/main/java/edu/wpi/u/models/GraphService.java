@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.database.MapData;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ import java.util.LinkedList;
 public class GraphService {
 
   static GraphManager gm = new GraphManager();
-  static DatabaseManager dm;
+  static MapData md;
 
 
   public static void main (String[] args){
@@ -17,21 +18,25 @@ public class GraphService {
   }
 
   public GraphService() {
-    System.out.println("Constrctor for Graph SERVICE");
-    dm = new DatabaseManager();
-    dm.loadGraph(gm);
+    md = new MapData();
+    md.loadGraph(gm);
   }
 
-  public void saveAndExitDB(){
-    dm.stop();
+  public void saveCSVFile(String path, String tableName){
+    md.dropValues();
+    md.saveCSV(path,tableName, "test"); // TODO: Provide header
   }
 
+  public void loadCSVFile(String path, String tableName){
+    md.dropValues();
+    md.readCSV(path,tableName);
+  }
 
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addNode(String node_id, int x, int y) {
-    dm.addNode(node_id,x,y,0, "Def", "Def", "Def", "Def");
+    md.addNode(node_id,x,y,0, "Def", "Def", "Def", "Def");
     gm.makeNode(node_id,x,y,0,"Def", "Def", "Def", "Def", "u");
     return "";
     /*
@@ -42,8 +47,8 @@ public class GraphService {
   }
 
   public String updateNode(String node_id, int x, int y) {
-    if (dm.isNode(node_id)){
-      dm.updCoords(node_id, x, y);
+    if (md.isNode(node_id)){
+      md.updCoords(node_id, x, y);
       gm.updateCoords(node_id, x, y);
       return "";
     }
@@ -60,8 +65,8 @@ public class GraphService {
   }
 
   public String deleteNode(String node_id) {
-    if (dm.isNode(node_id)){
-      dm.delNode(node_id);
+    if (md.isNode(node_id)){
+      md.delNode(node_id);
       gm.removeNode(node_id);
       return "";
     }
@@ -77,12 +82,13 @@ public class GraphService {
   }
 
   public String addEdge(String edge_id, String start_node, String end_node) {
-    if (dm.isNode(start_node) && dm.isNode(end_node)){
-      dm.addEdge(edge_id, start_node, end_node);
+    if (md.isNode(start_node) && md.isNode(end_node)){
+      md.addEdge(edge_id, start_node, end_node);
       gm.makeEdge(edge_id, start_node, end_node);
       return "";
     }
     else {
+      System.out.println("Edge Creation Failed!");
       return edge_id;
     }
 
@@ -96,8 +102,8 @@ public class GraphService {
   }
 
   public String updateStartEdge(String edge_id, String start_node) {
-    if (dm.isNode(start_node)){
-      dm.updEdgeStart(edge_id, start_node);
+    if (md.isNode(start_node)){
+      md.updEdgeStart(edge_id, start_node);
       gm.updateEdgeStart(edge_id, start_node);
       return "";
     }
@@ -112,8 +118,8 @@ public class GraphService {
   }
 
   public String updateEndEdge(String edge_id, String end_node) {
-    if (dm.isNode(end_node)){
-      dm.updEdgeEnd(edge_id, end_node);
+    if (md.isNode(end_node)){
+      md.updEdgeEnd(edge_id, end_node);
       gm.updateEdgeEnd(edge_id, end_node);
       return "";
     }
@@ -128,8 +134,8 @@ public class GraphService {
   }
 
   public String deleteEdge(String edge_id) {
-    if (dm.isEdge(edge_id)){
-      dm.delEdge(edge_id);
+    if (md.isEdge(edge_id)){
+      md.delEdge(edge_id);
       gm.removeEdge(edge_id);
       return "";
     }
