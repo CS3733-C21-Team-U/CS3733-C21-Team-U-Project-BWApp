@@ -16,15 +16,11 @@ public class RequestService {
   ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
-    System.out.println("Constructor for Request SERVICE");
   }
 
   /*
   Saves the model data into csvs and drops tables
    */
-  public void saveAndExitDB(){
-    rd.stop();
-  }
 
   public void loadCSVFile(String path, String tableName){
     rd.dropValues();

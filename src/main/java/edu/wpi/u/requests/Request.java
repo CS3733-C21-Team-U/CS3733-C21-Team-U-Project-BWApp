@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Date;
 
-//TODO: Private or protected fields?
 public class Request {
     protected String requestID;
     protected Date dateCreated, dateCompleted;
@@ -27,10 +26,7 @@ public class Request {
         this.type = type;
         this.creator = creator;
     }
-
-    protected void resolveRequest() { //TODO: Belongs in request?
-
-    }
+    public void resolveRequest() {} //TODO: Belongs in request?
     public void editRequest(Date endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
         this.dateCompleted = endDate;
         this.description = description;
@@ -40,75 +36,55 @@ public class Request {
         this.assignee = assignee;
         this.creator = creator;
     }
-
     public String getRequestID() {
         return requestID;
     }
-
     public Date getDateCreated() {
         return dateCreated;
     }
-
     public Date getDateCompleted() {
         return dateCompleted;
     }
-
     public String getDescription() {
         return description;
     }
-
     public String getTitle() {
         return title;
     }
-
     public LinkedList<String> getLocation() {
         return location;
     }
-
     public String getType() {
         return type;
     }
-
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
-
     public void setDateCompleted(Date dateCompleted) {
         this.dateCompleted = dateCompleted;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public void setLocation(LinkedList<String> location) {
         this.location = location;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
-    public LinkedList<String> getAssignee() {
-        return assignee;
-    }
-
+    public LinkedList<String> getAssignee() {return assignee;}
     public void setAssignee(LinkedList<String> assignee) {
         this.assignee = assignee;
     }
-
     public String getCreator() {
         return creator;
     }
-
     public void setCreator(String creator) {
         this.creator = creator;
     }

@@ -10,7 +10,6 @@ public class GraphManager {
   private final HashMap<String, Edge> allEdges;
 
   public GraphManager() {
-    System.out.println("Constrctor for Graph Manager");
     allNodes = new HashMap<>();
     allEdges = new HashMap<>();
   }

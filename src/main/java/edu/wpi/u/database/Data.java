@@ -20,8 +20,6 @@ public abstract class Data {
     public void connect() {
         try {
             conn = DriverManager.getConnection(url);
-            //conn.setAutoCommit(false);
-            //conn.commit();
         } catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
@@ -62,7 +60,7 @@ public abstract class Data {
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
-            System.out.println("File deleted");
+            System.out.println("\n"); //TODO : Used to be "file deleted"
         }
         String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
@@ -122,6 +120,10 @@ public abstract class Data {
             Statement s = conn.createStatement();
             s.execute(str);
             str = "drop table Edges";
+            s.execute(str);
+            str = "drop table Assignments";
+            s.execute(str);
+            str = "drop table Locations";
             s.execute(str);
             str = "drop table Requests";
             s.execute(str);

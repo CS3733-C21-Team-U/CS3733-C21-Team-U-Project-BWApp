@@ -21,7 +21,6 @@ public class Database {
     public Database() {
         driver();
         connect();
-        deleteTables();
         init();
     }
 
@@ -87,24 +86,5 @@ public class Database {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void deleteTables() {
-        try {
-            String str = "drop table Nodes";
-            Statement s = conn.createStatement();
-            s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Assignments";
-            s.execute(str);
-            str = "drop table Locations";
-            s.execute(str);
-            str = "drop table Requests";
-            s.execute(str);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

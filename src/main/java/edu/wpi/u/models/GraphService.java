@@ -18,7 +18,6 @@ public class GraphService {
   }
 
   public GraphService() {
-    System.out.println("Constructor for Graph SERVICE");
     md = new MapData();
     md.loadGraph(gm);
   }
