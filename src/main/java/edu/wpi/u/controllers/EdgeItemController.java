@@ -26,7 +26,7 @@ public class EdgeItemController {
 
     @FXML
     public void handleEdgeCollapseButton() {
-        edgeAnchor.setPrefHeight(50);
+        edgeAnchor.setPrefHeight(75);
         extendedInfo.setVisible(false);
         expandButton.setVisible(true);
     }

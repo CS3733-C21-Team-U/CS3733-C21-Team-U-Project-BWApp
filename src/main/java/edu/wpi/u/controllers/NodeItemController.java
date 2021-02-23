@@ -27,7 +27,7 @@ public class NodeItemController {
 
     @FXML
     public void handleNodeCollapseButton() {
-        nodeAnchor.setPrefHeight(50);
+        nodeAnchor.setPrefHeight(75);
         extendedInfo.setVisible(false);
         expandButton.setVisible(true);
     }
