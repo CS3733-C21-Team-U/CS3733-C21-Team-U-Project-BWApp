@@ -2,6 +2,7 @@ package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
 import javafx.beans.InvalidationListener;
@@ -10,6 +11,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.util.*;
@@ -29,14 +31,16 @@ public class PathfindingRightPageController {
     @FXML
     JFXComboBox endDropField;
 
-    GraphService gs = new GraphService();
+    @FXML
+    ListView list;
+
 
     ObservableList<Node> oList;
 
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
-        ArrayList<Node> L = gs.getNodes();//This gets the list of all the nodes
+        ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
         ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
         for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
             nodeIDs.add(N.getNodeID());
@@ -46,8 +50,6 @@ public class PathfindingRightPageController {
         endDropField.setItems(oList);
 
     }
-
-
 
 
     /*  This toggles the list/text entry button and shows/hides teh applicable fields

@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="requestAnchor" maxHeight="-Infinity" maxWidth="500.0" minHeight="-Infinity" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-header" text="Title" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Location" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0" />
-      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="440.0" text="Description" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
-      <Button fx:id="expandCollapseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="120.0" text="Expand" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="27.0" layoutY="117.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="440.0" style="-fx-font-size: 15; -fx-font-style: UNICORN;" text="Description" wrapText="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="117.0" />
+      <Button fx:id="expandCollapseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="120.0" text="View Details" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <Button fx:id="editRequestButton" layoutX="178.0" layoutY="168.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditRequest" prefHeight="35.0" prefWidth="150.0" text="Edit Request" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
       <Button fx:id="deleteRequestButton" layoutX="183.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Delete Request" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="190.0" />
+      <Label fx:id="titleLabel" alignment="TOP_CENTER" layoutX="92.0" layoutY="25.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="37.0" prefWidth="318.0" style="-fx-font-family: Rubik;" text="Title" wrapText="true">
+         <effect>
+            <Blend />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="locationLabel" alignment="TOP_CENTER" layoutX="35.0" layoutY="54.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" prefWidth="394.0" text="Location" wrapText="true">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

@@ -9,8 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,8 +25,8 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
+  public static AnchorPane pane;
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("../views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
-
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = new Database();
@@ -45,16 +48,17 @@ public class App extends Application {
 
   @Override
   public void init() {
-    log.info("Starting Up");
+    System.out.println("Starting Up");
+    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
 
 
 
 
-  //    @Override
-  //    public void init() throws Exception {
-  //
-  //    }
+//      @Override
+//      public void init() throws Exception {
+//
+//      }
 
 //  Font.loadFont(getClass().getResourceAsStream("/resources/fonts/marck.ttf"), 14);
 
@@ -64,11 +68,18 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
+//    Label label = new Label("Hello World");
+////    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
+//    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
+//    Scene scene = new Scene(label);
+//    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
+    scene.getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
     App.primaryStage.setScene(scene);
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
-    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
+//    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
