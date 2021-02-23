@@ -87,4 +87,6 @@ public class App extends Application {
     stage.close();
   }
 
+  public int requestClicked;
+
 }

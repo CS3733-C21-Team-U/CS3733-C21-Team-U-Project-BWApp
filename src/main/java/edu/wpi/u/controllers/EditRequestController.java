@@ -36,23 +36,25 @@ public class EditRequestController {
 
     @FXML Label editPeopleErrorLabel;
 
-    public void initialize(){
-        Request request = makeDummyRequest();
+    private Request currRequest;
 
-        editTitleField.setText(request.getTitle());
-        editDescripArea.setText(request.getDescription());
-        editTypeOfRequestField.setText(request.getType());
-        editCompDateField.setText(request.getDateCompleted().toString());
+    public void initialize(){
+        currRequest = App.requestService.getRequests().get(App.getInstance().requestClicked);
+
+        editTitleField.setText(currRequest.getTitle());
+        editDescripArea.setText(currRequest.getDescription());
+        editTypeOfRequestField.setText(currRequest.getType());
+        editCompDateField.setText(currRequest.getDateCompleted().toString());
         editCreatorField.setText("Admin");
         //For when creators switch
-        //editCreatorField.setText(request.getCreator());
+        //editCreatorField.setText(currRequest.getCreator());
 
-        for (int i = 0; i < request.getLocation().size(); i++) {
-            showCurrentLocListView.getItems().add(request.getLocation().get(i));
+        for (int i = 0; i < currRequest.getLocation().size(); i++) {
+            showCurrentLocListView.getItems().add(currRequest.getLocation().get(i));
         }
 
-        for (int i = 0; i < request.getStaff().size(); i++) {
-            showCurrentPeopleListView.getItems().add(request.getStaff().get(i));
+        for (int i = 0; i < currRequest.getStaff().size(); i++) {
+            showCurrentPeopleListView.getItems().add(currRequest.getStaff().get(i));
         }
     }
 
@@ -63,42 +65,32 @@ public class EditRequestController {
     }
 
     private boolean doesLocationExist() {
-        for(int i = 0; i < request.getLocation().size(); i++) {
-            if (editLocField.equals(request.getLocation().get(i))) {
+        for(int i = 0; i < currRequest.getLocation().size(); i++) {
+            if (editLocField.equals(currRequest.getLocation().get(i))) {
                 return true;
             } return false;
         }
     }
 
     private boolean doesPersonExist() {
-        for(int i = 0; i < request.getStaff().size(); i++) {
-            if (editPeopleField.equals(request.getStaff().get(i))) {
+        for(int i = 0; i < currRequest.getStaff().size(); i++) {
+            if (editPeopleField.equals(currRequest.getStaff().get(i))) {
                 return true;
             } return false;
         }
     }
 
-    private Request makeDummyRequest(){
-        Request request = new Request("Bobby", "Bobby wants a good steak.", "King of the Hill");
-        request.setDateCompleted(new Date());
-        ArrayList<String> staff = new ArrayList<String>();
-        staff.add("Hank");
-        staff.add("Peggy");
-        request.setStaff(staff);
-        return request;
-    }
-
     public void handleAddLocation() {
         String newLoc = editLocField.getText();
         if(!doesLocationExist()) {
-            location.add(newLoc);
+            currRequest.getLocation().add(newLoc);
         } editLocationErrorLabel.setText("Location Already Listed.");
     }
 
     public void handleDeleteLocation() {
-        for(int i = 0; i < request.getLocation().size(); i++) {
-            if (editLocField.equals(request.getLocation().get(i))) {
-                request.getLocation().remove(request.getLocation().get(i));
+        for(int i = 0; i < currRequest.getLocation().size(); i++) {
+            if (editLocField.equals(currRequest.getLocation().get(i))) {
+                currRequest.getLocation().remove(currRequest.getLocation().get(i));
                 return;
             }
         } editLocationErrorLabel.setText("Location Does Not Exist");
@@ -107,14 +99,14 @@ public class EditRequestController {
     public void handleAddPeople() {
         String newPer = editPeopleField.getText();
         if(!doesPersonExist()) {
-            staff.add(newPer);
+            currRequest.getStaff().add(newPer);
         } editPeopleErrorLabel.setText("Person Already Listed.");
     }
 
     public void handleDeletePeople() {
-        for(int i = 0; i < request.getStaff().size(); i++) {
-            if (editPeopleField.equals(request.getStaff().get(i))) {
-                request.getStaff().remove(request.getStaff().get(i));
+        for(int i = 0; i < currRequest.getStaff().size(); i++) {
+            if (editPeopleField.equals(currRequest.getStaff().get(i))) {
+                currRequest.getStaff().remove(currRequest.getStaff().get(i));
                 return;
             }
         } editPeopleErrorLabel.setText("Person Does Not Exist");
@@ -123,16 +115,6 @@ public class EditRequestController {
     public void handleCancel() { App.rightDrawerRoot.set("../views/ViewRequest.fxml"); }
 
     public void handleSaveRequest() {
-        if(!(checkCreaDate())){
-            return;
-        }
-        //Replace with getter of request or set request as class level variable.
-        Request request = makeDummyRequest();
-
-        request.setTitle(editTitleField.getText());
-        request.setDescription(editDescripArea.getText());
-        request.setLocation(editLocField.getText());
-        //save added people
 
         Date dateCompleted;
         if (isChecked()) {
@@ -141,7 +123,8 @@ public class EditRequestController {
             dateCompleted = null;
         }
 
-        updateRequest(request.getrequestID(), editTitleField.getText(), editDescripArea.getText(), dateCompleted,
-                location, editTypeOfRequestField.getText(), people, editCreatorField.getText());
+        App.requestService.updateRequest(currRequest.getRequestID(), editTitleField.getText(), editDescripArea.getText(),
+                dateCompleted, showCurrentPeopleListView.getItems(), editTypeOfRequestField.getText(),
+                showCurrentPeopleListView.getItems(), editCreatorField.getText());
     }
 }
