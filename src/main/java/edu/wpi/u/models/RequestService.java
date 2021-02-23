@@ -16,15 +16,11 @@ public class RequestService {
   ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
-    System.out.println("Constructor for Request SERVICE");
   }
 
   /*
   Saves the model data into csvs and drops tables
    */
-  public void saveAndExitDB(){
-    rd.stop();
-  }
 
   public void loadCSVFile(String path, String tableName){
     rd.dropValues();
@@ -44,7 +40,8 @@ public class RequestService {
     Random rand = new Random();
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
-    Request newRequest = new Request(ID, assignee, new Date(), null, description, title, location, type, creator);
+    // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
+    Request newRequest = new Request(ID, null, new Date(), new Date(), description ,title,null, type, creator);
     this.activeRequests.add(newRequest);
     rd.addRequest(newRequest);
     return "";

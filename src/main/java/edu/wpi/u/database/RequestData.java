@@ -1,34 +1,36 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.Request;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class RequestData extends Data{
-    //Load from CSV into table - if any
-    //send Request data from tables into Java objects
-    //accessors/deleters
 
-    public RequestData(){
+    public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        //Request r = new Request("Testtttyyy", new Date(1994- 2- 1), new Date(1994-23-10),"Charlie is dumb" , "Title", "place", "cool");
-        //addRequest(r);
+//        LinkedList<String> l1 = new LinkedList<String>();
+//        l1.add("UPARK00101");
+//        LinkedList<String> s1 = new LinkedList<String>();
+//        s1.add("Kaamil");
+//        Date d = new Date(900);
+//        addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        //printRequests();
+//        saveCSV("Locations", "src/main/resources/edu/wpi/u/Locations.csv", "Location");
+//        saveCSV("Assignments", "src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
     }
 
-    public void updateRequest(Request request){
+    public void updateRequest(Request request){ // TODO: Add assignee and location stuff
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestLocation(request.getRequestID(), request.getLocation());
         this.updRequestType(request.getRequestID(), request.getType());
     }
-
-    public ArrayList<Request> loadActiveRequests(){
+    public ArrayList<Request> loadActiveRequests(){ // TODO: Add assignee and location stuff
         ArrayList<Request> results = new ArrayList<Request>();
         String str = "select * from Requests where dateCompleted is null";
         try{
@@ -40,8 +42,36 @@ public class RequestData extends Data{
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
                 String location = rs.getString("location");
+                LinkedList<String> locations = new LinkedList<String>();
+                try { // TODO : Move to helper function
+                    String str2 = "select * from Locations where requestID=?";
+                    PreparedStatement ps2= conn.prepareStatement(str2);
+                    ps2.setString(1,id);
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()){
+                        locations.add(rs2.getString("nodeID"));
+                    }
+                    rs2.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                LinkedList<String> assignees = new LinkedList<String>();
+                try {
+                    String str3 = "select * from Assignments where requestID=?";
+                    PreparedStatement ps3 = conn.prepareStatement(str3);
+                    ps3.setString(1,id);
+                    ResultSet rs3 = ps3.executeQuery();
+                    while (rs3.next()){
+                        assignees.add(rs3.getString("userID"));
+                    }
+                    rs3.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 String type = rs.getString("type");
-                results.add(new Request(id,created,null,desc,title,location,type));
+                results.add(new Request(id,assignees, created,null,desc,title,locations,type, "Test creator"));
             }
             rs.close();
         }
@@ -50,9 +80,9 @@ public class RequestData extends Data{
         }
         return results;
     }
-
-    public void addRequest(Request request) {
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, location, type) values (?,?,?,?,?,?,?)";
+    public void addRequest(Request request) { // TODO: Add assignee and location stuff
+        //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,request.getRequestID());
@@ -60,16 +90,45 @@ public class RequestData extends Data{
             ps.setDate(3, (java.sql.Date) request.getDateCompleted());
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
-            ps.setString(6,request.getLocation());
-            ps.setString(7,request.getType());
+            ps.setString(6,request.getType());
             ps.execute();
+            // Adding data into joint tables
+            for(String locationID : request.getLocation()){
+                addLocation(locationID, request.getRequestID());
+            }
+            for(String assignmentID : request.getAssignee()){
+                addAssignee(assignmentID, request.getRequestID());
+            }
         }
         catch (Exception e){
             e.printStackTrace();
         }
-
     }
-    public void delRequest(Request request) {
+    public void addAssignee(String userID, String requestID){
+        String str = "insert into Assignments(requestID, userID) values (?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,userID);
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void addLocation(String nodeID, String requestID){
+        String str = "insert into Locations(requestID, nodeID) values (?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,nodeID);
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void delRequest(Request request) { // TODO: Add assignee and location stuff
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -103,12 +162,25 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void updRequestLocation(String requestID, String location) {
-        String str = "update Requests set location=? where requestID=?";
-        try {
+    public void deleteLocation(String requestID, String nodeID){
+        String str = "delete * from Locations where requestID=? and nodeID=?";
+        try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,location);
-            ps.setString(2,requestID);
+            ps.setString(1,requestID);
+            ps.setString(2,nodeID);
+            ps.execute();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void deleteAssignment(String requestID, String userID){
+        String str = "delete * from Assignments where requestID=? and userID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,userID);
+            ps.execute();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -125,7 +197,6 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-
     public void printRequests() {
         try {
             String str = "select * from Requests";
@@ -140,11 +211,7 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-
-    public void getRequests() {
-
-    }
+    public void getRequests() {}
     public void getRequestByID(String id) {
-
     }
 }

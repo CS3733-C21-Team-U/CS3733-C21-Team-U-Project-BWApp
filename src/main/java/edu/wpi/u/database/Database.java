@@ -9,12 +9,18 @@ import java.sql.*;
 public class Database {
 
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true";
+    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
+    /*
+    connect 'jdbc:derby:myEncryptedDatabaseName;create=true;
+    dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;
+    bootPassword=mySuperSecretBootPassword';
 
+    connect 'jdbc:derby:myEncryptedDatabaseName;
+    bootPassword=mySuperSecretBootPassword';
+     */
     public Database() {
         driver();
         connect();
-        deleteTables();
         init();
     }
 
@@ -38,7 +44,7 @@ public class Database {
         }
     }
 
-    public static void init() {
+    public static void init() { //TODO : Rename to createTables()
         try {
             if (isTableEmpty()) {
                 String tbl1 =
@@ -52,9 +58,18 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),location varchar(50),type varchar(50), primary key(requestID))";
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
+
+                String tbl4 = "create table Assignments(assignmentID int generated always as identity, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
+                PreparedStatement ps4 = conn.prepareStatement(tbl4);
+                ps4.execute();
+
+                String tbl5 = "create table Locations(locationID int generated always as identity, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                PreparedStatement ps5 = conn.prepareStatement(tbl5);
+                ps5.execute();
+
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
@@ -71,46 +86,5 @@ public class Database {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void deleteTables() {
-        try {
-            String str = "drop table Nodes";
-            Statement s = conn.createStatement();
-            s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Requests";
-            s.execute(str);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static void dropValues() {
-        try {
-            String str = "delete from Nodes";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.execute();
-            str = "delete from Edges";
-            ps.execute();
-            str = "delete from Requests";
-            ps.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public static void stop() {
-        dropValues();
-        deleteTables();
-        try{
-            conn.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 }
