@@ -9,16 +9,15 @@
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="requestAnchor" maxHeight="-Infinity" maxWidth="500.0" minHeight="-Infinity" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="27.0" layoutY="117.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="440.0" style="-fx-font-size: 15; -fx-font-style: UNICORN;" text="Description" wrapText="true" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="117.0" />
       <Button fx:id="expandCollapseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="120.0" text="View Details" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="editRequestButton" layoutX="178.0" layoutY="168.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditRequest" prefHeight="35.0" prefWidth="150.0" text="Edit Request" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
-      <Button fx:id="deleteRequestButton" layoutX="183.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Delete Request" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="190.0" />
-      <Label fx:id="titleLabel" alignment="TOP_CENTER" layoutX="92.0" layoutY="25.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="37.0" prefWidth="318.0" style="-fx-font-family: Rubik;" text="Title" wrapText="true">
+      <Button fx:id="editRequestButton" layoutX="178.0" layoutY="168.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleChangeToEditRequest" prefHeight="35.0" prefWidth="150.0" text="Edit Request" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+      <Button fx:id="handleDeleteRequestButton" layoutX="183.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteRequest" prefHeight="35.0" prefWidth="150.0" text="Delete Request" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="190.0" />
+      <Label fx:id="titleLabel" alignment="TOP_CENTER" layoutX="92.0" layoutY="25.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="37.0" prefWidth="318.0" style="-fx-font-size: 28; -fx-font-family: Din;" text="Title" wrapText="true">
          <effect>
             <Blend />
          </effect>
@@ -26,7 +25,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Label fx:id="locationLabel" alignment="TOP_CENTER" layoutX="35.0" layoutY="54.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" prefWidth="394.0" text="Location" wrapText="true">
+      <Label fx:id="locationLabel" alignment="TOP_CENTER" layoutX="72.0" layoutY="68.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="357.0" style="-fx-font-size: 18; -fx-font-style: Bazooka;" text="Location" wrapText="true">
          <effect>
             <Lighting>
                <bumpInput>

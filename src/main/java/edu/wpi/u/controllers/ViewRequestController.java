@@ -2,8 +2,13 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.models.Request;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -34,6 +39,14 @@ public class ViewRequestController {
             controller.locationLabel.setText(listOfRequests.get(i).getLocation());
             controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());
             requestList.getChildren().add(request);
+
+            final int index = i;
+            controller.editRequestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    App.getInstance().requestClicked = index;
+                }
+            });
         }
     }
 
