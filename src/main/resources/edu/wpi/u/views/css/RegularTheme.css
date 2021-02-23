@@ -1,30 +1,22 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');*/
 @font-face {
-    font-family: 'Rubik Regular', sans-serif;
-    src: url('./Rubik-Regular.ttf');
-}
-
-@font-face {
-    font-family: 'Rubik Bold';
-    url('./Rubik-Bold.ttf');
-    -fx-font-weight: bold;
+    -fx-font-family: 'Rubik';
+    src: url('Rubik-Regular.ttf');
+    /*-fx-font-weight: bold;*/
 }
 /*Base colors here------------------------*/
 
 /*Base colors here------------------------*/
 
 
-
-.serialConn{
-    -fx-font-family: 'Rubik Regular', sans-serif;
-}
 
 .root{
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-font-family: 'Rubik';
 }
 
 .background {
     -fx-background-color: #cbcbcb;
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-font-family: 'Rubik', sans-serif;
 }
 
 /*.label {*/
@@ -34,17 +26,13 @@
 
 .label-sub-header {
     -fx-font-size: 18pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
     -fx-text-fill: Black;
 }
 
 .label-header {
     -fx-font-size: 36pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
     -fx-text-fill: Black;
 }
-
-
 
 .label-Other {
     -fx-font-size: 10pt;

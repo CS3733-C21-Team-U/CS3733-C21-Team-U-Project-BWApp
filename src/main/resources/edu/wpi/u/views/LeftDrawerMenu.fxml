@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="250.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.LeftDrawerMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="250.0" style="-fx-background-color: #FFFFFF;" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.LeftDrawerMenuController">
    <children>
       <VBox layoutX="6.0" layoutY="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,7 +36,7 @@
                      <children>
                         <Label text="Welcome">
                            <font>
-                              <Font name="Arial Bold" size="18.0" />
+                              <Font name="Rubik" size="18.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="6.0" />
@@ -78,7 +78,7 @@
                               <Insets />
                            </HBox.margin>
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Rubik" size="19.0" />
                            </font>
                         </Label>
                      </children>
@@ -87,7 +87,7 @@
             </JFXToggleNode>
             <JFXToggleNode fx:id="toggle2" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleChangeToRequests" prefHeight="55.0" prefWidth="250.0" selected="true" style="-fx-background-radius: 0;" styleClass="navBtn" toggleGroup="$navBar">
                <font>
-                  <Font name="Arial" size="22.0" />
+                  <Font name="Rubik" size="22.0" />
                </font>
                <graphic>
                   <HBox alignment="CENTER" minWidth="250.0" prefHeight="61.0" prefWidth="268.0" styleClass="nav-item">
