@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -20,14 +21,14 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="entryTypeButton" mnemonicParsing="false" onAction="#handleEntryTypeButton" prefWidth="120.0" styleClass="button-blue" text="List Entry">
+            <Button fx:id="entryTypeButton" mnemonicParsing="false" onAction="#handleEntryTypeButton" prefWidth="130.0" styleClass="button-blue" text="List Entry">
                <VBox.margin>
-                  <Insets left="370.0" top="5.0" />
+                  <Insets left="360.0" top="5.0" />
                </VBox.margin>
             </Button>
             <HBox prefHeight="40.0" prefWidth="500.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="60.0" styleClass="label-sub-header" text="Start:">
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="80.0" styleClass="label-sub-header" text="Start:">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" />
                      </HBox.margin>
@@ -42,7 +43,7 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="500.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="60.0" styleClass="label-sub-header" text="End:">
+                  <Label alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="80.0" styleClass="label-sub-header" text="End:">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" />
                      </HBox.margin>
@@ -58,11 +59,16 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="findPathButton" mnemonicParsing="false" prefWidth="110.0" styleClass="button-yellow" text="Find Path">
+            <Button fx:id="findPathButton" mnemonicParsing="false" onAction="#handleFindPathButton" prefWidth="110.0" styleClass="button-yellow" text="Find Path">
                <VBox.margin>
-                  <Insets left="185.0" top="20.0" />
+                  <Insets left="195.0" top="20.0" />
                </VBox.margin>
             </Button>
+            <JFXDrawer fx:id="errorDrawer" defaultDrawerSize="500.0" direction="RIGHT" miniDrawerSize="0.0" onMouseClicked="#handleErrorMessageClear" prefHeight="50.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </JFXDrawer>
          </children>
       </VBox>
    </children>

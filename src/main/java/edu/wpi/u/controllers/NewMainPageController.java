@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
@@ -60,7 +61,9 @@ public class NewMainPageController {
         AnchorPane pane = new AnchorPane(node);
         SVGPath pathFindingPath = new SVGPath();
         pathFindingPath.setContent(PathHandling.SVGPath);
+        pathFindingPath.setStrokeWidth(5);
         pane.getChildren().add(pathFindingPath);
+        pane.getChildren().get(1).toFront();
         GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
@@ -103,6 +106,18 @@ public class NewMainPageController {
                 e.printStackTrace();
             }
         });
+
+        map.scaleXProperty().addListener((observable, oldValue, newValue)  ->
+        {
+            pathFindingPath.setScaleX((Double) newValue);
+        });
+        map.scaleYProperty().addListener((observable, oldValue, newValue)  ->
+        {
+            pathFindingPath.setScaleY((Double) newValue);
+        });
+
+
+
     }
 
 

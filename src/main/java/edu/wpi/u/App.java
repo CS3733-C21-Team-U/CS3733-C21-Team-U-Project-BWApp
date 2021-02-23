@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,7 +31,7 @@ public class App extends Application {
 
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
-
+  public static PathHandling PathHandling = new PathHandling();
 
 
   public App(){

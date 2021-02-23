@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
@@ -10,10 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class PathfindingRightPageController {
@@ -32,10 +36,7 @@ public class PathfindingRightPageController {
     JFXComboBox endDropField;
 
     @FXML
-    ListView list;
-
-
-    ObservableList<Node> oList;
+    JFXDrawer errorDrawer;
 
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
@@ -48,6 +49,16 @@ public class PathfindingRightPageController {
         ObservableList<String> oList = FXCollections.observableList(nodeIDs);
         startDropField.setItems(oList); //This sets the observablelist that just got created to the stuff thats in the dropdown
         endDropField.setItems(oList);
+
+
+
+
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        AnchorPane error = errorMessageLoader.load();
+        ErrorMessageController controller = errorMessageLoader.getController();
+        controller.errorMessage.setText("Plaese Input Valid Nodes");
+        errorDrawer.setSidePane(error);
+
 
     }
 
@@ -71,4 +82,34 @@ public class PathfindingRightPageController {
             endDropField.setVisible(false);
         }
     }
+
+
+    public void handleFindPathButton(){
+        try {
+            if (entryTypeButton.getText().equalsIgnoreCase("Text Entry")) {
+                if (startDropField.getValue().equals("") || endDropField.getValue().equals("") || startDropField.getValue() == null || endDropField.getValue() == null) {
+                    errorDrawer.open();
+                } else {
+                    App.PathHandling.setSVGPath(App.graphService.aStar(startDropField.getId(), endDropField.getId()));
+                }
+            } else {
+                if (startTextField.getText().equals("") || endTextField.getText().equals("")) {
+                    errorDrawer.open();
+                } else {
+                    System.out.println("SENDING THE LIST TO PATHHANDLING");
+                    App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+                }
+            }
+        } catch (Exception e){
+            errorDrawer.open();
+        }
+    }
+
+
+
+    public void handleErrorMessageClear(){
+        errorDrawer.close();
+    }
+
+
 }
