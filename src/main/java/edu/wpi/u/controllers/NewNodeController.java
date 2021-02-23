@@ -20,8 +20,7 @@ public class NewNodeController {
 
     @FXML
     public void handleNodeSubmitButton() {
-        GraphService g = new GraphService();
-        g.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
+        App.graphService.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
         App.rightDrawerRoot.set( "../views/AdminTools.fxml");
     }
     @FXML

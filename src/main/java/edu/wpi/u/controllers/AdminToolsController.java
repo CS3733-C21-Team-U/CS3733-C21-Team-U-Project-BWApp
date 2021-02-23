@@ -39,12 +39,12 @@ public class AdminToolsController {
         for (int i = 0; i < edges.size(); i++) {
             Edge currentEdgeInfo = edges.get(i);
             FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("../views/EdgeListItem.fxml"));
-            AnchorPane node = edgeLoader.load();
+            AnchorPane edge = edgeLoader.load();
             EdgeItemController controller = edgeLoader.getController();
             controller.edgeID.setText(currentEdgeInfo.getEdgeID());
             controller.startingNode.setText(currentEdgeInfo.getStartNode().getNodeID());
             controller.endingNode.setText(currentEdgeInfo.getEndNode().getNodeID());
-            test.getChildren().add(node);
+            test.getChildren().add(edge);
         }
 
     }
