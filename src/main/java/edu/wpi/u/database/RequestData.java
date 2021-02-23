@@ -41,7 +41,6 @@ public class RequestData extends Data{
                 Date created = rs.getDate("dateCreated");
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
-                String location = rs.getString("location");
                 LinkedList<String> locations = new LinkedList<String>();
                 try { // TODO : Move to helper function
                     String str2 = "select * from Locations where requestID=?";
