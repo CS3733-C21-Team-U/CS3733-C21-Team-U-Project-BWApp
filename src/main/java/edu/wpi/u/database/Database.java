@@ -71,7 +71,6 @@ public class Database {
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
-
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
