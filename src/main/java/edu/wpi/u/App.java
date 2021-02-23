@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import edu.wpi.u.database.Database;
 import edu.wpi.u.models.GraphService;
 import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
@@ -91,9 +92,9 @@ public class App extends Application {
     });
   }
 
-  public void updateMap(){
-    NewMainPageController.
-  }
+//  public void updateMap(){
+//    NewMainPageController.
+//  }
 
 
 
@@ -103,7 +104,7 @@ public class App extends Application {
 
   public void stop() {
     System.out.println("Shutting Down");
-    graphService.saveAndExitDB();
+    db.stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

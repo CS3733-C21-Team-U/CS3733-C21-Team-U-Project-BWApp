@@ -87,4 +87,48 @@ public class Database {
         }
         return false;
     }
+
+    public void deleteTables() {
+        try {
+            String str = "drop table Nodes";
+            Statement s = conn.createStatement();
+            s.execute(str);
+            str = "drop table Edges";
+            s.execute(str);
+            str = "drop table Assignments";
+            s.execute(str);
+            str = "drop table Locations";
+            s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void dropValues() {
+        try {
+            String str = "delete from Nodes";
+            Statement ps = conn.createStatement();
+            ps.execute(str);
+            str = "delete from Edges";
+            ps.execute(str);
+            str = "delete from Requests";
+            ps.execute(str);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        dropValues();
+        deleteTables();
+        try{
+            //conn.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
