@@ -17,9 +17,9 @@ public class RequestService {
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-    for (Request x : this.activeRequests){
-      System.out.println("Req: "+ x.getRequestID());
-    }
+//    for (Request x : this.activeRequests){
+//      System.out.println("Req: "+ x.getRequestID());
+//    }
   }
 
   /*
@@ -33,8 +33,7 @@ public class RequestService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    rd.dropValues();
-    rd.saveCSV(path,tableName, "test"); // TODO: Provide header
+    rd.saveCSV(tableName,path , "test"); // TODO: Provide header
   }
   /*
   Make sure x & y are positive integers within the map coordinate range
@@ -83,6 +82,7 @@ public class RequestService {
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
         r.setDateCompleted(now);
+        this.activeRequests.remove(r);
         rd.delRequest(r);
         return "";
       }

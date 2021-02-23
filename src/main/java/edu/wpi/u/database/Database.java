@@ -10,10 +10,21 @@ public class Database {
 
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
+    private static Database db = new Database();
+    public static boolean off = false;
+
+    public void setOff(boolean off) {
+        Database.off = off;
+    }
+
     public Database() {
         driver();
         connect();
         init();
+    }
+
+    public static edu.wpi.u.database.Database getDb() {
+        return db;
     }
 
     public static void driver() {

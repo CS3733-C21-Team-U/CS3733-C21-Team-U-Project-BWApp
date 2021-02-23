@@ -34,7 +34,7 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
-  public static Database db = new Database();
+  public static Database db = Database.getDb();
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -106,8 +106,16 @@ public class App extends Application {
   }
 
   public void stop() {
+//    System.out.println("This is a second print stmt");
     System.out.println("Shutting Down");
+
+    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
+//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Locations");
+//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Assignments");
+//    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
+//    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     db.stop();
+    db.setOff(true);
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
