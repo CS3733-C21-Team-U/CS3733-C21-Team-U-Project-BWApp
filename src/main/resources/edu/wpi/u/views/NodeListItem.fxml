@@ -33,12 +33,12 @@
                   </Label>
                </children>
             </HBox>
-            <Label prefHeight="19.0" prefWidth="227.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Adjacent Nodes:">
+            <Label prefHeight="19.0" prefWidth="227.0" style="-fx-font-size: 16; -fx-font-weight: bold;">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="nodeAdj" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="240.0" style="-fx-font-size: 16; -fx-wrap-text: true;" text="PARKA12345, PARKA12345, PARKA12345, PARKA12345, PARKA12345, PARKA12345">
+            <Label fx:id="nodeAdj" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="240.0" style="-fx-font-size: 16; -fx-wrap-text: true;">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
