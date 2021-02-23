@@ -153,7 +153,6 @@
 }
 
 
-
 /*Left Nav Stuff*/
 
 .nav-item:selected{
@@ -161,10 +160,6 @@
 
 }
 
-
-.nav-item > {
-
-}
 
 .jfx-toggle-node{
     -jfx-toggle-color: #E9EEFF;
@@ -174,4 +169,10 @@
 
 .jfx-rippler{
     -jfx-rippler-fill: #b7bfd2;
+}
+
+#navigation_pill{
+    -fx-background-color: -lightBlue;
+    -jfx-toggle-color: -blue;
+
 }
