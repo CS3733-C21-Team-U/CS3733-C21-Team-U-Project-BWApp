@@ -85,6 +85,7 @@ public class GraphService {
       return "";
     }
     else {
+      System.out.println("Edge Creation Failed!");
       return edge_id;
     }
 

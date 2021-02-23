@@ -15,8 +15,7 @@ public class NewEdgeController {
 
     @FXML
     public void handleEdgeSubmitButton() {
-        GraphService g = new GraphService();
-        g.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
+        App.graphService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
         App.rightDrawerRoot.set( "../views/AdminTools.fxml");
     }
     @FXML
