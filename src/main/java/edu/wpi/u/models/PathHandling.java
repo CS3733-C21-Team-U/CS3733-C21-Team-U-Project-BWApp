@@ -1,13 +1,13 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PathHandling {
 
-    public static String SVGPath = "m 0, 0 l 1, 1 m 1468.0, 694.0 l 20.0, 0.0 l 16.0, 0.0 l 31.0, 0.0 l 0.0, 20.0 l 0.0, 18.0 l 0.0, 17.0 l 53.0, 180.0 l -156.0, 22.0 l -118.0, 78.0 l -106.0, -31.0 l -136.0, -4.0 l -68.0, -39.0 l -131.0, 13.0 l -126.0, 31.0 l -218.0, 206.0 l -23.0, 2.0 l -2.0, -32.0";
+    public static String SVGPathString = "";
 
 
     public void setSVGPath(LinkedList<Node> nodeList){
@@ -20,12 +20,13 @@ public class PathHandling {
             path += " l " + xdiff + ", " + ydiff;
             System.out.println(path + " Path So far");
         }
-        SVGPath = path;
+        SVGPathString = path;
         System.out.println("ENDING PATH: " + path);
+        App.pathFindingPath.setContent(SVGPathString);
     }
 
     public void clearSVGPath(){
-        SVGPath = "";
+        SVGPathString = "";
     }
 
 
