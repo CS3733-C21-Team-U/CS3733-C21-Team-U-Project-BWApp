@@ -28,7 +28,7 @@ public class NewMainPageController {
     private JFXDrawer serviceRequestDrawer;
 
 
-    public ImageView mapView;
+    public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
 
@@ -56,7 +56,7 @@ public class NewMainPageController {
         App.pathFindingPath.setStrokeWidth(5);
         pane.getChildren().add(App.pathFindingPath);
         App.pathFindingPath.toFront();
-        GesturePane map = new GesturePane(pane);
+        map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
 //        mapView.setFitWidth(4000.0);
@@ -101,19 +101,6 @@ public class NewMainPageController {
 
 
 
-
-
-        map.scaleXProperty().addListener((observable, oldValue, newValue)  ->
-        {
-            App.pathFindingPath.setScaleX((Double) newValue);
-        });
-        map.scaleYProperty().addListener((observable, oldValue, newValue)  ->
-        {
-            App.pathFindingPath.setScaleY((Double) newValue);
-        });
-
-
-
     }
 
 
@@ -137,13 +124,25 @@ public class NewMainPageController {
 
     @FXML
     public void handleZoomOutButton() {
-        mapView.setFitHeight(mapView.getFitHeight()/1.4);
-        mapView.setFitWidth(mapView.getFitWidth()/1.4);
+//        map.currentScaleProperty().setValue(map.getCurrentScale()/1.4);
+//        mapView.setFitHeight(mapView.getFitHeight()/1.4);
+//        mapView.setFitWidth(mapView.getFitWidth()/1.4);
+        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
+        // increment of scale makes more sense exponentially instead of linearly
+        map.animate(DURATION)
+                .interpolateWith(Interpolator.EASE_BOTH)
+                .zoomBy(-0.35, pivotOnTarget);
     }
 
     @FXML
     public void handleZoomInButton() {
-        mapView.setFitHeight(mapView.getFitHeight()*1.4);
-        mapView.setFitWidth(mapView.getFitWidth()*1.4);
+//        map.currentScaleProperty().setValue(map.getCurrentScale()*1.4);
+//        mapView.setFitHeight(mapView.getFitHeight()*1.4);
+//        mapView.setFitWidth(mapView.getFitWidth()*1.4);
+        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
+        // increment of scale makes more sense exponentially instead of linearly
+        map.animate(DURATION)
+                .interpolateWith(Interpolator.EASE_BOTH)
+                .zoomBy(0.35, pivotOnTarget);
     }
 }

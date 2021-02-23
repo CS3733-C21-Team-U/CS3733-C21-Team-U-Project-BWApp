@@ -34,7 +34,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <Label fx:id="locationLabel" layoutX="21.0" layoutY="55.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="195.0" styleClass="label-sub-header" text="Location" wrapText="true">
+      <Label fx:id="locationLabel" layoutX="20.0" layoutY="56.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="195.0" styleClass="label-sub-header" text="Location" wrapText="true">
          <effect>
             <Lighting>
                <bumpInput>

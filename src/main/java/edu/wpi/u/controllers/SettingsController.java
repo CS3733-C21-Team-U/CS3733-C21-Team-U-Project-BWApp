@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -28,7 +29,9 @@ public class SettingsController {
     }
 
     public void HandleRequestLocation(){
-        requestLocation.setText(getFileLocation());
+        String path = getFileLocation();
+        App.requestService.loadCSVFile(path, "REQUESTS");
+        requestLocation.setText(path);
     }
     //This is just a helper function so there isn't reused code!
     public String getFileLocation(){
