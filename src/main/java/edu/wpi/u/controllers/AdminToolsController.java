@@ -27,11 +27,11 @@ public class AdminToolsController {
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
             controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
-            StringBuilder adjacencies = new StringBuilder();
-            for(Node a : currentNodeInfo.getAdjNodes()) {
-                adjacencies.append(a.getNodeID() + ", ");
-            }
-            controller.nodeAdj.setText(adjacencies.toString());
+//            StringBuilder adjacencies = new StringBuilder();
+//            for(Node a : currentNodeInfo.getAdjNodes()) {
+//                adjacencies.append(a.getNodeID() + ", ");
+//            }
+//            controller.nodeAdj.setText(adjacencies.toString());
             nodeList.getChildren().add(node);
         }
 

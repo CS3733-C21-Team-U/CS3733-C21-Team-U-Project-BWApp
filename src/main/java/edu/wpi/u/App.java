@@ -73,7 +73,7 @@ public class App extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
-////    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
+//    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
