@@ -40,6 +40,7 @@ public class App extends Application {
 
   public App(){
     System.out.println("App constructor");
+    app_instance = this;
   }
 
   public static App getInstance(){

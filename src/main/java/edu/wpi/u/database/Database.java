@@ -88,7 +88,7 @@ public class Database {
         return false;
     }
 
-    public void deleteTables() {
+    public static void deleteTables() {
         try {
             String str = "drop table Nodes";
             Statement s = conn.createStatement();
@@ -103,21 +103,32 @@ public class Database {
             s.execute(str);
         }
         catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
     public void dropValues() {
+        //System.out.println("here2");
         try {
-            String str = "delete from Nodes";
-            Statement ps = conn.createStatement();
-            ps.execute(str);
+            Statement s = conn.createStatement();
+            String str = "alter table Locations drop column nodeID";
+            s.execute(str);
+            str = "alter table Locations drop column requestID";
+            s.execute(str);
+            str = "alter table Assignments drop column requestID";
+            s.execute(str);
+            str = "delete from Nodes";
+            s.execute(str);
             str = "delete from Edges";
-            ps.execute(str);
+            s.execute(str);
             str = "delete from Requests";
-            ps.execute(str);
+            s.execute(str);
+            str = "delete from Locations";
+            s.execute(str);
+            str = "delete from Assigments";
+            s.execute(str);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            //throwables.printStackTrace();
         }
     }
 
