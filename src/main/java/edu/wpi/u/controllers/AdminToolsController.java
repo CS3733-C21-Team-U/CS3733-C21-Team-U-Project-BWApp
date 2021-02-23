@@ -34,9 +34,9 @@ public class AdminToolsController {
             AnchorPane node = nodeLoader.load();
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
-            controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
-            controller.XPos = (int)(nodes.get(i).getCords()[0]);
-            controller.YPos = (int)(nodes.get(i).getCords()[1]);
+            double XPos = (nodes.get(i).getCords()[0]);
+            double YPos = (nodes.get(i).getCords()[1]);
+            controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
             nodeList.getChildren().add(node);
         }
 
