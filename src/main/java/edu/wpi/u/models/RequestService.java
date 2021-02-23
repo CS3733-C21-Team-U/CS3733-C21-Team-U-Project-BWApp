@@ -45,7 +45,7 @@ public class RequestService {
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-    Request newRequest = new Request(ID, null, new Date(), new Date(), description ,title,null, type, creator);
+    Request newRequest = new Request(ID, null, new Date(), null, description ,title,location, type, creator);
     this.activeRequests.add(newRequest);
     rd.addRequest(newRequest);
     return "";

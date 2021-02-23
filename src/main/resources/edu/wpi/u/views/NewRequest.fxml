@@ -68,9 +68,9 @@
                   <Insets top="25.0" />
                </VBox.margin>
             </HBox>
-            <ListView fx:id="locationList" prefHeight="119.0" prefWidth="398.0">
+            <ListView fx:id="locationList" prefHeight="119.0" prefWidth="387.0">
                <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
+                  <Insets left="50.0" right="50.0" />
                </VBox.margin>
             </ListView>
             <Label fx:id="errorMessage3" prefHeight="15.0" prefWidth="56.0">
@@ -83,14 +83,9 @@
                   <Insets left="50.0" right="50.0" top="25.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="nodeTextField" promptText="Location Node(s)">
-               <VBox.margin>
-                  <Insets bottom="25.0" left="50.0" right="50.0" top="25.0" />
-               </VBox.margin>
-            </TextField>
             <Button fx:id="submitRequestButton" mnemonicParsing="false" onAction="#handleSubmitRequestButton" prefWidth="357.0" styleClass="button-blue" text="Submit">
                <VBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" top="50.0" />
                </VBox.margin>
             </Button>
             <Label fx:id="errorMessage" textAlignment="CENTER" textFill="RED">
