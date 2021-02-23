@@ -24,38 +24,22 @@ import java.util.ArrayList;
 
 public class NewRequestController {
 
-    @FXML
-    public TextField titleTextField;
-    @FXML
-    public TextField descriptionTextField;
-    @FXML
-    public TextField nodeTextField;
-    @FXML
-    public TextField assigneeTextField;
-    @FXML
-    public TextField serviceTypeTextField;
-    @FXML
-    public Button submitRequestButton;
-    @FXML
-    public Button assigneeButton;
-    @FXML
-    public Button locationButton;
-    @FXML
-    public Button cancelButton;
-    @FXML
-    public Label errorMessage;
-    @FXML
-    public Label errorMessage2;
-    @FXML
-    public Label errorMessage3;
-    @FXML
-    public ListView locationList;
-    @FXML
-    public ListView assigneeList;
-    @FXML
-    ChoiceBox locationDropField;
 
-
+    @FXML public Button cancelButton;
+    @FXML public TextField titleTextField;
+    @FXML public TextField descriptionTextField;
+    @FXML public Label errorMessage2;
+    @FXML public TextField assigneeTextField;
+    @FXML public Button assigneeButton;
+    @FXML public ListView assigneeList;
+    @FXML public ChoiceBox locationDropField;
+    @FXML public Button locationButton;
+    @FXML public ListView locationList;
+    @FXML public Label errorMessage3;
+    @FXML public TextField serviceTypeTextField;
+    @FXML public TextField nodeTextField;
+    @FXML public Button submitRequestButton;
+    @FXML public Label errorMessage;
     GraphService gs = new GraphService();
 
     ObservableList<Node> oList;

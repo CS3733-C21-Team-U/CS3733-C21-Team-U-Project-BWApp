@@ -22,20 +22,14 @@ import java.io.IOException;
 
 public class NewMainPageController {
 
-    @FXML
-    public SVGPath leftMenuHamburger;
-    @FXML
-    private AnchorPane mainAnchorPane;
-
-    @FXML
-    private JFXDrawer leftMenuDrawer;
-    @FXML
-    private JFXDrawer serviceRequestDrawer;
-
 
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
+    @FXML public SVGPath leftMenuHamburger;
+    @FXML public AnchorPane mainAnchorPane;
+    @FXML public JFXDrawer leftMenuDrawer;
+    @FXML public JFXDrawer serviceRequestDrawer;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
