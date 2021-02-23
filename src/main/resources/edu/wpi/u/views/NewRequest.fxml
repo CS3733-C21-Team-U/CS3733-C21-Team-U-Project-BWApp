@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" style="-fx-background-color: hotpink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
    <children>
-      <TextField layoutX="176.0" layoutY="148.0" promptText="Title" />
-      <TextField layoutX="146.0" layoutY="206.0" prefHeight="107.0" prefWidth="210.0" promptText="Description" />
-      <TextField layoutX="176.0" layoutY="352.0" promptText="Location Node(s)" />
-      <TextField layoutX="176.0" layoutY="451.0" promptText="Assigned Staff Member" />
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="410.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="67.0" prefWidth="500.0">
+               <children>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleLeaveAdd" prefHeight="30.0" prefWidth="225.0" styleClass="button-lightBlue" text="Cancel" />
+               </children>
+            </HBox>
+            <TextField fx:id="titleTextField" prefWidth="291.0" promptText="Title" styleClass="label" stylesheets="@css/RegularTheme.css">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="descriptionTextField" prefHeight="200.0" promptText="Description">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="50.0" right="50.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="errorMessage2" textFill="RED">
+               <VBox.margin>
+                  <Insets left="200.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="14.0" prefWidth="500.0" VBox.vgrow="NEVER">
+               <children>
+                  <TextField fx:id="assigneeTextField" prefHeight="23.0" prefWidth="224.0" promptText="Assign Staff Member" styleClass="attached-left" />
+                  <Button fx:id="assigneeButton" mnemonicParsing="false" onAction="#handleAssigneeList" prefHeight="100.0" prefWidth="183.0" text="Add Assignee">
+                     <styleClass>
+                        <String fx:value="button-blue" />
+                        <String fx:value="attached-right" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="assigneeList" prefHeight="100.0" prefWidth="404.0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </ListView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox fx:id="locationDropField" prefHeight="41.0" prefWidth="150.0" />
+                  <Button fx:id="locationButton" mnemonicParsing="false" onAction="#handleAddLocation" prefHeight="100.0" prefWidth="197.0" text="Add Location">
+                     <styleClass>
+                        <String fx:value="button-blue" />
+                        <String fx:value="attached-right" />
+                     </styleClass></Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </HBox>
+            <ListView fx:id="locationList" prefHeight="119.0" prefWidth="398.0">
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </ListView>
+            <Label fx:id="errorMessage3" prefHeight="15.0" prefWidth="56.0">
+               <VBox.margin>
+                  <Insets left="220.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="serviceTypeTextField" promptText="Service Type">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" top="25.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="nodeTextField" promptText="Location Node(s)">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="50.0" right="50.0" top="25.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="submitRequestButton" mnemonicParsing="false" onAction="#handleSubmitRequestButton" prefWidth="357.0" styleClass="button-blue" text="Submit">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Label fx:id="errorMessage" textAlignment="CENTER" textFill="RED">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="200.0" top="16.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

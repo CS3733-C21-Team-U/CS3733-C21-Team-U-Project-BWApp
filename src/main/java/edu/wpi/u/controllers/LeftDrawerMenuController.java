@@ -33,11 +33,25 @@ import java.io.IOException;
         public void initialize() throws IOException{
 //        toPathPlanningBtn.onActionProperty()
 //        toggle4.setDisable(true);
-            setTextColor(2);
+            setTextColor(App.leftMenuScreenNum);
+            toggleButton(App.leftMenuScreenNum);
+            setRectVisibility(App.leftMenuScreenNum);
 //        setRectVisibility(-1);
 //        toggle4.setDisableAnimation(true);
         }
 
+        private void toggleButton(int screen){
+            switch(screen) {
+                case 1:
+                    toggle1.setSelected(true); break;
+                case 2:
+                    toggle2.setSelected(true); break;
+                case 3:
+                    toggle3.setSelected(true); break;
+                case 4:
+                    toggle4.setSelected(true); break;
+            }
+        }
 
         private void setRectVisibility(int activeRect){
             flair1.setVisible(false);
@@ -69,26 +83,34 @@ import java.io.IOException;
 
 
         public void handleChangeToPathPlanning(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/PathfindingRightPage.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/PathfindingRightPage.fxml");
+            App.leftMenuScreenNum = 1;
             setRectVisibility(1);
             setTextColor(1);
         }
 
         public void handleChangeToRequests(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
+            App.leftMenuScreenNum = 2;
             setRectVisibility(2);
             setTextColor(2);
         }
 
         public void handleChangeToAdmin(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
+            App.leftMenuScreenNum = 3;
             setRectVisibility(3);
             setTextColor(3);
         }
 
         public void handleChangeToSettings(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "../views/Settings.fxml");
+            App.rightDrawerRoot.set( "/edu/wpi/u/views/Settings.fxml");
+            App.leftMenuScreenNum = 4;
             setRectVisibility(4);
             setTextColor(4);
+        }
+
+        public void handleExit(ActionEvent actionEvent) {
+            App.getInstance().stop();
         }
     }

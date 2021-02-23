@@ -1,30 +1,42 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');*/
 @font-face {
-    font-family: 'Rubik Regular', sans-serif;
-    src: url('./Rubik-Regular.ttf');
+    -fx-font-family: 'Rubik Regular';
+    src: url('Rubik-Regular.ttf');
 }
-
 @font-face {
-    font-family: 'Rubik Bold';
-    url('./Rubik-Bold.ttf');
-    -fx-font-weight: bold;
+    -fx-font-family: 'Rubik Bold';
+    src: url('Rubik-Bold.ttf');
+}
+@font-face {
+    -fx-font-family: 'Rubik Medium';
+    src: url('Rubik-Medium.ttf');
 }
 /*Base colors here------------------------*/
 
 /*Base colors here------------------------*/
 
 
-
-.serialConn{
-    -fx-font-family: 'Rubik Regular', sans-serif;
-}
 
 .root{
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -blue: #2e5bff;
+    -yellow: #f7c137;
+    -green: #33ac2e;
+    -red: #d63649;
+    -lightBlue: #d4ddfe;
+    -lightYellow: #fbefcb;
+    -blueTint: #f9faff;
+    -grey: #B0bac9;
+    -fx-font-family: 'Rubik';
+    -fx-background-color: #ffffff;
+}
+
+.nav-item > *{
+    -fx-font-family: 'Rubik';
 }
 
 .background {
     -fx-background-color: #cbcbcb;
-    -fx-font-family: 'Rubik Regular', sans-serif;
+    -fx-font-family: 'Rubik';
 }
 
 /*.label {*/
@@ -32,25 +44,91 @@
 /*    -fx-text-fill: black;*/
 /*}*/
 
-.label-sub-header {
-    -fx-font-size: 18pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
-    -fx-text-fill: Black;
+.label{
+    -fx-font-size: 13pt;
 }
 
 .label-header {
-    -fx-font-size: 36pt;
-    -fx-font-family: 'Rubik Bold', sans-serif;
-    -fx-text-fill: Black;
+    -fx-font-size: 25pt;
+    -fx-font-family: 'Rubik Bold';
+}
+
+.label-sub-header {
+    -fx-font-size: 15pt;
+    -fx-font-family: 'Rubik Bold';
+}
+
+.label-feild-tile{
+    -fx-font-size: 12pt;
+    -fx-font-family: 'Rubik Medium';
+    -fx-text-fill: -grey;
 }
 
 
+.text-field{
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-border-radius: 5;
+    -fx-border-style: solid;
 
-.label-Other {
-    -fx-font-size: 10pt;
-    -fx-font-family: 'Rubik Regular', sans-serif;
-    -fx-text-fill: Grey;
+    -fx-border-color: -lightBlue;
+    -fx-text-fill: -blue;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: -grey;
+    -fx-background-color: -blueTint;
 }
+
+.button{
+    -fx-font-family: 'Rubik Medium';
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+
+    -fx-padding: 7 30;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button-green {
+    -fx-background-color: -green;
+}
+.button-yellow {
+    -fx-background-color: -yellow;
+}
+.button-blue {
+    -fx-background-color: -blue;
+}
+.button-red{
+    -fx-background-color: -red;
+}
+.button-lightBlue {
+    -fx-background-color: -lightBlue;
+    -fx-text-fill: -blue;
+}
+.button-lightYellow {
+    -fx-background-color: -lightYellow;
+    -fx-text-fill: -yellow;
+}
+
+.button:pressed{
+    -fx-opacity: 0.5;
+}
+
+.attached-left {
+    -fx-background-radius: 5 0 0 5;
+    -fx-border-radius: 5 0 0 5;
+}
+
+.attached-right{
+    -fx-background-radius: 0 5 5 0;
+    -fx-border-radius: 0 5 5 0;
+}
+
+
+/*I don't know what split pane does*/
 
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: white;
@@ -74,105 +152,9 @@
     -fx-padding: 0 0 0 0;
 }
 
-/*.text-field {*/
-/*    -fx-font-size: 12pt;*/
-/*    -fx-font-family: "Rubik";*/
-/*}*/
 
 
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-
-.button-green {
-    -fx-font-size: 14pt;
-    -fx-font-family: 'Rubik Regular', sans-serif;
-    -fx-text-fill: white;
-    -fx-padding: 5 10 5 10;
-    -fx-background-color: #33ab2e;
-    -fx-background-radius: 3;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-.button-yellow {
-    -fx-font-size: 14pt;
-    -fx-font-family: 'Rubik Regular', sans-serif;
-    -fx-text-fill: white;
-    -fx-padding: 5 10 5 10;
-    -fx-background-color: #f6c037;
-    -fx-background-radius: 3;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-.button-blue {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 3;
-    -fx-background-color: #2e5bfe;
-    -fx-font-family: Arial;
-    -fx-font-size: 14pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-.button-lightBlue {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 3;
-    -fx-background-color: #d4ddfe;
-    -fx-font-family: Arial;
-    -fx-font-size: 14pt;
-    -fx-text-fill: #2e5bfe;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-.button-lightYellow {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 3;
-    -fx-background-color: #fbefcb;
-    -fx-font-family: Arial;
-    -fx-font-size: 14pt;
-    -fx-text-fill: #f6c037;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-
-
-.button-regular {
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 2;
-    -fx-background-color: #2e5bfe;
-    -fx-font-family: Arial;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #ffffff;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-
-
-.button:hover {
-    -fx-background-color: #3a3a3a;
-}
-
-.button:pressed, .button:default:hover:pressed {
-    -fx-background-color: white;
-    -fx-text-fill: #1d1d1d;
-}
-
-
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
-}
-
-.button:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color,30%);
-}
-
-.map-btn{
-    -fx-background-color: #FFFFFF;
-}
-
+/*Left Nav Stuff*/
 
 .nav-item:selected{
     -fx-background-color: #E9EEFF;

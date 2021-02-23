@@ -3,62 +3,80 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
-import edu.wpi.u.uiComponents.ZoomableScrollPane;
 import javafx.animation.Interpolator;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
-import java.util.Observable;
 
 public class NewMainPageController {
 
     @FXML
-    private AnchorPane mainAnchorPane;
+    public SVGPath leftMenuHamburger;
     @FXML
-    private JFXHamburger leftMenuHamburger;
+    private AnchorPane mainAnchorPane;
+
     @FXML
     private JFXDrawer leftMenuDrawer;
     @FXML
     private JFXDrawer serviceRequestDrawer;
 
 
-    public ImageView mapView;
+    public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
 
     AnchorPane rightServiceRequestPane;
+    AnchorPane leftMenuPane;
+
 
 
     public void initialize() throws IOException {
-        AnchorPane leftMenuPane;
-        leftMenuPane = FXMLLoader.load(getClass().getResource("../views/LeftDrawerMenu.fxml"));
+        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("../views/ViewRequest.fxml"));
+
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequest.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 
 
 
-        Node node = new ImageView(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png").toExternalForm());
-        App.pane = new AnchorPane(node);
-        App.pane.getStyleClass().add("blue");
-        App.pane.applyCss();
-        GesturePane map = new GesturePane(App.pane);
+        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
+        node.setFitWidth(2987);
+        node.setPreserveRatio(true);
+        AnchorPane pane = new AnchorPane(node);
+        //The black path behind--------------
+        App.pathFindingPath = new SVGPath();
+        App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
+        App.pathFindingPath.setStrokeWidth(5);
+        App.pathFindingPath.setStroke(Color.web("#f6c037", 1.0));
+        App.pathFindingPath.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        App.pathFindingPath.setStrokeLineCap(StrokeLineCap.ROUND);
+        //The yellow path behind--------------
+        App.pathFindingPath2 = new SVGPath();
+        App.pathFindingPath2.setContent(App.PathHandling.SVGPathString);
+        App.pathFindingPath2.setStrokeWidth(12);
+        App.pathFindingPath2.setStroke(Color.web("#1d1d1d", 1.0));
+        App.pathFindingPath2.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        App.pathFindingPath2.setStrokeLineCap(StrokeLineCap.ROUND);
+        //The loading of the paths
+        pane.getChildren().add(App.pathFindingPath);
+        pane.getChildren().add(App.pathFindingPath2);
+        App.pathFindingPath2.toFront();
+        App.pathFindingPath.toFront();
+        map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
 //        mapView.setFitWidth(4000.0);
@@ -100,36 +118,56 @@ public class NewMainPageController {
                 e.printStackTrace();
             }
         });
+
+        App.leftDrawerRoot.addListener((observable, oldValue, newValue)  ->
+        {
+            try {
+                leftMenuPane = FXMLLoader.load(getClass().getResource(newValue));
+                leftMenuDrawer.setSidePane(leftMenuPane);
+                leftMenuDrawer.open();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
     }
 
 
 
     @FXML
     public void leftMenuToggle() throws Exception {
-        if(leftMenuDrawer.isOpened()){
-            leftMenuDrawer.close();
-        } else{
-            leftMenuDrawer.open();
+        if(App.leftDrawerRoot.getValue().equals("/edu/wpi/u/views/LeftDrawerMenu.fxml")){
+            leftMenuDrawer.setPrefSize(80,1000);
+            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenuSmall.fxml");
+        }else{
+            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenu.fxml");
         }
     }
 
 
-
-
-    @FXML
-    public void handleExitButton() {
-        App.getInstance().stop();
-    }
-
     @FXML
     public void handleZoomOutButton() {
-        mapView.setFitHeight(mapView.getFitHeight()/1.4);
-        mapView.setFitWidth(mapView.getFitWidth()/1.4);
+//        map.currentScaleProperty().setValue(map.getCurrentScale()/1.4);
+//        mapView.setFitHeight(mapView.getFitHeight()/1.4);
+//        mapView.setFitWidth(mapView.getFitWidth()/1.4);
+        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
+        // increment of scale makes more sense exponentially instead of linearly
+        map.animate(DURATION)
+                .interpolateWith(Interpolator.EASE_BOTH)
+                .zoomBy(-0.35, pivotOnTarget);
     }
 
     @FXML
     public void handleZoomInButton() {
-        mapView.setFitHeight(mapView.getFitHeight()*1.4);
-        mapView.setFitWidth(mapView.getFitWidth()*1.4);
+//        map.currentScaleProperty().setValue(map.getCurrentScale()*1.4);
+//        mapView.setFitHeight(mapView.getFitHeight()*1.4);
+//        mapView.setFitWidth(mapView.getFitWidth()*1.4);
+        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
+        // increment of scale makes more sense exponentially instead of linearly
+        map.animate(DURATION)
+                .interpolateWith(Interpolator.EASE_BOTH)
+                .zoomBy(0.35, pivotOnTarget);
     }
 }
