@@ -36,7 +36,7 @@ public class App extends Application {
   public static RequestService requestService = new RequestService();
   public static PathHandling PathHandling = new PathHandling();
   public static SVGPath pathFindingPath;
-
+  public static SVGPath pathFindingPath2;
 
   public App(){
     System.out.println("App constructor");

@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.assets.JFoenixResources;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXTextField;
@@ -85,12 +86,12 @@ public class PathfindingRightPageController {
 
 
     public void handleFindPathButton(){
-        try {
+
             if (entryTypeButton.getText().equalsIgnoreCase("Text Entry")) {
-                if (startDropField.getValue().equals("") || endDropField.getValue().equals("") || startDropField.getValue() == null || endDropField.getValue() == null) {
+                if (startDropField.valueProperty().getValue().equals("") || endDropField.valueProperty().getValue().equals("") || startDropField.valueProperty().getValue() == null || endDropField.valueProperty().getValue() == null) {
                     errorDrawer.open();
                 } else {
-                    App.PathHandling.setSVGPath(App.graphService.aStar(startDropField.getId(), endDropField.getId()));
+                    App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
                 }
             } else {
                 if (startTextField.getText().equals("") || endTextField.getText().equals("")) {
@@ -101,9 +102,7 @@ public class PathfindingRightPageController {
 
                 }
             }
-        } catch (Exception e){
-            errorDrawer.open();
-        }
+
     }
 
 

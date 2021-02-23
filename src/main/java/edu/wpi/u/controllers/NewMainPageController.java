@@ -10,7 +10,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -48,13 +52,27 @@ public class NewMainPageController {
 
 
         ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
-        node.setFitWidth(3000);
+        node.setFitWidth(2987);
         node.setPreserveRatio(true);
         AnchorPane pane = new AnchorPane(node);
+        //The black path behind--------------
         App.pathFindingPath = new SVGPath();
         App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
         App.pathFindingPath.setStrokeWidth(5);
+        App.pathFindingPath.setStroke(Color.web("#f6c037", 1.0));
+        App.pathFindingPath.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        App.pathFindingPath.setStrokeLineCap(StrokeLineCap.ROUND);
+        //The yellow path behind--------------
+        App.pathFindingPath2 = new SVGPath();
+        App.pathFindingPath2.setContent(App.PathHandling.SVGPathString);
+        App.pathFindingPath2.setStrokeWidth(12);
+        App.pathFindingPath2.setStroke(Color.web("#1d1d1d", 1.0));
+        App.pathFindingPath2.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        App.pathFindingPath2.setStrokeLineCap(StrokeLineCap.ROUND);
+        //The loading of the paths
         pane.getChildren().add(App.pathFindingPath);
+        pane.getChildren().add(App.pathFindingPath2);
+        App.pathFindingPath2.toFront();
         App.pathFindingPath.toFront();
         GesturePane map = new GesturePane(pane);
         map.setMinScale(0.3);
