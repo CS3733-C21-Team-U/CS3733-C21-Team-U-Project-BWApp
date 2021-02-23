@@ -88,7 +88,7 @@ public class Database {
         return false;
     }
 
-    public void deleteTables() {
+    public static void deleteTables() {
         try {
             String str = "drop table Nodes";
             Statement s = conn.createStatement();
@@ -109,12 +109,22 @@ public class Database {
 
     public void dropValues() {
         try {
-            String str = "delete from Nodes";
             Statement ps = conn.createStatement();
+            String str = "alter table Locations drop constraint nodeID";
+            ps.execute(str);
+            str = "delete from Nodes";
             ps.execute(str);
             str = "delete from Edges";
             ps.execute(str);
+            str = "alter table Locations drop constraint requestID";
+            ps.execute(str);
+            str = "alter table Assignments drop constraint requestID";
+            ps.execute(str);
             str = "delete from Requests";
+            ps.execute(str);
+            str = "delete from Locations";
+            ps.execute(str);
+            str = "delete from Assigments";
             ps.execute(str);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
