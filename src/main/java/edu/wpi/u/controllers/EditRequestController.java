@@ -1,10 +1,14 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -54,6 +58,14 @@ public class EditRequestController {
         for (int i = 0; i < currRequest.getAssignee().size(); i++) {
             showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
         }
+
+        ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
+        ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
+        for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
+            nodeIDs.add(N.getNodeID());
+        }
+        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
+        editLocField.setItems(oList);
     }
 
     private boolean isChecked() {
@@ -103,6 +115,7 @@ public class EditRequestController {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 currRequest.getLocation().remove(currRequest.getLocation().get(i));
+                showCurrentLocListView.getItems().remove(currRequest.getLocation().get(i));
                 return;
             }
         } editLocationErrorLabel.setText("Location Does Not Exist");
@@ -112,19 +125,49 @@ public class EditRequestController {
         String newPer = editPeopleField.getText();
         if(!doesPersonExist()) {
             currRequest.getAssignee().add(newPer);
-        } editPeopleErrorLabel.setText("Person Already Listed.");
+            showCurrentPeopleListView.getItems().add(newPer);
+            editPeopleErrorLabel.setText("");
+        }
+        else{
+            editPeopleErrorLabel.setText("Person Already Listed.");
+        }
     }
 
     public void handleDeletePeople() {
-        for(int i = 0; i < currRequest.getAssignee().size(); i++) {
+        for(String s : currRequest.getAssignee()){
+            if (editPeopleField.getText().equals(s)) {
+                currRequest.getAssignee().remove(s);
+                showCurrentPeopleListView.getItems().remove(s);
+                return;
+            }
+        } //editPeopleErrorLabel.setText("Person Does Not Exist");
+
+
+       // showCurrentPeopleListView.setItems(currRequest.getAssignee());
+
+        //showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
+
+      /*  for(int i = 0; i < currRequest.getAssignee().size(); i++) {
             if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
                 currRequest.getAssignee().remove(currRequest.getAssignee().get(i));
                 return;
             }
-        } editPeopleErrorLabel.setText("Person Does Not Exist");
+        } editPeopleErrorLabel.setText("Person Does Not Exist");*/
     }
 
-    public void handleCancel() { App.rightDrawerRoot.set("../views/ViewRequest.fxml"); }
+    public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml"); }
+
+    // Array list to linkedlist converter
+    public static LinkedList<String> OConverter(ObservableList<String> oList)
+    {
+        LinkedList<String> newLL = new LinkedList<String>();
+        for(String s : oList){
+            newLL.add(s);
+        }
+
+
+        return newLL;
+    }
 
     public void handleSaveRequest() {
 
@@ -135,14 +178,23 @@ public class EditRequestController {
             dateCompleted = null;
         }
 
+        System.out.println(currRequest.getRequestID());
+
+
         App.requestService.updateRequest(
                 currRequest.getRequestID(),
                 editTitleField.getText(),
                 editDescripArea.getText(),
                 dateCompleted,
-                (LinkedList<String>) showCurrentLocListView.getItems(),
+                OConverter(showCurrentLocListView.getItems()),
                 editTypeOfRequestField.getText(),
-                (LinkedList<String>) showCurrentPeopleListView.getItems(),
+                OConverter(showCurrentPeopleListView.getItems()),
                 editCreatorField.getText());
+        App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
+
+        //needs node ID
+        //assignments, give list name
+
+
     }
 }
