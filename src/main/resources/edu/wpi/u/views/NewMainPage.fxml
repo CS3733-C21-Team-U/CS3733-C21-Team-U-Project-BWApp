@@ -36,11 +36,6 @@
                         <Label prefHeight="42.0" prefWidth="298.0" styleClass="label-header" text="Brigham Health " />
                      </children>
                   </HBox>
-                  <ImageView fitHeight="80.0" fitWidth="170.0" layoutX="1719.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/topRight.png" />
-                     </image>
-                  </ImageView>
                </children>
             </AnchorPane>
           <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #edf1ff;">

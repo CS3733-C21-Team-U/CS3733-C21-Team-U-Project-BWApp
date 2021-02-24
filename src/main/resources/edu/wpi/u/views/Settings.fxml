@@ -7,16 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.SVGPath?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.SettingsController">
    <children>
-      <VBox layoutX="-6.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutY="-14.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
          <children>
             <Label styleClass="label-sub-header" text="Choose where your data is saved:" wrapText="true">
                <VBox.margin>
@@ -121,73 +117,25 @@
                   <Insets bottom="10.0" left="100.0" top="10.0" />
                </VBox.margin>
             </JFXButton>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0">
-               <children>
-                  <Label styleClass="label-sub-header" text="CSS Demo (No Functionality)" />
-               </children>
-            </HBox>
-            <GridPane alignment="CENTER" hgap="20.0" vgap="20.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="200.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="260.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <JFXButton styleClass="button-blue" text="button-blue" />
-                  <JFXButton styleClass="button-green" text="button-green" GridPane.rowIndex="1" />
-                  <JFXButton styleClass="button-yellow" text="button-yellow" GridPane.rowIndex="2" />
-                  <JFXButton styleClass="button-lightYellow" text="button-lightYellow" GridPane.rowIndex="3" />
-                  <JFXButton styleClass="button-lightBlue" text="button-lightBlue" GridPane.rowIndex="4" />
-                  <JFXButton layoutX="63.0" layoutY="6.0" styleClass="button-blue" text="button-blue" GridPane.rowIndex="5">
-                     <graphic>
-                        <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" fill="WHITE" fillRule="EVEN_ODD" scaleX="0.6" scaleY="0.6" scaleZ="0.6" />
-                     </graphic>
-                  </JFXButton>
-                  <Label prefHeight="42.0" prefWidth="236.0" styleClass="label-header" text="label-header" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label styleClass="label-sub-header" text="label-subHeader" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label styleClass="label-feild-tile" text="label-field-title (USE CAPS)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField styleClass="textFeild-regular" text="textField-regular" GridPane.columnIndex="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TextField>
-                  <TextField promptText="textField-regular  (promptText)" styleClass="textFeild-regular" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXButton styleClass="button-blue" text="button-blue" />
-                  <HBox prefHeight="20.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <children>
-                        <Label text="Default Label" />
-                     </children>
-                  </HBox>
-               </children>
+            <Label styleClass="label-sub-header" text="Change Theme">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets left="20.0" top="10.0" />
                </VBox.margin>
-            </GridPane>
-            <HBox prefHeight="20.0" prefWidth="500.0">
+            </Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="requestLocation1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="attached-left" text="attached-left">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" text="attached-right">
-                     <HBox.margin>
-                        <Insets left="-3.0" />
-                     </HBox.margin>
-                     <styleClass>
-                        <String fx:value="button-green" />
-                        <String fx:value="attached-right" />
-                     </styleClass>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRegTheme" styleClass="button-yellow" text="Regular Theme">
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAltTheme" styleClass="button-yellow" text="High-Contrast Theme">
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" />
+                     </VBox.margin>
                   </Button>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </children>

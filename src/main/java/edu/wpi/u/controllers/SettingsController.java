@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -45,6 +46,14 @@ public class SettingsController {
     }
 
 
+    public void handleRegTheme(ActionEvent actionEvent) {
+        App.getPrimaryStage().getScene().getStylesheets().removeAll();
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
+    }
 
-
+    public void handleAltTheme(ActionEvent actionEvent) {
+        System.out.println("I clicked the theme!!!!");
+        App.getPrimaryStage().getScene().getStylesheets().removeAll();
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+    }
 }
