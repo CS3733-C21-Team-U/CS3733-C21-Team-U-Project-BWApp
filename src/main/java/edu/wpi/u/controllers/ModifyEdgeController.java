@@ -10,6 +10,12 @@ public class ModifyEdgeController {
     @FXML public TextField sNode;
     @FXML public TextField eNode;
 
+    public void initialize(){
+        modifyNodeID.setText(App.lastSelectedEdge);
+        sNode.setText(App.edgeField1);
+        eNode.setText(App.edgeField2);
+    }
+
     @FXML
     public void handleEdgeSubmitButton() {
         App.graphService.updateStartEdge(modifyNodeID.getText(), sNode.getText());

@@ -36,6 +36,13 @@ public class App extends Application {
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
 
+  public static String lastSelectedNode;
+  public static String nodeField1;
+  public static String nodeField2;
+  public static String lastSelectedEdge;
+  public static String edgeField1;
+  public static String edgeField2;
+
   public App(){
     System.out.println("App constructor");
     app_instance = this;

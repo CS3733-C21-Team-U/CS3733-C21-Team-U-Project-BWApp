@@ -38,6 +38,8 @@ public class AdminToolsController {
             double XPos = (nodes.get(i).getCords()[0]);
             double YPos = (nodes.get(i).getCords()[1]);
             controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
+            controller.x = Double.toString(XPos);
+            controller.y = Double.toString(YPos);
             StringBuilder string = new StringBuilder("Adj Nodes: ");
             Iterator<Node> it = currentNodeInfo.getAdjNodes().descendingIterator();
             while (it.hasNext()) {

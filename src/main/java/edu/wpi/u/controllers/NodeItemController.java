@@ -18,6 +18,9 @@ public class NodeItemController {
     @FXML public Button collapseButton;
     @FXML public VBox extendedInfo;
 
+    public String x;
+    public String y;
+
     @FXML
     public void handleNodeExpandButton() {
         nodeAnchor.setPrefHeight(300);
@@ -42,6 +45,9 @@ public class NodeItemController {
 
     @FXML
     public void handleNodeModifyButton() {
+        App.lastSelectedNode = nodeID.getText();
+        App.nodeField1 = x;
+        App.nodeField2 = y;
         //TODO: Make better way of doing this
 //        FXMLLoader windowLoader = new FXMLLoader(getClass().getResource("../views/ModifyNode.fxml"));
 //        ModifyNodeController controller = windowLoader.getController();

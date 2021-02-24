@@ -16,9 +16,16 @@ public class ModifyNodeController {
     @FXML public TextField ShortNameField;
     @FXML public TextField LongNameField;
 
+    public void initialize(){
+        modifyNodeID.setText(App.lastSelectedNode);
+        XCoordinate.setText(App.nodeField1);
+        YCoordinate.setText(App.nodeField2);
+    }
+
+
     @FXML
     public void handleNodeSubmitButton() {
-        App.graphService.updateNode(modifyNodeID.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
+        App.graphService.updateNode(modifyNodeID.getText(), (int)Double.parseDouble(XCoordinate.getText()), (int)Double.parseDouble(YCoordinate.getText()));
         App.rightDrawerRoot.set( "../views/AdminTools.fxml");
     }
     @FXML
