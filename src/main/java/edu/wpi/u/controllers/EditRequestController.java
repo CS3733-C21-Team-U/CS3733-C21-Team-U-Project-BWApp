@@ -38,10 +38,12 @@ public class EditRequestController {
 
     @FXML Label editPeopleErrorLabel;
 
+
+
     private Request currRequest;
 
     public void initialize(){
-        currRequest = App.requestService.getRequests().get(App.getInstance().requestClicked);
+        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
 
         editTitleField.setText(currRequest.getTitle());
         editDescripArea.setText(currRequest.getDescription());

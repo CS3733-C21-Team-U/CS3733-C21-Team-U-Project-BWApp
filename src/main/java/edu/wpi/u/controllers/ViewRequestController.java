@@ -33,6 +33,7 @@ public class ViewRequestController {
             controller.locationLabel.setText(listOfRequests.get(i).getLocation().toString());
             controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());
             requestList.getChildren().add(request);
+            App.lastClickedRequestNumber = i;
 
             final int index = i;
             controller.editRequestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
