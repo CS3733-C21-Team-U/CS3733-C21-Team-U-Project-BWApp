@@ -52,8 +52,8 @@ public abstract class Data {
             p.execute();
         }
         catch (Exception e){
-            System.out.println("Rewrite being weird");
-            e.printStackTrace();
+            System.out.println("Path: " + filePath);
+            //e.printStackTrace();
         }
     }
 
@@ -152,8 +152,8 @@ public abstract class Data {
             ps.execute(str);
             str = "delete from Assigments";
             ps.execute(str);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

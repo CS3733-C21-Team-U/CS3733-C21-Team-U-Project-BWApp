@@ -1,6 +1,5 @@
 package edu.wpi.u;
 
-import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.AdminToolStorage;
 import edu.wpi.u.models.GraphService;
@@ -8,16 +7,11 @@ import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +28,7 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
-  public static Database db = Database.getDb();
+  public static Database db = new Database();
   public static GraphService graphService = new GraphService();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -92,7 +86,7 @@ public class App extends Application {
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");
-        App.getInstance().stop();
+        App.getInstance().end();
       }
     });
   }
@@ -105,17 +99,16 @@ public class App extends Application {
     return primaryStage;
   }
 
-  public void stop() {
+  public void end() {
 //    System.out.println("This is a second print stmt");
     System.out.println("Shutting Down");
 
     requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Locations");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Assignments");
-//    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
-//    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
+    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
+    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
+    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     db.stop();
-    db.setOff(true);
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

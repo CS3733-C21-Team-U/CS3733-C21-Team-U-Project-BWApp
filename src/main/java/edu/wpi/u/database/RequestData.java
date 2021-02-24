@@ -16,6 +16,8 @@ public class RequestData extends Data{
         connect();
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
         readCSV("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
+        readCSV("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
