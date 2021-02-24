@@ -198,3 +198,12 @@
     -jfx-toggle-color: -blue;
 
 }
+
+.map-btn{
+    -fx-background-color: white;
+    -fx-min-height: 90px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: -lightBlue;
+    -fx-border-width: 3px;
+}

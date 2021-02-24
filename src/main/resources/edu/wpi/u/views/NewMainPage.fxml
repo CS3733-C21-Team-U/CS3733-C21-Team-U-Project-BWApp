@@ -42,7 +42,7 @@
                <children>
                   <Button layoutX="1310.0" layoutY="880.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
                      <graphic>
-                        <SVGPath content="M 0,0 H 30 V 5 H 0 Z" />
+                        <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
                      </graphic>
                   </Button>
                   <Button layoutX="1310.0" layoutY="800.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
