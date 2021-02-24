@@ -44,6 +44,7 @@ public class PathfindingRightPageController {
     @FXML
     ToggleGroup textList;
 
+    ErrorMessageController controller;
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
@@ -61,8 +62,8 @@ public class PathfindingRightPageController {
 
         FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
-        ErrorMessageController controller = errorMessageLoader.getController();
-        controller.errorMessage.setText("Plaese Input Valid Nodes");
+        controller = errorMessageLoader.getController();
+        controller.errorMessage.setText("Please Input Valid Nodes");
         errorDrawer.setSidePane(error);
 
 
@@ -72,21 +73,27 @@ public class PathfindingRightPageController {
 
             if (listEntryButton.isSelected()) {
                 if (startDropField.getValue() == null || endDropField.getValue() == null) {
+                    controller.errorMessage.setText("Please input two valid Nodes!");
                     errorDrawer.open();
                 } else {
                     try {
                         App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
+                        errorDrawer.close();
                     } catch(PathNotFoundException p) {
+                        controller.errorMessage.setText(p.description);
                         errorDrawer.open();
                     }
+
                     }
             } else {
                 if (startTextField.getText().equals("") || endTextField.getText().equals("")) {
+                    controller.errorMessage.setText("Please input two valid Nodes!");
                     errorDrawer.open();
                 } else {
                     System.out.println("SENDING THE LIST TO PATHHANDLING");
                     try {
                         App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+                        errorDrawer.close();
                     } catch(PathNotFoundException p) {
                         errorDrawer.open();
                     }
