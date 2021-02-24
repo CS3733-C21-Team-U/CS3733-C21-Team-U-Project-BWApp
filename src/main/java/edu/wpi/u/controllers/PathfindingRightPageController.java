@@ -103,12 +103,18 @@ public class PathfindingRightPageController {
     }
 
     public void handleListEntryButton(){
+        if(!listEntryButton.isSelected()){
+            listEntryButton.setSelected(true);
+        }
         startTextField.setVisible(false);
         endTextField.setVisible(false);
         startDropField.setVisible(true);
         endDropField.setVisible(true);
     }
     public void handleTextEntryButton(){
+        if(!textEntryButton.isSelected()){
+            textEntryButton.setSelected(true);
+        }
         startDropField.setVisible(false);
         endDropField.setVisible(false);
         startTextField.setVisible(true);

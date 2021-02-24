@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AdminToolsController {
     @FXML public VBox nodeList;
@@ -37,6 +38,18 @@ public class AdminToolsController {
             double XPos = (nodes.get(i).getCords()[0]);
             double YPos = (nodes.get(i).getCords()[1]);
             controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
+            StringBuilder string = new StringBuilder("Adj Nodes: ");
+            Iterator<Node> it = currentNodeInfo.getAdjNodes().descendingIterator();
+            while (it.hasNext()) {
+                string.append(it.next().getNodeID()+", ");
+            }
+            String label = String.valueOf(string);
+            if(label.length() > 0) {
+                label = label.substring(0, label.length()-2);
+                controller.nodeAdj.setText(label);
+            }else{
+                controller.nodeAdj.setText("No Adjacent Nodes");
+            }
             nodeList.getChildren().add(node);
         }
 

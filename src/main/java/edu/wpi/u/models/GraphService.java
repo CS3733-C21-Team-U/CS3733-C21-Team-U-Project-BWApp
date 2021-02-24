@@ -24,8 +24,8 @@ public class GraphService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    md.dropValues();
-    md.saveCSV(path,tableName, "test"); // TODO: Provide header
+    //md.dropValues();
+    md.saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
   public void loadCSVFile(String path, String tableName){

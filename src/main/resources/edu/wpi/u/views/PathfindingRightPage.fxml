@@ -26,9 +26,8 @@
             </Separator>
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="500.0" VBox.vgrow="NEVER">
                <children>
-                  <JFXToggleNode fx:id="listEntryButton" onAction="#handleListEntryButton" prefHeight="40.0" prefWidth="150.0" text="List Entry">
+                  <JFXToggleNode id="navigation_pill" fx:id="listEntryButton" onAction="#handleListEntryButton" prefHeight="40.0" prefWidth="150.0" selected="true" text="List Entry">
                      <styleClass>
-                        <String fx:value="button-lightBlue" />
                         <String fx:value="button" />
                         <String fx:value="attached-left" />
                      </styleClass>
@@ -36,9 +35,8 @@
                         <ToggleGroup fx:id="textList" />
                      </toggleGroup>
                   </JFXToggleNode>
-                  <JFXToggleNode fx:id="textEntryButton" onAction="#handleTextEntryButton" prefHeight="40.0" prefWidth="150.0" selected="true" text="Text Entry" toggleGroup="$textList">
+                  <JFXToggleNode id="navigation_pill" fx:id="textEntryButton" onAction="#handleTextEntryButton" prefHeight="40.0" prefWidth="150.0" selected="true" text="Text Entry" toggleGroup="$textList">
                      <styleClass>
-                        <String fx:value="button-lightBlue" />
                         <String fx:value="button" />
                         <String fx:value="attached-right" />
                      </styleClass>

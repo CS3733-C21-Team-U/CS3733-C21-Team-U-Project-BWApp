@@ -6,6 +6,7 @@ import edu.wpi.u.requests.Request;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -136,7 +137,9 @@ public class RequestData extends Data{
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1, (Date) request.getDateCompleted());
+            java.util.Date d = request.getDateCompleted();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(1, sqld);
             ps.setString(2,request.getRequestID());
             ps.execute();
         }
@@ -215,7 +218,7 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void getRequests() {}
-    public void getRequestByID(String id) {
-    }
+//    public void getRequests() {}
+//    public void getRequestByID(String id) {
+//    }
 }
