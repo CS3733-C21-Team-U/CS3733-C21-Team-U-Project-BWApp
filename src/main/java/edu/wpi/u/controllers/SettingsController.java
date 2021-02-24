@@ -37,7 +37,7 @@ public class SettingsController {
     //This is just a helper function so there isn't reused code!
     public String getFileLocation(){
         FileChooser csvWindow = new FileChooser();
-        String currentPath = Paths.get(".\\src\\main\\resources\\edu\\wpi\\u").toAbsolutePath().normalize().toString();
+        String currentPath = Paths.get(".\\").toAbsolutePath().normalize().toString();
         csvWindow.setInitialDirectory(new File(currentPath));
         csvWindow.getExtensionFilters().add
                 (0, new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
