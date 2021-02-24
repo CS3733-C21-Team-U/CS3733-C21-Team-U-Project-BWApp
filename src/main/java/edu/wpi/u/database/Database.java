@@ -10,21 +10,11 @@ public class Database {
 
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
-    private static Database db = new Database();
-    public static boolean off = false;
-
-    public void setOff(boolean off) {
-        Database.off = off;
-    }
 
     public Database() {
         driver();
         connect();
         init();
-    }
-
-    public static edu.wpi.u.database.Database getDb() {
-        return db;
     }
 
     public static void driver() {
@@ -80,6 +70,21 @@ public class Database {
         }
     }
 
+    public void printRequests() {
+        try {
+            String str = "select * from Requests";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            while (rset.next()) {
+                String id = rset.getString("requestID");
+                System.out.println("Request id: " + id);
+            }
+            rset.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
@@ -106,7 +111,7 @@ public class Database {
             s.execute(str);
         }
         catch (Exception e){
-            //e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 
@@ -128,7 +133,7 @@ public class Database {
             s.execute(str);
             str = "delete from Locations";
             s.execute(str);
-            str = "delete from Assigments";
+            str = "delete from Assignments";
             s.execute(str);
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
