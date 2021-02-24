@@ -23,13 +23,13 @@ public class RequestItemController {
 
     @FXML public Button deleteRequestButton;
 
-    @FXML public Label descriptionLabel;
+    @FXML public Label descriptionLabel; //40
     //@FXML public TextField title;
     //@FXML public TextField location;
 
     public boolean isCollapsed = true;
-    @FXML public Label titleLabel;
-    @FXML public Label locationLabel;
+    @FXML public Label titleLabel; //45
+    @FXML public Label locationLabel; //40
 
 
     @FXML
@@ -38,6 +38,9 @@ public class RequestItemController {
             isCollapsed = false;
             requestAnchor.setPrefHeight(700);
             expandCollapseButton.setText("Collapse");
+            titleLabel.prefHeight(45);
+            descriptionLabel.prefHeight(40);
+            locationLabel.prefHeight(40);
             descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
 //            deleteRequestButton.setVisible(true);
 //            editRequestButton.setVisible(true);
@@ -46,6 +49,9 @@ public class RequestItemController {
             requestAnchor.setPrefHeight(200);
             expandCollapseButton.setText("Expand");
             descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
+            titleLabel.prefHeight(-1);
+            descriptionLabel.prefHeight(-1);
+            locationLabel.prefHeight(-1);
 //            deleteRequestButton.setVisible(false);
 //            editRequestButton.setVisible(false);
         }

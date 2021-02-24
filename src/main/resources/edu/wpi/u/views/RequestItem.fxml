@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,41 +9,58 @@
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="requestAnchor" maxHeight="-Infinity" maxWidth="500.0" minHeight="-Infinity" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="21.0" layoutY="84.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="440.0" text="Description" wrapText="true" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="84.0" />
-      <Button fx:id="expandCollapseButton" layoutX="310.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="170.0" styleClass="button-blue" text="View Details" AnchorPane.bottomAnchor="141.0" AnchorPane.rightAnchor="20.0" />
-      <Button fx:id="editRequestButton" layoutX="13.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleChangeToEditRequest" prefHeight="35.0" prefWidth="232.0" text="Edit Request" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="13.0">
-         <styleClass>
-            <String fx:value="button-yellow" />
-            <String fx:value="attached-left" />
-         </styleClass></Button>
-      <Button fx:id="handleDeleteRequestButton" layoutX="243.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteRequest" prefHeight="35.0" prefWidth="232.0" text="Delete Request" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="243.0">
-         <styleClass>
-            <String fx:value="button-green" />
-            <String fx:value="attached-right" />
-         </styleClass></Button>
-      <Label fx:id="titleLabel" layoutX="19.0" layoutY="13.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="54.0" prefWidth="318.0" styleClass="label-header" text="Request Title" wrapText="true">
-         <effect>
-            <Blend />
-         </effect>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="locationLabel" layoutX="20.0" layoutY="56.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" prefWidth="195.0" styleClass="label-sub-header" text="Location" wrapText="true">
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Label>
+      <VBox layoutX="-15.0" layoutY="-95.0" prefHeight="200.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLabel" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" prefWidth="298.0" styleClass="label-header" text="Request Title ASjdajdiaj diojdio diodaijaiodaio a das ada" wrapText="true">
+               <effect>
+                  <Blend />
+               </effect>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="locationLabel" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="195.0" styleClass="label-sub-header" text="Location" wrapText="true">
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="descriptionLabel" alignment="TOP_LEFT" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="466.0" text="Description" wrapText="true">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="editRequestButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleChangeToEditRequest" prefHeight="35.0" prefWidth="200.0" styleClass="button-yellow" text="Edit Request" />
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="handleDeleteRequestButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteRequest" prefHeight="35.0" prefWidth="210.0" styleClass="button-red" text="Delete Request" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <Button fx:id="expandCollapseButton" layoutX="310.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="170.0" styleClass="button-blue" text="View Details" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="13.0" />
    </children>
 </AnchorPane>
