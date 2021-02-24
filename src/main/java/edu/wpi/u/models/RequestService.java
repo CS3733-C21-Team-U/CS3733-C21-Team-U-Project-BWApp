@@ -39,12 +39,20 @@ public class RequestService {
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
+    /*
+                        descriptionTextField.getText(),
+                        lLConverter(assigneeArrayList),
+                        titleTextField.getText(),
+                        lLConverter(locationArrayList),
+                        serviceTypeTextField.getText(),
+                        userID );
+     */
     //Scucess
     Random rand = new Random();
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-    Request newRequest = new Request(ID, null, new Date(), null, description ,title,location, type, creator);
+    Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
     this.activeRequests.add(newRequest);
     rd.addRequest(newRequest);
     return "";
