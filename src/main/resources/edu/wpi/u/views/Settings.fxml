@@ -152,13 +152,13 @@
                   </JFXButton>
                   <Label prefHeight="42.0" prefWidth="236.0" styleClass="label-header" text="label-header" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label styleClass="label-sub-header" text="label-subHeader" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label styleClass="label-feild-tile" text="label-feild-title (USE CAPS)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField styleClass="textFeild-regular" text="textFeild-regular" GridPane.columnIndex="1">
+                  <Label styleClass="label-feild-tile" text="label-field-title (USE CAPS)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField styleClass="textFeild-regular" text="textField-regular" GridPane.columnIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </TextField>
-                  <TextField promptText="textFeild-regular  (promtText)" styleClass="textFeild-regular" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField promptText="textField-regular  (promptText)" styleClass="textFeild-regular" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXButton styleClass="button-blue" text="button-blue" />
                   <HBox prefHeight="20.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
