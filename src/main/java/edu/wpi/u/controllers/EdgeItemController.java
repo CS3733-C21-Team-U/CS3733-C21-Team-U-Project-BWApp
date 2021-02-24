@@ -42,6 +42,10 @@ public class EdgeItemController {
     @FXML
     public void handleEdgeModifyButton() {
         //TODO: Make better way of doing this
+        App.lastSelectedEdge = edgeID.getText();
+        App.edgeField1 = startingNode.getText();
+        App.edgeField2 = endingNode.getText();
+
 //        FXMLLoader windowLoader = new FXMLLoader(getClass().getResource("../views/ModifyNode.fxml"));
 //        ModifyNodeController controller = windowLoader.getController();
 //        controller.modifyNodeID.setText(nodeID.getText());
