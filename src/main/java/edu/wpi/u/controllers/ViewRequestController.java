@@ -28,6 +28,7 @@ public class ViewRequestController {
             AnchorPane request = requestLoader.load();
             RequestItemController controller = requestLoader.getController();
             String temp = listOfRequests.get(i).getTitle();
+            controller.myRequestID = listOfRequests.get(i).getRequestID();
             controller.titleLabel.setText(temp);
             controller.locationLabel.setText(listOfRequests.get(i).getLocation().toString());
             controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());

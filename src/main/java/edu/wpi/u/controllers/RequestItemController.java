@@ -31,6 +31,8 @@ public class RequestItemController {
     @FXML public Label titleLabel; //45
     @FXML public Label locationLabel; //40
 
+    public String myRequestID;
+
 
     @FXML
     public void handleExpandCollapseButton(){
@@ -58,8 +60,8 @@ public class RequestItemController {
 
     @FXML
     public void handleDeleteRequest() {
-        App.requestService.deleteRequest(App.requestService.getRequests().get(App.getInstance().requestClicked).getRequestID());
-        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml");
+        App.requestService.deleteRequest(myRequestID);
+        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml"); //Fake - Just to refresh
         App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
     }
 
