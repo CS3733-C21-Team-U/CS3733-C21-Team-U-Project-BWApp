@@ -90,10 +90,10 @@ public class EditRequestController {
         errorDrawer.setSidePane(error);
 
         FXMLLoader errorMessageLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
-        AnchorPane error2 = errorMessageLoader.load();
-        controller2 = errorMessageLoader.getController();
+        AnchorPane error2 = errorMessageLoader2.load();
+        controller2 = errorMessageLoader2.getController();
         controller2.errorMessage.setText("Invalid People");
-        errorDrawer2.setSidePane(error);
+        errorDrawer2.setSidePane(error2);
     }
 
     private boolean isChecked() {
@@ -151,7 +151,7 @@ public class EditRequestController {
 
     public void handleAddPeople() {
         String newPer = editPeopleField.getText();
-        if(!doesPersonExist()) {
+        if(!doesPersonExist() && editPeopleField.getText() != null && !newPer.equals("") && !newPer.equals("")) {
             currRequest.getAssignee().add(newPer);
             showCurrentPeopleListView.getItems().add(newPer);
             errorDrawer2.close();
@@ -167,9 +167,10 @@ public class EditRequestController {
             if (editPeopleField.getText().equals(s)) {
                 currRequest.getAssignee().remove(s);
                 showCurrentPeopleListView.getItems().remove(s);
+                errorDrawer2.close();
                 return;
             }
-        } //editPeopleErrorLabel.setText("Person Does Not Exist");
+        } errorDrawer2.open();
 
 
 
