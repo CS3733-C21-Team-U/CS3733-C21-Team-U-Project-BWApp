@@ -22,20 +22,14 @@ import java.io.IOException;
 
 public class NewMainPageController {
 
-    @FXML
-    public SVGPath leftMenuHamburger;
-    @FXML
-    private AnchorPane mainAnchorPane;
-
-    @FXML
-    private JFXDrawer leftMenuDrawer;
-    @FXML
-    private JFXDrawer serviceRequestDrawer;
-
 
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
+    @FXML public SVGPath leftMenuHamburger;
+    @FXML public AnchorPane mainAnchorPane;
+    @FXML public JFXDrawer leftMenuDrawer;
+    @FXML public JFXDrawer serviceRequestDrawer;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -47,7 +41,7 @@ public class NewMainPageController {
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
 
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequest.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingRightPage.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 
@@ -79,6 +73,9 @@ public class NewMainPageController {
         map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
+        map.centreOn(new Point2D(700, 4000));
+        map.zoomTo(0.5,map.targetPointAtViewportCentre());
+
 //        mapView.setFitWidth(4000.0);
 //        mapView.setFitHeight(4000.0);
 //        mapView.setPreserveRatio(true);

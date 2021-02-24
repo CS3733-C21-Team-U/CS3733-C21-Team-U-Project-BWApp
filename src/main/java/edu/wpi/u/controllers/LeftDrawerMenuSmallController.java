@@ -4,9 +4,6 @@ import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
@@ -59,6 +56,6 @@ public class LeftDrawerMenuSmallController {
     }
 
     public void handleExit(ActionEvent actionEvent) {
-        App.getInstance().stop();
+        App.getInstance().end();
     }
 }

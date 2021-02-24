@@ -4,6 +4,7 @@ import com.jfoenix.assets.JFoenixResources;
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.GraphService;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
@@ -43,6 +44,7 @@ public class PathfindingRightPageController {
     @FXML
     ToggleGroup textList;
 
+    ErrorMessageController controller;
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
@@ -60,8 +62,8 @@ public class PathfindingRightPageController {
 
         FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
-        ErrorMessageController controller = errorMessageLoader.getController();
-        controller.errorMessage.setText("Plaese Input Valid Nodes");
+        controller = errorMessageLoader.getController();
+        controller.errorMessage.setText("Please Input Valid Nodes");
         errorDrawer.setSidePane(error);
 
 
@@ -70,30 +72,49 @@ public class PathfindingRightPageController {
     public void handleFindPathButton(){
 
             if (listEntryButton.isSelected()) {
-                if (startDropField.valueProperty().getValue().equals("") || endDropField.valueProperty().getValue().equals("") || startDropField.valueProperty().getValue() == null || endDropField.valueProperty().getValue() == null) {
+                if (startDropField.getValue() == null || endDropField.getValue() == null) {
+                    controller.errorMessage.setText("Please input two valid Nodes!");
                     errorDrawer.open();
                 } else {
-                    App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
-                }
+                    try {
+                        App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
+                        errorDrawer.close();
+                    } catch(PathNotFoundException p) {
+                        controller.errorMessage.setText(p.description);
+                        errorDrawer.open();
+                    }
+
+                    }
             } else {
                 if (startTextField.getText().equals("") || endTextField.getText().equals("")) {
+                    controller.errorMessage.setText("Please input two valid Nodes!");
                     errorDrawer.open();
                 } else {
                     System.out.println("SENDING THE LIST TO PATHHANDLING");
-                    App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
-
+                    try {
+                        App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+                        errorDrawer.close();
+                    } catch(PathNotFoundException p) {
+                        errorDrawer.open();
+                    }
                 }
             }
 
     }
 
     public void handleListEntryButton(){
+        if(!listEntryButton.isSelected()){
+            listEntryButton.setSelected(true);
+        }
         startTextField.setVisible(false);
         endTextField.setVisible(false);
         startDropField.setVisible(true);
         endDropField.setVisible(true);
     }
     public void handleTextEntryButton(){
+        if(!textEntryButton.isSelected()){
+            textEntryButton.setSelected(true);
+        }
         startDropField.setVisible(false);
         endDropField.setVisible(false);
         startTextField.setVisible(true);

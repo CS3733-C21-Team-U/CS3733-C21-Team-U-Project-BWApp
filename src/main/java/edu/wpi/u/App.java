@@ -1,6 +1,5 @@
 package edu.wpi.u;
 
-import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.AdminToolStorage;
 import edu.wpi.u.models.GraphService;
@@ -8,16 +7,11 @@ import edu.wpi.u.models.PathHandling;
 import edu.wpi.u.models.RequestService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +23,7 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static int leftMenuScreenNum = 2; //Start on the 2nd screen (Service Requests)
+  public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
@@ -41,6 +35,15 @@ public class App extends Application {
   public static PathHandling PathHandling = new PathHandling();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
+
+  public static String lastSelectedNode;
+  public static String nodeField1;
+  public static String nodeField2;
+  public static String lastSelectedEdge;
+  public static String edgeField1;
+  public static String edgeField2;
+
+  public static Integer lastClickedRequestNumber;
 
   public App(){
     System.out.println("App constructor");
@@ -82,17 +85,18 @@ public class App extends Application {
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
-    scene.getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
     App.primaryStage.setScene(scene);
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
+
 
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");
-        App.getInstance().stop();
+        App.getInstance().end();
       }
     });
   }
@@ -105,8 +109,13 @@ public class App extends Application {
     return primaryStage;
   }
 
-  public void stop() {
+  public void end() {
     System.out.println("Shutting Down");
+    requestService.saveCSVFile("Requests.csv", "Requests");
+    requestService.saveCSVFile("Assignments.csv", "Assignments");
+    requestService.saveCSVFile("Locations.csv", "Locations");
+    graphService.saveCSVFile("Nodes.csv", "Nodes");
+    graphService.saveCSVFile("Edges.csv", "Edges");
     db.stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();

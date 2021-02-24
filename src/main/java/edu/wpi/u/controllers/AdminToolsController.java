@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AdminToolsController {
     @FXML public VBox nodeList;
@@ -30,20 +31,34 @@ public class AdminToolsController {
 
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);
-            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
+            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeListItem.fxml"));
             AnchorPane node = nodeLoader.load();
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
-            controller.nodeLocation.setText("(" + currentNodeInfo.getXString() + ", " + currentNodeInfo.getYString() + ")");
-            controller.XPos = (int)(nodes.get(i).getCords()[0]);
-            controller.YPos = (int)(nodes.get(i).getCords()[1]);
+            double XPos = (nodes.get(i).getCords()[0]);
+            double YPos = (nodes.get(i).getCords()[1]);
+            controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
+            controller.x = Double.toString(XPos);
+            controller.y = Double.toString(YPos);
+            StringBuilder string = new StringBuilder("Adj Nodes: ");
+            Iterator<Node> it = currentNodeInfo.getAdjNodes().descendingIterator();
+            while (it.hasNext()) {
+                string.append(it.next().getNodeID()+", ");
+            }
+            String label = String.valueOf(string);
+            if(label.length() > 0) {
+                label = label.substring(0, label.length()-2);
+                controller.nodeAdj.setText(label);
+            }else{
+                controller.nodeAdj.setText("No Adjacent Nodes");
+            }
             nodeList.getChildren().add(node);
         }
 
         //Edges
         for (int i = 0; i < edges.size(); i++) {
             Edge currentEdgeInfo = edges.get(i);
-            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("../views/EdgeListItem.fxml"));
+            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeListItem.fxml"));
             AnchorPane edge = edgeLoader.load();
             EdgeItemController controller = edgeLoader.getController();
             controller.edgeID.setText(currentEdgeInfo.getEdgeID());
@@ -59,17 +74,16 @@ public class AdminToolsController {
                 newNodeButton.setVisible(false);
             }
         });
-
     }
 
 
 
     public void handleNewNodeButton() {
-        App.rightDrawerRoot.set( "../views/NewNode.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/NewNode.fxml");
     }
 
     public void handleNewEdgeButton() {
-        App.rightDrawerRoot.set( "../views/NewEdge.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/NewEdge.fxml");
     }
 
     public void handleEditNodeButton(){

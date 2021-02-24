@@ -3,6 +3,8 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.MapData;
+import edu.wpi.u.exceptions.InvalidEdgeException;
+import edu.wpi.u.exceptions.PathNotFoundException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,8 +25,8 @@ public class GraphService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    md.dropValues();
-    md.saveCSV(path,tableName, "test"); // TODO: Provide header
+    //md.dropValues();
+    md.saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
   public void loadCSVFile(String path, String tableName){
@@ -35,10 +37,17 @@ public class GraphService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addNode(String node_id, int x, int y) {
-    md.addNode(node_id,x,y,0, "Def", "Def", "Def", "Def");
-    gm.makeNode(node_id,x,y,0,"Def", "Def", "Def", "Def", "u");
-    return "";
+  public String addNode(String node_id, int x, int y) throws InvalidEdgeException {
+    if (md.isNode(node_id)) {
+      md.addNode(node_id, x, y, 0, "Def", "Def", "Def", "Def");
+      gm.makeNode(node_id, x, y, 0, "Def", "Def", "Def", "Def", "u");
+      return "";
+    } else{
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Node Creation Failed!";
+      throw invalidEdge;
+
+    }
     /*
     Check if valid node_id
     Return "" is a success
@@ -81,15 +90,16 @@ public class GraphService {
     //        dm.delNode(node_id);
   }
 
-  public String addEdge(String edge_id, String start_node, String end_node) {
+  public String addEdge(String edge_id, String start_node, String end_node) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
       gm.makeEdge(edge_id, start_node, end_node);
       return "";
     }
     else {
-      System.out.println("Edge Creation Failed!");
-      return edge_id;
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Edge Creation Failed!";
+      throw invalidEdge;
     }
 
 
@@ -165,7 +175,7 @@ public class GraphService {
      */
   }
 
-  public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
+  public LinkedList<Node> aStar(String start_node_id, String end_node_id) throws PathNotFoundException {
     //if (dm.isNode(start_node_id) && dm.isNode(end_node_id)){
       return gm.runAStar(start_node_id, end_node_id);
     /*}

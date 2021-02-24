@@ -16,6 +16,10 @@ public class RequestService {
   ArrayList<Request> activeRequests = new ArrayList<>();
 
   public RequestService() {
+    this.activeRequests = rd.loadActiveRequests();
+//    for (Request x : this.activeRequests){
+//      System.out.println("Req: "+ x.getRequestID());
+//    }
   }
 
   /*
@@ -29,19 +33,26 @@ public class RequestService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    rd.dropValues();
-    rd.saveCSV(path,tableName, "test"); // TODO: Provide header
+    rd.saveCSV(tableName,path , "test"); // TODO: Provide header
   }
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
+    /*
+                        descriptionTextField.getText(),
+                        lLConverter(assigneeArrayList),
+                        titleTextField.getText(),
+                        lLConverter(locationArrayList),
+                        serviceTypeTextField.getText(),
+                        userID );
+     */
     //Scucess
     Random rand = new Random();
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-    Request newRequest = new Request(ID, null, new Date(), new Date(), description ,title,null, type, creator);
+    Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
     this.activeRequests.add(newRequest);
     rd.addRequest(newRequest);
     return "";
@@ -58,6 +69,9 @@ public class RequestService {
     //Scucess
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
+        if(dateCompleted != null){
+          this.activeRequests.remove(r);
+        }
         r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
         rd.updateRequest(r);
         return "";
@@ -79,6 +93,7 @@ public class RequestService {
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
         r.setDateCompleted(now);
+        this.activeRequests.remove(r);
         rd.delRequest(r);
         return "";
       }
@@ -95,7 +110,7 @@ public class RequestService {
   }
 
   public ArrayList<Request> getRequests() {
-    boolean debug = true;
+    boolean debug = false;
     if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array
       ArrayList<Request> temp = new ArrayList<Request>();
       LinkedList<String> list = new LinkedList<String>();

@@ -10,14 +10,7 @@ public class Database {
 
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
-    /*
-    connect 'jdbc:derby:myEncryptedDatabaseName;create=true;
-    dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;
-    bootPassword=mySuperSecretBootPassword';
 
-    connect 'jdbc:derby:myEncryptedDatabaseName;
-    bootPassword=mySuperSecretBootPassword';
-     */
     public Database() {
         driver();
         connect();
@@ -62,17 +55,32 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                String tbl4 = "create table Assignments(assignmentID int generated always as identity, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
+                String tbl4 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
-                String tbl5 = "create table Locations(locationID int generated always as identity, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl5 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
+            e.printStackTrace();
+        }
+    }
+
+    public void printRequests() {
+        try {
+            String str = "select * from Requests";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            while (rset.next()) {
+                String id = rset.getString("requestID");
+                System.out.println("Request id: " + id);
+            }
+            rset.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -103,7 +111,7 @@ public class Database {
             s.execute(str);
         }
         catch (Exception e){
-            //e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 
@@ -125,7 +133,7 @@ public class Database {
             s.execute(str);
             str = "delete from Locations";
             s.execute(str);
-            str = "delete from Assigments";
+            str = "delete from Assignments";
             s.execute(str);
         } catch (SQLException throwables) {
             //throwables.printStackTrace();

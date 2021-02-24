@@ -3,6 +3,7 @@
 /*-------------------------*/
 
 package edu.wpi.u;
+import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.GraphManager;
 import edu.wpi.u.algorithms.Node;
 import org.junit.Test;
@@ -109,7 +110,7 @@ public class DefaultTest {
     }
 
     @Test
-    public void AStarNodeTest() {//Michael
+    public void AStarNodeTest() throws PathNotFoundException {//Michael
         LinkedList<Node> answer = ExampleGraph().runAStar("A", "D");
         assertTrue(FindNodeID(answer, "A"));
         assertTrue(FindNodeID(answer, "D"));
@@ -118,7 +119,7 @@ public class DefaultTest {
     }
 
     @Test
-    public void AStarEdgeTest() {//Michael
+    public void AStarEdgeTest() throws PathNotFoundException{//Michael
         LinkedList<Node> nodeP = ExampleGraph().runAStar("A", "D");
         LinkedList<Edge> answer = ExampleGraph().EdgesFollowed(nodeP);
         assertEquals(3, answer.size());
