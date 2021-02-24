@@ -145,5 +145,6 @@ public class EditRequestController {
                 editTypeOfRequestField.getText(),
                 (LinkedList<String>) showCurrentPeopleListView.getItems(),
                 editCreatorField.getText());
+        App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
     }
 }
