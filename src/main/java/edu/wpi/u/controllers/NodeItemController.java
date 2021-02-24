@@ -53,7 +53,7 @@ public class NodeItemController {
 //        ModifyNodeController controller = windowLoader.getController();
 //        controller.modifyNodeID.setText(nodeID.getText());
 
-        App.rightDrawerRoot.set( "../views/ModifyNode.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/ModifyNode.fxml");
     }
 
 }

@@ -21,11 +21,11 @@ public class NewNodeController {
     @FXML
     public void handleNodeSubmitButton() {
         App.graphService.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
     @FXML
     public void handleNodeCancelButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
 
 

@@ -20,11 +20,11 @@ public class ModifyEdgeController {
     public void handleEdgeSubmitButton() {
         App.graphService.updateStartEdge(modifyNodeID.getText(), sNode.getText());
         App.graphService.updateEndEdge(modifyNodeID.getText(), eNode.getText());
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
     @FXML
     public void handleEdgeCancelButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
 
 

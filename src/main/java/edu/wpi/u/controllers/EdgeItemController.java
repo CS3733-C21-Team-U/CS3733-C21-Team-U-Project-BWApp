@@ -50,6 +50,6 @@ public class EdgeItemController {
 //        ModifyNodeController controller = windowLoader.getController();
 //        controller.modifyNodeID.setText(nodeID.getText());
 
-        App.rightDrawerRoot.set( "../views/ModifyEdge.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/ModifyEdge.fxml");
     }
 }

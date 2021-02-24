@@ -30,7 +30,7 @@ public class ModifyNodeController {
     }
     @FXML
     public void handleNodeCancelButton() {
-        App.rightDrawerRoot.set( "../views/AdminTools.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
 
 
