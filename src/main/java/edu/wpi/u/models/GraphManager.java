@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.exceptions.PathNotFoundException;
 
 import java.util.*;
 
@@ -90,9 +91,14 @@ public class GraphManager {
     this.allNodes.get(node_id).updateCords(x,y);
   }
 
-  public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) {
+  public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) throws PathNotFoundException {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _goalNode = this.allNodes.get(_goalNodeID);
+    if(_startNode == _goalNode){
+      PathNotFoundException invalidNodes = new PathNotFoundException();
+      invalidNodes.description = "Please select two different Nodes!";
+      throw invalidNodes;
+    }
 
     Set<Node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
     reachableNodes.add(_startNode); // add the start node to the seen nodes

@@ -153,6 +153,15 @@
 }
 
 
+.dropdown-regular{
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-border-radius: 5;
+    -fx-background-color: -blueTint;
+    -fx-border-color: -lightBlue;
+}
+
 /*Left Nav Stuff*/
 
 .nav-item:selected{

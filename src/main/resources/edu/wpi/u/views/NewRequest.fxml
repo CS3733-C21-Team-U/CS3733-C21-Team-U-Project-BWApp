@@ -57,7 +57,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox fx:id="locationDropField" prefHeight="41.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="locationDropField" prefHeight="41.0" prefWidth="150.0" styleClass="dropdown-regular" />
                   <Button fx:id="locationButton" mnemonicParsing="false" onAction="#handleAddLocation" prefHeight="100.0" prefWidth="197.0" text="Add Location">
                      <styleClass>
                         <String fx:value="button-blue" />
