@@ -66,7 +66,7 @@
                   </HBox>
                </graphic>
             </JFXToggleNode>
-            <JFXToggleNode fx:id="toggle4" maxWidth="-Infinity" minHeight="-Infinity" minWidth="2.0" onAction="#handleChangeToSettings" prefHeight="55.0" prefWidth="80.0" style="-fx-background-radius: 0;" styleClass="navBtn" toggleGroup="$navBar">
+            <JFXToggleNode fx:id="toggle4" maxWidth="-Infinity" minHeight="-Infinity" minWidth="2.0" onAction="#handleChangeToSettings" prefHeight="55.0" prefWidth="80.0" style="-fx-background-radius: 0;" styleClass="navBtn" toggleGroup="$navBar" visible="false">
                <font>
                   <Font name="Arial" size="22.0" />
                </font>

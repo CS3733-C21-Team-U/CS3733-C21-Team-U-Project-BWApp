@@ -22,8 +22,8 @@
                </font>
             </Label>
             <TextField fx:id="NodeIDField" maxWidth="-Infinity" prefWidth="300.0" promptText="Node ID" />
-            <TextField fx:id="XCoordinate" maxWidth="-Infinity" prefWidth="300.0" promptText="X Coordinate (Double)" />
-            <TextField fx:id="YCoordinate" maxWidth="-Infinity" prefWidth="300.0" promptText="Y Coordinate (Double)" />
+            <TextField fx:id="XCoordinate" maxWidth="-Infinity" prefWidth="300.0" promptText="X Coordinate " />
+            <TextField fx:id="YCoordinate" maxWidth="-Infinity" prefWidth="300.0" promptText="Y Coordinate" />
 <!--            <TextField fx:id="FloorField" promptText="Floor #" />-->
 <!--            <TextField fx:id="BuildingField" promptText="Building" />-->
 <!--            <TextField fx:id="NodeTypeField" promptText="Node Type" />-->

@@ -38,13 +38,13 @@ public class GraphService {
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addNode(String node_id, int x, int y) throws InvalidEdgeException {
-    if (md.isNode(node_id)) {
+    try{
       md.addNode(node_id, x, y, 0, "Def", "Def", "Def", "Def");
       gm.makeNode(node_id, x, y, 0, "Def", "Def", "Def", "Def", "u");
       return "";
-    } else{
+    } catch (Exception e){
       InvalidEdgeException invalidEdge = new InvalidEdgeException();
-      invalidEdge.description = "Node Creation Failed!";
+      invalidEdge.description = "Invalid node";
       throw invalidEdge;
 
     }
