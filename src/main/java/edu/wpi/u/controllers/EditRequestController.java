@@ -42,7 +42,11 @@ public class EditRequestController {
 
     @FXML Label editPeopleErrorLabel;
 
+
+
     private Request currRequest;
+
+
 
     @FXML
     JFXDrawer errorDrawer;

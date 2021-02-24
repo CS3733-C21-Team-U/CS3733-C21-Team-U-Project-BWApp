@@ -43,6 +43,8 @@ public class App extends Application {
   public static String edgeField1;
   public static String edgeField2;
 
+  public static Integer lastClickedRequestNumber;
+
   public App(){
     System.out.println("App constructor");
     app_instance = this;

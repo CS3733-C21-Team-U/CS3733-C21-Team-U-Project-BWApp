@@ -32,6 +32,7 @@ public class ViewRequestController {
             controller.titleLabel.setText(temp);
             controller.locationLabel.setText(listOfRequests.get(i).getLocation().toString());
             controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());
+            controller.myID = i;
             requestList.getChildren().add(request);
 
             final int index = i;
