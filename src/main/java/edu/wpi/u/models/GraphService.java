@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.MapData;
+import edu.wpi.u.exceptions.PathNotFoundException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -165,7 +166,7 @@ public class GraphService {
      */
   }
 
-  public LinkedList<Node> aStar(String start_node_id, String end_node_id) {
+  public LinkedList<Node> aStar(String start_node_id, String end_node_id) throws PathNotFoundException {
     //if (dm.isNode(start_node_id) && dm.isNode(end_node_id)){
       return gm.runAStar(start_node_id, end_node_id);
     /*}
