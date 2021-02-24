@@ -38,6 +38,7 @@
       <TextField fx:id="editCreatorField" editable="false" layoutX="41.0" layoutY="706.0" />
       <Label fx:id="editPeopleErrorLabel" layoutX="41.0" layoutY="907.0" prefHeight="22.0" prefWidth="213.0" />
       <Label fx:id="editLocationErrorLabel" layoutX="46.0" layoutY="456.0" prefHeight="19.0" prefWidth="432.0" />
-      <JFXDrawer fx:id="errorDrawer" defaultDrawerSize="500.0" direction="RIGHT" layoutX="262.0" layoutY="701.0" miniDrawerSize="0.0" onMouseClicked="#handleErrorMessageClear" prefHeight="50.0" prefWidth="182.0" />
+      <JFXDrawer fx:id="errorDrawer" defaultDrawerSize="500.0" direction="RIGHT" layoutX="249.0" layoutY="453.0" miniDrawerSize="0.0" onMouseClicked="#handleErrorMessageClear" prefHeight="50.0" prefWidth="253.0" />
+      <JFXDrawer fx:id="errorDrawer2" defaultDrawerSize="500.0" direction="RIGHT" layoutX="242.0" layoutY="721.0" miniDrawerSize="0.0" onMouseClicked="#handleErrorMessageClear2" prefHeight="50.0" prefWidth="253.0" />
    </children>
 </AnchorPane>

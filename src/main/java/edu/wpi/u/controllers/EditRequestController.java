@@ -1,13 +1,17 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXDrawer;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -40,7 +44,15 @@ public class EditRequestController {
 
     private Request currRequest;
 
-    public void initialize(){
+    @FXML
+    JFXDrawer errorDrawer;
+    ErrorMessageController controller;
+
+    @FXML
+    JFXDrawer errorDrawer2;
+    ErrorMessageController controller2;
+
+    public void initialize() throws IOException {
         currRequest = App.requestService.getRequests().get(App.getInstance().requestClicked);
 
         editTitleField.setText(currRequest.getTitle());
@@ -66,6 +78,18 @@ public class EditRequestController {
         }
         ObservableList<String> oList = FXCollections.observableList(nodeIDs);
         editLocField.setItems(oList);
+
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        AnchorPane error = errorMessageLoader.load();
+        controller = errorMessageLoader.getController();
+        controller.errorMessage.setText("Invalid Location");
+        errorDrawer.setSidePane(error);
+
+        FXMLLoader errorMessageLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        AnchorPane error2 = errorMessageLoader.load();
+        controller2 = errorMessageLoader.getController();
+        controller2.errorMessage.setText("Invalid People");
+        errorDrawer2.setSidePane(error);
     }
 
     private boolean isChecked() {
@@ -99,13 +123,13 @@ public class EditRequestController {
 
     public void handleAddLocation(){
         if (editLocField.getValue() == null) {
-            editLocationErrorLabel.setText("Please enter a node!");
+            errorDrawer.open();
         } else {
             currRequest.getLocation().add(editLocField.getValue().toString());
             showCurrentLocListView.getItems().add(editLocField.getValue().toString());
             // clears combobox
             editLocField.setValue(null);
-            editLocationErrorLabel.setText("");
+            errorDrawer.close();
         }
 
     }
@@ -118,7 +142,7 @@ public class EditRequestController {
                 showCurrentLocListView.getItems().remove(currRequest.getLocation().get(i));
                 return;
             }
-        } editLocationErrorLabel.setText("Location Does Not Exist");
+        } errorDrawer.open();
     }
 
     public void handleAddPeople() {
@@ -126,10 +150,11 @@ public class EditRequestController {
         if(!doesPersonExist()) {
             currRequest.getAssignee().add(newPer);
             showCurrentPeopleListView.getItems().add(newPer);
-            editPeopleErrorLabel.setText("");
+            errorDrawer2.close();
         }
         else{
-            editPeopleErrorLabel.setText("Person Already Listed.");
+
+            errorDrawer2.open();
         }
     }
 
@@ -192,6 +217,10 @@ public class EditRequestController {
 
     }
     public void handleErrorMessageClear(){
+        errorDrawer.close();
+    }
 
+    public void handleErrorMessageClear2(){
+        errorDrawer2.close();
     }
 }
