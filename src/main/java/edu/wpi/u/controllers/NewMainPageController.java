@@ -41,7 +41,7 @@ public class NewMainPageController {
         leftMenuDrawer.setSidePane(leftMenuPane);
         leftMenuDrawer.open();
 
-        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequest.fxml"));
+        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingRightPage.fxml"));
         serviceRequestDrawer.setSidePane(rightServiceRequestPane);
         serviceRequestDrawer.open();
 

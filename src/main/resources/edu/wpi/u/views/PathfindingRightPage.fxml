@@ -19,7 +19,7 @@
       <Separator prefHeight="15.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <children>
-            <Label alignment="CENTER" prefWidth="500.0" styleClass="label-header" text="Navigation" />
+            <Label alignment="CENTER" prefWidth="500.0" styleClass="label-header" text="Path Planning" />
             <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0">
                <VBox.margin>
                   <Insets top="5.0" />

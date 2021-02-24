@@ -23,7 +23,7 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static int leftMenuScreenNum = 2; //Start on the 2nd screen (Service Requests)
+  public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
