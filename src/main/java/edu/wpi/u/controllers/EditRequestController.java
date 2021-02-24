@@ -143,19 +143,11 @@ public class EditRequestController {
         } //editPeopleErrorLabel.setText("Person Does Not Exist");
 
 
-       // showCurrentPeopleListView.setItems(currRequest.getAssignee());
 
-        //showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
-
-      /*  for(int i = 0; i < currRequest.getAssignee().size(); i++) {
-            if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
-                currRequest.getAssignee().remove(currRequest.getAssignee().get(i));
-                return;
-            }
-        } editPeopleErrorLabel.setText("Person Does Not Exist");*/
     }
 
     public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml"); }
+
 
     // Array list to linkedlist converter
     public static LinkedList<String> OConverter(ObservableList<String> oList)
@@ -168,6 +160,7 @@ public class EditRequestController {
 
         return newLL;
     }
+
 
     public void handleSaveRequest() {
 
@@ -191,6 +184,7 @@ public class EditRequestController {
                 OConverter(showCurrentPeopleListView.getItems()),
                 editCreatorField.getText());
         App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
+
 
         //needs node ID
         //assignments, give list name
