@@ -10,12 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class RequestItemController {
-
 
     @FXML public Button expandCollapseButton;
     @FXML public Button editRequestButton;
@@ -36,24 +36,17 @@ public class RequestItemController {
     public void handleExpandCollapseButton(){
         if(isCollapsed) {
             isCollapsed = false;
-            requestAnchor.setPrefHeight(700);
             expandCollapseButton.setText("Collapse");
-            titleLabel.prefHeight(45);
-            descriptionLabel.prefHeight(40);
-            locationLabel.prefHeight(40);
-            descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
-//            deleteRequestButton.setVisible(true);
-//            editRequestButton.setVisible(true);
+            titleLabel.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            descriptionLabel.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            locationLabel.setPrefHeight(Region.USE_COMPUTED_SIZE);
         } else{
             isCollapsed = true;
-            requestAnchor.setPrefHeight(200);
             expandCollapseButton.setText("Expand");
-            descriptionLabel.setPrefHeight(requestAnchor.getPrefHeight()-140);
-            titleLabel.prefHeight(-1);
-            descriptionLabel.prefHeight(-1);
-            locationLabel.prefHeight(-1);
-//            deleteRequestButton.setVisible(false);
-//            editRequestButton.setVisible(false);
+            titleLabel.setPrefHeight(45);
+            descriptionLabel.setPrefHeight(40);
+            locationLabel.setPrefHeight(40);
+
         }
     }
 
