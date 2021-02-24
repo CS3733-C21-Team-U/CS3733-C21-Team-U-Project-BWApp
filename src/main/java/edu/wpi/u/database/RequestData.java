@@ -17,6 +17,7 @@ public class RequestData extends Data{
         readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
         readCSV("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
         readCSV("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+        printRequests();
 
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
@@ -29,6 +30,7 @@ public class RequestData extends Data{
         saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
         saveCSV("Locations", "src/main/resources/edu/wpi/u/Locations.csv", "Location");
         saveCSV("Assignments", "src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+        //printRequests();
     }
 
     public void updateRequest(Request request){ // TODO: Add assignee and location stuff
@@ -91,8 +93,10 @@ public class RequestData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,request.getRequestID());
-            ps.setDate(2, (java.sql.Date) request.getDateCreated());
-            ps.setDate(3, (java.sql.Date) request.getDateCompleted());
+            java.util.Date d = request.getDateCreated();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(2, sqld);
+            ps.setDate(3,null);
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
             ps.setString(6,request.getType());

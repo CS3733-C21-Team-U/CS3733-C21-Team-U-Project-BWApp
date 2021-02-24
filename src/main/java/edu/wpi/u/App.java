@@ -108,6 +108,7 @@ public class App extends Application {
     requestService.saveCSVFile("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
     graphService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
     graphService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
+    db.printRequests();
     db.stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();

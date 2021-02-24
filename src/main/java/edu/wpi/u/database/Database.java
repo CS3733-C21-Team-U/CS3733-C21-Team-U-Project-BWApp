@@ -70,6 +70,21 @@ public class Database {
         }
     }
 
+    public void printRequests() {
+        try {
+            String str = "select * from Requests";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            while (rset.next()) {
+                String id = rset.getString("requestID");
+                System.out.println("Request id: " + id);
+            }
+            rset.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
