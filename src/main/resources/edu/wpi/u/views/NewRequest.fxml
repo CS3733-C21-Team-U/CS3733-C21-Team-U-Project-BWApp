@@ -26,7 +26,7 @@
                   <Insets bottom="25.0" left="50.0" right="50.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="descriptionTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="404.0" promptText="Description" />
+            <TextArea fx:id="descriptionTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="404.0" promptText="Description" wrapText="true" />
             <Label fx:id="errorMessage2" textFill="RED">
                <VBox.margin>
                   <Insets left="20.0" />
