@@ -36,9 +36,9 @@ public class NewNodeController {
     @FXML
     public void handleNodeSubmitButton() {
         if(NodeIDField.getText() == null || NodeIDField.getText().equals("") || XCoordinate.getText() == null || XCoordinate.getText().equals("") || YCoordinate.getText() == null || YCoordinate.getText().equals("")){
-            errorDrawer.open();
-        } else {
-            try {
+                errorDrawer.open();
+            } else {
+                try {
                 App.graphService.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
                 App.rightDrawerRoot.set("/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();

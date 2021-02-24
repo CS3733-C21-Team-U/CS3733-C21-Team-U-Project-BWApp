@@ -74,7 +74,6 @@ public class AdminToolsController {
                 newNodeButton.setVisible(false);
             }
         });
-
     }
 
 

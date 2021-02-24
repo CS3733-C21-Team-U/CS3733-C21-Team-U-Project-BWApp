@@ -111,11 +111,11 @@ public class App extends Application {
 
   public void end() {
     System.out.println("Shutting Down");
-    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
-    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
-    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
-    graphService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
+    requestService.saveCSVFile("Requests.csv", "Requests");
+    requestService.saveCSVFile("Assignments.csv", "Assignments");
+    requestService.saveCSVFile("Locations.csv", "Locations");
+    graphService.saveCSVFile("Nodes.csv", "Nodes");
+    graphService.saveCSVFile("Edges.csv", "Edges");
     db.stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
