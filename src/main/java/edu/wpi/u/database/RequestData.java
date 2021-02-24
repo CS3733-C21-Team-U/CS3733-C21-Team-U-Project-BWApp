@@ -14,9 +14,9 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-        readCSV("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        readCSV("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
-        readCSV("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+        readCSV("Requests.csv", "Requests");
+        readCSV("Locations.csv", "Locations");
+        readCSV("Assignments.csv", "Assignments");
         printRequests();
 
         LinkedList<String> l1 = new LinkedList<String>();
@@ -27,9 +27,9 @@ public class RequestData extends Data{
         //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
 
-        saveCSV("Requests", "src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-        saveCSV("Locations", "src/main/resources/edu/wpi/u/Locations.csv", "Location");
-        saveCSV("Assignments", "src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
+        saveCSV("Requests", "Requests.csv", "Requests");
+        saveCSV("Locations", "Locations.csv", "Location");
+        saveCSV("Assignments", "Assignments.csv", "Assignments");
         //printRequests();
     }
 
@@ -37,6 +37,8 @@ public class RequestData extends Data{
         /*
         requestID, dateCreated, dateCompleted, description, title, type
          */
+        System.out.println("Can anyone even hear me??????????????????????????????????");
+        if(request.getDateCompleted() != null) this.delRequest(request);
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestType(request.getRequestID(), request.getType());
@@ -48,7 +50,7 @@ public class RequestData extends Data{
         /*
         Take whole list: do new one
          */
-        String str = "delete from Locations where requestID=? and nodeID=?";
+        String str = "delete from Locations where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestId);
@@ -67,7 +69,7 @@ public class RequestData extends Data{
         /*
         Take whole list: do new one
          */
-        String str = "delete from Assignments where requestID=? and userID=?";
+        String str = "delete from Assignments where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestId);
@@ -202,6 +204,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,description);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -213,6 +217,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,title);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -248,6 +254,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,type);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();

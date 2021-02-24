@@ -28,7 +28,7 @@ public abstract class Data {
 
     public void readCSV(String filePath, String tableName){
 
-        String tempPath = "src/main/resources/edu/wpi/u/temp.csv"; //TODO : Change path in jar file
+        String tempPath = "temp.csv"; //TODO : Change path in jar file
         String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
 
         try {

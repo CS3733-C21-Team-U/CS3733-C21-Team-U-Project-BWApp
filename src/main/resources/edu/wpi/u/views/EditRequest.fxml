@@ -17,8 +17,8 @@
       <Button layoutX="353.0" layoutY="944.0" mnemonicParsing="false" onAction="#handleCancel" styleClass="button-yellow" text="Cancel" />
       <Label layoutX="46.0" layoutY="322.0" text="Location" />
       <ChoiceBox fx:id="editLocField" layoutX="302.0" layoutY="352.0" prefWidth="150.0" />
-      <Label layoutX="41.0" layoutY="577.0" text="Completion Date" />
-      <TextField fx:id="editCompDateField" editable="false" layoutX="41.0" layoutY="618.0" />
+      <Label layoutX="41.0" layoutY="577.0" text="Completion Date" visible="false" />
+      <TextField fx:id="editCompDateField" editable="false" layoutX="41.0" layoutY="618.0" visible="false" />
       <TextArea fx:id="editDescripArea" layoutX="43.0" layoutY="197.0" prefHeight="108.0" prefWidth="369.0" />
       <Label layoutX="43.0" layoutY="168.0" text="Description" />
       <Label layoutX="41.0" layoutY="755.0" text="People" />
@@ -30,7 +30,7 @@
       <ListView fx:id="showCurrentPeopleListView" layoutX="43.0" layoutY="790.0" prefHeight="99.0" prefWidth="213.0" />
       <Button layoutX="284.0" layoutY="840.0" mnemonicParsing="false" onAction="#handleAddPeople" prefHeight="8.0" prefWidth="188.0" styleClass="button-blue" text="Add Person" />
       <Button layoutX="284.0" layoutY="887.0" mnemonicParsing="false" onAction="#handleDeletePeople" prefHeight="8.0" prefWidth="188.0" styleClass="button-lightBlue" text="Delete Person" />
-      <CheckBox fx:id="isCompleteCheckBox" layoutX="249.0" layoutY="622.0" mnemonicParsing="false" text="Request Completed" />
+      <CheckBox fx:id="isCompleteCheckBox" layoutX="43.0" layoutY="606.0" mnemonicParsing="false" style="-fx-font-size: 18;" text="Request Completed" />
       <Label layoutX="44.0" layoutY="486.0" text="Type of Request" />
       <TextField fx:id="editTypeOfRequestField" layoutX="43.0" layoutY="517.0" />
       <Label layoutX="41.0" layoutY="672.0" text="Creator" />
