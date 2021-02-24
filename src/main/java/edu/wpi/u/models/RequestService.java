@@ -69,6 +69,9 @@ public class RequestService {
     //Scucess
     for(Request r : this.activeRequests){
       if(r.getRequestID() == requestID){
+        if(dateCompleted != null){
+          this.activeRequests.remove(r);
+        }
         r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
         rd.updateRequest(r);
         return "";

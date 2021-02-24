@@ -37,6 +37,8 @@ public class RequestData extends Data{
         /*
         requestID, dateCreated, dateCompleted, description, title, type
          */
+        System.out.println("Can anyone even hear me??????????????????????????????????");
+        if(request.getDateCompleted() != null) this.delRequest(request);
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestType(request.getRequestID(), request.getType());
@@ -48,7 +50,7 @@ public class RequestData extends Data{
         /*
         Take whole list: do new one
          */
-        String str = "delete from Locations where requestID=? and nodeID=?";
+        String str = "delete from Locations where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestId);
@@ -67,7 +69,7 @@ public class RequestData extends Data{
         /*
         Take whole list: do new one
          */
-        String str = "delete from Assignments where requestID=? and userID=?";
+        String str = "delete from Assignments where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestId);
@@ -202,6 +204,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,description);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -213,6 +217,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,title);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -248,6 +254,8 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,type);
             ps.setString(2,requestID);
+            ps.execute();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
