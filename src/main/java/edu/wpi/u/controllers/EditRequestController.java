@@ -124,7 +124,7 @@ public class EditRequestController {
         } editPeopleErrorLabel.setText("Person Does Not Exist");
     }
 
-    public void handleCancel() { App.rightDrawerRoot.set("../views/ViewRequest.fxml"); }
+    public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml"); }
 
     public void handleSaveRequest() {
 

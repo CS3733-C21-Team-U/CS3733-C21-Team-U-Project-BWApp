@@ -108,14 +108,14 @@ public class NewRequestController {
                         lLConverter(locationArrayList),
                         serviceTypeTextField.getText(),
                         userID );
-                App.rightDrawerRoot.set("../views/ViewRequest.fxml");
+                App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
 
             }
 
     }
 
     public void handleLeaveAdd(){
-        App.rightDrawerRoot.set( "../views/ViewRequest.fxml");
+        App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
     }
 
 
