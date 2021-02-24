@@ -34,9 +34,52 @@ public class RequestData extends Data{
     }
 
     public void updateRequest(Request request){ // TODO: Add assignee and location stuff
+        /*
+        requestID, dateCreated, dateCompleted, description, title, type
+         */
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestType(request.getRequestID(), request.getType());
+        this.updLocations(request.getRequestID(), request.getLocation());
+        this.updAssignees(request.getRequestID(), request.getAssignee());
+    }
+
+    public void updLocations(String requestId, LinkedList<String> locations){
+        /*
+        Take whole list: do new one
+         */
+        String str = "delete from Locations where requestID=? and nodeID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestId);
+            ps.execute();
+            for (String node : locations) {
+                addLocation(node,requestId);
+            }
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updAssignees(String requestId, LinkedList<String> assignees){
+        /*
+        Take whole list: do new one
+         */
+        String str = "delete from Assignments where requestID=? and userID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestId);
+            ps.execute();
+            for (String assignee : assignees) {
+                addAssignee(assignee,requestId);
+            }
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public ArrayList<Request> loadActiveRequests(){ // TODO: Add assignee and location stuff
         ArrayList<Request> results = new ArrayList<Request>();
