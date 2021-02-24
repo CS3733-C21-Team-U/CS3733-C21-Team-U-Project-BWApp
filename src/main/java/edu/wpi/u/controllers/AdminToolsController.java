@@ -31,7 +31,7 @@ public class AdminToolsController {
 
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);
-            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("../views/NodeListItem.fxml"));
+            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeListItem.fxml"));
             AnchorPane node = nodeLoader.load();
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(currentNodeInfo.getNodeID());
@@ -56,7 +56,7 @@ public class AdminToolsController {
         //Edges
         for (int i = 0; i < edges.size(); i++) {
             Edge currentEdgeInfo = edges.get(i);
-            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("./edu/wpi/u/views/EdgeListItem.fxml"));
+            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeListItem.fxml"));
             AnchorPane edge = edgeLoader.load();
             EdgeItemController controller = edgeLoader.getController();
             controller.edgeID.setText(currentEdgeInfo.getEdgeID());
