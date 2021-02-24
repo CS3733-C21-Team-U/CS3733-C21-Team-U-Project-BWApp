@@ -60,6 +60,7 @@ public class RequestItemController {
     @FXML
     public void handleDeleteRequest() {
         App.requestService.deleteRequest(App.requestService.getRequests().get(App.getInstance().requestClicked).getRequestID());
+        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml");
         App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
     }
 
