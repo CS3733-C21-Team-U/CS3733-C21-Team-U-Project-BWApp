@@ -116,15 +116,16 @@ public class EditRequestController {
     }
 
     public void handleDeletePeople() {
-        for(int i = 0; i < currRequest.getAssignee().size(); i++) {
-            if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
-                currRequest.getAssignee().remove(currRequest.getAssignee().get(i));
+        LinkedList<String> assignees = currRequest.getAssignee();
+        for(String assignee : assignees) {
+            if (editPeopleField.equals(assignee)) {
+                assignees.remove(assignee);
                 return;
             }
         } editPeopleErrorLabel.setText("Person Does Not Exist");
     }
 
-    public void handleCancel() { App.rightDrawerRoot.set("../views/ViewRequest.fxml"); }
+    public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml"); }
 
     public void handleSaveRequest() {
 
