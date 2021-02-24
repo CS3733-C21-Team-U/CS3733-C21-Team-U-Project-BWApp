@@ -12,11 +12,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.SettingsController">
    <children>
-      <VBox layoutY="-14.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
+      <VBox layoutY="-14.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="label-sub-header" text="Choose where your data is saved:" wrapText="true">
+            <Label styleClass="label-header" text="Choose where your data is saved:" wrapText="true">
                <VBox.margin>
-                  <Insets left="20.0" top="20.0" />
+                  <Insets left="20.0" top="10.0" />
                </VBox.margin>
             </Label>
             <Label styleClass="label-sub-header" text="Map (Node and Edges)">
@@ -93,10 +93,14 @@
             </Label>
             <HBox prefHeight="20.0" prefWidth="500.0">
                <children>
-                  <TextField fx:id="requestLocation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="attached-left">
+                  <TextField fx:id="requestLocation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="attached-left" />
+                        <String fx:value="text-field" />
+                     </styleClass>
                   </TextField>
                   <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#HandleRequestLocation" prefHeight="30.0" text="Open Explorer">
                      <HBox.margin>
@@ -112,24 +116,24 @@
                   <Insets top="2.0" />
                </VBox.margin>
             </HBox>
-            <JFXButton contentDisplay="CENTER" styleClass="button-green" text="Update Request Location">
+            <JFXButton contentDisplay="CENTER" prefWidth="460.0" styleClass="button-green" text="Update Request Location">
                <VBox.margin>
-                  <Insets bottom="10.0" left="100.0" top="10.0" />
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
                </VBox.margin>
             </JFXButton>
-            <Label styleClass="label-sub-header" text="Change Theme">
+            <Label styleClass="label-sub-header" text="Change Theme" visible="false">
                <VBox.margin>
                   <Insets left="20.0" top="10.0" />
                </VBox.margin>
             </Label>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRegTheme" styleClass="button-yellow" text="Regular Theme">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleRegTheme" styleClass="button-yellow" text="Regular Theme" visible="false">
                      <VBox.margin>
                         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAltTheme" styleClass="button-yellow" text="High-Contrast Theme">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAltTheme" styleClass="button-yellow" text="High-Contrast Theme" visible="false">
                      <VBox.margin>
                         <Insets bottom="30.0" left="30.0" right="30.0" />
                      </VBox.margin>

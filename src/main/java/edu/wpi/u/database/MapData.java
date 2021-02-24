@@ -11,8 +11,8 @@ import java.sql.*;
 public class MapData extends Data{
     public MapData(){
         connect();
-        readCSV("OutsideMapNodes.csv", "Nodes");
-        readCSV("OutsideMapEdges.csv", "Edges");
+        readCSV("src/main/resources/edu/wpi/u/OutsideMapNodes.csv", "Nodes");
+        readCSV("src/main/resources/edu/wpi/u/OutsideMapEdges.csv", "Edges");
     }
 
     public int addNode(
