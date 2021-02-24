@@ -40,12 +40,12 @@
             </AnchorPane>
           <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #edf1ff;">
                <children>
-                  <Button layoutX="1310.0" layoutY="880.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
+                  <Button layoutX="1310.0" layoutY="856.0" maxHeight="71.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn">
                      <graphic>
                         <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
                      </graphic>
                   </Button>
-                  <Button layoutX="1310.0" layoutY="800.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="80.0" prefWidth="80.0" styleClass="map-btn">
+                  <Button layoutX="1310.0" layoutY="767.0" maxHeight="130.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="130.0" prefWidth="91.0" styleClass="map-btn">
                      <graphic>
                         <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
                      </graphic></Button>
