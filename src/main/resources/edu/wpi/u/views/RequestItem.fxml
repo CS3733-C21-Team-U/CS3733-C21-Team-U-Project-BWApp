@@ -15,7 +15,7 @@
    <children>
       <Separator maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="21.0" layoutY="84.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="440.0" text="Description" wrapText="true" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="84.0" />
-      <Button fx:id="expandCollapseButton" layoutX="322.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="170.0" styleClass="button-blue" text="View Details" AnchorPane.bottomAnchor="136.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="expandCollapseButton" layoutX="310.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleExpandCollapseButton" prefHeight="35.0" prefWidth="170.0" styleClass="button-blue" text="View Details" AnchorPane.bottomAnchor="141.0" AnchorPane.rightAnchor="20.0" />
       <Button fx:id="editRequestButton" layoutX="13.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleChangeToEditRequest" prefHeight="35.0" prefWidth="232.0" text="Edit Request" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="13.0">
          <styleClass>
             <String fx:value="button-yellow" />
@@ -26,7 +26,7 @@
             <String fx:value="button-green" />
             <String fx:value="attached-right" />
          </styleClass></Button>
-      <Label fx:id="titleLabel" layoutX="19.0" layoutY="17.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="37.0" prefWidth="318.0" styleClass="label-header" text="Request Title" wrapText="true">
+      <Label fx:id="titleLabel" layoutX="19.0" layoutY="13.0" lineSpacing="1.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="54.0" prefWidth="318.0" styleClass="label-header" text="Request Title" wrapText="true">
          <effect>
             <Blend />
          </effect>

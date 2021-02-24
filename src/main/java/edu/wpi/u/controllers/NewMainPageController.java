@@ -73,6 +73,9 @@ public class NewMainPageController {
         map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
+        map.centreOn(new Point2D(700, 4000));
+        map.zoomTo(0.5,map.targetPointAtViewportCentre());
+
 //        mapView.setFitWidth(4000.0);
 //        mapView.setFitHeight(4000.0);
 //        mapView.setPreserveRatio(true);
