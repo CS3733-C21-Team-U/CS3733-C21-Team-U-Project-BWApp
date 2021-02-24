@@ -16,7 +16,7 @@ public class EditRequestController {
 
     @FXML ListView showCurrentLocListView;
 
-    @FXML TextField editLocField;
+    @FXML ChoiceBox editLocField;
 
     @FXML Label editLocationErrorLabel;
 
@@ -42,7 +42,7 @@ public class EditRequestController {
         editTitleField.setText(currRequest.getTitle());
         editDescripArea.setText(currRequest.getDescription());
         editTypeOfRequestField.setText(currRequest.getType());
-        editCompDateField.setText(currRequest.getDateCompleted().toString());
+        //editCompDateField.setText(currRequest.getDateCompleted());
         editCreatorField.setText("Admin");
         //For when creators switch
         //editCreatorField.setText(currRequest.getCreator());
@@ -78,12 +78,26 @@ public class EditRequestController {
         } return false;
     }
 
-    public void handleAddLocation() {
+   /* public void handleAddLocation() {
         String newLoc = editLocField.getText();
         if(!doesLocationExist()) {
             currRequest.getLocation().add(newLoc);
         } editLocationErrorLabel.setText("Location Already Listed.");
+    }*/
+
+    public void handleAddLocation(){
+        if (editLocField.getValue() == null) {
+            editLocationErrorLabel.setText("Please enter a node!");
+        } else {
+            currRequest.getLocation().add(editLocField.getValue().toString());
+            showCurrentLocListView.getItems().add(editLocField.getValue().toString());
+            // clears combobox
+            editLocField.setValue(null);
+            editLocationErrorLabel.setText("");
+        }
+
     }
+
 
     public void handleDeleteLocation() {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
