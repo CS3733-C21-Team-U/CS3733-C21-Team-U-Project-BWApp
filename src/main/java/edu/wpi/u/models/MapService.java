@@ -24,6 +24,11 @@ public class MapService {
     md.loadGraph(mm);
   }
 
+  public Node getNodeFromID(String nodeID){
+    return mm.getNodeFromID(nodeID);
+  }
+
+
   public void saveCSVFile(String path, String tableName){
     //md.dropValues();
     md.saveCSV(tableName,path, "test"); // TODO: Provide header

@@ -76,6 +76,10 @@ public class MapManager {
       deleteEdge(ID);
     }
   }
+  public Node getNodeFromID(String nodeID){
+    return this.allNodes.get(nodeID);
+  }
+
 
   public void disableNode(String nodeID) {
     Node _node = this.allNodes.get(nodeID);
