@@ -1,7 +1,6 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
 import edu.wpi.u.models.AdminToolStorage;
@@ -26,8 +25,8 @@ public class AdminToolsController {
     public void initialize() throws IOException {
 
         //Nodes
-        ArrayList<Node> nodes = App.graphService.getNodes();
-        ArrayList<Edge> edges = App.graphService.getEdges();
+        ArrayList<Node> nodes = App.mapService.getNodes();
+        ArrayList<Edge> edges = App.mapService.getEdges();
 
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);

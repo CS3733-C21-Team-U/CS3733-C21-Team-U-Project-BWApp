@@ -17,9 +17,6 @@ public class RequestService {
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-//    for (Request x : this.activeRequests){
-//      System.out.println("Req: "+ x.getRequestID());
-//    }
   }
 
   /*
@@ -35,18 +32,11 @@ public class RequestService {
   public void saveCSVFile(String path, String tableName){
     rd.saveCSV(tableName,path , "test"); // TODO: Provide header
   }
+
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
-    /*
-                        descriptionTextField.getText(),
-                        lLConverter(assigneeArrayList),
-                        titleTextField.getText(),
-                        lLConverter(locationArrayList),
-                        serviceTypeTextField.getText(),
-                        userID );
-     */
     //Scucess
     Random rand = new Random();
     int requestID = rand.nextInt();

@@ -9,9 +9,9 @@ import edu.wpi.u.exceptions.PathNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class GraphService {
+public class MapService {
 
-  static GraphManager gm = new GraphManager();
+  static MapManager mm = new MapManager();
   static MapData md;
 
 
@@ -19,9 +19,9 @@ public class GraphService {
 
   }
 
-  public GraphService() {
+  public MapService() {
     md = new MapData();
-    md.loadGraph(gm);
+    md.loadGraph(mm);
   }
 
   public void saveCSVFile(String path, String tableName){
@@ -37,10 +37,10 @@ public class GraphService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addNode(String node_id, int x, int y) throws InvalidEdgeException {
+  public String addNode(String node_id, double x, double y) throws InvalidEdgeException {
     try{
-      md.addNode(node_id, x, y, 0, "Def", "Def", "Def", "Def");
-      gm.makeNode(node_id, x, y, 0, "Def", "Def", "Def", "Def", "u");
+      md.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def");
+      mm.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def", "u");
       return "";
     } catch (Exception e){
       InvalidEdgeException invalidEdge = new InvalidEdgeException();
@@ -55,10 +55,10 @@ public class GraphService {
      */
   }
 
-  public String updateNode(String node_id, int x, int y) {
+  public String updateNode(String node_id, double x, double y) {
     if (md.isNode(node_id)){
-      md.updCoords(node_id, x, y);
-      gm.updateCoords(node_id, x, y);
+      md.updateCoords(node_id, x, y);
+      mm.updateCoords(node_id, x, y);
       return "";
     }
     else {
@@ -75,8 +75,8 @@ public class GraphService {
 
   public String deleteNode(String node_id) {
     if (md.isNode(node_id)){
-      md.delNode(node_id);
-      gm.removeNode(node_id);
+      md.deleteNode(node_id);
+      mm.deleteNode(node_id);
       return "";
     }
     else {
@@ -93,7 +93,7 @@ public class GraphService {
   public String addEdge(String edge_id, String start_node, String end_node) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
-      gm.makeEdge(edge_id, start_node, end_node);
+      mm.addEdge(edge_id, start_node, end_node);
       return "";
     }
     else {
@@ -113,8 +113,8 @@ public class GraphService {
 
   public String updateStartEdge(String edge_id, String start_node) {
     if (md.isNode(start_node)){
-      md.updEdgeStart(edge_id, start_node);
-      gm.updateEdgeStart(edge_id, start_node);
+      md.updateEdgeStart(edge_id, start_node);
+      mm.updateEdgeStart(edge_id, start_node);
       return "";
     }
     else {
@@ -129,8 +129,8 @@ public class GraphService {
 
   public String updateEndEdge(String edge_id, String end_node) {
     if (md.isNode(end_node)){
-      md.updEdgeEnd(edge_id, end_node);
-      gm.updateEdgeEnd(edge_id, end_node);
+      md.updateEdgeEnd(edge_id, end_node);
+      mm.updateEdgeEnd(edge_id, end_node);
       return "";
     }
     else {
@@ -145,8 +145,8 @@ public class GraphService {
 
   public String deleteEdge(String edge_id) {
     if (md.isEdge(edge_id)){
-      md.delEdge(edge_id);
-      gm.removeEdge(edge_id);
+      md.deleteEdge(edge_id);
+      mm.deleteEdge(edge_id);
       return "";
     }
     else {
@@ -162,26 +162,26 @@ public class GraphService {
   }
 
   public ArrayList<Node> getNodes() {
-    return gm.getAllNodes();
+    return mm.getAllNodes();
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
   }
 
   public ArrayList<Edge> getEdges() {
-    return gm.getAllEdges();
+    return mm.getAllEdges();
     /*
     Returns an ArrayList of all Edge Objects in the graph
      */
   }
 
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) throws PathNotFoundException {
-    //if (dm.isNode(start_node_id) && dm.isNode(end_node_id)){
-      return gm.runAStar(start_node_id, end_node_id);
-    /*}
+    if (md.isNode(start_node_id) && md.isNode(end_node_id)){
+      return mm.runAStar(start_node_id, end_node_id);
+    }
     else {
       return null;
-    }*/
+    }
     /*
     Reutrn the A* path given the start and end node ids
     Return LinkedList of Nodes if path is found
