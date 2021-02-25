@@ -29,12 +29,12 @@ public class RequestService {
 
   public void loadCSVFile(String path, String tableName){
     Database.getDB().dropValues();
-    rd.readCSV(path,tableName);
+    Database.getDB().readCSV(path,tableName);
     this.activeRequests = rd.loadActiveRequests();
   }
 
   public void saveCSVFile(String path, String tableName){
-    rd.saveCSV(tableName,path , "test"); // TODO: Provide header
+    Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
   }
   /*
   Make sure x & y are positive integers within the map coordinate range

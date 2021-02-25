@@ -26,12 +26,12 @@ public class GraphService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    md.saveCSV(tableName,path, "test"); // TODO: Provide header
+    Database.getDB().saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
   public void loadCSVFile(String path, String tableName){
     Database.getDB().dropValues();
-    md.readCSV(path,tableName);
+    Database.getDB().readCSV(path,tableName);
   }
 
   /*
