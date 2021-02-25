@@ -1,11 +1,9 @@
 package edu.wpi.u.database;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 
@@ -17,7 +15,7 @@ public class Database {
     public Database() {
         driver();
         connect();
-        init();
+        createTables();
     }
 
     //Bill Pugh solution
@@ -50,7 +48,7 @@ public class Database {
         }
     }
 
-    public static void init() { //TODO : Rename to createTables()
+    public static void createTables() { //TODO : Rename to createTables()
         try {
             if (isTableEmpty()) {
                 String tbl1 =
