@@ -1,25 +1,20 @@
 package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphManager;
+import edu.wpi.u.models.MapManager;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 
 public class MapData extends Data{
     public MapData(){
         connect();
-       // readCSV("OutsideMapNodes.csv", "Nodes");
-       // readCSV("OutsideMapEdges.csv", "Edges");
     }
 
     public int addNode(
             String node_id,
-            int x,
-            int y,
-            int floor,
+            double x,
+            double y,
+            String floor,
             String building,
             String node_type,
             String longname,
@@ -29,9 +24,9 @@ public class MapData extends Data{
                     "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, node_id);
-            ps.setInt(2, x);
-            ps.setInt(3, y);
-            ps.setInt(4, floor);
+            ps.setDouble(2, x);
+            ps.setDouble(3, y);
+            ps.setString(4, floor);
             ps.setString(5, building);
             ps.setString(6, node_type);
             ps.setString(7, longname);
@@ -45,12 +40,12 @@ public class MapData extends Data{
         }
         return 1;
     }
-    public int updCoords(String node_id, int new_x, int new_y) {
+    public int updateCoords(String node_id, double new_x, double new_y) {
         try {
             String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setInt(1, new_x);
-            ps.setInt(2, new_y);
+            ps.setDouble(1, new_x);
+            ps.setDouble(2, new_y);
             ps.setString(3,node_id);
             ps.execute();
         } catch (SQLException e) {
@@ -61,11 +56,11 @@ public class MapData extends Data{
         return 1;
     }
 
-    public int updFloor(String node_id, int new_floor_number) {
+    public int updFloor(String node_id, String new_floor_number) {
         try {
             String str = "update Nodes set floor=? where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setInt(1, new_floor_number);
+            ps.setString(1, new_floor_number);
             ps.setString(2, node_id);
             ps.execute();
         } catch (SQLException e) {
@@ -121,7 +116,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public int delNode(String node_id) {
+    public int deleteNode(String node_id) {
         try {
             String str = "delete from Nodes where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
@@ -139,8 +134,8 @@ public class MapData extends Data{
         try {
             String str = "delete from Nodes where xcoord=? and ycoord=?";
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setInt(1, x);
-            ps.setInt(2, y);
+            ps.setDouble(1, x);
+            ps.setDouble(2, y);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -167,7 +162,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public int updEdgeStart(String edge_id, String new_start_node_id) {
+    public int updateEdgeStart(String edge_id, String new_start_node_id) {
         try {
             String str = "update Edges set startID=? where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
@@ -182,7 +177,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public int updEdgeEnd(String edge_id, String new_end_node_id) {
+    public int updateEdgeEnd(String edge_id, String new_end_node_id) {
         try {
             String str = "update Edges set endID=? where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
@@ -197,7 +192,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public int delEdge(String edge_id) {
+    public int deleteEdge(String edge_id) {
         try {
             String str = "delete from Edges where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
@@ -227,21 +222,21 @@ public class MapData extends Data{
         return 1;
     }
 
-    public void loadGraph(GraphManager gm){
+    public void loadGraph(MapManager gm){
         try{
             Statement ps = conn.createStatement();
             String str = "select * from Nodes";
             rset = ps.executeQuery(str);
             while (rset.next()) {
                 String id = rset.getString("nodeID");
-                int x = rset.getInt("xcoord");
-                int y = rset.getInt("ycoord");
-                int floor = rset.getInt("floor");
+                double x = rset.getDouble("xcoord");
+                double y = rset.getDouble("ycoord");
+                String floor = rset.getString("floor");
                 String building = rset.getString("building");
                 String nodeType = rset.getString("nodeType");
                 String longName = rset.getString("longName");
                 String shortName = rset.getString("shortName");
-                gm.makeNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+                gm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
             }
             rset.close();
             String str2 = "select * from Edges";
@@ -251,7 +246,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                gm.makeEdge(id,start,end);
+                gm.addEdge(id,start,end);
             }
             rs2.close();
         }
@@ -292,7 +287,7 @@ public class MapData extends Data{
             String str = "select * from Nodes where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
-            Node n = new Node(rs.getString("nodeId"), rs.getInt("xcoord"), rs.getInt("ycoord"), rs.getInt("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
+            Node n = new Node(rs.getString("nodeId"), rs.getDouble("xcoord"), rs.getDouble("ycoord"), rs.getString("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
             rs.close();
             return n;
         }

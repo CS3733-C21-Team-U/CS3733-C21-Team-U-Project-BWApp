@@ -15,7 +15,6 @@ public class UserData extends Data{
     public ArrayList<User> loadUsers(){
         return null;
     }
-
     public void addUser(User user){
         String str = "insert into Users (userID, name, accountName, password, type, employed) values (?,?,?,?,?,?)";
         try{
@@ -33,7 +32,6 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
-
     public void delUser(User user){
         String str ="update Users set empoloyed=? where userID=?";
         try {
@@ -45,7 +43,6 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
-
     public void updUser(User user, LinkedList<Parameters> updParams){
 
     }

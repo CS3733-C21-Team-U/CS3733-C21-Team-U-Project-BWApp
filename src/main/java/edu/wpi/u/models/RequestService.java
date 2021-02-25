@@ -18,9 +18,6 @@ public class RequestService {
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-//    for (Request x : this.activeRequests){
-//      System.out.println("Req: "+ x.getRequestID());
-//    }
   }
 
   /*
@@ -36,18 +33,7 @@ public class RequestService {
   public void saveCSVFile(String path, String tableName){
     Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
   }
-  /*
-  Make sure x & y are positive integers within the map coordinate range
-  */
   public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
-    /*
-                        descriptionTextField.getText(),
-                        lLConverter(assigneeArrayList),
-                        titleTextField.getText(),
-                        lLConverter(locationArrayList),
-                        serviceTypeTextField.getText(),
-                        userID );
-     */
     //Scucess
     Random rand = new Random();
     int requestID = rand.nextInt();
@@ -65,7 +51,6 @@ public class RequestService {
     Return node_id if node already exists / invalid
      */
   }
-
   public String updateRequest(String requestID, String title, String description,Date dateCompleted, LinkedList<String> location, String type, LinkedList<String> assignee, String creator){
     //Scucess
     for(Request r : this.activeRequests){
@@ -87,7 +72,6 @@ public class RequestService {
     Return node_id if node already exists / invalid
      */
   }
-
   public String deleteRequest(String requestID) {
     //Scucess
     Date now = new Date();
@@ -109,7 +93,6 @@ public class RequestService {
      */
     //        dm.delNode(node_id);
   }
-
   public ArrayList<Request> getRequests() {
     boolean debug = false;
     if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array

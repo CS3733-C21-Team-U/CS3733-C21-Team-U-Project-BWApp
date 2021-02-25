@@ -7,6 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
+/*
+Twillio covid screenings
+ */
+
 public class Database {
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
@@ -23,7 +27,6 @@ public class Database {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
     }
-
     public static Database getDB() {
         return SingletonHelper.db;
     }
@@ -47,7 +50,7 @@ public class Database {
         try {
             if (isTableEmpty()) {
                 String tbl1 =
-                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
+                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor varchar(50), building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
 
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
