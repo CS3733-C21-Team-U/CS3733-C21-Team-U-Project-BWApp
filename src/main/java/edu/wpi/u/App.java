@@ -115,7 +115,7 @@ public class App extends Application {
     requestService.saveCSVFile("Locations.csv", "Locations");
     graphService.saveCSVFile("OutsideMapNodes.csv", "Nodes");
     graphService.saveCSVFile("OutsideMapEdges.csv", "Edges");
-    Database.getDB().stop();
+    //Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
