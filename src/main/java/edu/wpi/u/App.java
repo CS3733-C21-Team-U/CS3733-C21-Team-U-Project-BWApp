@@ -23,7 +23,7 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static int leftMenuScreenNum = 2; //Start on the 2nd screen (Service Requests)
+  public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
@@ -42,6 +42,8 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
+
+  public static Integer lastClickedRequestNumber;
 
   public App(){
     System.out.println("App constructor");
@@ -83,10 +85,11 @@ public class App extends Application {
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
-    scene.getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
     App.primaryStage.setScene(scene);
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
+
 
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 

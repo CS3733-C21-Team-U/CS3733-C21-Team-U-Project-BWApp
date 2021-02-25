@@ -82,33 +82,33 @@ public class NodeController {
     int tempX = Integer.parseInt(enterXCoo.getText());
     int tempY = Integer.parseInt(enterYCoo.getText());
 
-    String ret = App.graphService.addNode(tempID, tempX, tempY);
-    if (ret.equals(tempID)) {
-      errorLabel.setText("Node already exists");
-      return;
-    }
+//    String ret = App.graphService.addNode(tempID, tempX, tempY);
+//    if (ret.equals(tempID)) {
+//      errorLabel.setText("Node already exists");
+//      return;
+//    }
 
     update();
     errorLabel.setText("Node added successfully.");
   }
 
   public void editNode() {
-    String tempID = enterNodeID.getText();
-    if (tempID.equals("")) {
-      errorLabel.setText("Missing Node ID.");
-      return;
-    }
-    if (checkTextBoxesErrorCoordinatesEmpty()) return;
-    if (checkTextBoxesErrorCoordinates()) return;
-    int tempX = (int)Double.parseDouble(enterXCoo.getText());
-    int tempY = (int)Double.parseDouble(enterYCoo.getText());
-    if (App.graphService.deleteNode(tempID).equals(tempID) || App.graphService.addNode(tempID, tempX, tempY).equals(tempID))
-   // if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
-      errorLabel.setText("Node does not exists.");
-    else {
-      update();
-      errorLabel.setText("node edited successfully.");
-    }
+//    String tempID = enterNodeID.getText();
+//    if (tempID.equals("")) {
+//      errorLabel.setText("Missing Node ID.");
+//      return;
+//    }
+//    if (checkTextBoxesErrorCoordinatesEmpty()) return;
+//    if (checkTextBoxesErrorCoordinates()) return;
+//    int tempX = (int)Double.parseDouble(enterXCoo.getText());
+//    int tempY = (int)Double.parseDouble(enterYCoo.getText());
+//    if (App.graphService.deleteNode(tempID).equals(tempID) || App.graphService.addNode(tempID, tempX, tempY).equals(tempID))
+//   // if (App.graphService.updateNode(tempID, tempX, tempY).equals(tempID))
+//      errorLabel.setText("Node does not exists.");
+//    else {
+//      update();
+//      errorLabel.setText("node edited successfully.");
+//    }
   }
 
   public void deleteNode() {

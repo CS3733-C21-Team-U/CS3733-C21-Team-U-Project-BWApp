@@ -1,13 +1,17 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXDrawer;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -38,10 +42,22 @@ public class EditRequestController {
 
     @FXML Label editPeopleErrorLabel;
 
+
+
     private Request currRequest;
 
-    public void initialize(){
-        currRequest = App.requestService.getRequests().get(App.getInstance().requestClicked);
+
+
+    @FXML
+    JFXDrawer errorDrawer;
+    ErrorMessageController controller;
+
+    @FXML
+    JFXDrawer errorDrawer2;
+    ErrorMessageController controller2;
+
+    public void initialize() throws IOException {
+        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
 
         editTitleField.setText(currRequest.getTitle());
         editDescripArea.setText(currRequest.getDescription());
@@ -66,6 +82,18 @@ public class EditRequestController {
         }
         ObservableList<String> oList = FXCollections.observableList(nodeIDs);
         editLocField.setItems(oList);
+
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        AnchorPane error = errorMessageLoader.load();
+        controller = errorMessageLoader.getController();
+        controller.errorMessage.setText("Invalid Location");
+        errorDrawer.setSidePane(error);
+
+        FXMLLoader errorMessageLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        AnchorPane error2 = errorMessageLoader2.load();
+        controller2 = errorMessageLoader2.getController();
+        controller2.errorMessage.setText("Invalid People");
+        errorDrawer2.setSidePane(error2);
     }
 
     private boolean isChecked() {
@@ -99,13 +127,13 @@ public class EditRequestController {
 
     public void handleAddLocation(){
         if (editLocField.getValue() == null) {
-            editLocationErrorLabel.setText("Please enter a node!");
+            errorDrawer.open();
         } else {
             currRequest.getLocation().add(editLocField.getValue().toString());
             showCurrentLocListView.getItems().add(editLocField.getValue().toString());
             // clears combobox
             editLocField.setValue(null);
-            editLocationErrorLabel.setText("");
+            errorDrawer.close();
         }
 
     }
@@ -118,18 +146,19 @@ public class EditRequestController {
                 showCurrentLocListView.getItems().remove(currRequest.getLocation().get(i));
                 return;
             }
-        } editLocationErrorLabel.setText("Location Does Not Exist");
+        } errorDrawer.open();
     }
 
     public void handleAddPeople() {
         String newPer = editPeopleField.getText();
-        if(!doesPersonExist()) {
+        if(!doesPersonExist() && editPeopleField.getText() != null && !newPer.equals("") && !newPer.equals("")) {
             currRequest.getAssignee().add(newPer);
             showCurrentPeopleListView.getItems().add(newPer);
-            editPeopleErrorLabel.setText("");
+            errorDrawer2.close();
         }
         else{
-            editPeopleErrorLabel.setText("Person Already Listed.");
+
+            errorDrawer2.open();
         }
     }
 
@@ -138,9 +167,10 @@ public class EditRequestController {
             if (editPeopleField.getText().equals(s)) {
                 currRequest.getAssignee().remove(s);
                 showCurrentPeopleListView.getItems().remove(s);
+                errorDrawer2.close();
                 return;
             }
-        } //editPeopleErrorLabel.setText("Person Does Not Exist");
+        } errorDrawer2.open();
 
 
 
@@ -190,5 +220,12 @@ public class EditRequestController {
         //assignments, give list name
 
 
+    }
+    public void handleErrorMessageClear(){
+        errorDrawer.close();
+    }
+
+    public void handleErrorMessageClear2(){
+        errorDrawer2.close();
     }
 }

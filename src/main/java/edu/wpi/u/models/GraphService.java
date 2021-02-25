@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.MapData;
+import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.exceptions.PathNotFoundException;
 
 import java.util.ArrayList;
@@ -36,10 +37,17 @@ public class GraphService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addNode(String node_id, int x, int y) {
-    md.addNode(node_id,x,y,0, "Def", "Def", "Def", "Def");
-    gm.makeNode(node_id,x,y,0,"Def", "Def", "Def", "Def", "u");
-    return "";
+  public String addNode(String node_id, int x, int y) throws InvalidEdgeException {
+    try{
+      md.addNode(node_id, x, y, 0, "Def", "Def", "Def", "Def");
+      gm.makeNode(node_id, x, y, 0, "Def", "Def", "Def", "Def", "u");
+      return "";
+    } catch (Exception e){
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Invalid node";
+      throw invalidEdge;
+
+    }
     /*
     Check if valid node_id
     Return "" is a success
@@ -82,15 +90,16 @@ public class GraphService {
     //        dm.delNode(node_id);
   }
 
-  public String addEdge(String edge_id, String start_node, String end_node) {
+  public String addEdge(String edge_id, String start_node, String end_node) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
       gm.makeEdge(edge_id, start_node, end_node);
       return "";
     }
     else {
-      System.out.println("Edge Creation Failed!");
-      return edge_id;
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Edge Creation Failed!";
+      throw invalidEdge;
     }
 
 

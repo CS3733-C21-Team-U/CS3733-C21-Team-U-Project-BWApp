@@ -61,21 +61,21 @@ public class EdgeController {
 
 
 
-    if(tempEdgeID.trim().equals("") || tempStartID.trim().equals("") || tempEndID.trim().equals("")){
-      errorLabel.setText("Missing Fields");
-      System.out.println("Adding edge attempt");
-      return;
-    }
-
-    if(App.graphService.addEdge(tempEdgeID, tempStartID, tempEndID).equals(tempEdgeID)){
-      errorLabel.setText("At least one node may not exist");
-      return;
-    }
-    else{
-      errorLabel.setText("Edge addition successful");
-      list = FXCollections.observableList(App.graphService.getEdges());
-      edgeTable.setItems(list);
-    }
+//    if(tempEdgeID.trim().equals("") || tempStartID.trim().equals("") || tempEndID.trim().equals("")){
+//      errorLabel.setText("Missing Fields");
+//      System.out.println("Adding edge attempt");
+//      return;
+//    }
+//
+//    if(App.graphService.addEdge(tempEdgeID, tempStartID, tempEndID).equals(tempEdgeID)){
+//      errorLabel.setText("At least one node may not exist");
+//      return;
+//    }
+//    else{
+//      errorLabel.setText("Edge addition successful");
+//      list = FXCollections.observableList(App.graphService.getEdges());
+//      edgeTable.setItems(list);
+//    }
   }
 
   @FXML
@@ -107,40 +107,40 @@ public class EdgeController {
     String tempStartID = startNode.getText();
     String tempEndID = endNode.getText();
 
-    //Delete the node first
-    if(tempEdgeID.trim().equals("")){
-      errorLabel.setText("Missing Field");
-      return;
-    }
-    else if(App.graphService.deleteEdge(tempEdgeID).equals(tempEdgeID)){
-      errorLabel.setText("This is edge ID is invalid");
-      return;
-    }
-    else{
-      errorLabel.setText("Edge deletion successful");
-
-      //"update"
-      list = FXCollections.observableList(App.graphService.getEdges());
-      edgeTable.setItems(list);
-    }
-    //Done with delete
-    //Now we add a new node
-    if(tempEdgeID.trim().equals("") || tempStartID.trim().equals("") || tempEndID.trim().equals("")){
-      errorLabel.setText("Missing Fields");
-      System.out.println("Adding edge attempt");
-      return;
-    }
-
-    if(App.graphService.addEdge(tempEdgeID, tempStartID, tempEndID).equals(tempEdgeID)){
-      errorLabel.setText("At least one node may not exist");
-      return;
-    }
-    else{
-      errorLabel.setText("Edge addition successful");
-      list = FXCollections.observableList(App.graphService.getEdges());
-      edgeTable.setItems(list);
-    }
-    errorLabel.setText("Edge update successful");
+//    //Delete the node first
+//    if(tempEdgeID.trim().equals("")){
+//      errorLabel.setText("Missing Field");
+//      return;
+//    }
+//    else if(App.graphService.deleteEdge(tempEdgeID).equals(tempEdgeID)){
+//      errorLabel.setText("This is edge ID is invalid");
+//      return;
+//    }
+//    else{
+//      errorLabel.setText("Edge deletion successful");
+//
+//      //"update"
+//      list = FXCollections.observableList(App.graphService.getEdges());
+//      edgeTable.setItems(list);
+//    }
+//    //Done with delete
+//    //Now we add a new node
+//    if(tempEdgeID.trim().equals("") || tempStartID.trim().equals("") || tempEndID.trim().equals("")){
+//      errorLabel.setText("Missing Fields");
+//      System.out.println("Adding edge attempt");
+//      return;
+//    }
+//
+//    if(App.graphService.addEdge(tempEdgeID, tempStartID, tempEndID).equals(tempEdgeID)){
+//      errorLabel.setText("At least one node may not exist");
+//      return;
+//    }
+//    else{
+//      errorLabel.setText("Edge addition successful");
+//      list = FXCollections.observableList(App.graphService.getEdges());
+//      edgeTable.setItems(list);
+//    }
+//    errorLabel.setText("Edge update successful");
   }
 
   @FXML
