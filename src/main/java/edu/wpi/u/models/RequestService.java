@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class RequestService {
    */
 
   public void loadCSVFile(String path, String tableName){
-    rd.dropValues();
+    Database.getDB().dropValues();
     rd.readCSV(path,tableName);
     this.activeRequests = rd.loadActiveRequests();
   }

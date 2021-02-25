@@ -114,47 +114,47 @@ public abstract class Data {
         return true;
     }
 
-    public void deleteTables() {
-        try {
-            String str = "drop table Nodes";
-            Statement s = conn.createStatement();
-            s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Assignments";
-            s.execute(str);
-            str = "drop table Locations";
-            s.execute(str);
-            str = "drop table Requests";
-            s.execute(str);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+/*    public void deleteTables() {
+//        try {
+//            String str = "drop table Nodes";
+//            Statement s = conn.createStatement();
+//            s.execute(str);
+//            str = "drop table Edges";
+//            s.execute(str);
+//            str = "drop table Assignments";
+//            s.execute(str);
+//            str = "drop table Locations";
+//            s.execute(str);
+//            str = "drop table Requests";
+//            s.execute(str);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
     //Deprecated
     public void dropValues() {
-        try {
-            Statement ps = conn.createStatement();
-            String str = "alter table Locations drop constraint nodeID";
-            ps.execute(str);
-            str = "delete from Nodes";
-            ps.execute(str);
-            str = "delete from Edges";
-            ps.execute(str);
-            str = "alter table Locations drop constraint requestID";
-            ps.execute(str);
-            str = "alter table Assignments drop constraint requestID";
-            ps.execute(str);
-            str = "delete from Requests";
-            ps.execute(str);
-            str = "delete from Locations";
-            ps.execute(str);
-            str = "delete from Assigments";
-            ps.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Statement ps = conn.createStatement();
+//            String str = "alter table Locations drop constraint nodeID";
+//            ps.execute(str);
+//            str = "delete from Nodes";
+//            ps.execute(str);
+//            str = "delete from Edges";
+//            ps.execute(str);
+//            str = "alter table Locations drop constraint requestID";
+//            ps.execute(str);
+//            str = "alter table Assignments drop constraint requestID";
+//            ps.execute(str);
+//            str = "delete from Requests";
+//            ps.execute(str);
+//            str = "delete from Locations";
+//            ps.execute(str);
+//            str = "delete from Assigments";
+//            ps.execute(str);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void stop() {
@@ -167,5 +167,5 @@ public abstract class Data {
         catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 }

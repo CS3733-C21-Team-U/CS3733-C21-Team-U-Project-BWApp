@@ -7,14 +7,24 @@ import java.nio.file.Paths;
 import java.sql.*;
 
 public class Database {
-
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
+
 
     public Database() {
         driver();
         connect();
         init();
+    }
+
+    //Bill Pugh solution
+    private static class SingletonHelper {
+        //Nested class is referenced after getDB() is called
+        private static final Database db = new Database();
+    }
+
+    public static Database getDB() {
+        return SingletonHelper.db;
     }
 
     public static void driver() {
@@ -141,13 +151,13 @@ public class Database {
     }
 
     public void stop() {
-        dropValues();
-        deleteTables();
-        try{
-            //conn.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        dropValues();
+//        deleteTables();
+//        try{
+//            //conn.close();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 }

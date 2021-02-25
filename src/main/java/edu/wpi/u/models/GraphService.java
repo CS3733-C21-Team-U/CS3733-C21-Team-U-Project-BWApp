@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.database.MapData;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.exceptions.PathNotFoundException;
@@ -25,12 +26,11 @@ public class GraphService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    //md.dropValues();
     md.saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
   public void loadCSVFile(String path, String tableName){
-    md.dropValues();
+    Database.getDB().dropValues();
     md.readCSV(path,tableName);
   }
 
