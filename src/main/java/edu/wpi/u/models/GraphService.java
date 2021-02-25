@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.database.MapData;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.exceptions.PathNotFoundException;
@@ -25,26 +26,25 @@ public class GraphService {
   }
 
   public void saveCSVFile(String path, String tableName){
-    //md.dropValues();
-    md.saveCSV(tableName,path, "test"); // TODO: Provide header
+    Database.getDB().saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
   public void loadCSVFile(String path, String tableName){
-    md.dropValues();
-    md.readCSV(path,tableName);
+    Database.getDB().dropValues();
+    Database.getDB().readCSV(path,tableName);
   }
 
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addNode(String node_id, int x, int y) throws InvalidEdgeException {
-    if (md.isNode(node_id)) {
+    try{
       md.addNode(node_id, x, y, 0, "Def", "Def", "Def", "Def");
       gm.makeNode(node_id, x, y, 0, "Def", "Def", "Def", "Def", "u");
       return "";
-    } else{
+    } catch (Exception e){
       InvalidEdgeException invalidEdge = new InvalidEdgeException();
-      invalidEdge.description = "Node Creation Failed!";
+      invalidEdge.description = "Invalid node";
       throw invalidEdge;
 
     }

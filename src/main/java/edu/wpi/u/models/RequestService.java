@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
 import java.util.ArrayList;
@@ -27,13 +28,13 @@ public class RequestService {
    */
 
   public void loadCSVFile(String path, String tableName){
-    rd.dropValues();
-    rd.readCSV(path,tableName);
+    Database.getDB().dropValues();
+    Database.getDB().readCSV(path,tableName);
     this.activeRequests = rd.loadActiveRequests();
   }
 
   public void saveCSVFile(String path, String tableName){
-    rd.saveCSV(tableName,path , "test"); // TODO: Provide header
+    Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
   }
   /*
   Make sure x & y are positive integers within the map coordinate range

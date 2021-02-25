@@ -29,7 +29,7 @@ public class NewNodeController {
         FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
-        controller.errorMessage.setText("Please Input Valid Nodes");
+        controller.errorMessage.setText("Please Input a Valid Node");
         errorDrawer.setSidePane(error);
     }
 
@@ -39,6 +39,8 @@ public class NewNodeController {
                 errorDrawer.open();
             } else {
                 try {
+                    Integer.parseInt(XCoordinate.getText());
+                    Integer.parseInt(YCoordinate.getText());
                 App.graphService.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
                 App.rightDrawerRoot.set("/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();

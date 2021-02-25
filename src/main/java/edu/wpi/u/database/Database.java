@@ -1,20 +1,31 @@
 package edu.wpi.u.database;
 
-import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 
 public class Database {
-
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
+
 
     public Database() {
         driver();
         connect();
-        init();
+        createTables();
+    }
+
+    //Bill Pugh solution
+    private static class SingletonHelper {
+        //Nested class is referenced after getDB() is called
+        private static final Database db = new Database();
+    }
+
+    public static Database getDB() {
+        return SingletonHelper.db;
     }
 
     public static void driver() {
@@ -37,7 +48,7 @@ public class Database {
         }
     }
 
-    public static void init() { //TODO : Rename to createTables()
+    public static void createTables() { //TODO : Rename to createTables()
         try {
             if (isTableEmpty()) {
                 String tbl1 =
@@ -70,6 +81,63 @@ public class Database {
         }
     }
 
+    public void readCSV(String filePath, String tableName){
+
+        String tempPath = "temp.csv"; //TODO : Change path in jar file
+        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
+
+        try {
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            String[] columns = content.split("\n", 2);
+            //String[] attributes = content.split(","); TODO: Make table columns from header values
+            columns[1] += "\n";
+            File temp = new File(tempPath);
+            if(temp.createNewFile()){
+                System.out.println("File created");
+            }
+            FileWriter myWriter = new FileWriter(tempPath);
+            myWriter.write(columns[1]);
+            myWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            PreparedStatement p = conn.prepareStatement(str1);
+            p.execute();
+        }
+        catch (Exception e){
+            System.out.println("Path: " + filePath);
+            //e.printStackTrace();
+        }
+    }
+    public void saveCSV(String tableName, String filePath, String header){
+        File f = new File(filePath);
+        if(f.delete()){
+            System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
+        }
+        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Wants new file");
+            e.printStackTrace();
+        }
+
+        try {
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(header);
+            fw.write("\n");
+            fw.write(content);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void printRequests() {
         try {
             String str = "select * from Requests";
@@ -94,25 +162,6 @@ public class Database {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void deleteTables() {
-        try {
-            String str = "drop table Nodes";
-            Statement s = conn.createStatement();
-            s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Assignments";
-            s.execute(str);
-            str = "drop table Locations";
-            s.execute(str);
-            str = "drop table Requests";
-            s.execute(str);
-        }
-        catch (Exception e){
-           // e.printStackTrace();
-        }
     }
 
     public void dropValues() {
@@ -141,13 +190,6 @@ public class Database {
     }
 
     public void stop() {
-        dropValues();
-        deleteTables();
-        try{
-            //conn.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+
     }
 }
