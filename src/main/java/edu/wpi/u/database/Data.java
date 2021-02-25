@@ -16,7 +16,6 @@ public abstract class Data {
     public Data(){
 
     }
-
     public void connect() {
         try {
             conn = DriverManager.getConnection(url);
@@ -25,7 +24,6 @@ public abstract class Data {
             e.printStackTrace();
         }
     }
-
     public boolean updateField(String tableName, String idField, String id, String field, String val) {
         try {
             String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
@@ -40,7 +38,6 @@ public abstract class Data {
         }
         return true;
     }
-
     public boolean updateField(String tableName, String idField, String id, String field, int val) {
         try {
             String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";

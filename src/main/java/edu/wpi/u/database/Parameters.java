@@ -27,7 +27,7 @@ public class Parameters {
         this.fieldToUpd = fieldToUpd;
     }
     /*
-    Parse Parameter object for easy 
+    Parse Parameter object for easy
      */
     public String parseParams(){
         // TODO

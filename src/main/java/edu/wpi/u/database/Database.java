@@ -62,7 +62,7 @@ public class Database {
                 ps3.execute();
 
                 String tbl4 =
-                        "create table Users (userID varchar(50) not null, name varchar(50), accountName varchar(100), password varchar(100), type varchar(50) primary key(userID))";
+                        "create table Users (userID varchar(50) not null, name varchar(50), accountName varchar(100), password varchar(100), type varchar(50), employed boolean, primary key(userID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 

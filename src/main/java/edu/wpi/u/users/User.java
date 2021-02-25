@@ -6,13 +6,15 @@ public class User {
     protected String accountName;
     protected String password;
     protected StaffType type;
+    protected boolean employed;
 
-    public User(String userID, String name, String accountName, String password, StaffType role) {
+    public User(String userID, String name, String accountName, String password, StaffType role, boolean employed) {
         this.userID = userID;
         this.name = name;
         this.accountName = accountName;
         this.password = password;
         this.type = role;
+        this.employed = employed;
     }
 
     public String getUserID() {
@@ -53,5 +55,13 @@ public class User {
 
     public void setType(StaffType type) {
         this.type = type;
+    }
+
+    public boolean isEmployed() {
+        return employed;
+    }
+
+    public void setEmployed(boolean employed) {
+        this.employed = employed;
     }
 }
