@@ -14,7 +14,7 @@ public class RequestService {
 
 
   static RequestData rd = new RequestData();
-  ArrayList<Request> activeRequests = new ArrayList<>();
+  ArrayList<Request> activeRequests;
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();

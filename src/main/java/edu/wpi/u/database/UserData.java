@@ -3,12 +3,17 @@ package edu.wpi.u.database;
 import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class UserData extends Data{
 
     public UserData (){
         connect();
+    }
+
+    public ArrayList<User> loadUsers(){
+        return null;
     }
 
     public void addUser(User user){
@@ -42,6 +47,6 @@ public class UserData extends Data{
     }
 
     public void updUser(User user, LinkedList<Parameters> updParams){
-        
+
     }
 }
