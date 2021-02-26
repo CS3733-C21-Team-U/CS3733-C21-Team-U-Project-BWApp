@@ -15,6 +15,11 @@ public class UserData extends Data{
     public ArrayList<User> loadUsers(){
         return null;
     }
+
+    /**
+     * Adds a user to the table Users
+     * @param user the object containing all the information on the user
+     */
     public void addUser(User user){
         String str = "insert into Users (userID, name, accountName, password, type, employed) values (?,?,?,?,?,?)";
         try{
@@ -32,6 +37,11 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Marks a user as deleted by setting the employed field to false
+     * @param user the object containing all of the information on the user
+     */
     public void delUser(User user){
         String str ="update Users set empoloyed=? where userID=?";
         try {
@@ -43,6 +53,12 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Will update the field of a user in the database
+     * @param user
+     * @param updParams
+     */
     public void updUser(User user, LinkedList<Parameters> updParams){
 
     }

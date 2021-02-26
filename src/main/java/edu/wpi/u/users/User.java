@@ -8,6 +8,10 @@ public class User {
     protected StaffType type;
     protected boolean employed;
 
+    public User(){
+
+    }
+
     public User(String userID, String name, String accountName, String password, StaffType role, boolean employed) {
         this.userID = userID;
         this.name = name;

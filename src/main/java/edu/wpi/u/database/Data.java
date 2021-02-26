@@ -16,6 +16,10 @@ public abstract class Data {
     public Data(){
 
     }
+
+    /**
+     * Creates the connection to the database by mounting the driver
+     */
     public void connect() {
         try {
             conn = DriverManager.getConnection(url);

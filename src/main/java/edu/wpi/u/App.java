@@ -1,10 +1,8 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
-import edu.wpi.u.models.AdminToolStorage;
-import edu.wpi.u.models.MapService;
-import edu.wpi.u.models.PathHandling;
-import edu.wpi.u.models.RequestService;
+import edu.wpi.u.models.*;
+import edu.wpi.u.users.User;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +26,7 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
-
+  public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();

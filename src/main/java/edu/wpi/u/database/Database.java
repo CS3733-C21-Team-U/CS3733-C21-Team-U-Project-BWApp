@@ -30,6 +30,10 @@ public class Database {
     public static Database getDB() {
         return SingletonHelper.db;
     }
+
+    /**
+     * Creates an instance of the database Driver to allow connection
+     */
     public static void driver() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -38,6 +42,9 @@ public class Database {
             e.printStackTrace();
         }
     }
+    /**
+     * Creates the connection to the database by mounting the driver
+     */
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
@@ -46,6 +53,10 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Creates all of the tables in the database
+     */
     public static void createTables() {
         try {
             if (isTableEmpty()) {
@@ -82,6 +93,12 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Will read the csv file from a given path
+     * @param filePath the path to be read from
+     * @param tableName the table to load the data from the csv into
+     */
     public void readCSV(String filePath, String tableName){
 
         String tempPath = "temp.csv"; //TODO : Change path in jar file
@@ -112,6 +129,13 @@ public class Database {
             //e.printStackTrace();
         }
     }
+
+    /**
+     * Saves a csv to a given file path
+     * @param tableName the table to be saved to a csv
+     * @param filePath the path that the csv file will be written to
+     * @param header header of the csv file (the first line)
+     */
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
