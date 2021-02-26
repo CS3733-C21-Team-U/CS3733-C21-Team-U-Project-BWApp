@@ -29,45 +29,15 @@ public class AdminToolsController {
         ArrayList<Node> nodes = App.graphService.getNodes();
         ArrayList<Edge> edges = App.graphService.getEdges();
 
-        for (int i = 0; i < nodes.size(); i++) {
-            Node currentNodeInfo = nodes.get(i);
-            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeListItem.fxml"));
-            AnchorPane node = nodeLoader.load();
-            NodeItemController controller = nodeLoader.getController();
-            controller.nodeID.setText(currentNodeInfo.getNodeID());
-            double XPos = (nodes.get(i).getCords()[0]);
-            double YPos = (nodes.get(i).getCords()[1]);
-            controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
-            controller.x = Double.toString(XPos);
-            controller.y = Double.toString(YPos);
-            StringBuilder string = new StringBuilder("Adj Nodes: ");
-            Iterator<Node> it = currentNodeInfo.getAdjNodes().descendingIterator();
-            while (it.hasNext()) {
-                string.append(it.next().getNodeID()+", ");
-            }
-            String label = String.valueOf(string);
-            if(label.length() > 0) {
-                label = label.substring(0, label.length()-2);
-                controller.nodeAdj.setText(label);
-            }else{
-                controller.nodeAdj.setText("No Adjacent Nodes");
-            }
-            nodeList.getChildren().add(node);
+        for (Node node: nodes) {
+            nodeList.getChildren().add(new NodeItemController(node));
         }
 
-        //Edges
-        for (int i = 0; i < edges.size(); i++) {
-            Edge currentEdgeInfo = edges.get(i);
-            FXMLLoader edgeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeListItem.fxml"));
-            AnchorPane edge = edgeLoader.load();
-            EdgeItemController controller = edgeLoader.getController();
-            controller.edgeID.setText(currentEdgeInfo.getEdgeID());
-            controller.startingNode.setText(currentEdgeInfo.getStartNode().getNodeID());
-            controller.endingNode.setText(currentEdgeInfo.getEndNode().getNodeID());
-            test.getChildren().add(edge);
+        for (Edge edge: edges) {
+            test.getChildren().add(new EdgeItemController(edge));
         }
 
-        App.AdminStorage.haveSelectedNode.addListener((observable, oldValue, newValue)  ->
+        AdminToolStorage.haveSelectedNode.addListener((observable, oldValue, newValue)  ->
         {
             if(AdminToolStorage.nodeIsSelected){
                 editNodeButton.setVisible(true);

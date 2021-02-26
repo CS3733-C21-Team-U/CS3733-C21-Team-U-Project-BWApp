@@ -13,7 +13,6 @@ public class AdminToolStorage {
     public static int xloc = 0;
     public static int yloc = 0;
 
-    public static NodeItemController selectedNode = new NodeItemController();
     public static SimpleIntegerProperty haveSelectedNode = new SimpleIntegerProperty(0);
     public static boolean nodeIsSelected = false;
 
