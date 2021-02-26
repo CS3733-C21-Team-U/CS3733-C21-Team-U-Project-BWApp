@@ -75,7 +75,7 @@ public class EditRequestController {
             showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
         }
 
-        ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
+        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
         ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
         for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
             nodeIDs.add(N.getNodeID());

@@ -7,6 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
+/*
+Twillio covid screenings
+ */
+
 public class Database {
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
@@ -23,11 +27,13 @@ public class Database {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
     }
-
     public static Database getDB() {
         return SingletonHelper.db;
     }
 
+    /**
+     * Creates an instance of the database Driver to allow connection
+     */
     public static void driver() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -36,23 +42,26 @@ public class Database {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Creates the connection to the database by mounting the driver
+     */
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
-            //conn.setAutoCommit(false);
-            //conn.commit();
         } catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
         }
     }
 
-    public static void createTables() { //TODO : Rename to createTables()
+    /**
+     * Creates all of the tables in the database
+     */
+    public static void createTables() {
         try {
             if (isTableEmpty()) {
                 String tbl1 =
-                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
+                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor varchar(50), building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
 
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
@@ -66,14 +75,18 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                String tbl4 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
+                String tbl4 =
+                        "create table Users (userID varchar(50) not null, name varchar(50), accountName varchar(100), password varchar(100), type varchar(50), employed boolean, primary key(userID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
-                String tbl5 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Users, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
+                String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                PreparedStatement ps6 = conn.prepareStatement(tbl6);
+                ps6.execute();
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
@@ -81,6 +94,11 @@ public class Database {
         }
     }
 
+    /**
+     * Will read the csv file from a given path
+     * @param filePath the path to be read from
+     * @param tableName the table to load the data from the csv into
+     */
     public void readCSV(String filePath, String tableName){
 
         String tempPath = "temp.csv"; //TODO : Change path in jar file
@@ -111,6 +129,13 @@ public class Database {
             //e.printStackTrace();
         }
     }
+
+    /**
+     * Saves a csv to a given file path
+     * @param tableName the table to be saved to a csv
+     * @param filePath the path that the csv file will be written to
+     * @param header header of the csv file (the first line)
+     */
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
@@ -137,7 +162,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-
     public void printRequests() {
         try {
             String str = "select * from Requests";
@@ -152,7 +176,6 @@ public class Database {
             e.printStackTrace();
         }
     }
-
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
@@ -163,9 +186,7 @@ public class Database {
         }
         return false;
     }
-
     public void dropValues() {
-        //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
             String str = "alter table Locations drop column nodeID";
@@ -184,12 +205,18 @@ public class Database {
             s.execute(str);
             str = "delete from Assignments";
             s.execute(str);
-        } catch (SQLException throwables) {
-            //throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void stop() {
-
-    }
+    // TODO: Test
+//    public void stop() {
+//        try{
+//            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 }

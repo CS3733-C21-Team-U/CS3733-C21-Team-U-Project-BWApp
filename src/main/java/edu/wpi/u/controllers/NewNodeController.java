@@ -1,13 +1,10 @@
 package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
-import edu.wpi.u.models.GraphManager;
-import edu.wpi.u.models.GraphService;
 
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -41,7 +38,7 @@ public class NewNodeController {
                 try {
                     Integer.parseInt(XCoordinate.getText());
                     Integer.parseInt(YCoordinate.getText());
-                App.graphService.addNode(NodeIDField.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
+                App.mapService.addNode(NodeIDField.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
                 App.rightDrawerRoot.set("/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){

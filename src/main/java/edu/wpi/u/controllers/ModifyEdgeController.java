@@ -18,8 +18,8 @@ public class ModifyEdgeController {
 
     @FXML
     public void handleEdgeSubmitButton() {
-        App.graphService.updateStartEdge(modifyNodeID.getText(), sNode.getText());
-        App.graphService.updateEndEdge(modifyNodeID.getText(), eNode.getText());
+        App.mapService.updateStartEdge(modifyNodeID.getText(), sNode.getText());
+        App.mapService.updateEndEdge(modifyNodeID.getText(), eNode.getText());
         App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
     }
     @FXML
