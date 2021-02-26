@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
+import sun.awt.image.ImageWatched;
 
 import java.util.*;
 
@@ -163,6 +164,28 @@ public class MapManager {
     }
 
     return returnMe;
+  }
+
+  /**
+   * Runs a DEPTH FIRST search to find a path between the two nodes specified
+   * @param _startNodeID String of node Id for the start node already confirmed valid
+   * @param _goalNodeID String of node Id for the end node already confirmed valid
+   * @return the path as an Array List of nodes
+   * @throws PathNotFoundException
+   */
+  public ArrayList<Node> runDFS(String _startNodeID, String _goalNodeID) throws PathNotFoundException{
+    return new ArrayList<>();
+  }
+
+  /**
+   * Runs a BREATH FIRST search to find a path between the two nodes specified
+   * @param _startNodeID String of node Id for the start node already confirmed valid
+   * @param _goalNodeID String of node Id for the end node already confirmed valid
+   * @return the path as an Array List of nodes
+   * @throws PathNotFoundException
+   */
+  public ArrayList<Node> runBFS(String _startNodeID, String _goalNodeID) throws PathNotFoundException{
+    return new ArrayList<>();
   }
 
   // takes in two nodes and returns the distance between them

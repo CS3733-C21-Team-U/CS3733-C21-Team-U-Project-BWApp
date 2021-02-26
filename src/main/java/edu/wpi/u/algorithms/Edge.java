@@ -1,11 +1,16 @@
 package edu.wpi.u.algorithms;
 
+import edu.wpi.u.users.StaffType;
+
+import java.util.ArrayList;
+
 public class Edge {
   private String edgeID;
   private Node startNode;
   private Node endNode;
   private double weight;
   private boolean walkable = true;
+  private ArrayList<StaffType> permission;
 
   public Edge(String _edgeID, Node _startNode, Node _endNode) {
     this.edgeID = _edgeID;
@@ -26,6 +31,28 @@ public class Edge {
     // calculate the distance then
     // return the distance (weight)
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+  }
+
+  /**
+   * takes in a staff and gives them permission to use the edge
+   * default means all
+   * @param staffType
+   */
+  public void addUserPermission(StaffType staffType){}
+
+  /**
+   * remove a users permission to use an edge
+   * default means all
+   * @param staffType
+   */
+  public void removeUserPermission(StaffType staffType){}
+
+  /**
+   * returns the array list of permissions
+   * @return
+   */
+  public ArrayList<StaffType> getUserPermissions(){
+    return this.permission;
   }
 
   public String getEdgeID() {
