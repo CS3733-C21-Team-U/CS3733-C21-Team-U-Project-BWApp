@@ -3,6 +3,8 @@ package edu.wpi.u.algorithms;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.MapManager;
 
+import java.util.ArrayList;
+
 public class GraphTest {
 
   public static void main(String[] args) throws PathNotFoundException {
@@ -34,6 +36,10 @@ public class GraphTest {
     graph.addEdge("11", "F", "D");
     graph.addEdge("12", "E", "C");
 
+    graph.deleteEdge("10");
+    graph.deleteEdge("8");
+    graph.deleteEdge("11");
+    /*
     graph.deleteNode("B");
     graph.disableNode("F");
 
@@ -42,9 +48,11 @@ public class GraphTest {
     graph.disableEdge("8");
     graph.enableEdge("8");
     graph.deleteEdge("10");
+    */
 
-    for (Edge e : graph.EdgesFollowed(graph.runAStar("A", "D"))) {
-      System.out.print(e.getEdgeID());
+    ArrayList<Node> path = graph.runDFS("A","D");
+    for(Node curNode: path){
+      System.out.println(curNode.getNodeID());
     }
   }
 }

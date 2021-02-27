@@ -174,7 +174,73 @@ public class MapManager {
    * @throws PathNotFoundException
    */
   public ArrayList<Node> runDFS(String _startNodeID, String _goalNodeID) throws PathNotFoundException{
-    return new ArrayList<>();
+    Node _startNode = this.allNodes.get(_startNodeID);
+    Node _goalNode = this.allNodes.get(_goalNodeID);
+    if(_startNode == _goalNode){
+      PathNotFoundException invalidNodes = new PathNotFoundException();
+      invalidNodes.description = "Please select two different Nodes!";
+      throw invalidNodes;
+    }
+    // record the reachable but unvisited nodes
+    Deque<Node> reachableNodes = new ArrayDeque<>();
+    // add the start node to the seen nodes
+    reachableNodes.add(_startNode);
+    // record what node leads to which for shortest path
+    HashMap<Node, Node> cameFrom = new HashMap<>();
+    // record the cost to get to each node from the start node
+    HashMap<Node, Double> cost = new HashMap<>();
+    // priority the cost + euclidean distance to the goal
+    HashMap<Node, Double> priority = new HashMap<>();
+
+    // setup the start node in the data
+    cost.put(_startNode, 0.0);
+    cameFrom.put(_startNode, _startNode);
+
+    // create the variable used in A*
+    Node current = _startNode;
+
+    // while there is reachable nodes loop
+    while (!reachableNodes.isEmpty()) {
+      // get the next node
+      current = reachableNodes.poll();
+
+      if (current == _goalNode) {
+        // found the end
+        break;
+      }
+      // iterate through the linked list of adjacent nodes
+      for (Node adjNode : current.getAdjNodes()) {
+        // calculate the cost to get to get from the start to the adjacent node
+        double nextNodeCost = cost.get(current) + distBetweenNodes(current, adjNode);
+        // if the adjacent node has not been seen yet add it
+        if (!cost.containsKey(adjNode)) {
+          cost.put(adjNode, nextNodeCost);
+          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
+          reachableNodes.addFirst(adjNode);
+          cameFrom.put(adjNode, current);
+        }
+        // if the cost to get to the adjacent node is less update its cost and add it back to the
+        // reachable nodes
+        else if (cost.get(adjNode) > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
+          // NULL
+          cost.put(adjNode, nextNodeCost);
+          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
+          reachableNodes.addFirst(adjNode);
+          cameFrom.put(adjNode, current);
+        }
+      }
+    } // end of while
+    LinkedList<Node> returnMe = new LinkedList<>();
+    // print out the path if there is one
+    if (cameFrom.containsKey(_goalNode)) { // if exited with a path
+      while (current != _startNode) {
+        returnMe.addFirst(current);
+        current = cameFrom.get(current);
+      }
+      returnMe.addFirst(_startNode);
+    }
+    ArrayList<Node> ArrayListReturnMe = new ArrayList<>(returnMe);
+    return ArrayListReturnMe;
   }
 
   /**
