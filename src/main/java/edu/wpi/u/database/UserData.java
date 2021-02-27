@@ -59,7 +59,7 @@ public class UserData extends Data{
      * @param user
      * @param updParams
      */
-    public void updUser(User user, LinkedList<Parameters> updParams){
+    public void updUser(User user){
 
     }
 }

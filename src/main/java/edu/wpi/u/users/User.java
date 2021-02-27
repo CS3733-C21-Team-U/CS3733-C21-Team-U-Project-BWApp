@@ -12,6 +12,14 @@ public class User {
 
     }
 
+    public void editUser(String name, String accountName, String password, StaffType role, boolean employed){
+        this.name = name;
+        this.accountName = accountName;
+        this.password = password;
+        this.type = role;
+        this.employed = employed;
+    }
+
     public User(String userID, String name, String accountName, String password, StaffType role, boolean employed) {
         this.userID = userID;
         this.name = name;
