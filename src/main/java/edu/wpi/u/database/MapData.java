@@ -386,5 +386,44 @@ public class MapData extends Data{
 
 
 
+    /**
+     * Updates Returns list of users who have permission to inputted edge
+     * @param edgeID - Desired edge
+     * @return Arraylist of StaffType, representing types of users with permission
+     */
+    public ArrayList<StaffType> getPermissions(String edgeID){
+        return new ArrayList<StaffType>();
+    }
+
+    /**
+     * Updates multiple permissions assosciated with the edge at once by deleting
+     * the edge's past permissions and adding new ones specified by the list
+     * @param edgeID - Desired edge
+     * @param permissions - new permission to be added
+     */
+    public void updatePermissions(String edgeID, ArrayList<StaffType> permissions){
+
+    }
+
+    /**
+     * Adds a single specified permission to the table for the specified edge
+     * @param edgeID - Desired edge
+     * @param staffType - New permission to be added
+     */
+    public void addPermission(String edgeID, StaffType staffType){
+
+    }
+
+    /**
+     * Removes a single permission from the table
+     * @param edgeID - Edge in position
+     * @param stafftype - User type to be added to permission
+     */
+    public void removePermission(String edgeID, StaffType stafftype){
+
+    }
+
+
+
 
 }
