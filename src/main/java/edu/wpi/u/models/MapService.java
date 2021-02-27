@@ -25,23 +25,43 @@ public class MapService {
     md.loadGraph(mm);
   }
 
+  /**
+   * returns a node object from the node ID referance
+   * @param nodeID
+   * @return
+   */
   public Node getNodeFromID(String nodeID){
     return mm.getNodeFromID(nodeID);
   }
 
-
+  /**
+   * saves the currtent database to a csv
+   * @param path
+   * @param tableName
+   */
   public void saveCSVFile(String path, String tableName){
     Database.getDB().saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
+  /**
+   * loads a csv into the database the database handles updating the model
+   * @param path
+   * @param tableName
+   */
   public void loadCSVFile(String path, String tableName){
     Database.getDB().dropValues();
     Database.getDB().readCSV(path,tableName);
   }
 
-  /*
-  Make sure x & y are positive integers within the map coordinate range
-  */
+  /**
+   * adds a node to the database and the model
+   * TODO: make sure the coordinates are valid
+   * @param node_id
+   * @param x
+   * @param y
+   * @return
+   * @throws InvalidEdgeException TODO: change to Invalid Edge Exception
+   */
   public String addNode(String node_id, double x, double y) throws InvalidEdgeException {
     try{
       md.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def");
@@ -53,13 +73,17 @@ public class MapService {
       throw invalidEdge;
 
     }
-    /*
-    Check if valid node_id
-    Return "" is a success
-    Return node_id if node already exists / invalid
-     */
   }
 
+  /**
+   * updates a nodes data
+   * TODO:Make it so more than just the coordinates are updatable
+   * @param node_id
+   * @param x
+   * @param y
+   * @return
+   * TODO throw error if ID is not valid
+   */
   public String updateNode(String node_id, double x, double y) {
     if (md.isNode(node_id)){
       md.updateCoords(node_id, x, y);
@@ -69,15 +93,14 @@ public class MapService {
     else {
       return node_id;
     }
-
-    // gm needs to write
-    /*
-    Check if valid node_id
-    Return "" is a success
-    Return node_id if node already exists / invalid
-     */
   }
 
+  /**
+   * removes a node from the model and database
+   * @param node_id
+   * @return
+   * TODO add error checking on node ID
+   */
   public String deleteNode(String node_id) {
     if (md.isNode(node_id)){
       md.deleteNode(node_id);
@@ -87,14 +110,17 @@ public class MapService {
     else {
       return node_id;
     }
-    /*
-    Check if valid node_id
-    Return "" is a success
-    Return node_id if node already exists / invalid
-     */
-    //        dm.delNode(node_id);
   }
 
+  /**
+   * add an edge to the database
+   * @param edge_id
+   * @param start_node
+   * @param end_node
+   * @return
+   * @throws InvalidEdgeException
+   * TODO add Node ID checking
+   */
   public String addEdge(String edge_id, String start_node, String end_node) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
@@ -106,16 +132,15 @@ public class MapService {
       invalidEdge.description = "Edge Creation Failed!";
       throw invalidEdge;
     }
-
-
-    /*
-    Check if valid edge_id
-    Return "" is a success
-    Return edge_id if edge already exists / invalid
-    */
-    //        dm.addEdge(edge_id, start_node, end_node);
   }
 
+  /**
+   * updates the start node of an edge in the database and model
+   * @param edge_id
+   * @param start_node
+   * @return
+   * TODO add ID checking on Node and Edge IDs
+   */
   public String updateStartEdge(String edge_id, String start_node) {
     if (md.isNode(start_node)){
       md.updateEdgeStart(edge_id, start_node);
@@ -125,13 +150,15 @@ public class MapService {
     else {
       return edge_id;
     }
-    /*
-    Check if valid edge_id
-    Return "" is a success
-    Return edge_id if edge already exists / invalid
-     */
   }
 
+  /**
+   * updates the end node of an edge in the database and model
+   * @param edge_id
+   * @param end_node
+   * @return
+   * TODO node and edge id error checking
+   */
   public String updateEndEdge(String edge_id, String end_node) {
     if (md.isNode(end_node)){
       md.updateEdgeEnd(edge_id, end_node);
@@ -141,13 +168,14 @@ public class MapService {
     else {
       return edge_id;
     }
-    /*
-    Check if valid edge_id
-    Return "" is a success
-    Return edge_id if edge already exists / invalid
-     */
   }
 
+  /**
+   * removes an edge from the database and model
+   * @param edge_id
+   * @return
+   * TODO edge ID error checking
+   */
   public String deleteEdge(String edge_id) {
     if (md.isEdge(edge_id)){
       md.deleteEdge(edge_id);
@@ -157,13 +185,6 @@ public class MapService {
     else {
       return edge_id;
     }
-
-    /*
-    Check if valid edge_id
-    Return "" is a success
-    Return edge_id if edge already exists / invalid
-     */
-    //        dm.delEdge(edge_id);
   }
 
   public ArrayList<Node> getNodes() {
@@ -180,6 +201,14 @@ public class MapService {
      */
   }
 
+  /**
+   * runs A* on the model and gets a linked list of the path
+   * returns an empty list if there is no path to be found TODO make no path found an error
+   * @param start_node_id
+   * @param end_node_id
+   * @return
+   * @throws PathNotFoundException
+   */
   public LinkedList<Node> aStar(String start_node_id, String end_node_id) throws PathNotFoundException {
     if (md.isNode(start_node_id) && md.isNode(end_node_id)){
       return mm.runAStar(start_node_id, end_node_id);
@@ -187,10 +216,5 @@ public class MapService {
     else {
       return null;
     }
-    /*
-    Reutrn the A* path given the start and end node ids
-    Return LinkedList of Nodes if path is found
-    Return Return null if either id is invalid or path is not found
-     */
   }
 }

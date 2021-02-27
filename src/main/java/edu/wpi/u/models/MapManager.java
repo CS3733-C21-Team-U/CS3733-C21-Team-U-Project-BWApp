@@ -16,6 +16,12 @@ public class MapManager {
     allEdges = new HashMap<>();
   }
 
+  /**
+   * adds an edge to the algo model
+   * @param _edgeID
+   * @param _startNodeID
+   * @param _endNodeID
+   */
   public void addEdge(String _edgeID, String _startNodeID, String _endNodeID) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
@@ -25,6 +31,10 @@ public class MapManager {
     this.allNodes.put(_endNode.getNodeID(), _endNode);
   }
 
+  /**
+   * removes an edge and handles
+   * @param edgeId
+   */
   public void deleteEdge(String edgeId) {
     Edge e = this.allEdges.get(edgeId);
     allEdges.remove(edgeId);
@@ -32,16 +42,36 @@ public class MapManager {
     e.getEndNode().removeEdge(e);
   }
 
+  /**
+   * sets the edge walkable to false
+   * @param edgeId
+   */
   public void disableEdge(String edgeId) {
     Edge e = this.allEdges.get(edgeId);
     e.setWalkable(false);
   }
 
+  /**
+   * sets the edge walkable attribute to true
+   * @param edgeID
+   */
   public void enableEdge(String edgeID) {
     Edge e = this.allEdges.get(edgeID);
     e.setWalkable(true);
   }
 
+  /**
+   * full constructor for a Node and adds it to the model
+   * @param _nodeID
+   * @param _xcoord
+   * @param _ycoord
+   * @param floor
+   * @param _building
+   * @param _nodeType
+   * @param _LongName
+   * @param _ShortName
+   * @param _teamAssigned
+   */
   public void addNode(
           String _nodeID,
           double _xcoord,
@@ -58,10 +88,19 @@ public class MapManager {
     allNodes.put(n.getNodeID(), n);
   }
 
+  /**
+   * add a node to the model through passing an object
+   * WILL OVERRIDE EXISTING NODES
+   * @param n
+   */
   public void addNodeObject(Node n) {
     this.allNodes.put(n.getNodeID(), n);
   }
 
+  /**
+   * removes a node and all connected edges
+   * @param nodeID
+   */
   public void deleteNode(String nodeID) {
     Node n = this.allNodes.get(nodeID);
 
@@ -77,25 +116,51 @@ public class MapManager {
       deleteEdge(ID);
     }
   }
+
+  /**
+   * returns a node object from the ID
+   * @param nodeID
+   * @return
+   */
   public Node getNodeFromID(String nodeID){
     return this.allNodes.get(nodeID);
   }
 
-
+  /**
+   * sets a node to not walkable
+   * @param nodeID
+   */
   public void disableNode(String nodeID) {
     Node _node = this.allNodes.get(nodeID);
     _node.setWalkable(false);
   }
 
+  /**
+   * sets a node to walkable
+   * @param nodeID
+   */
   public void enableNode(String nodeID) {
     Node _node = this.allNodes.get(nodeID);
     _node.setWalkable(true);
   }
 
+  /**
+   * updates a nodes [x,y] coordinates
+   * @param node_id
+   * @param x
+   * @param y
+   */
   public void updateCoords(String node_id, double x, double y){
     this.allNodes.get(node_id).updateCords(x,y);
   }
 
+  /**
+   * runs A* and returns a linked list path of the result
+   * @param _startNodeID
+   * @param _goalNodeID
+   * @return
+   * @throws PathNotFoundException
+   */
   public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) throws PathNotFoundException {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _goalNode = this.allNodes.get(_goalNodeID);
@@ -188,7 +253,12 @@ public class MapManager {
     return new ArrayList<>();
   }
 
-  // takes in two nodes and returns the distance between them
+  /**
+   * helper function for A* to get the distance between nodes
+   * @param n1
+   * @param n2
+   * @return
+   */
   private double distBetweenNodes(Node n1, Node n2) {
     // calculate the rise and run
     double[][] nodeLocation = {n1.getCords(), n2.getCords()};
@@ -198,7 +268,13 @@ public class MapManager {
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   }
 
-  // returns the node with the lowest priority from the set of reachable nodes
+  /**
+   *reads the different prioritys and current reachable nodes in the fields passed and
+   * returns the next node to be checked
+   * @param _reachableNodes
+   * @param priority
+   * @return
+   */
   private Node getNextNode(Set<Node> _reachableNodes, HashMap<Node, Double> priority) {
     // convert the set of reachable nodes into an array
     Node[] nodes = new Node[_reachableNodes.size()];
@@ -236,6 +312,12 @@ public class MapManager {
     return output;
   }
 
+  /**
+   * removes the edge in order to keep the logical integrity of the map model then
+   * adds a new edge with the same ID and end node but different start node
+   * @param edge_id
+   * @param start_node
+   */
   public void updateEdgeStart(String edge_id, String start_node) {
     Edge edge = this.allEdges.get(edge_id);
     String endNodeId = edge.getEndNode().getNodeID();
@@ -243,6 +325,12 @@ public class MapManager {
     this.addEdge(edge_id, start_node,endNodeId);
   }
 
+  /**
+   * removes the edge in order to keep the logical integrity of the map model then
+   * adds a new edge with the same ID and start node but different end node
+   * @param edge_id
+   * @param end_node
+   */
   public void updateEdgeEnd(String edge_id, String end_node) {
     Edge edge = this.allEdges.get(edge_id);
     String startNodeId = edge.getStartNode().getNodeID();

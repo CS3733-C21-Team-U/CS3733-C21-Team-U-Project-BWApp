@@ -23,6 +23,12 @@ public class Edge {
     _endNode.addAdjNode(_startNode);
   }
 
+  /**
+   * calculates the length of the edge
+   * @param _startNode
+   * @param _endNode
+   * @return the distance
+   */
   private double calcWeight(Node _startNode, Node _endNode) {
     // calculate the rise and run
     double[][] nodeLocation = {_startNode.getCords(), _endNode.getCords()};
