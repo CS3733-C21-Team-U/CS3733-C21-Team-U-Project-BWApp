@@ -27,6 +27,10 @@ public class UserService {
         return this.activeUser;
     }
 
+    public ArrayList<User> getUsers(){
+        return this.users;
+    }
+
     public void loadCSVFile(String path, String tableName){
         Database.getDB().dropValues();
         Database.getDB().readCSV(path,tableName);
@@ -71,5 +75,4 @@ public class UserService {
         }
         return userID;
     }
-
 }

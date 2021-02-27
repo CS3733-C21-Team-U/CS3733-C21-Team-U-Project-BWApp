@@ -60,6 +60,19 @@ public class UserData extends Data{
      * @param updParams
      */
     public void updUser(User user){
-
+        String str = "update Users set name=? and accountName=? and password=? and type=? and employed=? where userID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getAccountName());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, String.valueOf(user.getType()));
+            ps.setBoolean(5,user.getEmployed());
+            ps.setString(6,user.getUserID());
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

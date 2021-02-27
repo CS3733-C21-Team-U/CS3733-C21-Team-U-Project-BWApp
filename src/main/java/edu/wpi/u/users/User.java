@@ -12,20 +12,28 @@ public class User {
 
     }
 
-    public void editUser(String name, String accountName, String password, StaffType role, boolean employed){
+    /**
+     * This function will be called by UserService to update the ArrayList of Users / the active user
+     * @param name
+     * @param accountName
+     * @param password
+     * @param type
+     * @param employed
+     */
+    public void editUser(String name, String accountName, String password, StaffType type, boolean employed){
         this.name = name;
         this.accountName = accountName;
         this.password = password;
-        this.type = role;
+        this.type = type;
         this.employed = employed;
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType role, boolean employed) {
+    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed) {
         this.userID = userID;
         this.name = name;
         this.accountName = accountName;
         this.password = password;
-        this.type = role;
+        this.type = type;
         this.employed = employed;
     }
 
