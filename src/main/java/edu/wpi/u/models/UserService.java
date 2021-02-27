@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.requests.Request;
 import edu.wpi.u.users.StaffType;
@@ -24,6 +25,16 @@ public class UserService {
 
     public User getActiveUser() {
         return this.activeUser;
+    }
+
+    public void loadCSVFile(String path, String tableName){
+        Database.getDB().dropValues();
+        Database.getDB().readCSV(path,tableName);
+        this.users = ud.loadUsers();
+    }
+
+    public void saveCSVFile(String path, String tableName){
+        Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
     public void addUser(String name, String accountName, String password, StaffType type, boolean employed){
