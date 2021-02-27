@@ -2,8 +2,10 @@ package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapManager;
+import edu.wpi.u.users.StaffType;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MapData extends Data{
     public MapData(){
@@ -296,6 +298,45 @@ public class MapData extends Data{
         }
         return null;
     }
+
+    /**
+     * Updates Returns list of users who have permission to inputted edge
+     * @param edgeID - Desired edge
+     * @return Arraylist of StaffType, representing types of users with permission
+     */
+    public ArrayList<StaffType> getPermissions(String edgeID){
+        return new ArrayList<StaffType>();
+    }
+
+    /**
+     * Updates multiple permissions assosciated with the edge at once by deleting
+     * the edge's past permissions and adding new ones specified by the list
+     * @param edgeID - Desired edge
+     * @param permissions - new permission to be added
+     */
+    public void updatePermissions(String edgeID, ArrayList<StaffType> permissions){
+
+    }
+
+    /**
+     * Adds a single specified permission to the table for the specified edge
+     * @param edgeID - Desired edge
+     * @param staffType - New permission to be added
+     */
+    public void addPermission(String edgeID, StaffType staffType){
+
+    }
+
+    /**
+     * Removes a single permission from the table
+     * @param edgeID - Edge in position
+     * @param stafftype - User type to be added to permission
+     */
+    public void removePermission(String edgeID, StaffType stafftype){
+
+    }
+
+
 
 
 }
