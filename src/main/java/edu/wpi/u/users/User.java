@@ -21,9 +21,7 @@ public class User {
         this.employed = employed;
     }
 
-    public String getUserID() {
-        return userID;
-    }
+    public String getUserID() {return userID;}
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -61,7 +59,7 @@ public class User {
         this.type = type;
     }
 
-    public boolean isEmployed() {
+    public boolean getEmployed() {
         return employed;
     }
 
