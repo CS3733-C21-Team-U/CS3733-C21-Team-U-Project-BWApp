@@ -38,7 +38,7 @@ public class GraphTest {
 
     graph.deleteEdge("10");
     graph.deleteEdge("8");
-    graph.deleteEdge("11");
+//    graph.deleteEdge("11");
     /*
     graph.deleteNode("B");
     graph.disableNode("F");
@@ -50,8 +50,13 @@ public class GraphTest {
     graph.deleteEdge("10");
     */
 
-    ArrayList<Node> path = graph.runDFS("A","D");
+    ArrayList<Node> path = graph.runBFS("A","D");
     for(Node curNode: path){
+      System.out.println(curNode.getNodeID());
+    }
+    System.out.println("==========================\nDepth");
+    ArrayList<Node> path2 = graph.runDFS("A","D");
+    for(Node curNode: path2){
       System.out.println(curNode.getNodeID());
     }
   }

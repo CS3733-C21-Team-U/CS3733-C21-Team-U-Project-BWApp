@@ -331,8 +331,6 @@ public class MapManager {
     HashMap<Node, Node> cameFrom = new HashMap<>();
     // record the cost to get to each node from the start node
     HashMap<Node, Double> cost = new HashMap<>();
-    // priority the cost + euclidean distance to the goal
-    HashMap<Node, Double> priority = new HashMap<>();
 
     // setup the start node in the data
     cost.put(_startNode, 0.0);
@@ -346,10 +344,10 @@ public class MapManager {
       // get the next node
       current = reachableNodes.poll();
 
-      if (current == _goalNode) {
-        // found the end
-        break;
-      }
+//      if (current == _goalNode) {
+//        // found the end
+//        break;
+//      }
       // iterate through the linked list of adjacent nodes
       for (Node adjNode : current.getAdjNodes()) {
         // calculate the cost to get to get from the start to the adjacent node
@@ -357,7 +355,6 @@ public class MapManager {
         // if the adjacent node has not been seen yet add it
         if (!cost.containsKey(adjNode)) {
           cost.put(adjNode, nextNodeCost);
-          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
           reachableNodes.addLast(adjNode);
           cameFrom.put(adjNode, current);
         }
@@ -366,7 +363,6 @@ public class MapManager {
         else if (cost.get(adjNode) > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
           // NULL
           cost.put(adjNode, nextNodeCost);
-          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
           reachableNodes.addLast(adjNode);
           cameFrom.put(adjNode, current);
         }
@@ -375,6 +371,7 @@ public class MapManager {
     LinkedList<Node> returnMe = new LinkedList<>();
     // print out the path if there is one
     if (cameFrom.containsKey(_goalNode)) { // if exited with a path
+      current = _goalNode;
       while (current != _startNode) {
         returnMe.addFirst(current);
         current = cameFrom.get(current);
