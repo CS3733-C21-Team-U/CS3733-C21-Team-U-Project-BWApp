@@ -5,6 +5,7 @@ import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class UserData extends Data{
@@ -15,6 +16,57 @@ public class UserData extends Data{
 
     public ArrayList<User> loadUsers(){
         return null;
+    }
+
+
+    public boolean checkUserName(String username){
+        String str = "select * from Employees where userName=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                ps.close();
+                return true;
+            }
+            else {
+                str = "select * from Guests where userName=?";
+                ps = conn.prepareStatement(str);
+                ps.setString(1,username);
+                rs = ps.executeQuery();
+                ps.close();
+                return rs.next();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean checkPassword(String password){
+        String str = "select * from Employees where password=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                ps.close();
+                return true;
+            }
+            else {
+                str = "select * from Guests where password=?";
+                ps = conn.prepareStatement(str);
+                ps.setString(1,password);
+                rs = ps.executeQuery();
+                ps.close();
+                return rs.next();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
