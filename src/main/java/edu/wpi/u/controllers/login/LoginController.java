@@ -1,12 +1,13 @@
 package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 public class LoginController {
 
     public JFXTextField accountName;
-    public JFXTextField passWord;
+    public JFXPasswordField passWord;
     public JFXButton login;
     public JFXButton forgotPasswordButton;
 
@@ -20,7 +21,7 @@ public class LoginController {
      * @param accountName Text field for username
      * @param passWord Text field for Password
      */
-    public void handleLogin(JFXTextField accountName, JFXTextField passWord){
+    public void handleLogin(JFXTextField accountName, JFXPasswordField passWord){
 
     }
 
