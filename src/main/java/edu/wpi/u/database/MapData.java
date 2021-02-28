@@ -306,19 +306,18 @@ public class MapData extends Data{
      * @return Arraylist of Strings, representing types of users with permission
      * TODO: Update this to return a list of StaffType
      */
-    public ArrayList<String> getUserTypes(String edgeID){
+    public ArrayList<String> getUserTypes(String edgeID) {
         ArrayList<String> userTypes = new ArrayList<String>();
         try {
-            String str = "select * from Permissions where requestID=?";
+            String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,edgeID);
+            ps.setString(1, edgeID);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 userTypes.add(rs.getString("userType"));
             }
             rs.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return userTypes;
