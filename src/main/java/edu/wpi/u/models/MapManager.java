@@ -155,6 +155,14 @@ public class MapManager {
     this.allNodes.get(node_id).updateCords(x,y);
   }
 
+
+  /**
+   * Runs a A STAR search to find a path between the two nodes specified
+   * @param _startNodeID String of node Id for the start node already confirmed valid
+   * @param _goalNodeID String of node Id for the end node already confirmed valid
+   * @return the path as an Linked List of nodes
+   * @throws PathNotFoundException if there is no path between the two nodes or if any other error occurs
+   */
   /**
    * runs A* and returns a linked list path of the result
    * @param _startNodeID
@@ -237,7 +245,7 @@ public class MapManager {
    * @param _startNodeID String of node Id for the start node already confirmed valid
    * @param _goalNodeID String of node Id for the end node already confirmed valid
    * @return the path as an Array List of nodes
-   * @throws PathNotFoundException
+   * @throws PathNotFoundException if there is no path between the two nodes or if any other error occurs
    */
   public ArrayList<Node> runDFS(String _startNodeID, String _goalNodeID) throws PathNotFoundException{
     Node _startNode = this.allNodes.get(_startNodeID);
@@ -314,7 +322,7 @@ public class MapManager {
    * @param _startNodeID String of node Id for the start node already confirmed valid
    * @param _goalNodeID String of node Id for the end node already confirmed valid
    * @return the path as an Array List of nodes
-   * @throws PathNotFoundException
+   * @throws PathNotFoundException if there is no path between the two nodes or if any other error occurs
    */
   public ArrayList<Node> runBFS(String _startNodeID, String _goalNodeID) throws PathNotFoundException{
     Node _startNode = this.allNodes.get(_startNodeID);

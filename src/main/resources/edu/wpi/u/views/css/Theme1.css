@@ -92,6 +92,8 @@
     -fx-background-color: -blueTint;
 }
 
+
+
 .button{
     -fx-font-family: 'Rubik Medium';
     -fx-pref-height: 40px;
@@ -103,6 +105,16 @@
     -fx-padding: 7 30;
     -fx-background-radius: 5;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button-floating-action{
+    -fx-background-color: white;
+    -fx-max-width: -fx-pref-width;
+    -fx-pref-width: 70;
+    -fx-min-width: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-pref-height: 70;
+    -fx-min-height: -fx-pref-height;
+    -fx-background-radius: 40;
 }
 
 .button-green {

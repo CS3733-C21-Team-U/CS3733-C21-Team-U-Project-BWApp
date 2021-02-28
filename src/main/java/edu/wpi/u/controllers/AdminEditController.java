@@ -20,7 +20,7 @@ import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 
-public class NewMainPageController {
+public class AdminEditController {
 
 
     public GesturePane map;
