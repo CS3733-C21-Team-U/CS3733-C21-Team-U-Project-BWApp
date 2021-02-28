@@ -87,6 +87,11 @@ public class Database {
                 String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
+
+                String tbl7 = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
+                PreparedStatement ps7 = conn.prepareStatement(tbl7);
+                ps6.execute();
+
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
