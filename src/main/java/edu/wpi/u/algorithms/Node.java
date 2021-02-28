@@ -4,6 +4,8 @@ import edu.wpi.u.App;
 
 import java.util.LinkedList;
 
+import static edu.wpi.u.users.StaffType.DEFAULT;
+
 public class Node {
   private String nodeID;
   private double xcoord;
@@ -133,7 +135,7 @@ public class Node {
     for (Edge e : this.edges) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass())){
+            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass()) || e.getUserPermissions().contains(DEFAULT)){
               return true;
             }
           }
