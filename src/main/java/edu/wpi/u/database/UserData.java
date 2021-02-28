@@ -56,11 +56,10 @@ public class UserData extends Data{
 
     /**
      * Will update the field of a user in the database
-     * @param user
-     * @param updParams
+     * @param user the object containing all of the information on the user
      */
     public void updUser(User user){
-        String str = "update Users set name=? and accountName=? and password=? and type=? and employed=? where userID=?";
+        String str = "update Users set name=? and accountName=? and password=? and type=? and employed=? and phoneNumber=? where userID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, user.getName());
@@ -68,7 +67,8 @@ public class UserData extends Data{
             ps.setString(3, user.getPassword());
             ps.setString(4, String.valueOf(user.getType()));
             ps.setBoolean(5,user.getEmployed());
-            ps.setString(6,user.getUserID());
+            ps.setString(6,user.getPhoneNumber());
+            ps.setString(7,user.getUserID());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){

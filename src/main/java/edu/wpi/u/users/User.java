@@ -6,6 +6,7 @@ public class User {
     protected String accountName;
     protected String password;
     protected StaffType type;
+    protected String phoneNumber;
     protected boolean employed;
 
     public User(){
@@ -20,21 +21,31 @@ public class User {
      * @param type
      * @param employed
      */
-    public void editUser(String name, String accountName, String password, StaffType type, boolean employed){
+    public void editUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
         this.name = name;
         this.accountName = accountName;
         this.password = password;
         this.type = type;
         this.employed = employed;
+        this.phoneNumber = phoneNumber;
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed) {
+    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber) {
         this.userID = userID;
         this.name = name;
         this.accountName = accountName;
         this.password = password;
         this.type = type;
         this.employed = employed;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getUserID() {return userID;}

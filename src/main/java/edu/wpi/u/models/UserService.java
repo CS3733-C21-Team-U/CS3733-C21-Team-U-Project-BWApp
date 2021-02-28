@@ -41,11 +41,11 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    public void addUser(String name, String accountName, String password, StaffType type, boolean employed){
+    public void addUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
         Random rand = new Random();
         int userID = rand.nextInt();
         String id = Integer.toString(userID);
-        User newUser = new User(id,name,accountName,password,type,employed);
+        User newUser = new User(id,name,accountName,password,type,employed, phoneNumber);
         ud.addUser(newUser);
         this.users.add(newUser);
     }
@@ -62,13 +62,13 @@ public class UserService {
         return "";
     }
 
-    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean employed){
+    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
         for(User u : this.users){
             if(u.getUserID().equals(userID)){
                 if(!employed){
                     this.users.remove(u);
                 }
-                u.editUser(name, accountName,password,type,employed);
+                u.editUser(name, accountName,password,type,employed,phoneNumber);
                 ud.updUser(u);
                 return "";
             }
