@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class UserData extends Data{
 
@@ -57,8 +58,7 @@ public class UserData extends Data{
         return new User();
     }
 
-
-    public String checkUsername(String username){
+    public boolean checkUserName(String username){
         String str = "select * from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -66,7 +66,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return "Employees";
+                return true;
             }
             else {
                 str = "select * from Guests where userName=?";
@@ -74,21 +74,16 @@ public class UserData extends Data{
                 ps.setString(1,username);
                 rs = ps.executeQuery();
                 ps.close();
-                if(rs.next()){
-                    return "Guests";
-                }
-                else{
-                    return "";
-                }
+                return rs.next();
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return "";
+            return false;
         }
     }
 
-    public String checkPassword(String password){
+    public boolean checkPassword(String password){
         String str = "select * from Employees where password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -96,7 +91,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return "Employees";
+                return true;
             }
             else {
                 str = "select * from Guests where password=?";
@@ -104,17 +99,12 @@ public class UserData extends Data{
                 ps.setString(1,password);
                 rs = ps.executeQuery();
                 ps.close();
-                if(rs.next()){
-                    return "Guests";
-                }
-                else{
-                    return "";
-                }
+                return rs.next();
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return "";
+            return false;
         }
     }
 

@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
+import edu.wpi.u.database.UserData;
 import edu.wpi.u.models.*;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.User;
