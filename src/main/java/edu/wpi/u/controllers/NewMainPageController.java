@@ -32,7 +32,7 @@ public class NewMainPageController {
 //    @FXML public AnchorPane mainAnchorPane;
 //    @FXML public JFXDrawer leftMenuDrawer;
 //    @FXML public JFXDrawer serviceRequestDrawer;
-    @FXML public Tab nonActiveValue;
+//    @FXML public Tab nonActiveValue;
     @FXML public JFXTabPane mainTabPane;
 
     AnchorPane rightServiceRequestPane;
@@ -41,7 +41,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
-        mainTabPane.getStylesheets().add("/edu/wpi/u/views/css/DisableTab.css");
+        mainTabPane.getStylesheets().add("-fx-text-fill: white;");
 //        nonActiveValue.setStyle("-jfx-rippler-fill: red");
 //        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
 //        leftMenuDrawer.setSidePane(leftMenuPane);
