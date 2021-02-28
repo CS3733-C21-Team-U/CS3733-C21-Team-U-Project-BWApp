@@ -14,7 +14,7 @@ public class User {
 
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber, String email) {
+    public User(String userID, String name, String accountName, String password, String email, StaffType type, String phoneNumber,boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -28,13 +28,13 @@ public class User {
     /**
      * This function will be called by UserService to update the ArrayList of Users / the active user
      * @param name
-     * @param accountName
+     * @param userName
      * @param password
      * @param type
      */
-    public void editUser(String name, String accountName, String password, StaffType type,  boolean deleted, String phoneNumber, String email){
+    public void editUser(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         this.name = name;
-        this.userName = accountName;
+        this.userName = userName;
         this.password = password;
         this.type = type;
         this.deleted = deleted;

@@ -42,6 +42,10 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Function to add a guest to the Guests table
+     * @param guest the object containing all of the information on the user
+     */
     public void addGuest(Guest guest){
         //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
         String str = "insert into Guests (guestID, name, userName, password, email, type, phoneNumber, deleted, appointmentDate) values (?,?,?,?,?,?,?,?,?)";
@@ -67,7 +71,7 @@ public class UserData extends Data{
     }
 
     /**
-     * Marks a user as deleted by setting the employed field to false
+     * Marks a user as deleted by setting the deleted field to false
      * @param employee the object containing all of the information on the user
      */
     public void delEmployee(Employee employee){
@@ -76,18 +80,26 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setBoolean(1,true);
             ps.setString(2,employee.getUserID());
+            ps.executeUpdate();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Marks a user as deleted by setting the deleted field to false
+     * @param guest the object containing all of the information on the user
+     */
     public void delGuest(Guest guest){
         String str ="update Guests set deleted=? where guestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setBoolean(1,true);
             ps.setString(2,guest.getUserID());
+            ps.executeUpdate();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -118,6 +130,10 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Will update the field of a user in the database
+     * @param guest the object containing all of the information on the user
+     */
     public void updGuest(Guest guest){
        //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
         String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? and appointmentDate=? where employeeID=?";

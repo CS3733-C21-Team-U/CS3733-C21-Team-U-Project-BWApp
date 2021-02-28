@@ -35,6 +35,14 @@ public class UserService {
         return this.users;
     }
 
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public ArrayList<Guest> getGuests() {
+        return guests;
+    }
+
     public void loadCSVFile(String path, String tableName){
         Database.getDB().dropValues();
         Database.getDB().readCSV(path,tableName);
@@ -45,22 +53,58 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    //String userID, String name, String accountName, String password, StaffType type, boolean employed,boolean deleted, String phoneNumber, String email
-    public void addEmployee(String name, String userName, String password, StaffType type,boolean deleted, String phoneNumber, String email){
+    /**
+     * Adds an employee to list and calls databsase
+     * @param name
+     * @param userName
+     * @param password
+     * @param type
+     * @param deleted
+     * @param phoneNumber
+     * @param email
+     */
+    //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
+    public void addEmployee(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
         //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
-        Employee newEmployee = new Employee(id,name,userName,password,type,deleted, phoneNumber, email);
+        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
         ud.addEmployee(newEmployee);
-        this.users.add(newEmployee);
+        this.employees.add(newEmployee);
     }
 
+    /**
+     * 
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param appointmentDate
+     * @param deleted
+     */
+    public void addGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+        Random rand = new Random();
+        int employeeID = rand.nextInt();
+        String id = Integer.toString(employeeID);
+        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
+        Guest newGuest = new Guest(id,name,userName,password,email, type, phoneNumber, appointmentDate, deleted);
+        ud.addGuest(newGuest);
+        this.guests.add(newGuest);
+    }
+
+    /**
+     * Removes employee from list and calls database
+     * @param employeeID
+     * @return
+     */
     public String deleteEmployee(String employeeID) {
         for (Employee e : this.employees) {
             if (e.getUserID().equals(employeeID)) {
                 this.employees.remove(e);
-                this.users.remove(e);
+                //this.users.remove(e);
                 ud.delEmployee(e);
                 return "";
             }
@@ -73,7 +117,7 @@ public class UserService {
         for (Guest g : this.guests) {
             if (g.getUserID().equals(guestID)) {
                 this.guests.remove(g);
-                this.users.remove(g);
+                //this.users.remove(g);
                 ud.delGuest(g);
                 return "";
             }
@@ -83,14 +127,25 @@ public class UserService {
     }
 
 
-    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber, String email){
-        for(User u : this.users){
-            if(u.getUserID().equals(userID)){
-                u.editUser(name, accountName,password,type,deleted, phoneNumber, email);
-                ud.updUser(u);
+    public String updateEmployee(String employeeID, String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+        for(Employee e : this.employees){
+            if(e.getUserID().equals(employeeID)){
+                e.editUser(name, userName ,password,email,type, phoneNumber, deleted);
+                ud.updEmployee(e);
                 return "";
             }
         }
-        return userID;
+        return employeeID;
+    }
+
+    public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+        for(Guest g : this.guests){
+            if(g.getUserID().equals(guestID)){
+                g.editGuest(name, userName ,password,email,type, phoneNumber, appointmentDate, deleted);
+                ud.updGuest(g);
+                return "";
+            }
+        }
+        return guestID;
     }
 }
