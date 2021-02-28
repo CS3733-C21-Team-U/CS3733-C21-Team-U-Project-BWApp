@@ -76,6 +76,7 @@ public class App extends Application {
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
     Parent root = FXMLLoader.load(getClass().getResource("views/AdminEdit.fxml"));
+    //mapService.loadCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
