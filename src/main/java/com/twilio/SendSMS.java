@@ -15,7 +15,7 @@ public class SendSMS {
         Message message = Message.creator(
                 new PhoneNumber("+19148394600"),
                 new PhoneNumber("+16502623516"),
-                "Test message").create();
+                "Tyler is a cool dude").create();
 
         System.out.println(message.getSid());
     }
