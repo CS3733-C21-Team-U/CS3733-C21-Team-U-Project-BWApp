@@ -4,18 +4,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
    <children>
-      <JFXTabPane rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+      <JFXTabPane fx:id="mainTabPane" prefHeight="926.0" prefWidth="1901.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab>
+            <Tab closable="false">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
               </content>
@@ -28,38 +27,6 @@
                               <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
-                                 </VBox.margin></Label>
-                           </children>
-                           <padding>
-                              <Insets top="20.0" />
-                           </padding></VBox>
-                     </children></Group>
-               </graphic>
-            </Tab>
-            <Tab disable="true">
-               <content>
-                  <Group />
-               </content>
-               <graphic>
-                  <Group>
-                     <children>
-                        <Separator orientation="VERTICAL" prefHeight="203.0" prefWidth="9.0" />
-                     </children></Group>
-               </graphic>
-            </Tab>
-            <Tab>
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-               <graphic>
-                  <Group>
-                     <children>
-                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
-                           <children>
-                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
-                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
-                                 <VBox.margin>
-                                    <Insets bottom="40.0" />
                                  </VBox.margin>
                               </Label>
                            </children>
@@ -98,6 +65,30 @@
             <Tab>
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <Group>
+                     <children>
+                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
+                           <children>
+                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
+                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
+                                 <VBox.margin>
+                                    <Insets bottom="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+               </graphic>
+            </Tab>
+            <Tab closable="false">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
                </content>
                <graphic>
                   <Group>
