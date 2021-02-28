@@ -1,5 +1,7 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.users.Employee;
+import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
@@ -17,18 +19,45 @@ public class UserData extends Data{
 
     /**
      * Adds a user to the table Users
-     * @param user the object containing all the information on the user
+     * @param employee the object containing all the information on the user
      */
-    public void addUser(User user){
-        String str = "insert into Users (userID, name, accountName, password, type, employed) values (?,?,?,?,?,?)";
+    public void addEmployee(Employee employee){
+        //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
+        String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,user.getUserID());
-            ps.setString(2,user.getName());
-            ps.setString(3, user.getUserName());
-            ps.setString(4, user.getPassword());
-            ps.setString(5,String.valueOf(user.getType()));// StaffType.valueOf(string) to get ENUM type
-            ps.setBoolean(6,true);
+            ps.setString(1,employee.getUserID());
+            ps.setString(2,employee.getName());
+            ps.setString(3, employee.getUserName());
+            ps.setString(4, employee.getPassword());
+            ps.setString(5,employee.getEmail());
+            ps.setString(6,String.valueOf(employee.getType()));// StaffType.valueOf(string) to get ENUM type
+            ps.setString(7,employee.getPhoneNumber());
+            ps.setBoolean(8,false);
+            ps.execute();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addGuest(Guest guest){
+        //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+        String str = "insert into Guests (guestID, name, userName, password, email, type, phoneNumber, deleted, appointmentDate) values (?,?,?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,guest.getUserID());
+            ps.setString(2,guest.getName());
+            ps.setString(3, guest.getUserName());
+            ps.setString(4, guest.getPassword());
+            ps.setString(5,guest.getEmail());
+            ps.setString(6,String.valueOf(guest.getType()));// StaffType.valueOf(string) to get ENUM type
+            ps.setString(7,guest.getPhoneNumber());
+            ps.setBoolean(8,true);
+            java.util.Date d = guest.getAppointmentDate();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(9,sqld);
             ps.execute();
             ps.close();
         }
@@ -39,14 +68,26 @@ public class UserData extends Data{
 
     /**
      * Marks a user as deleted by setting the employed field to false
-     * @param user the object containing all of the information on the user
+     * @param employee the object containing all of the information on the user
      */
-    public void delUser(User user){
-        String str ="update Users set empoloyed=? where userID=?";
+    public void delEmployee(Employee employee){
+        String str ="update Employees set deleted=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setBoolean(1,false);
-            ps.setString(2,user.getUserID());
+            ps.setBoolean(1,true);
+            ps.setString(2,employee.getUserID());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void delGuest(Guest guest){
+        String str ="update Guests set deleted=? where guestID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setBoolean(1,true);
+            ps.setString(2,guest.getUserID());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -55,19 +96,44 @@ public class UserData extends Data{
 
     /**
      * Will update the field of a user in the database
-     * @param user the object containing all of the information on the user
+     * @param employee the object containing all of the information on the user
      */
-    public void updUser(User user){
-        String str = "update Users set name=? and accountName=? and password=? and type=? and deleted=? and phoneNumber=? where userID=?";
+    public void updEmployee(Employee employee){
+        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
+        String str = "update Employees set name=? and userName=? and password=? and email=? and type=? and deleted=? and phoneNumber=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getUserName());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, String.valueOf(user.getType()));
-            ps.setBoolean(5,user.isDeleted());
-            ps.setString(6,user.getPhoneNumber());
-            ps.setString(7,user.getUserID());
+            ps.setString(1, employee.getName());
+            ps.setString(2, employee.getUserName());
+            ps.setString(3, employee.getPassword());
+            ps.setString(4,employee.getEmail());
+            ps.setString(5, String.valueOf(employee.getType()));
+            ps.setBoolean(6,employee.isDeleted());
+            ps.setString(7,employee.getPhoneNumber());
+            ps.setString(8,employee.getUserID());
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updGuest(Guest guest){
+       //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+        String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? and appointmentDate=? where employeeID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, guest.getName());
+            ps.setString(2, guest.getUserName());
+            ps.setString(3, guest.getPassword());
+            ps.setString(4,guest.getEmail());
+            ps.setString(5, String.valueOf(guest.getType()));
+            ps.setString(6,guest.getPhoneNumber());
+            ps.setBoolean(7,guest.isDeleted());
+            java.util.Date d = guest.getAppointmentDate();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(8,sqld);
+            ps.setString(9,guest.getUserID());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
