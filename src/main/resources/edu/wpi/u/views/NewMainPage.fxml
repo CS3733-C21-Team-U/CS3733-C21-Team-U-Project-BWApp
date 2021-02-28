@@ -1,60 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.svg.SVGGlyph?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.09554730983302412" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0" style="-fx-background-color: white;">
-               <children>
-                  <SVGGlyph fill="TRANSPARENT" layoutX="9.0" layoutY="8.0" onMouseClicked="#leftMenuToggle">
+      <JFXTabPane rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab>
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+              </content>
+               <graphic>
+                  <Group>
                      <children>
-                        <SVGPath fx:id="leftMenuHamburger" content="M0,13.225V11.336H11v1.889ZM0,7.557V5.668H18V7.557ZM0,1.889V0H18V1.889Z" fill="#bfc5d2" layoutX="22.0" layoutY="25.0" scaleX="1.5" scaleY="1.5" />
-                     </children>
-                  </SVGGlyph>
-                  <HBox alignment="CENTER_LEFT" layoutX="84.0" layoutY="2.0" prefHeight="80.0" prefWidth="390.0">
+                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
+                           <children>
+                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
+                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
+                                 <VBox.margin>
+                                    <Insets bottom="40.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding></VBox>
+                     </children></Group>
+               </graphic>
+            </Tab>
+            <Tab disable="true">
+               <content>
+                  <Group />
+               </content>
+               <graphic>
+                  <Group>
                      <children>
-                        <ImageView fitHeight="58.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Images/logo.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="30.0" right="30.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="42.0" prefWidth="298.0" styleClass="label-header" text="Brigham Health " />
+                        <Separator orientation="VERTICAL" prefHeight="203.0" prefWidth="9.0" />
+                     </children></Group>
+               </graphic>
+            </Tab>
+            <Tab>
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <Group>
+                     <children>
+                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
+                           <children>
+                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
+                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
+                                 <VBox.margin>
+                                    <Insets bottom="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-          <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #edf1ff;">
-               <children>
-                  <Button layoutX="1310.0" layoutY="856.0" maxHeight="71.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn">
-                     <graphic>
-                        <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
-                     </graphic>
-                  </Button>
-                  <Button layoutX="1310.0" layoutY="767.0" maxHeight="130.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="130.0" prefWidth="91.0" styleClass="map-btn">
-                     <graphic>
-                        <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
-                     </graphic></Button>
-                  <fx:include source="LeftDrawerMenuSmall.fxml" />
-                   <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" layoutY="-88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1082.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                   <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+                  </Group>
+               </graphic>
+            </Tab>
+            <Tab>
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <Group>
+                     <children>
+                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
+                           <children>
+                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
+                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
+                                 <VBox.margin>
+                                    <Insets bottom="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+               </graphic>
+            </Tab>
+            <Tab>
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <Group>
+                     <children>
+                        <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="50.0" spacing="20.0">
+                           <children>
+                              <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" />
+                              <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" text="Pathfinding">
+                                 <VBox.margin>
+                                    <Insets bottom="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Group>
+               </graphic>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
    </children>
-</AnchorPane>
+</StackPane>
