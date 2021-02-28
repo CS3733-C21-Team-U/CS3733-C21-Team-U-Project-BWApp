@@ -17,7 +17,7 @@ public class RequestService {
   ArrayList<Request> activeRequests = new ArrayList<>(); //TODO: Change to IRequest, fix errors that will appear below
 
   public RequestService() {
-    this.activeRequests = rd.loadActiveRequests();
+    //this.activeRequests = rd.loadActiveRequests();
 //    for (Request x : this.activeRequests){
 //      System.out.println("Req: "+ x.getRequestID());
 //    }
@@ -30,7 +30,7 @@ public class RequestService {
   public void loadCSVFile(String path, String tableName){
     Database.getDB().dropValues();
     Database.getDB().readCSV(path,tableName);
-    this.activeRequests = rd.loadActiveRequests();
+    //this.activeRequests = rd.loadActiveRequests();
   }
 
   public void saveCSVFile(String path, String tableName){
@@ -55,7 +55,7 @@ public class RequestService {
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
     Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
     this.activeRequests.add(newRequest);
-    rd.addRequest(newRequest);
+    //rd.addRequest(newRequest); TODO: replace using interface
     return "";
     //Fail
     //return requestID;
@@ -74,7 +74,7 @@ public class RequestService {
           this.activeRequests.remove(r);
         }
         r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
-        rd.updateRequest(r);
+        //rd.updateRequest(r); TODO: replace using interface
         return "";
       }
     }
@@ -95,7 +95,7 @@ public class RequestService {
       if(r.getRequestID() == requestID){
         r.setDateCompleted(now);
         this.activeRequests.remove(r);
-        rd.delRequest(r);
+        //rd.delRequest(r); TODO: replace using interface
         return "";
       }
     }

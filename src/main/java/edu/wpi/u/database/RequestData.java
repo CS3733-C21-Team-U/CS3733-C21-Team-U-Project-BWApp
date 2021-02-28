@@ -2,7 +2,7 @@ package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.IRequest;
-import edu.wpi.u.requests.Request;
+//import edu.wpi.u.requests.Request;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -34,18 +34,18 @@ public class RequestData extends Data{
         //printRequests();
     }
 
-    public void updateRequest(Request request){ // TODO: Add assignee and location stuff
-        /*
+   /* public void updateRequest(Request request){ // TODO: Move to interface
+        *//*
         requestID, dateCreated, dateCompleted, description, title, type
-         */
+         *//*
         System.out.println("Can anyone even hear me??????????????????????????????????");
-        if(request.getDateCompleted() != null) this.delRequest(request);
+        if(request.getDateCompleted() != null) this.resolveRequest(request);
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestType(request.getRequestID(), request.getType());
         this.updLocations(request.getRequestID(), request.getLocation());
         this.updAssignees(request.getRequestID(), request.getAssignee());
-    }
+    }*/
 
     public void updLocations(String requestId, LinkedList<String> locations){
         /*
@@ -84,7 +84,17 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public ArrayList<Request> loadActiveRequests(){ // TODO: Add assignee and location stuff
+
+    /**
+     * The pulling of database information into java class objects
+     * @return list of IRequest objects
+     */
+    /*public ArrayList<Request> loadActiveRequests(){ // TODO: refactor for IRequest
+        //go through requests, make a request object
+        //go to subtable based on type(stored in field of request db)
+        //set unique fields into correct object
+        //If we do factory, this is where we do it
+
         ArrayList<Request> results = new ArrayList<Request>();
         String str = "select * from Requests where dateCompleted is null";
         try{
@@ -132,8 +142,8 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
         return results;
-    }
-    public void addRequest(Request request) { // TODO: Add assignee and location stuff
+    }*/
+   public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
         try{
@@ -145,7 +155,7 @@ public class RequestData extends Data{
             ps.setDate(3,null);
             ps.setString(4,request.getDescription());
             ps.setString(5,request.getTitle());
-            ps.setString(6,request.getType());
+            ps.setString(6,request.getRequestType());
             ps.execute();
             // Adding data into joint tables
             for(String locationID : request.getLocation()){
@@ -159,6 +169,7 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
     public void addAssignee(String userID, String requestID){
         String str = "insert into Assignments(assignmentID, requestID, userID) values (?,?,?)";
         try{
@@ -185,14 +196,14 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void delRequest(Request request) { // TODO: Add assignee and location stuff
+    public void resolveRequest(String requestID, Date date) { // TODO: Add resolve comment
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            java.util.Date d = request.getDateCompleted();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(1, sqld);
-            ps.setString(2,request.getRequestID());
+           /* java.util.Date d = request.getDateCompleted();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());*/
+            ps.setDate(1, date);
+            ps.setString(2,requestID);
             ps.execute();
         }
         catch (Exception e){

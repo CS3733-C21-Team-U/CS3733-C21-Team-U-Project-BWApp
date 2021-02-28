@@ -1,4 +1,6 @@
 package edu.wpi.u.requests;
+import edu.wpi.u.database.RequestData;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -47,7 +49,82 @@ public class MaintenanceRequest implements IRequest {
 
     @Override
     public void createDBEntry() {
+        //send all fields to database
+        //using fields, first insert into Requests table
+        //second, insert into Maintenance table
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,request.getRequestID());
+            java.util.Date d = request.getDateCreated();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(2, sqld);
+            ps.setDate(3,null);
+            ps.setString(4,request.getDescription());
+            ps.setString(5,request.getTitle());
+            ps.setString(6,request.getRequestType());
+            ps.execute();
+            // Adding data into joint tables
+            for(String locationID : request.getLocation()){
+                addLocation(locationID, request.getRequestID());
+            }
+            for(String assignmentID : request.getAssignee()){
+                addAssignee(assignmentID, request.getRequestID());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,request.getRequestID());
+            java.util.Date d = request.getDateCreated();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(2, sqld);
+            ps.setDate(3,null);
+            ps.setString(4,request.getDescription());
+            ps.setString(5,request.getTitle());
+            ps.setString(6,request.getRequestType());
+            ps.execute();
+            // Adding data into joint tables
+            for(String locationID : request.getLocation()){
+                addLocation(locationID, request.getRequestID());
+            }
+            for(String assignmentID : request.getAssignee()){
+                addAssignee(assignmentID, request.getRequestID());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
+        /* public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
+        //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,request.getRequestID());
+            java.util.Date d = request.getDateCreated();
+            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            ps.setDate(2, sqld);
+            ps.setDate(3,null);
+            ps.setString(4,request.getDescription());
+            ps.setString(5,request.getTitle());
+            ps.setString(6,request.getRequestType());
+            ps.execute();
+            // Adding data into joint tables
+            for(String locationID : request.getLocation()){
+                addLocation(locationID, request.getRequestID());
+            }
+            for(String assignmentID : request.getAssignee()){
+                addAssignee(assignmentID, request.getRequestID());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }*/
     }
 
     @Override
