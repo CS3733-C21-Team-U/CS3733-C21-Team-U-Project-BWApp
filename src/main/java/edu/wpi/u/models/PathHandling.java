@@ -10,7 +10,12 @@ public class PathHandling {
 
     public static String SVGPathString = "";
 
-
+    /**
+     *
+     * @param nodeList
+     * @throws PathNotFoundException
+     * @author Jacob
+     */
     public void setSVGPath(LinkedList<Node> nodeList) throws PathNotFoundException {
         try {
             if (nodeList == null || nodeList.size() == 0 || nodeList.get(0) == null || nodeList.get(1) == null || nodeList.size() < 2) {//this is a bad way yo do this
