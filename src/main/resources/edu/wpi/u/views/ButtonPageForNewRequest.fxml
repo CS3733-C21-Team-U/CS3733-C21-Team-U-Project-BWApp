@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="805.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.views.ButtonPageForNewRequest">
+   <children>
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="202.0" prefHeight="31.0" prefWidth="166.0" ripplerFill="BLACK" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Audio/Visual" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="280.0" ripplerFill="BLACK" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Facilities Maintenance" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="372.0" prefHeight="31.0" prefWidth="166.0" ripplerFill="#ff8888" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Interpreter" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="456.0" prefHeight="31.0" prefWidth="166.0" ripplerFill="BLACK" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Laundry" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="536.0" prefHeight="31.0" prefWidth="166.0" ripplerFill="BLACK" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Religious" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="613.0" prefHeight="35.0" prefWidth="166.0" ripplerFill="BLACK" style="-fx-background-color: #0065ff; -fx-border-radius: 10;" text="Security" textFill="WHITE" />
+      <Label layoutX="92.0" layoutY="85.0" text="Please Choose a Request Type to Add" textFill="#0065ff">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
