@@ -2,7 +2,6 @@ package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapManager;
-import edu.wpi.u.requests.Request;
 import edu.wpi.u.users.StaffType;
 
 import java.sql.*;
@@ -389,29 +388,66 @@ public class MapData extends Data{
     /**
      * Updates Returns list of users who have permission to inputted edge
      * @param edgeID - Desired edge
-     * @return Arraylist of StaffType, representing types of users with permission
+     * @return Arraylist of Strings, representing types of users with permission
+     * TODO: Update this to return a list of StaffType
      */
-    public ArrayList<StaffType> getPermissions(String edgeID){
-        return new ArrayList<StaffType>();
+    public ArrayList<String> getUserTypes(String edgeID){
+        ArrayList<String> userTypes = new ArrayList<String>();
+        try {
+            String str = "select * from Permissions where requestID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,edgeID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                userTypes.add(rs.getString("userType"));
+            }
+            rs.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return userTypes;
     }
 
     /**
-     * Updates multiple permissions assosciated with the edge at once by deleting
+     * Updates multiple user types assosciated with the edge at once by deleting
      * the edge's past permissions and adding new ones specified by the list
      * @param edgeID - Desired edge
      * @param permissions - new permission to be added
      */
     public void updatePermissions(String edgeID, ArrayList<StaffType> permissions){
-
+        try {
+            String str = "delete from Permissions where edgeID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,edgeID);
+            ps.execute();
+            // Add function
+            for(StaffType user: permissions){
+                addPermission(edgeID, user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update permissions.");
+        }
     }
 
     /**
-     * Adds a single specified permission to the table for the specified edge
+     * Adds a single specified user type to the table for the specified edge (new permission)
      * @param edgeID - Desired edge
      * @param staffType - New permission to be added
      */
     public void addPermission(String edgeID, StaffType staffType){
-
+        try {
+            String str = "insert into Permissions (permissionID, edgeID, userType) values (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,"" + edgeID + "_" + String.valueOf(staffType));
+            ps.setString(2, edgeID);
+            ps.setString(3, String.valueOf(staffType));
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to add permission.");
+        }
     }
 
     /**
@@ -420,7 +456,16 @@ public class MapData extends Data{
      * @param stafftype - User type to be added to permission
      */
     public void removePermission(String edgeID, StaffType stafftype){
-
+        try {
+            String str = "delete from Permissions where edgeID=? and userType=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, edgeID);
+            ps.setString(2,String.valueOf(stafftype));
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to remove permission.");
+        }
     }
 
 
