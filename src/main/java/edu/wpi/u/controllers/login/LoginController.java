@@ -17,9 +17,8 @@ public class LoginController {
      *
      * @param accountName Text field for username
      * @param passWord Text field for Password
-     * @param login Button to attempt login
      */
-    public void handleLogin(JFXTextField accountName, JFXTextField passWord, JFXButton login){
+    public void handleLogin(JFXTextField accountName, JFXTextField passWord){
 
     }
 
