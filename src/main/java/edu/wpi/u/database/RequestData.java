@@ -144,6 +144,7 @@ public class RequestData extends Data{
         return results;
     }*/
    public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
+       //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
         try{

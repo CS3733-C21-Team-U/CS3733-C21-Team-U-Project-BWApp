@@ -48,34 +48,21 @@ public class MaintenanceRequest implements IRequest {
 
 
     @Override
-    public void createDBEntry() {
+    public String[] createDBEntry() {//used for add request
         //send all fields to database
         //using fields, first insert into Requests table
         //second, insert into Maintenance table
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values ("+getRequestID()+","+req.getDateCreated()+",?,?,?,?)";
         try{
+            //
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,request.getRequestID());
-            java.util.Date d = request.getDateCreated();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(2, sqld);
-            ps.setDate(3,null);
-            ps.setString(4,request.getDescription());
-            ps.setString(5,request.getTitle());
-            ps.setString(6,request.getRequestType());
             ps.execute();
-            // Adding data into joint tables
-            for(String locationID : request.getLocation()){
-                addLocation(locationID, request.getRequestID());
-            }
-            for(String assignmentID : request.getAssignee()){
-                addAssignee(assignmentID, request.getRequestID());
-            }
+
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        String str = "insert into Maintenance (requestID, machine, priority) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,request.getRequestID());
