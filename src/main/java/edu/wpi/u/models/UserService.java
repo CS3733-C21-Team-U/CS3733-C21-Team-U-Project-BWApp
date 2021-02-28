@@ -3,6 +3,8 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.requests.Request;
+import edu.wpi.u.users.Employee;
+import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
 import edu.wpi.u.users.User;
 import java.util.ArrayList;
@@ -13,8 +15,10 @@ public class UserService {
 
     static UserData ud = new UserData();
     ArrayList<User> users = new ArrayList<>();
+    ArrayList<Employee> employees = new ArrayList<>();
+    ArrayList<Guest> guests = new ArrayList<>();
     User activeUser = new User();
-
+    //TODO : Add getEmps, getGuests
     public UserService() {
         this.users = ud.loadUsers();
     }
@@ -26,9 +30,17 @@ public class UserService {
     public User getActiveUser() {
         return this.activeUser;
     }
-
+    // TODO :Add getters and setters for lists of emps and guests
     public ArrayList<User> getUsers(){
         return this.users;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public ArrayList<Guest> getGuests() {
+        return guests;
     }
 
     public void loadCSVFile(String path, String tableName){
@@ -41,38 +53,128 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    public void addUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+    /**
+     * Adds an employee to list and calls database
+     * @param name
+     * @param userName
+     * @param password
+     * @param type
+     * @param deleted
+     * @param phoneNumber
+     * @param email
+     */
+    //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
+    public void addEmployee(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         Random rand = new Random();
-        int userID = rand.nextInt();
-        String id = Integer.toString(userID);
-        User newUser = new User(id,name,accountName,password,type,employed, phoneNumber);
-        ud.addUser(newUser);
-        this.users.add(newUser);
+        int employeeID = rand.nextInt();
+        String id = Integer.toString(employeeID);
+        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
+        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
+        ud.addEmployee(newEmployee);
+        this.employees.add(newEmployee);
     }
 
-    public String deleteUser(String userID) {
-        for(User u : this.users){
-            if(u.getUserID().equals(userID)){
-                u.setEmployed(false);
-                this.users.remove(u);
-                ud.delUser(u);
+    /**
+     * Adds an guest to list and calls database
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param appointmentDate
+     * @param deleted
+     */
+    public void addGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+        Random rand = new Random();
+        int employeeID = rand.nextInt();
+        String id = Integer.toString(employeeID);
+        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
+        Guest newGuest = new Guest(id,name,userName,password,email, type, phoneNumber, appointmentDate, deleted);
+        ud.addGuest(newGuest);
+        this.guests.add(newGuest);
+    }
+
+    /**
+     * Removes employee from list and calls database
+     * @param employeeID id of employee
+     * @return empty string if success, employeeID on failure
+     */
+    public String deleteEmployee(String employeeID) {
+        for (Employee e : this.employees) {
+            if (e.getUserID().equals(employeeID)) {
+                this.employees.remove(e);
+                //this.users.remove(e);
+                ud.delEmployee(e);
+                return "";
+            }
+            return "";
+        }
+        return employeeID;
+    }
+
+    /**
+     * Removes guest from list and calls database
+     * @param guestID id of guest
+     * @return empty string if success, guestID on failure
+     */
+    public String deleteGuest(String guestID) {
+        for (Guest g : this.guests) {
+            if (g.getUserID().equals(guestID)) {
+                this.guests.remove(g);
+                //this.users.remove(g);
+                ud.delGuest(g);
+                return "";
+            }
+            return "";
+        }
+        return guestID;
+    }
+
+    /**
+     * Updates the list of employees and calls database
+     * @param employeeID
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param deleted
+     * @return
+     */
+    public String updateEmployee(String employeeID, String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+        for(Employee e : this.employees){
+            if(e.getUserID().equals(employeeID)){
+                e.editUser(name, userName ,password,email,type, phoneNumber, deleted);
+                ud.updEmployee(e);
                 return "";
             }
         }
-        return "";
+        return employeeID;
     }
 
-    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
-        for(User u : this.users){
-            if(u.getUserID().equals(userID)){
-                if(!employed){
-                    this.users.remove(u);
-                }
-                u.editUser(name, accountName,password,type,employed,phoneNumber);
-                ud.updUser(u);
+    /**
+     * Updates the list of guests and calls database
+     * @param guestID
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param appointmentDate
+     * @param deleted
+     * @return
+     */
+    public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+        for(Guest g : this.guests){
+            if(g.getUserID().equals(guestID)){
+                g.editGuest(name, userName ,password,email,type, phoneNumber, appointmentDate, deleted);
+                ud.updGuest(g);
                 return "";
             }
         }
-        return userID;
+        return guestID;
     }
 }
