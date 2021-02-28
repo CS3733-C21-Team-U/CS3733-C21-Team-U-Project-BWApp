@@ -1,25 +1,26 @@
 package edu.wpi.u.requests;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 //TODO: Private or protected fields?
-public class SecurityRequest implements IRequest {
-    private String threatLevel;
+public class LaundryRequest implements IRequest{
+    private String washer;
     private Request req;
     private int priority;
 
     //Composition Pattern Type
-    public SecurityRequest(String threatLevel, int priority, Request req) {
-        this.threatLevel = threatLevel;
+    public LaundryRequest(String washer, int priority, Request req) {
+        this.washer = washer;
         this.priority = priority;
         this.req = req;
     }
 
     @Override
-    public java.sql.Date getDateCreated() { return (java.sql.Date) this.req.getDateCreated(); }
+    public Date getDateCreated() { return (Date) this.req.getDateCreated(); }
 
     @Override
-    public java.sql.Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
+    public Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
 
     @Override
     public String getDescription() { return this.req.getDescription(); }
@@ -35,6 +36,5 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public String displayAssignees() { return this.req.displayAssignees(); }
-
 }
 

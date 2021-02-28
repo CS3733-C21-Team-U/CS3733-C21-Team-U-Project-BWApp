@@ -62,7 +62,7 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))"; //TODO: Delete Type
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -74,6 +74,18 @@ public class Database {
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
+                //Service Request Tables
+                String tblMaintenance = "create table Maintenance(requestID varchar(50), machineUsed varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
+                maintenanceRQ.execute();
+
+                String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+                LaundryRQ.execute();
+
+                String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
+                SecurityRQ.execute();
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
@@ -138,7 +150,7 @@ public class Database {
         }
     }
 
-    public void printRequests() {
+    public void printRequests() { //what is happening here?
         try {
             String str = "select * from Requests";
             PreparedStatement ps = conn.prepareStatement(str);

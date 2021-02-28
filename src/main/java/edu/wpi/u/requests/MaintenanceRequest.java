@@ -1,36 +1,41 @@
-//
-//
-//package edu.wpi.u.requests;
-//import java.util.ArrayList;
-//import java.util.Date;
-//
-////TODO: Private or protected fields?
-//public class MaintenanceRequest extends Request {
-//    private String machine;
-//    private int priority;
-//
-//    public MaintenanceRequest(String requestID, Date dateCreated, Date dateCompleted, String description, String title, String location, String machine, int priority) {
-//        super();
-//        super.requestID = requestID;
-//        super.dateCreated = dateCreated;
-//        super.dateCompleted = dateCompleted;
-//        super.description = description;
-//        super.title = title;
-//        super.location = location;
-//        this.machine = machine;
-//        this.priority = priority;
-//    }
-//
-//    protected void editRequest(Date startDate, Date endDate, String description, String title, ArrayList<Staff> assignees, String location) {
-//        super.dateCreated = startDate;
-//        super.dateCompleted = endDate;
-//        super.description = description;
-//        super.title = title;
-//        super.location = location;
-//    }
-//
-//    private void blocksPath() { //TODO: void or boolean?
-//
-//    }
-//}
-//
+package edu.wpi.u.requests;
+import java.sql.Date;
+import java.util.ArrayList;
+
+//TODO: Private or protected fields?
+public class MaintenanceRequest implements IRequest {
+    private String machine;
+    private Request req;
+    private int priority;
+
+    //Composition Pattern Type
+    public MaintenanceRequest(String machine, int priority, Request req) {
+        this.machine = machine;
+        this.priority = priority;
+        this.req = req;
+    }
+
+
+    @Override
+    public java.sql.Date getDateCreated() { return (java.sql.Date) this.req.getDateCreated(); }
+
+    @Override
+    public java.sql.Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
+
+    @Override
+    public String getDescription() { return this.req.getDescription(); }
+
+    @Override
+    public String getRequestID() { return this.req.getRequestID(); }
+
+    @Override
+    public String getTitle() { return this.req.getTitle(); }
+
+    @Override
+    public String displayLocations() { return this.req.displayLocation(); }
+
+    @Override
+    public String displayAssignees() { return this.req.displayAssignees(); }
+
+}
+

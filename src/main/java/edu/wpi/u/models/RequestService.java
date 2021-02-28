@@ -14,7 +14,7 @@ public class RequestService {
 
 
   static RequestData rd = new RequestData();
-  ArrayList<Request> activeRequests = new ArrayList<>();
+  ArrayList<Request> activeRequests = new ArrayList<>(); //TODO: Change to IRequest, fix errors that will appear below
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
