@@ -1,6 +1,7 @@
 package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.requests.IRequest;
 import edu.wpi.u.requests.Request;
 
 import java.sql.Date;

@@ -36,5 +36,24 @@ public class SecurityRequest implements IRequest {
     @Override
     public String displayAssignees() { return this.req.displayAssignees(); }
 
+    @Override
+    public String getSpecificData() { return null; }
+
+    @Override
+    public void createDBEntry() { }
+
+    @Override
+    public void updateDBEntry() { }
+
+    @Override
+    public String getRequestType() {
+        return null;
+    }
+
+    @Override
+    public Request getGenericRequest() {
+        return null;
+    }
+
 }
 

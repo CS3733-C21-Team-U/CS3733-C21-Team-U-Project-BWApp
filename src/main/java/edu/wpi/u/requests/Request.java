@@ -14,6 +14,7 @@ public class Request {
     private String type;
     private LinkedList<String> assignee;
     private String creator;
+    private LinkedList<String> comments;
 
     public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
         this.requestID = requestID;
@@ -102,4 +103,6 @@ public class Request {
         String out = "Assigned: " + aLocation + " + " + numAssigned + " others";
         return out;
     }
+
+    public void addComment(String c) { this.comments.add(c); }
 }

@@ -150,9 +150,9 @@ public class Database {
         }
     }
 
-    public void printRequests() { //what is happening here?
+    public void printRequests(String aTable) { //what is happening here?
         try {
-            String str = "select * from Requests";
+            String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
             while (rset.next()) {

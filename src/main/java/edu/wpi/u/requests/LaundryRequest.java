@@ -36,5 +36,32 @@ public class LaundryRequest implements IRequest{
 
     @Override
     public String displayAssignees() { return this.req.displayAssignees(); }
+
+    @Override
+    public String getSpecificData() {
+        StringBuilder s = new StringBuilder();
+        s.append("Fields specific to Maintenance Requests\n");
+        s.append("Washer used: " + washer + "\n");
+        s.append("priority: " + priority + "\n");
+        return s.toString();
+        //TODO: How will UI use this data?
+    }
+
+    @Override
+    public void createDBEntry() { }
+
+    @Override
+    public void updateDBEntry() { }
+
+    @Override
+    public String getRequestType() {
+        return null;
+    }
+
+    @Override
+    public Request getGenericRequest() {
+        return null;
+    }
+
 }
 
