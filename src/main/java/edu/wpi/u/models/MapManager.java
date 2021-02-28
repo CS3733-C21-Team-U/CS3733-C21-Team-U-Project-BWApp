@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
+import edu.wpi.u.users.StaffType;
 import sun.awt.image.ImageWatched;
 
 import java.util.*;
@@ -467,6 +468,10 @@ public class MapManager {
     this.addEdge(edge_id, startNodeId,end_node);
   }
 
+  public void updateUserPermissions(String edgeID, ArrayList<StaffType> permissions){
+    Edge edge = this.allEdges.get(edgeID);
+    edge.setUserPermission(permissions);
+  }
   public ArrayList<Node> getAllNodes() {
     Collection<Node> allValues = this.allNodes.values();
     ArrayList<Node> nodeArrayList = new ArrayList<>(allValues);

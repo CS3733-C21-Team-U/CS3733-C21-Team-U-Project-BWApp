@@ -80,4 +80,8 @@ public class Edge {
   public boolean isWalkable() {
     return this.walkable;
   }
+
+  public void setUserPermission(ArrayList<StaffType> permissions) {
+    this.permission = permissions;
+  }
 }
