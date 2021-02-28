@@ -8,12 +8,13 @@ public class User {
     protected StaffType type;
     protected String phoneNumber;
     protected boolean deleted;
+    protected String email;
 
     public User(){
 
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber) {
+    public User(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber, String email) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -21,6 +22,7 @@ public class User {
         this.type = type;
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     /**
@@ -30,13 +32,22 @@ public class User {
      * @param password
      * @param type
      */
-    public void editUser(String name, String accountName, String password, StaffType type,  boolean deleted, String phoneNumber){
+    public void editUser(String name, String accountName, String password, StaffType type,  boolean deleted, String phoneNumber, String email){
         this.name = name;
         this.userName = accountName;
         this.password = password;
         this.type = type;
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {

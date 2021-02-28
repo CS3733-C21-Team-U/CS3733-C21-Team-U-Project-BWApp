@@ -80,9 +80,14 @@ public class Database {
                 //TODO: Change to employees and guests
                 //TODO: Check for username, phone number, or email
                 String tbl4 =
-                        "create table Users (userID varchar(50) not null, name varchar(50), accountName varchar(100), password varchar(100), type varchar(50), employed boolean, primary key(userID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
+
+                String tbl7 =
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), deleted boolean, appointmentDate date, primary key(guestID))";
+                PreparedStatement ps7 = conn.prepareStatement(tbl7);
+                ps7.execute();
 
                 String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Users, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
