@@ -54,7 +54,7 @@ public class UserService {
     }
 
     /**
-     * Adds an employee to list and calls databsase
+     * Adds an employee to list and calls database
      * @param name
      * @param userName
      * @param password
@@ -75,7 +75,7 @@ public class UserService {
     }
 
     /**
-     * 
+     * Adds an guest to list and calls database
      * @param name
      * @param userName
      * @param password
@@ -97,8 +97,8 @@ public class UserService {
 
     /**
      * Removes employee from list and calls database
-     * @param employeeID
-     * @return
+     * @param employeeID id of employee
+     * @return empty string if success, employeeID on failure
      */
     public String deleteEmployee(String employeeID) {
         for (Employee e : this.employees) {
@@ -113,6 +113,11 @@ public class UserService {
         return employeeID;
     }
 
+    /**
+     * Removes guest from list and calls database
+     * @param guestID id of guest
+     * @return empty string if success, guestID on failure
+     */
     public String deleteGuest(String guestID) {
         for (Guest g : this.guests) {
             if (g.getUserID().equals(guestID)) {
@@ -126,7 +131,18 @@ public class UserService {
         return guestID;
     }
 
-
+    /**
+     * Updates the list of employees and calls database
+     * @param employeeID
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param deleted
+     * @return
+     */
     public String updateEmployee(String employeeID, String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         for(Employee e : this.employees){
             if(e.getUserID().equals(employeeID)){
@@ -138,6 +154,19 @@ public class UserService {
         return employeeID;
     }
 
+    /**
+     * Updates the list of guests and calls database
+     * @param guestID
+     * @param name
+     * @param userName
+     * @param password
+     * @param email
+     * @param type
+     * @param phoneNumber
+     * @param appointmentDate
+     * @param deleted
+     * @return
+     */
     public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
         for(Guest g : this.guests){
             if(g.getUserID().equals(guestID)){
