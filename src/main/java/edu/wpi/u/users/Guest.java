@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class Guest extends User{
     protected Date appointmentDate;
-
-
+    
     public Guest(String userID, String name, String accountName, String password, StaffType type,boolean deleted, Date appointmentDate, String phoneNumber, String email){
         super(userID, name,accountName,password,type,deleted, phoneNumber, email);
         this.appointmentDate = appointmentDate;
