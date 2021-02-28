@@ -2,11 +2,13 @@ package edu.wpi.u.database;
 
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
+import edu.wpi.u.users.StaffType;
 import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserData extends Data{
 
@@ -18,7 +20,45 @@ public class UserData extends Data{
         return null;
     }
 
-    public boolean checkUsername(String username){
+    public User setUser(String username, String password, String type){
+        String idColumn = "";
+        int returnType = 0; // 1 is employee, 2 is guest
+        if (type.equals("Employees")){
+            idColumn = "employeeID";
+            returnType=1;
+        }
+        else if (type.equals("guestID")) {
+            idColumn = "guestID";
+            returnType=2;
+        }
+        //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
+        String str = "select * from "+type+" where username=? and password=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, username);
+            ps.setString(2,password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                String userID= rs.getString(idColumn);
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                StaffType staffType = StaffType.valueOf(rs.getString("type"));
+                String phoneNumber = rs.getString("phoneNumber");
+                if (returnType == 2){
+                    Date appointmentDate = rs.getDate("appointmentDate");
+                    return new Guest(userID, name,username,password,email,staffType,phoneNumber,appointmentDate, false);
+                }
+                return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return new User();
+    }
+
+
+    public String checkUsername(String username){
         String str = "select * from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -26,7 +66,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return true;
+                return "Employees";
             }
             else {
                 str = "select * from Guests where userName=?";
@@ -34,16 +74,21 @@ public class UserData extends Data{
                 ps.setString(1,username);
                 rs = ps.executeQuery();
                 ps.close();
-                return rs.next();
+                if(rs.next()){
+                    return "Guests";
+                }
+                else{
+                    return "";
+                }
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            return "";
         }
     }
 
-    public boolean checkPassword(String password){
+    public String checkPassword(String password){
         String str = "select * from Employees where password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -51,7 +96,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return true;
+                return "Employees";
             }
             else {
                 str = "select * from Guests where password=?";
@@ -59,12 +104,17 @@ public class UserData extends Data{
                 ps.setString(1,password);
                 rs = ps.executeQuery();
                 ps.close();
-                return rs.next();
+                if(rs.next()){
+                    return "Guests";
+                }
+                else{
+                    return "";
+                }
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            return "";
         }
     }
 

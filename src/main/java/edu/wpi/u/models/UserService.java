@@ -23,8 +23,8 @@ public class UserService {
         this.users = ud.loadUsers();
     }
     
-    public void setUser(User activeUser) {
-        this.activeUser = activeUser;
+    public void setUser(String username, String password, String type) {
+        this.activeUser = ud.setUser(username,password,type);
     }
 
     public User getActiveUser() {
@@ -53,11 +53,11 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    public boolean checkUsername(String username) {
+    public String checkUsername(String username) {
         return ud.checkUsername(username);
     }
 
-    public boolean checkPassword(String password) {
+    public String checkPassword(String password) {
         return ud.checkPassword(password);
     }
 
