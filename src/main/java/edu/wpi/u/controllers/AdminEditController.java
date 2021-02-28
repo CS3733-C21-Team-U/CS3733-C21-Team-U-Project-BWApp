@@ -7,11 +7,13 @@ import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapService;
 import javafx.animation.Interpolator;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -80,9 +82,13 @@ public class AdminEditController {
         });
 
         // Creating nodes
-
-
-        App.mapService.getNodes().stream().forEach(n -> placeNodes(n));
+        App.mapService.getNodes().stream().forEach(n -> {
+            try {
+                placeNodes(n);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         App.mapService.getEdges().stream().forEach(e -> placeEdges(e));
         //Stream<Edge> edgeStream = App.mapService.getEdges().parallelStream();
 
@@ -94,7 +100,7 @@ public class AdminEditController {
 
     } // End of initialize
 
-    public void placeNodes(Node n){
+    public void placeNodes(Node n) throws IOException{
             Circle node = new Circle();
             node.setCenterX(n.getCords()[0]);
             node.setCenterY(n.getCords()[1]);
@@ -103,7 +109,15 @@ public class AdminEditController {
             node.toFront();
             node.setFill(Paint.valueOf("Black"));
             node.setVisible(true);
-            pane.getChildren().add(node);
+            node.setOnMouseClicked(event -> {
+                try {
+                    handleNodeClicked(n);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        pane.getChildren().add(node);
     }
     public void placeEdges(Edge e){
         double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
@@ -121,14 +135,25 @@ public class AdminEditController {
         edge.setVisible(true);
 
         pane.getChildren().add(edge);
+
     }
 
     public void handleEdgeClicked(){
         System.out.println("You clicked on an edge");
     }
 
-    public void handleNodeClicked(){
+    public void handleNodeClicked(Node n) throws IOException {
         System.out.println("You clicked on a node");
+        FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+        AnchorPane contextAnchor = new AnchorPane();
+        contextAnchor = nodeContextMenu.load();
+        NodeContextMenuController controller = nodeContextMenu.getController();
+
+        contextAnchor.setLayoutX(n.getCords()[0]);
+        contextAnchor.setLayoutY(n.getCords()[1]);
+
+        pane.getChildren().add(contextAnchor);
+
     }
 
 
