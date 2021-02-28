@@ -6,6 +6,7 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.database.MapData;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.exceptions.PathNotFoundException;
+import edu.wpi.u.users.StaffType;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -132,6 +133,16 @@ public class MapService {
       invalidEdge.description = "Edge Creation Failed!";
       throw invalidEdge;
     }
+  }
+
+  /**
+   * set the permission for the current edge
+   * @param edgeID
+   * @param permissions
+   */
+  public void updateEdgePermissions(String edgeID, ArrayList<StaffType> permissions){
+    md.updatePermissions(edgeID, permissions);
+    mm.updateUserPermissions(edgeID, permissions);
   }
 
   /**
