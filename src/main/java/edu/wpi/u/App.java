@@ -75,7 +75,8 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    //mapService.loadCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     Parent root = FXMLLoader.load(getClass().getResource("views/AdminEdit.fxml"));
 
     Scene scene = new Scene(root);

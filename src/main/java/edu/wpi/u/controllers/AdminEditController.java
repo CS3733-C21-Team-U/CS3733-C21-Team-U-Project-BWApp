@@ -15,14 +15,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.SVGPath;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.shape.*;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -39,7 +37,7 @@ public class AdminEditController {
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
-
+    AnchorPane pane = new AnchorPane();
 
 
     public void initialize() throws IOException {
@@ -47,7 +45,7 @@ public class AdminEditController {
         ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
-        AnchorPane pane = new AnchorPane(node);
+        pane.getChildren().add(node);
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -82,33 +80,55 @@ public class AdminEditController {
         });
 
         // Creating nodes
-        Stream<Node> nodeStream = App.mapService.getNodes().parallelStream();
+
+
+        App.mapService.getNodes().stream().forEach(n -> placeNodes(n));
+        App.mapService.getEdges().stream().forEach(e -> placeEdges(e));
         //Stream<Edge> edgeStream = App.mapService.getEdges().parallelStream();
 
-        for (Node n :  App.mapService.getNodes()){
-            this.placeNodes(n);
-        }
-        //nodeStream.forEach(n -> placeNodes(n));
+//        for (Node n :  App.mapService.getNodes()){
+//            this.placeNodes(n);
+//        }
+//        nodeStream.forEach(n -> placeNodes(n));
         // edgeStream.forEach(n ->placeEdges(n));
 
     } // End of initialize
 
     public void placeNodes(Node n){
-        try {
             Circle node = new Circle();
             node.setCenterX(n.getCords()[0]);
             node.setCenterY(n.getCords()[1]);
-            node.setRadius(500.0);
+            node.setRadius(7.0);
             node.setId(n.getNodeID());
             node.toFront();
             node.setFill(Paint.valueOf("Black"));
             node.setVisible(true);
-            mainAnchorPane.getChildren().add(node);
-        }catch (Exception e){
-            System.out.println(n.getNodeID());
-            throw e;
-        }
+            pane.getChildren().add(node);
+    }
+    public void placeEdges(Edge e){
+        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
+        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+        Line edge = new Line();
+        edge.setLayoutX(e.getStartNode().getCords()[0]);
+        edge.setStartX(0);
+        edge.setLayoutY(e.getStartNode().getCords()[1]);
+        edge.setStartY(0);
+        edge.setEndX(xdiff);
+        edge.setEndY(ydiff);
+        edge.setId(e.getEdgeID());
+        edge.toFront();
+        edge.setFill(Paint.valueOf("Black"));
+        edge.setVisible(true);
 
+        pane.getChildren().add(edge);
+    }
+
+    public void handleEdgeClicked(){
+        System.out.println("You clicked on an edge");
+    }
+
+    public void handleNodeClicked(){
+        System.out.println("You clicked on a node");
     }
 
 
