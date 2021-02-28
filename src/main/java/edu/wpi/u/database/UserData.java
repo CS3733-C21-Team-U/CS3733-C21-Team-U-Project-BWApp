@@ -18,8 +18,7 @@ public class UserData extends Data{
         return null;
     }
 
-
-    public boolean checkUserName(String username){
+    public boolean checkUsername(String username){
         String str = "select * from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);

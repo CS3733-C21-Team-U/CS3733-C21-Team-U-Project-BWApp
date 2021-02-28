@@ -53,6 +53,14 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
+    public boolean checkUsername(String username) {
+        return ud.checkUsername(username);
+    }
+
+    public boolean checkPassword(String password) {
+        return ud.checkPassword(password);
+    }
+
     /**
      * Adds an employee to list and calls database
      * @param name
