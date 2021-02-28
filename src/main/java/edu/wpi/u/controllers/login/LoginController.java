@@ -10,7 +10,7 @@ public class LoginController {
     public JFXButton login;
 
 
-    // This function, upon handling login button, will check the accountName and passWrod
+    // This function, upon handling login button, will check the accountName and passWord
     // against the database, if this works, the user will be taken to the application, if not
     //the user will recieve an error
     /**
