@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MapService {
-
   static MapManager mm = new MapManager();
   static MapData md;
 

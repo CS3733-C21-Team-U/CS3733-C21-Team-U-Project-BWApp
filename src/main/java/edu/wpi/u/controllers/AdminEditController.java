@@ -63,12 +63,6 @@ public class AdminEditController {
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
-        // Creating nodes
-        Stream<Node> nodeStream = App.mapService.getNodes().parallelStream();
-        Stream<Edge> edgeStream = App.mapService.getEdges().parallelStream();
-
-        nodeStream.forEach(n ->placeNodes(n));
-        // edgeStream.forEach(n ->placeEdges(n));
 
 
         // Click and scroll map view functionality
@@ -86,13 +80,35 @@ public class AdminEditController {
                         .zoomTo(map.getMinScale(), pivotOnTarget);
             }
         });
+
+        // Creating nodes
+        Stream<Node> nodeStream = App.mapService.getNodes().parallelStream();
+        //Stream<Edge> edgeStream = App.mapService.getEdges().parallelStream();
+
+        for (Node n :  App.mapService.getNodes()){
+            this.placeNodes(n);
+        }
+        //nodeStream.forEach(n -> placeNodes(n));
+        // edgeStream.forEach(n ->placeEdges(n));
+
     } // End of initialize
 
     public void placeNodes(Node n){
-        Circle node = new Circle();
-        node.setCenterX(n.getCords()[0]);
-        node.setCenterY(n.getCords()[1]);
-        mainAnchorPane.getChildren().add(node);
+        try {
+            Circle node = new Circle();
+            node.setCenterX(n.getCords()[0]);
+            node.setCenterY(n.getCords()[1]);
+            node.setRadius(500.0);
+            node.setId(n.getNodeID());
+            node.toFront();
+            node.setFill(Paint.valueOf("Black"));
+            node.setVisible(true);
+            mainAnchorPane.getChildren().add(node);
+        }catch (Exception e){
+            System.out.println(n.getNodeID());
+            throw e;
+        }
+
     }
 
 
