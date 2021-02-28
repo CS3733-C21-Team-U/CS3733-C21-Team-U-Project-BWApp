@@ -41,11 +41,11 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    public void addUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+    public void addUser(String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber){
         Random rand = new Random();
         int userID = rand.nextInt();
         String id = Integer.toString(userID);
-        User newUser = new User(id,name,accountName,password,type,employed, phoneNumber);
+        User newUser = new User(id,name,accountName,password,type,deleted, phoneNumber);
         ud.addUser(newUser);
         this.users.add(newUser);
     }
@@ -53,7 +53,6 @@ public class UserService {
     public String deleteUser(String userID) {
         for(User u : this.users){
             if(u.getUserID().equals(userID)){
-                u.setEmployed(false);
                 this.users.remove(u);
                 ud.delUser(u);
                 return "";
@@ -62,13 +61,10 @@ public class UserService {
         return "";
     }
 
-    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+    public String updateUser(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber){
         for(User u : this.users){
             if(u.getUserID().equals(userID)){
-                if(!employed){
-                    this.users.remove(u);
-                }
-                u.editUser(name, accountName,password,type,employed,phoneNumber);
+                u.editUser(name, accountName,password,type,deleted, phoneNumber);
                 ud.updUser(u);
                 return "";
             }

@@ -77,6 +77,8 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
+                //TODO: Change to employees and guests
+                //TODO: Check for username, phone number, or email
                 String tbl4 =
                         "create table Users (userID varchar(50) not null, name varchar(50), accountName varchar(100), password varchar(100), type varchar(50), employed boolean, primary key(userID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);

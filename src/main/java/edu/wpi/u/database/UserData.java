@@ -4,7 +4,6 @@ import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class UserData extends Data{
 
@@ -26,7 +25,7 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,user.getUserID());
             ps.setString(2,user.getName());
-            ps.setString(3, user.getAccountName());
+            ps.setString(3, user.getUserName());
             ps.setString(4, user.getPassword());
             ps.setString(5,String.valueOf(user.getType()));// StaffType.valueOf(string) to get ENUM type
             ps.setBoolean(6,true);
@@ -59,14 +58,14 @@ public class UserData extends Data{
      * @param user the object containing all of the information on the user
      */
     public void updUser(User user){
-        String str = "update Users set name=? and accountName=? and password=? and type=? and employed=? and phoneNumber=? where userID=?";
+        String str = "update Users set name=? and accountName=? and password=? and type=? and deleted=? and phoneNumber=? where userID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, user.getName());
-            ps.setString(2, user.getAccountName());
+            ps.setString(2, user.getUserName());
             ps.setString(3, user.getPassword());
             ps.setString(4, String.valueOf(user.getType()));
-            ps.setBoolean(5,user.getEmployed());
+            ps.setBoolean(5,user.isDeleted());
             ps.setString(6,user.getPhoneNumber());
             ps.setString(7,user.getUserID());
             ps.executeUpdate();

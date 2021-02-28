@@ -3,14 +3,24 @@ package edu.wpi.u.users;
 public class User {
     protected String userID;
     protected String name;
-    protected String accountName;
+    protected String userName;
     protected String password;
     protected StaffType type;
     protected String phoneNumber;
-    protected boolean employed;
+    protected boolean deleted;
 
     public User(){
 
+    }
+
+    public User(String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber) {
+        this.userID = userID;
+        this.name = name;
+        this.userName = accountName;
+        this.password = password;
+        this.type = type;
+        this.deleted = deleted;
+        this.phoneNumber = phoneNumber;
     }
 
     /**
@@ -19,29 +29,26 @@ public class User {
      * @param accountName
      * @param password
      * @param type
-     * @param employed
      */
-    public void editUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+    public void editUser(String name, String accountName, String password, StaffType type,  boolean deleted, String phoneNumber){
         this.name = name;
-        this.accountName = accountName;
+        this.userName = accountName;
         this.password = password;
         this.type = type;
-        this.employed = employed;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber) {
-        this.userID = userID;
-        this.name = name;
-        this.accountName = accountName;
-        this.password = password;
-        this.type = type;
-        this.employed = employed;
+        this.deleted = deleted;
         this.phoneNumber = phoneNumber;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -62,12 +69,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -84,13 +91,5 @@ public class User {
 
     public void setType(StaffType type) {
         this.type = type;
-    }
-
-    public boolean getEmployed() {
-        return employed;
-    }
-
-    public void setEmployed(boolean employed) {
-        this.employed = employed;
     }
 }

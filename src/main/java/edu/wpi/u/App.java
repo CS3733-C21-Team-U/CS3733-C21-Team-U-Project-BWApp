@@ -2,6 +2,7 @@ package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
+import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.User;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -120,7 +121,6 @@ public class App extends Application {
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
-
     stage.close();
   }
 
