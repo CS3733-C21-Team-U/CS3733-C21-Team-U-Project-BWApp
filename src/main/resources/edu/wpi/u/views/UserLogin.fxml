@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -11,12 +10,12 @@
    <children>
       <VBox layoutX="280.0" layoutY="47.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Enter Username" />
-            <JFXTextField fx:id="accountName" />
-            <Label text="Enter Password" />
-            <JFXPasswordField fx:id="passWord" />
+            <JFXTextField fx:id="accountName" labelFloat="true" promptText="Username" text="Test Input">
+               <VBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="passWord" prefHeight="26.0" prefWidth="600.0" promptText="Password" text="SAdsa" />
             <JFXButton fx:id="login" onAction="#handleLogin" text="Login" />
-            <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" text="Forgot Password" />
          </children>
       </VBox>
    </children>
