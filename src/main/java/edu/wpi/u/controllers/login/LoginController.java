@@ -8,6 +8,8 @@ public class LoginController {
     public JFXTextField accountName;
     public JFXTextField passWord;
     public JFXButton login;
+    public JFXButton forgotPasswordButton;
+
 
 
     // This function, upon handling login button, will check the accountName and passWord
@@ -19,6 +21,10 @@ public class LoginController {
      * @param passWord Text field for Password
      */
     public void handleLogin(JFXTextField accountName, JFXTextField passWord){
+
+    }
+
+    public  void handleForgotPassword(){
 
     }
 

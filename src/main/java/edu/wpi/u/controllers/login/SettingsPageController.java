@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 
@@ -21,9 +22,8 @@ public class SettingsPageController {
 
     public  JFXButton pathMode1Button;
     public  JFXButton pathMode2Button;
-    public  JFXButton themeMode1Button;
-    public  JFXButton themeMode2Button;
     public  JFXButton loadCSVButton;
+    public JFXRadioButton setTheme;
     public  JFXTextField phoneNumTextField;
     public  JFXTextField emailAddressTextField;
     public  JFXButton contactChangeButton;
@@ -41,12 +41,7 @@ public class SettingsPageController {
 
     }
 
-    public void handleThemeMode1(){
-
-    }
-
-    public void handleThemeMode2(){
-
+    public void handleSetTheme() {
     }
 
     /**
