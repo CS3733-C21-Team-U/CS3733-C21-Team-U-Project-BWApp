@@ -310,7 +310,7 @@ public class MapData extends Data{
     public ArrayList<String> getUserTypes(String edgeID){
         ArrayList<String> userTypes = new ArrayList<String>();
         try {
-            String str = "select * from Permissions where requestID=?";
+            String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,edgeID);
             ResultSet rs = ps.executeQuery();
