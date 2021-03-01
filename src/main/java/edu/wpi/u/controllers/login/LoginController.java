@@ -14,14 +14,10 @@ public class LoginController {
 
     @FXML
     public JFXTextField accountName;
-    @FXML
     public JFXPasswordField passWord;
-    @FXML
     public JFXButton login;
-    @FXML
-    public JFXButton forgotPassword;
-    @FXML
-    public JFXButton navButton;
+    public JFXButton forgotPasswordButton;
+
 
     // This function, upon handling login button, will check the accountName and passWord
     // against the database, if this works, the user will be taken to the application, if not
@@ -30,6 +26,7 @@ public class LoginController {
     /**
      *
      */
+
     @FXML
     public void handleLogin() {
         String username = accountName.getText();
@@ -38,21 +35,28 @@ public class LoginController {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
-                }
-                else {
+                } else {
                     throw new PasswordNotFoundException();
                 }
-            }
-            else {
+            } else {
                 throw new AccountNameNotFoundException();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             AccountNameNotFoundException accountException = new AccountNameNotFoundException();
             accountException.description = username + " not found in system.";
             PasswordNotFoundException passwordException = new PasswordNotFoundException();
             passwordException.description = password + " not associated with account. Check username or click Forgot Password.";
         }
+    }
 //Throws exceptions if username or password not found
+
+    public void handleLogin(JFXTextField accountName, JFXPasswordField passWord){
+
+    }
+
+    public  void handleForgotPassword(){
+
+
     }
 }
 
