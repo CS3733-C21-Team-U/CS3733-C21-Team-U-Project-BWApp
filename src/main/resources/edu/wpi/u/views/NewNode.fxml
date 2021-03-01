@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewNodeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/LightTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewNodeController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,7 +29,7 @@
 <!--            <TextField fx:id="NodeTypeField" promptText="Node Type" />-->
 <!--            <TextField fx:id="ShortNameField" promptText="Short Name" />-->
 <!--            <TextField fx:id="LongNameField" promptText="Long Name" />-->
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0" stylesheets="@css/RegularTheme.css">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="35.0" stylesheets="@css/LightTheme.css">
                <children>
                   <Button mnemonicParsing="false" onAction="#handleNodeSubmitButton" styleClass="button-blue" text="Submit" />
                   <Button mnemonicParsing="false" onAction="#handleNodeCancelButton" styleClass="button-lightBlue" text="Cancel" />

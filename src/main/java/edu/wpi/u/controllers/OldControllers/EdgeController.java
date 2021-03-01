@@ -3,7 +3,7 @@ package edu.wpi.u.controllers.OldControllers;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.MapService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,9 +42,9 @@ public class EdgeController {
   ObservableList<Edge> list = FXCollections.observableArrayList();
 
   public void initialize() {
-    GraphService graphService = App.graphService;
+    MapService mapService = App.mapService;
     list.removeAll();
-    list.addAll(graphService.getEdges());
+    list.addAll(mapService.getEdges());
     edgeIdCol.setCellValueFactory(new PropertyValueFactory<Edge, String>("edgeID"));
     startNodeCol.setCellValueFactory(
         cellData -> new SimpleStringProperty(cellData.getValue().getStartNode().getNodeID()));
@@ -87,7 +87,7 @@ public class EdgeController {
       errorLabel.setText("Missing Field");
       return;
     }
-    else if(App.graphService.deleteEdge(tempEdgeID).equals(tempEdgeID)){
+    else if(App.mapService.deleteEdge(tempEdgeID).equals(tempEdgeID)){
       errorLabel.setText("This is edge ID is invalid");
       return;
     }
@@ -95,7 +95,7 @@ public class EdgeController {
       errorLabel.setText("Edge deletion successful");
 
       //"update"
-      list = FXCollections.observableList(App.graphService.getEdges());
+      list = FXCollections.observableList(App.mapService.getEdges());
       edgeTable.setItems(list);
     }
   }
@@ -166,7 +166,7 @@ public class EdgeController {
 
   @FXML
   public void loadData() {
-    GraphService graphService = App.graphService;
+    MapService mapService = App.mapService;
     list.removeAll(list);
 //    list.getItems().addAll(graphService.getEdges());
   }

@@ -2,7 +2,7 @@ package edu.wpi.u.controllers.OldControllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.MapService;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +44,7 @@ public class AStarController {
   @FXML
   public void buttonPressFind() throws Exception {
     listOfNodes.getItems().clear();
-    GraphService g = App.graphService;
+    MapService g = App.mapService;
     if (startNode.getText().equals("") || endNode.getText().equals("")) {
       errorMessage.setText("Please input nodes!");
     } else {
