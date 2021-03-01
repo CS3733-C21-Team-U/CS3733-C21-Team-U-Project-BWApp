@@ -16,8 +16,27 @@ public class UserData extends Data{
         connect();
     }
 
-    public ArrayList<User> loadUsers(){
-        return null;
+
+    public StaffType getPermissions(String userID, String type){
+        String id = "";
+        if (type.equals("Employees")){
+            id = "employeeID";
+        }
+        else if(type.equals("Guests")){
+            id = "guestID";
+        }
+        String str = "select type from " + type + " where " + id +"=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return StaffType.valueOf(rs.getString("type"));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return StaffType.DEFUALT;
     }
 
     public ArrayList<Employee> getEmployees(){

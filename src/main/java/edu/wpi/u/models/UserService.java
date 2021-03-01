@@ -14,14 +14,17 @@ import java.util.Random;
 public class UserService {
 
     static UserData ud = new UserData();
-    ArrayList<User> users = new ArrayList<>();
+    //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     User activeUser = new User();
     //TODO : Add getEmps, getGuests
     public UserService() {
-        this.users = ud.loadUsers();
+        this.setEmployees();
+        this.setGuests();
     }
+
+
 
     public void setEmployees() {this.employees = ud.getEmployees();}
 
@@ -33,10 +36,6 @@ public class UserService {
 
     public User getActiveUser() {
         return this.activeUser;
-    }
-    // TODO :Add getters and setters for lists of emps and guests
-    public ArrayList<User> getUsers(){
-        return this.users;
     }
 
     public ArrayList<Employee> getEmployees() {
@@ -50,7 +49,8 @@ public class UserService {
     public void loadCSVFile(String path, String tableName){
         Database.getDB().dropValues();
         Database.getDB().readCSV(path,tableName);
-        this.users = ud.loadUsers();
+        this.setGuests();
+        this.setEmployees();
     }
 
     public void saveCSVFile(String path, String tableName){
