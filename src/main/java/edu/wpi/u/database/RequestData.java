@@ -20,9 +20,7 @@ public class RequestData extends Data{
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
-        //printRequests();
-        System.out.println("HERE");
-        System.out.println("HERE 2");
+        printRequests();
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
@@ -142,17 +140,19 @@ public class RequestData extends Data{
                 Request r = new Request(id,assignees, created,null,desc,title,locations,type, "Test creator");
                 switch (type){
                     case "Maintenance":
+                        System.out.println("Found m Request");
+
                         String subtableQuery = "select * from Maintenance where requestID=?";
                         PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
                         specificTable.setString(1,id);
-                        ResultSet ans = ps.executeQuery();
+                        ResultSet ans = specificTable.executeQuery();
                         if (!ans.next()) {
                             System.out.println("Item does not exist in Maintenance");
                             break;
                         }
 
-                        result = new MaintenanceRequest(ans.getString(2),
-                                ans.getInt(3), r);
+                        result = new MaintenanceRequest(ans.getString("machineUsed"),
+                                ans.getInt("priority"), r);
                         specificTable.close();
                         break;
 //                    case "Laundry":
@@ -162,13 +162,13 @@ public class RequestData extends Data{
 //                        result = new SecurityRequest("machine", 1, newRequest);
 //                        break;
                     default:
+                       // result = new MaintenanceRequest("ans.getString(2)", 2, r);
                         System.out.println("Type does not exist!");
 
                 }
-
                 results.add(result);
             }
-            rs.close();
+            //rs.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -344,7 +344,7 @@ public class RequestData extends Data{
 
         }
 
-        return 999;
+        return -999;
     }
 //    public void getRequests() {}
 //    public void getRequestByID(String id) {

@@ -110,11 +110,7 @@ public class App extends Application {
 
   public void end() {
     System.out.println("Shutting Down");
-    requestService.saveCSVFile("Requests.csv", "Requests");
-    requestService.saveCSVFile("Assignments.csv", "Assignments");
-    requestService.saveCSVFile("Locations.csv", "Locations");
-    graphService.saveCSVFile("OutsideMapNodes.csv", "Nodes");
-    graphService.saveCSVFile("OutsideMapEdges.csv", "Edges");
+    Database.getDB().saveAll();
     Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
