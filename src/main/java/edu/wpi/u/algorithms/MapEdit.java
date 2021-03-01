@@ -184,6 +184,9 @@ public class MapEdit {
                         break;
                     case DELETE:
                         this.addNode(this.ID, x, y, floor, building, nodeType, longName, shortName);
+                        for(Edge curEdge: this.removedEdges){
+                            this.addEdge(curEdge.getStartNode().getNodeID(),curEdge.getEndNode().getNodeID(),curEdge.getUserPermissions());
+                        }
                         break;
                     case ADD:
                         this.deleteNode();
