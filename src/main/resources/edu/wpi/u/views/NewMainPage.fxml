@@ -16,6 +16,7 @@
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
@@ -94,7 +95,7 @@
                            <children>
                               <JFXButton buttonType="RAISED" styleClass="button-contained" text="BUTTON" GridPane.columnIndex="1" />
                               <JFXCheckBox GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <JFXChipView GridPane.columnIndex="4" GridPane.rowIndex="4">
+                              <JFXChipView style="-fx-background-color: lightgrey;" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -105,7 +106,7 @@
                               <JFXRadioButton GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="9" />
                               <JFXToggleButton GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                              <Label text="Chipview - type something!" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <Label text="Chipview - type something! Then press &lt;Enter&gt;" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                               <Label text="noClass (default checkbox)" GridPane.rowIndex="7" />
                               <JFXButton layoutX="210.0" layoutY="38.0" styleClass="button-outlined" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <JFXButton layoutX="210.0" layoutY="129.0" styleClass="button-text" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -159,6 +160,40 @@
                               <Label text="default color picker" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                               <JFXListView fx:id="listViewDemo" GridPane.columnIndex="8" />
                               <Label text="listView" GridPane.columnIndex="7" />
+                              <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text=" " textFill="WHITE" GridPane.columnIndex="5">
+                                 <graphic>
+                                    <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-secondary" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="secondary-color" />
+                                    <String fx:value="fab-default" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" text="BUTTON" GridPane.columnIndex="2">
+                                 <styleClass>
+                                    <String fx:value="button-contained" />
+                                    <String fx:value="secondary-color" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton styleClass="secondary-button-outlined" text="BUTTON" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label minWidth="-Infinity" prefHeight="73.0" prefWidth="307.0" styleClass="headline-1" text="headline-1" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                              <Label styleClass="headline-2" text="headline-2" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                              <Label styleClass="headline-3" text="headline-3" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                              <Label styleClass="subtitle" text="subtitle" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                              <Label text="body - default (no class)" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                              <Label styleClass="caption" text="caption" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                              <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text=" " textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-secondary" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="fab-mini" />
+                                    <String fx:value="secondary-color" />
+                                 </styleClass>
+                              </JFXButton>
+                              <JFXButton styleClass="secondary-button-text" text="BUTTON" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <JFXTextField fx:id="validationFeild" labelFloat="true" promptText="This value is required!" styleClass="text-field-filled" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label alignment="CENTER" text="noClass (default textField)" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>

@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
@@ -43,16 +44,26 @@ public class NewMainPageController {
     public JFXButton openDialogue;
     public JFXDialog dialog;
     public JFXListView listViewDemo;
+    public JFXTextField validationFeild;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
 
-    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work","For me. Let me know","if it works!");
+    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work","For me. Let me know","if it shows Material Design!","And not just the default list");
 
 
 
     public void initialize() throws IOException {
         listViewDemo.setItems(listView);
+
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Input Required");
+        validationFeild.getValidators().add(validator);
+        validationFeild.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                validationFeild.validate();
+            }
+        });
 
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();

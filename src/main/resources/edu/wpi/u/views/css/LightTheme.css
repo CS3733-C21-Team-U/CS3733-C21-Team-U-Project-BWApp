@@ -36,19 +36,30 @@
     -fx-font-family: "Roboto Medium";
 }
 
-/* ----------- BASIC COLORS (SVGS) -------------- */
-.on-background{
-    -fx-fill: -onBackground;
-}
-
-.on-primary{
-    -fx-fill: -onPrimary;
-}
-
-
 /* ----------- LABEL -------------- */
 .label{
     -fx-text-fill: -onBackground;
+}
+
+.headline-1{
+    -fx-font-weight: light;
+    -fx-font-size: 60px;
+}
+.headline-2{
+    -fx-font-weight: normal;
+    -fx-font-size: 34px;
+}
+.headline-3{
+    -fx-font-weight: medium;
+    -fx-font-size: 20px;
+}
+.subtitle{
+    -fx-font-weight: medium;
+    -fx-font-size: 14px;
+}
+.caption{
+    -fx-font-weight: normal;
+    -fx-font-size: 12px;
 }
 
 
@@ -76,6 +87,21 @@
     -jfx-focus-color: -primary;
     -jfx-unfocus-color: -onBackground;
     -fx-pref-height: 30;
+}
+
+.jfx-text-field:error, .jfx-password-field:error, .jfx-text-area:error {
+    -jfx-focus-color: #D34336;
+    -jfx-unfocus-color: #D34336;
+}
+
+.jfx-text-field .error-label, .jfx-password-field .error-label, .jfx-text-area .error-label {
+    -fx-text-fill: #D34336;
+    -fx-font-size: 0.75em;
+}
+
+.jfx-text-field .error-icon, .jfx-password-field .error-icon, .jfx-text-area .error-icon {
+    -fx-text-fill: #D34336;
+    -fx-font-size: 1em;
 }
 
 /* ----------- TEXT AREA -------------- */
@@ -161,6 +187,20 @@
     -fx-pref-height: 36px;
     -fx-min-width: 64px;
 }
+.secondary-button-outlined{
+    -fx-border-color: -secondary;
+    -fx-border-radius: 3px;
+    -fx-text-fill: -secondary;
+    -fx-padding: 0px 16px;
+    -fx-pref-height: 36px;
+    -fx-min-width: 64px;
+}
+.secondary-button-text{
+    -fx-text-fill: -secondary;
+    -fx-padding: 0px 8px;
+    -fx-pref-height: 36px;
+    -fx-min-width: 64px;
+}
 
 /* ----------- FLOATING ACTION BUTTON -------------- */
 .fab-default{
@@ -214,4 +254,23 @@
     -fx-tab-max-width:120px;
     -fx-tab-min-height:50px;
     -fx-tab-max-height:50px;
+}
+
+/* ----------- BASIC COLORS (SVGS) -------------- */
+.on-background{
+    -fx-fill: -onBackground;
+}
+
+.on-primary{
+    -fx-fill: -onPrimary;
+}
+.on-secondary{
+    -fx-fill: -onSecondary;
+}
+
+/* ----------- SECCONDARY COLORS -------------- */
+
+.secondary-color{
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
 }
