@@ -1,7 +1,5 @@
 package edu.wpi.u.models;
 
-import edu.wpi.u.algorithms.Edge;
-import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;

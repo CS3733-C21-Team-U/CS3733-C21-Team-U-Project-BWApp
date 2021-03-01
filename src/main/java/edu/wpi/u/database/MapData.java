@@ -1,5 +1,6 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapManager;
 import edu.wpi.u.users.StaffType;
@@ -233,6 +234,13 @@ public class MapData extends Data{
                 String longName = rset.getString("longName");
                 String shortName = rset.getString("shortName");
                 mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+                String key = nodeType + floor;
+                int index = Integer.valueOf(id.substring(5,7));
+                if(!App.mapService.currentIDNumber.containsKey(key)){
+                    App.mapService.currentIDNumber.put(key, index);
+                }else if(App.mapService.currentIDNumber.get(key) < index){
+                    App.mapService.currentIDNumber.put(key, index);
+                }
             }
             rset.close();
             String str2 = "select * from Edges";
@@ -242,7 +250,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                mm.addEdge(id,start,end);
+                mm.addEdge(id,start,end, new ArrayList<>());
             }
             rs2.close();
         }

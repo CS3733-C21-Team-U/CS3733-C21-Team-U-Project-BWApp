@@ -1,10 +1,9 @@
 package edu.wpi.u.algorithms;
 
 import edu.wpi.u.App;
+import edu.wpi.u.users.StaffType;
 
 import java.util.LinkedList;
-
-import static edu.wpi.u.users.StaffType.DEFAULT;
 
 public class Node {
   private String nodeID;
@@ -19,7 +18,6 @@ public class Node {
   private LinkedList<Edge> edges;
   private LinkedList<Node> adjNodes;
   private boolean walkable = true;
-
   // full constructor
   public Node(
           String _nodeID,
@@ -115,7 +113,7 @@ public class Node {
     this.walkable = value;
   }
 
-  private boolean reachableNode(Node n){
+  private boolean reachableNode(Node n) {
     for (Edge e : this.edges) {
       if (e.isWalkable()) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
@@ -135,7 +133,7 @@ public class Node {
     for (Edge e : this.edges) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass()) || e.getUserPermissions().contains(DEFAULT)){
+            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass()) || e.getUserPermissions().contains(StaffType.DEFUALT)){
               return true;
             }
           }
@@ -166,5 +164,13 @@ public class Node {
 
   public String getShortName() {
     return shortName;
+  }
+
+  public void setLongName(String longName) {
+    this.longName = longName;
+  }
+
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
   }
 }

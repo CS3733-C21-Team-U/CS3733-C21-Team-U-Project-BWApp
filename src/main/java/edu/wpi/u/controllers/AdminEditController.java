@@ -38,6 +38,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void initialize() throws IOException {
+        App.mapService.loadStuff();
         // Loading the map
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
         node.setFitWidth(2987);

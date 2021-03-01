@@ -162,3 +162,5 @@ gradle-app.setting
 
 BWdb/**
 src/main/resources/edu/wpi/u/temp.csv
+
+.env

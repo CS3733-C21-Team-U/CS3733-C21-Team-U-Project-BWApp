@@ -23,18 +23,18 @@ public class GraphTest {
     graph.addNodeObject(E);
     graph.addNodeObject(F);
 
-    graph.addEdge("1", "A", "B");
-    graph.addEdge("2", "B", "C");
-    graph.addEdge("3", "D", "C");
-    graph.addEdge("4", "D", "E");
-    graph.addEdge("5", "E", "F");
-    graph.addEdge("6", "F", "A");
-    graph.addEdge("7", "F", "B");
-    graph.addEdge("8", "E", "A");
-    graph.addEdge("9", "B", "D");
-    graph.addEdge("10", "A", "D");
-    graph.addEdge("11", "F", "D");
-    graph.addEdge("12", "E", "C");
+//    graph.addEdge("1", "A", "B");
+//    graph.addEdge("2", "B", "C");
+//    graph.addEdge("3", "D", "C");
+//    graph.addEdge("4", "D", "E");
+//    graph.addEdge("5", "E", "F");
+//    graph.addEdge("6", "F", "A");
+//    graph.addEdge("7", "F", "B");
+//    graph.addEdge("8", "E", "A");
+//    graph.addEdge("9", "B", "D");
+//    graph.addEdge("10", "A", "D");
+//    graph.addEdge("11", "F", "D");
+//    graph.addEdge("12", "E", "C");
 
     graph.deleteEdge("10");
     graph.deleteEdge("8");

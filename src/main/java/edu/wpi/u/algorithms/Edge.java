@@ -12,7 +12,7 @@ public class Edge {
   private boolean walkable = true;
   private ArrayList<StaffType> permission;
 
-  public Edge(String _edgeID, Node _startNode, Node _endNode) {
+  public Edge(String _edgeID, Node _startNode, Node _endNode, ArrayList<StaffType> permissions) {
     this.edgeID = _edgeID;
     this.startNode = _startNode;
     this.endNode = _endNode;
@@ -21,6 +21,7 @@ public class Edge {
     _endNode.addEdge(this);
     _startNode.addAdjNode(_endNode);
     _endNode.addAdjNode(_startNode);
+    this.permission = permissions;
   }
 
   /**
