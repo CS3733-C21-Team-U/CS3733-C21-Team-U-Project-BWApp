@@ -4,8 +4,6 @@ import edu.wpi.u.App;
 
 import java.util.LinkedList;
 
-import static edu.wpi.u.users.StaffType.DEFAULT;
-
 public class Node {
   private String nodeID;
   private double xcoord;
@@ -102,7 +100,7 @@ public class Node {
   public LinkedList<Node> getAdjNodes() {
     LinkedList<Node> returnMe = new LinkedList<>();
     for (Node n : this.adjNodes) {
-      if (n.walkable() && this.reachableNode(n) && this.hasPermission(n)) returnMe.add(n);
+      if (n.walkable() && this.reachableNode(n)) returnMe.add(n);
     }
     return returnMe;
   }
@@ -115,31 +113,13 @@ public class Node {
     this.walkable = value;
   }
 
-  private boolean reachableNode(Node n){
+  private boolean reachableNode(Node n) {
     for (Edge e : this.edges) {
       if (e.isWalkable()) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) return true;
         }
       }
-    }
-    return false;
-  }
-
-  /**
-   * checks to see if the current user has permission to go down an edge
-   * @param n
-   * @return
-   */
-  private boolean hasPermission(Node n) {
-    for (Edge e : this.edges) {
-        if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
-          if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass()) || e.getUserPermissions().contains(DEFAULT)){
-              return true;
-            }
-          }
-        }
     }
     return false;
   }
