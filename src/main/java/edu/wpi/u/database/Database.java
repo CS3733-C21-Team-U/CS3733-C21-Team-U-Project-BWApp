@@ -75,7 +75,7 @@ public class Database {
                 ps5.execute();
 
                 //Service Request Tables
-                String tblMaintenance = "create table Maintenance(requestID varchar(50), machineUsed varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
+                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
                 PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
                 maintenanceRQ.execute();
 
@@ -87,7 +87,7 @@ public class Database {
                 PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
                 SecurityRQ.execute();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Table creation failed");
             e.printStackTrace();
         }

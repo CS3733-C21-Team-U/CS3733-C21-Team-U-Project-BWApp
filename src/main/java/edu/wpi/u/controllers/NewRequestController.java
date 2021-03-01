@@ -10,6 +10,7 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.GraphService;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
@@ -98,6 +99,12 @@ public class NewRequestController {
 
     public void handleSubmitRequestButton() {
 
+        //TESTING
+        //TODO: get rid of this and take in from UI
+        LinkedList<Serializable> l = new LinkedList<Serializable>();
+        l.addLast("Please");
+        l.addLast(3);
+        //END TESTING
         if (titleTextField.getText().equals("")) {
             errorMessage.setText("Please enter a title!");}
             else{
@@ -107,7 +114,7 @@ public class NewRequestController {
                         titleTextField.getText(),
                         lLConverter(locationArrayList),
                         serviceTypeTextField.getText(),
-                        userID );
+                        userID, l);
                 App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
 
             }

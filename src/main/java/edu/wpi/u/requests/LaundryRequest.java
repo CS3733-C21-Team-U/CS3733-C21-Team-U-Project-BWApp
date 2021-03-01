@@ -46,9 +46,9 @@ public class LaundryRequest implements IRequest{
     }
 
     @Override
-    public String[] createDBEntry() {
+    public String subtableCreateQuery() {
         String[] queries = new String[2];
-        return queries;
+        return "queries";
     }
 
     @Override

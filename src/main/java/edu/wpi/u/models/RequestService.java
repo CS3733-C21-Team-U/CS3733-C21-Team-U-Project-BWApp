@@ -5,6 +5,8 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -39,7 +41,7 @@ public class RequestService {
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
-  public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator) {
+  public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics) {
     /*
                         descriptionTextField.getText(),
                         lLConverter(assigneeArrayList),
@@ -55,7 +57,27 @@ public class RequestService {
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
     Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
     this.activeRequests.add(newRequest);
-    //rd.addRequest(newRequest); TODO: replace using interface
+
+
+   // TODO: Add Exception for error checking
+    IRequest result = null;
+    switch (type){
+      case "Maintenance":
+        result = new MaintenanceRequest(specifics.get(0).toString(), (int)specifics.get(1), newRequest);
+        break;
+      case "Laundry":
+        result = new LaundryRequest("machine", 1, newRequest);
+        break;
+      case "Security":
+        result = new SecurityRequest("machine", 1, newRequest);
+        break;
+      default:
+        System.out.println("Type does not exist!");
+
+    }
+
+    MaintenanceRequest thing = new MaintenanceRequest("machine", 1, newRequest);
+    rd.addRequest(result);
     return "";
     //Fail
     //return requestID;

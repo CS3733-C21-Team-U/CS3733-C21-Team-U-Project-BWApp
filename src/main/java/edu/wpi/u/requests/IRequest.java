@@ -20,7 +20,7 @@ public interface IRequest {
 
     String getSpecificData();//return formatted string for extra fields of a given request
     //DO FIRST DUMMY
-    String[] createDBEntry();
+    String subtableCreateQuery();
     String[] updateDBEntry();
     String getRequestType();
     Request getGenericRequest();

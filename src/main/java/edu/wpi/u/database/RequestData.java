@@ -18,8 +18,9 @@ public class RequestData extends Data{
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
-        printRequests();
-
+        //printRequests();
+        System.out.println("HERE");
+        System.out.println("HERE 2");
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
@@ -149,26 +150,36 @@ public class RequestData extends Data{
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,request.getRequestID());
-            java.util.Date d = request.getDateCreated();
+            ps.setString(1,request.getGenericRequest().getRequestID());
+            java.util.Date d = request.getGenericRequest().getDateCreated();
             java.sql.Date sqld = new java.sql.Date(d.getTime());
             ps.setDate(2, sqld);
             ps.setDate(3,null);
-            ps.setString(4,request.getDescription());
-            ps.setString(5,request.getTitle());
-            ps.setString(6,request.getRequestType());
+            ps.setString(4,request.getGenericRequest().getDescription());
+            ps.setString(5,request.getGenericRequest().getTitle());
+            ps.setString(6,request.getGenericRequest().getType());
             ps.execute();
             // Adding data into joint tables
-            for(String locationID : request.getLocation()){
+            for(String locationID : request.getGenericRequest().getLocation()){
                 addLocation(locationID, request.getRequestID());
             }
-            for(String assignmentID : request.getAssignee()){
+            for(String assignmentID : request.getGenericRequest().getAssignee()){
                 addAssignee(assignmentID, request.getRequestID());
             }
+
+            //Now place into specific subtable based on class
+            System.out.println(request.subtableCreateQuery());
+            PreparedStatement ps1 = conn.prepareStatement(request.subtableCreateQuery());
+            ps1.execute();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        printTableItem("Maintenance", "machineUsed");
+       printTableItem("Maintenance", "priority");
+
+
+
     }
 
     public void addAssignee(String userID, String requestID){
