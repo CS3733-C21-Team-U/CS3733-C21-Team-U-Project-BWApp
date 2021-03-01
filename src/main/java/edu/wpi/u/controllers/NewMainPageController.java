@@ -6,6 +6,7 @@ import edu.wpi.u.App;
 import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -168,6 +169,9 @@ public class NewMainPageController {
 
     }
 
+    public void handleThemeSwitch(ActionEvent actionEvent) {
+        App.getInstance().switchTheme();
+    }
 
 
 //    @FXML
