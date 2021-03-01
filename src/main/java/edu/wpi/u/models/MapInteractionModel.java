@@ -1,7 +1,10 @@
 package edu.wpi.u.models;
 
 import edu.wpi.u.controllers.NodeContextMenuController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
+
+import java.util.ArrayList;
 
 public class MapInteractionModel {
     private String nodeID = "";
@@ -10,6 +13,10 @@ public class MapInteractionModel {
 
     public AnchorPane selectedNodeContextBox;
     public AnchorPane selectedEdgeContextBox;
+    public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
+    public String floor = "G";
+    public ArrayList<String> nodeIDList = new ArrayList<String>();
+    public ArrayList<String> edgeIDList = new ArrayList<String>();
 
 
 

@@ -20,6 +20,8 @@ public class NodeContextMenuController {
      * To be run when save button in node context menu is pressed. Needs to check if a node can be saved, then saves a node.
      */
     @FXML
+
+
     public void handleSaveButton(){
         // App.mapService.updateNode() TODO: Use Charlie's undo/redo stuff
     }

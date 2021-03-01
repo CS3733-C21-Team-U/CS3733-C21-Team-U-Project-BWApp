@@ -151,6 +151,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
+            System.out.println("Edges are being added to the Database");
             String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
