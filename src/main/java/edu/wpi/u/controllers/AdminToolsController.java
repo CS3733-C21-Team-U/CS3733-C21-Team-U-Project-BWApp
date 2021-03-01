@@ -1,7 +1,6 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
 import edu.wpi.u.models.AdminToolStorage;
@@ -26,15 +25,15 @@ public class AdminToolsController {
     public void initialize() throws IOException {
 
         //Nodes
-        ArrayList<Node> nodes = App.graphService.getNodes();
-        ArrayList<Edge> edges = App.graphService.getEdges();
+        ArrayList<Node> nodes = App.mapService.getNodes();
+        ArrayList<Edge> edges = App.mapService.getEdges();
 
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);
             FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeListItem.fxml"));
             AnchorPane node = nodeLoader.load();
             NodeItemController controller = nodeLoader.getController();
-            controller.nodeID.setText(currentNodeInfo.getNodeID());
+            controller.nodeID.setText(App.mapService.getNodeFromID(currentNodeInfo.getNodeID()).getLongName());
             double XPos = (nodes.get(i).getCords()[0]);
             double YPos = (nodes.get(i).getCords()[1]);
             controller.nodeLocation.setText("(" + Double.toString(XPos) + ", " + Double.toString(YPos) + ")");
@@ -43,7 +42,7 @@ public class AdminToolsController {
             StringBuilder string = new StringBuilder("Adj Nodes: ");
             Iterator<Node> it = currentNodeInfo.getAdjNodes().descendingIterator();
             while (it.hasNext()) {
-                string.append(it.next().getNodeID()+", ");
+                string.append(it.next().getLongName()+", ");
             }
             String label = String.valueOf(string);
             if(label.length() > 0) {
@@ -62,8 +61,8 @@ public class AdminToolsController {
             AnchorPane edge = edgeLoader.load();
             EdgeItemController controller = edgeLoader.getController();
             controller.edgeID.setText(currentEdgeInfo.getEdgeID());
-            controller.startingNode.setText(currentEdgeInfo.getStartNode().getNodeID());
-            controller.endingNode.setText(currentEdgeInfo.getEndNode().getNodeID());
+            controller.startingNode.setText(currentEdgeInfo.getStartNode().getLongName());
+            controller.endingNode.setText(currentEdgeInfo.getEndNode().getLongName());
             test.getChildren().add(edge);
         }
 

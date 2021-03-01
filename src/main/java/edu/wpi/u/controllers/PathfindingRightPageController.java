@@ -1,14 +1,10 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.assets.JFoenixResources;
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
-import edu.wpi.u.models.GraphService;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class PathfindingRightPageController {
@@ -48,7 +43,7 @@ public class PathfindingRightPageController {
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
-        ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
+        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
         ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
         for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
             nodeIDs.add(N.getNodeID());
@@ -77,7 +72,7 @@ public class PathfindingRightPageController {
                     errorDrawer.open();
                 } else {
                     try {
-                        App.PathHandling.setSVGPath(App.graphService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
+                        App.PathHandling.setSVGPath(App.mapService.aStar(String.valueOf(startDropField.valueProperty().getValue()), String.valueOf(endDropField.valueProperty().getValue())));
                         errorDrawer.close();
                     } catch(PathNotFoundException p) {
                         controller.errorMessage.setText(p.description);
@@ -92,7 +87,7 @@ public class PathfindingRightPageController {
                 } else {
                     System.out.println("SENDING THE LIST TO PATHHANDLING");
                     try {
-                        App.PathHandling.setSVGPath(App.graphService.aStar(startTextField.getText(), endTextField.getText()));
+                        App.PathHandling.setSVGPath(App.mapService.aStar(startTextField.getText(), endTextField.getText()));
                         errorDrawer.close();
                     } catch(PathNotFoundException p) {
                         errorDrawer.open();
