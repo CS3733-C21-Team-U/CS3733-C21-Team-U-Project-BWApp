@@ -40,8 +40,11 @@ public class LoginController {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
                 }
                 else {
-
+                    throw new PasswordNotFoundException();
                 }
+            }
+            else {
+                throw new AccountNameNotFoundException();
             }
         } catch(Exception e){
             AccountNameNotFoundException accountException = new AccountNameNotFoundException();

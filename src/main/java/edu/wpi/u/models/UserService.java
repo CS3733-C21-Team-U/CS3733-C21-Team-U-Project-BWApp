@@ -54,7 +54,7 @@ public class UserService {
     }
 
     public void changePassword(String username, String newPassword, String type){
-
+        ud.changePassword(username,newPassword, type);
     }
 
     public String checkUsername(String username) {
