@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.AddUserController">
+   <children>
+      <VBox layoutX="336.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Add User" />
+            <Label text="Enter UserID" />
+            <JFXTextField fx:id="userIdTextField" />
+            <Label text="Enter Username" />
+            <JFXTextField fx:id="usernameField" />
+            <Label text="Enter Name" />
+            <JFXTextField fx:id="nameTextField" />
+            <Label text="Enter Phone #" />
+            <JFXTextField fx:id="phoneNumTextField" />
+            <Label text="Enter User Password" />
+            <JFXTextField fx:id="passwordTextField" />
+            <Label text="Enter User Type" />
+            <JFXComboBox fx:id="userTypeComboBox" />
+            <Label text="Is this user staff?" />
+            <JFXCheckBox fx:id="userEmployStatus" text="Employee?">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </JFXCheckBox>
+            <JFXButton fx:id="addUserButton" onAction="#handleAddUser" text="Add User" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

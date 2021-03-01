@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.models.MapInteractionModel;
 import edu.wpi.u.models.MapService;
 import javafx.animation.Interpolator;
 import javafx.event.EventHandler;
@@ -141,6 +142,7 @@ public class AdminEditController {
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
+        edge.setStrokeWidth(3.0);
         edge.toFront();
         edge.setFill(Paint.valueOf("Black"));
         edge.setVisible(true);
@@ -152,7 +154,6 @@ public class AdminEditController {
                 e.printStackTrace();
             }
         });
-
         pane.getChildren().add(edge);
 
     }
@@ -165,14 +166,19 @@ public class AdminEditController {
     public void handleEdgeClicked(Edge e) throws IOException {
         System.out.println("You clicked on an edge");
         FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
-        AnchorPane contextAnchor = new AnchorPane();
-        contextAnchor = edgeContextMenu.load();
+        AnchorPane EdgeContextAnchor = new AnchorPane();
+        EdgeContextAnchor = edgeContextMenu.load();
         EdgeContextMenuController controller = edgeContextMenu.getController();
 
-        contextAnchor.setLayoutX(e.getEndNode().getCords()[0]);
-        contextAnchor.setLayoutY(e.getEndNode().getCords()[1]);
+        EdgeContextAnchor.setLayoutX(e.getEndNode().getCords()[0]);
+        EdgeContextAnchor.setLayoutY(e.getEndNode().getCords()[1]);
 
-        pane.getChildren().add(contextAnchor);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().add(EdgeContextAnchor);
+        App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
+
+
     }
 
     /**
@@ -186,11 +192,15 @@ public class AdminEditController {
         AnchorPane contextAnchor = new AnchorPane();
         contextAnchor = nodeContextMenu.load();
         NodeContextMenuController controller = nodeContextMenu.getController();
-
         contextAnchor.setLayoutX(n.getCords()[0]);
         contextAnchor.setLayoutY(n.getCords()[1]);
 
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         pane.getChildren().add(contextAnchor);
+        App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+
+
     }
 
 }
