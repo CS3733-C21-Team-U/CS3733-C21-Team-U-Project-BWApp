@@ -19,23 +19,23 @@
          <children>
             <HBox alignment="CENTER" prefHeight="67.0" prefWidth="500.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleLeaveAdd" prefHeight="30.0" prefWidth="225.0" styleClass="button-lightBlue" text="Cancel" />
+                  <Button fx:id="newRequestCancelButton" mnemonicParsing="false" onAction="#handleLeaveAdd" prefHeight="30.0" prefWidth="225.0" styleClass="button-lightBlue" text="Cancel" />
                </children>
             </HBox>
-            <TextField fx:id="titleTextField" prefWidth="291.0" promptText="Title" styleClass="label" stylesheets="@css/RegularTheme.css">
+            <TextField fx:id="newRequestTitleTextField" prefWidth="291.0" promptText="Title" styleClass="label" stylesheets="@css/RegularTheme.css">
                <VBox.margin>
                   <Insets bottom="25.0" left="50.0" right="50.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="descriptionTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="404.0" promptText="Description" wrapText="true" />
-            <Label fx:id="errorMessage2" textFill="RED">
+            <TextArea fx:id="newRequestDescriptionTextField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="404.0" promptText="Description" wrapText="true" />
+            <Label fx:id="newRequestErrorMessage2" textFill="RED">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </Label>
             <HBox alignment="CENTER" prefHeight="14.0" prefWidth="500.0" VBox.vgrow="NEVER">
                <children>
-                  <TextField fx:id="assigneeTextField" prefHeight="23.0" prefWidth="224.0" promptText="Assign Staff Member" styleClass="attached-left" />
+                  <TextField fx:id="newRequestAssigneeTextField" prefHeight="23.0" prefWidth="224.0" promptText="Assign Staff Member" styleClass="attached-left" />
                   <Button fx:id="assigneeButton" mnemonicParsing="false" onAction="#handleAssigneeList" prefHeight="100.0" prefWidth="183.0" text="Add Assignee">
                      <styleClass>
                         <String fx:value="button-blue" />
@@ -46,22 +46,22 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="assigneeList" prefHeight="100.0" prefWidth="404.0">
+                  <ListView fx:id="newRequestAssigneeList" prefHeight="100.0" prefWidth="404.0">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </ListView>
                </children>
             </HBox>
-            <Label fx:id="errorMessage3" prefHeight="22.0" textFill="RED">
+            <Label fx:id="newRequestErrorMessage3" prefHeight="22.0" textFill="RED">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </Label>
             <HBox alignment="CENTER" prefHeight="47.0" prefWidth="500.0">
                <children>
-                  <ChoiceBox fx:id="locationDropField" prefHeight="41.0" prefWidth="150.0" styleClass="dropdown-regular" />
-                  <Button fx:id="locationButton" mnemonicParsing="false" onAction="#handleAddLocation" prefHeight="100.0" prefWidth="197.0" text="Add Location">
+                  <ChoiceBox fx:id="newRequestLocationDropField" prefHeight="41.0" prefWidth="150.0" styleClass="dropdown-regular" />
+                  <Button fx:id="newRequestLocationButton" mnemonicParsing="false" onAction="#handleAddLocation" prefHeight="100.0" prefWidth="197.0" text="Add Location">
                      <styleClass>
                         <String fx:value="button-blue" />
                         <String fx:value="attached-right" />
@@ -71,22 +71,22 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <ListView fx:id="locationList" prefHeight="119.0" prefWidth="404.0">
+            <ListView fx:id="newRequestLocationList" prefHeight="119.0" prefWidth="404.0">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
             </ListView>
-            <TextField fx:id="serviceTypeTextField" promptText="Service Type">
+            <TextField fx:id="newRequestServiceTypeTextField" promptText="Service Type">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" top="25.0" />
                </VBox.margin>
             </TextField>
-            <Label fx:id="errorMessage" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="newRequestErrorMessage" textAlignment="CENTER" textFill="RED">
                <VBox.margin>
                   <Insets left="20.0" top="25.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="submitRequestButton" mnemonicParsing="false" onAction="#handleSubmitRequestButton" prefWidth="357.0" styleClass="button-blue" text="Submit">
+            <Button fx:id="newRequestSubmitRequestButton" mnemonicParsing="false" onAction="#handleSubmitRequestButton" prefWidth="357.0" styleClass="button-blue" text="Submit">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
