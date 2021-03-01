@@ -14,14 +14,14 @@ public class ReceiveSms {
     private String response;
     public ReceiveSms(String response){
         this.response = response;
-        receiveSms();
     }
 
     public static void main(String[] args) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        //Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
 
     public void receiveSms(){
+        System.out.println("HERE");
         post("/sms", (req, res) -> {
             res.type("application/xml");
             Body body = new Body
