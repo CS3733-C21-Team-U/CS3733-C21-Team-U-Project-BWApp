@@ -53,6 +53,10 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
+    public void changePassword(String username, String newPassword, String type){
+
+    }
+
     public String checkUsername(String username) {
         return ud.checkUsername(username);
     }
