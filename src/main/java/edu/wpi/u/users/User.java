@@ -6,24 +6,49 @@ public class User {
     protected String accountName;
     protected String password;
     protected StaffType type;
+    protected String phoneNumber;
     protected boolean employed;
 
     public User(){
 
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType role, boolean employed) {
+    /**
+     * This function will be called by UserService to update the ArrayList of Users / the active user
+     * @param name
+     * @param accountName
+     * @param password
+     * @param type
+     * @param employed
+     */
+    public void editUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+        this.name = name;
+        this.accountName = accountName;
+        this.password = password;
+        this.type = type;
+        this.employed = employed;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber) {
         this.userID = userID;
         this.name = name;
         this.accountName = accountName;
         this.password = password;
-        this.type = role;
+        this.type = type;
         this.employed = employed;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getUserID() {return userID;}
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -61,7 +86,7 @@ public class User {
         this.type = type;
     }
 
-    public boolean isEmployed() {
+    public boolean getEmployed() {
         return employed;
     }
 

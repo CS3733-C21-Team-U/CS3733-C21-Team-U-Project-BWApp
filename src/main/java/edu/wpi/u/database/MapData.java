@@ -254,8 +254,8 @@ public class MapData extends Data{
             rs2.close();
         }
         catch (Exception e){
-            e.printStackTrace();
             System.out.println("Failed to load graph");
+            e.printStackTrace();
         }
     }
 
