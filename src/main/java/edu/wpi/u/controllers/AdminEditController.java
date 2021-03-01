@@ -42,7 +42,10 @@ public class AdminEditController {
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
 
-
+    /**
+     * Initializes the admin map screen with map zoom, and all node and edge placement
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         // Loading the map
         ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
@@ -63,8 +66,6 @@ public class AdminEditController {
 
         mainAnchorPane.getChildren().add(map);
         map.toBack();
-
-
 
         // Click and scroll map view functionality
         map.setOnMouseClicked(e -> {
@@ -101,6 +102,11 @@ public class AdminEditController {
 
     } // End of initialize
 
+    /**
+     * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
+     * @param n - Node that is being place
+     * @throws IOException
+     */
     public void placeNodes(Node n) throws IOException{
             Circle node = new Circle();
             node.setCenterX(n.getCords()[0]);
@@ -120,6 +126,11 @@ public class AdminEditController {
 
         pane.getChildren().add(node);
     }
+
+    /**
+     * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
+     * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
+     */
     public void placeEdges(Edge ed){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
@@ -147,6 +158,11 @@ public class AdminEditController {
 
     }
 
+    /**
+     * Function called when and edge is clicked on. This brings up the context menu.
+     * @param e - Edge that is clicked on
+     * @throws IOException
+     */
     public void handleEdgeClicked(Edge e) throws IOException {
         double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
         double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
@@ -167,6 +183,11 @@ public class AdminEditController {
 
     }
 
+    /**
+     * Function called when a node is clicked. This brings up the context menu.
+     * @param n - Node that is clicked on
+     * @throws IOException
+     */
     public void handleNodeClicked(Node n) throws IOException {
         System.out.println("You clicked on a node");
         FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
@@ -183,8 +204,5 @@ public class AdminEditController {
 
 
     }
-
-
-
 
 }
