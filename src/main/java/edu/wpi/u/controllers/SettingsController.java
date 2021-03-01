@@ -48,7 +48,7 @@ public class SettingsController {
 
     public void handleRegTheme(ActionEvent actionEvent) {
         App.getPrimaryStage().getScene().getStylesheets().removeAll();
-        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     }
 
     public void handleAltTheme(ActionEvent actionEvent) {

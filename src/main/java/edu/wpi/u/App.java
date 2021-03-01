@@ -26,8 +26,10 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
+  public static Database db = Database.getDB();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
+  public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
@@ -75,9 +77,9 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
-    Parent root = FXMLLoader.load(getClass().getResource("views/AdminEdit.fxml"));
+    //mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
+    //mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllEdges.csv", "Edges");
+    Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
 
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
@@ -85,9 +87,11 @@ public class App extends Application {
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
-//    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/LightTheme.css");
     App.primaryStage.setScene(scene);
-    //App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
@@ -122,6 +126,7 @@ public class App extends Application {
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
+
     stage.close();
   }
 

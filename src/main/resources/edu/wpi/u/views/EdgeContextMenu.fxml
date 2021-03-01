@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.u.controllers.EdgeContextMenuController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="70.0" prefWidth="230.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" stylesheets="@css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeContextMenuController">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <HBox prefHeight="40.0">
+               <children>
+                  <Label minWidth="105.0" prefWidth="105.0" text="Permission: ">
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="edgeComboBox" minWidth="110.0" promptText="Select" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+            </HBox>
+            <JFXButton alignment="TOP_CENTER" text="Save" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

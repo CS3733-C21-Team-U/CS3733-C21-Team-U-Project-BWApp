@@ -27,6 +27,7 @@ public class Database {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
     }
+
     public static Database getDB() {
         return SingletonHelper.db;
     }
@@ -42,6 +43,7 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     /**
      * Creates the connection to the database by mounting the driver
      */
@@ -167,6 +169,7 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     public void printRequests() {
         try {
             String str = "select * from Requests";
@@ -181,6 +184,7 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
@@ -191,6 +195,7 @@ public class Database {
         }
         return false;
     }
+
     public void dropValues() {
         try {
             Statement s = conn.createStatement();
@@ -215,13 +220,13 @@ public class Database {
         }
     }
 
-    // TODO: Test
-//    public void stop() {
-//        try{
-//            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+    //TODO: Test
+    public void stop() {
+        try{
+            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

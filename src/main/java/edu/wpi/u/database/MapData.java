@@ -152,6 +152,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
+            System.out.println("Edges are being added to the Database");
             String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
@@ -262,8 +263,8 @@ public class MapData extends Data{
             rs2.close();
         }
         catch (Exception e){
-            e.printStackTrace();
             System.out.println("Failed to load graph");
+            e.printStackTrace();
         }
     }
 
@@ -314,15 +315,15 @@ public class MapData extends Data{
      * @return Arraylist of Strings, representing types of users with permission
      * TODO: Update this to return a list of StaffType
      */
-    public ArrayList<String> getUserTypes(String edgeID) {
-        ArrayList<String> userTypes = new ArrayList<String>();
+    public ArrayList<StaffType> getUserTypes(String edgeID) {
+        ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                userTypes.add(rs.getString("userType"));
+                userTypes.add(StaffType.valueOf(rs.getString("userType")));
             }
             rs.close();
         } catch (Exception e) {

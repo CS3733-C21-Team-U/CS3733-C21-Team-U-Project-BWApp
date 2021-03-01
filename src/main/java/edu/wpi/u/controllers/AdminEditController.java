@@ -1,30 +1,22 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.MapService;
 import javafx.animation.Interpolator;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Stream;
 
 public class AdminEditController {
 
@@ -41,10 +33,13 @@ public class AdminEditController {
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
 
-
+    /**
+     * Initializes the admin map screen with map zoom, and all node and edge placement
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         // Loading the map
-        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
+        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
@@ -63,8 +58,6 @@ public class AdminEditController {
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
-
-
         // Click and scroll map view functionality
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
@@ -82,30 +75,41 @@ public class AdminEditController {
         });
 
         // Creating nodes
-        App.mapService.getNodes().stream().forEach(n -> {
-            try {
-                placeNodes(n);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        App.mapService.getEdges().stream().forEach(e -> placeEdges(e));
-        //Stream<Edge> edgeStream = App.mapService.getEdges().parallelStream();
+        generateNodes(App.mapInteractionModel.floor);
+        generateEdges(App.mapInteractionModel.floor);
 
-//        for (Node n :  App.mapService.getNodes()){
-//            this.placeNodes(n);
-//        }
-//        nodeStream.forEach(n -> placeNodes(n));
-        // edgeStream.forEach(n ->placeEdges(n));
+        App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
+            pane.getChildren().remove(node);
+            ImageView newNode = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
+            node.setFitWidth(1786);
+            node.setPreserveRatio(true);
+            pane.getChildren().add(newNode);
+            pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
+            pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
+        });
+
+
+
 
     } // End of initialize
 
-    public void placeNodes(Node n) throws IOException{
+
+
+
+
+
+    /**
+     * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
+     * @param n - Node that is being place
+     * @throws IOException
+     */
+    public void placeNodesHelper(Node n) throws IOException{
             Circle node = new Circle();
             node.setCenterX(n.getCords()[0]);
             node.setCenterY(n.getCords()[1]);
             node.setRadius(7.0);
             node.setId(n.getNodeID());
+            App.mapInteractionModel.nodeIDList.add(n.getNodeID());
             node.toFront();
             node.setFill(Paint.valueOf("Black"));
             node.setVisible(true);
@@ -117,46 +121,136 @@ public class AdminEditController {
                 }
             });
 
+
         pane.getChildren().add(node);
     }
-    public void placeEdges(Edge e){
-        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
-        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+
+
+    /**
+     * This generates the visible nodes that go on a particular floor. This is outside of
+     * the initialize function because we need to generate nodes on the new floor changes as well
+     * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
+     */
+    public void generateNodes(String floor){
+        App.mapService.getNodes().stream().forEach(n -> {
+            try {
+                if(n.getFloor().equals(floor)){
+                    placeNodesHelper(n);
+                }else{
+                    System.out.println(n.getFloor());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+
+    /**
+     * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
+     * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
+     */
+    public void placeEdgesHelper(Edge ed){
+        double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
+        double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
         Line edge = new Line();
-        edge.setLayoutX(e.getStartNode().getCords()[0]);
+        edge.setLayoutX(ed.getStartNode().getCords()[0]);
         edge.setStartX(0);
-        edge.setLayoutY(e.getStartNode().getCords()[1]);
+        edge.setLayoutY(ed.getStartNode().getCords()[1]);
         edge.setStartY(0);
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
-        edge.setId(e.getEdgeID());
+        edge.setId(ed.getEdgeID());
+        App.mapInteractionModel.edgeIDList.add(ed.getEdgeID());
+        edge.setStrokeWidth(3.0);
         edge.toFront();
         edge.setFill(Paint.valueOf("Black"));
         edge.setVisible(true);
 
+        edge.setOnMouseClicked(event -> {
+            try {
+                handleEdgeClicked(ed);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         pane.getChildren().add(edge);
 
     }
 
-    public void handleEdgeClicked(){
-        System.out.println("You clicked on an edge");
+
+
+    public void generateEdges(String floor){
+        System.out.println("We're outside the function");
+        System.out.println(App.mapService.getEdges());
+        System.out.println("That's all folks");
+        App.mapService.getEdges().stream().forEach(e ->{
+            System.out.println("We're in the function");
+        try {
+            if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
+                System.out.println("The edge is a valid edge for printing");
+                placeEdgesHelper(e);
+
+            } else{
+                System.out.println(e.getStartNode().getFloor());
+                System.out.println("The edge is NOT a valid edge for printing");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        });
     }
 
+
+
+    /**
+     * Function called when and edge is clicked on. This brings up the context menu.
+     * @param e - Edge that is clicked on
+     * @throws IOException
+     */
+    public void handleEdgeClicked(Edge e) throws IOException {
+        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
+        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+        System.out.println("You clicked on an edge");
+        FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+        AnchorPane EdgeContextAnchor = new AnchorPane();
+        EdgeContextAnchor = edgeContextMenu.load();
+        EdgeContextMenuController controller = edgeContextMenu.getController();
+
+        EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
+        EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
+
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().add(EdgeContextAnchor);
+        App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
+
+
+    }
+
+
+
+    /**
+     * Function called when a node is clicked. This brings up the context menu.
+     * @param n - Node that is clicked on
+     * @throws IOException
+     */
     public void handleNodeClicked(Node n) throws IOException {
         System.out.println("You clicked on a node");
         FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
         AnchorPane contextAnchor = new AnchorPane();
         contextAnchor = nodeContextMenu.load();
         NodeContextMenuController controller = nodeContextMenu.getController();
-
         contextAnchor.setLayoutX(n.getCords()[0]);
         contextAnchor.setLayoutY(n.getCords()[1]);
 
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         pane.getChildren().add(contextAnchor);
+        App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+
 
     }
-
-
-
 
 }

@@ -24,7 +24,7 @@ public class MapService {
 
   public MapService() {
     md = new MapData();
-    md.loadGraph(mm);
+    md.loadGraph(mm); //TODO: Can cause app to crash, this is ran before database initializes
   }
 
   /**
