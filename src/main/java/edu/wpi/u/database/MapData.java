@@ -258,7 +258,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                System.out.println("We are about to");
+                System.out.println("We are about to add the edge");
                 gm.addEdge(id,start,end, new ArrayList<>());
             }
             rs2.close();
