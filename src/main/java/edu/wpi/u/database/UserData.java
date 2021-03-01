@@ -20,6 +20,27 @@ public class UserData extends Data{
         return null;
     }
 
+    public void changeEmail(String userID, String newEmail, String type){
+        String typeID ="";
+        if (type.equals("Employees")){
+            typeID = "employeeID"; //TODO: Extract this out to a helper function
+        }
+        else if (type.equals("Guests")){
+            typeID = "guestID";
+        }
+        String str = "update " + type + " set email=? where userID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,newEmail);
+            ps.setString(2, typeID);
+            ps.executeUpdate();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void changePassword(String username, String newPassword, String type){
         String str = "update " + type + " set password=? where username=?";
         try{

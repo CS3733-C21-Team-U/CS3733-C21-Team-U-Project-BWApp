@@ -35,6 +35,7 @@ public class LoginController {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
+                    //switch scene
                 } else {
                     throw new PasswordNotFoundException();
                 }

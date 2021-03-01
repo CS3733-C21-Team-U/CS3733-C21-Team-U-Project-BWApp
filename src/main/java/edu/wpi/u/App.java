@@ -116,6 +116,7 @@ public class App extends Application {
     requestService.saveCSVFile("Requests.csv", "Requests");
     requestService.saveCSVFile("Assignments.csv", "Assignments");
     requestService.saveCSVFile("Locations.csv", "Locations");
+    //TODO: Load Database through CSVs only on first invocation (when its empty)
     //Database.getDB().stop();
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
