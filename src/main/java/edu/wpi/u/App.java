@@ -29,6 +29,7 @@ public class App extends Application {
   public static Database db = Database.getDB();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
+  public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
