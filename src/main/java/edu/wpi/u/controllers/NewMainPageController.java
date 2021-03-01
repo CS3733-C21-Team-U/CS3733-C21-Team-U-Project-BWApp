@@ -1,8 +1,6 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
@@ -12,6 +10,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
@@ -21,6 +20,8 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class NewMainPageController {
 
@@ -33,7 +34,11 @@ public class NewMainPageController {
 //    @FXML public JFXDrawer leftMenuDrawer;
 //    @FXML public JFXDrawer serviceRequestDrawer;
 //    @FXML public Tab nonActiveValue;
+//    @FXMLViewFlowContext
+//    private ViewFlowContext context;
     @FXML public JFXTabPane mainTabPane;
+    public JFXButton openDialogue;
+    public JFXDialog dialog;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -41,7 +46,14 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        JFXDatePicker a = new JFXDatePicker();
+        LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
+
+        this.openDialogue.setOnAction((action) -> {
+            this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
+//            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
+        });
 //        nonActiveValue.setStyle("-jfx-rippler-fill: red");
 //        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
 //        leftMenuDrawer.setSidePane(leftMenuPane);
