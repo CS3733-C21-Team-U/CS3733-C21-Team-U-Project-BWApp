@@ -90,9 +90,9 @@ public class Database {
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
 
-                String tbl7 = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
-                PreparedStatement ps7 = conn.prepareStatement(tbl7);
-                ps6.execute();
+                String tablePerm = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
+                PreparedStatement psPerm = conn.prepareStatement(tablePerm);
+                psPerm.execute();
 
             }
         } catch (SQLException e) {
