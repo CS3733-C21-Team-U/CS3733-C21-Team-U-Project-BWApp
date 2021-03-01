@@ -3,12 +3,17 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXChipView?>
+<?import com.jfoenix.controls.JFXColorPicker?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.geometry.Insets?>
@@ -22,6 +27,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -35,6 +41,14 @@
                <effect>
                   <DropShadow />
                </effect>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Region prefHeight="80.0" prefWidth="290.0" />
+                        <Label style="-fx-font-size: 30; -fx-text-fill: -onPrimary;" text="Brigham and Women's Hospital" />
+                     </children>
+                  </HBox>
+               </children>
             </AnchorPane>
          </top>
       </BorderPane>
@@ -63,6 +77,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -79,13 +94,18 @@
                            <children>
                               <JFXButton buttonType="RAISED" styleClass="button-contained" text="BUTTON" GridPane.columnIndex="1" />
                               <JFXCheckBox GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label alignment="CENTER" text="button-contained (Don't forget TYPE=RAISED)" wrapText="true" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                              <JFXChipView GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                              <JFXComboBox GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                              <JFXChipView GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin></JFXChipView>
+                              <JFXComboBox labelFloat="true" promptText="Prompt Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
                               <JFXRadioButton GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="9" />
                               <JFXToggleButton GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                              <Label text="Chipview" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <Label text="Chipview - type something!" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                               <Label text="noClass (default checkbox)" GridPane.rowIndex="7" />
                               <JFXButton layoutX="210.0" layoutY="38.0" styleClass="button-outlined" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <JFXButton layoutX="210.0" layoutY="129.0" styleClass="button-text" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -104,7 +124,7 @@
                               </JFXButton>
                               <Label alignment="CENTER" text="noClass (default passwordField)" GridPane.rowIndex="6" />
                               <JFXPasswordField labelFloat="true" promptText="Promt Text for Password" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label alignment="CENTER" text="fab-default (Don't forget TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" />
+                              <Label alignment="CENTER" text="fab-default (TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" />
                               <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="810.0" layoutY="33.0" styleClass="fab-mini" text=" " textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <graphic>
                                     <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-primary" />
@@ -120,6 +140,25 @@
                                     <JFXToggleNode layoutX="10.0" layoutY="10.0" text="2" toggleGroup="$group1" />
                                  </children>
                               </HBox>
+                              <Label alignment="CENTER" text="fab-default (TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label alignment="CENTER" text="button-contained" wrapText="true" />
+                              <Label alignment="CENTER" text="noClass (default toggleNode in hbox) this is for floor selection" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" text="default ToggleButton" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <JFXTextArea labelFloat="true" promptText="Promt Text Here" text="Real Text Here" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </JFXTextArea>
+                              <Label text="default TextArea, labelFloat" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Label text="default comboBox, labelFloat" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <JFXColorPicker GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <JFXDatePicker GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                              <JFXTimePicker GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                              <Label text="default date picker" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                              <Label text="default time picker" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                              <Label text="default color picker" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <JFXListView fx:id="listViewDemo" GridPane.columnIndex="8" />
+                              <Label text="listView" GridPane.columnIndex="7" />
                            </children>
                         </GridPane>
                      </children>

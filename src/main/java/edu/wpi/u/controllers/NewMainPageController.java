@@ -3,6 +3,8 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import javafx.animation.Interpolator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -22,6 +24,7 @@ import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Observable;
 
 public class NewMainPageController {
 
@@ -39,13 +42,18 @@ public class NewMainPageController {
     @FXML public JFXTabPane mainTabPane;
     public JFXButton openDialogue;
     public JFXDialog dialog;
+    public JFXListView listViewDemo;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
 
+    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work","For me. Let me know","if it works!");
+
 
 
     public void initialize() throws IOException {
+        listViewDemo.setItems(listView);
+
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
