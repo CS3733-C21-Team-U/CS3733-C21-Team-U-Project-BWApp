@@ -35,6 +35,18 @@ public class RequestData extends Data{
         //printRequests();
     }
 
+
+    public void updateRequest(Request request){ // TODO: Move to interface
+        //requestID, dateCreated, dateCompleted, description, title, type
+        System.out.println("Can anyone even hear me??????????????????????????????????");
+       // if(request.getDateCompleted() != null) this.resolveRequest(request);
+        this.updRequestDescription(request.getRequestID(), request.getDescription());
+        this.updRequestTitle(request.getRequestID(), request.getTitle());
+        this.updRequestType(request.getRequestID(), request.getType());
+        this.updLocations(request.getRequestID(), request.getLocation());
+        this.updAssignees(request.getRequestID(), request.getAssignee());
+    }
+
    /* public void updateRequest(Request request){ // TODO: Move to interface
         *//*
         requestID, dateCreated, dateCompleted, description, title, type
@@ -49,9 +61,8 @@ public class RequestData extends Data{
     }*/
 
     public void updLocations(String requestId, LinkedList<String> locations){
-        /*
-        Take whole list: do new one
-         */
+
+        //Take whole list: do new one
         String str = "delete from Locations where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -193,10 +204,10 @@ public class RequestData extends Data{
             ps.execute();
             // Adding data into joint tables
             for(String locationID : request.getGenericRequest().getLocation()){
-                addLocation(locationID, request.getRequestID());
+                addLocation(locationID, request.getGenericRequest().getRequestID());
             }
             for(String assignmentID : request.getGenericRequest().getAssignee()){
-                addAssignee(assignmentID, request.getRequestID());
+                addAssignee(assignmentID, request.getGenericRequest().getRequestID());
             }
 
             //Now place into specific subtable based on class
