@@ -6,21 +6,42 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
    <children>
       <VBox layoutX="280.0" layoutY="47.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Enter Username" />
-            <JFXTextField fx:id="accountName" labelFloat="true">
+            <Label text="Welcome to the Bringham Login Portal">
                <VBox.margin>
-                  <Insets />
-               </VBox.margin></JFXTextField>
-            <Label text="Enter Password" />
-            <JFXPasswordField fx:id="passWord" />
-            <JFXButton fx:id="login" onAction="#handleLogin" text="Login" />
-            <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" text="Forgot Password" />
+                  <Insets bottom="5.0" left="300.0" top="100.0" />
+               </VBox.margin>
+            </Label>
+            <JFXTextField fx:id="accountName" labelFloat="true" promptText="Username" text="test">
+               <VBox.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="300.0" right="1200.0" />
+               </padding></JFXTextField>
+            <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Password" text="test">
+               <VBox.margin>
+                  <Insets left="300.0" right="1200.0" />
+               </VBox.margin></JFXPasswordField>
+            <HBox prefHeight="26.0" prefWidth="1400.0">
+               <children>
+                  <JFXButton fx:id="login" buttonType="RAISED" onAction="#handleLogin" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Login" />
+                  <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" style="-fx-text-fill: -primary;" text="Forgot Password">
+                     <HBox.margin>
+                        <Insets left="49.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="300.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </children>
