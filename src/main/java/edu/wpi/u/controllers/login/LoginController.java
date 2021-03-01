@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class LoginController {
 
@@ -38,13 +39,18 @@ public class LoginController {
         String password = passWord.getText();
         //TODO: Stop from switching windows
         try {
-            if (!App.userService.checkUsername(username).equals("")) {
+            if (!App.userService.checkUsername(username).equals("") || !App.userService.checkPhoneNumber(username).equals("")) {
+                System.out.println("username works");
                 if (!App.userService.checkPassword(password).equals("")) {
+                    System.out.println("password works");
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
+                    System.out.println("Try Scene Switching");
                     //switch scene
-                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
 //                    Scene scene = new Scene(root);
                     App.getPrimaryStage().getScene().setRoot(root);
+
+                    System.out.println("Succeed");
                 } else {
                     throw new PasswordNotFoundException();
                 }
@@ -53,8 +59,10 @@ public class LoginController {
             }
         } catch (Exception e) {
             AccountNameNotFoundException accountException = new AccountNameNotFoundException();
+            System.out.println("no username");
             accountException.description = username + " not found in system.";
             PasswordNotFoundException passwordException = new PasswordNotFoundException();
+            System.out.println("no password");
             passwordException.description = password + " not associated with account. Check username or click Forgot Password.";
         }
     }
