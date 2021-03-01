@@ -148,14 +148,16 @@ public class AdminEditController {
     }
 
     public void handleEdgeClicked(Edge e) throws IOException {
+        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
+        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
         System.out.println("You clicked on an edge");
         FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
         AnchorPane EdgeContextAnchor = new AnchorPane();
         EdgeContextAnchor = edgeContextMenu.load();
         EdgeContextMenuController controller = edgeContextMenu.getController();
 
-        EdgeContextAnchor.setLayoutX(e.getEndNode().getCords()[0]);
-        EdgeContextAnchor.setLayoutY(e.getEndNode().getCords()[1]);
+        EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
+        EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
 
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
