@@ -21,7 +21,7 @@ public class ViewRequestController {
 
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
-        ArrayList<Request> listOfRequests = App.requestService.getRequests();
+        ArrayList<IRequest> listOfRequests = App.requestService.getRequests();
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
             FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/RequestItem.fxml"));
@@ -30,7 +30,7 @@ public class ViewRequestController {
             String temp = listOfRequests.get(i).getTitle();
             controller.myRequestID = listOfRequests.get(i).getRequestID();
             controller.titleLabel.setText(temp);
-            controller.locationLabel.setText(listOfRequests.get(i).getLocation().toString());
+            controller.locationLabel.setText(listOfRequests.get(i).getGenericRequest().getLocation().toString());
             controller.descriptionLabel.setText(listOfRequests.get(i).getDescription());
             controller.myID = i;
             requestList.getChildren().add(request);

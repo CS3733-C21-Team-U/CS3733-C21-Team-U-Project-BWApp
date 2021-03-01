@@ -1,7 +1,7 @@
 package edu.wpi.u.database;
 
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.requests.IRequest;
+import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
 import java.sql.Date;
@@ -15,6 +15,8 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
+        System.out.println("# of request items: " + getNumTableItems("Requests"));
+        System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
@@ -90,18 +92,19 @@ public class RequestData extends Data{
      * The pulling of database information into java class objects
      * @return list of IRequest objects
      */
-    /*public ArrayList<Request> loadActiveRequests(){ // TODO: refactor for IRequest
+    public ArrayList<IRequest> loadActiveRequests(){ // TODO: refactor for IRequest
         //go through requests, make a request object
         //go to subtable based on type(stored in field of request db)
         //set unique fields into correct object
         //If we do factory, this is where we do it
 
-        ArrayList<Request> results = new ArrayList<Request>();
-        String str = "select * from Requests where dateCompleted is null";
+        ArrayList<IRequest> results = new ArrayList<>();
+        String requestQuery = "select * from Requests where dateCompleted is null";
         try{
-            PreparedStatement ps = conn.prepareStatement(str);
+            PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                IRequest result = null;
                 String id = rs.getString("requestID");
                 Date created = rs.getDate("dateCreated");
                 String desc = rs.getString("description");
@@ -135,7 +138,35 @@ public class RequestData extends Data{
                     e.printStackTrace();
                 }
                 String type = rs.getString("type");
-                results.add(new Request(id,assignees, created,null,desc,title,locations,type, "Test creator"));
+
+                Request r = new Request(id,assignees, created,null,desc,title,locations,type, "Test creator");
+                switch (type){
+                    case "Maintenance":
+                        String subtableQuery = "select * from Maintenance where requestID=?";
+                        PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
+                        specificTable.setString(1,id);
+                        ResultSet ans = ps.executeQuery();
+                        if (!ans.next()) {
+                            System.out.println("Item does not exist in Maintenance");
+                            break;
+                        }
+
+                        result = new MaintenanceRequest(ans.getString(2),
+                                ans.getInt(3), r);
+                        specificTable.close();
+                        break;
+//                    case "Laundry":
+//                        result = new LaundryRequest("machine", 1, newRequest);
+//                        break;
+//                    case "Security":
+//                        result = new SecurityRequest("machine", 1, newRequest);
+//                        break;
+                    default:
+                        System.out.println("Type does not exist!");
+
+                }
+
+                results.add(result);
             }
             rs.close();
         }
@@ -143,7 +174,7 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
         return results;
-    }*/
+    }
    public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
@@ -298,6 +329,22 @@ public class RequestData extends Data{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getNumTableItems(String tableName) {
+
+        try {
+            String countItems = "select count(*) from " + tableName;
+            PreparedStatement c = conn.prepareStatement(countItems);
+            ResultSet res = c.executeQuery();
+            if(res.next())
+                return res.getInt(1);
+        } catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+        return 999;
     }
 //    public void getRequests() {}
 //    public void getRequestByID(String id) {
