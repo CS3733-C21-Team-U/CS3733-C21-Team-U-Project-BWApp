@@ -71,10 +71,10 @@ public class MapService {
    * @return
    * @throws InvalidEdgeException TODO: change to Invalid Edge Exception
    */
-  public String addNode(String node_id, double x, double y) throws InvalidEdgeException {
+  public String addNode(String node_id, double x, double y, String floor, String Building, String nodeType, String longName, String shortName) throws InvalidEdgeException {
     try{
-      md.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def");
-      mm.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def", "u");
+      md.addNode(node_id, x, y, floor, Building, nodeType, longName, shortName);
+      mm.addNode(node_id, x, y, floor, Building, nodeType, longName, shortName, "u");
       return "";
     } catch (Exception e){
       InvalidEdgeException invalidEdge = new InvalidEdgeException();
