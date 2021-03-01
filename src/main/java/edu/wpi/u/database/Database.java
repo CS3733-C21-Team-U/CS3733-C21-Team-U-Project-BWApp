@@ -49,6 +49,7 @@ public class Database {
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
         } catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();

@@ -14,6 +14,7 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
+        //this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
     }
 
     /**
@@ -194,27 +195,26 @@ public class UserData extends Data{
      * @return type for user of setting the users type Employees or Guests (table name)
      */
     public String checkUsername(String username){
-        String str = "select * from Employees where userName=?";
+        String str = "select * from Employees where username=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                ps.close();
                 return "Employees";
             }
             else {
-                str = "select * from Guests where userName=?";
-                ps = conn.prepareStatement(str);
-                ps.setString(1,username);
-                rs = ps.executeQuery();
-                ps.close();
-                if(rs.next()){
+                String str2 = "select * from Guests where username=?";
+                PreparedStatement ps2 = conn.prepareStatement(str2);
+                ps2.setString(1,username);
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
                     return "Guests";
                 }
                 else{
                     return "";
                 }
+
             }
         }
         catch (Exception e){
@@ -243,7 +243,6 @@ public class UserData extends Data{
                 ps = conn.prepareStatement(str);
                 ps.setString(1,password);
                 rs = ps.executeQuery();
-                ps.close();
                 if(rs.next()){
                     return "Guests";
                 }

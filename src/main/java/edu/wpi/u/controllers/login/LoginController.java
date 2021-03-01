@@ -9,6 +9,11 @@ import edu.wpi.u.exceptions.AccountNameNotFoundException;
 import edu.wpi.u.exceptions.PasswordNotFoundException;
 import edu.wpi.u.users.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -28,14 +33,18 @@ public class LoginController {
      */
 
     @FXML
-    public void handleLogin() {
+    public void handleLogin() throws IOException {
         String username = accountName.getText();
         String password = passWord.getText();
+        //TODO: Stop from switching windows
         try {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
                     //switch scene
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//                    Scene scene = new Scene(root);
+                    App.getPrimaryStage().getScene().setRoot(root);
                 } else {
                     throw new PasswordNotFoundException();
                 }
