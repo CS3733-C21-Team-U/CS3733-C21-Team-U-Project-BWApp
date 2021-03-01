@@ -24,7 +24,7 @@ public class UserService {
         this.setGuests();
     }
 
-
+    //public void addAuthyUser(String name,)
 
     public void setEmployees() {this.employees = ud.getEmployees();}
 
