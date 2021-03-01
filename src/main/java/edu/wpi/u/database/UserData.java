@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 
 public class UserData extends Data{
 
@@ -21,6 +20,20 @@ public class UserData extends Data{
         return null;
     }
 
+    public void changePassword(String username, String newPassword, String type){
+        String str = "update " + type + " set password=? where username=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,newPassword);
+            ps.setString(2,username);
+            ps.executeUpdate();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public User setUser(String username, String password, String type){
         String idColumn = "";
         int returnType = 0; // 1 is employee, 2 is guest
@@ -28,7 +41,7 @@ public class UserData extends Data{
             idColumn = "employeeID";
             returnType=1;
         }
-        else if (type.equals("guestID")) {
+        else if (type.equals("Guests")) {
             idColumn = "guestID";
             returnType=2;
         }
@@ -58,7 +71,8 @@ public class UserData extends Data{
         return new User();
     }
 
-    public boolean checkUserName(String username){
+
+    public String checkUsername(String username){
         String str = "select * from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -66,7 +80,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return true;
+                return "Employees";
             }
             else {
                 str = "select * from Guests where userName=?";
@@ -74,16 +88,21 @@ public class UserData extends Data{
                 ps.setString(1,username);
                 rs = ps.executeQuery();
                 ps.close();
-                return rs.next();
+                if(rs.next()){
+                    return "Guests";
+                }
+                else{
+                    return "";
+                }
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            return "";
         }
     }
 
-    public boolean checkPassword(String password){
+    public String checkPassword(String password){
         String str = "select * from Employees where password=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -91,7 +110,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-                return true;
+                return "Employees";
             }
             else {
                 str = "select * from Guests where password=?";
@@ -99,12 +118,17 @@ public class UserData extends Data{
                 ps.setString(1,password);
                 rs = ps.executeQuery();
                 ps.close();
-                return rs.next();
+                if(rs.next()){
+                    return "Guests";
+                }
+                else{
+                    return "";
+                }
             }
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            return "";
         }
     }
 
@@ -247,6 +271,4 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
-
-
 }

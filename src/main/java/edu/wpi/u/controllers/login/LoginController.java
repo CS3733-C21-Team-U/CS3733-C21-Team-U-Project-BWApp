@@ -23,9 +23,6 @@ public class LoginController {
     @FXML
     public JFXButton navButton;
 
-    UserData user = new UserData();
-
-
     // This function, upon handling login button, will check the accountName and passWord
     // against the database, if this works, the user will be taken to the application, if not
     //the user will recieve an error
@@ -38,11 +35,16 @@ public class LoginController {
         String username = accountName.getText();
         String password = passWord.getText();
         try {
-            if (App.userService.checkUsername(username)) {
-                if (App.userService.checkPassword(password)) {
-                    App.userService.setUser();
+            if (!App.userService.checkUsername(username).equals("")) {
+                if (!App.userService.checkPassword(password).equals("")) {
+                    App.userService.setUser(username, password, App.userService.checkPassword(password));
                 }
-                else{ throw passwordException
+                else {
+                    throw new PasswordNotFoundException();
+                }
+            }
+            else {
+                throw new AccountNameNotFoundException();
             }
         } catch(Exception e){
             AccountNameNotFoundException accountException = new AccountNameNotFoundException();
