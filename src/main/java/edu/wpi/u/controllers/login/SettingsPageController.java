@@ -91,11 +91,11 @@ public class SettingsPageController {
 
     }
 
-    public void handleSetTheme1(ActionEvent actionEvent) {
+    /*public void handleSetTheme1(ActionEvent actionEvent) {
         //Light Theme
-    }
+    }*/
 
-    public void handleSetTheme2(ActionEvent actionEvent) {
+    /*public void handleSetTheme2(ActionEvent actionEvent) {
         //Dark Theme
-    }
+    }*/
 }

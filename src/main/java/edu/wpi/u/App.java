@@ -40,6 +40,9 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
+  public static String DFS;
+  public static String BFS;
+  public static String ASTAR;
 
   public static Integer lastClickedRequestNumber;
 
