@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="1631.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.views.NewRequestItem">
+   <children>
+      <JFXButton layoutX="1448.0" layoutY="146.0" onAction="#handleViewRequestInDetail" text="View Request Details" />
+      <Label fx:id="requestItemTitleLabel" layoutX="22.0" layoutY="22.0" text="Title" />
+      <Label fx:id="requestitemDescriptionLabel" alignment="TOP_LEFT" layoutX="22.0" layoutY="53.0" prefHeight="131.0" prefWidth="912.0" text="Description" />
+      <Label fx:id="requestItemRequestTypeLabel" layoutX="276.0" layoutY="22.0" text="Type of Request" />
+      <Label fx:id="requestItemDateCreatedLabel" layoutX="639.0" layoutY="22.0" text="Date Created" />
+      <Label fx:id="requestItemDate2BCompletedLabel" layoutX="965.0" layoutY="22.0" text="Date To Be Completed" />
+      <Label fx:id="requestItemDateCompletedLabel" layoutX="1347.0" layoutY="22.0" text="Date Completed" />
+      <Label fx:id="requestItemCreatorLabel" layoutX="1297.0" layoutY="108.0" text="Creator" />
+      <JFXChipView fx:id="requestItemLocationChipView" layoutX="1040.0" layoutY="69.0" promptText="Location" />
+   </children>
+</AnchorPane>

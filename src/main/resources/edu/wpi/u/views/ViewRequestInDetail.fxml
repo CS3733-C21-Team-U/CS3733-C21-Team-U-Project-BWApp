@@ -4,100 +4,51 @@
 <?import com.jfoenix.controls.JFXChipView?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.views.RequestServiceMockup">
    <children>
-      <StackPane fx:id="laundryStack" layoutX="165.0" layoutY="513.0" prefHeight="283.0" prefWidth="950.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: black;" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="585.0" AnchorPane.topAnchor="513.0">
+      <StackPane fx:id="laundryStack" layoutX="165.0" layoutY="513.0" prefHeight="283.0" prefWidth="950.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="585.0" AnchorPane.topAnchor="513.0">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="36.0" prefWidth="115.0" text="Language">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutY="36.0" />
+                  <Label layoutY="1.0" prefHeight="36.0" prefWidth="115.0" text="Language:" />
+                  <Label layoutX="115.0" layoutY="5.0" text="LanguageLabel" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Label prefHeight="36.0" prefWidth="100.0" text="Religion">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutY="36.0" prefHeight="31.0" prefWidth="186.0" />
+                  <Label prefHeight="36.0" prefWidth="100.0" text="Religion:" />
+                  <Label layoutX="116.0" layoutY="2.0" prefHeight="27.0" prefWidth="120.0" text="ReligionLabel" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Label prefHeight="36.0" prefWidth="100.0" text="Laundry">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutY="36.0" prefHeight="31.0" prefWidth="159.0" />
+                  <Label prefHeight="36.0" prefWidth="100.0" text="Laundry:" />
+                  <Label layoutX="117.0" prefHeight="27.0" prefWidth="120.0" text="LaundryLabel" />
                </children>
             </Pane>
          </children>
       </StackPane>
-      <Label layoutX="646.0" layoutY="51.0" text="View A Request In Detail" textFill="#0065ff">
-         <font>
-            <Font name="Comic Sans MS Bold" size="33.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="1323.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" ripplerFill="#bfd2ff" style="-fx-background-color: #f4f7ff #f4f7ff; -fx-border-radius: 10; -fx-border-color: #0065ff;" text="Leave A Comment" textFill="#0066ff">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </JFXButton>
-      <JFXChipView layoutX="766.0" layoutY="227.0" prefHeight="203.0" prefWidth="209.0" promptText="Location" style="-fx-border-color: black; -fx-background-color: #f4f7ff; -fx-border-radius: 10;" />
-      <JFXButton layoutX="931.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" ripplerFill="#bfd2ff" style="-fx-background-color: #f4f7ff #f4f7ff; -fx-border-radius: 10; -fx-border-color: #0065ff;" text="Cancel" textFill="#0066ff">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="516.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" ripplerFill="#bfd2ff" style="-fx-background-color: #f4f7ff #f4f7ff; -fx-border-radius: 10; -fx-border-color: #0065ff;" text="Resolve Request" textFill="#0066ff">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="140.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" ripplerFill="#bfd2ff" style="-fx-background-color: #f4f7ff #f4f7ff; -fx-border-radius: 10; -fx-border-color: #0065ff;" text="Edit Request" textFill="#0066ff">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </JFXButton>
-      <JFXListView layoutX="1204.0" layoutY="165.0" prefHeight="647.0" prefWidth="404.0" style="-fx-background-color: #f4f7ff; -fx-border-color: black; -fx-border-radius: 10;" />
-      <JFXChipView layoutX="986.0" layoutY="227.0" prefHeight="61.0" prefWidth="468.0" promptText="Staff Name" style="-fx-border-color: black; -fx-background-color: #f4f7ff; -fx-border-radius: 10;" />
-      <Label layoutX="177.0" layoutY="154.0" prefHeight="36.0" prefWidth="54.0" text="Title">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label alignment="TOP_LEFT" layoutX="177.0" layoutY="227.0" prefHeight="172.0" prefWidth="533.0" text="Description........... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ............................. ....................... ....................... ....................... ............... ........ ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ....................... ..............." wrapText="true">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="177.0" layoutY="441.0" prefHeight="36.0" prefWidth="159.0" text="Date Created">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="565.0" layoutY="441.0" prefHeight="36.0" prefWidth="282.0" text="Date to Be Completed By">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="565.0" layoutY="154.0" prefHeight="36.0" prefWidth="100.0" text="Creator">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
+      <Label layoutX="646.0" layoutY="51.0" text="View A Request In Detail" />
+      <JFXButton layoutX="1323.0" layoutY="846.0" onAction="#handleCommentButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Leave A Comment" />
+      <JFXButton layoutX="931.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
+      <JFXButton layoutX="516.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Resolve Request" />
+      <JFXButton layoutX="140.0" layoutY="846.0" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Edit Request" />
+      <JFXListView fx:id="commentListView" layoutX="1204.0" layoutY="165.0" prefHeight="647.0" prefWidth="404.0" />
+      <JFXChipView layoutX="986.0" layoutY="227.0" prefHeight="61.0" prefWidth="468.0" promptText="Staff Name" />
+      <Label layoutX="177.0" layoutY="154.0" prefHeight="36.0" prefWidth="54.0" text="Title:" />
+      <Label alignment="TOP_LEFT" layoutX="177.0" layoutY="227.0" prefHeight="36.0" prefWidth="120.0" text="Description:" wrapText="true" />
+      <Label layoutX="177.0" layoutY="441.0" prefHeight="36.0" prefWidth="159.0" text="Date Created:" />
+      <Label layoutX="565.0" layoutY="441.0" prefHeight="36.0" prefWidth="282.0" text="Date to Be Completed By:" />
+      <Label layoutX="565.0" layoutY="154.0" prefHeight="36.0" prefWidth="100.0" text="Creator:" />
+      <JFXChipView layoutX="797.0" layoutY="227.0" prefHeight="125.0" prefWidth="282.0" promptText="Location" />
+      <Label layoutX="336.0" layoutY="446.0" text="DateCreatedLabel" />
+      <Label layoutX="847.0" layoutY="446.0" text="Date2BCompletedByLabel" />
+      <Label alignment="TOP_LEFT" layoutX="177.0" layoutY="267.0" prefHeight="160.0" prefWidth="505.0" text="DescriptionLabel" wrapText="true" />
+      <Label layoutX="247.0" layoutY="159.0" text="TitleLabel" />
+      <Label layoutX="668.0" layoutY="159.0" text="CreatorLabel" />
    </children>
 </AnchorPane>
