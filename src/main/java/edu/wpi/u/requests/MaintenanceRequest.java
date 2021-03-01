@@ -1,10 +1,7 @@
 package edu.wpi.u.requests;
-import edu.wpi.u.database.RequestData;
 
 import java.sql.Date;
-import java.util.ArrayList;
-
-import static edu.wpi.u.database.Database.getDB;
+import java.sql.PreparedStatement;
 
 //TODO: Private or protected fields?
 public class MaintenanceRequest implements IRequest {
@@ -52,27 +49,32 @@ public class MaintenanceRequest implements IRequest {
         //send all fields to database
         //using fields, first insert into Requests table
         //second, insert into Maintenance table
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values ("+getRequestID()+","+req.getDateCreated()+",?,?,?,?)";
-        try{
-            //
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.execute();
+        StringBuilder query1 = new StringBuilder();
+        query1.append("insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (");
+        query1.append(req.getRequestID() + " ,"
+                        + req.getDateCreated() + " ,"
+                        + null + " ,"
+                        + req.getDescription() + " ,"
+                        + req.getTitle() + " ,"
+                        + req.getType() + " ,"
+                        +")");
 
+        for(String locationID : req.getLocation()){
+            addLocation(locationID, req.getRequestID());
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        String str = "insert into Maintenance (requestID, machine, priority) values (?,?,?)";
+
+        StringBuilder query2 = new StringBuilder();
+        query2.append("insert into Maintenance (requestID, machine, priority) values (");
+        query2.append(
+                req.getRequestID() + " ,"
+                + machine + " ,"
+                + priority + ")");
+
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,request.getRequestID());
-            java.util.Date d = request.getDateCreated();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(2, sqld);
-            ps.setDate(3,null);
-            ps.setString(4,request.getDescription());
-            ps.setString(5,request.getTitle());
-            ps.setString(6,request.getRequestType());
+            ps.setString(1, req.getRequestID());
+            ps.setString(2, machine);
+            ps.setInt(3, priority);
             ps.execute();
             // Adding data into joint tables
             for(String locationID : request.getLocation()){
@@ -115,7 +117,10 @@ public class MaintenanceRequest implements IRequest {
     }
 
     @Override
-    public void updateDBEntry() { }
+    public String[] updateDBEntry() {
+        String[] queries = new String[2];
+        return queries;
+    }
 
     @Override
     public String getRequestType() {

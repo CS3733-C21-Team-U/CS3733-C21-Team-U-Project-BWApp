@@ -1,6 +1,5 @@
 package edu.wpi.u.requests;
 import java.sql.Date;
-import java.util.ArrayList;
 
 //TODO: Private or protected fields?
 public class SecurityRequest implements IRequest {
@@ -40,10 +39,16 @@ public class SecurityRequest implements IRequest {
     public String getSpecificData() { return null; }
 
     @Override
-    public void createDBEntry() { }
+    public String[] createDBEntry() {
+        String[] queries = new String[2];
+        return queries;
+    }
 
     @Override
-    public void updateDBEntry() { }
+    public String[] updateDBEntry() {
+        String[] queries = new String[2];
+        return queries;
+    }
 
     @Override
     public String getRequestType() {

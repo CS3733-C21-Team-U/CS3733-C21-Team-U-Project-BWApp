@@ -20,8 +20,8 @@ public interface IRequest {
 
     String getSpecificData();//return formatted string for extra fields of a given request
     //DO FIRST DUMMY
-    void createDBEntry();
-    void updateDBEntry();
+    String[] createDBEntry();
+    String[] updateDBEntry();
     String getRequestType();
     Request getGenericRequest();
 
