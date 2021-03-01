@@ -4,10 +4,11 @@
 <?import com.jfoenix.controls.JFXNodesList?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
@@ -25,66 +26,94 @@
                   <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
                </graphic>
             </Button>
-            <VBox layoutX="11.0" layoutY="744.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <VBox layoutX="11.0" layoutY="744.0" prefWidth="124.0" AnchorPane.bottomAnchor="20.0">
                <children>
-                  <JFXToggleNode minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-width: 3; -fx-border-radius: 30; -fx-border-color: Black;" text="1">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="floor" />
-                     </toggleGroup>
-                  </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black; -fx-border-width: 3; -fx-border-radius: 30;" text="2" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black; -fx-border-width: 3; -fx-border-radius: 30;" text="3" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-width: 3; -fx-border-color: Black; -fx-border-radius: 3000;" text="4" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black;" text="5" toggleGroup="$floor" />
-               </children>
-            </VBox>
-            <VBox layoutX="11.0" layoutY="744.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
-               <children>
-                  <JFXToggleNode minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="1">
+                  <JFXToggleNode minHeight="70.0" minWidth="70.0" styleClass="toggle-floor" text="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="$floor" />
                      </toggleGroup>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="2" toggleGroup="$floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="toggle-floor" text="2" toggleGroup="$$floor">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="3" toggleGroup="$floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="toggle-floor" text="3">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="-2.0" />
                      </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="floor" />
+                     </toggleGroup>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="4" toggleGroup="$floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="70.0" minWidth="70.0" styleClass="toggle-floor" text="4" toggleGroup="$$floor">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="5" toggleGroup="$floor" />
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="toggle-floor" text="5" toggleGroup="$floor" />
                </children>
             </VBox>
-            <JFXNodesList layoutX="919.0" layoutY="181.0">
+            <HBox layoutX="1432.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <JFXButton contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
                      <graphic>
-                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" scaleX="2.0" scaleY="2.0" />
+                        <SVGPath content="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" scaleX="2.0" scaleY="2.0" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
                      <graphic>
-                        <SVGPath content="M12,2C6.47,2,2,6.47,2,12c0,5.53,4.47,10,10,10s10-4.47,10-10C22,6.47,17.53,2,12,2z M12,20c-4.42,0-8-3.58-8-8 c0-4.42,3.58-8,8-8s8,3.58,8,8C20,16.42,16.42,20,12,20z" scaleX="2.0" scaleY="2.0" />
+                        <SVGPath content="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" scaleX="2.0" scaleY="2.0" />
                      </graphic>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </JFXButton>
-                  <JFXButton contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
-                     <graphic>
-                        <SVGPath content="M23,8c0,1.1-0.9,2-2,2c-0.18,0-0.35-0.02-0.51-0.07l-3.56,3.55C16.98,13.64,17,13.82,17,14c0,1.1-0.9,2-2,2s-2-0.9-2-2 c0-0.18,0.02-0.36,0.07-0.52l-2.55-2.55C10.36,10.98,10.18,11,10,11c-0.18,0-0.36-0.02-0.52-0.07l-4.55,4.56 C4.98,15.65,5,15.82,5,16c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2c0.18,0,0.35,0.02,0.51,0.07l4.56-4.55C8.02,9.36,8,9.18,8,9 c0-1.1,0.9-2,2-2s2,0.9,2,2c0,0.18-0.02,0.36-0.07,0.52l2.55,2.55C14.64,12.02,14.82,12,15,12c0.18,0,0.36,0.02,0.52,0.07 l3.55-3.56C19.02,8.35,19,8.18,19,8c0-1.1,0.9-2,2-2S23,6.9,23,8z" scaleX="2.0" scaleY="2.0" />
-                     </graphic>
-                  </JFXButton>
+                  <JFXNodesList alignment="TOP_CENTER">
+                     <children>
+                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                           <graphic>
+                              <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" scaleX="2.0" scaleY="2.0" />
+                           </graphic>
+                        </JFXButton>
+                        <HBox alignment="CENTER" prefHeight="70.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Please click on the map to add a node" />
+                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                                 <graphic>
+                                    <SVGPath content="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z" scaleX="2.0" scaleY="2.0" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Please click on the map to add a node" textFill="TRANSPARENT" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="70.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Please click on the map to add a node" />
+                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <SVGPath content="M19.5 9.5c-1.03 0-1.9.62-2.29 1.5h-2.92c-.39-.88-1.26-1.5-2.29-1.5s-1.9.62-2.29 1.5H6.79c-.39-.88-1.26-1.5-2.29-1.5C3.12 9.5 2 10.62 2 12s1.12 2.5 2.5 2.5c1.03 0 1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5s1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z" rotate="-45.0" scaleX="2.0" scaleY="2.0" />
+                                 </graphic>
+                              </JFXButton>
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Please click on the map to add a node" textFill="TRANSPARENT" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXNodesList>
                </children>
-            </JFXNodesList>
+            </HBox>
          </children>
       </AnchorPane>
    </children>
