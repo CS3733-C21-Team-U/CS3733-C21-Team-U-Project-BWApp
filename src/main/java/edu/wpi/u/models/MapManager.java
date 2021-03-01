@@ -25,23 +25,20 @@ public class MapManager {
    */
 
   public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, ArrayList<StaffType> permissions) {
-      System.out.println("Edges are getting added to the list of allEdges. This edge is: " + _edgeID);
     Node _startNode = this.allNodes.get(_startNodeID);
-    System.out.println("Line 28 is good");
     Node _endNode = this.allNodes.get(_endNodeID);
-    System.out.println("Line 30 is good");
+    if(_startNode == null || _endNode == null){
+      System.out.println("OOPS");
+      _startNode = this.allNodes.get(_startNodeID);
+    }
     System.out.println(_startNode.getNodeID());
     System.out.println(_startNode.getFloor());
     System.out.println(_endNode.getNodeID());
     System.out.println(_endNode.getFloor());
-    System.out.println("Line 32 is good");
     Edge realEdge = new Edge(_edgeID, _startNode, _endNode, permissions);
     this.allEdges.put(_edgeID, realEdge);
-    System.out.println("Line 34 is good");
     this.allNodes.put(_startNode.getNodeID(), _startNode);
-    System.out.println("Line 36 is good");
     this.allNodes.put(_endNode.getNodeID(), _endNode);
-    System.out.println("Line 38 is good");
   }
 
   /**
