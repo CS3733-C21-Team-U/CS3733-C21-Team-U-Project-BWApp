@@ -53,10 +53,6 @@ public class SettingsPageController {
 
     }
 
-    public void handleSetTheme() {
-        // Would likley call upon a method from another class to switch the theme, pretty sure this is on Kohmei.
-    }
-
     /**
      * This function will open the file explorer and update the textfield with the file name
      * selected in the explorer when the button is pressed
@@ -94,5 +90,13 @@ public class SettingsPageController {
     public void handleCreateTable() {
         App.mapService.loadCSVFile(filePathTextField.getText(), tableNameTextFIeld.getText() );
 
+    }
+
+    public void handleSetTheme1(ActionEvent actionEvent) {
+        //Light Theme
+    }
+
+    public void handleSetTheme2(ActionEvent actionEvent) {
+        //Dark Theme
     }
 }
