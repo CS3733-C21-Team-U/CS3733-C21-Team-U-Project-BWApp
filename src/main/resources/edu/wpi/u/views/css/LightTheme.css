@@ -1,16 +1,3 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Regular';*/
-/*    src: url('Rubik-Regular.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Bold';*/
-/*    src: url('Rubik-Bold.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Medium';*/
-/*    src: url('Rubik-Medium.ttf');*/
-/*}*/
 /*Base colors here------------------------*/
 
 .root{
@@ -19,13 +6,13 @@
     -secondary: #03DAC6;
     -secondaryVairant: #018786;
     -background: #FFFFFF;
+    -backgroundAlt: #f3f3f3;
     -surface: #FFFFFF;
     -error: #B00020;
-    -onParimary: #FFFFFF;
+    -onPrimary: #FFFFFF;
     -onSecondary: #000000;
-    -onBackground: #000000;
+    -onBackground: #323232;
+    -onBackgroundAlt: #919191;
     -onSurface: #000000;
     -onError: #FFFFFFF;
 }
-
-/*Base colors here------------------------*/

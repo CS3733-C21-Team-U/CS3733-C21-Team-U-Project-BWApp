@@ -87,11 +87,10 @@ public class App extends Application {
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
-//    scene.getStylesheets().add("/edu/wpi/u/views/css/LightTheme.css");
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.setScene(scene);
-
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
@@ -119,6 +118,7 @@ public class App extends Application {
     requestService.saveCSVFile("Requests.csv", "Requests");
     requestService.saveCSVFile("Assignments.csv", "Assignments");
     requestService.saveCSVFile("Locations.csv", "Locations");
+    //TODO: Load Database through CSVs only on first invocation (when its empty)
     //Database.getDB().stop();
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
@@ -126,7 +126,6 @@ public class App extends Application {
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
-
     stage.close();
   }
 
