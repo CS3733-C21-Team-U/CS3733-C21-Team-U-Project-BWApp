@@ -54,6 +54,6 @@ public class SettingsController {
     public void handleAltTheme(ActionEvent actionEvent) {
         System.out.println("I clicked the theme!!!!");
         App.getPrimaryStage().getScene().getStylesheets().removeAll();
-        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     }
 }
