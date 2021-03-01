@@ -117,7 +117,15 @@
     -fx-background-radius: 40;
 }
 
-.button-green {
+.toggle-floor{
+    -fx-background-color: white;
+    -fx-border-radius: 0;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-border-color: black;
+}
+
+.button-floating-action-green {
     -fx-background-color: -green;
 }
 .button-yellow {

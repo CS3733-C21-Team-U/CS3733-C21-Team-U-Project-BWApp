@@ -87,7 +87,7 @@ public class App extends Application {
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
     App.primaryStage.setScene(scene);
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+    //App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
