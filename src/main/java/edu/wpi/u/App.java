@@ -1,7 +1,9 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
+import edu.wpi.u.database.UserData;
 import edu.wpi.u.models.*;
+import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.User;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -76,7 +78,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
@@ -113,6 +115,7 @@ public class App extends Application {
     requestService.saveCSVFile("Requests.csv", "Requests");
     requestService.saveCSVFile("Assignments.csv", "Assignments");
     requestService.saveCSVFile("Locations.csv", "Locations");
+    //TODO: Load Database through CSVs only on first invocation (when its empty)
     //Database.getDB().stop();
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
 //    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
@@ -120,7 +123,6 @@ public class App extends Application {
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
 //    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
-
     stage.close();
   }
 

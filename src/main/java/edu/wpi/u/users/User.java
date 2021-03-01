@@ -3,45 +3,63 @@ package edu.wpi.u.users;
 public class User {
     protected String userID;
     protected String name;
-    protected String accountName;
+    protected String userName;
     protected String password;
     protected StaffType type;
     protected String phoneNumber;
-    protected boolean employed;
+    protected boolean deleted;
+    protected String email;
 
     public User(){
 
     }
 
+    public User(String userID, String name, String accountName, String password, String email, StaffType type, String phoneNumber,boolean deleted) {
+        this.userID = userID;
+        this.name = name;
+        this.userName = accountName;
+        this.password = password;
+        this.type = type;
+        this.deleted = deleted;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
     /**
      * This function will be called by UserService to update the ArrayList of Users / the active user
      * @param name
-     * @param accountName
+     * @param userName
      * @param password
      * @param type
-     * @param employed
      */
-    public void editUser(String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber){
+    public void editUser(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         this.name = name;
-        this.accountName = accountName;
+        this.userName = userName;
         this.password = password;
         this.type = type;
-        this.employed = employed;
+        this.deleted = deleted;
         this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
-    public User(String userID, String name, String accountName, String password, StaffType type, boolean employed, String phoneNumber) {
-        this.userID = userID;
-        this.name = name;
-        this.accountName = accountName;
-        this.password = password;
-        this.type = type;
-        this.employed = employed;
-        this.phoneNumber = phoneNumber;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -62,12 +80,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -84,13 +102,5 @@ public class User {
 
     public void setType(StaffType type) {
         this.type = type;
-    }
-
-    public boolean getEmployed() {
-        return employed;
-    }
-
-    public void setEmployed(boolean employed) {
-        this.employed = employed;
     }
 }
