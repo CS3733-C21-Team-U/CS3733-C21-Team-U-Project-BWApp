@@ -16,7 +16,12 @@ public class UserData extends Data{
         connect();
     }
 
-
+    /**
+     * Returns the StaffType for a user
+     * @param userID users id
+     * @param type Employees or Guests (table name)
+     * @return the type of the user
+     */
     public StaffType getPermissions(String userID, String type){
         String id = "";
         if (type.equals("Employees")){
@@ -39,6 +44,10 @@ public class UserData extends Data{
         return StaffType.DEFUALT;
     }
 
+    /**
+     * Gets list of employees from database
+     * @return list of employees
+     */
     public ArrayList<Employee> getEmployees(){
         ArrayList<Employee> results = new ArrayList<>();
         String str = "select * from Employees";
@@ -60,6 +69,11 @@ public class UserData extends Data{
         }
         return results;
     }
+
+    /**
+     * Gets a list of guests from the database
+     * @return list of guests
+     */
     public ArrayList<Guest> getGuests(){
         ArrayList<Guest> results = new ArrayList<>();
         String str = "select * from Guests";
@@ -83,7 +97,12 @@ public class UserData extends Data{
         return results;
     }
 
-
+    /**
+     * Changes the email of a user
+     * @param userID id of the user
+     * @param newEmail the new email
+     * @param type Employees or Guests (table name)
+     */
     public void changeEmail(String userID, String newEmail, String type){
         String typeID ="";
         if (type.equals("Employees")){
@@ -105,6 +124,12 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Changes a users password
+     * @param username username of user
+     * @param newPassword the new password
+     * @param type Employees or Guests (table name)
+     */
     public void changePassword(String username, String newPassword, String type){
         String str = "update " + type + " set password=? where username=?";
         try{
@@ -119,6 +144,13 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Sets the active user on successful login
+     * @param username username of the user
+     * @param password password othe user
+     * @param type Employees or Guests (table name)
+     * @return the User object of the active user
+     */
     public User setUser(String username, String password, String type){
         String idColumn = "";
         int returnType = 0; // 1 is employee, 2 is guest
@@ -156,7 +188,11 @@ public class UserData extends Data{
         return new User();
     }
 
-
+    /**
+     * Checks if the database has the username
+     * @param username username to be checked
+     * @return type for user of setting the users type Employees or Guests (table name)
+     */
     public String checkUsername(String username){
         String str = "select * from Employees where userName=?";
         try {
@@ -187,6 +223,11 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Checks to see if the password is valid
+     * @param password the password to be checked
+     * @return type for user of setting the users type Employees or Guests (table name)
+     */
     public String checkPassword(String password){
         String str = "select * from Employees where password=?";
         try {
