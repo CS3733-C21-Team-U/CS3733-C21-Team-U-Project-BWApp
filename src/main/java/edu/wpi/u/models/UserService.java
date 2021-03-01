@@ -22,7 +22,11 @@ public class UserService {
     public UserService() {
         this.users = ud.loadUsers();
     }
-    
+
+    public void setEmployees() {this.employees = ud.getEmployees();}
+
+    public void setGuests() {this.guests = ud.getGuests();}
+
     public void setUser(String username, String password, String type) {
         this.activeUser = ud.setUser(username,password,type);
     }

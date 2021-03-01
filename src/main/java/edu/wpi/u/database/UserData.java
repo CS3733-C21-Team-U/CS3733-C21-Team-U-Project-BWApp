@@ -20,6 +20,51 @@ public class UserData extends Data{
         return null;
     }
 
+    public ArrayList<Employee> getEmployees(){
+        ArrayList<Employee> results = new ArrayList<>();
+        String str = "select * from Employees";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                results.add(new Employee(rs.getString("employeeID"),
+                        rs.getString("name"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        StaffType.valueOf(rs.getString("type")),
+                        rs.getString("phoneNumber"),
+                        rs.getBoolean("deleted")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+    public ArrayList<Guest> getGuests(){
+        ArrayList<Guest> results = new ArrayList<>();
+        String str = "select * from Guests";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                results.add(new Guest(rs.getString("guestID"),
+                        rs.getString("name"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        StaffType.valueOf(rs.getString("type")),
+                        rs.getString("phoneNumber"),
+                        rs.getDate("appointmentDate"),
+                        rs.getBoolean("deleted")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+
     public void changeEmail(String userID, String newEmail, String type){
         String typeID ="";
         if (type.equals("Employees")){
