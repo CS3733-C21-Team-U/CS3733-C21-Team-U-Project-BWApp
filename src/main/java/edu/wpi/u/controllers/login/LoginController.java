@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers.login;
 
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -24,6 +25,26 @@ public class LoginController {
     public JFXButton login;
     public JFXButton forgotPasswordButton;
 
+    public void initialize() throws IOException {
+
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Username Required");
+        accountName.getValidators().add(validator);
+        accountName.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                accountName.validate();
+            }
+        });
+
+        RequiredFieldValidator validator2 = new RequiredFieldValidator();
+        validator.setMessage("Password Required");
+        passWord.getValidators().add(validator2);
+        passWord.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                passWord.validate();
+            }
+        });
+    }
 
     // This function, upon handling login button, will check the accountName and passWord
     // against the database, if this works, the user will be taken to the application, if not
@@ -40,17 +61,15 @@ public class LoginController {
         //TODO: Stop from switching windows
         try {
             if (!App.userService.checkUsername(username).equals("") || !App.userService.checkPhoneNumber(username).equals("")) {
-                System.out.println("username works");
                 if (!App.userService.checkPassword(password).equals("")) {
-                    System.out.println("password works");
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
-                    System.out.println("Try Scene Switching");
+
                     //switch scene
-                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //                    Scene scene = new Scene(root);
                     App.getPrimaryStage().getScene().setRoot(root);
 
-                    System.out.println("Succeed");
+
                 } else {
                     throw new PasswordNotFoundException();
                 }
@@ -59,10 +78,10 @@ public class LoginController {
             }
         } catch (Exception e) {
             AccountNameNotFoundException accountException = new AccountNameNotFoundException();
-            System.out.println("no username");
+
             accountException.description = username + " not found in system.";
             PasswordNotFoundException passwordException = new PasswordNotFoundException();
-            System.out.println("no password");
+
             passwordException.description = password + " not associated with account. Check username or click Forgot Password.";
         }
     }

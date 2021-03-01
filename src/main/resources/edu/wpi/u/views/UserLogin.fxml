@@ -3,8 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -12,16 +12,27 @@
     <children>
         <VBox layoutX="280.0" layoutY="47.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label text="Enter Username" />
-                <JFXTextField fx:id="accountName" labelFloat="true">
+                <JFXTextField fx:id="accountName" labelFloat="true" promptText="Enter Username">
                     <VBox.margin>
-                        <Insets />
+                        <Insets bottom="20.0" />
                     </VBox.margin></JFXTextField>
-                <Label text="Enter Password" />
-                <JFXPasswordField fx:id="passWord" />
-                <JFXButton fx:id="login" onAction="#handleLogin" text="Login" />
-                <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" text="Forgot Password" />
+                <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></JFXPasswordField>
+                <JFXButton fx:id="login" buttonType="RAISED" onAction="#handleLogin" styleClass="button-contained" text="Login">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></JFXButton>
+                <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" styleClass="button-text" text="Forgot Password" />
             </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
         </VBox>
     </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>
