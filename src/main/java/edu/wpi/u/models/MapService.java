@@ -64,8 +64,8 @@ public class MapService {
    */
   public String addNode(String node_id, double x, double y) throws InvalidEdgeException {
     try{
-      md.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def");
-      mm.addNode(node_id, x, y, "0", "Def", "Def", "Def", "Def", "u");
+      md.addNode(node_id, x, y, "G", "Def", "Def", "Def", "Def");
+      mm.addNode(node_id, x, y, "G", "Def", "Def", "Def", "Def", "u");
       return "";
     } catch (Exception e){
       InvalidEdgeException invalidEdge = new InvalidEdgeException();

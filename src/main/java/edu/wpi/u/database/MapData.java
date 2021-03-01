@@ -13,15 +13,7 @@ public class MapData extends Data{
         connect();
     }
 
-    public int addNode(
-            String node_id,
-            double x,
-            double y,
-            String floor,
-            String building,
-            String node_type,
-            String longname,
-            String shortname) {
+    public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
         try {
             String str =
                     "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
@@ -226,7 +218,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public void loadGraph(MapManager gm){
+    public void loadGraph(MapManager mm){
         try{
             Statement ps = conn.createStatement();
             String str = "select * from Nodes";
@@ -240,7 +232,7 @@ public class MapData extends Data{
                 String nodeType = rset.getString("nodeType");
                 String longName = rset.getString("longName");
                 String shortName = rset.getString("shortName");
-                gm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+                mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
             }
             rset.close();
             String str2 = "select * from Edges";
@@ -250,7 +242,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                gm.addEdge(id,start,end);
+                mm.addEdge(id,start,end);
             }
             rs2.close();
         }

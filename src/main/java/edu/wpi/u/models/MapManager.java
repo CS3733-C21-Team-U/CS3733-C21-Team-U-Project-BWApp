@@ -24,23 +24,12 @@ public class MapManager {
    * @param _endNodeID
    */
   public void addEdge(String _edgeID, String _startNodeID, String _endNodeID) {
-    System.out.println("Edges are getting added to the list of allEdges. This edge is: " + _edgeID);
     Node _startNode = this.allNodes.get(_startNodeID);
-    System.out.println("Line 28 is good");
     Node _endNode = this.allNodes.get(_endNodeID);
-    System.out.println("Line 30 is good");
-    System.out.println(_startNode.getNodeID());
-    System.out.println(_startNode.getFloor());
-    System.out.println(_endNode.getNodeID());
-    System.out.println(_endNode.getFloor());
     Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
-    System.out.println("Line 32 is good");
     this.allEdges.put(_edgeID, realEdge);
-    System.out.println("Line 34 is good");
     this.allNodes.put(_startNode.getNodeID(), _startNode);
-    System.out.println("Line 36 is good");
     this.allNodes.put(_endNode.getNodeID(), _endNode);
-    System.out.println("Line 38 is good");
   }
 
   /**
@@ -84,16 +73,7 @@ public class MapManager {
    * @param _ShortName
    * @param _teamAssigned
    */
-  public void addNode(
-          String _nodeID,
-          double _xcoord,
-          double _ycoord,
-          String floor,
-          String _building,
-          String _nodeType,
-          String _LongName,
-          String _ShortName,
-          String _teamAssigned) {
+  public void addNode(String _nodeID, double _xcoord, double _ycoord, String floor, String _building, String _nodeType, String _LongName, String _ShortName, String _teamAssigned) {
     Node n = new Node(_nodeID, _xcoord, _ycoord, floor, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
     allNodes.put(n.getNodeID(), n);
   }
@@ -163,7 +143,6 @@ public class MapManager {
   public void updateCoords(String node_id, double x, double y){
     this.allNodes.get(node_id).updateCords(x,y);
   }
-
 
   /**
    * Runs a A STAR search to find a path between the two nodes specified
@@ -489,6 +468,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edgeID);
     edge.setUserPermission(permissions);
   }
+
   public ArrayList<Node> getAllNodes() {
     Collection<Node> allValues = this.allNodes.values();
     ArrayList<Node> nodeArrayList = new ArrayList<>(allValues);
@@ -500,4 +480,6 @@ public class MapManager {
     ArrayList<Edge> edgeArrayList = new ArrayList<>(allValues);
     return edgeArrayList;
   }
+
+
 }
