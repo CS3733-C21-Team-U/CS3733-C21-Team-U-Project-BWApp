@@ -14,6 +14,7 @@ public class ReceiveSms {
     private String response;
     public ReceiveSms(String response){
         this.response = response;
+        receiveSms();
     }
 
     public static void main(String[] args) {

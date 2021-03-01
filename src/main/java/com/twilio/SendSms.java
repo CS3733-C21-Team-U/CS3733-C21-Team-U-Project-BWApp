@@ -11,7 +11,7 @@ public class SendSms {
 
     public static final String ACCOUNT_SID = dotenv.get("ACCOUNT_SID");
     public static final String AUTH_TOKEN = dotenv.get("AUTH_TOKEN");
-    public static final String twilioNumber = "+16502623516";
+    public static final String twilioNumber = dotenv.get("TWILIO_NUMBER");
 
     private String phoneNumber;
     private String body;
@@ -19,7 +19,7 @@ public class SendSms {
     public SendSms(String phoneNumber, String body){
         this.phoneNumber = phoneNumber;
         this.body = body;
-        this.sendMessage();
+        sendMessage();
     }
     public static void main(String[] args) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
