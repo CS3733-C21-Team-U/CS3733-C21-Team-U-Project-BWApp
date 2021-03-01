@@ -119,27 +119,44 @@ public class AdminEditController {
 
         pane.getChildren().add(node);
     }
-    public void placeEdges(Edge e){
-        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
-        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+    public void placeEdges(Edge ed){
+        double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
+        double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
         Line edge = new Line();
-        edge.setLayoutX(e.getStartNode().getCords()[0]);
+        edge.setLayoutX(ed.getStartNode().getCords()[0]);
         edge.setStartX(0);
-        edge.setLayoutY(e.getStartNode().getCords()[1]);
+        edge.setLayoutY(ed.getStartNode().getCords()[1]);
         edge.setStartY(0);
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
-        edge.setId(e.getEdgeID());
+        edge.setId(ed.getEdgeID());
         edge.toFront();
         edge.setFill(Paint.valueOf("Black"));
         edge.setVisible(true);
+
+        edge.setOnMouseClicked(event -> {
+            try {
+                handleEdgeClicked(ed);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         pane.getChildren().add(edge);
 
     }
 
-    public void handleEdgeClicked(){
+    public void handleEdgeClicked(Edge e) throws IOException {
         System.out.println("You clicked on an edge");
+        FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+        AnchorPane contextAnchor = new AnchorPane();
+        contextAnchor = edgeContextMenu.load();
+        EdgeContextMenuController controller = edgeContextMenu.getController();
+
+        contextAnchor.setLayoutX(e.getEndNode().getCords()[0]);
+        contextAnchor.setLayoutY(e.getEndNode().getCords()[1]);
+
+        pane.getChildren().add(contextAnchor);
     }
 
     public void handleNodeClicked(Node n) throws IOException {
@@ -153,7 +170,6 @@ public class AdminEditController {
         contextAnchor.setLayoutY(n.getCords()[1]);
 
         pane.getChildren().add(contextAnchor);
-
     }
 
 
