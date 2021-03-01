@@ -57,13 +57,7 @@ public class LoginController {
 
     @FXML
     public void changeLoginPassword() {
-        String username = accountName.getText();
-        String password = passWord.getText();
-        try{
-            if(!App.userService.checkUsername(username).equals("")){
 
-            }
-        }
     }
 }
 
