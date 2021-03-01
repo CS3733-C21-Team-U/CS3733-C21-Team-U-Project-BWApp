@@ -2,7 +2,6 @@ package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
-import edu.wpi.u.users.User;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;

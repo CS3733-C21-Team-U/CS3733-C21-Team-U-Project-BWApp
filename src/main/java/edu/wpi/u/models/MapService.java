@@ -49,7 +49,7 @@ public class MapService {
    * @param path
    * @param tableName
    */
-  public void saveCSVFile(String path, String tableName){
+  public static void saveCSVFile(String path, String tableName){
     Database.getDB().saveCSV(tableName,path, "test"); // TODO: Provide header
   }
 
