@@ -55,8 +55,8 @@ public class NewRequestController {
 //    @FXML public Label errorMessage;
 //    @FXML public Button submitRequestButton;
 
-    newRequestTitleTextField.setText(request.getTitle());
-    newRequestDescriptionTextField.setText(request.getDescription());
+    //newRequestTitleTextField.setText(request.getTitle());
+    //newRequestDescriptionTextField.setText(request.getDescription());
 
 
 
@@ -82,7 +82,7 @@ public class NewRequestController {
 
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
-        newRequestCancelButton
+
         ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
         ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
         for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
