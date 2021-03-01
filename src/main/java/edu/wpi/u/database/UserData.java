@@ -7,6 +7,7 @@ import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-        //this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
+        this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
     }
 
     /**
@@ -112,7 +113,7 @@ public class UserData extends Data{
         else if (type.equals("Guests")){
             typeID = "guestID";
         }
-        String str = "update " + type + " set email=? where userID=?";
+        String str = "update " + type + " set email=? where " + typeID + "=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,newEmail);
@@ -123,6 +124,27 @@ public class UserData extends Data{
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public String getPassword(String userID, String type)  {
+        String typeID ="";
+        String password = "";
+        if (type.equals("Employees")){
+            typeID = "employeeID"; //TODO: Extract this out to a helper function
+        }
+        else if (type.equals("Guests")){
+            typeID = "guestID";
+        }
+        String str = "select password from" + type + " where " + typeID + "=?";
+        try{
+          PreparedStatement ps = conn.prepareStatement(str);
+          ps.setString(1, userID);
+          rset = ps.executeQuery();
+          password = rset.getString("password");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return password;
     }
 
     /**

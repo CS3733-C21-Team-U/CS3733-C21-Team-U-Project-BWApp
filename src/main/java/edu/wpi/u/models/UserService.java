@@ -70,7 +70,12 @@ public class UserService {
      * @param type Employees or Guests (table name)
      */
     public void changeEmail(String userID, String newEmail, String type){
+        this.getActiveUser().setEmail(newEmail);
         ud.changeEmail(userID,newEmail,type);
+    }
+
+    public String getPassword(String userID, String type){
+        return ud.getPassword(userID, type);
     }
 
     /**
@@ -80,6 +85,7 @@ public class UserService {
      * @param type Employees or Guests (table name)
      */
     public void changePassword(String username, String newPassword, String type){
+        this.getActiveUser().setPassword(newPassword);
         ud.changePassword(username,newPassword, type);
     }
 

@@ -64,10 +64,15 @@ public class LoginController {
 
     }
 
-    public  void handleForgotPassword(){
+    public  void handleForgotPassword() throws IOException {
+        //switch scene
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
+//                    Scene scene = new Scene(root);
+        App.getPrimaryStage().getScene().setRoot(root);
 
 
     }
+
 }
 
 

@@ -23,8 +23,10 @@
             <Label text="Load CSV File" />
             <HBox prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <JFXTextField promptText="placeholder.csv" />
+                  <JFXTextField fx:id="filePathTextField" promptText="placeholder.csv" />
                   <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" text="Open Explorer" />
+                  <JFXTextField fx:id="tableNameTextFIeld" labelFloat="true" promptText="New Table Name" />
+                  <JFXButton fx:id="createTableButton" onAction="#handleCreateTable" text="Load CSV and Create New Table" />
                </children>
             </HBox>
             <Label text="Set theme" />
