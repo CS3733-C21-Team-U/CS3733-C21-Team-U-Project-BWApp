@@ -167,4 +167,12 @@ public class Node {
   public String getShortName() {
     return shortName;
   }
+
+  public void setLongName(String longName) {
+    this.longName = longName;
+  }
+
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
+  }
 }

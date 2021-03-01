@@ -9,11 +9,13 @@ import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.users.StaffType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class MapService {
   static MapManager mm = new MapManager();
   static MapData md;
+  public HashMap<String, Integer> currentIDNumber = new HashMap<>();
 
 
   public static void main (String[] args){
@@ -26,7 +28,7 @@ public class MapService {
   }
 
   /**
-   * returns a node object from the node ID referance
+   * returns a node object from the node ID reference
    * @param nodeID
    * @return
    */
@@ -34,6 +36,12 @@ public class MapService {
     return mm.getNodeFromID(nodeID);
   }
 
+  /**
+   *  returns the Edge object given the edge ID reference
+   * @param edgeId
+   * @return
+   */
+  public Edge getEdgeFromID(String edgeId){ return mm.getEdgeFromID(edgeId);}
   /**
    * saves the currtent database to a csv
    * @param path
@@ -49,6 +57,7 @@ public class MapService {
    * @param tableName
    */
   public void loadCSVFile(String path, String tableName){
+    this.currentIDNumber = new HashMap<>();
     Database.getDB().dropValues();
     Database.getDB().readCSV(path,tableName);
   }
@@ -75,19 +84,65 @@ public class MapService {
     }
   }
 
+  public String  addNode (
+          double xCoord,
+          double yCoord,
+          String floor,
+          String building,
+          String nodeType,
+          String longName,
+          String shortName) throws InvalidEdgeException{
+    try{
+      int curIndex = currentIDNumber.get(nodeType + floor) + 1;
+      currentIDNumber.put(nodeType + floor, curIndex);
+      String nodeID = "U" + nodeType + curIndex;
+
+      md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
+      mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");
+      return nodeID;
+    } catch (Exception e){
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Invalid node";
+      throw invalidEdge;
+    }
+  }
+
+  public void addNodeWithID(
+          String nodeID,
+          double xCoord,
+          double yCoord,
+          String floor,
+          String building,
+          String nodeType,
+          String longName,
+          String shortName) throws InvalidEdgeException{
+    try{
+      md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
+      mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");
+    } catch (Exception e){
+      InvalidEdgeException invalidEdge = new InvalidEdgeException();
+      invalidEdge.description = "Invalid node";
+      throw invalidEdge;
+
+    }
+  }
+
   /**
    * updates a nodes data
    * TODO:Make it so more than just the coordinates are updatable
-   * @param node_id
-   * @param x
-   * @param y
+   * @param node_id Node ID of the node to update
+   * @param x       x coordinate
+   * @param y       y coordinate
    * @return
    * TODO throw error if ID is not valid
    */
-  public String updateNode(String node_id, double x, double y) {
+  public String updateNode(String node_id, double x, double y, String shortName, String longName) {
     if (md.isNode(node_id)){
       md.updateCoords(node_id, x, y);
+      md.updLongname(node_id,longName);
+      md.updShortname(node_id, shortName);
       mm.updateCoords(node_id, x, y);
+      mm.updateNames(node_id,shortName,longName);
       return "";
     }
     else {
@@ -101,14 +156,13 @@ public class MapService {
    * @return
    * TODO add error checking on node ID
    */
-  public String deleteNode(String node_id) {
+  public ArrayList<Edge> deleteNode(String node_id) {
     if (md.isNode(node_id)){
       md.deleteNode(node_id);
-      mm.deleteNode(node_id);
-      return "";
+      return mm.deleteNode(node_id);
     }
     else {
-      return node_id;
+      return null;
     }
   }
 
@@ -121,10 +175,11 @@ public class MapService {
    * @throws InvalidEdgeException
    * TODO add Node ID checking
    */
-  public String addEdge(String edge_id, String start_node, String end_node) throws InvalidEdgeException {
+  public String addEdge(String edge_id, String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
-      mm.addEdge(edge_id, start_node, end_node);
+      md.updatePermissions(edge_id, permissions);
+      mm.addEdge(edge_id, start_node, end_node, permissions);
       return "";
     }
     else {

@@ -122,7 +122,6 @@ public class Database {
             FileWriter myWriter = new FileWriter(tempPath);
             myWriter.write(columns[1]);
             myWriter.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

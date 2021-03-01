@@ -23,10 +23,10 @@ public class MapManager {
    * @param _startNodeID
    * @param _endNodeID
    */
-  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID) {
+  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, ArrayList<StaffType> permissions) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
-    Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
+    Edge realEdge = new Edge(_edgeID, _startNode, _endNode, permissions);
     this.allEdges.put(_edgeID, realEdge);
     this.allNodes.put(_startNode.getNodeID(), _startNode);
     this.allNodes.put(_endNode.getNodeID(), _endNode);
@@ -102,10 +102,11 @@ public class MapManager {
    * removes a node and all connected edges
    * @param nodeID
    */
-  public void deleteNode(String nodeID) {
+  public ArrayList<Edge> deleteNode(String nodeID) {
     Node n = this.allNodes.get(nodeID);
 
     LinkedList<String> edgeIDsToRemove = new LinkedList<>();
+    ArrayList<Edge> allRemovedEdges = new ArrayList<>();
     // removes a node and all edges that make it up
     allNodes.remove(nodeID);
     for (Map.Entry<String, Edge> entry : this.allEdges.entrySet()) {
@@ -114,8 +115,12 @@ public class MapManager {
       }
     }
     for (String ID : edgeIDsToRemove) {
+      allRemovedEdges.add(this.allEdges.get(ID));
+    }
+    for (String ID : edgeIDsToRemove) {
       deleteEdge(ID);
     }
+    return allRemovedEdges;
   }
 
   /**
@@ -155,7 +160,16 @@ public class MapManager {
     this.allNodes.get(node_id).updateCords(x,y);
   }
 
-
+  /**
+   * updates the long and short name of the specified node
+   * @param nodeID
+   * @param shortName
+   * @param longName
+   */
+  public void updateNames(String nodeID, String shortName, String longName){
+    this.allNodes.get(nodeID).setShortName(shortName);
+    this.allNodes.get(nodeID).setLongName(longName);
+  }
   /**
    * Runs a A STAR search to find a path between the two nodes specified
    * @param _startNodeID String of node Id for the start node already confirmed valid
@@ -460,7 +474,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edge_id);
     String endNodeId = edge.getEndNode().getNodeID();
     this.deleteEdge(edge_id);
-    this.addEdge(edge_id, start_node,endNodeId);
+    this.addEdge(edge_id, start_node,endNodeId, edge.getUserPermissions());
   }
 
   /**
@@ -473,7 +487,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edge_id);
     String startNodeId = edge.getStartNode().getNodeID();
     this.deleteEdge(edge_id);
-    this.addEdge(edge_id, startNodeId,end_node);
+    this.addEdge(edge_id, startNodeId,end_node, edge.getUserPermissions());
   }
 
   public void updateUserPermissions(String edgeID, ArrayList<StaffType> permissions){
@@ -490,5 +504,9 @@ public class MapManager {
     Collection<Edge> allValues = this.allEdges.values();
     ArrayList<Edge> edgeArrayList = new ArrayList<>(allValues);
     return edgeArrayList;
+  }
+
+  public Edge getEdgeFromID(String edgeId) {
+    return this.allEdges.get(edgeId);
   }
 }
