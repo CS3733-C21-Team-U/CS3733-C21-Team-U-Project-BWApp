@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,15 +24,30 @@
             </Button>
             <VBox layoutX="11.0" layoutY="744.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <children>
-                  <JFXToggleNode minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-width: 3; -fx-border-radius: 30; -fx-border-color: Black;" text="1">
+                  <JFXToggleNode minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="floor" />
                      </toggleGroup>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black; -fx-border-width: 3; -fx-border-radius: 30;" text="2" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black; -fx-border-width: 3; -fx-border-radius: 30;" text="3" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-width: 3; -fx-border-color: Black; -fx-border-radius: 3000;" text="4" toggleGroup="$floor" />
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" style="-fx-background-color: White; -fx-border-color: Black;" text="5" toggleGroup="$floor" />
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="2" toggleGroup="$floor">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </JFXToggleNode>
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="3" toggleGroup="$floor">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </JFXToggleNode>
+                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="4" toggleGroup="$floor">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </JFXToggleNode>
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="60.0" minWidth="60.0" styleClass="toggle-floor" text="5" toggleGroup="$floor" />
                </children>
             </VBox>
          </children>
