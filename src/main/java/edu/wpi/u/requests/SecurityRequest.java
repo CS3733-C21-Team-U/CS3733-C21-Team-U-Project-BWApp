@@ -15,21 +15,6 @@ public class SecurityRequest implements IRequest {
     }
 
     @Override
-    public java.sql.Date getDateCreated() { return (java.sql.Date) this.req.getDateCreated(); }
-
-    @Override
-    public java.sql.Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
-
-    @Override
-    public String getDescription() { return this.req.getDescription(); }
-
-    @Override
-    public String getRequestID() { return this.req.getRequestID(); }
-
-    @Override
-    public String getTitle() { return this.req.getTitle(); }
-
-    @Override
     public String displayLocations() { return this.req.displayLocation(); }
 
     @Override
@@ -48,11 +33,6 @@ public class SecurityRequest implements IRequest {
     public String[] updateDBEntry() {
         String[] queries = new String[2];
         return queries;
-    }
-
-    @Override
-    public String getRequestType() {
-        return null;
     }
 
     @Override

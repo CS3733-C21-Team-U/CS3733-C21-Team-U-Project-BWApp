@@ -150,9 +150,10 @@ public class RequestData extends Data{
                             System.out.println("Item does not exist in Maintenance");
                             break;
                         }
+                        System.out.println(ans.getString(2));
 
-                        result = new MaintenanceRequest(ans.getString("machineUsed"),
-                                ans.getInt("priority"), r);
+                        result = new MaintenanceRequest(ans.getString(2),
+                                ans.getInt(3), r);
                         specificTable.close();
                         break;
 //                    case "Laundry":

@@ -16,17 +16,6 @@ public class MaintenanceRequest implements IRequest {
         this.req = req;
     }
 
-    //Getters for generic request fields
-    @Override
-    public java.sql.Date getDateCreated() { return (java.sql.Date) this.req.getDateCreated(); }
-    @Override
-    public java.sql.Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
-    @Override
-    public String getDescription() { return this.req.getDescription(); }
-    @Override
-    public String getRequestID() { return this.req.getRequestID(); }
-    @Override
-    public String getTitle() { return this.req.getTitle(); }
     @Override
     public String displayLocations() { return this.req.displayLocation(); }
     @Override
@@ -59,11 +48,6 @@ public class MaintenanceRequest implements IRequest {
     public String[] updateDBEntry() {
         String[] queries = new String[2];
         return queries;
-    }
-
-    @Override
-    public String getRequestType() {
-        return "Maintenance";
     }
 
     @Override

@@ -14,20 +14,6 @@ public class LaundryRequest implements IRequest{
         this.req = req;
     }
 
-    @Override
-    public Date getDateCreated() { return (Date) this.req.getDateCreated(); }
-
-    @Override
-    public Date getDateCompleted() { return (Date) this.req.getDateCompleted(); }
-
-    @Override
-    public String getDescription() { return this.req.getDescription(); }
-
-    @Override
-    public String getRequestID() { return this.req.getRequestID(); }
-
-    @Override
-    public String getTitle() { return this.req.getTitle(); }
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }
@@ -57,10 +43,6 @@ public class LaundryRequest implements IRequest{
         return queries;
     }
 
-    @Override
-    public String getRequestType() {
-        return null;
-    }
 
     @Override
     public Request getGenericRequest() {
