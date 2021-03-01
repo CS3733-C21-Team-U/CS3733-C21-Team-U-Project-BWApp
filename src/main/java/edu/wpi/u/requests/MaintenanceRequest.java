@@ -45,9 +45,9 @@ public class MaintenanceRequest implements IRequest {
     }
 
     @Override
-    public String[] updateDBEntry() {
-        String[] queries = new String[2];
-        return queries;
+    public String updateDBQuery() {
+        String query = "update Maintenance set machineUsed = '"+machineUsed+"', priority = "+priority+" where requestID = '"+req.getRequestID()+"'";
+        return query;
     }
 
     @Override

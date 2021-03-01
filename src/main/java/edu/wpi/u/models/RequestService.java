@@ -16,7 +16,7 @@ public class RequestService {
 
 
   static RequestData rd = new RequestData();
-  ArrayList<IRequest> activeRequests = new ArrayList<>(); //TODO: Change to IRequest, fix errors that will appear below
+  ArrayList<IRequest> activeRequests = new ArrayList<>();
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
@@ -90,16 +90,17 @@ public class RequestService {
 
   public String updateRequest(String requestID, String title, String description,Date dateCompleted, LinkedList<String> location, String type, LinkedList<String> assignee, String creator){
     //Scucess
-//    for(Request r : this.activeRequests){
-//      if(r.getRequestID() == requestID){
-//        if(dateCompleted != null){
-//          this.activeRequests.remove(r);
-//        }
-//        r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
-//        //rd.updateRequest(r); TODO: replace using interface
-//        return "";
-//      }
-//    }
+   for(IRequest Ir : this.activeRequests){
+     Request r = Ir.getGenericRequest();
+      if(r.getRequestID() == requestID){
+       if(dateCompleted != null){
+         this.activeRequests.remove(r);
+        }
+       r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
+        rd.updateRequest(Ir);
+        return "";
+      }
+    }
     return requestID;
     //Fail
     //return requestID;
@@ -111,13 +112,13 @@ public class RequestService {
   }
 
   public String deleteRequest(String requestID) {
-    //Scucess
+    //Success
     Date now = new Date();
     for(IRequest r : this.activeRequests){
-      if(r.getRequestID() == requestID){
+      if(r.getGenericRequest().getRequestID() == requestID){
         r.getGenericRequest().setDateCompleted(now);
         this.activeRequests.remove(r);
-        //rd.delRequest(r); TODO: replace using interface
+        rd.resolveRequest(requestID, (java.sql.Date)now);
         return "";
       }
     }

@@ -1,13 +1,11 @@
 package edu.wpi.u.database;
 
-import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -20,7 +18,7 @@ public class RequestData extends Data{
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
-        printRequests();
+        printTableItem("Requests", "title");
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
         LinkedList<String> s1 = new LinkedList<String>();
@@ -36,19 +34,31 @@ public class RequestData extends Data{
     }
 
 
-    public void updateRequest(Request request){ // TODO: Move to interface
+    public void updateRequest(IRequest obj){
+        Request request= obj.getGenericRequest();
         //requestID, dateCreated, dateCompleted, description, title, type
-        System.out.println("Can anyone even hear me??????????????????????????????????");
+       // System.out.println("Can anyone even hear me??????????????????????????????????");
        // if(request.getDateCompleted() != null) this.resolveRequest(request);
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
         this.updRequestType(request.getRequestID(), request.getType());
         this.updLocations(request.getRequestID(), request.getLocation());
         this.updAssignees(request.getRequestID(), request.getAssignee());
+
+        //Now place into specific subtable based on class
+        try{
+            System.out.println(obj.updateDBQuery());
+            PreparedStatement ps1 = conn.prepareStatement(obj.updateDBQuery());
+            ps1.execute();
+        }
+        catch (Exception e){
+            System.out.println("Check " + request.getType() + "update query");
+            e.printStackTrace();
+        }
+
     }
 
-   /* public void updateRequest(Request request){ // TODO: Move to interface
-        *//*
+   /* public void updateRequest(Request request){ //
         requestID, dateCreated, dateCompleted, description, title, type
          *//*
         System.out.println("Can anyone even hear me??????????????????????????????????");
@@ -328,21 +338,12 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void printRequests() {
-        try {
-            String str = "select * from Requests";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rset = ps.executeQuery();
-            while (rset.next()) {
-                String id = rset.getString("requestID");
-                System.out.println("Request id: " + id);
-            }
-            rset.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
+    /**
+     * For debugging
+     * @param tableName
+     * @return number of entries in table
+     */
     public int getNumTableItems(String tableName) {
 
         try {

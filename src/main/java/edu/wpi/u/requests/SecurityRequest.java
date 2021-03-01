@@ -30,9 +30,9 @@ public class SecurityRequest implements IRequest {
     }
 
     @Override
-    public String[] updateDBEntry() {
+    public String updateDBQuery() {
         String[] queries = new String[2];
-        return queries;
+        return "queries";
     }
 
     @Override
