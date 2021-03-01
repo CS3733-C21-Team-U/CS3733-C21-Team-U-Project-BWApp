@@ -13,9 +13,12 @@ public class EdgeContextMenuController {
     @FXML
     JFXComboBox nodeTypeDrop;
 
+    /**
+     * To be run when save button for edge context menu is pressed. Needs to check if a new edge can be saved, then it saved one
+     */
     @FXML
     public void handleSaveButton(){
-        App.mapService.updateEdgePermissions("",new ArrayList<StaffType>()); // TODO: update edges properly
+        //App.mapService.updateEdgePermissions("",new ArrayList<StaffType>()); // TODO: update edges properly
     }
 
 }
