@@ -119,8 +119,9 @@
 
 .toggle-floor{
     -fx-background-color: white;
-    -fx-border-radius: 0;
+    -fx-border-radius: 3000;
     -fx-border-width: 2;
+    -fx-background-radius: 3000;
     -fx-border-color: black;
 }
 
