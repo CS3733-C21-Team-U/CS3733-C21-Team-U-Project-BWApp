@@ -10,10 +10,12 @@ public class TextualDirections {
 
         Node A = new Node("A", 0, 0);
         Node B = new Node("B", 1, 0);
-        Node C = new Node("C", 2, 0);
-        Node D = new Node("D", 2, 1);
-        Node E = new Node("E", 1, 30);
-        Node F = new Node("F", 0, 1);
+        Node C = new Node("C", 1, -1);
+        Node D = new Node("D", 2, -1);
+        Node E = new Node("E", 3, 0);
+        Node F = new Node("F", 4, 0);
+        Node G = new Node("G", 3, -1);
+        Node H = new Node("H", 4, -1);
 
         ArrayList<Node> path = new ArrayList<>();
         path.add(A);
@@ -22,6 +24,8 @@ public class TextualDirections {
         path.add(D);
         path.add(E);
         path.add(F);
+        path.add(G);
+        path.add(H);
 
         System.out.println(getTextualDirections(path));
     }
@@ -58,21 +62,32 @@ public class TextualDirections {
     private static String nodesToTextDirection(Node start, Node end, Node previous){
         String direction = "";
         double angle = getAngle(start,end);
-        if(previous != null){
-            double previousAngle = getAngle(previous,start);
-            double angleDifferance = Math.abs(previousAngle - angle);
-            if(angleDifferance >= 45 && angleDifferance < 135){
-                direction = "Turn left and continue strait for ";
-            }else if(angleDifferance >= 135 && angleDifferance < 225){
-                direction = "Turn around continue strait for ";
-            }else if(angleDifferance >= 225 && angleDifferance < 315){
-                direction = "Turn Right and continue strait for ";
-            }else{
-                direction = "Continue strait for ";
+        if(previous != null) {
+            double previousAngle = getAngle(previous, start);
+            double angleDifferance = angle - previousAngle;
+            if(angleDifferance < 0){
+                angleDifferance = 180 + (180 - Math.abs(angleDifferance));
             }
-            direction = direction + calcDistance(start,end) + "ft";
+            if(angleDifferance >= 22.5 && angleDifferance < 67.5){
+                direction = "Take a slight left turn and continue straight for ";
+            }else if(angleDifferance >= 67.5 && angleDifferance < 112.5){
+                direction = "Take a left turn and continue straight for ";
+            }else if(angleDifferance >= 112.5 && angleDifferance < 157.5){
+                direction = "Take a sharp left turn and continue straight for ";
+            }else if(angleDifferance >= 157.5 && angleDifferance < 202.5){
+                direction = "Turn around continue straight for ";
+            }else if(angleDifferance >= 202.5 && angleDifferance < 247.5){
+                direction = "Take a sharp right turn and continue straight for ";
+            }else if(angleDifferance >= 247.5 && angleDifferance < 292.5){
+                direction = "Take a right turn and continue straight for ";
+            }else if(angleDifferance >= 292.5 && angleDifferance < 337.5){
+                direction = "Take a slight right turn and continue straight for ";
+            }else{
+                direction = "Continue straight for ";
+            }
+            direction = direction + calcDistance(start,end) + "ft\n";
         }else{
-            direction = "Go to the starting location and walk " + calcDistance(start,end) + "ft";
+            direction = "Go to the starting location and walk " + calcDistance(start,end) + "ft\n";
         }
 
         return direction;
@@ -90,9 +105,9 @@ public class TextualDirections {
 
         double angleInRadians = Math.atan2(dY,dX);
         double angleInDegrees = Math.toDegrees(angleInRadians);
-        if(angleInDegrees < 0){
-            angleInDegrees = 180 + Math.abs(angleInDegrees);
-        }
+//        if(angleInDegrees < 0){
+//            angleInDegrees = 180 + Math.abs(angleInDegrees);
+//        }
         return angleInDegrees;
     }
 
