@@ -3,7 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,16 +16,18 @@
       <VBox layoutX="336.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="Add User" />
-            <Label text="Enter UserID" />
-            <JFXTextField fx:id="userIdTextField" />
             <Label text="Enter Username" />
             <JFXTextField fx:id="usernameField" />
             <Label text="Enter Name" />
             <JFXTextField fx:id="nameTextField" />
+            <Label text="Enter Email" />
+            <JFXTextField fx:id="emailTextField" />
             <Label text="Enter Phone #" />
             <JFXTextField fx:id="phoneNumTextField" />
             <Label text="Enter User Password" />
             <JFXTextField fx:id="passwordTextField" />
+            <JFXDatePicker fx:id="appointmentDatePicker" />
+            <JFXTimePicker fx:id="appointmentTimePicker" />
             <Label text="Enter User Type" />
             <JFXComboBox fx:id="userTypeComboBox" />
             <Label text="Is this user staff?" />

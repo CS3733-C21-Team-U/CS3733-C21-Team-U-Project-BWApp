@@ -74,6 +74,7 @@ public class UserService {
         ud.changeEmail(userID,newEmail,type);
     }
 
+
     public String getPassword(String userID, String type){
         return ud.getPassword(userID, type);
     }

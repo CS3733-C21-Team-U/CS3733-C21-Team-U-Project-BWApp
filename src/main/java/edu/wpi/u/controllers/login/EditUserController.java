@@ -1,9 +1,11 @@
 package edu.wpi.u.controllers.login;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import edu.wpi.u.App;
+import edu.wpi.u.users.StaffType;
+
+import java.time.Instant;
+import java.util.Date;
 
 public class EditUserController {
 
@@ -17,6 +19,8 @@ public class EditUserController {
    public JFXComboBox userTypeComboBox;
    public JFXCheckBox userEmployStatus;
    public JFXButton editUserButton;
+    public JFXTextField emailTextField;
+    public JFXDatePicker appointmentDatePicker;
 
 
     /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
@@ -29,6 +33,13 @@ public class EditUserController {
      * @param userEmployStatus Checkbox to indicate user employment
      */
     public void handleEditUser( JFXTextField nameTextField, JFXTextField phoneNumTextField, JFXTextField passwordTextField, JFXComboBox userTypeComboBox, JFXCheckBox userEmployStatus){
+        String userType = "";
+        if(userEmployStatus.isSelected()){
+            App.userService.updateEmployee(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
+        }
+        else{
+            App.userService.updateGuest(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
+        }
 
     }
 

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -26,10 +27,13 @@
             <JFXTextField fx:id="usernameField" />
             <Label text="Edit Name" />
             <JFXTextField fx:id="nameTextField" />
+            <Label text="Edit Email" />
+            <JFXTextField fx:id="emailTextField" />
             <Label text="Edit Phone #" />
             <JFXTextField fx:id="phoneNumTextField" />
             <Label text="Edit User Password" />
             <JFXTextField fx:id="passwordTextField" />
+            <JFXDatePicker fx:id="appointmentDatePicker" />
             <Label text="Edit User Type" />
             <JFXComboBox fx:id="userTypeComboBox" />
             <Label text="Edit User Employment Status" />

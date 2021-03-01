@@ -55,6 +55,7 @@ public class SettingsPageController {
 
     public void handleSetTheme() {
         // Would likley call upon a method from another class to switch the theme, pretty sure this is on Kohmei.
+        //App.getInstance().switchTheme();
     }
 
     /**
@@ -74,7 +75,6 @@ public class SettingsPageController {
     }
 
     /** This function intakes two text fields and makes a change to the user in the database one the button is handled.
-     * @param emailAddressTextField email address of user
      */
     public void handleContactChange(){
         String userType = "";
