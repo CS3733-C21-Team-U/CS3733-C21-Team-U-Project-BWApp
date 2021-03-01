@@ -54,6 +54,17 @@ public class LoginController {
         }
 //Throws exceptions if username or password not found
     }
+
+    @FXML
+    public void changeLoginPassword() {
+        String username = accountName.getText();
+        String password = passWord.getText();
+        try{
+            if(!App.userService.checkUsername(username).equals("")){
+
+            }
+        }
+    }
 }
 
 
