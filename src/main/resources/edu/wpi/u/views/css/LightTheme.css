@@ -1,16 +1,22 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Regular';*/
-/*    src: url('Rubik-Regular.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Bold';*/
-/*    src: url('Rubik-Bold.ttf');*/
-/*}*/
-/*@font-face {*/
-/*    -fx-font-family: 'Rubik Medium';*/
-/*    src: url('Rubik-Medium.ttf');*/
-/*}*/
+@font-face {
+    font-family: Roboto;
+    src: url("Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Medium";
+    src: url("Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Light";
+    src: url("Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Bold";
+    src: url("Roboto-Bold.ttf");
+}
 /*Base colors here------------------------*/
 
 .root{
@@ -23,14 +29,131 @@
     -error: #B00020;
     -onPrimary: #FFFFFF;
     -onSecondary: #000000;
-    -onBackground: #000000;
+    -onBackground: #646464;
     -onSurface: #000000;
     -onError: #FFFFFFF;
+    -fx-text-fill: -onBackground;
+    -fx-font-family: "Roboto Medium";
 }
 
-/*Base colors here------------------------*/
+/* ----------- BASIC COLORS (SVGS) -------------- */
+.on-background{
+    -fx-fill: -onBackground;
+}
+
+.on-primary{
+    -fx-fill: -onPrimary;
+}
 
 
+/* ----------- LABEL -------------- */
+.label{
+    -fx-text-fill: -onBackground;
+}
+
+
+/*Base colors end------------------------*/
+
+/* ----------- TEXT FIELD -------------- */
+.jfx-text-field {
+    -jfx-focus-color: -primary;
+    -jfx-unfocus-color: -onBackground;
+    -fx-pref-height: 30;
+}
+
+/* ----------- PASSWORD FIELD -------------- */
+.jfx-password-field {
+    -jfx-focus-color: -primary;
+    -jfx-unfocus-color: -onBackground;
+    -fx-pref-height: 30;
+}
+
+
+/* ----------- CHECK-BOX -------------- */
+.jfx-check-box {
+    -jfx-checked-color: -primary;
+}
+
+/* ----------- RADIO-BUTTON -------------- */
+.jfx-radio-button {
+    -jfx-selected-color: -primary;
+}
+
+/* ----------- TOGGLE-NODE -------------- */
+.jfx-toggle-node{
+    -fx-min-width: 56px;
+    -fx-min-height: 56px;
+    -fx-pref-width: 56px;
+    -fx-pref-height: 56px;
+    -fx-max-width: 56px;
+    -fx-max-height: 56px;
+    -fx-background-color: -background;
+    -fx-text-fill: -onBackground;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -jfx-rippler-fill: -primary;
+    -jfx-toggle-color: derive(-primary, 100%);
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-width: 1px;
+    -fx-border-color: derive(-onBackground, 99%);
+}
+.jfx-toggle-node .jfx-rippler{
+    -jfx-rippler-fill: -primary;
+}
+/* ----------- SLIDER -------------- */
+.jfx-slider {
+    -jfx-default-thumb: -primary;
+}
+
+/* ----------- BUTTON -------------- */
+.jfx-button{
+    -fx-pref-height: 36px;
+    -fx-min-width: 64px;
+}
+.button-contained{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-padding: 0px 16px;
+}
+.button-outlined{
+    -fx-border-color: -primary;
+    -fx-border-radius: 3px;
+    -fx-text-fill: -primary;
+    -fx-padding: 0px 16px;
+}
+.button-text{
+    -fx-text-fill: -primary;
+    -fx-padding: 0px 8px;
+}
+
+/* ----------- FLOATING ACTION BUTTON -------------- */
+.fab-default{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-min-width: 56px;
+    -fx-min-height: 56px;
+    -fx-pref-width: 56px;
+    -fx-pref-height: 56px;
+    -fx-max-width: 56px;
+    -fx-max-height: 56px;
+    -fx-background-radius: 28px;
+    -fx-padding: 20px;
+}
+
+.fab-mini{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-background-radius: 20px;
+}
+
+/* ----------- TAB PANE -------------- */
 .jfx-tab-pane .headers-region {
     -fx-background-color: -background;
 }
@@ -38,7 +161,17 @@
     -fx-background-color: -background;
 }
 .jfx-tab-pane .tab-selected-line{
-    -fx-stroke : RED;
+    -fx-background-color: -primary;
+}
+.jfx-tab-pane .tab-selected-line{
+    -fx-background-color: -primary;
+}
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: -primary;
+}
+.jfx-tab-pane .headers-region > .tab-selected-line{
+    -fx-pref-width: 1px !important;
+    -fx-pref-height: 3px;
 }
 
 .tab-pane {
