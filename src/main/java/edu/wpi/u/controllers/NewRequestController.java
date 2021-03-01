@@ -1,25 +1,14 @@
 package edu.wpi.u.controllers;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphService;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
-import java.util.*;
-import java.util.stream.*;
 
-import java.util.Date;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 
@@ -108,14 +97,14 @@ public class NewRequestController {
                         lLConverter(locationArrayList),
                         serviceTypeTextField.getText(),
                         userID );
-                App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
+                App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
 
             }
 
     }
 
     public void handleLeaveAdd(){
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
     }
 
 
