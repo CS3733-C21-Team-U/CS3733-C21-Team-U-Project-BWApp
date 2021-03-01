@@ -157,6 +157,26 @@
     -fx-border-width: 1px;
     -fx-border-color: derive(-onBackground, 99%);
 }
+/* ----------- TOGGLE-NODE -------------- */
+.floor-toggle{
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-max-width: 70px;
+    -fx-max-height: 70px;
+    -fx-background-color: -background;
+    -fx-text-fill: -onBackground;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -jfx-rippler-fill: -primary;
+    -jfx-toggle-color: derive(-primary, 100%);
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-width: 1px;
+    -fx-border-color: derive(-onBackground, 99%);
+}
+
 .jfx-toggle-node .jfx-rippler{
     -jfx-rippler-fill: -primary;
 }
@@ -204,8 +224,8 @@
 
 /* ----------- FLOATING ACTION BUTTON -------------- */
 .fab-default{
-    -fx-background-color: -primary;
-    -fx-text-fill: -onPrimary;
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
     -fx-min-width: 56px;
     -fx-min-height: 56px;
     -fx-pref-width: 56px;

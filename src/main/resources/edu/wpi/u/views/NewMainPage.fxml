@@ -322,7 +322,10 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                      <padding>
                         <Insets top="80.0" />
-                     </padding></AnchorPane>
+                     </padding>
+                     <children>
+                        <fx:include source="AdminEdit.fxml" AnchorPane.bottomAnchor="0.0" />
+                     </children></AnchorPane>
                </content>
                <graphic>
                   <Group>
