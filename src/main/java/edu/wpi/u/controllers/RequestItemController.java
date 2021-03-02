@@ -11,7 +11,7 @@ public class RequestItemController {
 
     //@FXML public Button expandCollapseButton;     DNE
     //@FXML public Button editRequestButton;        DNE
-    @FXML public AnchorPane requestItemAnchor;
+    //@FXML public AnchorPane requestItemAnchor;    DNE
 
     //@FXML public Button deleteRequestButton;      DNE
 

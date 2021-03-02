@@ -22,7 +22,7 @@ public class RequestDetailController {
     @FXML ListView commentListView;
     @FXML StackPane requestDetailStack;
     @FXML Pane requestDetailSecurityPane;
-    @FXML Pane requestDetailReligionPane;
+    @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
 
     requestDetailTitleLabel.setText(request.getTitle());

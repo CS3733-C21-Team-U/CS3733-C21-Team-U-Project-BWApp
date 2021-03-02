@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="requestItemAnchor" prefHeight="200.0" prefWidth="1631.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
+<AnchorPane prefHeight="200.0" prefWidth="1631.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
    <children>
       <JFXButton layoutX="1448.0" layoutY="146.0" onAction="#handleViewRequestInDetailButton" text="View Request Details" />
       <Label fx:id="requestItemTitleLabel" layoutX="22.0" layoutY="22.0" text="Title" />
