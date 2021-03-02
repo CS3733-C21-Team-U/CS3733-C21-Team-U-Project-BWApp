@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.exceptions.InvalidEdgeException;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -36,15 +37,21 @@ public class NodeContextMenuController {
         list.add("PARK");
         list.add("LABS");
 
-        longNameText.setText(thisNode.getLongName());
-        shortNameText.setText(thisNode.getShortName());
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
+            longNameText.setText(thisNode.getLongName());
+            shortNameText.setText(thisNode.getShortName());
+        }
 
         nodeTypeDrop.setItems(list); //I'm in the middle of fixing this
     }
     @FXML
-    public void handleSaveButton(){
-        Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
-        App.undoRedoService.updateNode(thisNode.getNodeID(),thisNode.getCords()[0],thisNode.getCords()[1],longNameText.getText(),shortNameText.getText());
+    public void handleSaveButton() throws InvalidEdgeException {
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
+            Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
+            App.undoRedoService.updateNode(thisNode.getNodeID(), thisNode.getCords()[0], thisNode.getCords()[1], longNameText.getText(), shortNameText.getText());
+        } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
+            App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), nodeTypeDrop.getValue().toString(),longNameText.getText(), shortNameText.getText());
+        }
     }
     @FXML
     public void handleDeleteButton(){

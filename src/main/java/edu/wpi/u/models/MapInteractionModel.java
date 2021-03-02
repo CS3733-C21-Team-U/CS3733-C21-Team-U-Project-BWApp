@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 public class MapInteractionModel {
 
+
+    private String currentAction = "NONE";
     private String nodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
+
+    private String building = "Faulkner";
 
     public AnchorPane selectedNodeContextBox;
     public AnchorPane selectedEdgeContextBox;
@@ -18,6 +22,25 @@ public class MapInteractionModel {
     public String floor = "G";
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
+
+    public String getBuilding() {
+        return building;
+    }
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getCurrentAction() {
+        return currentAction;
+    }
+
+    public void setCurrentAction(String currentAction) {
+        this.currentAction = currentAction;
+    }
 
     public String getNodeID() {
         return nodeID;

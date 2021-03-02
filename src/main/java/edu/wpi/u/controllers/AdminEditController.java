@@ -37,7 +37,7 @@ public class AdminEditController {
      * Initializes the admin map screen with map zoom, and all node and edge placement
      * @throws IOException
      */
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
         App.mapService.loadStuff();
         // Loading the map
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
@@ -63,6 +63,25 @@ public class AdminEditController {
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
+            App.mapInteractionModel.setCoords(new double[]{e.getX(),e.getY()});
+
+            try {
+                if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
+                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+                    AnchorPane contextAnchor = new AnchorPane();
+                    contextAnchor = nodeContextMenu.load();
+                    NodeContextMenuController controller = nodeContextMenu.getController();
+                    contextAnchor.setLayoutX(e.getX());
+                    contextAnchor.setLayoutY(e.getY());
+                    pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+                    pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+                    pane.getChildren().add(contextAnchor);
+                    App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+                }
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+
             if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
                 // increment of scale makes more sense exponentially instead of linearly
                 map.animate(DURATION)
@@ -94,10 +113,15 @@ public class AdminEditController {
 
     } // End of initialize
 
+    @FXML
+    public void handleAddNodeButton(){
+        App.mapInteractionModel.setCurrentAction("ADDNODE");
+    }
 
-
-
-
+    @FXML
+    public void handleAddEdgeButton(){
+        App.mapInteractionModel.setCurrentAction("ADDEDGE");
+    }
 
     /**
      * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
