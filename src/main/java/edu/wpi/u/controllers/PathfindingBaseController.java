@@ -126,8 +126,8 @@ public class PathfindingBaseController {
         });
 
         // Creating nodes
-        generateNodes(App.mapInteractionModel.floor);
-        generateEdges(App.mapInteractionModel.floor);
+        //generateNodes(App.mapInteractionModel.floor);
+        //generateEdges(App.mapInteractionModel.floor);
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
             pane.getChildren().remove(node);
@@ -329,8 +329,8 @@ public class PathfindingBaseController {
     public void loadNewMapAndGenerateHelper(String floor, String resource){
         App.mapInteractionModel.floor = floor;
         App.mapInteractionModel.mapImageResource.set(resource);
-        generateNodes(floor);
-        generateEdges(floor);
+        //generateNodes(floor); Since this is just the pathfinding page, we don't want to generate all the nodes and edges
+        //generateEdges(floor);
     }
 
     /**
