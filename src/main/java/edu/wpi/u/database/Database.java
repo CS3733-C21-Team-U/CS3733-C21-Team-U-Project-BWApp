@@ -18,6 +18,7 @@ public class Database {
     public Database() {
         driver();
         connect();
+        makeCSVDependant(false);
         createTables();
     }
 
@@ -73,7 +74,7 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))"; //TODO: Delete Type
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -96,8 +97,20 @@ public class Database {
                 String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
+                //Service Request Tables
+                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
+                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
+                maintenanceRQ.execute();
+
+                String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+                LaundryRQ.execute();
+
+                String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
+                SecurityRQ.execute();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Table creation failed");
             e.printStackTrace();
         }
@@ -172,9 +185,9 @@ public class Database {
         }
     }
 
-    public void printRequests() {
+    public void printRequests(String aTable) { //what is happening here?
         try {
-            String str = "select * from Requests";
+            String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
             while (rset.next()) {
@@ -217,15 +230,78 @@ public class Database {
             s.execute(str);
             str = "delete from Assignments";
             s.execute(str);
-        } catch (SQLException e) {
+            str = "delete from Maintenance";
+            s.execute(str);
+            str = "delete from Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+        }
+    }
+
+    public void deleteTables() {
+        //System.out.println("here2");
+        try {
+            Statement s = conn.createStatement();
+            String str = "drop Nodes";
+            s.execute(str);
+            str = "drop Edges";
+            s.execute(str);
+            str = "drop Requests";
+            s.execute(str);
+            str = "drop Locations";
+            s.execute(str);
+            str = "drop Assignments";
+            s.execute(str);
+            str = "drop Maintenance";
+            s.execute(str);
+            str = "drop Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //TODO: Test
+
+
+    public void saveAll(){
+        saveCSV( "Requests", "Requests.csv","Test");
+        saveCSV( "Assignments", "Assignments.csv","Test");
+        saveCSV( "Locations", "Locations.csv","Test");
+        saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
+        saveCSV( "Edges", "OutsideMapEdges.csv","Test");
+        saveCSV( "Maintenance","Maintenance.csv", "Test");
+        //saveCSV( "Laundry", "Laundry.csv","Test");
+        //saveCSV( "Laundry", "Security.csv","Test");
+    }
+
+    public void makeCSVDependant(boolean yes){
+
+        if(!yes) return;
+        dropValues();
+        deleteTables();
+        readCSV("Requests.csv", "Requests");
+        readCSV("Locations.csv", "Locations");
+        readCSV("Assignments.csv", "Assignments");
+        readCSV("OutsideMapNodes.csv", "Nodes");
+        readCSV("OutsideMapEdges.csv", "Edges");
+        readCSV("Maintenance.csv", "Maintenance");
+        //readCSV("Laundry.csv", "Laundry");
+
+
+
+    }
+
+
+
     public void stop() {
         try{
-            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
         }
         catch (Exception e){
             e.printStackTrace();

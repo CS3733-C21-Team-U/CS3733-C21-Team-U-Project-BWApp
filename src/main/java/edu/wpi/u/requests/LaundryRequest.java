@@ -4,17 +4,18 @@ import java.sql.Date;
 import java.util.LinkedList;
 
 //TODO: Private or protected fields?
-public class SecurityRequest implements IRequest {
-    private String threatLevel;
+public class LaundryRequest implements IRequest{
+    private String washer;
     private Request req;
     private int priority;
 
     //Composition Pattern Type
-    public SecurityRequest(String threatLevel, int priority, Request req) {
-        this.threatLevel = threatLevel;
+    public LaundryRequest(String washer, int priority, Request req) {
+        this.washer = washer;
         this.priority = priority;
         this.req = req;
     }
+
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }
@@ -26,14 +27,14 @@ public class SecurityRequest implements IRequest {
     public LinkedList<Serializable> getSpecificData() {
         LinkedList<Serializable> result = new LinkedList<Serializable>();
         result.addFirst(priority);
-        result.addFirst(threatLevel);
+        result.addFirst(washer);
         return result;
     }
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
         priority = (int)l.get(0);
-        threatLevel = (String)l.get(1);
+        washer = (String)l.get(1);
     }
 
     @Override
@@ -47,6 +48,7 @@ public class SecurityRequest implements IRequest {
         String[] queries = new String[2];
         return "queries";
     }
+
 
     @Override
     public Request getGenericRequest() {

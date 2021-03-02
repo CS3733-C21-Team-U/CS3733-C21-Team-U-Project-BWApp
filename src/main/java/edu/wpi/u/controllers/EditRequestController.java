@@ -57,7 +57,7 @@ public class EditRequestController {
     ErrorMessageController controller2;
 
     public void initialize() throws IOException {
-        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
 
         editTitleField.setText(currRequest.getTitle());
         editDescripArea.setText(currRequest.getDescription());

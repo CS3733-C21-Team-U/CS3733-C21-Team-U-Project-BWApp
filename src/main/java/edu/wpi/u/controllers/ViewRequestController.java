@@ -21,11 +21,13 @@ public class ViewRequestController {
 
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
-        ArrayList<Request> listOfRequests = App.requestService.getRequests();
+
+        ArrayList<IRequest> listOfRequests = App.requestService.getRequests();
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
             FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewRequestItem.fxml"));
             AnchorPane request = requestLoader.load();
+            Request req = listOfRequests.get(i).getGenericRequest();
             RequestItemController controller = requestLoader.getController();
             String temp = listOfRequests.get(i).getTitle();
             controller.myRequestID = listOfRequests.get(i).getRequestID();

@@ -109,16 +109,8 @@ public class App extends Application {
 
   public void end() {
     System.out.println("Shutting Down");
-    requestService.saveCSVFile("Requests.csv", "Requests");
-    requestService.saveCSVFile("Assignments.csv", "Assignments");
-    requestService.saveCSVFile("Locations.csv", "Locations");
-    //TODO: Load Database through CSVs only on first invocation (when its empty)
-    //Database.getDB().stop();
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
-//    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
-//    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
+    Database.getDB().saveAll();
+    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
