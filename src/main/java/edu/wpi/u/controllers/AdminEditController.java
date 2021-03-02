@@ -34,6 +34,7 @@ public class AdminEditController {
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
+    ImageView node = new ImageView();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -42,7 +43,7 @@ public class AdminEditController {
     public void initialize() throws Exception {
         App.mapService.loadStuff();
         // Loading the map
-        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
+        node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
@@ -114,12 +115,14 @@ public class AdminEditController {
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
             pane.getChildren().remove(node);
-            ImageView newNode = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
-            node.setFitWidth(1786);
+            node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
+            if(App.mapInteractionModel.floor.equals("G")){
+                node.setFitWidth(2987);
+            } else{
+                node.setFitWidth(2470);
+            }
             node.setPreserveRatio(true);
-            pane.getChildren().add(newNode);
-            pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
-            pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
+            pane.getChildren().add(node);
         });
 
 
@@ -171,12 +174,13 @@ public class AdminEditController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
+        pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
                     placeNodesHelper(n);
                 }else{
-                    System.out.println(n.getFloor());
+                    System.out.println(n.getFloor()+" is not a valid node!!! We cant put this on the screen bruh");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -221,14 +225,11 @@ public class AdminEditController {
 
 
     public void generateEdges(String floor){
-        System.out.println("We're outside the function");
-        System.out.println(App.mapService.getEdges());
-        System.out.println("That's all folks");
+        pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
-                System.out.println("The edge is a valid edge for printing");
                 placeEdgesHelper(e);
 
             } else{
@@ -299,5 +300,88 @@ public class AdminEditController {
     public void handleRedoButton() throws Exception{
         App.undoRedoService.redo();
     }
+
+
+    /**
+     * This is a helper function for the floor buttons.
+     * It reloads the correct image onto the GesturePane and
+     * loads the correct nodes onto the screen after deleting the old ones
+     * @param floor this is the floor G, 1, 2, 3, 4, or 5 as a string
+     * @param resource this a path that points to the correct floor map from the base package (/edu/wpi/u...)
+     */
+    public void loadNewMapAndGenerateHelper(String floor, String resource){
+        App.mapInteractionModel.floor = floor;
+        App.mapInteractionModel.mapImageResource.set(resource);
+        generateNodes(floor);
+        generateEdges(floor);
+    }
+
+    /**
+     * This is what changes the map displayed to floor G and reloads the correct nodes
+     */
+    public void handleFloorGButton(){
+        if(!App.mapInteractionModel.floor.equals("G")) {
+            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerFloorG.png");
+        }
+    }
+
+
+    /**
+     * This is what changes the map displayed to floor 1 and reloads the correct nodes
+     */
+    public void handleFloor1Button(){
+        if(!App.mapInteractionModel.floor.equals("1")) {
+            loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+        }
+    }
+
+
+    /**
+     * This is what changes the map displayed to floor 2 and reloads the correct nodes
+     */
+    public void handleFloor2Button(){
+        if(!App.mapInteractionModel.floor.equals("2")) {
+            loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+        }
+    }
+
+
+    /**
+     * This is what changes the map displayed to floor 3 and reloads the correct nodes
+     */
+    public void handleFloor3Button(){
+        if(!App.mapInteractionModel.floor.equals("3")) {
+            loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+        }
+    }
+
+
+    /**
+     * This is what changes the map displayed to floor 4 and reloads the correct nodes
+     */
+    public void handleFloor4Button(){
+        if(!App.mapInteractionModel.floor.equals("4")) {
+            loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+        }
+    }
+
+
+    /**
+     * This is what changes the map displayed to floor 5 and reloads the correct nodes
+     */
+    public void handleFloor5Button(){
+        if(!App.mapInteractionModel.floor.equals("5")) {
+            loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 }
