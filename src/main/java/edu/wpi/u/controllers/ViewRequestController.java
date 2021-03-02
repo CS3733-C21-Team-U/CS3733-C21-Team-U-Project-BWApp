@@ -2,10 +2,8 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
@@ -64,6 +62,6 @@ public class ViewRequestController {
 
     @FXML
     public void handleNewRequestButton() {
-        new FXMLLoader(getClass().getResource( "/edu/wpi/u/views/MakeEditRequest.fxml"));
+        new FXMLLoader(getClass().getResource("/edu/wpi/u/views/MakeANewRequest.fxml"));
     }
 }
