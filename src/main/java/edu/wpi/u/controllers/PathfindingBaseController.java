@@ -321,7 +321,7 @@ public class PathfindingBaseController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
-            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerFloorG.png");
+            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             edgeNodeGroup.toFront();
 
