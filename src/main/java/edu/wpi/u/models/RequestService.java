@@ -43,31 +43,17 @@ public class RequestService {
   Make sure x & y are positive integers within the map coordinate range
   */
   public String addRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics) {
-    /*
-                        descriptionTextField.getText(),
-                        lLConverter(assigneeArrayList),
-                        titleTextField.getText(),
-                        lLConverter(locationArrayList),
-                        serviceTypeTextField.getText(),
-                        userID );
-     */
-    //Scucess
+
+    IRequest result = new RequestFactory().makeRequest(type);
+
     Random rand = new Random();
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
     Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
 
-    // TODO: Add Exception for error checking
-    IRequest result = new RequestFactory().makeRequest(type);
-
-
-    LinkedList<Serializable> l = new LinkedList<Serializable>();
-    l.addLast("machine");
-    l.addLast(1);
-
     result.setRequest(newRequest);
-    result.setSpecificData(l);
+    result.setSpecificData(specifics);
 
     rd.addRequest(result);
     this.activeRequests.add(result);
@@ -86,10 +72,12 @@ public class RequestService {
    for(IRequest Ir : this.activeRequests){
      Request r = Ir.getGenericRequest();
      if(r.getRequestID() == requestID){
-       if(dateGiven != null){ //TODO: Check if this is correct
+       /*if(dateGiven != null){ // No longer Used
          this.activeRequests.remove(r);
-       }
+       }*/
        r.editRequest(dateGiven,description,title,location,type,assignee,creator);
+       Ir.setRequest(r);
+       Ir.setSpecificData(specifics);
        rd.updateRequest(Ir);
        return "";
      }

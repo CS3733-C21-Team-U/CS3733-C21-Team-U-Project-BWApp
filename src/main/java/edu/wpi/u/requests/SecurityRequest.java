@@ -11,11 +11,6 @@ public class SecurityRequest implements IRequest {
 
     public SecurityRequest(){};
     //Composition Pattern Type
-    public SecurityRequest(String threatLevel, int priority, Request req) {
-        this.threatLevel = threatLevel;
-        this.priority = priority;
-        this.req = req;
-    }
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }

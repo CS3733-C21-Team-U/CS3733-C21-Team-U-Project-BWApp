@@ -9,15 +9,7 @@ public class LaundryRequest implements IRequest{
     private Request req;
     private int priority;
 
-
     public LaundryRequest() { }
-    //Composition Pattern Type
-    public LaundryRequest(String washer, int priority, Request req) {
-        this.washer = washer;
-        this.priority = priority;
-        this.req = req;
-    }
-
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }

@@ -12,12 +12,6 @@ public class MaintenanceRequest implements IRequest {
     private int priority;
 
     public MaintenanceRequest() { }
-    //some pattern type idk
-//    public MaintenanceRequest(String machine, int priority, Request req) {
-//        this.machineUsed = machine;
-//        this.priority = priority;
-//        this.req = req;
-//    }
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }
