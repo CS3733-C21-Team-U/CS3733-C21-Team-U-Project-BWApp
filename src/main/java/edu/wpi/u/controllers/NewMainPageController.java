@@ -53,6 +53,7 @@ public class NewMainPageController {
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
     public StackPane newMainPageStackPane;
+    public SVGPath themeIcon;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -61,6 +62,8 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
+        App.themeSVG = themeIcon;
 
         listViewDemo.setItems(listView);
 
