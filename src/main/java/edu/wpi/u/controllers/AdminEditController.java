@@ -84,12 +84,12 @@ public class AdminEditController {
             pane.getChildren().remove(node);
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
             if(App.mapInteractionModel.floor.equals("G")){
-
+                node.setFitWidth(2987);
+            } else{
+                node.setFitWidth(2470);
             }
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
-            pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
-            pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
         });
 
 
@@ -136,6 +136,7 @@ public class AdminEditController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
+        pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
@@ -186,6 +187,7 @@ public class AdminEditController {
 
 
     public void generateEdges(String floor){
+        pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
