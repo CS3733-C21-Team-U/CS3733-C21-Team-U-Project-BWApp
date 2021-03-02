@@ -36,7 +36,7 @@ public class RequestDetailController {
 
     public void handleRequestDetailCancelButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
