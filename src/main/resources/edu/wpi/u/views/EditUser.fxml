@@ -62,6 +62,11 @@
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></JFXButton>
+            <JFXButton fx:id="addUserButton" buttonType="RAISED" onAction="#handleAddUserPage" prefWidth="475.0" styleClass="button-contained" text="Add New User">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </JFXButton>
          </children>
       </VBox>
    </children>
