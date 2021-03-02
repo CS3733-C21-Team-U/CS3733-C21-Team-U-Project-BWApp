@@ -65,6 +65,20 @@ public class AdminEditController {
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
+        map.setOnMouseDragged(e ->{
+            Affine invMatrix = null;
+            try {
+                invMatrix = map.getAffine().createInverse();
+            } catch (NonInvertibleTransformException nonInvertibleTransformException) {
+                nonInvertibleTransformException.printStackTrace();
+            }
+            Point2D realPoint = invMatrix.transform(e.getX(),e.getY());
+
+            double x = (realPoint.getX()) + map.getLayoutX();
+            double y = (realPoint.getY()) + map.getLayoutY();
+            App.mapInteractionModel.setCoords(new double[]{x,y});
+        });
+
         // Click and scroll map view functionality
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
@@ -88,8 +102,8 @@ public class AdminEditController {
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
                     NodeContextMenuController controller = nodeContextMenu.getController();
-                    contextAnchor.setLayoutX(x);
-                    contextAnchor.setLayoutY(y);
+                    contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
+                    contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]); // Careful
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
                     pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                     pane.getChildren().add(contextAnchor);
@@ -168,21 +182,20 @@ public class AdminEditController {
             });
             node1.setOnMouseDragged(event -> {
                 try {
-                    handleNodeDragged(n); // Set visual position (circle)
+                    handleNodeDragged(node1); // Set visual position (circle)
                 } catch (Exception e) {
                 e.printStackTrace();
                 }
             });
             node1.setOnMouseDragExited(event -> {
                 try {
-                    handleNodeDragExit(n);
+                    handleNodeDragExit(n, node1);
                 } catch (Exception e) {
                     e.printStackTrace(); // Update node's actual storage
                 }
             });
         edgeNodeGroup.getChildren().add(node1);
     }
-
 
     /**
      * This generates the visible nodes that go on a particular floor. This is outside of
@@ -204,8 +217,6 @@ public class AdminEditController {
         });
         edgeNodeGroup.toFront();
     }
-
-
 
     /**
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
@@ -236,8 +247,6 @@ public class AdminEditController {
         edgeNodeGroup.getChildren().add(edge);
     }
 
-
-
     public void generateEdges(String floor){
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
@@ -255,8 +264,6 @@ public class AdminEditController {
         });
         edgeNodeGroup.toFront();
     }
-
-
 
     /**
      * Function called when and edge is clicked on. This brings up the context menu.
@@ -282,8 +289,6 @@ public class AdminEditController {
         }
     }
 
-
-
     /**
      * Function called when a node is clicked. This brings up the context menu.
      * @param n - Node that is clicked on
@@ -308,16 +313,18 @@ public class AdminEditController {
 
     /**
      * Need to: Handle when node is dragged by updating coordinates on screen connecting edges. Coordinates saved in other helper function
-     * @param n - Node being dragged
+     * @param node1 -
      */
-    public void handleNodeDragged(Node n) {
+    public void handleNodeDragged(Circle node1) {
         if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){ // Should this be !(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) ?
+            map.gestureEnabledProperty().set(false); // Disabling map zoom
             System.out.println("You are dragging a node.");
-            App.mapInteractionModel.setNodeID(n.getNodeID());
-            // FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml")); // Don't want a context menu for this
-
             pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox); // Removing previous context menus when dragging
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
+            // Update coordinates of node
+            node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
+            node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
         }
     }
 
@@ -325,8 +332,10 @@ public class AdminEditController {
      * Saves node's coordinates whenever dragging ceases
      * @param n - Node being dragged
      */
-    public void handleNodeDragExit(Node n){
-
+    public void handleNodeDragExit(Node n, Circle node1){
+        map.gestureEnabledProperty().set(true);
+        // Save coordinates of new node
+        System.out.println("Pretend like its actually saving the node here");
     }
 
     @FXML
