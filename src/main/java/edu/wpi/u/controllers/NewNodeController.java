@@ -38,7 +38,7 @@ public class NewNodeController {
                 try {
                     Integer.parseInt(XCoordinate.getText());
                     Integer.parseInt(YCoordinate.getText());
-                App.mapService.addNode(NodeIDField.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
+                //App.mapService.addNode(NodeIDField.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
                 App.rightDrawerRoot.set("/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){

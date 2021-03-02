@@ -1,24 +1,20 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapManager;
+import edu.wpi.u.users.StaffType;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MapData extends Data{
     public MapData(){
         connect();
     }
 
-    public int addNode(
-            String node_id,
-            double x,
-            double y,
-            String floor,
-            String building,
-            String node_type,
-            String longname,
-            String shortname) {
+    public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
         try {
             String str =
                     "insert into Nodes (nodeID, xcoord, ycoord, floor, building, nodeType, longname, shortname, teamAssigned) values (?,?,?,?,?,?,?,?,?)";
@@ -148,6 +144,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
+            System.out.println("Edges are being added to the Database");
             String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
@@ -222,7 +219,7 @@ public class MapData extends Data{
         return 1;
     }
 
-    public void loadGraph(MapManager gm){
+    public void loadGraph(MapManager mm){
         try{
             Statement ps = conn.createStatement();
             String str = "select * from Nodes";
@@ -236,7 +233,14 @@ public class MapData extends Data{
                 String nodeType = rset.getString("nodeType");
                 String longName = rset.getString("longName");
                 String shortName = rset.getString("shortName");
-                gm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+                mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
+                String key = nodeType + floor;
+                int index = Integer.valueOf(id.substring(5,7));
+                if(!App.mapService.currentIDNumber.containsKey(key)){
+                    App.mapService.currentIDNumber.put(key, index);
+                }else if(App.mapService.currentIDNumber.get(key) < index){
+                    App.mapService.currentIDNumber.put(key, index);
+                }
             }
             rset.close();
             String str2 = "select * from Edges";
@@ -246,7 +250,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                gm.addEdge(id,start,end);
+                mm.addEdge(id,start,end, new ArrayList<>());
             }
             rs2.close();
         }
@@ -297,5 +301,85 @@ public class MapData extends Data{
         return null;
     }
 
+    /**
+     * Updates Returns list of users who have permission to inputted edge
+     * @param edgeID - Desired edge
+     * @return Arraylist of Strings, representing types of users with permission
+     * TODO: Update this to return a list of StaffType
+     */
+    public ArrayList<StaffType> getUserTypes(String edgeID) {
+        ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
+        try {
+            String str = "select * from Permissions where edgeID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, edgeID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                userTypes.add(StaffType.valueOf(rs.getString("userType")));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userTypes;
+    }
 
+    /**
+     * Updates multiple user types assosciated with the edge at once by deleting
+     * the edge's past permissions and adding new ones specified by the list
+     * @param edgeID - Desired edge
+     * @param permissions - new permission to be added
+     */
+    public void updatePermissions(String edgeID, ArrayList<StaffType> permissions){
+        try {
+            String str = "delete from Permissions where edgeID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,edgeID);
+            ps.execute();
+            // Add function
+            for(StaffType user: permissions){
+                addPermission(edgeID, user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update permissions.");
+        }
+    }
+
+    /**
+     * Adds a single specified user type to the table for the specified edge (new permission)
+     * @param edgeID - Desired edge
+     * @param staffType - New permission to be added
+     */
+    public void addPermission(String edgeID, StaffType staffType){
+        try {
+            String str = "insert into Permissions (permissionID, edgeID, userType) values (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,"" + edgeID + "_" + String.valueOf(staffType));
+            ps.setString(2, edgeID);
+            ps.setString(3, String.valueOf(staffType));
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to add permission.");
+        }
+    }
+
+    /**
+     * Removes a single permission from the table
+     * @param edgeID - Edge in position
+     * @param stafftype - User type to be added to permission
+     */
+    public void removePermission(String edgeID, StaffType stafftype){
+        try {
+            String str = "delete from Permissions where edgeID=? and userType=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, edgeID);
+            ps.setString(2,String.valueOf(stafftype));
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to remove permission.");
+        }
+    }
 }

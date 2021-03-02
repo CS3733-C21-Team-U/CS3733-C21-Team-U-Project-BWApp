@@ -64,6 +64,8 @@ public class PathfindingRightPageController {
 
     }
 
+
+
     public void handleFindPathButton(){
 
             if (listEntryButton.isSelected()) {

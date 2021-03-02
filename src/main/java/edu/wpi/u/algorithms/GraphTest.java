@@ -3,6 +3,8 @@ package edu.wpi.u.algorithms;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.MapManager;
 
+import java.util.ArrayList;
+
 public class GraphTest {
 
   public static void main(String[] args) throws PathNotFoundException {
@@ -21,19 +23,23 @@ public class GraphTest {
     graph.addNodeObject(E);
     graph.addNodeObject(F);
 
-    graph.addEdge("1", "A", "B");
-    graph.addEdge("2", "B", "C");
-    graph.addEdge("3", "D", "C");
-    graph.addEdge("4", "D", "E");
-    graph.addEdge("5", "E", "F");
-    graph.addEdge("6", "F", "A");
-    graph.addEdge("7", "F", "B");
-    graph.addEdge("8", "E", "A");
-    graph.addEdge("9", "B", "D");
-    graph.addEdge("10", "A", "D");
-    graph.addEdge("11", "F", "D");
-    graph.addEdge("12", "E", "C");
+//    graph.addEdge("1", "A", "B");
+//    graph.addEdge("2", "B", "C");
+//    graph.addEdge("3", "D", "C");
+//    graph.addEdge("4", "D", "E");
+//    graph.addEdge("5", "E", "F");
+//    graph.addEdge("6", "F", "A");
+//    graph.addEdge("7", "F", "B");
+//    graph.addEdge("8", "E", "A");
+//    graph.addEdge("9", "B", "D");
+//    graph.addEdge("10", "A", "D");
+//    graph.addEdge("11", "F", "D");
+//    graph.addEdge("12", "E", "C");
 
+    graph.deleteEdge("10");
+    graph.deleteEdge("8");
+//    graph.deleteEdge("11");
+    /*
     graph.deleteNode("B");
     graph.disableNode("F");
 
@@ -42,9 +48,16 @@ public class GraphTest {
     graph.disableEdge("8");
     graph.enableEdge("8");
     graph.deleteEdge("10");
+    */
 
-    for (Edge e : graph.EdgesFollowed(graph.runAStar("A", "D"))) {
-      System.out.print(e.getEdgeID());
+    ArrayList<Node> path = graph.runBFS("A","D");
+    for(Node curNode: path){
+      System.out.println(curNode.getNodeID());
+    }
+    System.out.println("==========================\nDepth");
+    ArrayList<Node> path2 = graph.runDFS("A","D");
+    for(Node curNode: path2){
+      System.out.println(curNode.getNodeID());
     }
   }
 }

@@ -203,8 +203,8 @@
 
 /* ----------- FLOATING ACTION BUTTON -------------- */
 .fab-default{
-    -fx-background-color: -primary;
-    -fx-text-fill: -onPrimary;
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
     -fx-min-width: 56px;
     -fx-min-height: 56px;
     -fx-pref-width: 56px;
@@ -215,9 +215,13 @@
     -fx-padding: 20px;
 }
 
+.fab-default .jfx-rippler{
+    -jfx-rippler-fill: -onSecondary;
+}
+
 .fab-mini{
-    -fx-background-color: -primary;
-    -fx-text-fill: -onPrimary;
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
     -fx-min-width: 40px;
     -fx-min-height: 40px;
     -fx-pref-width: 40px;
@@ -225,6 +229,10 @@
     -fx-max-width: 40px;
     -fx-max-height: 40px;
     -fx-background-radius: 20px;
+}
+
+.fab-mini .jfx-rippler{
+    -jfx-rippler-fill: -onSecondary;
 }
 
 /* ----------- TAB PANE -------------- */
@@ -284,6 +292,10 @@
     -fx-pref-width: 60px;
     -fx-max-height: 60px;
     -fx-max-width: 60px;
+}
+
+.top-icons{
+    -fx-fill: -onPrimary;
 }
 
 .dialogue{

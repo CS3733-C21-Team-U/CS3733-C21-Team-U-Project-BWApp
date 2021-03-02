@@ -2,7 +2,6 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
-import edu.wpi.u.requests.Request;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;

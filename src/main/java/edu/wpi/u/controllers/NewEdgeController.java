@@ -31,7 +31,7 @@ public class NewEdgeController {
             errorDrawer.open();
         } else {
             try {
-                App.mapService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
+                //App.mapService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
                 App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){

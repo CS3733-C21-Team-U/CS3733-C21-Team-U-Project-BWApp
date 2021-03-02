@@ -1,5 +1,8 @@
 package edu.wpi.u.algorithms;
 
+import edu.wpi.u.App;
+import edu.wpi.u.users.StaffType;
+
 import java.util.LinkedList;
 
 public class Node {
@@ -15,7 +18,6 @@ public class Node {
   private LinkedList<Edge> edges;
   private LinkedList<Node> adjNodes;
   private boolean walkable = true;
-
   // full constructor
   public Node(
           String _nodeID,
@@ -40,6 +42,20 @@ public class Node {
     this.adjNodes = new LinkedList<>();
   }
 
+  public Node(Node n){
+    this.nodeID = n.getNodeID();
+    this.xcoord = n.getCords()[0];
+    this.ycoord = n.getCords()[1];
+    this.floor = n.getFloor();
+    this.building = n.getBuilding();
+    this.nodeType = n.getNodeType();
+    this.longName = n.getLongName();
+    this.shortName = n.getShortName();
+    this.teamAssigned = "U";
+    this.edges = n.getEdges();
+    this.adjNodes = n.whatAreAdjNodes();
+  }
+
   // simple constructor
   public Node(String _nodeID, double _xcoord, double _ycoord) {
     this.nodeID = _nodeID;
@@ -49,6 +65,9 @@ public class Node {
     this.adjNodes = new LinkedList<>();
   }
 
+  public LinkedList<Node> whatAreAdjNodes(){
+    return this.adjNodes;
+  }
   public double[] getCords() {
     double[] returnMe = {this.xcoord, this.ycoord};
     return returnMe;
@@ -98,7 +117,7 @@ public class Node {
   public LinkedList<Node> getAdjNodes() {
     LinkedList<Node> returnMe = new LinkedList<>();
     for (Node n : this.adjNodes) {
-      if (n.walkable() && this.reachableNode(n)) returnMe.add(n);
+      if (n.walkable() && this.reachableNode(n) && this.hasPermission(n)) returnMe.add(n);
     }
     return returnMe;
   }
@@ -118,6 +137,24 @@ public class Node {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) return true;
         }
       }
+    }
+    return false;
+  }
+
+  /**
+   * checks to see if the current user has permission to go down an edge
+   * @param n
+   * @return
+   */
+  private boolean hasPermission(Node n) {
+    for (Edge e : this.edges) {
+        if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
+          if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
+            if(e.getUserPermissions().contains(App.userService.getActiveUser().getClass()) || e.getUserPermissions().contains(StaffType.DEFUALT)){
+              return true;
+            }
+          }
+        }
     }
     return false;
   }
@@ -144,5 +181,13 @@ public class Node {
 
   public String getShortName() {
     return shortName;
+  }
+
+  public void setLongName(String longName) {
+    this.longName = longName;
+  }
+
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
   }
 }
