@@ -96,7 +96,7 @@ public class MapEdit {
     public void deleteNode(){
         try{
             this.edit = EditTypes.DELETE;
-            this.oldNode = App.mapService.getNodeFromID(this.ID);
+            this.oldNode = new Node(App.mapService.getNodeFromID(this.ID));
             this.removedEdges = App.mapService.deleteNode(this.ID);
         }catch (Exception e){
             throw e;
@@ -113,7 +113,7 @@ public class MapEdit {
     public void updateNode(double xCoord, double yCoord, String longName, String shortName){
         try{
             this.edit = EditTypes.UPDATE;
-            this.oldNode = App.mapService.getNodeFromID(this.ID);
+            this.oldNode = new Node(App.mapService.getNodeFromID(this.ID));
             App.mapService.updateNode(this.ID,xCoord,yCoord,shortName,longName);
         }catch (Exception e){
             throw e;

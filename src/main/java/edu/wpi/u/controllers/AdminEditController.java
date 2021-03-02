@@ -253,5 +253,14 @@ public class AdminEditController {
 
 
     }
+    @FXML
+    public void handleUndoButton() throws Exception{
+        App.undoRedoService.undo();
+    }
+
+    @FXML
+    public void handleRedoButton() throws Exception{
+        App.undoRedoService.redo();
+    }
 
 }

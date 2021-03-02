@@ -42,6 +42,20 @@ public class Node {
     this.adjNodes = new LinkedList<>();
   }
 
+  public Node(Node n){
+    this.nodeID = n.getNodeID();
+    this.xcoord = n.getCords()[0];
+    this.ycoord = n.getCords()[1];
+    this.floor = n.getFloor();
+    this.building = n.getBuilding();
+    this.nodeType = n.getNodeType();
+    this.longName = n.getLongName();
+    this.shortName = n.getShortName();
+    this.teamAssigned = "U";
+    this.edges = n.getEdges();
+    this.adjNodes = n.whatAreAdjNodes();
+  }
+
   // simple constructor
   public Node(String _nodeID, double _xcoord, double _ycoord) {
     this.nodeID = _nodeID;
@@ -51,6 +65,9 @@ public class Node {
     this.adjNodes = new LinkedList<>();
   }
 
+  public LinkedList<Node> whatAreAdjNodes(){
+    return this.adjNodes;
+  }
   public double[] getCords() {
     double[] returnMe = {this.xcoord, this.ycoord};
     return returnMe;

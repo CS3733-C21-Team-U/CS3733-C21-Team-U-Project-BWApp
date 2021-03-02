@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" stylesheets="@css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminEditController">
    <children>
-    <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: #edf1ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane fx:id="mainAnchorPane" layoutX="-7.0" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: #edf1ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="1310.0" layoutY="585.0" maxHeight="71.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn" visible="false">
                <graphic>
@@ -61,12 +61,12 @@
             </VBox>
             <HBox layoutX="1432.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleUndoButton" styleClass="button-floating-action" text="Undo">
                      <graphic>
                         <SVGPath content="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" scaleX="2.0" scaleY="2.0" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="button-floating-action">
+                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleRedoButton" styleClass="button-floating-action" text="Redo">
                      <graphic>
                         <SVGPath content="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" scaleX="2.0" scaleY="2.0" />
                      </graphic>

@@ -139,7 +139,7 @@ public class UndoRedoService {
      * @throws Exception
      */
     public void undo() throws Exception {
-        if(curIndex > 0) {
+        if(curIndex >= 0) {
             MapEdit curEdit = edits.get(curIndex);
             curIndex--;
             curEdit.toggleEdit();
@@ -154,8 +154,8 @@ public class UndoRedoService {
      */
     public void redo() throws Exception {
         if(curIndex < edits.size()) {
-            MapEdit curEdit = edits.get(curIndex);
             curIndex++;
+            MapEdit curEdit = edits.get(curIndex);
             curEdit.toggleEdit();
         }else{
             throw new Exception("Tried To REDO an edit and there was no edits left");
