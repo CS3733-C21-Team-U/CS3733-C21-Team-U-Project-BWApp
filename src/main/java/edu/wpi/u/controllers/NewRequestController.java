@@ -1,48 +1,16 @@
 package edu.wpi.u.controllers;
+
 import com.jfoenix.controls.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import edu.wpi.u.App;
-import edu.wpi.u.algorithms.Node;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.LinkedList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-import java.util.*;
-import java.util.stream.*;
-
-import java.util.Date;
-
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class NewRequestController {
-
-
-//    public Button newRequestCancelButton;
-//    public TextField newRequestTitleTextField;
-//    public TextArea newRequestDescriptionTextField;
-//    public Label newRequestErrorMessage2;
-//    public TextField newRequestAssigneeTextField;
-//    public Button assigneeButton;
-//    public ListView newRequestAssigneeList;
-//    public Label newRequestErrorMessage3;
-//    public ChoiceBox newRequestLocationDropField;
-//    public Button newRequestLocationButton;
-//    public ListView newRequestLocationList;
-//    public TextField newRequestServiceTypeTextField;
-//    public Label newRequestErrorMessage;
-//    public Button newRequestSubmitRequestButton;
-
     @FXML public StackPane laundryStack;
     @FXML public Pane makeEditLaundryPane;
     @FXML public JFXTextField madeEditLaundryField;
@@ -55,6 +23,45 @@ public class NewRequestController {
     @FXML public JFXChipView makeEditStaffChipView;
     @FXML public JFXDatePicker makeEditDate2BCompleteDatePicker;
     @FXML public JFXTextField makeEditTitleField;
+    @FXML public JFXButton cancelButton;
+    @FXML public JFXButton saveButton;
+
+    @FXML
+    public void initialize(ActionEvent event) throws IOException{
+        // receive data: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
+        // receiveData Step 1
+        javafx.scene.Node node = (javafx.scene.Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        // receiveData Step 2
+        String type = (String) stage.getUserData();
+        switch (type){
+            case "Laundry":
+                makeEditLaundryPane.setVisible(true);
+                break;
+            case "Security":
+                makeEditSecurityPane.setVisible(true);
+                break;
+            case "Maintenance":
+                makeEditMaintenancePane.setVisible(true);
+                break;
+        }
+
+    }
+
+
+    @FXML
+    public void handleSubmitRequestButton(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void HandleMakeEditCancelButton(ActionEvent actionEvent)throws IOException {
+        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequestController.fxml"));
+        requestLoader.load();
+
+    }
+
+    @FXML
+    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
+    }
 
 
     //newRequestTitleTextField.setText(request.getTitle());
