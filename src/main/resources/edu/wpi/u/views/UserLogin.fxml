@@ -5,31 +5,73 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
     <children>
-        <VBox layoutX="280.0" layoutY="47.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <JFXTextField fx:id="accountName" labelFloat="true" promptText="Enter Username">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin></JFXTextField>
-                <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin></JFXPasswordField>
-                <JFXButton fx:id="login" buttonType="RAISED" onAction="#handleLogin" styleClass="button-contained" text="Login">
-               <VBox.margin>
+      <HBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <VBox prefWidth="1086.0">
+                  <children>
+                  <Label styleClass="headline-2" text="Login Portal">
+                     <VBox.margin>
+                        <Insets left="290.0" top="320.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="15.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </Label>
+                      <JFXTextField fx:id="accountName" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
+                          <VBox.margin>
+                              <Insets bottom="30.0" left="290.0" right="305.0" top="25.0" />
+                          </VBox.margin>
+                  </JFXTextField>
+                      <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password" text="test">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="290.0" right="305.0" />
+                     </VBox.margin>
+                  </JFXPasswordField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                            <JFXButton fx:id="login" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
+                           <HBox.margin>
+                              <Insets left="290.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                            <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  </children>
+               <HBox.margin>
                   <Insets />
-               </VBox.margin></JFXButton>
-                <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" styleClass="button-text" text="Forgot Password" />
-            </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-        </VBox>
+               </HBox.margin>
+              </VBox>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="1000.0" fitWidth="790.0" smooth="false">
+                     <image>
+                        <Image url="@Images/pexels-anna-shvets-4421550.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </HBox>
     </children>
    <stylesheets>
       <URL value="@css/BaseStyle.css" />

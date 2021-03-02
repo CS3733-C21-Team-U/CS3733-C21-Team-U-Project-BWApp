@@ -1,53 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.SettingsPageController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.SettingsPageController">
    <children>
-      <VBox layoutX="300.0" layoutY="134.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="300.0" layoutY="134.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
-            <Label text="Settings Page" />
-            <Label text="Path Finding Modes" />
+            <Label styleClass="headline-2" text="Settings Page" />
+            <HBox prefHeight="21.0" prefWidth="600.0" />
+            <Label text="Change Contact Info">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin></Label>
+            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone Number" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="emailAddressTextField" labelFloat="true" promptText="Enter E-mail address" text="test">
+               <VBox.margin>
+                  <Insets bottom="15.0" right="1200.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="475.0" styleClass="button-contained" text="Apply Contact Change" />
+            <Label styleClass="headline-2" text="Admin">
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="headline-3" text="Read and Save CSV File">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="33.0" prefWidth="1675.0">
+               <children>
+                  <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" />
+                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="33.0" prefWidth="196.0" styleClass="button-text" text="Open Explorer">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="1675.0">
+               <children>
+                  <JFXTextField fx:id="tableNameTextFIeld" labelFloat="true" promptText="New Table Name">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXButton fx:id="createTableButton" buttonType="RAISED" onAction="#handleCreateTable" prefHeight="33.0" prefWidth="195.0" styleClass="button-contained" text="Load CSV and Create New Table">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Label styleClass="headline-3" text="Path Finding Modes">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
             <HBox prefHeight="30.0" prefWidth="600.0">
                <children>
-                  <JFXButton fx:id="pathMode1Button" onAction="#handlePathMode1" text="Mode 1" />
-                  <JFXButton fx:id="pathMode2Button" onAction="#handlePathMode2" text="Mode 2" />
+                  <JFXButton fx:id="pathMode1Button" onAction="#handlePathMode1" prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="A star" />
+                  <JFXButton fx:id="pathMode2Button" onAction="#handlePathMode2" prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="Depth FIrst">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="Breadth First">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
                </children>
             </HBox>
-            <Label text="Load CSV File" />
-            <HBox prefHeight="40.0" prefWidth="600.0">
-               <children>
-                  <JFXTextField fx:id="filePathTextField" promptText="placeholder.csv" />
-                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" text="Open Explorer" />
-                  <JFXTextField fx:id="tableNameTextFIeld" labelFloat="true" promptText="New Table Name" />
-                  <JFXButton fx:id="createTableButton" onAction="#handleCreateTable" text="Load CSV and Create New Table" />
-               </children>
-            </HBox>
-            <Label text="Set theme" />
-            <HBox prefHeight="21.0" prefWidth="600.0">
-               <children>
-                  <JFXRadioButton fx:id="setTheme1" onAction="#handleSetTheme1" selected="true" text="Light Theme">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="themeButtons" />
-                     </toggleGroup></JFXRadioButton>
-                  <JFXRadioButton fx:id="setTheme2" layoutX="10.0" layoutY="10.0" onAction="#handleSetTheme2" text="Dark Theme" toggleGroup="$themeButtons" />
-               </children>
-            </HBox>
-            <Label text="Set Contact info" />
-            <Label text="Enter Phone Number" />
-            <JFXTextField fx:id="phoneNumTextField" />
-            <Label text="Enter E-mail address" />
-            <JFXTextField fx:id="emailAddressTextField" />
-            <JFXButton fx:id="contactChangeButton" onAction="#handleContactChange" text="Apply Contact Change" />
-            <Label fx:id="check" />
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>
