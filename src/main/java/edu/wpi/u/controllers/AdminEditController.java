@@ -239,13 +239,13 @@ public class AdminEditController {
      */
     public void handleNodeClicked(Node n) throws IOException {
         System.out.println("You clicked on a node");
+        App.mapInteractionModel.setNodeID(n.getNodeID());
         FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
         AnchorPane contextAnchor = new AnchorPane();
         contextAnchor = nodeContextMenu.load();
         NodeContextMenuController controller = nodeContextMenu.getController();
         contextAnchor.setLayoutX(n.getCords()[0]);
         contextAnchor.setLayoutY(n.getCords()[1]);
-
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         pane.getChildren().add(contextAnchor);

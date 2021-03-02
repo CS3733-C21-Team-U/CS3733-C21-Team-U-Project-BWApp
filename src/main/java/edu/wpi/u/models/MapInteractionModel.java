@@ -7,6 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 
 public class MapInteractionModel {
+
+
+
+
     private String nodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
@@ -18,9 +22,13 @@ public class MapInteractionModel {
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
 
+    public String getNodeID() {
+        return nodeID;
+    }
 
-
-
+    public void setNodeID(String nodeID) {
+        this.nodeID = nodeID;
+    }
 
 
 

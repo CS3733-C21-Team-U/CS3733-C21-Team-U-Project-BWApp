@@ -32,6 +32,7 @@ public class App extends Application {
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
+  public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
 

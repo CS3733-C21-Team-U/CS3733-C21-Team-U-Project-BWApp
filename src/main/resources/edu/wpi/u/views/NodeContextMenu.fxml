@@ -60,11 +60,20 @@
                   <JFXComboBox fx:id="nodeTypeDrop" minWidth="110.0" prefWidth="110.0" promptText="Node Type" />
                </children>
             </HBox>
-            <JFXButton alignment="TOP_CENTER" prefHeight="31.0" styleClass="button-outlined" text="Save">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </JFXButton>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton alignment="CENTER" onAction="#handleSaveButton" prefHeight="31.0" styleClass="button-outlined" text="Save">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="10.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton alignment="CENTER" onAction="#handleDeleteButton" prefHeight="31.0" styleClass="button-outlined" text="Delete">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
          <opaqueInsets>
             <Insets />

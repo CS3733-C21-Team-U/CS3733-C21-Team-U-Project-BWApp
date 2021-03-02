@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,17 +29,26 @@ public class NodeContextMenuController {
 
 
     public void initialize(){
+        Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
         ArrayList<String> nodeAList = new ArrayList<String>();
-        nodeAList.add("WALK");
-        nodeAList.add("PARK");
-        nodeAList.add("LABS");
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.add("WALK");
+        list.add("PARK");
+        list.add("LABS");
 
+        longNameText.setText(thisNode.getLongName());
+        shortNameText.setText(thisNode.getShortName());
 
-    //nodeTypeDrop.setItems(nodeAList); I'm in the middle of fixing this
+        nodeTypeDrop.setItems(list); //I'm in the middle of fixing this
     }
-
+    @FXML
     public void handleSaveButton(){
-        // App.mapService.updateNode() TODO: Use Charlie's undo/redo stuff
+        Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
+        App.undoRedoService.updateNode(thisNode.getNodeID(),thisNode.getCords()[0],thisNode.getCords()[1],longNameText.getText(),shortNameText.getText());
+    }
+    @FXML
+    public void handleDeleteButton(){
+        App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
     }
 
 
