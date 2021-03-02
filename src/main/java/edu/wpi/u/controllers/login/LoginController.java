@@ -12,13 +12,24 @@ import edu.wpi.u.database.UserData;
 import edu.wpi.u.exceptions.AccountNameNotFoundException;
 import edu.wpi.u.exceptions.PasswordNotFoundException;
 import edu.wpi.u.users.User;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import jdk.nashorn.api.scripting.JSObject;
 import org.apache.http.HttpConnection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
+import org.w3c.dom.events.EventTarget;
 import spark.Spark;
 
 import java.io.BufferedReader;
@@ -34,7 +45,7 @@ import java.util.Map;
 import static spark.Spark.*;
 import com.google.gson.Gson;
 
-
+import javafx.concurrent.Worker.State;
 
 public class LoginController {
 
@@ -86,14 +97,36 @@ public class LoginController {
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
                     //switch scene
-                    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//                    Scene scene = new Scene(root)
+
                         //NEW CODE STARTS HERE
-                        WebView webView = new WebView();
-                        webView.getEngine().load("https://bw-webapp.herokuapp.com/");
-                        VBox vBox = new VBox(webView);
-                        Scene scene = new Scene(vBox, 1500, 750);
-                        App.getPrimaryStage().setScene(scene);
+                    WebView webView = new WebView();
+                    webView.setCache(true);
+                    WebEngine webEngine = webView.getEngine();
+                    webEngine.getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
+                        if (newState == State.SUCCEEDED) {
+                            Document doc = webEngine.getDocument();
+                            EventListener listener = ev -> {
+                                System.out.println("Event triggered");
+                                String t = doc.getElementById("statusLabel").getTextContent();
+                                doc.getElementById("statusLabel").setTextContent("Changed");
+                                Parent root = null;
+                                try {
+                                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Scene scene = new Scene(root);
+                                App.getPrimaryStage().setScene(scene);
+                            };
+                            Element el = doc.getElementById("tokenSubmit");
+                            ((EventTarget) el).addEventListener("click", listener, false);
+                        }
+                    });
+                    webEngine.load("http://localhost:3000/");
+                    webEngine.setJavaScriptEnabled(true);
+                    VBox vBox = new VBox(webView);
+                    Scene scene = new Scene(vBox, 1500, 750);
+                    App.getPrimaryStage().setScene(scene);
 
                         //TODO : Make this request send until it gets the correct appStatus / run when updated
                         /*
@@ -101,7 +134,7 @@ public class LoginController {
                         IE : This GET request needs to run after the new status has been updated
                         TODO : Possibly fix code below or fix BW-WebApp
                          */
-                        URL url = new URL("https://bw-webapp.herokuapp.com/getstatus"); // make GET request
+                        URL url = new URL("http://localhost:3000/getstatus"); // make GET request
                         HttpURLConnection con = (HttpURLConnection) url.openConnection();
                         con.setRequestMethod("GET");
                         con.setRequestProperty("Content-Type", "application/json");
@@ -116,6 +149,7 @@ public class LoginController {
                             content.append(inputLine);
                         }
                         in.close();
+                        webEngine.reload();
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
                         String status = obj.get("status").toString(); // "approved" or "pending"
