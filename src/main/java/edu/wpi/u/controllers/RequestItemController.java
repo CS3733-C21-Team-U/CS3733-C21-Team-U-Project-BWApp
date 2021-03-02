@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +18,7 @@ public class RequestItemController {
 
     //@FXML public Button deleteRequestButton;      DNE
 
+    @FXML public Button viewRequestButton;
     @FXML public Label requestItemDescriptionLabel;
     //@FXML public TextField title;
     //@FXML public TextField location;
@@ -30,6 +32,14 @@ public class RequestItemController {
 
     public String myRequestID;
     public Integer myID;
+
+    @FXML public void handleViewRequestInDetailButton() throws Exception {
+        //App.lastClickedRequestNumber = myID;
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestInDetail.fxml"));
+        anchor.getChildren().removeAll();
+        anchor.getChildren().add(root);
+    }
 
     /*
     @FXML
@@ -69,10 +79,4 @@ public class RequestItemController {
     }
     public void setLocation(String newLocation){ locationLabel.setText(newLocation); }
      */
-
-    @FXML
-    public void handleViewRequestInDetailButton() {
-        new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ViewRequestInDetail.fxml"));
-    }
-
 }
