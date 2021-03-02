@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.IRequest;
+import edu.wpi.u.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,25 +26,34 @@ public class RequestDetailController {
     @FXML JFXChipView requestDetailStaffChipView;
     @FXML Label requestDetailDateCreatedLabel;
     @FXML Label requestDetailDate2BCompleteLabel;
+
+    //Maintenance Requests Panes
     @FXML Label requestDetailSecurityLabel;
     @FXML ListView commentListView;
     @FXML StackPane requestDetailStack;
     @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
+    IRequest currentIRequest;
   
-//    requestDetailTitleLabel.setText(request.getTitle());
-//    requestDetailCreatorLabel.setText(request.getCreator());
-//    requestDetailDescriptionLabel.setText(request.getDecripition());
-//    requestDetailLocationChipView.setText(request.getLocation());
-//    requestDetailStaffChipView.setText(request.getStaff());
-//    requestDetailDateCreatedLabel.setText(request.getDateCreated());
-//    requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
-//    requestDetailSecurityLabel.setText(request.getLanguage());
+
 
     @FXML
     public void initialize() throws IOException{
-        System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
+        currentIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        Request request = currentIRequest.getGenericRequest();
+        requestDetailTitleLabel.setText(request.getTitle());
+        requestDetailCreatorLabel.setText(request.getCreator());
+        requestDetailDescriptionLabel.setText(request.getDescription());
+        //requestDetailLocationChipView.setText(request.getLocation());
+      //  requestDetailStaffChipView.setText(request.getStaff());
+        System.out.println(request.getDateCreated().toString());
+        requestDetailDateCreatedLabel.setText(request.getDateCreated().toString());
+        //System.out.println(request.getDateNeeded());
+      //  requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
+        //requestDetailSecurityLabel.setText(request);
+       // setSpecifics();
+
     }
 
 
@@ -79,5 +89,23 @@ public class RequestDetailController {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequestEdit.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
+    }
+
+    private void setSpecifics(){
+        switch(currentIRequest.getGenericRequest().getType()) {
+            case("Maintenance") :
+                requestDetailMaintenancePane.setVisible(true);
+                break;
+            case("Laundry") :
+                requestDetailLaundryPane.setVisible(true);
+                //add stuff
+                break;
+            case("Security"):
+                requestDetailSecurityPane.setVisible(true);
+                //add stuff
+                break;
+            default:
+                System.out.println("lmao you screwed up");
+        }
     }
 }
