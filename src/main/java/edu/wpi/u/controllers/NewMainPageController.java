@@ -7,6 +7,7 @@ import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -34,24 +36,25 @@ public class NewMainPageController {
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
-//    @FXML public SVGPath leftMenuHamburger;
+    //    @FXML public SVGPath leftMenuHamburger;
 //    @FXML public AnchorPane mainAnchorPane;
 //    @FXML public JFXDrawer leftMenuDrawer;
 //    @FXML public JFXDrawer serviceRequestDrawer;
 //    @FXML public Tab nonActiveValue;
 //    @FXMLViewFlowContext
 //    private ViewFlowContext context;
-    @FXML public JFXTabPane mainTabPane;
+    @FXML
+    public JFXTabPane mainTabPane;
     public JFXButton openDialogue;
     public JFXDialog dialog;
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
+    public StackPane newMainPageStackPane;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
 
-    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work","For me. Let me know","if it shows Material Design!","And not just the default list");
-
+    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work", "For me. Let me know", "if it shows Material Design!", "And not just the default list");
 
 
     public void initialize() throws IOException {
@@ -174,7 +177,26 @@ public class NewMainPageController {
     }
 
     public void handleExit(ActionEvent actionEvent) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("Exit Application"));
+        content.setBody(new Text("You are about to exit the application!"));
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                App.getInstance().end();
+            }
+        });
+        button.setStyle("-fx-background-color: #4dadf7");
+        content.setActions(button);
+        dialog.show();
+
     }
+}
+
+
 
 
 //    @FXML
@@ -211,4 +233,3 @@ public class NewMainPageController {
 //                .interpolateWith(Interpolator.EASE_BOTH)
 //                .zoomBy(0.35, pivotOnTarget);
 //    }
-}
