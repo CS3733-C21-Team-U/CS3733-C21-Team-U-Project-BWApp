@@ -8,6 +8,7 @@ import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +36,7 @@ public class AdminEditController {
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
+    Group edgeNodeGroup = new Group();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -47,6 +49,7 @@ public class AdminEditController {
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
+        pane.getChildren().add(edgeNodeGroup);
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -146,25 +149,22 @@ public class AdminEditController {
      * @throws IOException
      */
     public void placeNodesHelper(Node n) throws IOException{
-            Circle node = new Circle();
-            node.setCenterX(n.getCords()[0]);
-            node.setCenterY(n.getCords()[1]);
-            node.setRadius(7.0);
-            node.setId(n.getNodeID());
-            App.mapInteractionModel.nodeIDList.add(n.getNodeID());
-            node.toFront();
-            node.setFill(Paint.valueOf("Black"));
-            node.setVisible(true);
-            node.setOnMouseClicked(event -> {
+            Circle node1 = new Circle();
+            node1.setCenterX(n.getCords()[0]);
+            node1.setCenterY(n.getCords()[1]);
+            node1.setRadius(7.0);
+            node1.setId(n.getNodeID());
+            node1.toFront();
+            node1.setFill(Paint.valueOf("Black"));
+            node1.setVisible(true);
+            node1.setOnMouseClicked(event -> {
                 try {
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
-
-
-        pane.getChildren().add(node);
+        edgeNodeGroup.getChildren().add(node1);
     }
 
 
@@ -174,18 +174,19 @@ public class AdminEditController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
-        pane.getChildren().removeAll(App.mapInteractionModel.nodeIDList);
+        edgeNodeGroup.getChildren().clear();
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
                     placeNodesHelper(n);
                 }else{
-                    System.out.println(n.getFloor()+" is not a valid node!!! We cant put this on the screen bruh");
+                    System.out.println(n.getFloor()+" is not a valid node!!! We can't put this on the screen bruh");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+        edgeNodeGroup.toFront();
     }
 
 
@@ -205,12 +206,10 @@ public class AdminEditController {
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
-        App.mapInteractionModel.edgeIDList.add(ed.getEdgeID());
         edge.setStrokeWidth(3.0);
         edge.toFront();
         edge.setFill(Paint.valueOf("Black"));
         edge.setVisible(true);
-
         edge.setOnMouseClicked(event -> {
             try {
                 handleEdgeClicked(ed);
@@ -218,14 +217,12 @@ public class AdminEditController {
                 e.printStackTrace();
             }
         });
-        pane.getChildren().add(edge);
-
+        edgeNodeGroup.getChildren().add(edge);
     }
 
 
 
     public void generateEdges(String floor){
-        pane.getChildren().removeAll(App.mapInteractionModel.edgeIDList);
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
@@ -240,6 +237,7 @@ public class AdminEditController {
             ex.printStackTrace();
         }
         });
+        edgeNodeGroup.toFront();
     }
 
 
@@ -322,6 +320,9 @@ public class AdminEditController {
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerFloorG.png");
+            node.setFitWidth(2987);
+            edgeNodeGroup.toFront();
+
         }
     }
 
@@ -332,6 +333,7 @@ public class AdminEditController {
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floor.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -342,6 +344,7 @@ public class AdminEditController {
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floor.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -352,6 +355,7 @@ public class AdminEditController {
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floor.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -362,6 +366,7 @@ public class AdminEditController {
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floor.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -372,6 +377,7 @@ public class AdminEditController {
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floor.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+            edgeNodeGroup.toFront();
         }
     }
 
