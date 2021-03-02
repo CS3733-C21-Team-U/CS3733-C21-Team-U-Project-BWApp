@@ -73,6 +73,7 @@ public class NERController {
         editTitleField.setText(currRequest.getTitle());
         editDescriptionField.setText(currRequest.getDescription());
 
+        //TODO: Probably broken
         for (String l : currRequest.getLocation()) { //Locations
             makeEditLocationChipView.getChips().add(l);
         }

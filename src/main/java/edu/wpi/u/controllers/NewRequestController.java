@@ -1,7 +1,9 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,140 +12,105 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.LinkedList;
 
 public class NewRequestController {
-    @FXML public StackPane laundryStack;
-    @FXML public Pane makeEditLaundryPane;
-    @FXML public JFXTextField madeEditLaundryField;
-    @FXML public Pane makeEditSecurityPane;
-    @FXML public JFXTextField madeEditSecurityField;
-    @FXML public Pane makeEditMaintenancePane;
-    @FXML public JFXTextField madeEditMaintenanceField;
-    @FXML public JFXTextArea makeEditDescriptionField;
-    @FXML public JFXChipView makeEditLocationChipView;
-    @FXML public JFXChipView makeEditStaffChipView;
-    @FXML public JFXDatePicker makeEditDate2BCompleteDatePicker;
-    @FXML public JFXTextField makeEditTitleField;
-    @FXML public JFXButton cancelButton;
-    @FXML public JFXButton saveButton;
+
+
+    public JFXTextField makeTitleField;
+    public JFXTextArea makeDescriptionField;
+    public JFXDatePicker makeDate2BCompleteDatePicker;
+    public JFXChipView makeLocationChipView;
+    public JFXChipView makeStaffChipView;
+    public StackPane laundryStack;
+    public Pane makeLaundryPane;
+    public JFXTextField madeLaundryField;
+    public Pane makeSecurityPane;
+    public JFXTextField madeSecurityField;
+    public Pane makeMaintenancePane;
+    public JFXTextField madeMaintenanceFieldMachineUsed;
+    public JFXTextField madeMaintenanceFieldPriority;
+
+    private Request currRequest;
+
+    public boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @FXML
     public void initialize(ActionEvent event) throws IOException{
-        // receive data: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
-        // receiveData Step 1
-        javafx.scene.Node node = (javafx.scene.Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        // receiveData Step 2
-        String type = (String) stage.getUserData();
-        switch (type){
-            case "Laundry":
-                makeEditLaundryPane.setVisible(true);
+        //TODO: Implement commented code below in order to send request type info to show appropriate pane
+//        // receive data: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
+//        // receiveData Step 1
+//        javafx.scene.Node node = (javafx.scene.Node) event.getSource();
+//        Stage stage = (Stage) node.getScene().getWindow();
+//        // receiveData Step 2
+//        String type = (String) stage.getUserData();
+//        switch (type){
+//            case "Laundry":
+//                makeLaundryPane.setVisible(true);
+//                break;
+//            case "Security":
+//                makeSecurityPane.setVisible(true);
+//                break;
+//            case "Maintenance":
+//                makeMaintenancePane.setVisible(true);
+//                break;
+//        }
+
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Integer Required");
+        madeMaintenanceFieldMachineUsed.getValidators().add(validator);
+        madeMaintenanceFieldPriority.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!(isInteger(newVal.toString()))) {
+                madeMaintenanceFieldPriority.validate();
+            }
+        });
+
+    }
+
+    public LinkedList<Serializable> requestSpecificItems(String type) {
+        LinkedList<Serializable> specifics = new LinkedList<>();
+        switch(type) {
+            case("Maintenance") :
+                specifics.add(madeMaintenanceFieldMachineUsed.getText());
+                specifics.add(madeMaintenanceFieldPriority.getText());
                 break;
-            case "Security":
-                makeEditSecurityPane.setVisible(true);
+            case("Laundry") :
+                //add stuff
                 break;
-            case "Maintenance":
-                makeEditMaintenancePane.setVisible(true);
+            case("Security"):
+                //add stuff
                 break;
+            default:
+                System.out.println("lmao you screwed up");
         }
-
+        return specifics;
     }
 
 
     @FXML
-    public void handleSubmitRequestButton(ActionEvent actionEvent) {
+    public void handleSubmitRequestButton() throws IOException {
+        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequestController.fxml"));
+        requestLoader.load();
     }
 
     @FXML
-    public void HandleMakeEditCancelButton(ActionEvent actionEvent)throws IOException {
+    public void HandleMakeEditCancelButton()throws IOException {
         FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequestController.fxml"));
         requestLoader.load();
 
     }
-//String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics
-    @FXML
-    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
-        App.requestService.addRequest(makeEditDescriptionField.getText(),makeEditTitleField.getText());
+
+    public void handleSaveNewRequest() {
     }
 
-
-    //newRequestTitleTextField.setText(request.getTitle());
-    //newRequestDescriptionTextField.setText(request.getDescription());
-
-
- /*
-    ObservableList<Node> oList;
-    //string placeholder for USDERID
-    public String userID = "ADMIN";
-
-    public ArrayList<String> assigneeArrayList = new ArrayList<String>();
-
-    public ArrayList<String> locationArrayList = new ArrayList<String>();
-//
-    public void handleAssigneeList() {
-        if (newRequestAssigneeTextField.getText().equals("")) {
-            newRequestErrorMessage2.setText("Please enter an assignee!");
-        } else {
-            assigneeArrayList.add(newRequestAssigneeTextField.getText());
-            newRequestAssigneeList.getItems().add(newRequestAssigneeTextField.getText());
-            newRequestAssigneeTextField.setText("");
-            newRequestErrorMessage2.setText("");
-            //System.out.println("call");}
-        }
+    public void HandleMakeCancelButton() {
     }
-
-    //This initialize function mostly fills in the correct nodes to the drop-down menu
-    public void initialize() throws IOException {
-
-        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
-        ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
-        for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
-            nodeIDs.add(N.getNodeID());
-        }
-        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
-        newRequestLocationDropField.setItems(oList); //This sets the observablelist that just got created to the stuff thats in the dropdown
-    }
-
-    public void handleAddLocation(){
-        if (newRequestLocationDropField.getValue() == null) {
-            newRequestErrorMessage3.setText("Please enter a node!");
-        } else {
-            locationArrayList.add(newRequestLocationDropField.getValue().toString());
-            newRequestLocationList.getItems().add(newRequestLocationDropField.getValue().toString());
-            // clears combobox
-            newRequestLocationDropField.setValue(null);
-            newRequestErrorMessage3.setText("");
-        }
-
-    }
-
-    // Array list to linkedlist converter
-    public static LinkedList<String> lLConverter(ArrayList<String> arrayList)
-    {
-        LinkedList<String> newLL = new LinkedList<>(arrayList);
-
-        return newLL;
-    }
-
-    /*
-    public void handleSubmitRequestButton() {
-
-        if (newRequestTitleTextField.getText().equals("")) {
-            newRequestErrorMessage.setText("Please enter a title!");}
-            else{
-                App.requestService.addRequest(
-                        newRequestDescriptionTextField.getText(),
-                        lLConverter(assigneeArrayList),
-                        newRequestTitleTextField.getText(),
-                        lLConverter(locationArrayList),
-                        newRequestServiceTypeTextField.getText(),
-                        userID );
-                App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
-
-            }
-
-    }
-     */
-
-
 }
