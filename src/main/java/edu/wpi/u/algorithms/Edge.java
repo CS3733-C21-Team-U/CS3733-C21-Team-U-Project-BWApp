@@ -21,7 +21,8 @@ public class Edge {
     _endNode.addEdge(this);
     _startNode.addAdjNode(_endNode);
     _endNode.addAdjNode(_startNode);
-    this.permission = permissions;
+    this.permission = new ArrayList<>();
+    this.permission.add(StaffType.DEFUALT);
   }
 
   /**

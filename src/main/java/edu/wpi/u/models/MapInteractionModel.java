@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.controllers.NodeContextMenuController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
@@ -14,7 +15,8 @@ public class MapInteractionModel {
     private String previousNodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
-
+    public SimpleStringProperty pathFlag = new SimpleStringProperty("");
+    public ArrayList<Node> path = new ArrayList<>();
     private String building = "Faulkner";
 
     public AnchorPane selectedNodeContextBox;
