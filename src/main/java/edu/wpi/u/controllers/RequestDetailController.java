@@ -30,13 +30,21 @@ public class RequestDetailController {
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
 
+    requestDetailTitleLabel.setText(request.getTitle());
+    requestDetailCreatorLabel.setText(request.getCreator());
+    requestDetailDescriptionLabel.setText(request.getDecripition());
+    requestDetailLocationChipView.setText(request.getLocation());
+    requestDetailStaffChipView.setText(request.getStaff());
+    requestDetailDateCreatedLabel.setText(request.getDateCreated());
+    requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
+    requestDetailSecurityLabel.setText(request.getLanguage());
 
     public void handleCommentButton() {
     }
 
     public void handleRequestDetailCancelButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -46,16 +54,4 @@ public class RequestDetailController {
 
     public void handleEditRequestButton() {
     }
-
-
-    /*
-    requestDetailTitleLabel.setText(request.getTitle());
-    requestDetailCreatorLabel.setText(request.getCreator());
-    requestDetailDescriptionLabel.setText(request.getDecripition());
-    requestDetailLocationChipView.setText(request.getLocation());
-    requestDetailStaffChipView.setText(request.getStaff());
-    requestDetailDateCreatedLabel.setText(request.getDateCreated());
-    requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
-    requestDetailSecurityLabel.setText(request.getLanguage());
-     */
 }
