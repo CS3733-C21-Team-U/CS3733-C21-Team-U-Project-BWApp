@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.models.GraphService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -83,7 +82,7 @@ public class NewRequestController {
     //This initialize function mostly fills in the correct nodes to the drop-down menu
     public void initialize() throws IOException {
 
-        ArrayList<Node> L = App.graphService.getNodes();//This gets the list of all the nodes
+        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
         ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
         for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
             nodeIDs.add(N.getNodeID());
