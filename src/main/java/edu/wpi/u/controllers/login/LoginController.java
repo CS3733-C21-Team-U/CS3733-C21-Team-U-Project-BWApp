@@ -40,6 +40,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -102,11 +103,13 @@ public class LoginController {
                     WebEngine webEngine = webView.getEngine();
                     webEngine.getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
                         if (newState == State.SUCCEEDED) {
+                            App.getPrimaryStage().setTitle(webEngine.getLocation());
                             Document doc = webEngine.getDocument();
                             EventListener listener = ev -> {
                                 System.out.println("Event triggered and fetching status " + ev.getTimeStamp());
+                                String status = " ";
                                 try{
-                                    URL url = new URL("http://localhost:3000/getstatus"); // make GET request
+                                    URL url = new URL("https://bw-webapp.herokuapp.com/getstatus"); // make GET request
                                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                                     con.setRequestMethod("GET");
                                     con.setRequestProperty("Content-Type", "application/json");
@@ -117,46 +120,56 @@ public class LoginController {
                                         content.append(inputLine);
                                     }
                                     in.close();
-                                    //webEngine.reload();
+                                    webEngine.reload();
                                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                     System.out.println("Content: " + content);
                                     JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
                                     System.out.println("JSON Object: " + obj);
-                                    String status = obj.get("status").toString(); // "approved" or "pending"
+                                    status = obj.get("status").toString(); // "approved" or "pending"
                                     System.out.println("Status from get: " + status);
                                 }
                                 catch (Exception e){
                                     e.printStackTrace();
                                 }
 
-                                String t = doc.getElementById("statusLabel").getTextContent();
-                                doc.getElementById("statusLabel").setTextContent("Token received");
-                                Parent root = null;
-                                try {
-                                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                doc.getElementById("statusLabel").setTextContent("Token verified");
+                                // TODO : Token status is received at this point
+                                status = status.replaceAll("^\"|\"$", "");
+                                if (status.equals("approved")){
+                                    System.out.println("Token approved");
+                                    doc.getElementById("statusLabel").setTextContent("Token verified");
+                                    // TODO : Add a sexier scene switch here
+                                    Parent root = null;
+                                    try {
+                                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Scene scene = new Scene(root);
+                                    App.getPrimaryStage().setScene(scene);
                                 }
-                                Scene scene = new Scene(root);
-                                App.getPrimaryStage().setScene(scene);
+                                else if (status.equals("pending")){
+                                    System.out.println("Token denied");
+                                    doc.getElementById("statusLabel").setTextContent("Token denied");
+                                    // DO nothing, wait for correct input
+                                }
                             };
                             Element el = doc.getElementById("enterApp");
                             ((EventTarget) el).addEventListener("click", listener, false);
+
+                            EventListener listener2 = ev -> {
+                                webEngine.executeScript("enterToken()");
+                            };
+                            Element el2 = doc.getElementById("tokenSubmit");
+                            ((EventTarget) el2).addEventListener("click", listener2, false);
                         }
                     });
-                    webEngine.load("http://localhost:3000/");
+                    webEngine.load("https://bw-webapp.herokuapp.com/");
                     webEngine.setJavaScriptEnabled(true);
                     VBox vBox = new VBox(webView);
-                    Scene scene = new Scene(vBox, 1500, 750);
+                    Scene scene = new Scene(vBox, 1920, 1080);
                     App.getPrimaryStage().setScene(scene);
 
-                        //TODO : Make this request send until it gets the correct appStatus / run when updated
-                        /*
-                        Problem : GET request runs once when the appStatus in BW-WebApp is from the last recent appStatus
-                        IE : This GET request needs to run after the new status has been updated
-                        TODO : Possibly fix code below or fix BW-WebApp
-                         */
-                        // NEW CODE ENDS HERE
                 } else {
                     throw new PasswordNotFoundException();
                 }
