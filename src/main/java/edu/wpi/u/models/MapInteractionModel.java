@@ -10,7 +10,7 @@ public class MapInteractionModel {
 
 
     private String currentAction = "NONE";
-    private String nodeID = "";
+    public SimpleStringProperty nodeID = new SimpleStringProperty("");
     private String previousNodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
@@ -49,12 +49,12 @@ public class MapInteractionModel {
     }
 
     public String getNodeID() {
-        return nodeID;
+        return nodeID.get();
     }
 
     public void setNodeID(String nodeID) {
-        previousNodeID = this.nodeID;
-        this.nodeID = nodeID;
+        previousNodeID = this.nodeID.get();
+        this.nodeID.set(nodeID);
     }
 
     public String getEdgeID() {
