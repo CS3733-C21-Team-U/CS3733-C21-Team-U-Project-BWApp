@@ -30,16 +30,13 @@
                <children>
                   <JFXToggleNode minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" styleClass="floor-toggle" text="G">
                      <toggleGroup>
-                        <ToggleGroup fx:id="Floor1" />
+                        <ToggleGroup fx:id="Floor" />
                      </toggleGroup>
                   </JFXToggleNode>
-                  <JFXToggleNode minHeight="70.0" minWidth="70.0" onAction="#handleFloor1Button" styleClass="floor-toggle" text="1">
+                  <JFXToggleNode minHeight="70.0" minWidth="70.0" onAction="#handleFloor1Button" styleClass="floor-toggle" text="1" toggleGroup="$Floor">
                      <VBox.margin>
                         <Insets bottom="-2.0" />
                      </VBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="Floor" />
-                     </toggleGroup>
                   </JFXToggleNode>
                   <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor2Button" styleClass="floor-toggle" text="2" toggleGroup="$Floor">
                      <VBox.margin>
