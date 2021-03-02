@@ -16,7 +16,7 @@ public class EdgeContextMenuController {
     Node node1;
 
     @FXML
-    JFXComboBox nodeTypeDrop;
+    JFXComboBox edgeComboBox;
 
     @FXML
     public void initialize() {
@@ -25,7 +25,7 @@ public class EdgeContextMenuController {
         list.add("PATIENT");
         list.add("EMPLOYEE");
 
-        nodeTypeDrop.setItems(list);
+        edgeComboBox.setItems(list);
     }
 
     /**
@@ -34,8 +34,8 @@ public class EdgeContextMenuController {
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
         ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
-        userTypes.add(StaffType.valueOf(nodeTypeDrop.getValue().toString()));
-        System.out.println("DEBUG: " + nodeTypeDrop.getValue().toString());
+        userTypes.add(StaffType.valueOf(edgeComboBox.getValue().toString()));
+        System.out.println("DEBUG: " + edgeComboBox.getValue().toString());
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
             App.undoRedoService.updateEdge(thisEdge.getEdgeID(), thisEdge.getUserPermissions());
