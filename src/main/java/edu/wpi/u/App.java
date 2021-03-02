@@ -35,6 +35,8 @@ public class App extends Application {
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
 
+  public static String newNodeType;
+
   public static String lastSelectedNode;
   public static String nodeField1;
   public static String nodeField2;

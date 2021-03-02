@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.u.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ButtonPageForNewRequestController {
@@ -64,10 +66,13 @@ public class ButtonPageForNewRequestController {
     }
 
     @FXML
-    public void handleMakeMaintenanceButton(ActionEvent actionEvent)throws IOException {
-        sendData(actionEvent);
-        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/MakeANewRequest.fxml"));
-        requestLoader.load();
+    public void handleMakeMaintenanceButton()throws IOException {
+        App.newNodeType = "Maintenance";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     //For more request service types
