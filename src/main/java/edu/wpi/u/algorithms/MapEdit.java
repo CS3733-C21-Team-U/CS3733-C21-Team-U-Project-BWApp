@@ -170,19 +170,28 @@ public class MapEdit {
     public void toggleEdit() throws InvalidEdgeException, Exception{
         try {
             if (this.type.equals("NODE")) {
-                double x = this.oldNode.getCords()[0];
-                double y = this.oldNode.getCords()[1];
-                String floor = this.oldNode.getFloor();
-                String building = this.oldNode.getBuilding();
-                String nodeType = this.oldNode.getNodeType();
-                String longName = this.oldNode.getLongName();
-                String shortName = this.oldNode.getShortName();
+                double x,y;
+                String floor,building,nodeType,longName,shortName;
 
                 switch (this.edit) {
                     case UPDATE:
+                        x = this.oldNode.getCords()[0];
+                        y = this.oldNode.getCords()[1];
+                        floor = this.oldNode.getFloor();
+                        building = this.oldNode.getBuilding();
+                        nodeType = this.oldNode.getNodeType();
+                        longName = this.oldNode.getLongName();
+                        shortName = this.oldNode.getShortName();
                         this.updateNode(x, y,nodeType, longName, shortName);
                         break;
                     case DELETE:
+                        x = this.oldNode.getCords()[0];
+                        y = this.oldNode.getCords()[1];
+                        floor = this.oldNode.getFloor();
+                        building = this.oldNode.getBuilding();
+                        nodeType = this.oldNode.getNodeType();
+                        longName = this.oldNode.getLongName();
+                        shortName = this.oldNode.getShortName();
                         this.addNode(this.ID, x, y, floor, building, nodeType, longName, shortName);
                         for(Edge curEdge: this.removedEdges){
                             this.addEdge(curEdge.getStartNode().getNodeID(),curEdge.getEndNode().getNodeID(),curEdge.getUserPermissions());
