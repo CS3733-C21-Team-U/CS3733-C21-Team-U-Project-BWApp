@@ -109,6 +109,7 @@ public class NodeContextMenuController {
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
             Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
             App.undoRedoService.updateNode(thisNode.getNodeID(), thisNode.getCords()[0], thisNode.getCords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
+            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
         }

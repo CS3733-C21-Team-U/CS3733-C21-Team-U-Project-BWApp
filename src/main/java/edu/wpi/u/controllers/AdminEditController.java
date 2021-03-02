@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
@@ -117,7 +118,6 @@ public class AdminEditController {
         generateEdges(App.mapInteractionModel.floor);
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
-            pane.getChildren().remove(node);
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
             if(App.mapInteractionModel.floor.equals("G")){
                 node.setFitWidth(2987);
@@ -136,10 +136,14 @@ public class AdminEditController {
     } // End of initialize
 
     public void handleAddNodeButtonEDIT(){
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDNODE");
     }
 
     public void handleAddEdgeButtonEDIT(){
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDEDGE");
     }
 
