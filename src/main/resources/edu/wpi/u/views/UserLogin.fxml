@@ -44,19 +44,19 @@
                         <Insets left="290.0" />
                      </VBox.margin>
                   </Label>
-                      <JFXTextField fx:id="accountName" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
+                      <JFXTextField fx:id="accountNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
                           <VBox.margin>
                               <Insets bottom="30.0" left="290.0" right="483.0" top="25.0" />
                           </VBox.margin>
                   </JFXTextField>
-                      <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password" text="test">
+                      <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" text="test">
                      <VBox.margin>
                         <Insets bottom="20.0" left="290.0" right="483.0" />
                      </VBox.margin>
                   </JFXPasswordField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                            <JFXButton fx:id="login" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
+                            <JFXButton fx:id="loginButton" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
                            <HBox.margin>
                               <Insets left="290.0" />
                            </HBox.margin>
