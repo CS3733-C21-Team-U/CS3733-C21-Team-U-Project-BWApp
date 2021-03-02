@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 public class MapInteractionModel {
 
-
-
-
     private String nodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
@@ -30,8 +27,21 @@ public class MapInteractionModel {
         this.nodeID = nodeID;
     }
 
+    public String getEdgeID() {
+        return edgeID;
+    }
 
+    public void setEdgeID(String edgeID) {
+        this.edgeID = edgeID;
+    }
 
+    public double[] getCoords() {
+        return Coords;
+    }
+
+    public void setCoords(double[] coords) {
+        Coords = coords;
+    }
 
 
 //    /**
