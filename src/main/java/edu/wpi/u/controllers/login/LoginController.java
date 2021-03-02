@@ -96,9 +96,7 @@ public class LoginController {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
-                    //switch scene
 
-                        //NEW CODE STARTS HERE
                     WebView webView = new WebView();
                     webView.setCache(true);
                     WebEngine webEngine = webView.getEngine();
@@ -106,9 +104,33 @@ public class LoginController {
                         if (newState == State.SUCCEEDED) {
                             Document doc = webEngine.getDocument();
                             EventListener listener = ev -> {
-                                System.out.println("Event triggered");
+                                System.out.println("Event triggered and fetching status " + ev.getTimeStamp());
+                                try{
+                                    URL url = new URL("http://localhost:3000/getstatus"); // make GET request
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setRequestMethod("GET");
+                                    con.setRequestProperty("Content-Type", "application/json");
+                                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                                    String inputLine;
+                                    StringBuffer content = new StringBuffer();
+                                    while ((inputLine = in.readLine()) != null){
+                                        content.append(inputLine);
+                                    }
+                                    in.close();
+                                    //webEngine.reload();
+                                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                    System.out.println("Content: " + content);
+                                    JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
+                                    System.out.println("JSON Object: " + obj);
+                                    String status = obj.get("status").toString(); // "approved" or "pending"
+                                    System.out.println("Status from get: " + status);
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
                                 String t = doc.getElementById("statusLabel").getTextContent();
-                                doc.getElementById("statusLabel").setTextContent("Changed");
+                                doc.getElementById("statusLabel").setTextContent("Token received");
                                 Parent root = null;
                                 try {
                                     root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
@@ -118,7 +140,7 @@ public class LoginController {
                                 Scene scene = new Scene(root);
                                 App.getPrimaryStage().setScene(scene);
                             };
-                            Element el = doc.getElementById("tokenSubmit");
+                            Element el = doc.getElementById("enterApp");
                             ((EventTarget) el).addEventListener("click", listener, false);
                         }
                     });
@@ -134,26 +156,6 @@ public class LoginController {
                         IE : This GET request needs to run after the new status has been updated
                         TODO : Possibly fix code below or fix BW-WebApp
                          */
-                        URL url = new URL("http://localhost:3000/getstatus"); // make GET request
-                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                        con.setRequestMethod("GET");
-                        con.setRequestProperty("Content-Type", "application/json");
-                        int responseCode = con.getResponseCode();
-                        long date = con.getDate();
-                        System.out.println("Date "+ date);
-                        //System.out.println(responseCode);
-                        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                        String inputLine;
-                        StringBuffer content = new StringBuffer();
-                        while ((inputLine = in.readLine()) != null){
-                            content.append(inputLine);
-                        }
-                        in.close();
-                        webEngine.reload();
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
-                        String status = obj.get("status").toString(); // "approved" or "pending"
-                        System.out.println("Status from get " + status);
                         // NEW CODE ENDS HERE
                 } else {
                     throw new PasswordNotFoundException();
