@@ -40,13 +40,13 @@ public class ViewRequestController {
 
             /*
             final int index = i;
-            controller.editRequestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            controller.viewRequestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     App.getInstance().requestClicked = index;
                 }
             });
-            */
+             */
         }
     }
 
