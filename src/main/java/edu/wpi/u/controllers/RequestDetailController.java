@@ -3,6 +3,7 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.IRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.util.Stack;
 
 public class RequestDetailController {
@@ -39,9 +41,16 @@ public class RequestDetailController {
 //    requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
 //    requestDetailSecurityLabel.setText(request.getLanguage());
 
+    @FXML
+    public void initialize() throws IOException{
+        System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
+    }
+
+
     public void handleCommentButton() {
     }
 
+    @FXML
     public void handleRequestDetailCancelButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
@@ -49,9 +58,26 @@ public class RequestDetailController {
         anchor.getChildren().add(root);
     }
 
-    public void handleResolveRequestButton() {
+    @FXML
+    public void handleResolveRequestButton() throws IOException {
+        //Resolve Request()
+
+        IRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        App.requestService.deleteRequest(r.getGenericRequest().getRequestID());
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
-    public void handleEditRequestButton() {
+    @FXML
+    public void handleEditRequestButton() throws IOException {
+        System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequestEdit.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }

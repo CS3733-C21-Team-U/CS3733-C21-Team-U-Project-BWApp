@@ -20,9 +20,9 @@ import java.util.LinkedList;
 public class NERController {
 
     //Generic Request Fields
-    @FXML TextField editTitleField;
+    @FXML TextField makeEditTitleField;
 
-    @FXML TextArea editDescriptionField;
+    @FXML TextArea makeEditDescriptionField;
 
     @FXML JFXDatePicker makeEditDate2BCompleteDatePicker;
 
@@ -46,7 +46,9 @@ public class NERController {
     JFXCheckBox makeEditDateCheckBox;
 
 
+    private IRequest currIRequest;
     private Request currRequest;
+
 
     public boolean isInteger(String s) {
         try {
@@ -68,10 +70,13 @@ public class NERController {
                     }
                 });
 
-        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
+        currIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        currRequest = currIRequest.getGenericRequest();
 
-        editTitleField.setText(currRequest.getTitle());
-        editDescriptionField.setText(currRequest.getDescription());
+        System.out.println(currRequest.getTitle());
+
+        makeEditTitleField.setText(currRequest.getTitle());
+        makeEditDescriptionField.setText(currRequest.getDescription());
 
         //TODO: Probably broken
         for (String l : currRequest.getLocation()) { //Locations
@@ -116,9 +121,9 @@ public class NERController {
 
         currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
         App.requestService.updateRequest(currRequest.getRequestID(),
-                editDescriptionField.getText(),
+                makeEditDescriptionField.getText(),
                 assigneesToAdd,
-                editTitleField.getText(),
+                makeEditTitleField.getText(),
                 locationsToAdd,
                 null, //TODO: fill this in
                 currRequest.getType(),

@@ -113,12 +113,13 @@ public class RequestService {
 
   public String deleteRequest(String requestID) {
     //Success
-    Date now = new Date();
+    long time = System.currentTimeMillis();
+    Date now = new Date(time);
     for(IRequest r : this.activeRequests){
       if(r.getGenericRequest().getRequestID() == requestID){
         r.getGenericRequest().setDateCompleted(now);
         this.activeRequests.remove(r);
-        rd.resolveRequest(requestID, (java.sql.Date)now);
+        rd.resolveRequest(requestID, time);
         return "";
       }
     }

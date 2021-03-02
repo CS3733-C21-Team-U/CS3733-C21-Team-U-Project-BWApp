@@ -261,13 +261,14 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void resolveRequest(String requestID, Date date) { // TODO: Add resolve comment
+    public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
            /* java.util.Date d = request.getDateCompleted();
             java.sql.Date sqld = new java.sql.Date(d.getTime());*/
-            ps.setDate(1, date);
+            java.sql.Date d = new java.sql.Date(time);
+            ps.setDate(1, d);
             ps.setString(2,requestID);
             ps.execute();
         }

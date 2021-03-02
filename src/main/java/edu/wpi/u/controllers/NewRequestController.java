@@ -82,7 +82,8 @@ public class NewRequestController {
         switch (type) {
             case ("Maintenance"):
                 specifics.add(madeMaintenanceFieldMachineUsed.getText());
-                specifics.add(madeMaintenanceFieldPriority.getText());
+                //Ensure this is and integer
+                specifics.add(Integer.parseInt(madeMaintenanceFieldPriority.getText()));
                 break;
             case ("Laundry"):
                 //add stuff
@@ -99,6 +100,13 @@ public class NewRequestController {
 
     @FXML
     public void handleSaveNewRequest() throws IOException {
+        //makeDescriptionField, makeStaffChipView, makeTitleField, makeStaffLocationView, appNewNodetype, creator(NEED NEV), requestSpecificItems(type)
+        //String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics
+        LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
+        LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
+        LinkedList<Serializable> specifics = requestSpecificItems(App.newNodeType);
+        App.requestService.addRequest(makeDescriptionField.getText(), staff, makeTitleField.getText(), locations, App.newNodeType, "CREATOR HERE", specifics );
+        System.out.println("Made it to ADD REQUEST");
         //TODO: Call request service to add new request
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));

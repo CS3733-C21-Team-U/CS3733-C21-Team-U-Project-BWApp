@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
+import java.io.IOException;
+
 public class RequestItemController {
 
     //@FXML public Button expandCollapseButton;     DNE
@@ -33,8 +35,13 @@ public class RequestItemController {
     public String myRequestID;
     public Integer myID;
 
+    @FXML
+    public void initialize() throws IOException {
+        myID = App.lastClickedRequestNumber;
+    }
+
     @FXML public void handleViewRequestInDetailButton() throws Exception {
-        //App.lastClickedRequestNumber = myID;
+        App.lastClickedRequestNumber = myID;
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestInDetail.fxml"));
         anchor.getChildren().clear();

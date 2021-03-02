@@ -24,6 +24,7 @@ public class ViewRequestController {
         System.out.println("In Init for View Request");
 
         ArrayList<IRequest> listOfRequests = App.requestService.getRequests();
+        App.lastClickedRequestNumber = 0;
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
 
@@ -37,10 +38,11 @@ public class ViewRequestController {
             controller.requestItemLocationChipView.getChips().addAll(req.getLocation());
             controller.requestItemDescriptionLabel.setText(req.getDescription());
             controller.requestItemCreatorLabel.setText(req.getCreator());
-            controller.requestItemDate2BCompletedLabel.setText(req.getDateNeeded().toString());
+            //controller.requestItemDate2BCompletedLabel.setText(req.getDateNeeded().toString());
             controller.requestItemRequestTypeLabel.setText(req.getType());
             //controller.myID = i;
             requestList.getChildren().add(request);
+            App.lastClickedRequestNumber++;
 
             /*
             final int index = i;
