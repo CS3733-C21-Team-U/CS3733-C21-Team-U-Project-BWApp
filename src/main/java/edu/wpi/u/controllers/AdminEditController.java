@@ -148,6 +148,7 @@ public class AdminEditController {
                 e.printStackTrace();
             }
         });
+        edgeNodeGroup.toFront();
     }
 
 
@@ -198,6 +199,7 @@ public class AdminEditController {
             ex.printStackTrace();
         }
         });
+        edgeNodeGroup.toFront();
     }
 
 
@@ -272,6 +274,9 @@ public class AdminEditController {
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerFloorG.png");
+            node.setFitWidth(2987);
+            edgeNodeGroup.toFront();
+
         }
     }
 
@@ -282,6 +287,7 @@ public class AdminEditController {
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floor.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -292,6 +298,7 @@ public class AdminEditController {
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floor.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -302,6 +309,7 @@ public class AdminEditController {
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floor.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -312,6 +320,7 @@ public class AdminEditController {
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floor.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+            edgeNodeGroup.toFront();
         }
     }
 
@@ -322,6 +331,7 @@ public class AdminEditController {
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floor.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+            edgeNodeGroup.toFront();
         }
     }
 
