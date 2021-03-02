@@ -5,8 +5,8 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.TextualDirections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class floatingPathfindingController {
@@ -16,7 +16,7 @@ public class floatingPathfindingController {
     Label endNode;
     @FXML
     Label startNode;
-    @FXML
+
 
     String targetNode = "START";//flag for
     String startNodeID = "", endNodeID = "";
@@ -27,7 +27,8 @@ public class floatingPathfindingController {
     /**
      * sets flag for what field is being filled to END
      */
-    @FXML
+
+
     public void endNodeButtonHandler(){
         targetNode = "END";
     }
