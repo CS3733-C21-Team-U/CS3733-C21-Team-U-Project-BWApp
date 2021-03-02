@@ -89,6 +89,8 @@ public class AdminEditController {
                     pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                     pane.getChildren().add(contextAnchor);
                     App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+                }else{
+
                 }
             } catch(IOException ex){
                 ex.printStackTrace();
@@ -247,22 +249,22 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
-        double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
-        double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
-        System.out.println("You clicked on an edge");
-        FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
-        AnchorPane EdgeContextAnchor = new AnchorPane();
-        EdgeContextAnchor = edgeContextMenu.load();
-        EdgeContextMenuController controller = edgeContextMenu.getController();
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
+            double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
+            double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+            System.out.println("You clicked on an edge");
+            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+            AnchorPane EdgeContextAnchor = new AnchorPane();
+            EdgeContextAnchor = edgeContextMenu.load();
+            EdgeContextMenuController controller = edgeContextMenu.getController();
 
-        EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
-        EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
-        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-        pane.getChildren().add(EdgeContextAnchor);
-        App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
-
-
+            EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
+            EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
+            pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+            pane.getChildren().add(EdgeContextAnchor);
+            App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
+        }
     }
 
 
@@ -273,20 +275,20 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
-        System.out.println("You clicked on a node");
-        App.mapInteractionModel.setNodeID(n.getNodeID());
-        FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
-        AnchorPane contextAnchor = new AnchorPane();
-        contextAnchor = nodeContextMenu.load();
-        NodeContextMenuController controller = nodeContextMenu.getController();
-        contextAnchor.setLayoutX(n.getCords()[0]);
-        contextAnchor.setLayoutY(n.getCords()[1]);
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        pane.getChildren().add(contextAnchor);
-        App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
-
-
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+            System.out.println("You clicked on a node");
+            App.mapInteractionModel.setNodeID(n.getNodeID());
+            FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+            AnchorPane contextAnchor = new AnchorPane();
+            contextAnchor = nodeContextMenu.load();
+            NodeContextMenuController controller = nodeContextMenu.getController();
+            contextAnchor.setLayoutX(n.getCords()[0]);
+            contextAnchor.setLayoutY(n.getCords()[1]);
+            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+            pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            pane.getChildren().add(contextAnchor);
+            App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+        }
     }
     @FXML
     public void handleUndoButton() throws Exception{
