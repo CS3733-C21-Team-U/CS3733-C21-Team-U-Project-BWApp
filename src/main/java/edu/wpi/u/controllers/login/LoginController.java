@@ -45,7 +45,7 @@ public class LoginController {
         });
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
-        validator.setMessage("Password Required");
+        validator2.setMessage("Password Required");
         passWordField.getValidators().add(validator2);
         passWordField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {

@@ -3,12 +3,16 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -28,6 +32,9 @@ public class EditUserController {
     public JFXDatePicker appointmentDatePicker;
 
     public void initialize() throws IOException {
+
+
+
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -64,6 +71,8 @@ public class EditUserController {
                 }
             }
         });
+
+
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator2.setMessage("Password Required");

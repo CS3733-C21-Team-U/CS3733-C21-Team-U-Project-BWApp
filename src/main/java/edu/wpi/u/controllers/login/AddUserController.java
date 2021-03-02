@@ -51,7 +51,7 @@ public class AddUserController {
             for(Employee user : App.userService.getEmployees()){
                 if(user.getUserName().equals(newVal)){
                     usernameTextField.validate();
-                }validator
+                }
             }
         });
 
