@@ -6,40 +6,88 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EditRequestController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewEditRequestController">
    <children>
-      <StackPane fx:id="laundryStack" layoutX="347.0" layoutY="589.0" prefHeight="257.0" prefWidth="588.0">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="makeEditLaundryPane" prefHeight="200.0" prefWidth="200.0">
+            <Label text="Edit Request" textAlignment="CENTER">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="makeEditTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="33.0" prefWidth="400.0" promptText="Title" />
+            <JFXTextArea fx:id="makeEditDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="134.0" prefWidth="400.0" promptText="Description" />
+            <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" prefHeight="25.0" prefWidth="250.0" promptText="Date to Completed By">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXDatePicker>
+            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="900.0">
                <children>
-                  <JFXTextField fx:id="madeEditLaundryField" labelFloat="true" layoutY="-1.0" prefHeight="31.0" prefWidth="282.0" text="Laundry" />
+                  <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                     <children>
+                        <JFXChipView fx:id="makeEditLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                     <children>
+                        <JFXChipView fx:id="makeEditStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </Pane>
-            <Pane fx:id="makeEditSecurityPane" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <StackPane fx:id="laundryStack" prefHeight="257.0" prefWidth="588.0">
                <children>
-                  <JFXTextField fx:id="madeEditSecurityField" labelFloat="true" prefHeight="31.0" prefWidth="215.0" text="Security" />
+                  <Pane fx:id="makeEditLaundryPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <JFXTextField fx:id="madeEditLaundryField" labelFloat="true" layoutY="-1.0" prefHeight="31.0" prefWidth="282.0" text="Laundry" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="makeEditSecurityPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <JFXTextField fx:id="madeEditSecurityField" labelFloat="true" prefHeight="31.0" prefWidth="215.0" text="Security" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="makeEditMaintenancePane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="257.0" prefWidth="1700.0" spacing="20.0">
+                           <children>
+                              <Label text="Maintenance Fields">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="madeEditMaintenanceField" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Machine Used (String)" />
+                              <JFXTextField fx:id="madeEditMaintenanceField1" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Priority (Integer)" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
                </children>
-            </Pane>
-            <Pane fx:id="makeEditMaintenancePane" prefHeight="200.0" prefWidth="200.0">
+            </StackPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <JFXTextField fx:id="madeEditMaintenanceField" labelFloat="true" prefHeight="31.0" prefWidth="215.0" text="Maintenance" />
+                  <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
+                  <JFXCheckBox fx:id="makeEditDateCheckBox" prefHeight="21.0" prefWidth="118.0" text="Completed" />
+                  <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
                </children>
-            </Pane>
+            </HBox>
          </children>
-      </StackPane>
-      <Label layoutX="809.0" layoutY="51.0" text="Edit Request" />
-      <JFXTextArea fx:id="makeEditDescriptionField" focusColor="BLACK" labelFloat="true" layoutX="352.0" layoutY="241.0" prefHeight="134.0" prefWidth="730.0" promptText="Description" />
-      <JFXButton layoutX="1019.0" layoutY="862.0" onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
-      <JFXChipView fx:id="makeEditLocationChipView" layoutX="352.0" layoutY="432.0" prefHeight="61.0" prefWidth="468.0" promptText="Location" />
-      <JFXChipView fx:id="makeEditStaffChipView" layoutX="641.0" layoutY="432.0" prefHeight="61.0" prefWidth="468.0" promptText="Staff Name" />
-      <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" layoutX="877.0" layoutY="421.0" promptText="Date to Completed By" />
-      <JFXTextField fx:id="makeEditTitleField" labelFloat="true" layoutX="359.0" layoutY="172.0" prefHeight="33.0" prefWidth="282.0" promptText="Title" />
-      <JFXCheckBox fx:id="makeEditDateCheckBox" layoutX="901.0" layoutY="511.0" prefHeight="21.0" prefWidth="118.0" text="Completed" />
-      <JFXButton layoutX="347.0" layoutY="863.0" onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
+      </VBox>
    </children>
 </AnchorPane>
