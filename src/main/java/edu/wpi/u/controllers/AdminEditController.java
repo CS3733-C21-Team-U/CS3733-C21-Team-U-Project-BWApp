@@ -264,9 +264,8 @@ public class AdminEditController {
      * @param resource this a path that points to the correct floor map from the base package (/edu/wpi/u...)
      */
     public void loadNewMapAndGenerateHelper(String floor, String resource){
-
-        App.mapInteractionModel.mapImageResource.set(resource);
         App.mapInteractionModel.floor = floor;
+        App.mapInteractionModel.mapImageResource.set(resource);
         generateNodes(floor);
         generateEdges(floor);
     }
