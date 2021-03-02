@@ -102,13 +102,13 @@ public class Database {
                 PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
                 maintenanceRQ.execute();
 
-                String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
+               /* String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
                 PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
                 LaundryRQ.execute();
 
                 String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
                 PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
-                SecurityRQ.execute();
+                SecurityRQ.execute();*/
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");

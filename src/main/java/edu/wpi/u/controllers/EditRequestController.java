@@ -37,27 +37,16 @@ public class EditRequestController {
 
 /*
     @FXML TextField editTitleField;
-
     @FXML TextArea editDescripArea;
-
     @FXML ListView showCurrentLocListView;
-
     @FXML ChoiceBox editLocField;
-
     @FXML Label editLocationErrorLabel;
-
     @FXML TextField editTypeOfRequestField;
-
     @FXML TextField editCompDateField;
-
     @FXML CheckBox isCompleteCheckBox;
-
     @FXML TextField editCreatorField;
-
     @FXML ListView showCurrentPeopleListView;
-
     @FXML TextField editPeopleField;
-
     @FXML Label editPeopleErrorLabel;
 
 
