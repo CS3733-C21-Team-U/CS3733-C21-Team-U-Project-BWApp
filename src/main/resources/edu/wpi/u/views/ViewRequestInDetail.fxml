@@ -12,16 +12,16 @@
    <children>
       <StackPane fx:id="requestDetailStack" layoutX="165.0" layoutY="513.0" prefHeight="283.0" prefWidth="950.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="585.0" AnchorPane.topAnchor="513.0">
          <children>
-            <Pane fx:id="requestDetailLanguagePane" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="requestDetailSecurityPane" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutY="1.0" prefHeight="36.0" prefWidth="115.0" text="Language:" />
-                  <Label fx:id="requestDetailLanguageLabel" layoutX="115.0" layoutY="5.0" text="LanguageLabel" />
+                  <Label layoutY="1.0" prefHeight="36.0" prefWidth="115.0" text="Security:" />
+                  <Label fx:id="requestDetailSecurityLabel" layoutX="115.0" layoutY="5.0" text="SecurityLabel" />
                </children>
             </Pane>
-            <Pane fx:id="requestDetailReligionPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="requestDetailMaintenancePane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Label prefHeight="36.0" prefWidth="100.0" text="Religion:" />
-                  <Label fx:id="requestDetailReligionLabel" layoutX="116.0" layoutY="2.0" prefHeight="27.0" prefWidth="120.0" text="ReligionLabel" />
+                  <Label prefHeight="36.0" prefWidth="100.0" text="Maintenance:" />
+                  <Label fx:id="requestDetailMaintenanceLabel" layoutX="116.0" layoutY="2.0" prefHeight="27.0" prefWidth="120.0" text="MaintenanceLabel" />
                </children>
             </Pane>
             <Pane fx:id="requestDetailLaundryPane" prefHeight="200.0" prefWidth="200.0" visible="false">

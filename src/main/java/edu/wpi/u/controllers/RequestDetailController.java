@@ -18,10 +18,10 @@ public class RequestDetailController {
     @FXML JFXChipView requestDetailStaffChipView;
     @FXML Label requestDetailDateCreatedLabel;
     @FXML Label requestDetailDate2BCompleteLabel;
-    @FXML Label requestDetailLanguageLabel;
+    @FXML Label requestDetailSecurityLabel;
     @FXML ListView commentListView;
     @FXML StackPane requestDetailStack;
-    @FXML Pane requestDetailLanguagePane;
+    @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailReligionPane;
     @FXML Pane requestDetailLaundryPane;
 
@@ -32,7 +32,7 @@ public class RequestDetailController {
     requestDetailStaffChipView.setText(request.getStaff());
     requestDetailDateCreatedLabel.setText(request.getDateCreated());
     requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
-    requestDetailLanguageLabel.setText(request.getLanguage());
+    requestDetailSecurityLabel.setText(request.getLanguage());
 
 
 
