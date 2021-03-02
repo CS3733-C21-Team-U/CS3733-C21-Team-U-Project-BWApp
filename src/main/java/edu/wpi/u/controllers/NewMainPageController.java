@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -29,6 +30,7 @@ import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class NewMainPageController {
@@ -89,35 +91,31 @@ public class NewMainPageController {
 
     public void handleExit(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text("Are you sure you want to exit?"));
+        Label header = new Label("Exit Application?");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("OK");
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        JFXButton button1 = new JFXButton("CANCEL");
+        JFXButton button2 = new JFXButton("EXIT");
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
                 App.getInstance().end();
             }
         });
-        button.setStyle("-fx-background-color: #4dadf7");
-        content.setActions(button);
-        dialog.show();
-
-        JFXDialogLayout dialog = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ExitDialog.fxml"));
-        ObservableList<Node> buttons  = dialog.getActions();
-        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button1 = (JFXButton) buttons.get(0);
-        JFXButton button2 = (JFXButton) buttons.get(1);
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.
-                App.getInstance().end();
-            }
-        });
-        button1.getStyleClass()
-        button.setStyle("-fx-background-color: #4dadf7");
-        content.setActions(button);
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
         dialog.show();
 
     }
