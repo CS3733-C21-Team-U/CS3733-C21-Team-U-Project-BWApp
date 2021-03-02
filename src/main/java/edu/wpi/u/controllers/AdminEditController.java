@@ -87,8 +87,8 @@ public class AdminEditController {
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
                     NodeContextMenuController controller = nodeContextMenu.getController();
-                    contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
-                    contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
+                    contextAnchor.setLayoutX(x);
+                    contextAnchor.setLayoutY(y);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
                     pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                     pane.getChildren().add(contextAnchor);
@@ -128,18 +128,18 @@ public class AdminEditController {
             pane.getChildren().add(node);
         });
 
-
-
-
+        App.mapInteractionModel.editFlag.addListener((observable, oldValue, newValue)  ->{
+            //update nodes and edges
+            generateNodes(App.mapInteractionModel.floor);
+            generateEdges(App.mapInteractionModel.floor);
+        });
     } // End of initialize
 
-    @FXML
-    public void handleAddNodeButton(){
+    public void handleAddNodeButtonEDIT(){
         App.mapInteractionModel.setCurrentAction("ADDNODE");
     }
 
-    @FXML
-    public void handleAddEdgeButton(){
+    public void handleAddEdgeButtonEDIT(){
         App.mapInteractionModel.setCurrentAction("ADDEDGE");
     }
 
