@@ -10,9 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,8 +36,13 @@ public class NewRequestController {
     public Pane makeMaintenancePane;
     public JFXTextField madeMaintenanceFieldMachineUsed;
     public JFXTextField madeMaintenanceFieldPriority;
+    public AnchorPane SpecificRequestAPane;
+    public VBox VBoxToAddTo;
+    public Label specificTitle;
+    public HBox HBoxToClone;
 
     private IRequest currIRequest;
+    private JFXTextField[] specificTextFields;
 
     public boolean isInteger(String s) {
         try {
@@ -47,6 +51,28 @@ public class NewRequestController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public JFXTextField[] generateSpecificFields() {
+
+        specificTitle.setText(currIRequest.getType());
+        JFXTextField[] ans = new JFXTextField[currIRequest.getSpecificFields().length];
+        for(int i = 0; i < currIRequest.getSpecificFields().length; i++) {
+            HBox h = new HBox();
+
+            JFXTextField j = new JFXTextField();
+            j.setPromptText(currIRequest.getSpecificFields()[i]);
+            j.setLabelFloat(true);
+
+            ans[i] = j;
+
+            h.setAlignment(HBoxToClone.getAlignment());
+            h.setSpacing(HBoxToClone.getSpacing());
+            h.getChildren().add(j);
+            h.setId(Integer.toString(i));
+            VBoxToAddTo.getChildren().add(h);
+        }
+        return ans;
     }
 
     @FXML
@@ -58,7 +84,7 @@ public class NewRequestController {
         currIRequest = new RequestFactory().makeRequest(type);
 
         //TODO: redo so it does not use a switch statement
-        generateSpecificFields(type);
+        specificTextFields = generateSpecificFields();
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Integer Required");
@@ -71,38 +97,14 @@ public class NewRequestController {
 
     }
 
-    //TODO : Replace with function written in NER Controller, based on current IREQUEST
-    public void generateSpecificFields(String type){
-        switch (type) {
-            case "Laundry":
-                makeLaundryPane.setVisible(true);
-                break;
-            case "Security":
-                makeSecurityPane.setVisible(true);
-                break;
-            case "Maintenance":
-                makeMaintenancePane.setVisible(true);
-                break;
-        }
-    }
-
     //TODO : Replace with function written in NER Controller
     public LinkedList<Serializable> requestSpecificItems(String type) {
         LinkedList<Serializable> specifics = new LinkedList<>();
-        switch (type) {
-            case ("Maintenance"):
-                specifics.add(madeMaintenanceFieldMachineUsed.getText());
-                specifics.add(Integer.parseInt(madeMaintenanceFieldPriority.getText()));
-                break;
-            case ("Laundry"):
-                //add stuff
-                break;
-            case ("Security"):
-                //add stuff
-                break;
-            default:
-                System.out.println("lmao you screwed up");
+        for(JFXTextField j : specificTextFields) {
+            specifics.add(j.getText());
         }
+
+        //for loop(values stored in TextFields)
         return specifics;
     }
 

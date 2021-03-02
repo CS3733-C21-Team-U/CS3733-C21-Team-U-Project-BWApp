@@ -12,6 +12,11 @@ public class LaundryRequest implements IRequest{
     public LaundryRequest() { }
 
     @Override
+    public String getType() {
+        return  "Laundry";
+    }
+
+    @Override
     public String displayLocations() { return this.req.displayLocation(); }
 
     @Override

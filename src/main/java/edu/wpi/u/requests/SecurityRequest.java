@@ -13,6 +13,11 @@ public class SecurityRequest implements IRequest {
     //Composition Pattern Type
 
     @Override
+    public String getType() {
+        return  "Security";
+    }
+
+    @Override
     public String displayLocations() { return this.req.displayLocation(); }
 
     @Override

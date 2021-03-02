@@ -14,6 +14,11 @@ public class MaintenanceRequest implements IRequest {
     public MaintenanceRequest() { }
 
     @Override
+    public String getType() {
+        return "Maintenance";
+    }
+
+    @Override
     public String displayLocations() { return this.req.displayLocation(); }
     @Override
     public String displayAssignees() { return this.req.displayAssignees(); }

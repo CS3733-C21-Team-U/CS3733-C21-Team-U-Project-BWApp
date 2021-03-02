@@ -7,6 +7,7 @@ import java.util.LinkedList;
 //all methods below used as getters for each respective table
 
 public interface IRequest {
+    String getType();
     String displayLocations();
     String displayAssignees();
     LinkedList<Serializable> getSpecificData();//return formatted string for extra fields of a given request

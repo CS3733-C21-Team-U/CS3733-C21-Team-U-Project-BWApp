@@ -31,6 +31,7 @@ public class NERController {
     public AnchorPane SpecificRequestAPane;
     public HBox HBoxToClone;
     public VBox VBoxToAddTo;
+    public Label specificTitle;
     //Generic Request Fields
     @FXML TextField makeEditTitleField;
 
@@ -83,6 +84,7 @@ public class NERController {
 
     public JFXTextField[] generateSpecificFields() {
 
+        specificTitle.setText(currIRequest.getType());
         JFXTextField[] ans = new JFXTextField[currIRequest.getSpecificFields().length];
         for(int i = 0; i < currIRequest.getSpecificFields().length; i++) {
             HBox h = new HBox();
