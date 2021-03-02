@@ -349,7 +349,10 @@
                   </Tab>
                   <Tab fx:id="adminTab2" closable="false">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <fx:include source="EditUser.fxml" />
+                           </children></AnchorPane>
                      </content>
                      <graphic>
                         <Group>
