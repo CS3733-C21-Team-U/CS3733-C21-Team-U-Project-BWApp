@@ -254,6 +254,7 @@ public class AdminEditController {
     public void handleEdgeClicked(Edge e) throws IOException {
         double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
         double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+        App.mapInteractionModel.setEdgeID(e.getEdgeID());
         System.out.println("You clicked on an edge");
         FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
         AnchorPane EdgeContextAnchor = new AnchorPane();
