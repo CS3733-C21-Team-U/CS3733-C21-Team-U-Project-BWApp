@@ -62,13 +62,14 @@ public class NodeContextMenuController {
         System.out.println(App.mapInteractionModel.getCoords()[0] + " " + App.mapInteractionModel.getCoords()[1]);
     }
     @FXML
-    public void handleDeleteButton(){
-        if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
+    public void handleDeleteButton() {
+        if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
             App.mapInteractionModel.setCurrentAction("NONE");
-            ((Pane)App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        }else{
+            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+        } else {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
+    }
 
 
 
