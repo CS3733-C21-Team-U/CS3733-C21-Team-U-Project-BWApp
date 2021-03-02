@@ -13,30 +13,45 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
     <children>
       <HBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
               <VBox prefWidth="1086.0">
                   <children>
-                  <Label styleClass="headline-2" text="Login Portal">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets left="290.0" top="320.0" />
+                        <Insets top="270.0" />
                      </VBox.margin>
-                  </Label>
+                     <children>
+                        <ImageView fitHeight="120.0" fitWidth="115.0">
+                           <image>
+                              <Image url="@Images/logo.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="290.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label styleClass="headline-2" text="Login Portal">
+                           <HBox.margin>
+                              <Insets left="16.0" top="50.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label prefHeight="15.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets left="290.0" />
                      </VBox.margin>
                   </Label>
-                      <JFXTextField fx:id="accountName" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
+                      <JFXTextField fx:id="accountName" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
                           <VBox.margin>
-                              <Insets bottom="30.0" left="290.0" right="305.0" top="25.0" />
+                              <Insets bottom="30.0" left="290.0" right="483.0" top="25.0" />
                           </VBox.margin>
                   </JFXTextField>
                       <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password" text="test">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="290.0" right="305.0" />
+                        <Insets bottom="20.0" left="290.0" right="483.0" />
                      </VBox.margin>
                   </JFXPasswordField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -63,7 +78,7 @@
               </VBox>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="1000.0" fitWidth="790.0" smooth="false">
+                  <ImageView fitHeight="1080.0" fitWidth="835.0" smooth="false">
                      <image>
                         <Image url="@Images/pexels-anna-shvets-4421550.jpg" />
                      </image>

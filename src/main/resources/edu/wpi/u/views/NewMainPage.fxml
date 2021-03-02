@@ -287,9 +287,6 @@
                   <Tab>
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <padding>
-                              <Insets top="80.0" />
-                           </padding>
                            <children>
                               <fx:include source="SettingsPageSprint2.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>

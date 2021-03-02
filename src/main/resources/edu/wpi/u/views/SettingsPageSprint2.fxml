@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -38,16 +40,16 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path">
+            <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" text="test.csv">
                <VBox.margin>
                   <Insets right="1267.0" />
                </VBox.margin>
             </JFXTextField>
             <HBox prefHeight="52.0" prefWidth="1675.0">
                <children>
-                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="38.0" prefWidth="404.0" styleClass="button-outlined" text="Open Explorer">
+                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="38.0" prefWidth="408.0" styleClass="button-outlined" text="Open Explorer">
                      <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
+                        <Insets top="15.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
@@ -79,17 +81,20 @@
             </Label>
             <HBox prefHeight="36.0" prefWidth="1675.0">
                <children>
-                  <JFXButton fx:id="pathMode1Button" onAction="#handlePathMode1" prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="A star" />
-                  <JFXButton fx:id="pathMode2Button" onAction="#handlePathMode2" prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="Depth FIrst">
+                  <JFXRadioButton fx:id="aStarRadioButton" prefHeight="15.0" prefWidth="103.0" selected="true" text="  A Star">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets right="49.0" />
                      </HBox.margin>
-                  </JFXButton>
-                  <JFXButton prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="Breadth First">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pathFindingMode" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="dFSRadioButton" prefHeight="15.0" prefWidth="103.0" text="  Depth First" toggleGroup="$pathFindingMode">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets right="49.0" />
                      </HBox.margin>
-                  </JFXButton>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="bFSRadioButton" text="  Breadth First" toggleGroup="$pathFindingMode" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
