@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.database.Database;
@@ -267,6 +268,28 @@ public class MapService {
     Returns an ArrayList of all Edge Objects in the graph
      */
   }
+
+  /**
+   * runs the pathfinding algorithm specified in the APP class
+   * @param start_node_id
+   * @param end_node_id
+   * @return
+   * @throws PathNotFoundException
+   */
+  public ArrayList<Node> runPathfinding(String start_node_id, String end_node_id) throws PathNotFoundException {
+
+    switch (App.pathfindingAlgorithm){
+      case "ASTAR":
+        return new ArrayList<>(this.aStar(start_node_id,end_node_id));
+      case "DFS":
+        return mm.runDFS(start_node_id,end_node_id);
+      case "BFS":
+        return mm.runBFS(start_node_id,end_node_id);
+      default:
+        return new ArrayList<>();
+    }
+  }
+
 
   /**
    * runs A* on the model and gets a linked list of the path

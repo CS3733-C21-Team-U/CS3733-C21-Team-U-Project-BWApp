@@ -42,7 +42,7 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
-
+  public static String pathfindingAlgorithm = "ASTAR";//this will be set in the setting to be ASTAR BFS or DFS
   public static Integer lastClickedRequestNumber;
 
   public App(){
