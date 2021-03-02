@@ -24,7 +24,7 @@ import java.io.IOException;
 public class AdminEditController {
 
 
-    public GesturePane map;
+
 
     static final Duration DURATION = Duration.millis(300);
     @FXML public SVGPath leftMenuHamburger;
@@ -37,6 +37,7 @@ public class AdminEditController {
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
+    public GesturePane map = new GesturePane(pane);;
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -51,7 +52,6 @@ public class AdminEditController {
         pane.getChildren().add(node);
         pane.getChildren().add(edgeNodeGroup);
 
-        map = new GesturePane(pane);
         map.setMinScale(0.3);
         map.setMaxScale(2);
         map.centreOn(new Point2D(700, 4000));
