@@ -59,23 +59,16 @@ public class RequestService {
     Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
 
     // TODO: Add Exception for error checking
-    IRequest result = null;
-    switch (type){
-      case "Maintenance":
-        result = new MaintenanceRequest(specifics.get(0).toString(), (int)specifics.get(1), newRequest);
-        break;
-      case "Laundry":
-        result = new LaundryRequest("machine", 1, newRequest);
-        break;
-      case "Security":
-        result = new SecurityRequest("midnight", 1, newRequest);
-        break;
-      default:
-        System.out.println("Type does not exist!");
+    IRequest result = new RequestFactory().makeRequest(type);
 
-    }
 
-    MaintenanceRequest thing = new MaintenanceRequest("machine", 1, newRequest);
+    LinkedList<Serializable> l = new LinkedList<Serializable>();
+    l.addLast("machine");
+    l.addLast(1);
+
+    result.setRequest(newRequest);
+    result.setSpecificData(l);
+
     rd.addRequest(result);
     this.activeRequests.add(result);
     return "";

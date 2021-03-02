@@ -9,6 +9,8 @@ public class LaundryRequest implements IRequest{
     private Request req;
     private int priority;
 
+
+    public LaundryRequest() { }
     //Composition Pattern Type
     public LaundryRequest(String washer, int priority, Request req) {
         this.washer = washer;
@@ -52,6 +54,21 @@ public class LaundryRequest implements IRequest{
 
     @Override
     public Request getGenericRequest() {
+        return null;
+    }
+
+    @Override
+    public void setRequest(Request r) {
+        this.req = r;
+    }
+
+    @Override
+    public String[] getSpecificFields() {
+        return new String[0];
+    }
+
+    @Override
+    public String getSpecificDataCode() {
         return null;
     }
 

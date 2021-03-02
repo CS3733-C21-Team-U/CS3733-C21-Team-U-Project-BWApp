@@ -15,6 +15,10 @@ public interface IRequest {
     String subtableCreateQuery();
     String updateDBQuery();
     Request getGenericRequest();
+    void setRequest(Request r);
+    String[] getSpecificFields();
+    String getSpecificDataCode();
+
 
 
 

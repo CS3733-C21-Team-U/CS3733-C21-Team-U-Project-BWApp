@@ -3,6 +3,7 @@ package edu.wpi.u.database;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -123,7 +124,6 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                IRequest result = null;
                 String id = rs.getString("requestID");
                 Date created = rs.getDate("dateCreated");
                 String desc = rs.getString("description");
@@ -158,8 +158,43 @@ public class RequestData extends Data{
                 }
                 String type = rs.getString("type");
 
+                //Make IRequest
+                RequestFactory rf = new RequestFactory();
+                IRequest result = rf.makeRequest(type);
                 Request r = new Request(id,assignees, created,null,desc,title,locations,type, "Test creator");
-                switch (type){
+
+                String subtableQuery = "select * from "+type+" where requestID=?";
+                PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
+                specificTable.setString(1,id);
+                ResultSet ans = specificTable.executeQuery();
+                if (!ans.next()) {
+                    System.out.println("Item does not exist in " + type);
+                    break;
+                }
+                System.out.println(ans.getString(2));
+
+                LinkedList<Serializable> list = new LinkedList<Serializable>();
+                char[] dataChars = result.getSpecificDataCode().toCharArray();
+                for(int i = 0; i < result.getSpecificFields().length; i++){
+
+                    if(dataChars[i] == 's'){
+                        list.addLast(ans.getString(i+2));
+                    }
+                    else if(dataChars[i] == 'i'){
+                        list.addLast(ans.getInt(i+2));
+                    }
+                    else if(dataChars[i] == 'd'){
+                        list.addLast(ans.getDate(i+2));
+                    }
+
+                }
+                result.setRequest(r);
+                result.setSpecificData(list);
+
+                specificTable.close();
+
+
+               /* switch (type){
                     case "Maintenance":
                         System.out.println("Found m Request");
 
@@ -187,7 +222,7 @@ public class RequestData extends Data{
                        // result = new MaintenanceRequest("ans.getString(2)", 2, r);
                         System.out.println("Type does not exist!");
 
-                }
+                }*/
                 results.add(result);
             }
             //rs.close();

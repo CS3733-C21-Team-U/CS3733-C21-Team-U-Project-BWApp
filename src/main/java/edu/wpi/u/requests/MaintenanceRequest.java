@@ -11,12 +11,13 @@ public class MaintenanceRequest implements IRequest {
     private Request req;
     private int priority;
 
+    public MaintenanceRequest() { }
     //some pattern type idk
-    public MaintenanceRequest(String machine, int priority, Request req) {
-        this.machineUsed = machine;
-        this.priority = priority;
-        this.req = req;
-    }
+//    public MaintenanceRequest(String machine, int priority, Request req) {
+//        this.machineUsed = machine;
+//        this.priority = priority;
+//        this.req = req;
+//    }
 
     @Override
     public String displayLocations() { return this.req.displayLocation(); }
@@ -59,7 +60,21 @@ public class MaintenanceRequest implements IRequest {
     @Override
     public Request getGenericRequest() { return this.req; }
 
-    public void testMe(){}
+    @Override
+    public void setRequest(Request r) {
+        this.req = r;
+    }
+
+    @Override
+    public String[] getSpecificFields() {
+        String[] res = new String[]{"machineUsed", "priority"};
+        return res;
+    }
+
+    @Override
+    public String getSpecificDataCode() {
+        return "si";
+    }
 
 }
 

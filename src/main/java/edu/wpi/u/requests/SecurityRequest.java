@@ -9,6 +9,7 @@ public class SecurityRequest implements IRequest {
     private Request req;
     private int priority;
 
+    public SecurityRequest(){};
     //Composition Pattern Type
     public SecurityRequest(String threatLevel, int priority, Request req) {
         this.threatLevel = threatLevel;
@@ -50,6 +51,21 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public Request getGenericRequest() {
+        return null;
+    }
+
+    @Override
+    public void setRequest(Request r) {
+        this.req = r;
+    }
+
+    @Override
+    public String[] getSpecificFields() {
+        return new String[0];
+    }
+
+    @Override
+    public String getSpecificDataCode() {
         return null;
     }
 

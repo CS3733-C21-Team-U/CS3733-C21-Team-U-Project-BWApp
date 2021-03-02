@@ -3,6 +3,7 @@ package edu.wpi.u;
 import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
+import edu.wpi.u.requests.RequestFactory;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,7 @@ public class App extends Application {
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
+  public static RequestFactory requestFactory = new RequestFactory();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
 
