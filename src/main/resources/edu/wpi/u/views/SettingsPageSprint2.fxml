@@ -21,13 +21,13 @@
                </VBox.margin></Label>
             <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone Number" text="test">
                <VBox.margin>
-                  <Insets right="1200.0" />
+                  <Insets right="1267.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="emailAddressTextField" labelFloat="true" promptText="Enter E-mail address" text="test">
+            <JFXTextField fx:id="emailAddressTextField" labelFloat="true" prefWidth="372.0" promptText="Enter E-mail address" text="test">
                <VBox.margin>
-                  <Insets bottom="15.0" right="1200.0" top="30.0" />
+                  <Insets bottom="15.0" right="1267.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="475.0" styleClass="button-contained" text="Apply Contact Change" />
+            <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change" />
             <Label styleClass="headline-2" text="Admin">
                <VBox.margin>
                   <Insets top="25.0" />
@@ -35,20 +35,20 @@
             </Label>
             <Label styleClass="headline-3" text="Read and Save CSV File">
                <VBox.margin>
-                  <Insets bottom="15.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
             <HBox prefHeight="33.0" prefWidth="1675.0">
                <children>
                   <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" />
-                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="33.0" prefWidth="196.0" styleClass="button-text" text="Open Explorer">
+                  <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="33.0" prefWidth="275.0" styleClass="button-text" text="Open Explorer">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
             <HBox prefHeight="33.0" prefWidth="1675.0">
@@ -58,12 +58,15 @@
                         <Insets />
                      </HBox.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="createTableButton" buttonType="RAISED" onAction="#handleCreateTable" prefHeight="33.0" prefWidth="195.0" styleClass="button-contained" text="Load CSV and Create New Table">
+                  <JFXButton fx:id="createTableButton" buttonType="RAISED" onAction="#handleCreateTable" prefHeight="33.0" prefWidth="275.0" styleClass="button-contained" text="Load CSV and Create New Table">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </HBox>
             <Label styleClass="headline-3" text="Path Finding Modes">
                <VBox.margin>
@@ -72,13 +75,13 @@
             </Label>
             <HBox prefHeight="30.0" prefWidth="600.0">
                <children>
-                  <JFXButton fx:id="pathMode1Button" onAction="#handlePathMode1" prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="A star" />
-                  <JFXButton fx:id="pathMode2Button" onAction="#handlePathMode2" prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="Depth FIrst">
+                  <JFXButton fx:id="pathMode1Button" onAction="#handlePathMode1" prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="A star" />
+                  <JFXButton fx:id="pathMode2Button" onAction="#handlePathMode2" prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="Depth FIrst">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="30.0" prefWidth="105.0" styleClass="button-outlined" text="Breadth First">
+                  <JFXButton prefHeight="30.0" prefWidth="133.0" styleClass="button-outlined" text="Breadth First">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
