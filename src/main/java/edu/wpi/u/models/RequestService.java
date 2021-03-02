@@ -58,7 +58,7 @@ public class RequestService {
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
     Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
 
-   // TODO: Add Exception for error checking
+    // TODO: Add Exception for error checking
     IRequest result = null;
     switch (type){
       case "Maintenance":
@@ -90,13 +90,13 @@ public class RequestService {
 
   public String updateRequest(String requestID, String title, String description,Date dateCompleted, LinkedList<String> location, String type, LinkedList<String> assignee, String creator){
     //Scucess
-   for(IRequest Ir : this.activeRequests){
-     Request r = Ir.getGenericRequest();
+    for(IRequest Ir : this.activeRequests){
+      Request r = Ir.getGenericRequest();
       if(r.getRequestID() == requestID){
-       if(dateCompleted != null){
-         this.activeRequests.remove(r);
+        if(dateCompleted != null){
+          this.activeRequests.remove(r);
         }
-       r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
+        r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
         rd.updateRequest(Ir);
         return "";
       }
@@ -110,6 +110,7 @@ public class RequestService {
     Return node_id if node already exists / invalid
      */
   }
+
 
   public String deleteRequest(String requestID) {
     //Success
@@ -134,22 +135,28 @@ public class RequestService {
   }
 
   public ArrayList<IRequest> getRequests() {
-    boolean debug = false;
-//    if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array
-//      ArrayList<Request> temp = new ArrayList<Request>();
-//      LinkedList<String> list = new LinkedList<String>();
-//      list.add("Nothing");
-//      list.add("Here");
-//      Request r1 = new Request("FakeID",list ,new Date(1000), new Date(2000),"No Description","Fake Title",list, "No Type","Admin");
-//      temp.add(r1);
-//      return temp;
+    boolean debug = true;
+    if (debug) { //Adding fake requests just so we can test UI - currently it always returns a 0 length array
+      ArrayList<IRequest> temp = new ArrayList<IRequest>();
+      LinkedList<String> list = new LinkedList<String>();
+      list.add("Nothing");
+      list.add("Here");
+      Request r1 = new Request("FakeID", list, new Date(1000), new Date(2000), "No Description", "Fake Title", list, "No Type", "Admin");
+      IRequest result = new MaintenanceRequest("skdufh", 2, r1);
+      temp.add(result);
+      temp.add(result);
+      temp.add(result);
+      temp.add(result);
+      temp.add(result);
+      return temp;
 //
-//    }else{
+    } else {
       return new ArrayList<IRequest>(this.activeRequests);
     }
+  }
 
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
-  }
+}
 

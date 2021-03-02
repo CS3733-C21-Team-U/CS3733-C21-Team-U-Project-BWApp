@@ -1,6 +1,9 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXChipView;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.collections.FXCollections;
@@ -10,80 +13,82 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class EditRequestController {
+public class NewEditRequestController {
 
+    //Generic Request Fields
     @FXML TextField editTitleField;
 
-    @FXML TextArea editDescripArea;
+    @FXML TextArea editDescriptionField;
 
-    @FXML ListView showCurrentLocListView;
+    @FXML JFXDatePicker makeEditDate2BCompleteDatePicker;
 
-    @FXML ChoiceBox editLocField;
+    @FXML JFXChipView makeEditLocationChipView;
 
-    @FXML Label editLocationErrorLabel;
+    @FXML JFXChipView makeEditStaffChipView;
 
-    @FXML TextField editTypeOfRequestField;
+    //@FXML StackPane laundryStack;
 
-    @FXML TextField editCompDateField;
+    //12 Specific Request Panes (3 currently)
+    @FXML Pane makeEditLaundryPane;
 
-    @FXML CheckBox isCompleteCheckBox;
+    @FXML Pane makeEditSecurityPane;
 
-    @FXML TextField editCreatorField;
+    @FXML Pane makeEditMaintenancePane;
 
-    @FXML ListView showCurrentPeopleListView;
-
-    @FXML TextField editPeopleField;
-
-    @FXML Label editPeopleErrorLabel;
-
+        @FXML JFXTextField madeEditMaintenanceField;
+        @FXML JFXTextField madeEditMaintenanceField1;
 
 
     private Request currRequest;
 
 
 
-    @FXML
+  /*  @FXML
     JFXDrawer errorDrawer;
     ErrorMessageController controller;
 
     @FXML
     JFXDrawer errorDrawer2;
-    ErrorMessageController controller2;
+    ErrorMessageController controller2;*/
 
     public void initialize() throws IOException {
         currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
 
         editTitleField.setText(currRequest.getTitle());
-        editDescripArea.setText(currRequest.getDescription());
-        editTypeOfRequestField.setText(currRequest.getType());
+        editDescriptionField.setText(currRequest.getDescription());
+        //editTypeOfRequestField.setText(currRequest.getType()); //TODO: Type of request never changes, correct?
         //editCompDateField.setText(currRequest.getDateCompleted());
-        editCreatorField.setText("Admin");
+        //editCreatorField.setText("Admin");
         //For when creators switch
         //editCreatorField.setText(currRequest.getCreator());
 
-        for (int i = 0; i < currRequest.getLocation().size(); i++) {
-            showCurrentLocListView.getItems().add(currRequest.getLocation().get(i));
+
+        for (String l : currRequest.getLocation()) { //Locations
+            makeEditLocationChipView.getChips().add(l);
         }
 
-        for (int i = 0; i < currRequest.getAssignee().size(); i++) {
-            showCurrentPeopleListView.getItems().add(currRequest.getAssignee().get(i));
+        for (String a : currRequest.getAssignee()) { //Assignees
+            makeEditStaffChipView.getChips().add(a);
         }
 
-        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
-        ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
-        for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
-            nodeIDs.add(N.getNodeID());
-        }
-        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
-        editLocField.setItems(oList);
+        //TODO: What does this block do?
+//        ArrayList<Node> L = App.mapService.getNodes();//This gets the list of all the nodes
+//        ArrayList<String> nodeIDs = new ArrayList<String>(); //Instantiating a new ArrayList for the NodeID's
+//        for(Node N: L){//This fills up the new ArrayList<String> with the node ID's so we can display those
+//            nodeIDs.add(N.getNodeID());
+//        }
+//        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
+//        editLocField.setItems(oList);
 
-        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        /*FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
         controller.errorMessage.setText("Invalid Location");
@@ -93,30 +98,34 @@ public class EditRequestController {
         AnchorPane error2 = errorMessageLoader2.load();
         controller2 = errorMessageLoader2.getController();
         controller2.errorMessage.setText("Invalid People");
-        errorDrawer2.setSidePane(error2);
+        errorDrawer2.setSidePane(error2);*/
     }
 
-    private boolean isChecked() {
+    private void handleSaveNewEditRequest() {
+        
+    }
+
+    /*private boolean isChecked() {
         if (isCompleteCheckBox.isSelected()) {
             return true;
         } return false;
-    }
+    }*/
 
-    private boolean doesLocationExist() {
+   /* private boolean doesLocationExist() {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 return true;
             }
         } return false;
-    }
+    }*/
 
-    private boolean doesPersonExist() {
+    /*private boolean doesPersonExist() {
         for(int i = 0; i < currRequest.getAssignee().size(); i++) {
             if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
                 return true;
             }
         } return false;
-    }
+    }*/
 
    /* public void handleAddLocation() {
         String newLoc = editLocField.getText();
@@ -125,7 +134,7 @@ public class EditRequestController {
         } editLocationErrorLabel.setText("Location Already Listed.");
     }*/
 
-    public void handleAddLocation(){
+    /*public void handleAddLocation(){
         if (editLocField.getValue() == null) {
             errorDrawer.open();
         } else {
@@ -136,10 +145,10 @@ public class EditRequestController {
             errorDrawer.close();
         }
 
-    }
+    }*/
 
 
-    public void handleDeleteLocation() {
+  /*  public void handleDeleteLocation() {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 currRequest.getLocation().remove(currRequest.getLocation().get(i));
@@ -172,9 +181,9 @@ public class EditRequestController {
             }
         } errorDrawer2.open();
 
+*/
 
-
-    }
+   // }
 
     public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml"); }
 
@@ -194,7 +203,7 @@ public class EditRequestController {
 
     public void handleSaveRequest() {
 
-        Date dateCompleted;
+       /* Date dateCompleted;
         if (isChecked()) {
             dateCompleted = new Date();
         } else {
@@ -214,18 +223,18 @@ public class EditRequestController {
                 OConverter(showCurrentPeopleListView.getItems()),
                 editCreatorField.getText());
         App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
-
+*/
 
         //needs node ID
         //assignments, give list name
 
 
     }
-    public void handleErrorMessageClear(){
-        errorDrawer.close();
-    }
+   // public void handleErrorMessageClear(){
+       // errorDrawer.close();
+    //}
 
-    public void handleErrorMessageClear2(){
+   /* public void handleErrorMessageClear2(){
         errorDrawer2.close();
-    }
+    }*/
 }

@@ -2,6 +2,7 @@ package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -24,6 +25,18 @@ public class RequestDetailController {
     @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
+
+    public void handleCommentButton(ActionEvent actionEvent) {
+    }
+
+    public void handleRequestDetailCancelButton(ActionEvent actionEvent) {
+    }
+
+    public void handleResolveRequestButton(ActionEvent actionEvent) {
+    }
+
+    public void handleEditRequestButton(ActionEvent actionEvent) {
+    }
 
     /*
     requestDetailTitleLabel.setText(request.getTitle());

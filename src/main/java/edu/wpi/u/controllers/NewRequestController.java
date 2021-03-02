@@ -1,65 +1,75 @@
 package edu.wpi.u.controllers;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import edu.wpi.u.App;
-import edu.wpi.u.algorithms.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.LinkedList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
-import java.util.*;
-import java.util.stream.*;
-
-import java.util.Date;
-
-import java.util.ArrayList;
 
 public class NewRequestController {
+    @FXML public StackPane laundryStack;
+    @FXML public Pane makeEditLaundryPane;
+    @FXML public JFXTextField madeEditLaundryField;
+    @FXML public Pane makeEditSecurityPane;
+    @FXML public JFXTextField madeEditSecurityField;
+    @FXML public Pane makeEditMaintenancePane;
+    @FXML public JFXTextField madeEditMaintenanceField;
+    @FXML public JFXTextArea makeEditDescriptionField;
+    @FXML public JFXChipView makeEditLocationChipView;
+    @FXML public JFXChipView makeEditStaffChipView;
+    @FXML public JFXDatePicker makeEditDate2BCompleteDatePicker;
+    @FXML public JFXTextField makeEditTitleField;
+    @FXML public JFXButton cancelButton;
+    @FXML public JFXButton saveButton;
+
+    @FXML
+    public void initialize(ActionEvent event) throws IOException{
+        // receive data: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
+        // receiveData Step 1
+        javafx.scene.Node node = (javafx.scene.Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        // receiveData Step 2
+        String type = (String) stage.getUserData();
+        switch (type){
+            case "Laundry":
+                makeEditLaundryPane.setVisible(true);
+                break;
+            case "Security":
+                makeEditSecurityPane.setVisible(true);
+                break;
+            case "Maintenance":
+                makeEditMaintenancePane.setVisible(true);
+                break;
+        }
+
+    }
 
 
-    public Button newRequestCancelButton;
-    public TextField newRequestTitleTextField;
-    public TextArea newRequestDescriptionTextField;
-    public Label newRequestErrorMessage2;
-    public TextField newRequestAssigneeTextField;
-    public Button assigneeButton;
-    public ListView newRequestAssigneeList;
-    public Label newRequestErrorMessage3;
-    public ChoiceBox newRequestLocationDropField;
-    public Button newRequestLocationButton;
-    public ListView newRequestLocationList;
-    public TextField newRequestServiceTypeTextField;
-    public Label newRequestErrorMessage;
-    public Button newRequestSubmitRequestButton;
-    //    @FXML public Button cancelButton;
-//    @FXML public TextField titleTextField;
-//    @FXML public TextArea descriptionTextField;
-//    @FXML public Label errorMessage2;
-//    @FXML public TextField assigneeTextField;
-//    @FXML public Button assigneeButton;
-//    @FXML public ListView assigneeList;
-//    @FXML public Label errorMessage3;
-//    @FXML public ChoiceBox locationDropField;
-//    @FXML public Button locationButton;
-//    @FXML public ListView locationList;
-//    @FXML public TextField serviceTypeTextField;
-//    @FXML public Label errorMessage;
-//    @FXML public Button submitRequestButton;
+    @FXML
+    public void handleSubmitRequestButton(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void HandleMakeEditCancelButton(ActionEvent actionEvent)throws IOException {
+        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequestController.fxml"));
+        requestLoader.load();
+
+    }
+
+    @FXML
+    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
+    }
+
 
     //newRequestTitleTextField.setText(request.getTitle());
     //newRequestDescriptionTextField.setText(request.getDescription());
 
 
-
+ /*
     ObservableList<Node> oList;
     //string placeholder for USDERID
     public String userID = "ADMIN";
@@ -113,6 +123,7 @@ public class NewRequestController {
         return newLL;
     }
 
+    /*
     public void handleSubmitRequestButton() {
 
         if (newRequestTitleTextField.getText().equals("")) {
@@ -130,11 +141,7 @@ public class NewRequestController {
             }
 
     }
-
-    public void handleLeaveAdd(){
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
-    }
-
+     */
 
 
 }

@@ -7,7 +7,14 @@ import java.util.Date;
 
 public class Request {
     private String requestID;
-    private Date dateCreated, dateNeeded, dateCompleted;
+    private Date dateCreated;
+
+    public Date getDateNeeded() {
+        return dateNeeded;
+    }
+
+    private Date dateNeeded;
+    private Date dateCompleted;
     private String description;
     private String title;
     private LinkedList<String> location;
