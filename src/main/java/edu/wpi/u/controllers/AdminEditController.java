@@ -252,7 +252,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
             double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
             System.out.println("You clicked on an edge");
@@ -278,7 +278,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
             FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
