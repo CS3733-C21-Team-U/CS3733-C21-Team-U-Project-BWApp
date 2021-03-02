@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXDrawer;
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -41,9 +40,9 @@ public class ModifyNodeController {
             errorDrawer.open();
         } else {
             try {
-                Integer.parseInt(XCoordinate.getText());
-                Integer.parseInt(YCoordinate.getText());
-                App.graphService.updateNode(modifyNodeID.getText(), Integer.parseInt(XCoordinate.getText()), Integer.parseInt(YCoordinate.getText()));
+                Double.parseDouble(XCoordinate.getText());
+                Double.parseDouble(YCoordinate.getText());
+                App.mapService.updateNode(modifyNodeID.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
                 App.rightDrawerRoot.set("../views/AdminTools.fxml");
             } catch (Exception e) {
                 errorDrawer.open();

@@ -6,16 +6,16 @@ import edu.wpi.u.exceptions.PathNotFoundException;
 
 import java.util.*;
 
-public class GraphManager {
+public class MapManager {
   private final HashMap<String, Node> allNodes;
   private final HashMap<String, Edge> allEdges;
 
-  public GraphManager() {
+  public MapManager() {
     allNodes = new HashMap<>();
     allEdges = new HashMap<>();
   }
 
-  public void makeEdge(String _edgeID, String _startNodeID, String _endNodeID) {
+  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
     Edge realEdge = new Edge(_edgeID, _startNode, _endNode);
@@ -24,7 +24,7 @@ public class GraphManager {
     this.allNodes.put(_endNode.getNodeID(), _endNode);
   }
 
-  public void removeEdge(String edgeId) {
+  public void deleteEdge(String edgeId) {
     Edge e = this.allEdges.get(edgeId);
     allEdges.remove(edgeId);
     e.getStartNode().removeEdge(e);
@@ -41,11 +41,11 @@ public class GraphManager {
     e.setWalkable(true);
   }
 
-  public void makeNode(
+  public void addNode(
           String _nodeID,
           double _xcoord,
           double _ycoord,
-          int floor,
+          String floor,
           String _building,
           String _nodeType,
           String _LongName,
@@ -57,11 +57,11 @@ public class GraphManager {
     allNodes.put(n.getNodeID(), n);
   }
 
-  public void addNode(Node n) {
+  public void addNodeObject(Node n) {
     this.allNodes.put(n.getNodeID(), n);
   }
 
-  public void removeNode(String nodeID) {
+  public void deleteNode(String nodeID) {
     Node n = this.allNodes.get(nodeID);
 
     LinkedList<String> edgeIDsToRemove = new LinkedList<>();
@@ -73,9 +73,13 @@ public class GraphManager {
       }
     }
     for (String ID : edgeIDsToRemove) {
-      removeEdge(ID);
+      deleteEdge(ID);
     }
   }
+  public Node getNodeFromID(String nodeID){
+    return this.allNodes.get(nodeID);
+  }
+
 
   public void disableNode(String nodeID) {
     Node _node = this.allNodes.get(nodeID);
@@ -87,7 +91,7 @@ public class GraphManager {
     _node.setWalkable(true);
   }
 
-  public void updateCoords(String node_id, int x, int y){
+  public void updateCoords(String node_id, double x, double y){
     this.allNodes.get(node_id).updateCords(x,y);
   }
 
@@ -212,15 +216,15 @@ public class GraphManager {
   public void updateEdgeStart(String edge_id, String start_node) {
     Edge edge = this.allEdges.get(edge_id);
     String endNodeId = edge.getEndNode().getNodeID();
-    this.removeEdge(edge_id);
-    this.makeEdge(edge_id, start_node,endNodeId);
+    this.deleteEdge(edge_id);
+    this.addEdge(edge_id, start_node,endNodeId);
   }
 
   public void updateEdgeEnd(String edge_id, String end_node) {
     Edge edge = this.allEdges.get(edge_id);
     String startNodeId = edge.getStartNode().getNodeID();
-    this.removeEdge(edge_id);
-    this.makeEdge(edge_id, startNodeId,end_node);
+    this.deleteEdge(edge_id);
+    this.addEdge(edge_id, startNodeId,end_node);
   }
 
   public ArrayList<Node> getAllNodes() {

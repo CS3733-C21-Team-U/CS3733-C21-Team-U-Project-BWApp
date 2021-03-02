@@ -33,7 +33,7 @@ public class EdgeItemController {
 
     @FXML
     public void handleEdgeDeleteButton() {
-        App.graphService.deleteEdge(edgeID.getText());
+        App.mapService.deleteEdge(edgeID.getText());
         edgeAnchor.setPrefHeight(0);
         edgeAnchor.setVisible(false);
         //could be consider 'sloppy delete' on UI side until AdminTool is reloaded
