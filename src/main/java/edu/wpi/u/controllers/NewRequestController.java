@@ -9,6 +9,7 @@ import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import javafx.fxml.FXML;
