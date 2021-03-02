@@ -16,7 +16,10 @@ public class ViewRequestController {
 
     @FXML public VBox requestList;
 
-
+    /**
+     *Gets each request and attaches it to a NewRequestItem
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
 
@@ -60,8 +63,11 @@ public class ViewRequestController {
     }
      */
 
-    @FXML
-    public void handleNewRequestButton() throws Exception {
+    /**
+     * Sends Users to Button Page to add a new request
+     * @throws Exception
+     */
+    @FXML public void handleNewRequestButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequest.fxml"));
         anchor.getChildren().clear();
