@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
@@ -13,10 +14,11 @@
         <JFXButton styleClass="button-text" text="CANCEL" />
         <JFXButton styleClass="button-contained" text="EXIT" />
     </actions>
-   <children>
-   </children>
    <stylesheets>
       <URL value="@css/BaseStyle.css" />
       <URL value="@css/LightTheme.css" />
    </stylesheets>
+   <children>
+      <JFXDialog />
+   </children>
 </JFXDialogLayout>

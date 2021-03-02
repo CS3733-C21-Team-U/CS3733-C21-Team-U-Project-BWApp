@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -87,8 +88,10 @@ public class NewMainPageController {
     }
 
     public void handleExit(ActionEvent actionEvent) throws IOException {
-
-        JFXDialogLayout dialog = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ExitDialog.fxml"));
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("Are you sure you want to exit?"));
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -96,6 +99,23 @@ public class NewMainPageController {
                 App.getInstance().end();
             }
         });
+        button.setStyle("-fx-background-color: #4dadf7");
+        content.setActions(button);
+        dialog.show();
+
+        JFXDialogLayout dialog = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ExitDialog.fxml"));
+        ObservableList<Node> buttons  = dialog.getActions();
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = (JFXButton) buttons.get(0);
+        JFXButton button2 = (JFXButton) buttons.get(1);
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.
+                App.getInstance().end();
+            }
+        });
+        button1.getStyleClass()
         button.setStyle("-fx-background-color: #4dadf7");
         content.setActions(button);
         dialog.show();
