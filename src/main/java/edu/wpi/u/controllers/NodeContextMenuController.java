@@ -70,8 +70,6 @@ public class NodeContextMenuController {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
 
-    }
-
 
 
 }
