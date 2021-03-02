@@ -51,13 +51,13 @@ public class NewEditRequestController {
 
 
 
-    @FXML
+  /*  @FXML
     JFXDrawer errorDrawer;
     ErrorMessageController controller;
 
     @FXML
     JFXDrawer errorDrawer2;
-    ErrorMessageController controller2;
+    ErrorMessageController controller2;*/
 
     public void initialize() throws IOException {
         currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
@@ -88,7 +88,7 @@ public class NewEditRequestController {
 //        ObservableList<String> oList = FXCollections.observableList(nodeIDs);
 //        editLocField.setItems(oList);
 
-        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        /*FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
         controller.errorMessage.setText("Invalid Location");
@@ -98,34 +98,34 @@ public class NewEditRequestController {
         AnchorPane error2 = errorMessageLoader2.load();
         controller2 = errorMessageLoader2.getController();
         controller2.errorMessage.setText("Invalid People");
-        errorDrawer2.setSidePane(error2);
+        errorDrawer2.setSidePane(error2);*/
     }
 
     private void handleSaveNewEditRequest() {
         
     }
 
-    private boolean isChecked() {
+    /*private boolean isChecked() {
         if (isCompleteCheckBox.isSelected()) {
             return true;
         } return false;
-    }
+    }*/
 
-    private boolean doesLocationExist() {
+   /* private boolean doesLocationExist() {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 return true;
             }
         } return false;
-    }
+    }*/
 
-    private boolean doesPersonExist() {
+    /*private boolean doesPersonExist() {
         for(int i = 0; i < currRequest.getAssignee().size(); i++) {
             if (editPeopleField.equals(currRequest.getAssignee().get(i))) {
                 return true;
             }
         } return false;
-    }
+    }*/
 
    /* public void handleAddLocation() {
         String newLoc = editLocField.getText();
@@ -134,7 +134,7 @@ public class NewEditRequestController {
         } editLocationErrorLabel.setText("Location Already Listed.");
     }*/
 
-    public void handleAddLocation(){
+    /*public void handleAddLocation(){
         if (editLocField.getValue() == null) {
             errorDrawer.open();
         } else {
@@ -145,10 +145,10 @@ public class NewEditRequestController {
             errorDrawer.close();
         }
 
-    }
+    }*/
 
 
-    public void handleDeleteLocation() {
+  /*  public void handleDeleteLocation() {
         for(int i = 0; i < currRequest.getLocation().size(); i++) {
             if (editLocField.equals(currRequest.getLocation().get(i))) {
                 currRequest.getLocation().remove(currRequest.getLocation().get(i));
@@ -181,9 +181,9 @@ public class NewEditRequestController {
             }
         } errorDrawer2.open();
 
+*/
 
-
-    }
+   // }
 
     public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml"); }
 
@@ -203,7 +203,7 @@ public class NewEditRequestController {
 
     public void handleSaveRequest() {
 
-        Date dateCompleted;
+       /* Date dateCompleted;
         if (isChecked()) {
             dateCompleted = new Date();
         } else {
@@ -223,18 +223,18 @@ public class NewEditRequestController {
                 OConverter(showCurrentPeopleListView.getItems()),
                 editCreatorField.getText());
         App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
-
+*/
 
         //needs node ID
         //assignments, give list name
 
 
     }
-    public void handleErrorMessageClear(){
-        errorDrawer.close();
-    }
+   // public void handleErrorMessageClear(){
+       // errorDrawer.close();
+    //}
 
-    public void handleErrorMessageClear2(){
+   /* public void handleErrorMessageClear2(){
         errorDrawer2.close();
-    }
+    }*/
 }
