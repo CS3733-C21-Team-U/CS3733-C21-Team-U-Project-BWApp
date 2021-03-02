@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -15,4 +16,6 @@ public class RequestDetailController {
     @FXML public Label creatorLabel;
 
 
+    public void handleCommentButton(ActionEvent actionEvent) {
+    }
 }
