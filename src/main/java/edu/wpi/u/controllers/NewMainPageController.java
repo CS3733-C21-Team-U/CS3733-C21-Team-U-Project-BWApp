@@ -94,6 +94,7 @@ public class NewMainPageController {
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
         content.setHeading(header);
+        content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("CANCEL");
         JFXButton button2 = new JFXButton("EXIT");
