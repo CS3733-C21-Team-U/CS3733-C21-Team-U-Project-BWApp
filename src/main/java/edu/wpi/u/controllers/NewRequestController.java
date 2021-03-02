@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.*;
+import edu.wpi.u.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,9 +60,10 @@ public class NewRequestController {
         requestLoader.load();
 
     }
-
+//String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics
     @FXML
     public void handleSaveNewEditRequest(ActionEvent actionEvent) {
+        App.requestService.addRequest(makeEditDescriptionField.getText(),makeEditTitleField.getText());
     }
 
 

@@ -148,6 +148,9 @@ public class RequestService {
       return new ArrayList<IRequest>(this.activeRequests);
     }
 
+  public void addRequest(String text, String text1) {
+  }
+
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
