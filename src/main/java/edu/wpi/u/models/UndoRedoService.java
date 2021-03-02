@@ -155,7 +155,7 @@ public class UndoRedoService {
      * @throws Exception
      */
     public void redo() throws Exception {
-        if(curIndex < edits.size()) {
+        if(curIndex < edits.size() - 1) {
             curIndex++;
             MapEdit curEdit = edits.get(curIndex);
             curEdit.toggleEdit();
