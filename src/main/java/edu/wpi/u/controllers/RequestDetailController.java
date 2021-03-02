@@ -29,7 +29,7 @@ public class RequestDetailController {
     @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
-//
+  
 //    requestDetailTitleLabel.setText(request.getTitle());
 //    requestDetailCreatorLabel.setText(request.getCreator());
 //    requestDetailDescriptionLabel.setText(request.getDecripition());
