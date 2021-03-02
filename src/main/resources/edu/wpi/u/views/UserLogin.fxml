@@ -11,16 +11,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
    <children>
-      <JFXTextField fx:id="userName" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
+      <JFXTextField fx:id="userNameTextField" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
          <font>
             <Font name="Calibri Light" size="23.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="passWord" layoutX="513.0" layoutY="519.0" prefHeight="48.0" prefWidth="486.0" promptText="Password">
+      <JFXPasswordField fx:id="passWordField" layoutX="513.0" layoutY="519.0" prefHeight="48.0" prefWidth="486.0" promptText="Password">
          <font>
             <Font name="Calibri Light" size="23.0" />
          </font></JFXPasswordField>
-      <JFXButton fx:id="login" layoutX="513.0" layoutY="665.0" onAction="#handleLogin" prefHeight="47.0" prefWidth="183.0" style="-fx-background-color: #2b5bf5;" text="Login" textFill="WHITE">
+      <JFXButton fx:id="loginButton" layoutX="513.0" layoutY="665.0" onAction="#handleLogin" prefHeight="47.0" prefWidth="183.0" style="-fx-background-color: #2b5bf5;" text="Login" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font name="Calibri" size="39.0" />
          </font>
       </Text>
-      <JFXButton fx:id="forgotPassword" layoutX="776.0" layoutY="661.0" prefHeight="63.0" prefWidth="190.0" text="Forgot Password" textFill="#101c38">
+      <JFXButton fx:id="forgotPasswordButton" layoutX="776.0" layoutY="661.0" prefHeight="63.0" prefWidth="190.0" text="Forgot Password" textFill="#101c38">
          <font>
             <Font name="Calibri Light" size="22.0" />
          </font>

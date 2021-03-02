@@ -17,7 +17,7 @@ import static edu.wpi.u.users.StaffType.*;
 public class AddUserController {
 
     public JFXTextField userIdTextField;
-    public JFXTextField usernameField;
+    public JFXTextField usernameTextField;
     public JFXTextField nameTextField;
     public JFXTextField phoneNumTextField;
     public JFXTextField passwordTextField;
@@ -32,36 +32,25 @@ public class AddUserController {
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
-        usernameField.getValidators().add(validator);
-        usernameField.focusedProperty().addListener((o, oldVal, newVal) -> {
+        usernameTextField.getValidators().add(validator);
+        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
-                usernameField.validate();
+                usernameTextField.validate();
             }
             for(Guest user : App.userService.getGuests()){
                 if(user.getUserName().equals(newVal)){
 
-                }
-            }
-        });
-
-        RequiredFieldValidator validatorGuestExists = new RequiredFieldValidator();
-        validator.setMessage("Username Required");
-        usernameField.getValidators().add(validatorGuestExists );
-        usernameField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            for(Guest user : App.userService.getGuests()){
-                if(user.getUserName().equals(newVal)){
-                    usernameField.validate();
                 }
             }
         });
 
         RequiredFieldValidator validatorEmployeeExists = new RequiredFieldValidator();
         validator.setMessage("Username Required");
-        usernameField.getValidators().add(validatorEmployeeExists);
-        usernameField.focusedProperty().addListener((o, oldVal, newVal) -> {
+        usernameTextField.getValidators().add(validatorEmployeeExists);
+        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             for(Employee user : App.userService.getEmployees()){
                 if(user.getUserName().equals(newVal)){
-                    usernameField.validate();
+                    usernameTextField.validate();
                 }
             }
         });
@@ -107,26 +96,20 @@ public class AddUserController {
     /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to be
      * made into a user object to be added to the database
      *
-     * @param userIdTextField Text field for USERID
-     * @param nameTextField Textfield for name
-     * @param phoneNumTextField Textfield for Phone#
-     * @param passwordTextField Textfield for password
-     * @param userTypeComboBox ComboBox for user Type
-     * @param userEmployStatus Checkbox to indicate user employment
      */
-    public void handleAddUser(JFXTextField userIdTextField, JFXTextField nameTextField, JFXTextField phoneNumTextField, JFXTextField passwordTextField, JFXComboBox userTypeComboBox, JFXCheckBox userEmployStatus) throws UsernameNotFoundException {
+    public void handleAddUser() throws UsernameNotFoundException {
         String userType = "";
         if(userEmployStatus.isSelected()){
-            if(!App.userService.checkUsername(usernameField.getText()).equals("")){
-            App.userService.addEmployee(nameTextField.getText(), usernameField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
+            if(!App.userService.checkUsername(usernameTextField.getText()).equals("")){
+            App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
         }
             else{
                 throw new UsernameNotFoundException();
             }
         }
         else{
-            if(!App.userService.checkUsername(usernameField.getText()).equals("")){
-            App.userService.addGuest(nameTextField.getText(), usernameField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
+            if(!App.userService.checkUsername(usernameTextField.getText()).equals("")){
+            App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
         }
             else{
                 throw new UsernameNotFoundException();

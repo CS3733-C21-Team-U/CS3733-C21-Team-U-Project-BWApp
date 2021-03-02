@@ -24,31 +24,32 @@ public class LoginController {
 
     // TODO: Properly rename JFX artifacts
     @FXML
-    public JFXTextField userName;
+    public JFXTextField userNameTextField;
     @FXML
-    public JFXPasswordField passWord;
+    public JFXPasswordField passWordField;
     @FXML
-    public JFXButton login;
+    public JFXButton loginButton;
     @FXML
     public JFXButton forgotPasswordButton;
+
 
     public void initialize() throws IOException {
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
-        userName.getValidators().add(validator);
-        userName.focusedProperty().addListener((o, oldVal, newVal) -> {
+        userNameTextField.getValidators().add(validator);
+        userNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
-                userName.validate();
+                userNameTextField.validate();
             }
         });
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator.setMessage("Password Required");
-        passWord.getValidators().add(validator2);
-        passWord.focusedProperty().addListener((o, oldVal, newVal) -> {
+        passWordField.getValidators().add(validator2);
+        passWordField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
-                passWord.validate();
+                passWordField.validate();
             }
         });
     }
@@ -63,8 +64,8 @@ public class LoginController {
 
     @FXML
     public void handleLogin() throws IOException, Exception {
-        String username = userName.getText();
-        String password = passWord.getText();
+        String username = userNameTextField.getText();
+        String password = passWordField.getText();
 
         AccountNameNotFoundException accountException = new AccountNameNotFoundException();
         PasswordNotFoundException passwordException = new PasswordNotFoundException();

@@ -18,7 +18,7 @@
       <VBox layoutX="336.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
             <Label styleClass="headline-2" text="Add User" />
-            <JFXTextField fx:id="usernameField" labelFloat="true" promptText="Enter Username" text="test">
+            <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Enter Username" text="test">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
