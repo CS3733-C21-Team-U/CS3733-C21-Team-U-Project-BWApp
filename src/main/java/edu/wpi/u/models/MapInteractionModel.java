@@ -22,7 +22,9 @@ public class MapInteractionModel {
     public AnchorPane selectedNodeContextBox;
     public AnchorPane selectedEdgeContextBox;
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
+    public SimpleStringProperty mapImageResourcePathfinding = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public String floor = "G";
+    public String floorPathfinding = "G";
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
 
