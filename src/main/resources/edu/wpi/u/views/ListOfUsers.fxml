@@ -31,22 +31,25 @@
             </HBox>
             <TableView fx:id="guestTableView" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn fx:id="guestIDColumn" prefWidth="75.0" text="guestID" />
                 <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Name" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+                  <TableColumn fx:id="userNameColumn" prefWidth="75.0" text="Username" />
+                  <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
+                  <TableColumn fx:id="userTypeColumn" prefWidth="75.0" text="User Type" />
+                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="phoneNumberColumn" prefWidth="112.0" text="Phone Number" />
+                  <TableColumn fx:id="appDateColumn" prefWidth="91.0" text="AppDate" />
               </columns>
             </TableView>
             <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+                  <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="employeeID" />
+                <TableColumn fx:id="employeeNameTableColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="employeeUserNameColumn" prefWidth="75.0" text="Username" />
+                  <TableColumn fx:id="employeePasswordColumn" prefWidth="75.0" text="Password" />
+                  <TableColumn fx:id="employeeUserTypeColumn" prefWidth="75.0" text="User Type" />
+                  <TableColumn fx:id="employeeEmailColumn" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="75.0" text="Phone Number" />
               </columns>
             </TableView>
             <JFXButton fx:id="editSelectedButton" onAction="#handleEditUser" styleClass="button-contained" text="Edit Selected User" />

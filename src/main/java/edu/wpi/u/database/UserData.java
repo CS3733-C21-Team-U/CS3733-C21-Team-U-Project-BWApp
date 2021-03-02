@@ -17,7 +17,8 @@ public class UserData extends Data{
         connect();
         this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
         this.addGuest(new Guest("newOne","testy","testy","testy","email", StaffType.PATIENT,"915", new Date(800), false));
-        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
+        this.delGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
+        this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
 
     }
 

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -130,11 +131,19 @@ public class EditUserController {
 
      */
     public void handleEditUser(){
+
         String userType = "";
         if(userEmployStatus.isSelected()){
             App.userService.updateEmployee(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
         }
         else{
+            nameTextField.setText(App.selectedGuest.getName());
+            usernameTextField.setText(App.selectedGuest.getUserName());
+            passwordTextField.setText(App.selectedGuest.getPassword());
+            emailTextField.setText(App.selectedGuest.getEmail());
+            userTypeComboBox.setValue(App.selectedGuest.getType());
+            phoneNumTextField.setText(App.selectedGuest.getPhoneNumber());
+            appointmentDatePicker.setValue(App.selectedGuest.getAppointmentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             App.userService.updateGuest(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
         }
 

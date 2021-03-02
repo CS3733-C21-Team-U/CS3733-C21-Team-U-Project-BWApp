@@ -1,7 +1,10 @@
 package edu.wpi.u;
 
+import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
+import edu.wpi.u.users.Employee;
+import edu.wpi.u.users.Guest;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +27,7 @@ public class App extends Application {
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
+
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
   public static UserService userService = new UserService();
@@ -43,10 +47,13 @@ public class App extends Application {
   public static String DFS;
   public static String BFS;
   public static String ASTAR;
+  public static JFXTabPane tabPaneRoot;
 
   public static boolean isLightTheme = true;
 
   public static Integer lastClickedRequestNumber;
+  public static Guest selectedGuest;
+  public static Employee selectedEmployee;
 
   public App(){
     System.out.println("App constructor");
@@ -80,7 +87,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
