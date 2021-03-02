@@ -63,7 +63,7 @@ public class AdminEditController {
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
-            App.mapInteractionModel.setCoords(new double[]{e.getX(),e.getY()});
+            App.mapInteractionModel.setCoords(new double[]{e.getX() * map.getCurrentScale(),e.getY() * map.getCurrentScale()});
 
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
@@ -71,8 +71,8 @@ public class AdminEditController {
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
                     NodeContextMenuController controller = nodeContextMenu.getController();
-                    contextAnchor.setLayoutX(e.getX());
-                    contextAnchor.setLayoutY(e.getY());
+                    contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
+                    contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
                     pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                     pane.getChildren().add(contextAnchor);
@@ -141,7 +141,7 @@ public class AdminEditController {
             node.setOnMouseClicked(event -> {
                 try {
                     handleNodeClicked(n);
-                } catch (IOException e) {
+                } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
