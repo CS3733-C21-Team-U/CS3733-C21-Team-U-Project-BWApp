@@ -301,7 +301,7 @@ public class Database {
 
     public void stop() {
         try{
-            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
         }
         catch (Exception e){
             e.printStackTrace();
