@@ -79,8 +79,9 @@ public class AdminEditController {
 
             double x = (realPoint.getX()) + map.getLayoutX();
             double y = (realPoint.getY()) + map.getLayoutY();
+            App.mapInteractionModel.setCoords(new double[]{x,y}); // This is the source of the node's position?
 
-            App.mapInteractionModel.setCoords(new double[]{x,y});
+            // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
                     FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
@@ -100,6 +101,7 @@ public class AdminEditController {
                 ex.printStackTrace();
             }
 
+            // Map zooming stuff
             if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
                 // increment of scale makes more sense exponentially instead of linearly
                 map.animate(DURATION)
@@ -289,6 +291,23 @@ public class AdminEditController {
             App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
         }
     }
+
+    /**
+     * Need to: Handle when node is dragged by updating coordinates, connecting edges, and saving coordinates when dragging ceases
+     * @param n - Node being dragged
+     */
+    public void handleNodeDragged(Node n) {
+        if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){ // Should this be !(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) ?
+            System.out.println("You are dragging a node.");
+            App.mapInteractionModel.setNodeID(n.getNodeID());
+            // FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml")); // Don't want a context menu for this
+
+            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox); // Removing previous context menus when dragging
+            pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
+        }
+    }
+
     @FXML
     public void handleUndoButton() throws Exception{
         App.undoRedoService.undo();
