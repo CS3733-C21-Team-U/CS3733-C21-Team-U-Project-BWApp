@@ -210,9 +210,11 @@ public class MapEdit {
                         break;
                     case DELETE:
                         this.addEdge(oldEdge.getStartNode().getNodeID(),oldEdge.getEndNode().getNodeID(), oldEdge.getUserPermissions());
+                        this.edit = EditTypes.ADD;
                         break;
                     case ADD:
                         this.deleteEdge();
+                        this.edit = EditTypes.DELETE;
                         break;
                 }
             }else{
