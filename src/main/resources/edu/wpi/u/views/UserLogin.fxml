@@ -19,7 +19,7 @@
          <children>
               <VBox prefWidth="1086.0">
                   <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="107.0" prefWidth="1086.0">
                      <VBox.margin>
                         <Insets top="270.0" />
                      </VBox.margin>
