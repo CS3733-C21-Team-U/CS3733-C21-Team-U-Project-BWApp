@@ -79,7 +79,7 @@ public class AdminEditController {
 
             double x = (realPoint.getX()) + map.getLayoutX();
             double y = (realPoint.getY()) + map.getLayoutY();
-            App.mapInteractionModel.setCoords(new double[]{x,y}); // This is the source of the node's position?
+            App.mapInteractionModel.setCoords(new double[]{x,y});
 
             // Trying add node context menu
             try {
@@ -164,6 +164,20 @@ public class AdminEditController {
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
+                }
+            });
+            node1.setOnMouseDragged(event -> {
+                try {
+                    handleNodeDragged(n); // Set visual position (circle)
+                } catch (Exception e) {
+                e.printStackTrace();
+                }
+            });
+            node1.setOnMouseDragExited(event -> {
+                try {
+                    handleNodeDragExit(n);
+                } catch (Exception e) {
+                    e.printStackTrace(); // Update node's actual storage
                 }
             });
         edgeNodeGroup.getChildren().add(node1);
@@ -293,7 +307,7 @@ public class AdminEditController {
     }
 
     /**
-     * Need to: Handle when node is dragged by updating coordinates, connecting edges, and saving coordinates when dragging ceases
+     * Need to: Handle when node is dragged by updating coordinates on screen connecting edges. Coordinates saved in other helper function
      * @param n - Node being dragged
      */
     public void handleNodeDragged(Node n) {
@@ -304,8 +318,15 @@ public class AdminEditController {
 
             pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox); // Removing previous context menus when dragging
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-
         }
+    }
+
+    /**
+     * Saves node's coordinates whenever dragging ceases
+     * @param n - Node being dragged
+     */
+    public void handleNodeDragExit(Node n){
+
     }
 
     @FXML
