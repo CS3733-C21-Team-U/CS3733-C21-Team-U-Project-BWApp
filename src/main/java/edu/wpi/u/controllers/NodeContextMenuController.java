@@ -59,7 +59,7 @@ public class NodeContextMenuController {
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), nodeTypeDrop.getValue().toString(),longNameText.getText(), shortNameText.getText());
         }
-        System.out.println(App.mapInteractionModel.getCoords()[0] + " " + App.mapInteractionModel.getCoords()[1]);
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
     @FXML
     public void handleDeleteButton() {
@@ -69,6 +69,7 @@ public class NodeContextMenuController {
         } else {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
 

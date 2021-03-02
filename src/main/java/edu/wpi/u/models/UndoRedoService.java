@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.algorithms.MapEdit;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.users.StaffType;
@@ -146,6 +147,7 @@ public class UndoRedoService {
         }else{
             throw new Exception("Tried To UNDO an edit and there was no edits left");
         }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
     /**
@@ -160,6 +162,7 @@ public class UndoRedoService {
         }else{
             throw new Exception("Tried To REDO an edit and there was no edits left");
         }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
 

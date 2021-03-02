@@ -80,8 +80,8 @@
                         </JFXButton>
                         <HBox alignment="CENTER" prefHeight="70.0">
                            <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" styleClass="headline-3" text="Click on the map to add node" />
-                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="fab-default">
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Click on the map to add node" />
+                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleAddNodeButtonEDIT" styleClass="fab-default" text="add Node">
                                  <graphic>
                                     <SVGPath content="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z" scaleX="2.0" scaleY="2.0" styleClass="on-primary" />
                                  </graphic>
@@ -94,8 +94,8 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="70.0">
                            <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" styleClass="headline-3" text="Click two nodes to add edge" />
-                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="fab-default">
+                              <Label alignment="TOP_RIGHT" prefHeight="16.0" text="Click two nodes to add edge" />
+                              <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleAddEdgeButtonEDIT" styleClass="fab-default" text="add edge">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>

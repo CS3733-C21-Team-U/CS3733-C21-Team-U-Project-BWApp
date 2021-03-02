@@ -18,7 +18,7 @@ public class MapInteractionModel {
     public SimpleStringProperty pathFlag = new SimpleStringProperty("");
     public ArrayList<Node> path = new ArrayList<>();
     private String building = "Faulkner";
-
+    public SimpleStringProperty editFlag = new SimpleStringProperty("");
     public AnchorPane selectedNodeContextBox;
     public AnchorPane selectedEdgeContextBox;
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
