@@ -261,6 +261,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
+                              <fx:include source="NewViewRequest.fxml" />
                            </children>
                         </AnchorPane>
                      </content>

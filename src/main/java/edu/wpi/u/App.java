@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 import javafx.application.Application;
@@ -44,6 +45,8 @@ public class App extends Application {
   public static boolean isLightTheme = true;
 
   public static Integer lastClickedRequestNumber;
+
+  public static JFXTabPane tabPaneRoot;
 
   public App(){
     System.out.println("App constructor");

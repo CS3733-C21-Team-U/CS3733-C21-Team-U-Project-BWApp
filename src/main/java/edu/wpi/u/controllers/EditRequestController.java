@@ -1,15 +1,18 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,28 +21,32 @@ import java.util.LinkedList;
 
 public class EditRequestController {
 
+    @FXML public StackPane laundryStack;
+    @FXML public Pane makeEditLaundryPane;
+    @FXML public JFXTextField madeEditLaundryField;
+    @FXML public Pane makeEditSecurityPane;
+    @FXML public JFXTextField madeEditSecurityField;
+    @FXML public Pane makeEditMaintenancePane;
+    @FXML public JFXTextField madeEditMaintenanceField;
+    @FXML public JFXTextArea makeEditDescriptionField;
+    @FXML public JFXChipView makeEditLocationChipView;
+    @FXML public JFXChipView makeEditStaffChipView;
+    @FXML public JFXDatePicker makeEditDate2BCompleteDatePicker;
+    @FXML public JFXTextField makeEditTitleField;
+    @FXML public JFXCheckBox makeEditDateCheckBox;
+
+/*
     @FXML TextField editTitleField;
-
     @FXML TextArea editDescripArea;
-
     @FXML ListView showCurrentLocListView;
-
     @FXML ChoiceBox editLocField;
-
     @FXML Label editLocationErrorLabel;
-
     @FXML TextField editTypeOfRequestField;
-
     @FXML TextField editCompDateField;
-
     @FXML CheckBox isCompleteCheckBox;
-
     @FXML TextField editCreatorField;
-
     @FXML ListView showCurrentPeopleListView;
-
     @FXML TextField editPeopleField;
-
     @FXML Label editPeopleErrorLabel;
 
 
@@ -123,7 +130,7 @@ public class EditRequestController {
         if(!doesLocationExist()) {
             currRequest.getLocation().add(newLoc);
         } editLocationErrorLabel.setText("Location Already Listed.");
-    }*/
+    }
 
     public void handleAddLocation(){
         if (editLocField.getValue() == null) {
@@ -227,5 +234,11 @@ public class EditRequestController {
 
     public void handleErrorMessageClear2(){
         errorDrawer2.close();
+    }
+*/
+    public void HandleMakeEditCancelButton(ActionEvent actionEvent) {
+    }
+
+    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
     }
 }
