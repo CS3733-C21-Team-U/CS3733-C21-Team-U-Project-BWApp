@@ -63,7 +63,7 @@ public class AdminEditController {
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
-            App.mapInteractionModel.setCoords(new double[]{e.getX() * map.getCurrentScale(),e.getY() * map.getCurrentScale()});
+            App.mapInteractionModel.setCoords(new double[]{2*e.getX(),2*e.getY()});
 
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
