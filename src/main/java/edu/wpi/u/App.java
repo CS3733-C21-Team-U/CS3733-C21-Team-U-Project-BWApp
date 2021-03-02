@@ -87,7 +87,7 @@ public class App extends Application {
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.setScene(scene);
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
@@ -127,15 +127,15 @@ public class App extends Application {
   public int requestClicked;
 
   public void switchTheme() {
-    if(isLightTheme){
+    if(App.isLightTheme){
       System.out.println("isLightTheme!");
-      App.primaryStage.getScene().getStylesheets().removeAll();
+      App.primaryStage.getScene().getStylesheets().clear();
       App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
       App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
       App.isLightTheme = false;
     }else{
       System.out.println("isDarkTheme!");
-      App.primaryStage.getScene().getStylesheets().removeAll();
+      App.primaryStage.getScene().getStylesheets().clear();
       App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
       App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
       App.isLightTheme = true;

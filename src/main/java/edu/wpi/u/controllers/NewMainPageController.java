@@ -173,6 +173,10 @@ public class NewMainPageController {
         App.getInstance().switchTheme();
     }
 
+    public void handleRemoveThemes(ActionEvent actionEvent) {
+        App.getInstance().removeThemes();
+    }
+
 
 //    @FXML
 //    public void leftMenuToggle() throws Exception {
