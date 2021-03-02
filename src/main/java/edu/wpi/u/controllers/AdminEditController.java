@@ -57,9 +57,9 @@ public class AdminEditController {
         map.setFitMode(GesturePane.FitMode.UNBOUNDED);
         map.setScrollMode(GesturePane.ScrollMode.ZOOM);
         Affine invMatrix = map.getAffine().createInverse();
-        Point2D realPoint = invMatrix.deltaTransform(e.x,e.y);
-        realPoint.getX();
-        realPoint.getY();
+        //Point2D realPoint = invMatrix.deltaTransform(e.x,e.y);
+        //realPoint.getX();
+        //realPoint.getY();
 
 
 
@@ -70,6 +70,7 @@ public class AdminEditController {
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
+
             App.mapInteractionModel.setCoords(new double[]{2*e.getX(),2*e.getY()});
 
             try {
@@ -119,6 +120,15 @@ public class AdminEditController {
 
 
     } // End of initialize
+
+    public double getAbsPos(double oldCenter, double newCenter, double mScaleFactor){
+        if (newCenter > oldCenter){
+            return oldCenter + ((newCenter-oldCenter)/mScaleFactor);
+        }else{
+            return oldCenter - ((newCenter-oldCenter)/mScaleFactor);
+        }
+    }
+
 
     @FXML
     public void handleAddNodeButton(){

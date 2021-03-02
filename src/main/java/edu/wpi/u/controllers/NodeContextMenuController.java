@@ -26,9 +26,8 @@ public class NodeContextMenuController {
     /**
      * To be run when save button in node context menu is pressed. Needs to check if a node can be saved, then saves a node.
      */
+
     @FXML
-
-
     public void initialize(){
         Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
         ArrayList<String> nodeAList = new ArrayList<String>();

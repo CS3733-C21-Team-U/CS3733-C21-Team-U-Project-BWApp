@@ -11,6 +11,7 @@ public class MapInteractionModel {
 
     private String currentAction = "NONE";
     private String nodeID = "";
+    private String previousNodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
 
@@ -23,9 +24,14 @@ public class MapInteractionModel {
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
 
+    public String getPreviousNodeID() {
+        return previousNodeID;
+    }
+
     public String getBuilding() {
         return building;
     }
+
     public String getFloor() {
         return floor;
     }
@@ -47,6 +53,7 @@ public class MapInteractionModel {
     }
 
     public void setNodeID(String nodeID) {
+        previousNodeID = this.nodeID;
         this.nodeID = nodeID;
     }
 
