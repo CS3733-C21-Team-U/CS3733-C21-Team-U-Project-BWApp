@@ -13,17 +13,24 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import edu.wpi.u.requests.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class NERController {
 
+    public AnchorPane SpecificRequestAPane;
+    public HBox HBoxToClone;
+    public VBox VBoxToAddTo;
     //Generic Request Fields
     @FXML TextField makeEditTitleField;
 
@@ -53,6 +60,7 @@ public class NERController {
 
     private IRequest currIRequest;
     private Request currRequest;
+    private JFXTextField[] specificTextFields;
 
 
     public boolean isInteger(String s) {
@@ -64,8 +72,39 @@ public class NERController {
         }
     }
 
+/*    RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Integer Required");
+        madeEditMaintenanceField1.getValidators().add(validator);
+        madeEditMaintenanceField1.focusedProperty().addListener((o, oldVal, newVal) -> {
+        if (!(isInteger(newVal.toString()))) {
+            madeEditMaintenanceField1.validate();
+        }
+    });*/
+
+    public JFXTextField[] generateSpecificFields() {
+
+        JFXTextField[] ans = new JFXTextField[currIRequest.getSpecificFields().length];
+        for(int i = 0; i < currIRequest.getSpecificFields().length; i++) {
+            HBox h = new HBox();
+
+            JFXTextField j = new JFXTextField();
+            j.setPromptText(currIRequest.getSpecificFields()[i]);
+            j.setText(currIRequest.getSpecificData().get(i).toString());
+            j.setLabelFloat(true);
+
+            ans[i] = j;
+
+            h.setAlignment(HBoxToClone.getAlignment());
+            h.setSpacing(HBoxToClone.getSpacing());
+            h.getChildren().add(j);
+            h.setId(Integer.toString(i));
+            VBoxToAddTo.getChildren().add(h);
+        }
+        return ans;
+    }
+
     public void initialize() throws IOException {
-        //FOR KOHMEI -------------------------------------
+//FOR KOHMEI -------------------------------------
         //HERE is the IREQUEST that you will use to get the label, and the fields you need
         //get them like so:
         //        currIRequest.getSpecificFields() - string array of FXML LABELS
@@ -75,16 +114,9 @@ public class NERController {
         currIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
         currRequest = currIRequest.getGenericRequest();
 
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Integer Required");
-        madeEditMaintenanceField1.getValidators().add(validator);
-        madeEditMaintenanceField1.focusedProperty().addListener((o, oldVal, newVal) -> {
-                    if (!(isInteger(newVal.toString()))) {
-                        madeEditMaintenanceField1.validate();
-                    }
-                });
-
         System.out.println(currRequest.getTitle());
+
+        specificTextFields = generateSpecificFields();
 
         makeEditTitleField.setText(currRequest.getTitle());
         makeEditDescriptionField.setText(currRequest.getDescription());
@@ -106,21 +138,8 @@ public class NERController {
      */
     public LinkedList<Serializable> requestSpecificItems(String type) {
         LinkedList<Serializable> specifics = new LinkedList<>();
-
-        //ToDO: KOHMEI - Get rid of switch statement
-        switch(type) {
-            case("Maintenance") :
-                specifics.add(madeEditMaintenanceField.getText());
-                specifics.add(madeEditMaintenanceField1.getText());
-                break;
-            case("Laundry") :
-                //add stuff
-                break;
-            case("Security"):
-                //add stuff
-                break;
-            default:
-                System.out.println("lmao you screwed up");
+        for(JFXTextField j : specificTextFields) {
+            specifics.add(j.getText());
         }
 
         //for loop(values stored in TextFields)
@@ -144,7 +163,8 @@ public class NERController {
         currRequest.setAssignee(assigneesToAdd);
         currRequest.setLocation(locationsToAdd);
         LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
-        Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+        //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+        Date date= new Date();
         currRequest.setDateNeeded(date);
         currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
         App.requestService.updateRequest(currIRequest);

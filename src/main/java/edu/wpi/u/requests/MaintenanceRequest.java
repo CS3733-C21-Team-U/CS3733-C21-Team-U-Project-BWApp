@@ -29,8 +29,9 @@ public class MaintenanceRequest implements IRequest {
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
-        machineUsed = (String)l.get(0);
-        priority = (int)l.get(1);
+
+        machineUsed = l.get(0).toString();
+        priority =  Integer.parseInt(l.get(1).toString());
     }
 
 

@@ -10,8 +10,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -48,38 +46,32 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <StackPane fx:id="laundryStack" prefHeight="257.0" prefWidth="588.0">
+            <AnchorPane fx:id="SpecificRequestAPane" prefHeight="500.0" prefWidth="1700.0">
                <children>
-                  <Pane fx:id="makeEditLaundryPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <VBox fx:id="VBoxToAddTo" alignment="TOP_CENTER" layoutX="6.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXTextField fx:id="madeEditLaundryField" labelFloat="true" layoutY="-1.0" prefHeight="31.0" prefWidth="282.0" text="Laundry" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="makeEditSecurityPane" prefHeight="200.0" prefWidth="200.0" visible="false">
-                     <children>
-                        <JFXTextField fx:id="madeEditSecurityField" labelFloat="true" prefHeight="31.0" prefWidth="215.0" text="Security" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="makeEditMaintenancePane" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="257.0" prefWidth="1700.0" spacing="20.0">
+                        <Label text="Specific Request Type">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <HBox fx:id="HBoxToClone" alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
-                              <Label text="Maintenance Fields">
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
+                              <Label text="Field1">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="madeEditMaintenanceField" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Machine Used (String)" />
-                              <JFXTextField fx:id="madeEditMaintenanceField1" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Priority (Integer)" />
+                              <JFXTextField fx:id="madeEditMaintenanceField" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Sample Text Field" />
                            </children>
-                        </VBox>
+                        </HBox>
                      </children>
-                  </Pane>
+                  </VBox>
                </children>
-            </StackPane>
+            </AnchorPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
                   <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
