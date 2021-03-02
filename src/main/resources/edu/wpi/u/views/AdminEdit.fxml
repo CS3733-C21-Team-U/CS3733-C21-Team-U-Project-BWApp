@@ -28,7 +28,12 @@
             </Button>
             <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                <children>
-                  <JFXToggleNode minHeight="70.0" minWidth="70.0" styleClass="floor-toggle" text="1">
+                  <JFXToggleNode minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" styleClass="floor-toggle" text="G">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Floor1" />
+                     </toggleGroup>
+                  </JFXToggleNode>
+                  <JFXToggleNode minHeight="70.0" minWidth="70.0" onAction="#handleFloor1Button" styleClass="floor-toggle" text="1">
                      <VBox.margin>
                         <Insets bottom="-2.0" />
                      </VBox.margin>
@@ -36,22 +41,22 @@
                         <ToggleGroup fx:id="Floor" />
                      </toggleGroup>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="floor-toggle" text="2" toggleGroup="$Floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor2Button" styleClass="floor-toggle" text="2" toggleGroup="$Floor">
                      <VBox.margin>
                         <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="floor-toggle" text="3" toggleGroup="$Floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor3Button" styleClass="floor-toggle" text="3" toggleGroup="$Floor">
                      <VBox.margin>
                         <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="70.0" minWidth="70.0" styleClass="floor-toggle" text="4" toggleGroup="$Floor">
+                  <JFXToggleNode layoutX="10.0" layoutY="50.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor4Button" styleClass="floor-toggle" text="4" toggleGroup="$Floor">
                      <VBox.margin>
                         <Insets bottom="-2.0" />
                      </VBox.margin>
                   </JFXToggleNode>
-                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" styleClass="floor-toggle" text="5" toggleGroup="$Floor" />
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor5Button" styleClass="floor-toggle" text="5" toggleGroup="$Floor" />
                </children>
             </VBox>
             <HBox layoutX="1432.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
