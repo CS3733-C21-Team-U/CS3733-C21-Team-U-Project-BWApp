@@ -88,15 +88,15 @@ public class RequestService {
      */
   }
 
-  public String updateRequest(String description, LinkedList<String> assignee, String title, LinkedList<String> location,
-                              String type, String creator, LinkedList<Serializable> specifics) {
+  public String updateRequest(String requestID, String description, LinkedList<String> assignee, String title, LinkedList<String> location,
+                              Date dateGiven, String type, String creator, LinkedList<Serializable> specifics) {
    for(IRequest Ir : this.activeRequests){
      Request r = Ir.getGenericRequest();
      if(r.getRequestID() == requestID){
-       if(dateCompleted != null){
+       if(dateGiven != null){ //TODO: Check if this is correct
          this.activeRequests.remove(r);
        }
-       r.editRequest(dateCompleted,description,title,location,type,assignee,creator);
+       r.editRequest(dateGiven,description,title,location,type,assignee,creator);
        rd.updateRequest(Ir);
        return "";
      }
