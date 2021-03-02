@@ -40,5 +40,6 @@
       <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" layoutX="877.0" layoutY="421.0" promptText="Date to Completed By" />
       <JFXTextField fx:id="makeEditTitleField" labelFloat="true" layoutX="359.0" layoutY="172.0" prefHeight="33.0" prefWidth="282.0" promptText="Title" />
       <JFXCheckBox fx:id="makeEditDateCheckBox" layoutX="901.0" layoutY="511.0" prefHeight="21.0" prefWidth="118.0" text="Completed" />
+      <JFXButton layoutX="347.0" layoutY="863.0" onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
    </children>
 </AnchorPane>
