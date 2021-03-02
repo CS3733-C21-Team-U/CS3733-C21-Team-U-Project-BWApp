@@ -3,24 +3,16 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.wpi.u.models.UserService;
-import javafx.event.ActionEvent;
+import com.jfoenix.validation.RequiredFieldValidator;
+import edu.wpi.u.exceptions.FilePathNotFoundException;
 import javafx.fxml.FXML;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import edu.wpi.u.App;
-import edu.wpi.u.algorithms.Node;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
-import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-
-import java.util.ArrayList;
 
 import static edu.wpi.u.users.StaffType.*;
 
@@ -41,6 +33,27 @@ public class SettingsPageController {
     public JFXTextField filePathTextField;
     //public JFXButton  createTableButton;
 
+    public void initialize() throws IOException {
+
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("File Required");
+        filePathTextField.getValidators().add(validator);
+        filePathTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                filePathTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator2 = new RequiredFieldValidator();
+        validator.setMessage("Email Required");
+        emailAddressTextField.getValidators().add(validator2);
+        emailAddressTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                emailAddressTextField.validate();
+            }
+        });
+    }
+
 
     //most of these functions are just place holders, so I dont
     //have anything to add for stubs / javadocs
@@ -58,8 +71,15 @@ public class SettingsPageController {
      * selected in the explorer when the button is pressed
      *
      */
-    public String handleLoadCSV(){
-      File csv = fileDirect.showOpenDialog(null);
+    public String handleLoadCSV() throws FilePathNotFoundException {
+        //creating file
+        File csv = null;
+        //checking if path is valid
+        try {
+            csv = fileDirect.showOpenDialog(null);
+        }catch(Exception e){
+            throw new FilePathNotFoundException();
+        }
         fileDirect.setTitle("Open Resource File");
        String filePath = "";
        filePathTextField.setText(csv.getPath());
@@ -87,8 +107,7 @@ public class SettingsPageController {
     }
 
     public void handleCreateTable() {
-        App.mapService.loadCSVFile(filePathTextField.getText(), tableNameTextFIeld.getText() );
-
+        App.mapService.loadCSVFile(filePathTextField.getText(), tableNameTextFIeld.getText());
     }
 
     /*public void handleSetTheme1(ActionEvent actionEvent) {

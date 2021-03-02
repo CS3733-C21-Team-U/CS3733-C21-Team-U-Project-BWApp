@@ -17,6 +17,8 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.sql.SQLOutput;
 
+import static edu.wpi.u.users.StaffType.*;
+
 public class LoginController {
 
     @FXML
@@ -55,43 +57,37 @@ public class LoginController {
      */
 
     @FXML
-    public void handleLogin() throws IOException {
+    public void handleLogin() throws IOException, Exception {
         String username = accountName.getText();
         String password = passWord.getText();
+
+        AccountNameNotFoundException accountException = new AccountNameNotFoundException();
+        PasswordNotFoundException passwordException = new PasswordNotFoundException();
         //TODO: Stop from switching windows
-        try {
-            if (!App.userService.checkUsername(username).equals("") || !App.userService.checkPhoneNumber(username).equals("")) {
-                if (!App.userService.checkPassword(password).equals("")) {
-                    App.userService.setUser(username, password, App.userService.checkPassword(password));
+        if (!App.userService.checkUsername(username).equals("") || !App.userService.checkPhoneNumber(username).equals("")) {
+            if (!App.userService.checkPassword(password).equals("")) {
+                App.userService.setUser(username, password, App.userService.checkPassword(password));
 
                     //switch scene
                     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //                    Scene scene = new Scene(root);
-                    App.getPrimaryStage().getScene().setRoot(root);
+                App.getPrimaryStage().getScene().setRoot(root);
 
 
-                } else {
-                    throw new PasswordNotFoundException();
-                }
             } else {
-                throw new AccountNameNotFoundException();
+                throw passwordException;
             }
-        } catch (Exception e) {
-            AccountNameNotFoundException accountException = new AccountNameNotFoundException();
-
-            accountException.description = username + " not found in system.";
-            PasswordNotFoundException passwordException = new PasswordNotFoundException();
-
-            passwordException.description = password + " not associated with account. Check username or click Forgot Password.";
+        } else {
+            throw accountException;
         }
     }
 //Throws exceptions if username or password not found
 
-    public void handleLogin(JFXTextField accountName, JFXPasswordField passWord){
+    public void handleLogin(JFXTextField accountName, JFXPasswordField passWord) {
 
     }
 
-    public  void handleForgotPassword() throws IOException {
+    public void handleForgotPassword() throws IOException {
         //switch scene
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
 //                    Scene scene = new Scene(root);
