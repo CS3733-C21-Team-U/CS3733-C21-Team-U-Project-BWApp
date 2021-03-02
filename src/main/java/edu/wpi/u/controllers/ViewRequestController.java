@@ -5,6 +5,7 @@ import edu.wpi.u.requests.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -60,7 +61,10 @@ public class ViewRequestController {
      */
 
     @FXML
-    public void handleNewRequestButton() {
-        new FXMLLoader(getClass().getResource("/edu/wpi/u/views/MakeANewRequest.fxml"));
+    public void handleNewRequestButton() throws Exception {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
