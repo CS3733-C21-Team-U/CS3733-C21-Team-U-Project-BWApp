@@ -190,4 +190,8 @@ public class Node {
   public void setShortName(String shortName) {
     this.shortName = shortName;
   }
+
+  public void setNodeType(String nodeType) {
+    this.nodeType = nodeType;
+  }
 }

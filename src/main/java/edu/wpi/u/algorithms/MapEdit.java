@@ -110,11 +110,11 @@ public class MapEdit {
      * @param longName
      * @param shortName
      */
-    public void updateNode(double xCoord, double yCoord, String longName, String shortName){
+    public void updateNode(double xCoord, double yCoord, String nodeType, String longName, String shortName){
         try{
             this.edit = EditTypes.UPDATE;
             this.oldNode = new Node(App.mapService.getNodeFromID(this.ID));
-            App.mapService.updateNode(this.ID,xCoord,yCoord,shortName,longName);
+            App.mapService.updateNode(this.ID,xCoord,yCoord, nodeType, shortName,longName);
         }catch (Exception e){
             throw e;
         }
@@ -180,7 +180,7 @@ public class MapEdit {
 
                 switch (this.edit) {
                     case UPDATE:
-                        this.updateNode(x, y, longName, shortName);
+                        this.updateNode(x, y,nodeType, longName, shortName);
                         break;
                     case DELETE:
                         this.addNode(this.ID, x, y, floor, building, nodeType, longName, shortName);

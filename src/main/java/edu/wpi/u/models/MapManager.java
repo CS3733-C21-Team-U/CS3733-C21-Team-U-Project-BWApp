@@ -36,6 +36,10 @@ public class MapManager {
     this.allNodes.put(_endNode.getNodeID(), _endNode);
   }
 
+  public void setNodeType(String nodeID, String nodeType){
+    this.allNodes.get(nodeID).setNodeType(nodeType);
+  }
+
   /**
    * removes an edge and handles
    * @param edgeId

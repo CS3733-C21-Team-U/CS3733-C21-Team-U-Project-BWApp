@@ -139,12 +139,14 @@ public class MapService {
    * @return
    * TODO throw error if ID is not valid
    */
-  public String updateNode(String node_id, double x, double y, String shortName, String longName) {
+  public String updateNode(String node_id, double x, double y, String nodeType, String shortName, String longName) {
     if (md.isNode(node_id)){
       md.updateCoords(node_id, x, y);
       md.updLongname(node_id,longName);
       md.updShortname(node_id, shortName);
+      md.updateNodeType(node_id,nodeType);
       mm.updateCoords(node_id, x, y);
+      mm.setNodeType(node_id,nodeType);
       mm.updateNames(node_id,shortName,longName);
       return "";
     }
