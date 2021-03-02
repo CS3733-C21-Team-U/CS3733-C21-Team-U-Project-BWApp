@@ -105,7 +105,16 @@ public class MapService {
       }
 
       currentIDNumber.put(nodeType + floor, curIndex);
-      String nodeID = "U" + nodeType + curIndex;
+
+      String curIndexString;
+      if(curIndex < 10){
+        curIndexString = "00" + String.valueOf(curIndex);
+      }else if(curIndex < 100){
+        curIndexString = "0" + String.valueOf(curIndex);
+      }else {
+        curIndexString = String.valueOf(curIndex);
+      }
+      String nodeID = "U" + nodeType + curIndexString;
 
       md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
       mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");

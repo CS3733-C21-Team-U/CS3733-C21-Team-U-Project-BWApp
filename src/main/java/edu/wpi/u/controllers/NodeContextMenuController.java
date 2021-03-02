@@ -159,6 +159,7 @@ public class NodeContextMenuController {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
     }
 
 

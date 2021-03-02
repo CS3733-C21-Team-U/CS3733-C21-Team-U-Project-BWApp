@@ -187,9 +187,11 @@ public class MapEdit {
                         for(Edge curEdge: this.removedEdges){
                             this.addEdge(curEdge.getStartNode().getNodeID(),curEdge.getEndNode().getNodeID(),curEdge.getUserPermissions());
                         }
+                        this.edit = EditTypes.ADD;
                         break;
                     case ADD:
                         this.deleteNode();
+                        this.edit = EditTypes.DELETE;
                         break;
                 }
             }else if (this.type.equals("EDGE")){
