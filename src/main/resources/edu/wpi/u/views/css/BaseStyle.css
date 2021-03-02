@@ -30,23 +30,23 @@
 }
 
 .headline-1{
-    -fx-font-weight: light;
+    -fx-font-family: "Roboto Light";
     -fx-font-size: 60px;
 }
 .headline-2{
-    -fx-font-weight: normal;
+    -fx-font-family: "Roboto";
     -fx-font-size: 34px;
 }
 .headline-3{
-    -fx-font-weight: medium;
+    -fx-font-family: "Roboto Medium";
     -fx-font-size: 20px;
 }
 .subtitle{
-    -fx-font-weight: medium;
+    -fx-font-family: "Roboto Medium";
     -fx-font-size: 14px;
 }
 .caption{
-    -fx-font-weight: normal;
+    -fx-font-family: "Roboto";
     -fx-font-size: 12px;
 }
 
@@ -229,23 +229,23 @@
 
 /* ----------- TAB PANE -------------- */
 .jfx-tab-pane .headers-region {
-    -fx-background-color: -backgroundAlt;
+    -fx-background-color: -primaryVariant;
 }
 .jfx-tab-pane .tab-header-background {
-    -fx-background-color: -backgroundAlt
+    -fx-background-color: -primaryVariant
 }
 .jfx-tab-pane .tab-selected-line{
     -fx-background-color: -primary;
 }
 .jfx-tab-pane .tab-selected-line{
-    -fx-background-color: -primary;
+    -fx-background-color: -onPrimary;
 }
 .jfx-tab-pane .tab-header-area .jfx-rippler{
-    -jfx-rippler-fill: -primary;
+    -jfx-rippler-fill: -onPrimary;
 }
 .jfx-tab-pane .headers-region > .tab-selected-line{
     -fx-pref-width: 1px !important;
-    -fx-pref-height: 3px;
+    -fx-pref-height: 5px;
 }
 
 .tab-pane {
@@ -265,6 +265,14 @@
 }
 .on-secondary{
     -fx-fill: -onSecondary;
+}
+
+.left-nav-icons{
+    -fx-fill: -onPrimary;
+}
+
+.white-text{
+    -fx-text-fill: -onPrimary;
 }
 
 /* ----------- SECCONDARY COLORS -------------- */

@@ -44,6 +44,8 @@ public class App extends Application {
   public static String BFS;
   public static String ASTAR;
 
+  public static boolean isLightTheme = true;
+
   public static Integer lastClickedRequestNumber;
 
   public App(){
@@ -104,9 +106,6 @@ public class App extends Application {
   }
 
 
-
-
-
   public static Stage getPrimaryStage() {
     return primaryStage;
   }
@@ -130,4 +129,19 @@ public class App extends Application {
 
   public int requestClicked;
 
+  public void switchTheme() {
+    if(App.isLightTheme){
+      System.out.println("isLightTheme!");
+      App.primaryStage.getScene().getStylesheets().clear();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+      App.isLightTheme = false;
+    }else{
+      System.out.println("isDarkTheme!");
+      App.primaryStage.getScene().getStylesheets().clear();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+      App.isLightTheme = true;
+    }
+  }
 }
