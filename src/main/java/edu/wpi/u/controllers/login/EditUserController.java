@@ -3,6 +3,10 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.users.StaffType;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 import java.time.Instant;
 import java.util.Date;
@@ -21,6 +25,7 @@ public class EditUserController {
    public JFXButton editUserButton;
     public JFXTextField emailTextField;
     public JFXDatePicker appointmentDatePicker;
+    public JFXButton addUserButton;
 
 
     /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
@@ -49,5 +54,13 @@ public class EditUserController {
      */
     public void handleSelectUser(JFXComboBox userSelectComboBox){
 
+    }
+
+    public void handleAddUserPage() throws Exception {
+        //switch scene
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddUser.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }

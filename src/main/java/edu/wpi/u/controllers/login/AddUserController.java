@@ -4,6 +4,10 @@ import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 import java.time.Instant;
 import java.util.Date;
@@ -44,5 +48,16 @@ public class AddUserController {
             App.userService.addGuest(nameTextField.getText(), usernameField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
         }
 
+    }
+
+    public void handleAddUser(ActionEvent actionEvent) {
+    }
+
+    public void handleCancel() throws Exception {
+        //switch scene
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditUser.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }

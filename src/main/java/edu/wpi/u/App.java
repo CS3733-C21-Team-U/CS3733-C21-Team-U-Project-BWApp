@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 import javafx.application.Application;
@@ -43,6 +44,7 @@ public class App extends Application {
   public static String DFS;
   public static String BFS;
   public static String ASTAR;
+  public static JFXTabPane tabPaneRoot;
 
   public static boolean isLightTheme = true;
 
