@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="805.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.views.ButtonPageForNewRequest">
+   <children>
+      <JFXButton layoutX="194.0" layoutY="403.0" onAction="#handleMakeSecurityButton" prefHeight="31.0" prefWidth="166.0" text="Security" />
+      <JFXButton layoutX="194.0" layoutY="206.0" onAction="#handleMakeLaundryButton" prefHeight="31.0" prefWidth="166.0" text="Laundry" />
+      <JFXButton layoutX="194.0" layoutY="308.0" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="166.0" text="Maintenance" />
+      <Label layoutX="152.0" layoutY="83.0" text="Please Choose a Request Type to Add" />
+   </children>
+</AnchorPane>
