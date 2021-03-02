@@ -54,6 +54,7 @@ public class SettingsPageController {
 
     public void initialize() throws IOException, FilePathNotFoundException {
 
+        // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("File Required");
         filePathTextField.getValidators().add(validator);
@@ -62,7 +63,7 @@ public class SettingsPageController {
                 filePathTextField.validate();
             }
         });
-
+        // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator.setMessage("Email Required");
         emailAddressTextField.getValidators().add(validator2);
@@ -71,6 +72,16 @@ public class SettingsPageController {
                 emailAddressTextField.validate();
             }
         });
+        // TODO: ADD REGEX FUNCTIONALITY TO THIS
+        RequiredFieldValidator validator3 = new RequiredFieldValidator();
+        validator.setMessage("Phone # Required");
+        phoneNumTextField.getValidators().add(validator2);
+        phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                emailAddressTextField.validate();
+            }
+        });
+
 
         if (!(App.userService.getActiveUser().getType() == ADMIN)) {
             adminText.setStyle("-fx-opacity: 0");

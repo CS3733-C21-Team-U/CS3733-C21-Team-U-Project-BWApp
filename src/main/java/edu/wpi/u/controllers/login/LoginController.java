@@ -21,6 +21,8 @@ import static edu.wpi.u.users.StaffType.*;
 
 public class LoginController {
 
+
+    // TODO: Properly rename JFX artifacts
     @FXML
     public JFXTextField userName;
     @FXML

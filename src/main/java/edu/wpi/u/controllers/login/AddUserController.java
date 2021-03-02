@@ -75,6 +75,7 @@ public class AddUserController {
             }
         });
 
+        // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
         validator.setMessage("Phone Number Required");
         phoneNumTextField.getValidators().add(validator3);
@@ -92,7 +93,7 @@ public class AddUserController {
                 passwordTextField.validate();
             }
         });
-
+        // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator5 = new RequiredFieldValidator();
         validator.setMessage("Email Required");
         emailTextField.getValidators().add(validator5);
