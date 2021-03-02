@@ -173,8 +173,7 @@ public class NewMainPageController {
         App.getInstance().switchTheme();
     }
 
-    public void handleRemoveThemes(ActionEvent actionEvent) {
-        App.getInstance().removeThemes();
+    public void handleExit(ActionEvent actionEvent) {
     }
 
 
