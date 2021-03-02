@@ -58,6 +58,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
         listViewDemo.setItems(listView);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -77,97 +78,6 @@ public class NewMainPageController {
             this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
 //            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
         });
-//        nonActiveValue.setStyle("-jfx-rippler-fill: red");
-//        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
-//        leftMenuDrawer.setSidePane(leftMenuPane);
-//        leftMenuDrawer.open();
-//
-//        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingRightPage.fxml"));
-//        serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//        serviceRequestDrawer.open();
-//
-//
-//
-//        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
-//        node.setFitWidth(2987);
-//        node.setPreserveRatio(true);
-//        AnchorPane pane = new AnchorPane(node);
-//        //The black path behind--------------
-//        App.pathFindingPath = new SVGPath();
-//        App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath.setStrokeWidth(5);
-//        App.pathFindingPath.setStroke(Color.web("#f6c037", 1.0));
-//        App.pathFindingPath.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The yellow path behind--------------
-//        App.pathFindingPath2 = new SVGPath();
-//        App.pathFindingPath2.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath2.setStrokeWidth(12);
-//        App.pathFindingPath2.setStroke(Color.web("#1d1d1d", 1.0));
-//        App.pathFindingPath2.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath2.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The loading of the paths
-//        pane.getChildren().add(App.pathFindingPath);
-//        pane.getChildren().add(App.pathFindingPath2);
-//        App.pathFindingPath2.toFront();
-//        App.pathFindingPath.toFront();
-//        map = new GesturePane(pane);
-//        map.setMinScale(0.3);
-//        map.setMaxScale(2);
-//        map.centreOn(new Point2D(700, 4000));
-//        map.zoomTo(0.5,map.targetPointAtViewportCentre());
-//
-////        mapView.setFitWidth(4000.0);
-////        mapView.setFitHeight(4000.0);
-////        mapView.setPreserveRatio(true);
-////
-////        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
-////        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
-//        map.setPrefWidth(1920);
-//        map.setPrefHeight(1000);
-//        map.setFitMode(GesturePane.FitMode.UNBOUNDED);
-//        map.setScrollMode(GesturePane.ScrollMode.ZOOM);
-////        map.setPannable(true);
-//        mainAnchorPane.getChildren().add(map);
-//        map.toBack();
-//
-//        map.setOnMouseClicked(e -> {
-//            Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
-//                    .orElse(map.targetPointAtViewportCentre());
-//            if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-//                // increment of scale makes more sense exponentially instead of linearly
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomBy(map.getCurrentScale(), pivotOnTarget);
-//            } else if (e.getButton() == MouseButton.SECONDARY && e.getClickCount() == 1) {
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomTo(map.getMinScale(), pivotOnTarget);
-//            }
-//        });
-//
-//        App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
-//                serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//                serviceRequestDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-//        App.leftDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                leftMenuPane = FXMLLoader.load(getClass().getResource(newValue));
-//                leftMenuDrawer.setSidePane(leftMenuPane);
-//                leftMenuDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
 
 
     }
@@ -176,12 +86,9 @@ public class NewMainPageController {
         App.getInstance().switchTheme();
     }
 
-    public void handleExit(ActionEvent actionEvent) {
-        JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text("Exit Application"));
-        content.setBody(new Text("You are about to exit the application!"));
-        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("OK");
+    public void handleExit(ActionEvent actionEvent) throws IOException {
+
+        JFXDialogLayout dialog = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ExitDialog.fxml"));
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
