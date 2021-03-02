@@ -82,7 +82,7 @@ public class NewMainPageController {
 //            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
         });
 
-        if(App.userService.getActiveUser().getType() ==  ADMIN){
+      /*  if(App.userService.getActiveUser().getType() ==  ADMIN){
             adminTab1.setStyle("-fx-opacity: 1");
             adminTab1.setDisable(false);
             adminTab2.setStyle("-fx-opacity: 1");
@@ -94,6 +94,8 @@ public class NewMainPageController {
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
         }
+
+       */
 
 //        nonActiveValue.setStyle("-jfx-rippler-fill: red");
 //        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));

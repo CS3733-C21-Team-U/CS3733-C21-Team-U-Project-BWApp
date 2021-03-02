@@ -3,12 +3,16 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
+import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.User;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TreeTableColumn;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumnBase;
@@ -32,8 +37,25 @@ public class ListOfUsersController {
     public JFXButton editSelectedButton;
     public TableColumn nameTableColumn;
     public ObservableList<User> guestList = FXCollections.observableArrayList();
-
-
+    public ObservableList<User> employeeList = FXCollections.observableArrayList();
+    public TableColumn userNameColumn;
+    public TableColumn passwordColumn;
+    public TableColumn userTypeColumn;
+    public TableColumn emailColumn;
+    public TableColumn phoneNumberColumn;
+    public TableColumn appDateColumn;
+    public TableColumn employeeNameTableColumn;
+    public TableColumn employeeUserNameColumn;
+    public TableColumn employeePasswordColumn;
+    public TableColumn employeeUserTypeColumn;
+    public TableColumn employeeEmailColumn;
+    public TableColumn employeePhoneNumberColumn;
+//    public TableView.TableViewSelectionModel guestSelectionModel = guestTableView.getSelectionModel();
+//    public TableView.TableViewSelectionModel employeeSelectionModel = employeeTableView.getSelectionModel();
+    public TableColumn guestIDColumn;
+    public TableColumn employeeIDColumn;
+    Guest myGuest;
+    Employee myEmployee;
 
 //    TableColumn<User, String> guestTableColumnUserID = new TableColumn<User, String>("userID");
 //    TableColumn<User, String> guestTableColumnName = new TableColumn<>("name");
@@ -70,15 +92,26 @@ public class ListOfUsersController {
 //        employeeTableView.getColumns().add(employeeTableColumnUserType);
 //        employeeTableView.getColumns().add(employeeTableColumnEmail);
 //        employeeTableView.getColumns().add(employeeTableColumnPhoneNum);
+        myGuest = App.selectedGuest;
+        myEmployee = App.selectedEmployee;
 
         //PropertyValueFactory factoryUserID = new PropertyValueFactory<>("Name");
+        guestIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
         nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Username"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Usertype"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Phone Number"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("AppDate"));
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
+        userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
+        appDateColumn.setCellValueFactory(new PropertyValueFactory<User, String>("AppointmentDate"));
+
+        employeeIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
+        employeeNameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+        employeeUserNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
+        employeePasswordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
+        employeeUserTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
+        employeeEmailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
+        employeePhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
 
         //PropertyValueFactory factory = new PropertyValueFactory<>("Name");
         //nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"))
@@ -87,10 +120,25 @@ public class ListOfUsersController {
         guestTableView.setItems(guestList);
      //   guestTableView.getItems().add(App.userService.getGuests());
 
-
+        employeeList.addAll(App.userService.getEmployees());
+        employeeTableView.setItems(employeeList);
     }
 
-    public void handleEditUser(ActionEvent actionEvent) {
+    public void handleEditUser(ActionEvent actionEvent) throws IOException {
+        if(guestTableView.getSelectionModel().getSelectedItem() != null){
+          myGuest = (Guest) guestTableView.getSelectionModel().getSelectedItem();
+          App.selectedGuest = myGuest;
+        }
+        if(employeeTableView.getSelectionModel().getSelectedItem() != null){
+            myEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+            App.selectedEmployee = myEmployee;
+        }
+        //switch scene
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditUser.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+
     }
 
     //getColumns(.add(treeTableColumnUserID));
