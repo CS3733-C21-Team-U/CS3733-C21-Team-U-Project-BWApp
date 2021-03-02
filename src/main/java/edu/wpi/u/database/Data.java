@@ -17,6 +17,9 @@ public abstract class Data {
 
     }
 
+    /**
+     * Creates the connection to the database by mounting the driver
+     */
     public void connect() {
         try {
             conn = DriverManager.getConnection(url);
@@ -25,65 +28,6 @@ public abstract class Data {
             e.printStackTrace();
         }
     }
-
-//    public void readCSV(String filePath, String tableName){
-//
-//        String tempPath = "temp.csv"; //TODO : Change path in jar file
-//        String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
-//
-//        try {
-//            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
-//            String[] columns = content.split("\n", 2);
-//            //String[] attributes = content.split(","); TODO: Make table columns from header values
-//            columns[1] += "\n";
-//            File temp = new File(tempPath);
-//            if(temp.createNewFile()){
-//                System.out.println("File created");
-//            }
-//            FileWriter myWriter = new FileWriter(tempPath);
-//            myWriter.write(columns[1]);
-//            myWriter.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            PreparedStatement p = conn.prepareStatement(str1);
-//            p.execute();
-//        }
-//        catch (Exception e){
-//            System.out.println("Path: " + filePath);
-//            //e.printStackTrace();
-//        }
-//    }
-
-//    public void saveCSV(String tableName, String filePath, String header){
-//        File f = new File(filePath);
-//        if(f.delete()){
-//            System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
-//        }
-//        String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
-//        try {
-//            PreparedStatement ps = conn.prepareStatement(str);
-//            ps.execute();
-//            ps.close();
-//        } catch (SQLException e) {
-//            System.out.println("Wants new file");
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
-//            FileWriter fw = new FileWriter(filePath);
-//            fw.write(header);
-//            fw.write("\n");
-//            fw.write(content);
-//            fw.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public boolean updateField(String tableName, String idField, String id, String field, String val) {
         try {
             String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
@@ -98,7 +42,6 @@ public abstract class Data {
         }
         return true;
     }
-
     public boolean updateField(String tableName, String idField, String id, String field, int val) {
         try {
             String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
@@ -112,6 +55,22 @@ public abstract class Data {
             return false;
         }
         return true;
+    }
+
+    public void printTableItem(String tableName, String columnName) {
+        try {
+            String str = "select * from " + tableName;
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            while (rset.next()) {
+                String id = rset.getString(columnName);
+                System.out.println(columnName + ": " + id);
+            }
+            rset.close();
+        } catch (Exception e) {
+            System.out.println("Failed");
+            e.printStackTrace();
+        }
     }
 
 /*

@@ -1,10 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
-import edu.wpi.u.models.AdminToolStorage;
-import edu.wpi.u.models.GraphService;
-import edu.wpi.u.models.PathHandling;
-import edu.wpi.u.models.RequestService;
+import edu.wpi.u.models.*;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +25,9 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   private static Stage primaryStage;
   // We only ever have one primary stage, each time we switch scenes, we swap this out
-  public static GraphService graphService = new GraphService();
+  public static Database db = Database.getDB();
+  public static UserService userService = new UserService();
+  public static MapService mapService = new MapService();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
@@ -41,6 +40,8 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
+
+  public static boolean isLightTheme = true;
 
   public static Integer lastClickedRequestNumber;
 
@@ -76,16 +77,17 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/NewMainPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
     Scene scene = new Scene(root);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
-//    scene.getStylesheets().add("/edu/wpi/u/views/css/RegularTheme.css");
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.setScene(scene);
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
@@ -101,20 +103,13 @@ public class App extends Application {
   }
 
 
-
-
-
   public static Stage getPrimaryStage() {
     return primaryStage;
   }
 
   public void end() {
     System.out.println("Shutting Down");
-    requestService.saveCSVFile("Requests.csv", "Requests");
-    requestService.saveCSVFile("Assignments.csv", "Assignments");
-    requestService.saveCSVFile("Locations.csv", "Locations");
-    graphService.saveCSVFile("OutsideMapNodes.csv", "Nodes");
-    graphService.saveCSVFile("OutsideMapEdges.csv", "Edges");
+    Database.getDB().saveAll();
     Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
@@ -123,4 +118,19 @@ public class App extends Application {
 
   public int requestClicked;
 
+  public void switchTheme() {
+    if(isLightTheme){
+      System.out.println("isLightTheme!");
+      App.primaryStage.getScene().getStylesheets().removeAll();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+      App.isLightTheme = false;
+    }else{
+      System.out.println("isDarkTheme!");
+      App.primaryStage.getScene().getStylesheets().removeAll();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+      App.isLightTheme = true;
+    }
+  }
 }

@@ -7,14 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
+/*
+Twillio covid screenings
+ */
+
 public class Database {
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
 
-
     public Database() {
         driver();
         connect();
+        makeCSVDependant(false);
         createTables();
     }
 
@@ -28,6 +32,9 @@ public class Database {
         return SingletonHelper.db;
     }
 
+    /**
+     * Creates an instance of the database Driver to allow connection
+     */
     public static void driver() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
@@ -37,22 +44,27 @@ public class Database {
         }
     }
 
+    /**
+     * Creates the connection to the database by mounting the driver
+     */
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
-            //conn.setAutoCommit(false);
-            //conn.commit();
+            conn.setAutoCommit(true);
         } catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
         }
     }
 
-    public static void createTables() { //TODO : Rename to createTables()
+    /**
+     * Creates all of the tables in the database
+     */
+    public static void createTables() {
         try {
             if (isTableEmpty()) {
                 String tbl1 =
-                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor int , building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
+                        "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor varchar(50), building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
 
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
@@ -62,25 +74,53 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))"; //TODO: Delete Type
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                String tbl4 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50), primary key(assignmentID))";
+                //TODO: Change to employees and guests
+                //TODO: Check for username, phone number, or email
+                String tbl4 =
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
-                String tbl5 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl7 =
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+                PreparedStatement ps7 = conn.prepareStatement(tbl7);
+                ps7.execute();
+
+                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
+                String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                PreparedStatement ps6 = conn.prepareStatement(tbl6);
+                ps6.execute();
+                //Service Request Tables
+                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
+                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
+                maintenanceRQ.execute();
+
+                String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+                LaundryRQ.execute();
+
+                String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
+                PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
+                SecurityRQ.execute();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Table creation failed");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Will read the csv file from a given path
+     * @param filePath the path to be read from
+     * @param tableName the table to load the data from the csv into
+     */
     public void readCSV(String filePath, String tableName){
 
         String tempPath = "temp.csv"; //TODO : Change path in jar file
@@ -111,6 +151,13 @@ public class Database {
             //e.printStackTrace();
         }
     }
+
+    /**
+     * Saves a csv to a given file path
+     * @param tableName the table to be saved to a csv
+     * @param filePath the path that the csv file will be written to
+     * @param header header of the csv file (the first line)
+     */
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
@@ -138,9 +185,9 @@ public class Database {
         }
     }
 
-    public void printRequests() {
+    public void printRequests(String aTable) { //what is happening here?
         try {
-            String str = "select * from Requests";
+            String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
             while (rset.next()) {
@@ -165,7 +212,6 @@ public class Database {
     }
 
     public void dropValues() {
-        //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
             String str = "alter table Locations drop column nodeID";
@@ -184,12 +230,81 @@ public class Database {
             s.execute(str);
             str = "delete from Assignments";
             s.execute(str);
+            str = "delete from Maintenance";
+            s.execute(str);
+            str = "delete from Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
         }
     }
 
-    public void stop() {
+    public void deleteTables() {
+        //System.out.println("here2");
+        try {
+            Statement s = conn.createStatement();
+            String str = "drop Nodes";
+            s.execute(str);
+            str = "drop Edges";
+            s.execute(str);
+            str = "drop Requests";
+            s.execute(str);
+            str = "drop Locations";
+            s.execute(str);
+            str = "drop Assignments";
+            s.execute(str);
+            str = "drop Maintenance";
+            s.execute(str);
+            str = "drop Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    //TODO: Test
+
+
+    public void saveAll(){
+        saveCSV( "Requests", "Requests.csv","Test");
+        saveCSV( "Assignments", "Assignments.csv","Test");
+        saveCSV( "Locations", "Locations.csv","Test");
+        saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
+        saveCSV( "Edges", "OutsideMapEdges.csv","Test");
+        saveCSV( "Maintenance","Maintenance.csv", "Test");
+        //saveCSV( "Laundry", "Laundry.csv","Test");
+        //saveCSV( "Laundry", "Security.csv","Test");
+    }
+
+    public void makeCSVDependant(boolean yes){
+
+        if(!yes) return;
+        dropValues();
+        deleteTables();
+        readCSV("Requests.csv", "Requests");
+        readCSV("Locations.csv", "Locations");
+        readCSV("Assignments.csv", "Assignments");
+        readCSV("OutsideMapNodes.csv", "Nodes");
+        readCSV("OutsideMapEdges.csv", "Edges");
+        readCSV("Maintenance.csv", "Maintenance");
+        //readCSV("Laundry.csv", "Laundry");
+
+
+
+    }
+
+
+
+    public void stop() {
+        try{
+           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

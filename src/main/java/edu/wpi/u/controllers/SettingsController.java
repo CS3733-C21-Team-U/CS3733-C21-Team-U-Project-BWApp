@@ -48,12 +48,12 @@ public class SettingsController {
 
     public void handleRegTheme(ActionEvent actionEvent) {
         App.getPrimaryStage().getScene().getStylesheets().removeAll();
-        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/RegularTheme.css").toExternalForm());
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     }
 
     public void handleAltTheme(ActionEvent actionEvent) {
         System.out.println("I clicked the theme!!!!");
         App.getPrimaryStage().getScene().getStylesheets().removeAll();
-        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+        App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     }
 }

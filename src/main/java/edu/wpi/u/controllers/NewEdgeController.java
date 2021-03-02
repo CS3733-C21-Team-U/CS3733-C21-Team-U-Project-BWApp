@@ -1,13 +1,10 @@
 package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXDrawer;
-import edu.wpi.u.models.GraphManager;
-import edu.wpi.u.models.GraphService;
 
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -34,7 +31,7 @@ public class NewEdgeController {
             errorDrawer.open();
         } else {
             try {
-                App.graphService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
+                App.mapService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
                 App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){

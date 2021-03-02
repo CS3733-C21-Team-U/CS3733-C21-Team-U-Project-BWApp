@@ -6,20 +6,21 @@ import java.util.List;
 import java.util.Date;
 
 public class Request {
-    protected String requestID;
-    protected Date dateCreated, dateCompleted;
-    protected String description;
-    protected String title;
-    protected LinkedList<String> location;
-    protected String type;
-    protected LinkedList<String> assignee;
-    protected String creator;
+    private String requestID;
+    private Date dateCreated, dateNeeded, dateCompleted;
+    private String description;
+    private String title;
+    private LinkedList<String> location;
+    private String type;
+    private LinkedList<String> assignee;
+    private String creator;
+    private LinkedList<String> comments;
 
-    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
+    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateNeeded, String description, String title, LinkedList<String> location, String type, String creator) {
         this.requestID = requestID;
         this.assignee = assignee;
         this.dateCreated = dateCreated;
-        this.dateCompleted = dateCompleted;
+        this.dateNeeded = dateNeeded;
         this.description = description;
         this.title = title;
         this.location = location;
@@ -88,4 +89,20 @@ public class Request {
     public void setCreator(String creator) {
         this.creator = creator;
     }
+
+    public String displayAssignees() {
+        String aAssignee = this.assignee.getFirst();
+        int numAssigned = this.assignee.size();
+        String out = "Assigned: " + aAssignee + " + " + numAssigned + " others";
+        return out;
+    }
+
+    public String displayLocation() {
+        String aLocation = this.location.getFirst();
+        int numAssigned = this.location.size();
+        String out = "Assigned: " + aLocation + " + " + numAssigned + " others";
+        return out;
+    }
+
+    public void addComment(String c) { this.comments.add(c); }
 }

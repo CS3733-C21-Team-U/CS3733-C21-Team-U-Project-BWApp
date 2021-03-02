@@ -1,19 +1,57 @@
-//package edu.wpi.u.requests;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Date;
-//
-////TODO: Private or protected fields?
-//public class SecurityRequest extends Request {
-//    private String codeLevel;
-//
-//    public SecurityRequest(Date dateCreated, Date dateCompleted, String description,
-//                           ArrayList<Staff> assignees, String codeLevel) {
-//        super.dateCreated = dateCreated;
-//        super.dateCompleted = dateCompleted;
-//        super.description = description;
-//        super.assignees = assignees;
-//        this.codeLevel = codeLevel;
-//    }
-//}
+package edu.wpi.u.requests;
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.LinkedList;
+
+//TODO: Private or protected fields?
+public class SecurityRequest implements IRequest {
+    private String threatLevel;
+    private Request req;
+    private int priority;
+
+    //Composition Pattern Type
+    public SecurityRequest(String threatLevel, int priority, Request req) {
+        this.threatLevel = threatLevel;
+        this.priority = priority;
+        this.req = req;
+    }
+
+    @Override
+    public String displayLocations() { return this.req.displayLocation(); }
+
+    @Override
+    public String displayAssignees() { return this.req.displayAssignees(); }
+
+    @Override
+    public LinkedList<Serializable> getSpecificData() {
+        LinkedList<Serializable> result = new LinkedList<Serializable>();
+        result.addFirst(priority);
+        result.addFirst(threatLevel);
+        return result;
+    }
+
+    @Override
+    public void setSpecificData(LinkedList<Serializable> l){
+        priority = (int)l.get(0);
+        threatLevel = (String)l.get(1);
+    }
+
+    @Override
+    public String subtableCreateQuery() {
+        String[] queries = new String[2];
+        return "queries";
+    }
+
+    @Override
+    public String updateDBQuery() {
+        String[] queries = new String[2];
+        return "queries";
+    }
+
+    @Override
+    public Request getGenericRequest() {
+        return null;
+    }
+
+}
+
