@@ -323,7 +323,7 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab1" closable="false" disable="true" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab1" closable="false" style="fx-opacity: 0;">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
                      </content>
@@ -347,7 +347,7 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab2" closable="false" disable="true" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab2" closable="false" style="fx-opacity: 0;">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
