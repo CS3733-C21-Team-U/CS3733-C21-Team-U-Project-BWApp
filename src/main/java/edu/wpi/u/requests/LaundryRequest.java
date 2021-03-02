@@ -64,5 +64,11 @@ public class LaundryRequest implements IRequest{
         return null;
     }
 
+    @Override
+    public void fillObject(Request r, LinkedList<Serializable> l) {
+        setRequest(r);
+        setSpecificData(l);
+    }
+
 }
 

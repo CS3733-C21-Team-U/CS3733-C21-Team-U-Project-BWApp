@@ -3,7 +3,9 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.IRequest;
 import edu.wpi.u.requests.Request;
+import edu.wpi.u.requests.RequestFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class NewRequestController {
 
@@ -102,11 +106,33 @@ public class NewRequestController {
     public void handleSaveNewRequest() throws IOException {
         //makeDescriptionField, makeStaffChipView, makeTitleField, makeStaffLocationView, appNewNodetype, creator(NEED NEV), requestSpecificItems(type)
         //String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics
+
+
         LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
         LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
         LinkedList<Serializable> specifics = requestSpecificItems(App.newNodeType);
-        App.requestService.addRequest(makeDescriptionField.getText(), staff, makeTitleField.getText(), locations, App.newNodeType, "CREATOR HERE", specifics );
-        System.out.println("Made it to ADD REQUEST");
+
+        //NEW
+
+        IRequest result = new RequestFactory().makeRequest(App.newNodeType);
+
+        Random rand = new Random();
+        int requestID = rand.nextInt();
+        String ID = Integer.toString(requestID);//make a random id
+        // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
+        Request newRequest = new Request(ID, staff, new Date(), null, makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
+
+        result.setRequest(newRequest);
+        result.setSpecificData(specifics);
+        App.requestService.addRequest(result);
+
+        //END NEW
+
+        //OLD
+        /*App.requestService.addRequest(makeDescriptionField.getText(), staff, makeTitleField.getText(), locations, App.newNodeType, "CREATOR HERE", specifics );
+        System.out.println("Made it to ADD REQUEST");*/
+
+
         //TODO: Call request service to add new request
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));

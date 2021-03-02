@@ -12,6 +12,9 @@ public class Request {
     public Date getDateNeeded() {
         return dateNeeded;
     }
+    public void setDateNeeded(Date d) {
+        this.dateNeeded = d;
+    }
 
     private Date dateNeeded;
     private Date dateCompleted;

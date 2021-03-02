@@ -18,6 +18,7 @@ public interface IRequest {
     void setRequest(Request r);
     String[] getSpecificFields();
     String getSpecificDataCode();
+    void fillObject(Request r, LinkedList<Serializable> l);
 
 
 

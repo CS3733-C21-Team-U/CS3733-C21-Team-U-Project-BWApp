@@ -67,6 +67,12 @@ public class RequestService {
      */
   }
 
+  public void addRequest(IRequest result) {
+    rd.addRequest(result);
+    this.activeRequests.add(result);
+  }
+
+
   public String updateRequest(String requestID, String description, LinkedList<String> assignee, String title, LinkedList<String> location,
                               Date dateGiven, String type, String creator, LinkedList<Serializable> specifics) {
    for(IRequest Ir : this.activeRequests){
@@ -91,6 +97,13 @@ public class RequestService {
     Return node_id if node already exists / invalid
      */
   }
+
+  public void updateRequest(IRequest result) {
+    rd.updateRequest(result);
+  }
+
+
+
 
   public String deleteRequest(String requestID) {
     //Success

@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import com.sun.javafx.scene.control.skin.LabelSkin;
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class NERController {
@@ -60,6 +65,15 @@ public class NERController {
     }
 
     public void initialize() throws IOException {
+        //FOR KOHMEI -------------------------------------
+        //HERE is the IREQUEST that you will use to get the label, and the fields you need
+        //get them like so:
+        //        currIRequest.getSpecificFields() - string array of FXML LABELS
+        //        currIRequest.getSpecificData() - LinkedList of INFORMATION, corresponding to labels
+        //        currIRequest.getSpecificDataCode() - string of chars describing what datatype they are if you can do error checking (see RequestData line 177 -190)
+
+        currIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        currRequest = currIRequest.getGenericRequest();
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Integer Required");
@@ -69,9 +83,6 @@ public class NERController {
                         madeEditMaintenanceField1.validate();
                     }
                 });
-
-        currIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        currRequest = currIRequest.getGenericRequest();
 
         System.out.println(currRequest.getTitle());
 
@@ -88,8 +99,15 @@ public class NERController {
         }
     }
 
+    /**
+     * Take the get values from unique fields, put it in a linkedList
+     * @param type
+     * @return
+     */
     public LinkedList<Serializable> requestSpecificItems(String type) {
         LinkedList<Serializable> specifics = new LinkedList<>();
+
+        //ToDO: KOHMEI - Get rid of switch statement
         switch(type) {
             case("Maintenance") :
                 specifics.add(madeEditMaintenanceField.getText());
@@ -104,6 +122,8 @@ public class NERController {
             default:
                 System.out.println("lmao you screwed up");
         }
+
+        //for loop(values stored in TextFields)
         return specifics;
     }
 
@@ -119,17 +139,18 @@ public class NERController {
             assigneesToAdd.add(l.toString());
         }
 
-        currRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber).getGenericRequest();
-        App.requestService.updateRequest(currRequest.getRequestID(),
-                makeEditDescriptionField.getText(),
-                assigneesToAdd,
-                makeEditTitleField.getText(),
-                locationsToAdd,
-                null, //TODO: fill this in
-                currRequest.getType(),
-                currRequest.getCreator(),
-                requestSpecificItems(currRequest.getType()));
+        //NEW
+        currRequest.setDescription(makeEditDescriptionField.getText());
+        currRequest.setAssignee(assigneesToAdd);
+        currRequest.setLocation(locationsToAdd);
+        LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
+        Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+        currRequest.setDateNeeded(date);
+        currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
+        App.requestService.updateRequest(currIRequest);
 
+
+        //SCENE Switch
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
         anchor.getChildren().clear();

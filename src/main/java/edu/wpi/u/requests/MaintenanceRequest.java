@@ -70,5 +70,11 @@ public class MaintenanceRequest implements IRequest {
         return "si";
     }
 
+    @Override
+    public void fillObject(Request r, LinkedList<Serializable> l) {
+        setRequest(r);
+        setSpecificData(l);
+    }
+
 }
 

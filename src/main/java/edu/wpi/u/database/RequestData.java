@@ -171,7 +171,7 @@ public class RequestData extends Data{
                     System.out.println("Item does not exist in " + type);
                     break;
                 }
-                System.out.println(ans.getString(2));
+                //System.out.println(ans.getString(2));
 
                 LinkedList<Serializable> list = new LinkedList<Serializable>();
                 char[] dataChars = result.getSpecificDataCode().toCharArray();
@@ -188,41 +188,8 @@ public class RequestData extends Data{
                     }
 
                 }
-                result.setRequest(r);
-                result.setSpecificData(list);
-
+                result.fillObject(r, list);
                 specificTable.close();
-
-
-               /* switch (type){
-                    case "Maintenance":
-                        System.out.println("Found m Request");
-
-                        String subtableQuery = "select * from Maintenance where requestID=?";
-                        PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
-                        specificTable.setString(1,id);
-                        ResultSet ans = specificTable.executeQuery();
-                        if (!ans.next()) {
-                            System.out.println("Item does not exist in Maintenance");
-                            break;
-                        }
-                        System.out.println(ans.getString(2));
-
-                        result = new MaintenanceRequest(ans.getString(2),
-                                ans.getInt(3), r);
-                        specificTable.close();
-                        break;
-//                    case "Laundry":
-//                        result = new LaundryRequest("machine", 1, newRequest);
-//                        break;
-//                    case "Security":
-//                        result = new SecurityRequest("machine", 1, newRequest);
-//                        break;
-                    default:
-                       // result = new MaintenanceRequest("ans.getString(2)", 2, r);
-                        System.out.println("Type does not exist!");
-
-                }*/
                 results.add(result);
             }
             //rs.close();
