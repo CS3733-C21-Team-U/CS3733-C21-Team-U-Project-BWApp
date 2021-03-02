@@ -41,11 +41,11 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXComboBox>
-            <HBox prefHeight="38.0" prefWidth="1675.0">
+            <HBox prefHeight="33.0" prefWidth="1675.0">
                <children>
-                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="324.0" promptText="Edit Next Appt">
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="358.0" promptText="Edit Next Appt">
                      <HBox.margin>
-                        <Insets right="66.0" />
+                        <Insets right="33.0" />
                      </HBox.margin>
                   </JFXDatePicker>
                   <JFXCheckBox fx:id="userEmployStatus" text="Employee?">
