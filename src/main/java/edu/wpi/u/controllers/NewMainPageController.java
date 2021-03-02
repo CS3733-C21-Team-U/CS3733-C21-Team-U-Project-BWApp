@@ -50,6 +50,8 @@ public class NewMainPageController {
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
     public StackPane newMainPageStackPane;
+    public Tab adminTab2;
+    public Tab adminTab1;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
