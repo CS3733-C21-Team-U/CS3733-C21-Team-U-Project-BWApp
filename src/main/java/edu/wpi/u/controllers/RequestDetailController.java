@@ -30,7 +30,8 @@ public class RequestDetailController {
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
 
-    public void handleCommentButton(ActionEvent actionEvent) {
+
+    public void handleCommentButton() {
     }
 
     public void handleRequestDetailCancelButton() throws Exception {
@@ -40,10 +41,10 @@ public class RequestDetailController {
         anchor.getChildren().add(root);
     }
 
-    public void handleResolveRequestButton(ActionEvent actionEvent) {
+    public void handleResolveRequestButton() {
     }
 
-    public void handleEditRequestButton(ActionEvent actionEvent) {
+    public void handleEditRequestButton() {
     }
 
 
