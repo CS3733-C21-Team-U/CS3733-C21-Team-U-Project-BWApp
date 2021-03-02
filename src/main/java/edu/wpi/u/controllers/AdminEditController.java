@@ -13,6 +13,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
+import javafx.scene.transform.Affine;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -55,6 +56,12 @@ public class AdminEditController {
         map.setPrefHeight(1000);
         map.setFitMode(GesturePane.FitMode.UNBOUNDED);
         map.setScrollMode(GesturePane.ScrollMode.ZOOM);
+        Affine invMatrix = map.getAffine().createInverse();
+        Point2D realPoint = invMatrix.deltaTransform(e.x,e.y);
+        realPoint.getX();
+        realPoint.getY();
+
+
 
         mainAnchorPane.getChildren().add(map);
         map.toBack();
