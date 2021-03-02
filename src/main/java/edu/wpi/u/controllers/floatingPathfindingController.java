@@ -51,6 +51,7 @@ public class floatingPathfindingController {
             }else{
                 endNode.setText(newValue);
                 endNodeID = newValue;
+                targetNode = "START";
             }
             if(!startNodeID.equals("") && !endNodeID.equals("")){
                 try {
@@ -58,7 +59,11 @@ public class floatingPathfindingController {
                 } catch (PathNotFoundException e) {
                     e.printStackTrace();
                 }
+                App.mapInteractionModel.path = path;
+                App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
+
                 textualDirectionsStrings = TextualDirections.getTextualDirections(path);
+                textualDirectionsMegaString = "";
                 for(String curString : textualDirectionsStrings){
                     textualDirectionsMegaString = textualDirectionsMegaString + curString + "\n";
                 }

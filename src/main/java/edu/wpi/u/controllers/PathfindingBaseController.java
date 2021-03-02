@@ -1,9 +1,12 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.algorithms.getEdgesTest;
 import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +36,13 @@ public class PathfindingBaseController {
     @FXML public AnchorPane mainAnchorPane;
     @FXML public JFXDrawer leftMenuDrawer;
     @FXML public JFXDrawer serviceRequestDrawer;
+    @FXML public JFXToggleNode floorG;
+    @FXML public JFXToggleNode floor1;
+    @FXML public JFXToggleNode floor2;
+    @FXML public JFXToggleNode floor3;
+    @FXML public JFXToggleNode floor4;
+    @FXML public JFXToggleNode floor5;
+
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -45,6 +55,7 @@ public class PathfindingBaseController {
      * @throws IOException
      */
     public void initialize() throws Exception {
+        floorG.setSelected(true);
         App.mapService.loadStuff();
         // Loading the map
         node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
@@ -130,6 +141,39 @@ public class PathfindingBaseController {
             pane.getChildren().add(node);
         });
 
+        App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
+            edgeNodeGroup.getChildren().clear();
+            String floorStart = App.mapInteractionModel.path.get(0).getFloor();
+            String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size()-1).getFloor();
+            switch (floorStart){
+                case "G":
+                    floorG.setSelected(true);
+                    handleFloorGButton();
+                    break;
+                case "1":
+                    floor1.setSelected(true);
+                    handleFloor1Button();
+                    break;
+                case "2":
+                    floor2.setSelected(true);
+                    handleFloor2Button();
+                    break;
+                case "3":
+                    floor3.setSelected(true);
+                    handleFloor3Button();
+                    break;
+                case "4":
+                    floor4.setSelected(true);
+                    handleFloor4Button();
+                    break;
+                case "5":
+                    floor5.setSelected(true);
+                    handleFloor5Button();
+                    break;
+            }
+            generateEdges(floorStart);
+            generateNodes(App.mapInteractionModel.floor);
+        });
 
 
 
@@ -176,7 +220,6 @@ public class PathfindingBaseController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
-        edgeNodeGroup.getChildren().clear();
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
@@ -225,7 +268,7 @@ public class PathfindingBaseController {
 
 
     public void generateEdges(String floor){
-        App.mapService.getEdges().stream().forEach(e ->{
+        getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
@@ -250,22 +293,6 @@ public class PathfindingBaseController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
-            double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
-            double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
-            System.out.println("You clicked on an edge");
-            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
-            AnchorPane EdgeContextAnchor = new AnchorPane();
-            EdgeContextAnchor = edgeContextMenu.load();
-            EdgeContextMenuController controller = edgeContextMenu.getController();
-
-            EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
-            EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
-            pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-            pane.getChildren().add(EdgeContextAnchor);
-            App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
-        }
     }
 
 
@@ -279,16 +306,6 @@ public class PathfindingBaseController {
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
-            FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
-            AnchorPane contextAnchor = new AnchorPane();
-            contextAnchor = nodeContextMenu.load();
-            NodeContextMenuController controller = nodeContextMenu.getController();
-            contextAnchor.setLayoutX(n.getCords()[0]);
-            contextAnchor.setLayoutY(n.getCords()[1]);
-            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-            pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-            pane.getChildren().add(contextAnchor);
-            App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
         }
     }
     @FXML
@@ -320,6 +337,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor G and reloads the correct nodes
      */
     public void handleFloorGButton(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
@@ -333,6 +351,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 1 and reloads the correct nodes
      */
     public void handleFloor1Button(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
             edgeNodeGroup.toFront();
@@ -344,6 +363,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 2 and reloads the correct nodes
      */
     public void handleFloor2Button(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
             edgeNodeGroup.toFront();
@@ -355,6 +375,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 3 and reloads the correct nodes
      */
     public void handleFloor3Button(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
             edgeNodeGroup.toFront();
@@ -366,6 +387,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 4 and reloads the correct nodes
      */
     public void handleFloor4Button(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
             edgeNodeGroup.toFront();
@@ -377,6 +399,7 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 5 and reloads the correct nodes
      */
     public void handleFloor5Button(){
+        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floor.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
             edgeNodeGroup.toFront();

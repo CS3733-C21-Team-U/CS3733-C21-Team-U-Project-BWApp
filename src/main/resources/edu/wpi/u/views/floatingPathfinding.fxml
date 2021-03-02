@@ -15,7 +15,16 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="200.0">
+               <children>
+                  <JFXButton onAction="#startNodeButtonHandler" text="Start Location" />
+                  <Label fx:id="startNode" text="Node Name" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
                <children>
                   <JFXButton onAction="#endNodeButtonHandler" text="End Location" />
                   <Label fx:id="endNode" text="Node Name">
@@ -24,19 +33,16 @@
                      </HBox.margin>
                   </Label>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton onAction="#startNodeButtonHandler" text="Start Location" />
-                  <Label fx:id="startNode" text="Node Name" />
-               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
             </HBox>
             <Label fx:id="textualDirections" alignment="TOP_LEFT" maxWidth="1000.0" minHeight="600.0" text="Text Directions">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </Label>
-            <JFXButton text="Save">
+            <JFXButton disable="true" text="Save" visible="false">
                <VBox.margin>
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
