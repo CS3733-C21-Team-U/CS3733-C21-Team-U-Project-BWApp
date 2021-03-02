@@ -45,18 +45,18 @@ public class AddUserController {
         });
 
         RequiredFieldValidator validatorEmployeeExists = new RequiredFieldValidator();
-        validator.setMessage("Username Required");
+        validatorEmployeeExists.setMessage("Username Required");
         usernameTextField.getValidators().add(validatorEmployeeExists);
         usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             for(Employee user : App.userService.getEmployees()){
                 if(user.getUserName().equals(newVal)){
                     usernameTextField.validate();
-                }
+                }validator
             }
         });
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
-        validator.setMessage("Password Required");
+        validator2.setMessage("Password Required");
         nameTextField.getValidators().add(validator2);
         nameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -66,7 +66,7 @@ public class AddUserController {
 
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator.setMessage("Phone Number Required");
+        validator3.setMessage("Phone Number Required");
         phoneNumTextField.getValidators().add(validator3);
         phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -75,7 +75,7 @@ public class AddUserController {
         });
 
         RequiredFieldValidator validator4 = new RequiredFieldValidator();
-        validator.setMessage("Password Required");
+        validator4.setMessage("Password Required");
         passwordTextField.getValidators().add(validator4);
         passwordTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -84,7 +84,7 @@ public class AddUserController {
         });
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator5 = new RequiredFieldValidator();
-        validator.setMessage("Email Required");
+        validator5.setMessage("Email Required");
         emailTextField.getValidators().add(validator5);
         emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {

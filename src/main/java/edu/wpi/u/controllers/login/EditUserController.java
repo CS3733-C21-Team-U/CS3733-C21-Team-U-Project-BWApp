@@ -10,6 +10,7 @@ import edu.wpi.u.users.StaffType;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class EditUserController {
 
@@ -43,7 +44,7 @@ public class EditUserController {
         });
 
         RequiredFieldValidator validatorGuestExists = new RequiredFieldValidator();
-        validator.setMessage("Username Required");
+        validatorGuestExists .setMessage("Username already exists");
         usernameTextField.getValidators().add(validatorGuestExists );
         usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             for(Guest user : App.userService.getGuests()){
@@ -54,7 +55,7 @@ public class EditUserController {
         });
 
         RequiredFieldValidator validatorEmployeeExists = new RequiredFieldValidator();
-        validator.setMessage("Username Required");
+        validatorEmployeeExists.setMessage("Username already exists");
         usernameTextField.getValidators().add(validatorEmployeeExists);
         usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             for(Employee user : App.userService.getEmployees()){
@@ -65,7 +66,7 @@ public class EditUserController {
         });
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
-        validator.setMessage("Password Required");
+        validator2.setMessage("Password Required");
         nameTextField.getValidators().add(validator2);
         nameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -74,7 +75,7 @@ public class EditUserController {
         });
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator.setMessage("Phone Number Required");
+        validator3.setMessage("Phone Number Required");
         phoneNumTextField.getValidators().add(validator3);
         phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -83,7 +84,7 @@ public class EditUserController {
         });
 
         RequiredFieldValidator validator4 = new RequiredFieldValidator();
-        validator.setMessage("Password Required");
+        validator4.setMessage("Password Required");
         passwordTextField.getValidators().add(validator4);
         passwordTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
@@ -92,11 +93,24 @@ public class EditUserController {
         });
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator5 = new RequiredFieldValidator();
-        validator.setMessage("Email Required");
+        validator5.setMessage("Email Required");
         emailTextField.getValidators().add(validator5);
         emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
                 emailTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator6 = new RequiredFieldValidator();
+        validator6.setMessage("Email not in correct format");
+        emailTextField.getValidators().add(validator6);
+        emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            String regex = "[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            Pattern pat = Pattern.compile(regex);
+            if (newVal){
+                if(!pat.matcher(emailTextField.getText()).matches()) {
+                    emailTextField.validate();
+                }
             }
         });
     }
