@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
+import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -56,12 +57,6 @@ public class AdminEditController {
         map.setPrefHeight(1000);
         map.setFitMode(GesturePane.FitMode.UNBOUNDED);
         map.setScrollMode(GesturePane.ScrollMode.ZOOM);
-        Affine invMatrix = map.getAffine().createInverse();
-        Point2D realPoint = invMatrix.deltaTransform(e.x,e.y);
-        realPoint.getX();
-        realPoint.getY();
-
-
 
         mainAnchorPane.getChildren().add(map);
         map.toBack();
@@ -70,8 +65,18 @@ public class AdminEditController {
         map.setOnMouseClicked(e -> {
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
-            App.mapInteractionModel.setCoords(new double[]{2*e.getX(),2*e.getY()});
+            Affine invMatrix = null;
+            try {
+                invMatrix = map.getAffine().createInverse();
+            } catch (NonInvertibleTransformException nonInvertibleTransformException) {
+                nonInvertibleTransformException.printStackTrace();
+            }
+            Point2D realPoint = invMatrix.transform(e.getX(),e.getY());
 
+            double x = (realPoint.getX()) + map.getLayoutX();
+            double y = (realPoint.getY()) + map.getLayoutY();
+
+            App.mapInteractionModel.setCoords(new double[]{x,y});
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
                     FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
