@@ -113,6 +113,7 @@ public class NewRequestController {
         return newLL;
     }
 
+    /*
     public void handleSubmitRequestButton() {
 
         if (newRequestTitleTextField.getText().equals("")) {
@@ -130,6 +131,7 @@ public class NewRequestController {
             }
 
     }
+     */
 
     public void handleLeaveAdd(){
         App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
