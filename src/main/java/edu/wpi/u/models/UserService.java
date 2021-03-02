@@ -70,7 +70,18 @@ public class UserService {
      * @param type Employees or Guests (table name)
      */
     public void changeEmail(String userID, String newEmail, String type){
+        this.getActiveUser().setEmail(newEmail);
         ud.changeEmail(userID,newEmail,type);
+    }
+
+    /**
+     *  Gets the password of the user
+     * @param userID id of the user
+     * @param type position of user
+     * @return the password of the user
+     */
+    public String getPassword(String userID, String type){
+        return ud.getPassword(userID, type);
     }
 
     /**
@@ -80,6 +91,7 @@ public class UserService {
      * @param type Employees or Guests (table name)
      */
     public void changePassword(String username, String newPassword, String type){
+        this.getActiveUser().setPassword(newPassword);
         ud.changePassword(username,newPassword, type);
     }
 
@@ -99,6 +111,15 @@ public class UserService {
      */
     public String checkPassword(String password) {
         return ud.checkPassword(password);
+    }
+
+    /**
+     * Validates the phone number of a given username
+     * @param username the username to be validated
+     * @return the phonenumber of the username
+     */
+    public String checkPhoneNumber(String username) {
+        return ud.checkPhoneNumber(username);
     }
 
     /**

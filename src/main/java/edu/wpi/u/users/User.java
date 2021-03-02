@@ -1,6 +1,8 @@
 package edu.wpi.u.users;
 
-public class User {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class User extends RecursiveTreeObject<User> {
     protected String userID;
     protected String name;
     protected String userName;

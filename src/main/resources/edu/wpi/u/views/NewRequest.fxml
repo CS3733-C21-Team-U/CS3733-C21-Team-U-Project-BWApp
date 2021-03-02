@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/LightTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="410.0" prefHeight="1000.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +22,7 @@
                   <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleLeaveAdd" prefHeight="30.0" prefWidth="225.0" styleClass="button-lightBlue" text="Cancel" />
                </children>
             </HBox>
-            <TextField fx:id="titleTextField" prefWidth="291.0" promptText="Title" styleClass="label" stylesheets="@css/LightTheme.css">
+            <TextField fx:id="titleTextField" prefWidth="291.0" promptText="Title" styleClass="label" stylesheets="@css/BaseStyle.css">
                <VBox.margin>
                   <Insets bottom="25.0" left="50.0" right="50.0" />
                </VBox.margin>

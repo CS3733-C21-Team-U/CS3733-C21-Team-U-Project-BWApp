@@ -1,10 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
-import edu.wpi.u.database.UserData;
 import edu.wpi.u.models.*;
-import edu.wpi.u.users.Employee;
-import edu.wpi.u.users.User;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +42,11 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
+  public static String DFS;
+  public static String BFS;
+  public static String ASTAR;
+
+  public static boolean isLightTheme = true;
 
   public static Integer lastClickedRequestNumber;
 
@@ -80,7 +82,7 @@ public class App extends Application {
   public void start(Stage stage) throws Exception {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
-    Parent root = FXMLLoader.load(getClass().getResource("views/UserLogin.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -88,9 +90,13 @@ public class App extends Application {
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
+
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/LightTheme.css");
 
 
+
+//    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
+    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
@@ -105,10 +111,6 @@ public class App extends Application {
       }
     });
   }
-
-  private void post(String s, Object o) {
-  }
-
 
   public static Stage getPrimaryStage() {
     return primaryStage;
@@ -133,4 +135,19 @@ public class App extends Application {
 
   public int requestClicked;
 
+  public void switchTheme() {
+    if(App.isLightTheme){
+      System.out.println("isLightTheme!");
+      App.primaryStage.getScene().getStylesheets().clear();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+      App.isLightTheme = false;
+    }else{
+      System.out.println("isDarkTheme!");
+      App.primaryStage.getScene().getStylesheets().clear();
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+      App.isLightTheme = true;
+    }
+  }
 }
