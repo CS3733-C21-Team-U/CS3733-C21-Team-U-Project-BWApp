@@ -6,9 +6,13 @@ import edu.wpi.u.App;
 import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -19,12 +23,14 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class NewMainPageController {
@@ -33,27 +39,29 @@ public class NewMainPageController {
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
-//    @FXML public SVGPath leftMenuHamburger;
+    //    @FXML public SVGPath leftMenuHamburger;
 //    @FXML public AnchorPane mainAnchorPane;
 //    @FXML public JFXDrawer leftMenuDrawer;
 //    @FXML public JFXDrawer serviceRequestDrawer;
 //    @FXML public Tab nonActiveValue;
 //    @FXMLViewFlowContext
 //    private ViewFlowContext context;
-    @FXML public JFXTabPane mainTabPane;
+    @FXML
+    public JFXTabPane mainTabPane;
     public JFXButton openDialogue;
     public JFXDialog dialog;
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
+    public StackPane newMainPageStackPane;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
 
-    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work","For me. Let me know","if it shows Material Design!","And not just the default list");
-
+    ObservableList<String> listView = FXCollections.observableArrayList("Doesn't work", "For me. Let me know", "if it shows Material Design!", "And not just the default list");
 
 
     public void initialize() throws IOException {
+
         listViewDemo.setItems(listView);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -73,100 +81,47 @@ public class NewMainPageController {
             this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
 //            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
         });
-//        nonActiveValue.setStyle("-jfx-rippler-fill: red");
-//        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
-//        leftMenuDrawer.setSidePane(leftMenuPane);
-//        leftMenuDrawer.open();
-//
-//        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingRightPage.fxml"));
-//        serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//        serviceRequestDrawer.open();
-//
-//
-//
-//        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
-//        node.setFitWidth(2987);
-//        node.setPreserveRatio(true);
-//        AnchorPane pane = new AnchorPane(node);
-//        //The black path behind--------------
-//        App.pathFindingPath = new SVGPath();
-//        App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath.setStrokeWidth(5);
-//        App.pathFindingPath.setStroke(Color.web("#f6c037", 1.0));
-//        App.pathFindingPath.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The yellow path behind--------------
-//        App.pathFindingPath2 = new SVGPath();
-//        App.pathFindingPath2.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath2.setStrokeWidth(12);
-//        App.pathFindingPath2.setStroke(Color.web("#1d1d1d", 1.0));
-//        App.pathFindingPath2.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath2.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The loading of the paths
-//        pane.getChildren().add(App.pathFindingPath);
-//        pane.getChildren().add(App.pathFindingPath2);
-//        App.pathFindingPath2.toFront();
-//        App.pathFindingPath.toFront();
-//        map = new GesturePane(pane);
-//        map.setMinScale(0.3);
-//        map.setMaxScale(2);
-//        map.centreOn(new Point2D(700, 4000));
-//        map.zoomTo(0.5,map.targetPointAtViewportCentre());
-//
-////        mapView.setFitWidth(4000.0);
-////        mapView.setFitHeight(4000.0);
-////        mapView.setPreserveRatio(true);
-////
-////        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
-////        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
-//        map.setPrefWidth(1920);
-//        map.setPrefHeight(1000);
-//        map.setFitMode(GesturePane.FitMode.UNBOUNDED);
-//        map.setScrollMode(GesturePane.ScrollMode.ZOOM);
-////        map.setPannable(true);
-//        mainAnchorPane.getChildren().add(map);
-//        map.toBack();
-//
-//        map.setOnMouseClicked(e -> {
-//            Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
-//                    .orElse(map.targetPointAtViewportCentre());
-//            if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-//                // increment of scale makes more sense exponentially instead of linearly
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomBy(map.getCurrentScale(), pivotOnTarget);
-//            } else if (e.getButton() == MouseButton.SECONDARY && e.getClickCount() == 1) {
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomTo(map.getMinScale(), pivotOnTarget);
-//            }
-//        });
-//
-//        App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
-//                serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//                serviceRequestDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-//        App.leftDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                leftMenuPane = FXMLLoader.load(getClass().getResource(newValue));
-//                leftMenuDrawer.setSidePane(leftMenuPane);
-//                leftMenuDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
 
 
     }
+
+    public void handleThemeSwitch(ActionEvent actionEvent) {
+        App.getInstance().switchTheme();
+    }
+
+    public void handleExit(ActionEvent actionEvent) throws IOException {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Exit Application?");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("CANCEL");
+        JFXButton button2 = new JFXButton("EXIT");
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                App.getInstance().end();
+            }
+        });
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+
+    }
+}
+
 
 
 
@@ -204,4 +159,3 @@ public class NewMainPageController {
 //                .interpolateWith(Interpolator.EASE_BOTH)
 //                .zoomBy(0.35, pivotOnTarget);
 //    }
-}
