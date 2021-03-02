@@ -257,7 +257,6 @@ public class AdminEditController {
 
         EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
         EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
-
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().add(EdgeContextAnchor);

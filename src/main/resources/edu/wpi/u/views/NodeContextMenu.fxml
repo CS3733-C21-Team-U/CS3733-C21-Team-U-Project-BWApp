@@ -67,7 +67,7 @@
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" onAction="#handleDeleteButton" prefHeight="31.0" styleClass="button-outlined" text="Delete">
+                  <JFXButton fx:id="doneButton" alignment="CENTER" onAction="#handleDeleteButton" prefHeight="31.0" styleClass="button-outlined" text="Delete">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>
