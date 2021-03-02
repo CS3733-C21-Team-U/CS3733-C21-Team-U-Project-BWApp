@@ -338,6 +338,7 @@ public class PathfindingBaseController {
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
+            generateEdges("G");
             edgeNodeGroup.toFront();
 
         }
@@ -351,6 +352,7 @@ public class PathfindingBaseController {
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+            generateEdges("1");
             edgeNodeGroup.toFront();
         }
     }
@@ -363,6 +365,7 @@ public class PathfindingBaseController {
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+            generateEdges("2");
             edgeNodeGroup.toFront();
         }
     }
@@ -375,6 +378,7 @@ public class PathfindingBaseController {
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+            generateEdges("3");
             edgeNodeGroup.toFront();
         }
     }
@@ -387,6 +391,7 @@ public class PathfindingBaseController {
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+            generateEdges("4");
             edgeNodeGroup.toFront();
         }
     }
@@ -399,6 +404,7 @@ public class PathfindingBaseController {
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+            generateEdges("5");
             edgeNodeGroup.toFront();
         }
     }

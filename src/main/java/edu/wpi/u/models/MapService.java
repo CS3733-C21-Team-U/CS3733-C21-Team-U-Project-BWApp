@@ -96,7 +96,14 @@ public class MapService {
           String longName,
           String shortName) throws InvalidEdgeException{
     try{
-      int curIndex = currentIDNumber.get(nodeType + floor) + 1;
+      int curIndex;
+      if(!currentIDNumber.containsKey(nodeType + floor)){
+        curIndex = 1;
+        currentIDNumber.put(nodeType + floor, 1);
+      }else{
+        curIndex = currentIDNumber.get(nodeType + floor) + 1;
+      }
+
       currentIDNumber.put(nodeType + floor, curIndex);
       String nodeID = "U" + nodeType + curIndex;
 

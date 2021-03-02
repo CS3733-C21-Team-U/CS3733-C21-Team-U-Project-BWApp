@@ -57,63 +57,65 @@ public class NodeContextMenuController {
         }else{
             longNameText.setText(thisNode.getLongName());
             shortNameText.setText(thisNode.getShortName());
+            switch(thisNode.getNodeType()){
+                case "CONF":
+                    nodeTypeDrop.setValue("Conference Room");
+                    break;
+                case "DEPT":
+                    nodeTypeDrop.setValue("Department");
+                    break;
+                case "ELEV":
+                    nodeTypeDrop.setValue("Elevator");
+                    break;
+                case "EXIT":
+                    nodeTypeDrop.setValue("Exit");
+                    break;
+                case "FOOD":
+                    nodeTypeDrop.setValue("Food");
+                    break;
+                case "HALL":
+                    nodeTypeDrop.setValue("Hallway");
+                    break;
+                case "KIOS":
+                    nodeTypeDrop.setValue("Kiosk");
+                    break;
+                case "LAB":
+                    nodeTypeDrop.setValue("Laboratory");
+                    break;
+                case "PARK":
+                    nodeTypeDrop.setValue("Parking Lot");
+                    break;
+                case "REST":
+                    nodeTypeDrop.setValue("Restroom");
+                    break;
+                case "SERV":
+                    nodeTypeDrop.setValue("Service Area");
+                    break;
+                case "STAI":
+                    nodeTypeDrop.setValue("Staircase");
+                    break;
+                case "WALK":
+                    nodeTypeDrop.setValue("Walkway");
+                    break;
+
+            }
         }
 
         nodeTypeDrop.setItems(list); //I'm in the middle of fixing this
 
-        switch(thisNode.getNodeType()){
-            case "CONF":
-                nodeTypeDrop.setValue("Conference Room");
-                break;
-            case "DEPT":
-                nodeTypeDrop.setValue("Department");
-                break;
-            case "ELEV":
-                nodeTypeDrop.setValue("Elevator");
-                break;
-            case "EXIT":
-                nodeTypeDrop.setValue("Exit");
-                break;
-            case "FOOD":
-                nodeTypeDrop.setValue("Food");
-                break;
-            case "HALL":
-                nodeTypeDrop.setValue("Hallway");
-                break;
-            case "KIOS":
-                nodeTypeDrop.setValue("Kiosk");
-                break;
-            case "LAB":
-                nodeTypeDrop.setValue("Laboratory");
-                break;
-            case "PARK":
-                nodeTypeDrop.setValue("Parking Lot");
-                break;
-            case "REST":
-                nodeTypeDrop.setValue("Restroom");
-                break;
-            case "SERV":
-                nodeTypeDrop.setValue("Service Area");
-                break;
-            case "STAI":
-                nodeTypeDrop.setValue("Staircase");
-                break;
-            case "WALK":
-                nodeTypeDrop.setValue("Walkway");
-                break;
 
-        }
     }
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
             Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
             App.undoRedoService.updateNode(thisNode.getNodeID(), thisNode.getCords()[0], thisNode.getCords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
-            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
     }
 
     public String getNodeType(){

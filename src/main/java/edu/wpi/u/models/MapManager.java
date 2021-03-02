@@ -92,7 +92,7 @@ public class MapManager {
           String _ShortName,
           String _teamAssigned) {
     Node n = new Node(_nodeID, _xcoord, _ycoord, floor, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
-    allNodes.put(n.getNodeID(), n);
+    this.addNodeObject(n);
   }
 
   /**
