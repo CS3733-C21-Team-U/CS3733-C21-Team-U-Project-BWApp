@@ -1,7 +1,9 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +23,7 @@ public class RequestItemController {
 
     //public boolean isCollapsed = true;
     @FXML public Label requestItemTitleLabel;
-    @FXML public Label requestItemLocationChipView;
+    @FXML public JFXChipView requestItemLocationChipView;
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
@@ -69,6 +71,8 @@ public class RequestItemController {
      */
 
     @FXML
-    public void handleViewRequestInDetailButton() {}
+    public void handleViewRequestInDetailButton() {
+        new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ViewRequestInDetail.fxml"));
+    }
 
 }

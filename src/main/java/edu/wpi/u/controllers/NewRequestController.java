@@ -4,14 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
-
 import java.io.IOException;
 import java.util.LinkedList;
-
 import javafx.scene.control.*;
-
 import java.util.ArrayList;
-
 public class NewRequestController {
 
 

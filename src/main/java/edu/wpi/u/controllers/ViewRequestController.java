@@ -30,7 +30,8 @@ public class ViewRequestController {
             String temp = listOfRequests.get(i).getTitle();
             controller.myRequestID = listOfRequests.get(i).getRequestID();
             controller.requestItemTitleLabel.setText(temp);
-            controller.requestItemLocationChipView.setText(listOfRequests.get(i).getLocation().toString());
+            //Read ChipView Again
+            //controller.requestItemLocationChipView.setText(listOfRequests.get(i).getLocation().toString());
             controller.requestItemDescriptionLabel.setText(listOfRequests.get(i).getDescription());
             controller.requestItemCreatorLabel.setText(listOfRequests.get(i).getCreator());
             controller.requestItemDate2BCompletedLabel.setText(null);   //listOfRequests.get(i).getDate2BCompleted());

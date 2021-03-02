@@ -25,6 +25,7 @@ public class RequestDetailController {
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
 
+    /*
     requestDetailTitleLabel.setText(request.getTitle());
     requestDetailCreatorLabel.setText(request.getCreator());
     requestDetailDescriptionLabel.setText(request.getDecripition());
@@ -33,7 +34,5 @@ public class RequestDetailController {
     requestDetailDateCreatedLabel.setText(request.getDateCreated());
     requestDetailDate2BCompleteLabel.setText(request.getDate2BComplete());
     requestDetailSecurityLabel.setText(request.getLanguage());
-
-
-
+     */
 }
