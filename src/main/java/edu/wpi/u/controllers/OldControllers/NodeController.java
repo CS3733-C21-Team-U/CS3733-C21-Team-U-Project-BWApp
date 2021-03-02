@@ -2,7 +2,7 @@ package edu.wpi.u.controllers.OldControllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.*;
-import edu.wpi.u.models.GraphService;
+import edu.wpi.u.models.MapService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,9 +45,9 @@ public class NodeController {
     colYCoo.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
     update();
 
-    GraphService graphService = App.graphService;
+    MapService mapService = App.mapService;
     list.removeAll();
-    list.addAll(graphService.getNodes());
+    list.addAll(mapService.getNodes());
     colNodeID.setCellValueFactory(new PropertyValueFactory<Node, String>("nodeID"));
     colXCoo.setCellValueFactory(
             cellData -> new SimpleStringProperty(cellData.getValue().getXString()));
@@ -65,7 +65,7 @@ public class NodeController {
 //      deleteNodeButton.setDisable(false);
 //    }
 
-    allNodes = FXCollections.observableList(App.graphService.getNodes());
+    allNodes = FXCollections.observableList(App.mapService.getNodes());
     nodeTable.setItems(allNodes);
   }
 
@@ -115,7 +115,7 @@ public class NodeController {
     String tempID = enterNodeID.getText();
     if (tempID.equals("")) errorLabel.setText("Missing Node ID.");
     else {
-      if (App.graphService.deleteNode(tempID).equals(tempID))
+      if (App.mapService.deleteNode(tempID).equals(tempID))
         errorLabel.setText("Node does not exists.");
       else {
         update();

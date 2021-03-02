@@ -2,7 +2,6 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -37,7 +36,7 @@ public class NodeItemController {
 
     @FXML
     public void handleNodeDeleteButton() {
-        App.graphService.deleteNode(nodeID.getText());
+        App.mapService.deleteNode(nodeID.getText());
         nodeAnchor.setPrefHeight(0);
         nodeAnchor.setVisible(false);
         //could be consider 'sloppy delete' on UI side until AdminTool is reloaded

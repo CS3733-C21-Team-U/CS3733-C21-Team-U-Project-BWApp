@@ -1,6 +1,6 @@
 package edu.wpi.u.algorithms;
 
-import edu.wpi.u.models.GraphManager;
+import edu.wpi.u.models.MapManager;
 
 import java.util.LinkedList;
 
@@ -25,13 +25,13 @@ public class getEdgesTest {
   }
 
   public static void main(String[] args) {
-    GraphManager graph = new GraphManager();
+    MapManager graph = new MapManager();
     Node A = new Node("A", 0, 0);
     Node B = new Node("B", 1, 0);
     Node D = new Node("D", 2, 1);
 
-    graph.makeEdge("1", "A", "B");
-    graph.makeEdge("9", "B", "D");
+    graph.addEdge("1", "A", "B");
+    graph.addEdge("9", "B", "D");
 
     LinkedList<Node> exampleOutput = new LinkedList<>();
     exampleOutput.add(D);

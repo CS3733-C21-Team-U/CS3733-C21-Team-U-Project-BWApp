@@ -1,60 +1,379 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.svg.SVGGlyph?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@css/RegularTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewMainPageController">
    <children>
-      <SplitPane dividerPositions="0.09554730983302412" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="1920.0" style="-fx-background-color: white;">
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <AnchorPane prefHeight="80.0" prefWidth="1920.0" style="-fx-background-color: -primary;" BorderPane.alignment="CENTER">
+               <effect>
+                  <DropShadow />
+               </effect>
                <children>
-                  <SVGGlyph fill="TRANSPARENT" layoutX="9.0" layoutY="8.0" onMouseClicked="#leftMenuToggle">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <SVGPath fx:id="leftMenuHamburger" content="M0,13.225V11.336H11v1.889ZM0,7.557V5.668H18V7.557ZM0,1.889V0H18V1.889Z" fill="#bfc5d2" layoutX="22.0" layoutY="25.0" scaleX="1.5" scaleY="1.5" />
-                     </children>
-                  </SVGGlyph>
-                  <HBox alignment="CENTER_LEFT" layoutX="84.0" layoutY="2.0" prefHeight="80.0" prefWidth="390.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Images/logo.png" />
-                           </image>
+                        <Region prefHeight="80.0" prefWidth="290.0" />
+                        <Label style="-fx-font-size: 30; -fx-text-fill: -onPrimary;" text="Brigham and Women's Hospital" />
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleThemeSwitch" prefHeight="61.0" prefWidth="64.0">
+                           <graphic>
+                              <SVGPath content="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12.29 7c-.74 0-1.45.17-2.08.46 1.72.79 2.92 2.53 2.92 4.54s-1.2 3.75-2.92 4.54c.63.29 1.34.46 2.08.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z" scaleX="1.5" scaleY="1.5" styleClass="left-nav-icons" />
+                           </graphic>
                            <HBox.margin>
-                              <Insets left="30.0" right="30.0" />
+                              <Insets />
                            </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="42.0" prefWidth="298.0" styleClass="label-header" text="Brigham Health " />
+                        </JFXButton>
+                        <Region prefHeight="80.0" prefWidth="9.0" />
                      </children>
                   </HBox>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #edf1ff;">
-               <children>
-                  <Button layoutX="1310.0" layoutY="856.0" maxHeight="71.0" mnemonicParsing="false" onAction="#handleZoomOutButton" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn">
+         </top>
+         <center>
+            <JFXTabPane fx:id="mainTabPane" prefHeight="926.0" prefWidth="1901.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <GridPane alignment="CENTER" hgap="10.0" layoutX="493.0" layoutY="524.0" prefHeight="1080.0" prefWidth="1688.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <JFXButton buttonType="RAISED" styleClass="button-contained" text="BUTTON" GridPane.columnIndex="1" />
+                                    <JFXCheckBox GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <JFXChipView style="-fx-background-color: lightgrey;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></JFXChipView>
+                                    <JFXComboBox labelFloat="true" promptText="Prompt Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                    <JFXRadioButton GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <JFXToggleButton GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <Label text="Chipview - type something! Then press &lt;Enter&gt;" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    <Label text="noClass (default checkbox)" GridPane.rowIndex="7" />
+                                    <JFXButton layoutX="210.0" layoutY="38.0" styleClass="button-outlined" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <JFXButton layoutX="210.0" layoutY="129.0" styleClass="button-text" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="42.0" text="button-outlined" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="133.0" text="button-text" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" text="noClass (default textField)" GridPane.rowIndex="4" />
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="407.0" text="noClass (default textField)" GridPane.rowIndex="5" />
+                                    <JFXTextField labelFloat="true" promptText="Type Here! (Prompt)" styleClass="text-field-filled" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <JFXTextField labelFloat="true" promptText="Prompt Text" styleClass="text-field-outlined" text="TextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="noClass (default radioButton)" GridPane.rowIndex="8" />
+                                    <Label text="noClass (default slider)" GridPane.rowIndex="9" />
+                                    <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" styleClass="fab-default" text=" " textFill="WHITE" GridPane.columnIndex="4">
+                                       <graphic>
+                                          <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-primary" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <Label alignment="CENTER" text="noClass (default passwordField)" GridPane.rowIndex="6" />
+                                    <JFXPasswordField labelFloat="true" promptText="Promt Text for Password" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label alignment="CENTER" text="fab-default (TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" />
+                                    <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="810.0" layoutY="33.0" styleClass="fab-mini" text=" " textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                       <graphic>
+                                          <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-primary" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="190.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                       <children>
+                                          <JFXToggleNode text="1">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="group1" />
+                                             </toggleGroup>
+                                          </JFXToggleNode>
+                                          <JFXToggleNode layoutX="10.0" layoutY="10.0" text="2" toggleGroup="$group1" />
+                                       </children>
+                                    </HBox>
+                                    <Label alignment="CENTER" text="fab-default (TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" text="button-contained" wrapText="true" />
+                                    <Label alignment="CENTER" text="noClass (default toggleNode in hbox) this is for floor selection" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" text="default ToggleButton" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <JFXTextArea labelFloat="true" promptText="Promt Text Here" text="Real Text Here" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </JFXTextArea>
+                                    <Label text="default TextArea, labelFloat" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                    <Label text="default comboBox, labelFloat" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <JFXColorPicker GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                    <JFXDatePicker GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                    <JFXTimePicker GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                    <Label text="default date picker" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                    <Label text="default time picker" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                    <Label text="default color picker" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                    <JFXListView fx:id="listViewDemo" GridPane.columnIndex="8" />
+                                    <Label text="listView" GridPane.columnIndex="7" />
+                                    <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text=" " textFill="WHITE" GridPane.columnIndex="5">
+                                       <graphic>
+                                          <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-secondary" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="secondary-color" />
+                                          <String fx:value="fab-default" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton buttonType="RAISED" text="BUTTON" GridPane.columnIndex="2">
+                                       <styleClass>
+                                          <String fx:value="button-contained" />
+                                          <String fx:value="secondary-color" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton styleClass="secondary-button-outlined" text="BUTTON" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label minWidth="-Infinity" prefHeight="73.0" prefWidth="307.0" styleClass="headline-1" text="headline-1" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                                    <Label styleClass="headline-2" text="headline-2" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                                    <Label styleClass="headline-3" text="headline-3" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                                    <Label styleClass="subtitle" text="subtitle" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                                    <Label text="body - default (no class)" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                                    <Label styleClass="caption" text="caption" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                                    <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text=" " textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                       <graphic>
+                                          <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.75" scaleY="0.75" smooth="false" styleClass="on-secondary" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="fab-mini" />
+                                          <String fx:value="secondary-color" />
+                                       </styleClass>
+                                    </JFXButton>
+                                    <JFXButton styleClass="secondary-button-text" text="BUTTON" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <JFXTextField fx:id="validationFeild" labelFloat="true" promptText="This value is required!" styleClass="text-field-filled" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" text="noClass (default textField)" GridPane.rowIndex="3" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
                      <graphic>
-                        <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="CSS Demo">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
                      </graphic>
-                  </Button>
-                  <Button layoutX="1310.0" layoutY="767.0" maxHeight="130.0" mnemonicParsing="false" onAction="#handleZoomInButton" prefHeight="130.0" prefWidth="91.0" styleClass="map-btn">
+                  </Tab>
+                  <Tab closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1688.0">
+                           <children>
+                              <JFXButton fx:id="openDialogue" buttonType="RAISED" layoutX="407.0" layoutY="266.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Hello SJKHADJKAH d" />
+                              <JFXButton layoutX="433.0" layoutY="332.0" style="-fx-text-fill: -primary;" text="Button" />
+                              <JFXButton layoutX="433.0" layoutY="406.0" />
+                           </children></AnchorPane>
+                     </content>
                      <graphic>
-                        <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
-                     </graphic></Button>
-                  <fx:include source="LeftDrawerMenuSmall.fxml" />
-                   <JFXDrawer fx:id="leftMenuDrawer" defaultDrawerSize="250.0" layoutY="-88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" miniDrawerSize="0.0" prefHeight="1082.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                   <JFXDrawer fx:id="serviceRequestDrawer" defaultDrawerSize="500.0" direction="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="500.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="Pathfinding">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="My Requests">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab>
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <padding>
+                              <Insets top="80.0" />
+                           </padding>
+                           <children>
+                              <fx:include source="SettingsPageSprint2.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="Settings">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab closable="false" disable="true" style="-fx-opacity: 0;">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="24.0" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="Map Builder">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+                  <Tab closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 ZM17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5zM18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="white-text" text="User Manager">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
    </children>
-</AnchorPane>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
+</StackPane>
