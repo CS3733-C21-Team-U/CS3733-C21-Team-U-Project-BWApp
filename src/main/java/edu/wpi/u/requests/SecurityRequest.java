@@ -1,5 +1,7 @@
 package edu.wpi.u.requests;
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.LinkedList;
 
 //TODO: Private or protected fields?
 public class SecurityRequest implements IRequest {
@@ -21,7 +23,18 @@ public class SecurityRequest implements IRequest {
     public String displayAssignees() { return this.req.displayAssignees(); }
 
     @Override
-    public String getSpecificData() { return null; }
+    public LinkedList<Serializable> getSpecificData() {
+        LinkedList<Serializable> result = new LinkedList<Serializable>();
+        result.addFirst(priority);
+        result.addFirst(threatLevel);
+        return result;
+    }
+
+    @Override
+    public void setSpecificData(LinkedList<Serializable> l){
+        priority = (int)l.get(0);
+        threatLevel = (String)l.get(1);
+    }
 
     @Override
     public String subtableCreateQuery() {

@@ -1,7 +1,9 @@
 package edu.wpi.u.requests;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.LinkedList;
 
 //TODO: Private or protected fields?
 public class MaintenanceRequest implements IRequest {
@@ -23,13 +25,17 @@ public class MaintenanceRequest implements IRequest {
 
     //For Specific Request Class
     @Override
-    public String getSpecificData() {
-        StringBuilder s = new StringBuilder();
-        s.append("Fields specific to Maintenance Requests\n");
-        s.append("Machine used: " + machineUsed + "\n");
-        s.append("priority: " + priority + "\n");
-        return s.toString();
-        //TODO: How will UI use this data?
+    public LinkedList<Serializable> getSpecificData() {
+        LinkedList<Serializable> result = new LinkedList<Serializable>();
+        result.addFirst(priority);
+        result.addFirst(machineUsed);
+        return result;
+    }
+
+    @Override
+    public void setSpecificData(LinkedList<Serializable> l){
+        machineUsed = (String)l.get(0);
+        priority = (int)l.get(1);
     }
 
 
@@ -52,6 +58,8 @@ public class MaintenanceRequest implements IRequest {
 
     @Override
     public Request getGenericRequest() { return this.req; }
+
+    public void testMe(){}
 
 }
 

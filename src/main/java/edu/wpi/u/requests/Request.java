@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Request {
     private String requestID;
-    private Date dateCreated, dateCompleted;
+    private Date dateCreated, dateNeeded, dateCompleted;
     private String description;
     private String title;
     private LinkedList<String> location;
@@ -16,11 +16,11 @@ public class Request {
     private String creator;
     private LinkedList<String> comments;
 
-    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
+    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateNeeded, String description, String title, LinkedList<String> location, String type, String creator) {
         this.requestID = requestID;
         this.assignee = assignee;
         this.dateCreated = dateCreated;
-        this.dateCompleted = dateCompleted;
+        this.dateNeeded = dateNeeded;
         this.description = description;
         this.title = title;
         this.location = location;
