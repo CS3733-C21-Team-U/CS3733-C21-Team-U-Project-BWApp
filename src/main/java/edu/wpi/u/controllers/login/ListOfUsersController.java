@@ -35,50 +35,62 @@ public class ListOfUsersController {
 
 
 
-    TableColumn<User, String> guestTableColumnUserID = new TableColumn<User, String>("userID");
-    TableColumn<User, String> guestTableColumnName = new TableColumn<>("name");
-    TableColumn<User, String> guestTableColumnUserName = new TableColumn<>("Username");
-    TableColumn<User, String> guestTableColumnPassword = new TableColumn<>("Password");
-    TableColumn<User, String> guestTableColumnUserType = new TableColumn<>("User Type");
-    TableColumn<User, String> guestTableColumnEmail = new TableColumn<>("Email");
-    TableColumn<User, String> guestTableColumnPhoneNum = new TableColumn<>("Phone #");
-    TableColumn<User, String> guestTableColumnAppDate = new TableColumn<>("Appt. Date");
-
-    TableColumn<User, String> employeeTableColumnUserID = new TableColumn<>("userID");
-    TableColumn<User, String> employeeTableColumnName = new TableColumn<>("name");
-    TableColumn<User, String> employeeTableColumnUserName = new TableColumn<>("Username");
-    TableColumn<User, String> employeeTableColumnPassword = new TableColumn<>("Password");
-    TableColumn<User, String> employeeTableColumnUserType = new TableColumn<>("User Type");
-    TableColumn<User, String> employeeTableColumnEmail = new TableColumn<>("Email");
-    TableColumn<User, String> employeeTableColumnPhoneNum = new TableColumn<>("Phone #");
+//    TableColumn<User, String> guestTableColumnUserID = new TableColumn<User, String>("userID");
+//    TableColumn<User, String> guestTableColumnName = new TableColumn<>("name");
+//    TableColumn<User, String> guestTableColumnUserName = new TableColumn<>("Username");
+//    TableColumn<User, String> guestTableColumnPassword = new TableColumn<>("Password");
+//    TableColumn<User, String> guestTableColumnUserType = new TableColumn<>("User Type");
+//    TableColumn<User, String> guestTableColumnEmail = new TableColumn<>("Email");
+//    TableColumn<User, String> guestTableColumnPhoneNum = new TableColumn<>("Phone #");
+//    TableColumn<User, String> guestTableColumnAppDate = new TableColumn<>("Appt. Date");
+//
+//    TableColumn<User, String> employeeTableColumnUserID = new TableColumn<>("userID");
+//    TableColumn<User, String> employeeTableColumnName = new TableColumn<>("name");
+//    TableColumn<User, String> employeeTableColumnUserName = new TableColumn<>("Username");
+//    TableColumn<User, String> employeeTableColumnPassword = new TableColumn<>("Password");
+//    TableColumn<User, String> employeeTableColumnUserType = new TableColumn<>("User Type");
+//    TableColumn<User, String> employeeTableColumnEmail = new TableColumn<>("Email");
+//    TableColumn<User, String> employeeTableColumnPhoneNum = new TableColumn<>("Phone #");
 
 
     public void initialize() throws IOException {
-        guestTableView.getColumns().add(guestTableColumnUserID);
-        guestTableView.getColumns().add(guestTableColumnName);
-        guestTableView.getColumns().add(guestTableColumnUserName);
-        guestTableView.getColumns().add(guestTableColumnPassword);
-        guestTableView.getColumns().add(guestTableColumnUserType);
-        guestTableView.getColumns().add(guestTableColumnEmail);
-        guestTableView.getColumns().add(guestTableColumnPhoneNum);
-        guestTableView.getColumns().add(guestTableColumnAppDate);
+//        guestTableView.getColumns().add(guestTableColumnUserID);
+//        guestTableView.getColumns().add(guestTableColumnName);
+//        guestTableView.getColumns().add(guestTableColumnUserName);
+//        guestTableView.getColumns().add(guestTableColumnPassword);
+//        guestTableView.getColumns().add(guestTableColumnUserType);
+//        guestTableView.getColumns().add(guestTableColumnEmail);
+//        guestTableView.getColumns().add(guestTableColumnPhoneNum);
+//        guestTableView.getColumns().add(guestTableColumnAppDate);
+//
+//        employeeTableView.getColumns().add(employeeTableColumnUserID);
+//        employeeTableView.getColumns().add(employeeTableColumnName);
+//        employeeTableView.getColumns().add(employeeTableColumnUserName);
+//        employeeTableView.getColumns().add(employeeTableColumnPassword);
+//        employeeTableView.getColumns().add(employeeTableColumnUserType);
+//        employeeTableView.getColumns().add(employeeTableColumnEmail);
+//        employeeTableView.getColumns().add(employeeTableColumnPhoneNum);
 
-        employeeTableView.getColumns().add(employeeTableColumnUserID);
-        employeeTableView.getColumns().add(employeeTableColumnName);
-        employeeTableView.getColumns().add(employeeTableColumnUserName);
-        employeeTableView.getColumns().add(employeeTableColumnPassword);
-        employeeTableView.getColumns().add(employeeTableColumnUserType);
-        employeeTableView.getColumns().add(employeeTableColumnEmail);
-        employeeTableView.getColumns().add(employeeTableColumnPhoneNum);
-
-        PropertyValueFactory factoryUserID = new PropertyValueFactory<>("Name");
+        //PropertyValueFactory factoryUserID = new PropertyValueFactory<>("Name");
         nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Username"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Usertype"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Phone Number"));
+        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("AppDate"));
+
+        //PropertyValueFactory factory = new PropertyValueFactory<>("Name");
+        //nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"))
 
         guestList.addAll(App.userService.getGuests());
         guestTableView.setItems(guestList);
      //   guestTableView.getItems().add(App.userService.getGuests());
 
 
+    }
+
+    public void handleEditUser(ActionEvent actionEvent) {
     }
 
     //getColumns(.add(treeTableColumnUserID));
