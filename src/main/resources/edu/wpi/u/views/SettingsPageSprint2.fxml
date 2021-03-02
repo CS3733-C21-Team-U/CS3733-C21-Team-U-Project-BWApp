@@ -28,12 +28,12 @@
                   <Insets bottom="15.0" right="1267.0" top="30.0" />
                </VBox.margin></JFXTextField>
             <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change" />
-            <Label styleClass="headline-2" text="Admin">
+            <Label fx:id="adminText" styleClass="headline-2" text="Admin">
                <VBox.margin>
                   <Insets top="25.0" />
                </VBox.margin>
             </Label>
-            <Label styleClass="headline-3" text="Read and Save CSV File">
+            <Label fx:id="subtitleText" styleClass="headline-3" text="Read and Save CSV File">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
@@ -68,7 +68,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <Label styleClass="headline-3" text="Path Finding Modes">
+            <Label fx:id="pathfindingText" styleClass="headline-3" text="Path Finding Modes">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

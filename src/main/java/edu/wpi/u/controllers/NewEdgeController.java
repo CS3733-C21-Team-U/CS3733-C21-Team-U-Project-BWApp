@@ -40,6 +40,7 @@ public class NewEdgeController {
         }
     }
 
+
     @FXML
     public void handleEdgeCancelButton() {
         App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");

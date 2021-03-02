@@ -22,19 +22,22 @@ import static edu.wpi.u.users.StaffType.*;
 public class LoginController {
 
     @FXML
-    public JFXTextField accountName;
+    public JFXTextField userName;
+    @FXML
     public JFXPasswordField passWord;
+    @FXML
     public JFXButton login;
+    @FXML
     public JFXButton forgotPasswordButton;
 
     public void initialize() throws IOException {
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
-        accountName.getValidators().add(validator);
-        accountName.focusedProperty().addListener((o, oldVal, newVal) -> {
+        userName.getValidators().add(validator);
+        userName.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
-                accountName.validate();
+                userName.validate();
             }
         });
 
@@ -58,7 +61,7 @@ public class LoginController {
 
     @FXML
     public void handleLogin() throws IOException, Exception {
-        String username = accountName.getText();
+        String username = userName.getText();
         String password = passWord.getText();
 
         AccountNameNotFoundException accountException = new AccountNameNotFoundException();

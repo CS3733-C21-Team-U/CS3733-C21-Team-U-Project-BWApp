@@ -30,6 +30,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Observable;
 
+import static edu.wpi.u.users.StaffType.ADMIN;
+
 public class NewMainPageController {
 
 
@@ -79,6 +81,20 @@ public class NewMainPageController {
             this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
 //            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
         });
+
+        if(App.userService.getActiveUser().getType() ==  ADMIN){
+            adminTab1.setStyle("-fx-opacity: 1");
+            adminTab1.setDisable(false);
+            adminTab2.setStyle("-fx-opacity: 1");
+            adminTab2.setDisable(false);
+        }
+        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+            adminTab1.setStyle("-fx-opacity: 0");
+            adminTab1.setDisable(true);
+            adminTab2.setStyle("-fx-opacity: 0");
+            adminTab2.setDisable(true);
+        }
+
 //        nonActiveValue.setStyle("-jfx-rippler-fill: red");
 //        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
 //        leftMenuDrawer.setSidePane(leftMenuPane);
@@ -177,6 +193,7 @@ public class NewMainPageController {
     public void handleThemeSwitch(ActionEvent actionEvent) {
         App.getInstance().switchTheme();
     }
+
 
     public void handleExit(ActionEvent actionEvent) {
         JFXDialogLayout content = new JFXDialogLayout();

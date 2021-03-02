@@ -3,78 +3,42 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
-    <children>
-      <HBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-              <VBox prefWidth="1086.0">
-                  <children>
-                  <Label styleClass="headline-2" text="Login Portal">
-                     <VBox.margin>
-                        <Insets left="290.0" top="320.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label prefHeight="15.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System" textAlignment="CENTER">
-                     <VBox.margin>
-                        <Insets left="290.0" />
-                     </VBox.margin>
-                  </Label>
-                      <JFXTextField fx:id="accountName" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
-                          <VBox.margin>
-                              <Insets bottom="30.0" left="290.0" right="305.0" top="25.0" />
-                          </VBox.margin>
-                  </JFXTextField>
-                      <JFXPasswordField fx:id="passWord" labelFloat="true" promptText="Enter Password" text="test">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="290.0" right="305.0" />
-                     </VBox.margin>
-                  </JFXPasswordField>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                            <JFXButton fx:id="login" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
-                           <HBox.margin>
-                              <Insets left="290.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                            <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-              </VBox>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="1000.0" fitWidth="790.0" smooth="false">
-                     <image>
-                        <Image url="@Images/pexels-anna-shvets-4421550.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </StackPane>
-         </children>
-      </HBox>
-    </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
+   <children>
+      <JFXTextField fx:id="userName" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
+         <font>
+            <Font name="Calibri Light" size="23.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="passWord" layoutX="513.0" layoutY="519.0" prefHeight="48.0" prefWidth="486.0" promptText="Password">
+         <font>
+            <Font name="Calibri Light" size="23.0" />
+         </font></JFXPasswordField>
+      <JFXButton fx:id="login" layoutX="513.0" layoutY="665.0" onAction="#handleLogin" prefHeight="47.0" prefWidth="183.0" style="-fx-background-color: #2b5bf5;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <Text layoutX="278.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Brigham Health Login Portal" textAlignment="CENTER" wrappingWidth="1023.248046875">
+         <font>
+            <Font name="Calibri" size="39.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="forgotPassword" layoutX="776.0" layoutY="661.0" prefHeight="63.0" prefWidth="190.0" text="Forgot Password" textFill="#101c38">
+         <font>
+            <Font name="Calibri Light" size="22.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="337.0" fitWidth="352.0" layoutX="51.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@brigham-health-logo-600x200.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>
