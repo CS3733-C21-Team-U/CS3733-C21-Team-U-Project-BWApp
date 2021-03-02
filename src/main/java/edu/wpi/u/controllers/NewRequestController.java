@@ -38,7 +38,7 @@ public class NewRequestController {
     public JFXTextField madeMaintenanceFieldMachineUsed;
     public JFXTextField madeMaintenanceFieldPriority;
 
-    private Request currRequest;
+    private IRequest currIRequest;
 
     public boolean isInteger(String s) {
         try {
@@ -51,24 +51,14 @@ public class NewRequestController {
 
     @FXML
     public void initialize(ActionEvent event) throws IOException {
-        //TODO: Implement commented code below in order to send request type info to show appropriate pane
-        // receive data: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
-        // receiveData Step 1
         javafx.scene.Node node = (javafx.scene.Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         // receiveData Step 2
         String type = App.newNodeType;
-        switch (type) {
-            case "Laundry":
-                makeLaundryPane.setVisible(true);
-                break;
-            case "Security":
-                makeSecurityPane.setVisible(true);
-                break;
-            case "Maintenance":
-                makeMaintenancePane.setVisible(true);
-                break;
-        }
+        currIRequest = new RequestFactory().makeRequest(type);
+
+        //TODO: redo so it does not use a switch statement
+        generateSpecificFields(type);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Integer Required");
@@ -81,12 +71,27 @@ public class NewRequestController {
 
     }
 
+    //TODO : Replace with function written in NER Controller, based on current IREQUEST
+    public void generateSpecificFields(String type){
+        switch (type) {
+            case "Laundry":
+                makeLaundryPane.setVisible(true);
+                break;
+            case "Security":
+                makeSecurityPane.setVisible(true);
+                break;
+            case "Maintenance":
+                makeMaintenancePane.setVisible(true);
+                break;
+        }
+    }
+
+    //TODO : Replace with function written in NER Controller
     public LinkedList<Serializable> requestSpecificItems(String type) {
         LinkedList<Serializable> specifics = new LinkedList<>();
         switch (type) {
             case ("Maintenance"):
                 specifics.add(madeMaintenanceFieldMachineUsed.getText());
-                //Ensure this is and integer
                 specifics.add(Integer.parseInt(madeMaintenanceFieldPriority.getText()));
                 break;
             case ("Laundry"):
@@ -104,18 +109,11 @@ public class NewRequestController {
 
     @FXML
     public void handleSaveNewRequest() throws IOException {
-        //makeDescriptionField, makeStaffChipView, makeTitleField, makeStaffLocationView, appNewNodetype, creator(NEED NEV), requestSpecificItems(type)
-        //String description, LinkedList<String> assignee, String title, LinkedList<String> location, String type, String creator, LinkedList<Serializable> specifics
-
-
         LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
         LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
         LinkedList<Serializable> specifics = requestSpecificItems(App.newNodeType);
 
-        //NEW
-
         IRequest result = new RequestFactory().makeRequest(App.newNodeType);
-
         Random rand = new Random();
         int requestID = rand.nextInt();
         String ID = Integer.toString(requestID);//make a random id
@@ -126,14 +124,6 @@ public class NewRequestController {
         result.setSpecificData(specifics);
         App.requestService.addRequest(result);
 
-        //END NEW
-
-        //OLD
-        /*App.requestService.addRequest(makeDescriptionField.getText(), staff, makeTitleField.getText(), locations, App.newNodeType, "CREATOR HERE", specifics );
-        System.out.println("Made it to ADD REQUEST");*/
-
-
-        //TODO: Call request service to add new request
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
         anchor.getChildren().clear();
