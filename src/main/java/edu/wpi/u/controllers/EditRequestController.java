@@ -176,7 +176,7 @@ public class EditRequestController {
 
     }
 
-    public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml"); }
+    public void handleCancel() { App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml"); }
 
 
     // Array list to linkedlist converter
@@ -213,7 +213,7 @@ public class EditRequestController {
                 editTypeOfRequestField.getText(),
                 OConverter(showCurrentPeopleListView.getItems()),
                 editCreatorField.getText());
-        App.rightDrawerRoot.set("/edu/wpi/u/views/ViewRequest.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
 
 
         //needs node ID
