@@ -48,7 +48,7 @@ public class NewMainPageController {
 //    private ViewFlowContext context;
     @FXML
     public JFXTabPane mainTabPane;
-    public JFXButton openDialogue;
+    //public JFXButton openDialogue;
     public JFXDialog dialog;
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
@@ -77,10 +77,10 @@ public class NewMainPageController {
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
 
-        this.openDialogue.setOnAction((action) -> {
-            this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
-//            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
-        });
+//        this.openDialogue.setOnAction((action) -> {
+//            this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
+////            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
+//        });
 
 
     }

@@ -232,9 +232,8 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1688.0">
                            <children>
-                              <JFXButton fx:id="openDialogue" buttonType="RAISED" layoutX="407.0" layoutY="266.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Hello SJKHADJKAH d" />
-                              <JFXButton layoutX="433.0" layoutY="332.0" style="-fx-text-fill: -primary;" text="Button" />
-                              <JFXButton layoutX="433.0" layoutY="406.0" />
+                              <fx:include source="PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="floatingPathfinding.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -325,7 +324,10 @@
                   </Tab>
                   <Tab closable="false">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <fx:include source="AdminEdit.fxml" AnchorPane.bottomAnchor="0.0" />
+                           </children></AnchorPane>
                      </content>
                      <graphic>
                         <Group>
