@@ -52,6 +52,7 @@ public class NewRequestController {
     @FXML
     public void handleSubmitRequestButton(ActionEvent actionEvent) {
     }
+
     @FXML
     public void HandleMakeEditCancelButton(ActionEvent actionEvent)throws IOException {
         FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequestController.fxml"));
@@ -142,16 +143,5 @@ public class NewRequestController {
     }
      */
 
-    public void handleLeaveAdd(){
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
-    }
-
-
-    public void HandleMakeEditCancelButton(ActionEvent actionEvent) {
-    }
-
-    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
-    }
-    */
 
 }
