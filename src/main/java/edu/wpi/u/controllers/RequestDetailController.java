@@ -16,6 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class RequestDetailController {
@@ -52,10 +54,16 @@ public class RequestDetailController {
         //System.out.println(request.getDateNeeded());
       //  requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
         //requestDetailSecurityLabel.setText(request);
-       // setSpecifics();
+        setSpecifics();
 
     }
 
+    //TODO : Replace with function written in NER Controller, based on current IREQUEST
+    public void generateSpecificFields(String type){
+       //Generate Labels ONLY, using fields/values of Irequest, no error checking needed
+        //NO text fields, just for display
+
+    }
 
     public void handleCommentButton() {
     }
