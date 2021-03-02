@@ -22,6 +22,7 @@ public class RequestDetailController {
     @FXML Label requestDetailTitleLabel;
     @FXML Label requestDetailCreatorLabel;
     @FXML Label requestDetailDescriptionLabel;
+    @FXML Label requestDetailTypeLabel;
     @FXML JFXChipView requestDetailLocationChipView;
     @FXML JFXChipView requestDetailStaffChipView;
     @FXML Label requestDetailDateCreatedLabel;
@@ -34,32 +35,39 @@ public class RequestDetailController {
     @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
+    @FXML Label requestDetailMaintenanceLabel;
+    @FXML Label requestDetailLaundryLabel;
     IRequest currentIRequest;
-  
 
-
+    /**
+     * Sets All Labels to Correspond to A Specific Request
+     * @throws IOException
+     */
     @FXML
     public void initialize() throws IOException{
         currentIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
         Request request = currentIRequest.getGenericRequest();
         requestDetailTitleLabel.setText(request.getTitle());
-        requestDetailCreatorLabel.setText(request.getCreator());
         requestDetailDescriptionLabel.setText(request.getDescription());
-        //requestDetailLocationChipView.setText(request.getLocation());
-      //  requestDetailStaffChipView.setText(request.getStaff());
-        System.out.println(request.getDateCreated().toString());
+        requestDetailTypeLabel.setText(request.getType());
+        requestDetailCreatorLabel.setText(request.getCreator());
         requestDetailDateCreatedLabel.setText(request.getDateCreated().toString());
-        //System.out.println(request.getDateNeeded());
-      //  requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
-        //requestDetailSecurityLabel.setText(request);
-       // setSpecifics();
+        requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
+        requestDetailLocationChipView.getChips().addAll(request.getLocation());
+        requestDetailStaffChipView.getChips().addAll(request.getAssignee());
+        setSpecifics();
 
     }
 
+    /**
+     * Allows User to Add Comments to A Request
+     */
+    public void handleCommentButton() {}
 
-    public void handleCommentButton() {
-    }
-
+    /**
+     * Sends User Back to NewViewRequest
+     * @throws Exception
+     */
     @FXML
     public void handleRequestDetailCancelButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
@@ -68,6 +76,10 @@ public class RequestDetailController {
         anchor.getChildren().add(root);
     }
 
+    /**
+     * Resolves Request and Takes the User Back to NewViewRequest
+     * @throws IOException
+     */
     @FXML
     public void handleResolveRequestButton() throws IOException {
         //Resolve Request()
@@ -81,6 +93,10 @@ public class RequestDetailController {
         anchor.getChildren().add(root);
     }
 
+    /**
+     * Takes User to Edit Request Page
+     * @throws IOException
+     */
     @FXML
     public void handleEditRequestButton() throws IOException {
         System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
@@ -95,14 +111,18 @@ public class RequestDetailController {
         switch(currentIRequest.getGenericRequest().getType()) {
             case("Maintenance") :
                 requestDetailMaintenancePane.setVisible(true);
+                //Placeholder
+                requestDetailMaintenanceLabel.setText("Maintenance Issue");
                 break;
             case("Laundry") :
                 requestDetailLaundryPane.setVisible(true);
-                //add stuff
+                //Placeholder
+                requestDetailLaundryLabel.setText("Laundry Issue");
                 break;
             case("Security"):
                 requestDetailSecurityPane.setVisible(true);
-                //add stuff
+                //Placeholder
+                requestDetailSecurityLabel.setText("Security Issue");
                 break;
             default:
                 System.out.println("lmao you screwed up");

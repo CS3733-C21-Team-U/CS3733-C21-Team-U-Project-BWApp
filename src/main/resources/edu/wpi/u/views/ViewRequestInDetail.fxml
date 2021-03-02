@@ -35,7 +35,7 @@
             <HBox alignment="CENTER" prefHeight="63.0" prefWidth="1700.0">
                <children>
                   <Label prefHeight="19.0" prefWidth="47.0" text="Type:" />
-                  <Label text="TypeLabel" />
+                  <Label fx:id="requestDetailTypeLabel" text="TypeLabel" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1700.0">

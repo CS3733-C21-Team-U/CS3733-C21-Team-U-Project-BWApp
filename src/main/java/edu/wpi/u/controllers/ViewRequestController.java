@@ -44,7 +44,9 @@ public class ViewRequestController {
             requestList.getChildren().add(request);
             App.lastClickedRequestNumber++;
 
-            /*
+            /**
+             * Keeps Track of Which Request In the List Was Clicked
+             */
             final int index = i;
             controller.viewRequestButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -52,7 +54,6 @@ public class ViewRequestController {
                     App.getInstance().requestClicked = index;
                 }
             });
-             */
         }
     }
 

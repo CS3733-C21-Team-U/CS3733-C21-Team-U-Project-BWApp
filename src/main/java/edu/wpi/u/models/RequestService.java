@@ -20,9 +20,9 @@ public class RequestService {
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-    for (IRequest x : this.activeRequests){
+    for (IRequest x : this.activeRequests) {
 
-      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
+      System.out.println("Req: " + x.getGenericRequest().getRequestID());
     }
   }
 
@@ -30,15 +30,16 @@ public class RequestService {
   Saves the model data into csvs and drops tables
    */
 
-  public void loadCSVFile(String path, String tableName){
+  public void loadCSVFile(String path, String tableName) {
     Database.getDB().dropValues();
-    Database.getDB().readCSV(path,tableName);
+    Database.getDB().readCSV(path, tableName);
     //this.activeRequests = rd.loadActiveRequests();
   }
 
-  public void saveCSVFile(String path, String tableName){
-    Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
+  public void saveCSVFile(String path, String tableName) {
+    Database.getDB().saveCSV(tableName, path, "test"); // TODO: Provide header
   }
+
   /*
   Make sure x & y are positive integers within the map coordinate range
   */
@@ -56,13 +57,13 @@ public class RequestService {
     int requestID = rand.nextInt();
     String ID = Integer.toString(requestID);//make a random id
     // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-    Request newRequest = new Request(ID, assignee, new Date(), null, description ,title,location, type, creator);
+    Request newRequest = new Request(ID, assignee, new Date(), null, description, title, location, type, creator);
 
     // TODO: Add Exception for error checking
     IRequest result = null;
-    switch (type){
+    switch (type) {
       case "Maintenance":
-        result = new MaintenanceRequest(specifics.get(0).toString(), (int)specifics.get(1), newRequest);
+        result = new MaintenanceRequest(specifics.get(0).toString(), (int) specifics.get(1), newRequest);
         break;
       case "Laundry":
         result = new LaundryRequest("machine", 1, newRequest);
@@ -90,18 +91,18 @@ public class RequestService {
 
   public String updateRequest(String requestID, String description, LinkedList<String> assignee, String title, LinkedList<String> location,
                               Date dateGiven, String type, String creator, LinkedList<Serializable> specifics) {
-   for(IRequest Ir : this.activeRequests){
-     Request r = Ir.getGenericRequest();
-     if(r.getRequestID() == requestID){
-       if(dateGiven != null){ //TODO: Check if this is correct
-         this.activeRequests.remove(r);
-       }
-       r.editRequest(dateGiven,description,title,location,type,assignee,creator);
-       rd.updateRequest(Ir);
-       return "";
-     }
-   }
-   return requestID;
+    for (IRequest Ir : this.activeRequests) {
+      Request r = Ir.getGenericRequest();
+      if (r.getRequestID() == requestID) {
+        if (dateGiven != null) { //TODO: Check if this is correct
+          this.activeRequests.remove(r);
+        }
+        r.editRequest(dateGiven, description, title, location, type, assignee, creator);
+        rd.updateRequest(Ir);
+        return "";
+      }
+    }
+    return requestID;
     //Fail
     //return requestID;
     /*
@@ -115,8 +116,8 @@ public class RequestService {
     //Success
     long time = System.currentTimeMillis();
     Date now = new Date(time);
-    for(IRequest r : this.activeRequests){
-      if(r.getGenericRequest().getRequestID() == requestID){
+    for (IRequest r : this.activeRequests) {
+      if (r.getGenericRequest().getRequestID() == requestID) {
         r.getGenericRequest().setDateCompleted(now);
         this.activeRequests.remove(r);
         rd.resolveRequest(requestID, time);
@@ -135,25 +136,31 @@ public class RequestService {
   }
 
   public ArrayList<IRequest> getRequests() {
-    boolean debug = false;
-//    if(debug){ //Adding fake requests just so we can test UI - currently it always returns a 0 length array
-//      ArrayList<Request> temp = new ArrayList<Request>();
-//      LinkedList<String> list = new LinkedList<String>();
-//      list.add("Nothing");
-//      list.add("Here");
-//      Request r1 = new Request("FakeID",list ,new Date(1000), new Date(2000),"No Description","Fake Title",list, "No Type","Admin");
-//      temp.add(r1);
-//      return temp;
-//
-//    }else{
+    boolean debug = true;
+    if (debug) { //Adding fake requests just so we can test UI - currently it always returns a 0 length array
+      ArrayList<IRequest> temp = new ArrayList<IRequest>();
+      LinkedList<String> list = new LinkedList<String>();
+      list.add("Nothing");
+      list.add("Here");
+      Request r1 = new Request("FakeID", list, new Date(1000), new Date(2000), "No Description", "Fake Title", list, "No Type", "Admin");
+      MaintenanceRequest r2 = new MaintenanceRequest("Comp", 1, r1);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      temp.add(r2);
+      return temp;
+    } else {
       return new ArrayList<IRequest>(this.activeRequests);
     }
 
-  public void addRequest(String text, String text1) {
-  }
+    //public void addRequest(String text, String text1) {}
 
     /*
     Returns an ArrayList of all Node Objects in the graph
      */
+  }
 }
-
