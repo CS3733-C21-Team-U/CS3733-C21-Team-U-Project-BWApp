@@ -11,7 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,26 +76,27 @@ public class App extends Application {
 
 //  Font.loadFont(getClass().getResourceAsStream("/resources/fonts/marck.ttf"), 14);
 
-
   @Override
   public void start(Stage stage) throws Exception {
+    // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     Parent root = FXMLLoader.load(getClass().getResource("views/UserLogin.fxml"));
     Scene scene = new Scene(root);
+    App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
 //    Scene scene = new Scene(label);
 //    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/LightTheme.css");
-    App.primaryStage.setScene(scene);
+
 
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
 
-//    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
+    //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
 
     App.primaryStage.getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
@@ -103,8 +106,8 @@ public class App extends Application {
     });
   }
 
-
-
+  private void post(String s, Object o) {
+  }
 
 
   public static Stage getPrimaryStage() {
