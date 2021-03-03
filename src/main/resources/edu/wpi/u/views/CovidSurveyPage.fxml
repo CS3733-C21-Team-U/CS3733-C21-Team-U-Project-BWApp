@@ -89,6 +89,11 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </HBox>
+                  <Label fx:id="errorLabel" styleClass="error-label">
+                     <VBox.margin>
+                        <Insets left="290.0" top="15.0" />
+                     </VBox.margin>
+                  </Label>
                   <JFXButton fx:id="submitSurveyButton" onAction="#handleCovidSurveyFill" prefWidth="399.0" styleClass="button-contained" text="Submit">
                      <VBox.margin>
                         <Insets left="290.0" top="15.0" />
