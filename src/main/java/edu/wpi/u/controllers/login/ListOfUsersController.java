@@ -54,6 +54,7 @@ public class ListOfUsersController {
 //    public TableView.TableViewSelectionModel employeeSelectionModel = employeeTableView.getSelectionModel();
     public TableColumn guestIDColumn;
     public TableColumn employeeIDColumn;
+    public JFXButton addUserButton;
     Guest myGuest;
     Employee myEmployee;
 
@@ -144,6 +145,13 @@ public class ListOfUsersController {
         myEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
         App.selectedEmployee = myEmployee;
         handleEditUserList(actionEvent);
+    }
+
+    public void handleAddUserButton(ActionEvent actionEvent) throws IOException {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddUser.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     //getColumns(.add(treeTableColumnUserID));

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +20,7 @@
         </JFXButton>
         <Text layoutX="278.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="Welcome to the Brigham Health Login Portal" textAlignment="CENTER" wrappingWidth="1023.248046875">
         </Text>
-        <JFXButton fx:id="forgotPasswordButton" layoutX="776.0" layoutY="661.0" prefHeight="63.0" prefWidth="190.0" styleClass="button-text" text="Forgot Password" textFill="#101c38">
+        <JFXButton fx:id="forgotPasswordButton" layoutX="776.0" layoutY="661.0" onAction="#handleForgotPassword" prefHeight="63.0" prefWidth="190.0" styleClass="button-text" text="Forgot Password" textFill="#101c38">
         </JFXButton>
         <ImageView fitHeight="337.0" fitWidth="352.0" layoutX="51.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -28,5 +29,7 @@
         </ImageView>
       <JFXProgressBar fx:id="progressBar" layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
       <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="241.0" layoutY="552.0" onAction="#handleSubmit" opacity="0.0" prefHeight="47.0" prefWidth="183.0" styleClass="button-contained" text="VERIFY" textFill="WHITE" />
+      <JFXButton fx:id="loginButton2" buttonType="RAISED" layoutX="14.0" layoutY="939.0" onAction="#handleLogin2" prefHeight="47.0" prefWidth="190.0" styleClass="button-contained" text="DEBUG LOGIN" textFill="WHITE" />
+      <Label fx:id="errorLabel" layoutX="696.0" layoutY="591.0" style="-fx-text-fill: -error;" />
     </children>
 </AnchorPane>

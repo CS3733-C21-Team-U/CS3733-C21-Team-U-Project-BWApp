@@ -12,7 +12,7 @@
       <VBox layoutX="278.0" layoutY="61.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="Please check all that apply" />
-            <HBox fx:id="Q1CheckBox" prefHeight="58.0" prefWidth="600.0">
+            <HBox prefHeight="58.0" prefWidth="600.0">
                <children>
                   <JFXCheckBox fx:id="Q1CheckBox" text="I have had a symptomatic COVID-19 test or I have recieved positive test result for COVID- 19 in the last 14 days." />
                </children>

@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
@@ -90,6 +91,8 @@ public class LoginController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
+    public JFXButton loginButton2;
+    @FXML public Label errorLabel;
 
     public void initialize() throws IOException {
 
@@ -101,6 +104,17 @@ public class LoginController {
                 userNameTextField.validate();
             }
         });
+        RequiredFieldValidator validator4 = new RequiredFieldValidator();
+        validator4.setMessage("Username Invalid");
+        userNameTextField.getValidators().add(validator4);
+        userNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal){
+                if (App.userService.checkUsername(passWordField.getText()).equals("")) {
+                    userNameTextField.validate();
+                }
+            }
+        });
+
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator2.setMessage("Password Required");
@@ -110,6 +124,19 @@ public class LoginController {
                 passWordField.validate();
             }
         });
+
+        RequiredFieldValidator validator5 = new RequiredFieldValidator();
+        validator5.setMessage("Username Invalid");
+        userNameTextField.getValidators().add(validator5);
+        userNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal){
+                if (App.userService.checkUsername(passWordField.getText()).equals("")) {
+                    userNameTextField.validate();
+                }
+            }
+
+        });
+
 
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
         validator3.setMessage("Token Required");
@@ -192,6 +219,8 @@ public class LoginController {
                 throw new AccountNameNotFoundException();
             }
         } catch (AccountNameNotFoundException | PasswordNotFoundException e) {
+            progressBar.setStyle("-fx-opacity: 0");
+            errorLabel.setText("Username or Password is Invalid");
             e.printStackTrace();
         }
     }
@@ -206,6 +235,11 @@ public class LoginController {
 
     public void handleSubmit() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FAToken.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleLogin2(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 }

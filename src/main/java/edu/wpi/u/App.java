@@ -47,9 +47,7 @@ public class App extends Application {
   public static String lastSelectedEdge;
   public static String edgeField1;
   public static String edgeField2;
-  public static String DFS;
-  public static String BFS;
-  public static String ASTAR;
+  public static String pathfindingAlgorithm = "ASTAR";//this will be set in the settings to be ASTA BFS or DFS
   public static JFXTabPane tabPaneRoot;
 
   public static boolean isLightTheme = true;
@@ -94,7 +92,7 @@ public class App extends Application {
 
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/CovidSurveyPage.fxml"));
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");

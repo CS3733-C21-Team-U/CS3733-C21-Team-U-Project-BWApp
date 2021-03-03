@@ -3,22 +3,25 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
-import edu.wpi.u.users.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
+
+import static edu.wpi.u.users.StaffType.*;
 
 public class EditUserController {
 
@@ -28,14 +31,13 @@ public class EditUserController {
     @FXML public JFXTextField emailTextField;
     @FXML public JFXTextField phoneNumTextField;
     @FXML public JFXTextField passwordTextField;
-    //public JFXComboBox userTypeComboBox;
+    @FXML public JFXComboBox userTypeComboBox;
     @FXML public JFXDatePicker appointmentDatePicker;
     @FXML public JFXButton editUserButton;
 
-    public void handleEditUser(ActionEvent actionEvent) {
-    }
 
-       public void initialize() throws IOException {
+    public void initialize() throws IOException {
+        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFUALT.toString() );
 
         if(App.isEdtingGuest){
             nameTextField.setText(App.selectedGuest.getName());
@@ -68,29 +70,6 @@ public class EditUserController {
                 }
             }
         });
-
-        RequiredFieldValidator validatorGuestExists = new RequiredFieldValidator();
-        validatorGuestExists .setMessage("Username already exists");
-        usernameTextField.getValidators().add(validatorGuestExists );
-        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            for(Guest user : App.userService.getGuests()){
-                if(user.getUserName().equals(newVal)){
-                    usernameTextField.validate();
-                }
-            }
-        });
-
-        RequiredFieldValidator validatorEmployeeExists = new RequiredFieldValidator();
-        validatorEmployeeExists.setMessage("Username already exists");
-        usernameTextField.getValidators().add(validatorEmployeeExists);
-        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            for(Employee user : App.userService.getEmployees()){
-                if(user.getUserName().equals(newVal)){
-                    usernameTextField.validate();
-                }
-            }
-        });
-
 
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
@@ -142,20 +121,38 @@ public class EditUserController {
             }
         });
     }
-//
+    //
 //
 //    /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
 //     * the database to edit an existing user
 //
 //     */
-    public void handleEditUser(){
+    public void handleEditUser() throws IOException, ParseException {
 
-//        if(!App.isEdtingGuest){
-//            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
-//        }
-//        else{
-//            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
-//        }
+
+        LocalDate localDate = appointmentDatePicker.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        if(!App.isEdtingGuest){
+            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+
+        }
+        else{
+
+            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date   , false);
+
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+
+        }
+
 
     }
 //

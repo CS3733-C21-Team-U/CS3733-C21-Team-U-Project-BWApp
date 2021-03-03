@@ -33,12 +33,12 @@
               <columns>
                   <TableColumn fx:id="guestIDColumn" prefWidth="75.0" text="guestID" />
                 <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Name" />
-                  <TableColumn fx:id="userNameColumn" prefWidth="75.0" text="Username" />
-                  <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />
-                  <TableColumn fx:id="userTypeColumn" prefWidth="75.0" text="User Type" />
-                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="phoneNumberColumn" prefWidth="112.0" text="Phone Number" />
-                  <TableColumn fx:id="appDateColumn" prefWidth="91.0" text="AppDate" />
+                  <TableColumn fx:id="userNameColumn" prefWidth="98.99996948242188" text="Username" />
+                  <TableColumn fx:id="passwordColumn" prefWidth="92.0" text="Password" />
+                  <TableColumn fx:id="userTypeColumn" prefWidth="48.0" text="User Type" />
+                  <TableColumn fx:id="emailColumn" prefWidth="97.0" text="Email" />
+                  <TableColumn fx:id="phoneNumberColumn" prefWidth="96.0" text="Phone Number" />
+                  <TableColumn fx:id="appDateColumn" prefWidth="428.0" text="AppDate" />
               </columns>
             </TableView>
             <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest" />
@@ -46,14 +46,15 @@
               <columns>
                   <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="employeeID" />
                 <TableColumn fx:id="employeeNameTableColumn" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="employeeUserNameColumn" prefWidth="75.0" text="Username" />
-                  <TableColumn fx:id="employeePasswordColumn" prefWidth="75.0" text="Password" />
-                  <TableColumn fx:id="employeeUserTypeColumn" prefWidth="75.0" text="User Type" />
-                  <TableColumn fx:id="employeeEmailColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="75.0" text="Phone Number" />
+                <TableColumn fx:id="employeeUserNameColumn" prefWidth="98.99996948242188" text="Username" />
+                  <TableColumn fx:id="employeePasswordColumn" prefWidth="91.0" text="Password" />
+                  <TableColumn fx:id="employeeUserTypeColumn" prefWidth="113.0" text="User Type" />
+                  <TableColumn fx:id="employeeEmailColumn" prefWidth="159.0" text="Email" />
+                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="194.0" text="Phone Number" />
               </columns>
             </TableView>
             <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee" />
+            <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
          </children>
       </VBox>
    </children>

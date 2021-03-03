@@ -23,10 +23,42 @@ public class UserData extends Data{
         //this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
         //this.addGuest(new Guest("charles","testp","7742706792","testp","email", StaffType.ADMIN,"7742706792", new Date(800), false));
         //this.addGuest(new Guest("nev2","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-
-
+        //this.addGuest(new Guest("nev","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
+        //this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
+        //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
+        printGuest();
+//        dropGuests();
+//        printGuest();
     }
 
+    public void dropGuests() {
+        String str = "delete from Guests";
+        try {
+                PreparedStatement ps = conn.prepareStatement(str);
+                ps.execute();
+                ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void printGuest(){
+        String str = "select * from Guests";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("===Guests===");
+            while (rs.next()){
+                System.out.println("Guest ID: " + rs.getString("guestID"));
+            }
+            rs.close();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Returns the StaffType for a user
      * @param userID users id

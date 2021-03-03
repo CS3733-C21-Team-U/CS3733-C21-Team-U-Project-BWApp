@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,14 +16,11 @@
         </JFXButton>
         <Text layoutX="278.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="Enter the 6 Digit Code sent to your phone" textAlignment="CENTER" wrappingWidth="1023.248046875" AnchorPane.bottomAnchor="674.69921875" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="398.751953125" AnchorPane.topAnchor="285.45703125">
         </Text>
-        <JFXButton layoutX="796.0" layoutY="601.0" onAction="#handleForgotPassword" prefHeight="63.0" prefWidth="190.0" styleClass="button-text" text="TRY AGAIN" textFill="#101c38">
-        </JFXButton>
         <ImageView fitHeight="337.0" fitWidth="352.0" layoutX="51.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@brigham-health-logo-600x200.png" />
             </image>
         </ImageView>
-      <Label layoutX="842.0" layoutY="578.0" styleClass="caption" text="Didn't get a code? " />
       <JFXButton layoutX="51.0" layoutY="154.0" onAction="#handleGoBack" prefHeight="63.0" prefWidth="190.0" styleClass="button-text" text="BACK TO LOGIN PAGE" textFill="#101c38">
       </JFXButton>
       <JFXProgressBar fx:id="progressBar" layoutX="519.0" layoutY="484.0" opacity="0.0" prefHeight="1.0" prefWidth="486.0" />

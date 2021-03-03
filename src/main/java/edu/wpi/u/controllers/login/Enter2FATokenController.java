@@ -81,31 +81,6 @@ public class Enter2FATokenController {
                             t.printStackTrace();
                         }
                     });
-//        HttpURLConnection con = (HttpURLConnection) url2.openConnection();
-//        con.setRequestMethod("GET");
-//        con.setRequestProperty("Content-Type", "application/json");
-//        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//        String inputLine;
-//        StringBuffer content = new StringBuffer();
-//        while ((inputLine = in.readLine()) != null) {
-//            content.append(inputLine);
-//        }
-//        in.close();
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        System.out.println("Content: " + content);
-//        JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
-//        String status = obj.get("status").toString(); // "approved" or "pending"
-//        System.out.println("Status from get/verify: " + status);
-//        if (status.startsWith("approved", 1)){
-//            System.out.println("Approved");
-//            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//            Scene scene = new Scene(root);
-//            App.getPrimaryStage().setScene(scene);
-//        }
-//        else if (status.startsWith("pending",1)){
-//            System.out.println("Pending");
-//            // TODO : UI display error incorrect token
-//        }
     } catch (Exception e) {
         e.printStackTrace();
     }
@@ -114,7 +89,9 @@ public class Enter2FATokenController {
     public void handleForgotPassword(ActionEvent actionEvent) {
     }
 
-    public void handleGoBack(ActionEvent actionEvent) {
+    public void handleGoBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleAppEntry(ActionEvent actionEvent) throws IOException {
