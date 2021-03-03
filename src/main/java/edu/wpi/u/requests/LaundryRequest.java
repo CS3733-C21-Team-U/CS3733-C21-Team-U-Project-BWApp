@@ -5,53 +5,51 @@ import java.util.LinkedList;
 
 //TODO: Private or protected fields?
 public class LaundryRequest implements IRequest{
-    private String washer;
     private Request req;
-    private int priority;
+    private int numLoad;
+    private int washStrength;
+    private int dryStrength;
 
     public LaundryRequest() { }
 
     @Override
     public String getType() {
-        return  "Laundry";
+        return "Laundry";
     }
 
-    @Override
-    public String displayLocations() { return this.req.displayLocation(); }
-
-    @Override
-    public String displayAssignees() { return this.req.displayAssignees(); }
-
+    //For Specific Request Class
     @Override
     public LinkedList<Serializable> getSpecificData() {
         LinkedList<Serializable> result = new LinkedList<Serializable>();
-        result.addFirst(priority);
-        result.addFirst(washer);
+        result.addLast(dryStrength);
+        result.addLast(numLoad);
+        result.addLast(washStrength);
         return result;
     }
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
-        priority = (int)l.get(0);
-        washer = (String)l.get(1);
+
+        dryStrength = Integer.parseInt(l.get(0).toString());
+        numLoad =  Integer.parseInt(l.get(1).toString());
+        washStrength = Integer.parseInt(l.get(2).toString());
     }
 
     @Override
-    public String subtableCreateQuery() {
-        String[] queries = new String[2];
-        return "queries";
+    public String subtableCreateQuery() {//used for add request
+        String query = "insert into Laundry(requestID, dryStrength, numLoad, washStrength) values ('"+getGenericRequest().getRequestID()+"', "+dryStrength+", "+numLoad+", "+washStrength+")";
+        return query;
     }
 
     @Override
     public String updateDBQuery() {
-        String[] queries = new String[2];
-        return "queries";
+        String query =  "update "+getType()+" set dryStrength = "+dryStrength+", numLoad = "+numLoad+", washStrength = "+washStrength+" where requestID = '"+req.getRequestID()+"'";
+        return query;
     }
-
 
     @Override
     public Request getGenericRequest() {
-        return null;
+        return req;
     }
 
     @Override
@@ -59,14 +57,16 @@ public class LaundryRequest implements IRequest{
         this.req = r;
     }
 
+
     @Override
     public String[] getSpecificFields() {
-        return new String[0];
+        String[] res = new String[]{"dryStrength", "numberLoads", "washStrength"};
+        return res;
     }
 
     @Override
     public String getSpecificDataCode() {
-        return null;
+        return "iii";
     }
 
     @Override
@@ -74,6 +74,7 @@ public class LaundryRequest implements IRequest{
         setRequest(r);
         setSpecificData(l);
     }
+
 
 }
 

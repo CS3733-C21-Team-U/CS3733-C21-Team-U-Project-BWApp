@@ -102,6 +102,12 @@ public class Database {
                 PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
                 maintenanceRQ.execute();
 
+
+                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
+                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+                LaundryRQ.execute();
+
+
                /* String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
                 PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
                 LaundryRQ.execute();
@@ -276,6 +282,7 @@ public class Database {
         saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
         saveCSV( "Edges", "OutsideMapEdges.csv","Test");
         saveCSV( "Maintenance","Maintenance.csv", "Test");
+        saveCSV( "Laundry","Laundry.csv", "Test");
         //saveCSV( "Laundry", "Laundry.csv","Test");
         //saveCSV( "Laundry", "Security.csv","Test");
     }
@@ -291,6 +298,7 @@ public class Database {
         readCSV("OutsideMapNodes.csv", "Nodes");
         readCSV("OutsideMapEdges.csv", "Edges");
         readCSV("Maintenance.csv", "Maintenance");
+        readCSV("Laundry.csv", "Laundry");
         //readCSV("Laundry.csv", "Laundry");
 
 

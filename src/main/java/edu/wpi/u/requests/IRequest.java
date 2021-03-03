@@ -8,8 +8,6 @@ import java.util.LinkedList;
 
 public interface IRequest {
     String getType();
-    String displayLocations();
-    String displayAssignees();
     LinkedList<Serializable> getSpecificData();//return formatted string for extra fields of a given request
     void setSpecificData(LinkedList<Serializable> l);
     //DO FIRST DUMMY
