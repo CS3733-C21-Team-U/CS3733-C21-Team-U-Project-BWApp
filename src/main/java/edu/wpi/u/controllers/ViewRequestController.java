@@ -46,8 +46,8 @@ public class ViewRequestController {
             Date today = req.getDateNeeded();
             System.out.println(today);
             String dateAsString = df.format(today);
-            controller.requestItemDate2BCompletedLabel.setText(dateAsString);
-            controller.requestItemRequestTypeLabel.setText(req.getType());
+            controller.requestItemDate2BCompletedLabel.setText("Created: "+dateAsString);
+            controller.requestItemRequestTypeLabel.setText("Type: "+ req.getType());
             //controller.myID = i;
             requestList.getChildren().add(request);
             App.lastClickedRequestNumber++;

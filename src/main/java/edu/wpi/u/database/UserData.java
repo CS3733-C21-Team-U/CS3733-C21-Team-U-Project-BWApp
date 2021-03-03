@@ -27,9 +27,9 @@ public class UserData extends Data{
         //this.addGuest(new Guest("nev","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
         //this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
-
-        this.addGuest(new Guest("kaamil","testp","7813155706","pass","email", StaffType.ADMIN,"7813155706", new Date(800), false));
-        this.addGuest(new Guest("admin","admin","admin","admin","admin", StaffType.ADMIN,"admin", new Date(800), false));
+        dropGuests(); // TODO : Stop for demo
+        this.addGuest(new Guest("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792", new Date(1000), false));
+        this.addGuest(new Guest("admin","admin","admin","admin","admin", StaffType.ADMIN,"9148394600", new Date(800), false));
         printGuest();
 //        dropGuests();
 //        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));

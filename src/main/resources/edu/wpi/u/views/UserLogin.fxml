@@ -97,7 +97,7 @@
                 </StackPane>
             </children>
         </HBox>
-      <JFXButton fx:id="forgotPasswordButton1" onAction="#handleDebugLogin" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Admin)" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" />
-      <JFXButton fx:id="forgotPasswordButton11" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
+      <JFXButton fx:id="debugLoginAdminButton" onAction="#handleDebugLogin" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Admin)" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton fx:id="debugLoginGuest" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
     </children>
 </AnchorPane>
