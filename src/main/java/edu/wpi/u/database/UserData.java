@@ -20,7 +20,7 @@ public class UserData extends Data{
 //        this.addGuest(new Guest("newOne","testy","testy","testy","email", StaffType.PATIENT,"915", new Date(800), false));
 //        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
        // this.addGuest(new Guest("nev","testp","9148394600","testp","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-        this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
+        //this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
 
 
     }

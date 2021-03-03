@@ -7,8 +7,11 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -20,21 +23,36 @@ import java.util.regex.Pattern;
 public class EditUserController {
 
 
-    public JFXComboBox userSelectComboBox;
-    public JFXButton selectUserButton;
-   public JFXTextField usernameTextField;
-   public JFXTextField nameTextField;
-   public JFXTextField phoneNumTextField;
-   public JFXTextField passwordTextField;
-   public JFXComboBox userTypeComboBox;
-   public JFXCheckBox userEmployStatus;
-   public JFXButton editUserButton;
-    public JFXTextField emailTextField;
-    public JFXDatePicker appointmentDatePicker;
+    @FXML public JFXTextField usernameTextField;
+    @FXML public JFXTextField nameTextField;
+    @FXML public JFXTextField emailTextField;
+    @FXML public JFXTextField phoneNumTextField;
+    @FXML public JFXTextField passwordTextField;
+    //public JFXComboBox userTypeComboBox;
+    @FXML public JFXDatePicker appointmentDatePicker;
+    @FXML public JFXButton editUserButton;
 
-    public void initialize() throws IOException {
+    public void handleEditUser(ActionEvent actionEvent) {
+    }
 
+       public void initialize() throws IOException {
 
+        if(App.isEdtingGuest){
+            nameTextField.setText(App.selectedGuest.getName());
+            usernameTextField.setText(App.selectedGuest.getUserName());
+            passwordTextField.setText(App.selectedGuest.getPassword());
+            emailTextField.setText(App.selectedGuest.getEmail());
+            phoneNumTextField.setText(App.selectedGuest.getPhoneNumber());
+            //appointmentDatePicker.setValue(App.selectedGuest.getAppointmentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            //TODO : Fix
+        }else{
+            nameTextField.setText(App.selectedEmployee.getName());
+            usernameTextField.setText(App.selectedEmployee.getUserName());
+            passwordTextField.setText(App.selectedEmployee.getPassword());
+            emailTextField.setText(App.selectedEmployee.getEmail());
+            phoneNumTextField.setText(App.selectedEmployee.getPhoneNumber());
+            //Hite date picker
+        }
 
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -124,36 +142,28 @@ public class EditUserController {
             }
         });
     }
-
-
-    /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
-     * the database to edit an existing user
-
-     */
+//
+//
+//    /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
+//     * the database to edit an existing user
+//
+//     */
     public void handleEditUser(){
 
-        String userType = "";
-        if(userEmployStatus.isSelected()){
-            App.userService.updateEmployee(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
-        }
-        else{
-            nameTextField.setText(App.selectedGuest.getName());
-            usernameTextField.setText(App.selectedGuest.getUserName());
-            passwordTextField.setText(App.selectedGuest.getPassword());
-            emailTextField.setText(App.selectedGuest.getEmail());
-            userTypeComboBox.setValue(App.selectedGuest.getType());
-            phoneNumTextField.setText(App.selectedGuest.getPhoneNumber());
-            appointmentDatePicker.setValue(App.selectedGuest.getAppointmentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            App.userService.updateGuest(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
-        }
+//        if(!App.isEdtingGuest){
+//            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(), phoneNumTextField.getText(), false);
+//        }
+//        else{
+//            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
+//        }
 
     }
-
-    /**This function takes a user from the combobox and fills the fields and artifacts with the selected user's info
-     *
-     * @param userSelectComboBox
-     */
-    public void handleSelectUser(JFXComboBox userSelectComboBox){
-
-    }
+//
+//    /**This function takes a user from the combobox and fills the fields and artifacts with the selected user's info
+//     *
+//     * @param userSelectComboBox
+//     */
+//    public void handleSelectUser(JFXComboBox userSelectComboBox){
+//
+//    }
 }

@@ -28,6 +28,7 @@ public class App extends Application {
   public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
+  public static boolean isEdtingGuest;
   private static Stage primaryStage;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
@@ -56,6 +57,7 @@ public class App extends Application {
   public static Integer lastClickedRequestNumber;
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
+
 
   public App(){
     System.out.println("App constructor");

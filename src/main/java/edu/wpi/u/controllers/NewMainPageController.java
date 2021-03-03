@@ -63,7 +63,7 @@ public class NewMainPageController {
 
     public void initialize() throws IOException {
         listViewDemo.setItems(listView);
-
+        App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
         validationFeild.getValidators().add(validator);
