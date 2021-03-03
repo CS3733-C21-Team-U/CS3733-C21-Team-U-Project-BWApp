@@ -30,6 +30,7 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleType9Button" prefHeight="23.0" prefWidth="153.0" text="Type9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -105,6 +106,33 @@
                      </styleClass>
                   </JFXButton>
                   <JFXButton fx:id="ButtonPageForNRType8JFXButton" onAction="#handleType8Button" prefHeight="23.0" prefWidth="146.0" text="Type8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType10JFXButton1" onAction="#handleType10Button" prefHeight="23.0" prefWidth="146.0" text="Type10" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType11JFXButton11" onAction="#handleType11Button" prefHeight="23.0" prefWidth="146.0" text="Type11" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType12JFXButton111" onAction="#handleType12Button" prefHeight="23.0" prefWidth="146.0" text="Type12" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="15.0" />
                      </font>
