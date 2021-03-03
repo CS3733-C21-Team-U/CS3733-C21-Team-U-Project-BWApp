@@ -28,7 +28,11 @@ public class ReligiousRequest implements IRequest{
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
 
-        priority = Integer.parseInt(l.get(0).toString());
+        try{
+            priority = Integer.parseInt(l.get(0).toString());        }
+        catch(Exception e){
+            priority =  999;
+        }
         religion =  l.get(1).toString();
     }
 

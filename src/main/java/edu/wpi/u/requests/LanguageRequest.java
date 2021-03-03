@@ -25,7 +25,11 @@ public class LanguageRequest implements IRequest{
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
         language = l.get(0).toString();
-        numInterpreters =  Integer.parseInt(l.get(1).toString());
+        try{
+            numInterpreters = Integer.parseInt(l.get(1).toString());        }
+        catch(Exception e){
+            numInterpreters =  999;
+        }
     }
 
     @Override

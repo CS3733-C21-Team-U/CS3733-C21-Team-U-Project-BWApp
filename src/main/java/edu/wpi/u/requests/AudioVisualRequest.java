@@ -27,8 +27,13 @@ public class AudioVisualRequest implements IRequest {
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
-
-        isAudio = Integer.parseInt(l.get(0).toString());
+try{
+    isAudio = Integer.parseInt(l.get(0).toString());
+}
+catch(Exception e){
+    isAudio = 999;
+}
+      //  isAudio = Integer.parseInt(l.get(0).toString());
         name =  l.get(1).toString();
     }
 

@@ -31,7 +31,11 @@ public class MaintenanceRequest implements IRequest {
     public void setSpecificData(LinkedList<Serializable> l){
 
         machineUsed = l.get(0).toString();
-        priority =  Integer.parseInt(l.get(1).toString());
+        try{
+            priority = Integer.parseInt(l.get(1).toString());        }
+        catch(Exception e){
+            priority =  999;
+        }
     }
 
 

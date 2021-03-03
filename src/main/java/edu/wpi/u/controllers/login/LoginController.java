@@ -97,7 +97,7 @@ public class LoginController {
     //public JFXButton loginButton2;
     @FXML public Label errorLabel;
     @FXML public JFXButton debugLoginAdminButton;
-    @FXML public JFXButton debugLoginGuest;
+    public JFXButton debugLoginGuestButton;
 
     public void initialize() throws IOException {
 
@@ -154,7 +154,6 @@ public class LoginController {
     }
 
 
-
     public void handleLogin() throws IOException {
         System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
@@ -167,7 +166,7 @@ public class LoginController {
         String password = passWordField.getText();
         System.out.println("Username : " + username + " Password: " + password);
         App.userService.setUser(username, password, App.userService.checkPassword(password));
-        System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
+        //System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
         System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
@@ -253,7 +252,7 @@ public class LoginController {
     }
 
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("admin", "admin", "Guests");
+        App.userService.setUser("admin", "admin", "Employees");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

@@ -145,6 +145,8 @@ public class SettingsPageController {
         fileDirect.setTitle("Open Resource File");
         String filePath = "";
         filePathTextField.setText(csv.getPath());
+        App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
+
         return csv.getPath();
 
         // App.db.readCSV(csv.getPath(), tableNameTextFIeld.getText() );

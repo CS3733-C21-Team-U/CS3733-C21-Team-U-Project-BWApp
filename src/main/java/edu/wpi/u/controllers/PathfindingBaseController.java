@@ -195,15 +195,15 @@ public class PathfindingBaseController {
                     e.printStackTrace();
                 }
             });
-            node1.setOnMouseEntered(event -> {
-                    if(App.mapInteractionModel.pathThingy) {
-                        try {
-                            handleNodeClicked(n);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-            });
+//            node1.setOnMouseEntered(event -> {
+//                    if(App.mapInteractionModel.pathThingy) {
+//                        try {
+//                            handleNodeClicked(n);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//            });
         edgeNodeGroup.getChildren().add(node1);
         node1.toFront();
     }

@@ -25,7 +25,11 @@ public class GiftRequest implements IRequest{
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
         contents = l.get(0).toString();
-        mass =  Integer.parseInt(l.get(1).toString());
+        try{
+            mass = Integer.parseInt(l.get(1).toString());        }
+        catch(Exception e){
+            mass =  999;
+        }
     }
 
     @Override

@@ -28,10 +28,11 @@ public class UserData extends Data{
         //this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
         dropGuests(); // TODO : Stop for demo
-        this.addGuest(new Guest("test","test","test","test","test", StaffType.ADMIN,"4016491137", new Date(1000), false));
+        dropEmployee();
+        this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
         this.addGuest(new Guest("w","w","w","w","w", StaffType.ADMIN,"998234", new Date(1000), false));
-        this.addGuest(new Guest("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792", new Date(1000), false));
-        this.addGuest(new Guest("admin","admin","admin","admin","admin", StaffType.ADMIN,"9148394600", new Date(800), false));
+        this.addGuest(new Guest("staff","staff","staff","staff","staff", StaffType.PATIENT,"7742706792", new Date(1000), false));
+        this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
 //        dropGuests();
 //        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
@@ -41,6 +42,18 @@ public class UserData extends Data{
 //        printGuest();
 
     }
+    public void dropEmployee() {
+        String str = "delete from Employees";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.execute();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void dropGuests() {
         String str = "delete from Guests";
