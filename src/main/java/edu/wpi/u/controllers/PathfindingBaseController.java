@@ -323,13 +323,15 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor G and reloads the correct nodes
      */
     public void handleFloorGButton(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");
             edgeNodeGroup.toFront();
 
+        }else{
+            floorG.setSelected(true);
         }
     }
 
@@ -338,11 +340,13 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 1 and reloads the correct nodes
      */
     public void handleFloor1Button(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             generateEdges("1");
             edgeNodeGroup.toFront();
+        }else{
+            floor1.setSelected(true);
         }
     }
 
@@ -351,11 +355,13 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 2 and reloads the correct nodes
      */
     public void handleFloor2Button(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             generateEdges("2");
             edgeNodeGroup.toFront();
+        }else{
+            floor2.setSelected(true);
         }
     }
 
@@ -364,11 +370,13 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 3 and reloads the correct nodes
      */
     public void handleFloor3Button(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             generateEdges("3");
             edgeNodeGroup.toFront();
+        }else{
+            floor3.setSelected(true);
         }
     }
 
@@ -377,11 +385,13 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 4 and reloads the correct nodes
      */
     public void handleFloor4Button(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             generateEdges("4");
             edgeNodeGroup.toFront();
+        }else{
+            floor4.setSelected(true);
         }
     }
 
@@ -390,11 +400,13 @@ public class PathfindingBaseController {
      * This is what changes the map displayed to floor 5 and reloads the correct nodes
      */
     public void handleFloor5Button(){
-        edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
+            edgeNodeGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             generateEdges("5");
             edgeNodeGroup.toFront();
+        }else{
+            floor5.setSelected(true);
         }
     }
 
