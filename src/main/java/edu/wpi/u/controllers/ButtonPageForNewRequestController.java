@@ -126,6 +126,12 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleMedicineButton() throws Exception{
+        App.newNodeType = "Medical";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleFoodButton() throws Exception{

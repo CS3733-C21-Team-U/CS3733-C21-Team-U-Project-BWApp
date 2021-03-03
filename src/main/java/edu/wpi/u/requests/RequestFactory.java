@@ -19,6 +19,8 @@ public class RequestFactory {
                 return new AudioVisualRequest();
             case "Floral":
                 return new FloralRequest();
+            case "Medical":
+                return new MedicalRequest();
             default:
                 System.out.println("Type does not exist!");
 
