@@ -44,6 +44,7 @@ public class floatingPathfindingController {
 
     public void initialize(){
         textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
+
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
                 startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
@@ -52,7 +53,6 @@ public class floatingPathfindingController {
             }else{
                 endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
-                targetNode = "START";
             }
             if(!startNodeID.equals("") && !endNodeID.equals("")){
                 try {

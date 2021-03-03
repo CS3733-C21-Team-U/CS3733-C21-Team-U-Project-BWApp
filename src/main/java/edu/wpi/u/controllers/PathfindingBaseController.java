@@ -1,7 +1,5 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
@@ -15,16 +13,16 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PathfindingBaseController {
 
@@ -198,12 +196,22 @@ public class PathfindingBaseController {
             node1.toFront();
             node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
-            node1.setOnMouseClicked(event -> {
+            node1.setOnMousePressed(event -> {
                 try {
                     handleNodeClicked(n);
+                    App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
+            });
+            node1.setOnMouseEntered(event -> {
+                    if(App.mapInteractionModel.pathThingy) {
+                        try {
+                            handleNodeClicked(n);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
             });
         edgeNodeGroup.getChildren().add(node1);
     }
@@ -292,10 +300,8 @@ public class PathfindingBaseController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
-        }
     }
     @FXML
     public void handleUndoButton() throws Exception{

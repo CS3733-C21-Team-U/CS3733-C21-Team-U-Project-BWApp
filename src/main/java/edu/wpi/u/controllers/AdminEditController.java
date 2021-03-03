@@ -217,7 +217,6 @@ public class AdminEditController {
                     e.printStackTrace();
                     }
                 }
-
             });
             node1.setOnMouseReleased(event -> {
                 try {
@@ -404,8 +403,6 @@ public class AdminEditController {
                     c3.setStyle("-fx-stroke: -error");
                 }
             }
-
-
         }
     }
 
