@@ -166,15 +166,25 @@ public class AdminEditController {
     public void handleAddNodeButtonEDIT(){
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        App.mapInteractionModel.setCurrentAction("ADDNODE");
-        App.mapInteractionModel.clearPreviousNodeID();
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+            App.mapInteractionModel.setCurrentAction("ADDNODE");
+        }else{
+            App.mapInteractionModel.setCurrentAction("NONE");
+        }
+
     }
 
     public void handleAddEdgeButtonEDIT(){
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+            App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        }else{
+            App.mapInteractionModel.setCurrentAction("NONE");
+        }
+
         App.mapInteractionModel.setEdgeID("");
+        App.mapInteractionModel.clearPreviousNodeID();
     }
 
     /**
@@ -200,11 +210,14 @@ public class AdminEditController {
                 }
             });
             node1.setOnMouseDragged(event -> {
-                try {
-                    handleNodeDragged(node1); // Set visual position (circle)
-                } catch (Exception e) {
-                e.printStackTrace();
+                if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+                    try {
+                        handleNodeDragged(node1); // Set visual position (circle)
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                    }
                 }
+
             });
             node1.setOnMouseReleased(event -> {
                 try {
@@ -286,6 +299,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
+        App.mapInteractionModel.setEdgeID(e.getEdgeID());
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
             double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];

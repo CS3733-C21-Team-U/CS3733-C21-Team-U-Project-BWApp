@@ -128,6 +128,7 @@ public class MapEdit {
      */
     public void addEdge(String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.ADD;
             App.mapService.addEdge(start_node + "_" + end_node, start_node, end_node, permissions);
             this.ID = start_node + "_" + end_node + "0";
@@ -140,6 +141,7 @@ public class MapEdit {
      */
     public void deleteEdge(){
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.DELETE;
             this.oldEdge = App.mapService.getEdgeFromID(this.ID);
             App.mapService.deleteEdge(this.ID);
@@ -154,6 +156,7 @@ public class MapEdit {
      */
     public void updateEdge(ArrayList<StaffType> permissions){
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.UPDATE;
             this.oldEdge = App.mapService.getEdgeFromID(this.ID);
             App.mapService.updateEdgePermissions(this.ID, permissions);
@@ -223,6 +226,7 @@ public class MapEdit {
         }catch (Exception e){
             throw e;
         }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
 
