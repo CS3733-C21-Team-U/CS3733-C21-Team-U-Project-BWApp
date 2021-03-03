@@ -18,11 +18,6 @@ public class MaintenanceRequest implements IRequest {
         return "Maintenance";
     }
 
-    @Override
-    public String displayLocations() { return this.req.displayLocation(); }
-    @Override
-    public String displayAssignees() { return this.req.displayAssignees(); }
-
     //For Specific Request Class
     @Override
     public LinkedList<Serializable> getSpecificData() {

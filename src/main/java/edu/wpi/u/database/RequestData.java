@@ -126,6 +126,7 @@ public class RequestData extends Data{
             while (rs.next()){
                 String id = rs.getString("requestID");
                 Date created = rs.getDate("dateCreated");
+                Date needed = rs.getDate("dateNeeded");
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
                 LinkedList<String> locations = new LinkedList<String>();
@@ -161,7 +162,7 @@ public class RequestData extends Data{
                 //Make IRequest
                 RequestFactory rf = new RequestFactory();
                 IRequest result = rf.makeRequest(type);
-                Request r = new Request(id,assignees, created,null,desc,title,locations,type, "Test creator");
+                Request r = new Request(id,assignees, created,needed,desc,title,locations,type, "Test creator");
 
                 String subtableQuery = "select * from "+type+" where requestID=?";
                 PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
@@ -202,7 +203,7 @@ public class RequestData extends Data{
    public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type) values (?,?,?,?,?,?)";
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded) values (?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,request.getGenericRequest().getRequestID());
@@ -213,6 +214,9 @@ public class RequestData extends Data{
             ps.setString(4,request.getGenericRequest().getDescription());
             ps.setString(5,request.getGenericRequest().getTitle());
             ps.setString(6,request.getGenericRequest().getType());
+            java.util.Date d2 = request.getGenericRequest().getDateNeeded();
+            java.sql.Date sqld2 = new java.sql.Date(d2.getTime());
+            ps.setDate(7,sqld2);
             ps.execute();
             // Adding data into joint tables
             for(String locationID : request.getGenericRequest().getLocation()){

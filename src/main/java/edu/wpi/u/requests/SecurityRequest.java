@@ -10,43 +10,30 @@ public class SecurityRequest implements IRequest {
     private int priority;
 
     public SecurityRequest(){};
-    //Composition Pattern Type
 
     @Override
     public String getType() {
-        return  "Security";
+        return null;
     }
-
-    @Override
-    public String displayLocations() { return this.req.displayLocation(); }
-
-    @Override
-    public String displayAssignees() { return this.req.displayAssignees(); }
 
     @Override
     public LinkedList<Serializable> getSpecificData() {
-        LinkedList<Serializable> result = new LinkedList<Serializable>();
-        result.addFirst(priority);
-        result.addFirst(threatLevel);
-        return result;
+        return null;
     }
 
     @Override
-    public void setSpecificData(LinkedList<Serializable> l){
-        priority = (int)l.get(0);
-        threatLevel = (String)l.get(1);
+    public void setSpecificData(LinkedList<Serializable> l) {
+
     }
 
     @Override
     public String subtableCreateQuery() {
-        String[] queries = new String[2];
-        return "queries";
+        return null;
     }
 
     @Override
     public String updateDBQuery() {
-        String[] queries = new String[2];
-        return "queries";
+        return null;
     }
 
     @Override
@@ -56,7 +43,7 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public void setRequest(Request r) {
-        this.req = r;
+
     }
 
     @Override
@@ -71,9 +58,11 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public void fillObject(Request r, LinkedList<Serializable> l) {
-        setRequest(r);
-        setSpecificData(l);
+
     }
+    //Composition Pattern Type
+
+
 
 }
 

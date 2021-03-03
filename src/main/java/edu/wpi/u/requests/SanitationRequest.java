@@ -1,49 +1,47 @@
 package edu.wpi.u.requests;
+
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.LinkedList;
 
-//TODO: Private or protected fields?
-public class LaundryRequest implements IRequest{
-    private Request req;
-    private int numLoad;
-    private int washStrength;
-    private int dryStrength;
+public class SanitationRequest implements IRequest{
+    String spillType;
+    int hazardLevel;
+    Request req;
 
-    public LaundryRequest() { }
+    public void SanitationRequest(){
+
+    }
 
     @Override
     public String getType() {
-        return "Laundry";
+        return "Sanitation";
     }
 
     //For Specific Request Class
     @Override
     public LinkedList<Serializable> getSpecificData() {
         LinkedList<Serializable> result = new LinkedList<Serializable>();
-        result.addLast(dryStrength);
-        result.addLast(numLoad);
-        result.addLast(washStrength);
+        result.addLast(hazardLevel);
+        result.addLast(spillType);
         return result;
     }
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
 
-        dryStrength = Integer.parseInt(l.get(0).toString());
-        numLoad =  Integer.parseInt(l.get(1).toString());
-        washStrength = Integer.parseInt(l.get(2).toString());
+        hazardLevel = Integer.parseInt(l.get(0).toString());
+        spillType =  l.get(1).toString();
     }
 
     @Override
     public String subtableCreateQuery() {//used for add request
-        String query = "insert into Laundry(requestID, dryStrength, numLoad, washStrength) values ('"+getGenericRequest().getRequestID()+"', "+dryStrength+", "+numLoad+", "+washStrength+")";
+        String query = "insert into Sanitation(requestID, hazardLevel, spillType) values ('"+getGenericRequest().getRequestID()+"', "+hazardLevel+", '"+spillType+"')";
         return query;
     }
 
     @Override
     public String updateDBQuery() {
-        String query =  "update "+getType()+" set dryStrength = "+dryStrength+", numLoad = "+numLoad+", washStrength = "+washStrength+" where requestID = '"+req.getRequestID()+"'";
+        String query =  "update "+getType()+" set hazardLevel = "+hazardLevel+", spillType = '"+spillType+"' where requestID = '"+req.getRequestID()+"'";
         return query;
     }
 
@@ -60,13 +58,13 @@ public class LaundryRequest implements IRequest{
 
     @Override
     public String[] getSpecificFields() {
-        String[] res = new String[]{"dryStrength", "numberLoads", "washStrength"};
+        String[] res = new String[]{"hazardLevel", "spillType"};
         return res;
     }
 
     @Override
     public String getSpecificDataCode() {
-        return "iii";
+        return "is";
     }
 
     @Override
@@ -74,7 +72,4 @@ public class LaundryRequest implements IRequest{
         setRequest(r);
         setSpecificData(l);
     }
-
-
 }
-

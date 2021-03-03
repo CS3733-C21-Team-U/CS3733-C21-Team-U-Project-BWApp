@@ -74,7 +74,7 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))"; //TODO: Delete Type
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50), dateNeeded date, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -102,13 +102,14 @@ public class Database {
                 PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
                 maintenanceRQ.execute();
 
-               /* String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
+
+                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
                 PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
                 LaundryRQ.execute();
 
-                String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
-                PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
-                SecurityRQ.execute();*/
+                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
+                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
+                SanitationRQ.execute();
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -276,8 +277,8 @@ public class Database {
         saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
         saveCSV( "Edges", "OutsideMapEdges.csv","Test");
         saveCSV( "Maintenance","Maintenance.csv", "Test");
-        //saveCSV( "Laundry", "Laundry.csv","Test");
-        //saveCSV( "Laundry", "Security.csv","Test");
+        saveCSV( "Laundry","Laundry.csv", "Test");
+        saveCSV( "Sanitation","Sanitation.csv", "Test");
     }
 
     public void makeCSVDependant(boolean yes){
@@ -291,6 +292,7 @@ public class Database {
         readCSV("OutsideMapNodes.csv", "Nodes");
         readCSV("OutsideMapEdges.csv", "Edges");
         readCSV("Maintenance.csv", "Maintenance");
+        readCSV("Laundry.csv", "Laundry");
         //readCSV("Laundry.csv", "Laundry");
 
 
