@@ -207,8 +207,8 @@
 
 /* ----------- FLOATING ACTION BUTTON -------------- */
 .fab-default{
-    -fx-background-color: -primary;
-    -fx-text-fill: -onPrimary;
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
     -fx-min-width: 56px;
     -fx-min-height: 56px;
     -fx-pref-width: 56px;
@@ -219,9 +219,13 @@
     -fx-padding: 20px;
 }
 
+.fab-default .jfx-rippler{
+    -jfx-rippler-fill: -onSecondary;
+}
+
 .fab-mini{
-    -fx-background-color: -primary;
-    -fx-text-fill: -onPrimary;
+    -fx-background-color: -secondary;
+    -fx-text-fill: -onSecondary;
     -fx-min-width: 40px;
     -fx-min-height: 40px;
     -fx-pref-width: 40px;
@@ -231,18 +235,19 @@
     -fx-background-radius: 20px;
 }
 
+.fab-mini .jfx-rippler{
+    -jfx-rippler-fill: -onSecondary;
+}
+
 /* ----------- TAB PANE -------------- */
 .jfx-tab-pane .headers-region {
-    -fx-background-color: -primaryVariant;
+    -fx-background-color: -backgroundAlt;
 }
 .jfx-tab-pane .tab-header-background {
-    -fx-background-color: -primaryVariant
+    -fx-background-color: -backgroundAlt;
 }
 .jfx-tab-pane .tab-selected-line{
     -fx-background-color: -primary;
-}
-.jfx-tab-pane .tab-selected-line{
-    -fx-background-color: -onPrimary;
 }
 .jfx-tab-pane .tab-header-area .jfx-rippler{
     -jfx-rippler-fill: -onPrimary;
@@ -272,12 +277,35 @@
 }
 
 .left-nav-icons{
-    -fx-fill: -onPrimary;
+    -fx-fill: -onBackground;
+    -fx-text-fill: -onBackground;
 }
 
 .white-text{
     -fx-text-fill: -onPrimary;
 }
+
+.top-bar-button .jfx-rippler{
+    -jfx-rippler-fill: white;
+}
+.top-bar-button{
+    -fx-background-radius: 30px;
+    -fx-min-height: 60px;
+    -fx-min-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-pref-width: 60px;
+    -fx-max-height: 60px;
+    -fx-max-width: 60px;
+}
+
+.top-icons{
+    -fx-fill: -onPrimary;
+}
+
+.dialogue{
+    -fx-background-color: -backgroundAlt;
+}
+
 
 /* ----------- SECCONDARY COLORS -------------- */
 

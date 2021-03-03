@@ -11,6 +11,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -23,11 +27,13 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import static edu.wpi.u.users.StaffType.ADMIN;
@@ -38,22 +44,19 @@ public class NewMainPageController {
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
-    //    @FXML public SVGPath leftMenuHamburger;
-//    @FXML public AnchorPane mainAnchorPane;
-//    @FXML public JFXDrawer leftMenuDrawer;
-//    @FXML public JFXDrawer serviceRequestDrawer;
-//    @FXML public Tab nonActiveValue;
-//    @FXMLViewFlowContext
-//    private ViewFlowContext context;
     @FXML
     public JFXTabPane mainTabPane;
-    public JFXButton openDialogue;
+    //public JFXButton openDialogue;
     public JFXDialog dialog;
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
     public StackPane newMainPageStackPane;
+
     public Tab adminTab2;
     public Tab adminTab1;
+
+    public SVGPath themeIcon;
+
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -62,6 +65,9 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
+        App.themeSVG = themeIcon;
+
         listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -76,120 +82,6 @@ public class NewMainPageController {
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
-
-        this.openDialogue.setOnAction((action) -> {
-            this.dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
-//            this.dialog.show((StackPane)this.context.getRegisteredObject("ContentPane"));
-        });
-
-      /*  if(App.userService.getActiveUser().getType() ==  ADMIN){
-            adminTab1.setStyle("-fx-opacity: 1");
-            adminTab1.setDisable(false);
-            adminTab2.setStyle("-fx-opacity: 1");
-            adminTab2.setDisable(false);
-        }
-        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
-            adminTab1.setStyle("-fx-opacity: 0");
-            adminTab1.setDisable(true);
-            adminTab2.setStyle("-fx-opacity: 0");
-            adminTab2.setDisable(true);
-        }
-
-       */
-
-//        nonActiveValue.setStyle("-jfx-rippler-fill: red");
-//        leftMenuPane = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/LeftDrawerMenu.fxml"));
-//        leftMenuDrawer.setSidePane(leftMenuPane);
-//        leftMenuDrawer.open();
-//
-//        rightServiceRequestPane= FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingRightPage.fxml"));
-//        serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//        serviceRequestDrawer.open();
-//
-//
-//
-//        ImageView node = new ImageView(String.valueOf(getClass().getResource("/edu/wpi/u/views/Images/FaulknerCampus.png")));
-//        node.setFitWidth(2987);
-//        node.setPreserveRatio(true);
-//        AnchorPane pane = new AnchorPane(node);
-//        //The black path behind--------------
-//        App.pathFindingPath = new SVGPath();
-//        App.pathFindingPath.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath.setStrokeWidth(5);
-//        App.pathFindingPath.setStroke(Color.web("#f6c037", 1.0));
-//        App.pathFindingPath.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The yellow path behind--------------
-//        App.pathFindingPath2 = new SVGPath();
-//        App.pathFindingPath2.setContent(App.PathHandling.SVGPathString);
-//        App.pathFindingPath2.setStrokeWidth(12);
-//        App.pathFindingPath2.setStroke(Color.web("#1d1d1d", 1.0));
-//        App.pathFindingPath2.setStrokeLineJoin(StrokeLineJoin.ROUND);
-//        App.pathFindingPath2.setStrokeLineCap(StrokeLineCap.ROUND);
-//        //The loading of the paths
-//        pane.getChildren().add(App.pathFindingPath);
-//        pane.getChildren().add(App.pathFindingPath2);
-//        App.pathFindingPath2.toFront();
-//        App.pathFindingPath.toFront();
-//        map = new GesturePane(pane);
-//        map.setMinScale(0.3);
-//        map.setMaxScale(2);
-//        map.centreOn(new Point2D(700, 4000));
-//        map.zoomTo(0.5,map.targetPointAtViewportCentre());
-//
-////        mapView.setFitWidth(4000.0);
-////        mapView.setFitHeight(4000.0);
-////        mapView.setPreserveRatio(true);
-////
-////        AnchorPane scrollPaneRoot = new AnchorPane(mapView);
-////        ZoomableScrollPane map = new ZoomableScrollPane(scrollPaneRoot);
-//        map.setPrefWidth(1920);
-//        map.setPrefHeight(1000);
-//        map.setFitMode(GesturePane.FitMode.UNBOUNDED);
-//        map.setScrollMode(GesturePane.ScrollMode.ZOOM);
-////        map.setPannable(true);
-//        mainAnchorPane.getChildren().add(map);
-//        map.toBack();
-//
-//        map.setOnMouseClicked(e -> {
-//            Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
-//                    .orElse(map.targetPointAtViewportCentre());
-//            if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-//                // increment of scale makes more sense exponentially instead of linearly
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomBy(map.getCurrentScale(), pivotOnTarget);
-//            } else if (e.getButton() == MouseButton.SECONDARY && e.getClickCount() == 1) {
-//                map.animate(DURATION)
-//                        .interpolateWith(Interpolator.EASE_BOTH)
-//                        .zoomTo(map.getMinScale(), pivotOnTarget);
-//            }
-//        });
-//
-//        App.rightDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                rightServiceRequestPane = FXMLLoader.load(getClass().getResource(newValue));
-//                serviceRequestDrawer.setSidePane(rightServiceRequestPane);
-//                serviceRequestDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-//        App.leftDrawerRoot.addListener((observable, oldValue, newValue)  ->
-//        {
-//            try {
-//                leftMenuPane = FXMLLoader.load(getClass().getResource(newValue));
-//                leftMenuDrawer.setSidePane(leftMenuPane);
-//                leftMenuDrawer.open();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-
-
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
@@ -197,25 +89,78 @@ public class NewMainPageController {
     }
 
 
-    public void handleExit(ActionEvent actionEvent) {
+    public void handleExit(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text("Exit Application"));
-        content.setBody(new Text("You are about to exit the application!"));
+        Label header = new Label("Exit Application?");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("OK");
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        JFXButton button1 = new JFXButton("CANCEL");
+        JFXButton button2 = new JFXButton("EXIT");
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
                 App.getInstance().end();
             }
         });
-        button.setStyle("-fx-background-color: #4dadf7");
-        content.setActions(button);
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
         dialog.show();
 
     }
+
+    public void handleLogout(ActionEvent actionEvent) throws IOException {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Log out?");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("CANCEL");
+        JFXButton button2 = new JFXButton("LOGOUT");
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @SneakyThrows
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+                App.getPrimaryStage().getScene().setRoot(root);
+            }
+        });
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+    }
+
+    public void handleChangeTab() {
+        App.mapInteractionModel.setCurrentAction("NONE");
+    }
 }
+
+
+
 
 
 

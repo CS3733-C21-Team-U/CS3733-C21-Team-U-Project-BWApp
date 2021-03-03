@@ -42,7 +42,7 @@ public class ModifyNodeController {
             try {
                 Double.parseDouble(XCoordinate.getText());
                 Double.parseDouble(YCoordinate.getText());
-                App.mapService.updateNode(modifyNodeID.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
+                //App.mapService.updateNode(modifyNodeID.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
                 App.rightDrawerRoot.set("../views/AdminTools.fxml");
             } catch (Exception e) {
                 errorDrawer.open();

@@ -96,6 +96,11 @@ public class Database {
                 String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
+
+                String permissionsInit = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
+                PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
+                psPerm.execute();
+
             }
         } catch (SQLException e) {
             System.out.println("Table creation failed");
@@ -105,6 +110,7 @@ public class Database {
 
     /**
      * Will read the csv file from a given path
+     *
      * @param filePath the path to be read from
      * @param tableName the table to load the data from the csv into
      */
@@ -125,7 +131,6 @@ public class Database {
             FileWriter myWriter = new FileWriter(tempPath);
             myWriter.write(columns[1]);
             myWriter.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
