@@ -22,47 +22,47 @@
           <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleType9Button" prefHeight="23.0" prefWidth="153.0" text="Type9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleType9Button" prefHeight="23.0" prefWidth="153.0" text="Type9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRType7JFXButton" onAction="#handleType7Button" prefHeight="23.0" prefWidth="164.0" text="Type7" GridPane.rowIndex="2">
+            <JFXButton fx:id="ButtonPageForNRType7JFXButton" onAction="#handleType7Button" prefHeight="23.0" prefWidth="164.0" text="Type7" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRType5JFXButton" onAction="#handleType5Button" prefHeight="23.0" prefWidth="147.0" text="Type5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <JFXButton fx:id="ButtonPageForNRType5JFXButton" onAction="#handleType5Button" prefHeight="23.0" prefWidth="147.0" text="Type5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRMaintenanceJFXButton" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="166.0" text="Maintenance">
+            <JFXButton fx:id="ButtonPageForNRMaintenanceJFXButton" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="166.0" text="Maintenance" GridPane.halignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRLaundryJFXButton" onAction="#handleMakeLaundryButton" prefHeight="31.0" prefWidth="166.0" text="Laundry" GridPane.columnIndex="1">
+            <JFXButton fx:id="ButtonPageForNRLaundryJFXButton" onAction="#handleMakeLaundryButton" prefHeight="31.0" prefWidth="166.0" text="Laundry" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRSecurityJFXButton" onAction="#handleMakeSecurityButton" prefHeight="31.0" prefWidth="166.0" text="Security" GridPane.columnIndex="2">
+            <JFXButton fx:id="ButtonPageForNRSecurityJFXButton" onAction="#handleMakeSecurityButton" prefHeight="31.0" prefWidth="166.0" text="Security" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRType4JFXButton" onAction="#handleType4Button" prefHeight="23.0" prefWidth="164.0" text="Type4" GridPane.rowIndex="1">
+            <JFXButton fx:id="ButtonPageForNRType4JFXButton" onAction="#handleType4Button" prefHeight="23.0" prefWidth="164.0" text="Type4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRType6JFXButton" onAction="#handleType6Button" prefHeight="23.0" prefWidth="154.0" text="Type6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <JFXButton fx:id="ButtonPageForNRType6JFXButton" onAction="#handleType6Button" prefHeight="23.0" prefWidth="154.0" text="Type6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="ButtonPageForNRType8JFXButton" onAction="#handleType8Button" prefHeight="23.0" prefWidth="146.0" text="Type8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <JFXButton fx:id="ButtonPageForNRType8JFXButton" onAction="#handleType8Button" prefHeight="23.0" prefWidth="146.0" text="Type8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
