@@ -28,6 +28,10 @@ public class UserData extends Data{
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
         printGuest();
 //        dropGuests();
+//        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
+//        this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
+//        printGuest();
+//        dropGuests();
 //        printGuest();
     }
 
@@ -50,7 +54,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             System.out.println("===Guests===");
             while (rs.next()){
-                System.out.println("Guest ID: " + rs.getString("guestID"));
+                System.out.println("Guest ID: " + rs.getString("userName"));
             }
             rs.close();
             ps.close();
@@ -266,10 +270,50 @@ public class UserData extends Data{
             ps.setString(1,username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
+                rs.close();
+                ps.close();
                 return "Employees";
             }
             else {
+                rs.close();
+                ps.close();
+                System.out.println("Not in employees");
                 String str2 = "select * from Guests where userName=?";
+                PreparedStatement ps2 = conn.prepareStatement(str2);
+                ps2.setString(1,username);
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
+                    rs2.close();
+                    ps2.close();
+                    return "Guests";
+                }
+                else{
+                    System.out.println("Not in Guests");
+                    rs2.close();
+                    ps2.close();
+                    return "";
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println("Exception");
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /*
+    public String checkUsername(String username){
+        String str = "select * from Employees where username=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return "Employees";
+            }
+            else {
+                String str2 = "select * from Guests where username=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,username);
                 ResultSet rs2 = ps2.executeQuery();
@@ -279,6 +323,7 @@ public class UserData extends Data{
                 else{
                     return "";
                 }
+
             }
         }
         catch (Exception e){
@@ -286,6 +331,7 @@ public class UserData extends Data{
             return "";
         }
     }
+     */
 
     /**
      * Checks if the database has the phone number matched with the given username
@@ -334,18 +380,25 @@ public class UserData extends Data{
             ps.setString(1,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                ps.close();
                 return "Employees";
             }
             else {
-                str = "select * from Guests where password=?";
-                ps = conn.prepareStatement(str);
-                ps.setString(1,password);
-                rs = ps.executeQuery();
-                if(rs.next()){
+                rs.close();
+                ps.close();
+                System.out.println("Not in employees");
+                String str2 = "select * from Guests where password=?";
+                PreparedStatement ps2 = conn.prepareStatement(str2);
+                ps2.setString(1,password);
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
+                    rs2.close();
+                    ps2.close();
                     return "Guests";
                 }
                 else{
+                    System.out.println("Not in Guests");
+                    rs2.close();
+                    ps2.close();
                     return "";
                 }
             }
