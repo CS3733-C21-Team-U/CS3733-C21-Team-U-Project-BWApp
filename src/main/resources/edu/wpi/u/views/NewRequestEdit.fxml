@@ -58,7 +58,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <HBox fx:id="HBoxToClone" alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                        <HBox fx:id="HBoxToClone" visible = "false" alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
                               <Label text="Field1">
                                  <font>

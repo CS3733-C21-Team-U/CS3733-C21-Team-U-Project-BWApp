@@ -76,9 +76,9 @@ public class NewRequestController {
     }
 
     @FXML
-    public void initialize(ActionEvent event) throws IOException {
-        javafx.scene.Node node = (javafx.scene.Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
+    public void initialize() throws IOException {
+        /*javafx.scene.Node node = (javafx.scene.Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();*/
         // receiveData Step 2
         String type = App.newNodeType;
         currIRequest = new RequestFactory().makeRequest(type);
@@ -86,19 +86,18 @@ public class NewRequestController {
         //TODO: redo so it does not use a switch statement
         specificTextFields = generateSpecificFields();
 
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Integer Required");
-        madeMaintenanceFieldMachineUsed.getValidators().add(validator);
-        madeMaintenanceFieldPriority.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!(isInteger(newVal.toString()))) {
-                madeMaintenanceFieldPriority.validate();
-            }
-        });
+//        RequiredFieldValidator validator = new RequiredFieldValidator();
+//        validator.setMessage("Integer Required");
+//        madeMaintenanceFieldMachineUsed.getValidators().add(validator);
+//        madeMaintenanceFieldPriority.focusedProperty().addListener((o, oldVal, newVal) -> {
+//            if (!(isInteger(newVal.toString()))) {
+//                madeMaintenanceFieldPriority.validate();
+//            }
+//        });
 
     }
 
-    //TODO : Replace with function written in NER Controller
-    public LinkedList<Serializable> requestSpecificItems(String type) {
+    public LinkedList<Serializable> requestSpecificItems() {
         LinkedList<Serializable> specifics = new LinkedList<>();
         for(JFXTextField j : specificTextFields) {
             specifics.add(j.getText());
@@ -113,7 +112,7 @@ public class NewRequestController {
     public void handleSaveNewRequest() throws IOException {
         LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
         LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
-        LinkedList<Serializable> specifics = requestSpecificItems(App.newNodeType);
+        LinkedList<Serializable> specifics = requestSpecificItems();
 
         IRequest result = new RequestFactory().makeRequest(App.newNodeType);
         Random rand = new Random();
