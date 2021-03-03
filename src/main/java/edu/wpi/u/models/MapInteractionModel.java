@@ -11,7 +11,7 @@ public class MapInteractionModel {
 
 
     private String currentAction = "NONE";
-    public SimpleStringProperty nodeID = new SimpleStringProperty("");
+    public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
@@ -29,7 +29,7 @@ public class MapInteractionModel {
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
     public boolean clickedOnNode = false;
-    public boolean pathThingy = false;
+    public int pathThingy = 0;
 
     public String getPreviousPreviousNodeID() {
         return previousPreviousNodeID;
