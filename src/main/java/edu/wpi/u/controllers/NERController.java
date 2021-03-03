@@ -32,6 +32,7 @@ public class NERController {
     public HBox HBoxToClone;
     public VBox VBoxToAddTo;
     public Label specificTitle;
+    public Label errorMsg;
     //Generic Request Fields
     @FXML TextField makeEditTitleField;
 
@@ -91,16 +92,19 @@ public class NERController {
 
             JFXTextField j = new JFXTextField();
             j.setPromptText(currIRequest.getSpecificFields()[i]);
-            j.setText(currIRequest.getSpecificData().get(i).toString());
             j.setLabelFloat(true);
+            j.setStyle("-fx-pref-width: 400px");
+            j.setStyle("-fx-pref-height: 50px");
+            j.setStyle("-fx-font-size: 16px");
+            j.setText(currIRequest.getSpecificData().get(i).toString());
 
             ans[i] = j;
 
-            h.setAlignment(HBoxToClone.getAlignment());
-            h.setSpacing(HBoxToClone.getSpacing());
-            h.getChildren().add(j);
-            h.setId(Integer.toString(i));
-            VBoxToAddTo.getChildren().add(h);
+//            h.setAlignment(HBoxToClone.getAlignment());
+//            h.setSpacing(HBoxToClone.getSpacing());
+//            h.getChildren().add(j);
+//            h.setId(Integer.toString(i));
+            VBoxToAddTo.getChildren().add(j);
         }
         return ans;
     }
@@ -142,42 +146,46 @@ public class NERController {
         LinkedList<Serializable> specifics = new LinkedList<>();
         for(JFXTextField j : specificTextFields) {
             specifics.add(j.getText());
-    }
+        }
 
         //for loop(values stored in TextFields)
         return specifics;
     }
 
     @FXML public void handleSaveNewEditRequest() throws IOException { //TODO: visibility?
+        try {
+            LinkedList<String> locationsToAdd = new LinkedList<>();
+            for(Object l : makeEditLocationChipView.getChips()) { //may break
+                locationsToAdd.add(l.toString());
+            }
 
-        LinkedList<String> locationsToAdd = new LinkedList<>();
-        for(Object l : makeEditLocationChipView.getChips()) { //may break
-            locationsToAdd.add(l.toString());
+            LinkedList<String> assigneesToAdd = new LinkedList<>();
+            for(Object l : makeEditLocationChipView.getChips()) { //may break
+                assigneesToAdd.add(l.toString());
+            }
+
+            //NEW
+            currRequest.setDescription(makeEditDescriptionField.getText());
+            currRequest.setAssignee(assigneesToAdd);
+            currRequest.setLocation(locationsToAdd);
+            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
+            //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+            Date date= new Date();
+            currRequest.setDateNeeded(date);
+            currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
+            App.requestService.updateRequest(currIRequest);
+
+
+            //SCENE Switch
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        } catch (Exception e) {
+            errorMsg.setVisible(true);
         }
 
-        LinkedList<String> assigneesToAdd = new LinkedList<>();
-        for(Object l : makeEditLocationChipView.getChips()) { //may break
-            assigneesToAdd.add(l.toString());
-        }
 
-        //NEW
-        currRequest.setDescription(makeEditDescriptionField.getText());
-        currRequest.setTitle(makeEditTitleField.getText());
-        currRequest.setAssignee(assigneesToAdd);
-        currRequest.setLocation(locationsToAdd);
-        LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
-        //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-        Date date= new Date();
-        currRequest.setDateNeeded(date);
-        currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
-        App.requestService.updateRequest(currIRequest);
-
-
-        //SCENE Switch
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
 
     }
 

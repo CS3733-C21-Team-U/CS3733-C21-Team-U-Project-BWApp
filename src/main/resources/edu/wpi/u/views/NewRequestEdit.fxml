@@ -5,82 +5,97 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NERController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NERController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Edit Request" textAlignment="CENTER">
-               <font>
-                  <Font size="42.0" />
-               </font>
-            </Label>
-            <JFXTextField fx:id="makeEditTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="33.0" prefWidth="400.0" promptText="Title" />
-            <JFXTextArea fx:id="makeEditDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="134.0" prefWidth="400.0" promptText="Description" />
-            <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" prefHeight="25.0" prefWidth="250.0" promptText="Date to Completed By">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXDatePicker>
-            <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="900.0">
+            <HBox fillHeight="false" prefHeight="800.0" prefWidth="1700.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="850.0" spacing="40.0">
                      <children>
-                        <JFXChipView fx:id="makeEditLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="550.0">
-                     <children>
-                        <JFXChipView fx:id="makeEditStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-            <AnchorPane fx:id="SpecificRequestAPane" prefHeight="500.0" prefWidth="1700.0">
-               <children>
-                  <VBox fx:id="VBoxToAddTo" alignment="TOP_CENTER" layoutX="6.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label fx:id="specificTitle" text="Specific Request Type">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
+                        <Label prefHeight="88.0" prefWidth="361.0" styleClass="headline-1" text="Edit Request" textAlignment="CENTER">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="60.0" />
                            </font>
                         </Label>
-                        <HBox fx:id="HBoxToClone" visible = "false" alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                        <Pane prefHeight="125.0" prefWidth="850.0" />
+                        <JFXTextField fx:id="makeEditTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" promptText="Title">
+                           <font>
+                              <Font size="18.0" />
+                           </font></JFXTextField>
+                        <JFXTextArea fx:id="makeEditDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="170.0" prefWidth="600.0" promptText="Description">
+                           <font>
+                              <Font size="15.0" />
+                           </font></JFXTextArea>
+                        <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" prefHeight="40.0" prefWidth="400.0" promptText="Date to Completed By">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </JFXDatePicker>
+                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="900.0">
                            <children>
-                              <Label text="Field1">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField fx:id="madeEditMaintenanceField" labelFloat="true" prefHeight="31.0" prefWidth="400.0" promptText="Sample Text Field" />
+                              <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                                 <children>
+                                    <JFXChipView fx:id="makeEditLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                                 <children>
+                                    <JFXChipView fx:id="makeEditStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                      </children>
+                     <HBox.margin>
+                        <Insets top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="VBoxToAddTo" alignment="TOP_CENTER" fillWidth="false" prefHeight="745.0" prefWidth="800.0" spacing="40.0">
+                     <children>
+                        <Label fx:id="specificTitle" prefHeight="88.0" styleClass="headline-1" text="Maintenence Fields" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="125.0" prefWidth="850.0" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@css/BaseStyle.css" />
+                        <URL value="@css/LightTheme.css" />
+                     </stylesheets>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
-            </AnchorPane>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1700.0" spacing="100.0">
                <children>
-                  <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
-                  <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
+                  <Pane prefHeight="200.0" prefWidth="400.0" />
+                  <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="45.0" prefWidth="240.0" styleClass="button-contained" text="Save" />
+                  <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="45.0" prefWidth="240.0" text="Cancel">
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass></JFXButton>
+                  <Label fx:id="errorMsg" styleClass="headline-3" text="Error! Field(s) contain incorrect datatype!" textFill="#dd0d0d" visible="false" />
                </children>
             </HBox>
          </children>
-         <padding>
-            <Insets top="50.0" />
-         </padding>
       </VBox>
    </children>
 </AnchorPane>
