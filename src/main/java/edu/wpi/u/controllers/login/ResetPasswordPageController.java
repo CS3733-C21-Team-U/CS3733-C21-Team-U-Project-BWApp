@@ -63,4 +63,9 @@ public class ResetPasswordPageController {
             throw new AccountNameNotFoundException();
         }
     }
+
+    public void handleBackButton(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
 }

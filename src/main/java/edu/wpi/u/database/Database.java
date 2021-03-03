@@ -13,7 +13,7 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=bwdbpassword";
+    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
 
     public Database() {
         driver();
@@ -310,8 +310,8 @@ public class Database {
         saveCSV( "Requests", "Requests.csv","Test");
         saveCSV( "Assignments", "Assignments.csv","Test");
         saveCSV( "Locations", "Locations.csv","Test");
-        saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
-        saveCSV( "Edges", "OutsideMapEdges.csv","Test");
+        saveCSV("Nodes", "MapUAllNodes.csv", "Test");
+        saveCSV( "Edges", "MapUAllEdges.csv","Test");
         saveCSV( "Maintenance","Maintenance.csv", "Test");
         saveCSV( "Laundry","Laundry.csv", "Test");
         saveCSV( "Sanitation","Sanitation.csv", "Test");
