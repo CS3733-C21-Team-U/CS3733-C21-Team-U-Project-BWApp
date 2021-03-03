@@ -123,6 +123,10 @@ public class Database {
                 PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
                 MedicalRQ.execute();
 
+                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
+                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
+                ReligiousRQ.execute();
+
                 String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
                 PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
                 computerRQ.execute();
@@ -299,6 +303,7 @@ public class Database {
         saveCSV( "AudioVisual","AudioVisual.csv", "Test");
         saveCSV( "Floral","Floral.csv", "Test");
         saveCSV("Medical", "Medical.csv", "Test");
+        saveCSV("Religious", "Religious.csv", "Test");
         saveCSV("Computer", "Computer.csv","Charlie was here");
     }
 

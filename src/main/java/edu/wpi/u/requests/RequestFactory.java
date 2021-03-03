@@ -21,6 +21,8 @@ public class RequestFactory {
                 return new FloralRequest();
             case "Medical":
                 return new MedicalRequest();
+            case "Religious":
+                return new ReligiousRequest();
             case "Computer":
                 return new ComputerRequest();
             default:

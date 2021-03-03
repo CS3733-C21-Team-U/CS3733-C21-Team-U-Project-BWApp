@@ -111,6 +111,12 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleReligiousButton() throws Exception{
+        App.newNodeType = "Religious";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleComputerButton() throws Exception{
