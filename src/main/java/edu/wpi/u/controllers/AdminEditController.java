@@ -73,6 +73,7 @@ public class AdminEditController {
             Affine invMatrix = null;
             try {
                 invMatrix = map.getAffine().createInverse();
+                System.out.println("Mouse realeased, 76");
             } catch (NonInvertibleTransformException nonInvertibleTransformException) {
                 nonInvertibleTransformException.printStackTrace();
             }
