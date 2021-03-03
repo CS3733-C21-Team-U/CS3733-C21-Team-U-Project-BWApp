@@ -29,7 +29,7 @@
         </ImageView>
       <JFXProgressBar fx:id="progressBar" layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
       <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="241.0" layoutY="552.0" onAction="#handleSubmit" opacity="0.0" prefHeight="47.0" prefWidth="183.0" styleClass="button-contained" text="VERIFY" textFill="WHITE" />
-      <JFXButton fx:id="loginButton2" buttonType="RAISED" layoutX="14.0" layoutY="939.0" onAction="#handleLogin2" prefHeight="47.0" prefWidth="265.0" styleClass="button-text" text="DEBUG LOGIN (Log in as admin)" textFill="WHITE" />
+      <JFXButton fx:id="loginButton2" layoutX="14.0" layoutY="939.0" onAction="#handleLogin2" prefHeight="47.0" prefWidth="265.0" styleClass="button-text" text="DEBUG LOGIN (Log in as admin)" textFill="WHITE" />
       <Label fx:id="errorLabel" layoutX="696.0" layoutY="591.0" style="-fx-text-fill: -error;" />
     </children>
 </AnchorPane>
