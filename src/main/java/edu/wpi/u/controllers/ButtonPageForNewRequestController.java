@@ -111,6 +111,12 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleAudioVisualButton() throws Exception{
+        App.newNodeType = "AudioVisual";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleMedicineButton() throws Exception{

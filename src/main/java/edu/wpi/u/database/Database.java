@@ -110,6 +110,11 @@ public class Database {
                 String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
                 PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
                 SanitationRQ.execute();
+
+                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int , name varchar(50) , primary key(requestID))";
+                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
+                AudioVisualRQ.execute();
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -279,6 +284,7 @@ public class Database {
         saveCSV( "Maintenance","Maintenance.csv", "Test");
         saveCSV( "Laundry","Laundry.csv", "Test");
         saveCSV( "Sanitation","Sanitation.csv", "Test");
+        saveCSV( "AudioVisual","AudioVisual.csv", "Test");
     }
 
     public void makeCSVDependant(boolean yes){

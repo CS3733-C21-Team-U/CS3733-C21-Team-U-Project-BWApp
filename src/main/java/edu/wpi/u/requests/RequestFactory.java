@@ -15,6 +15,8 @@ public class RequestFactory {
                 return new SecurityRequest();
             case "Sanitation":
                 return new SanitationRequest();
+            case "AudioVisual":
+                return new AudioVisualRequest();
             default:
                 System.out.println("Type does not exist!");
 
