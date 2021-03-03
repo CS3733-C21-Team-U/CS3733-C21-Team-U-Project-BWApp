@@ -17,7 +17,7 @@
             </HBox>
             <ScrollPane prefHeight="877.0" prefWidth="1631.0">
               <content>
-                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="3000.0" prefWidth="1629.0">
+                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="3000.0" prefWidth="1629.0" stylesheets="@css/BaseStyle.css">
                      <children>
                         <VBox fx:id="requestList" layoutX="579.0" layoutY="238.0" prefHeight="875.0" prefWidth="1629.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
