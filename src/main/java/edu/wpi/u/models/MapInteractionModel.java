@@ -13,6 +13,7 @@ public class MapInteractionModel {
     private String currentAction = "NONE";
     public SimpleStringProperty nodeID = new SimpleStringProperty("");
     private String previousNodeID = "";
+    private String previousPreviousNodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
     public SimpleStringProperty pathFlag = new SimpleStringProperty("");
@@ -27,6 +28,14 @@ public class MapInteractionModel {
     public String floorPathfinding = "G";
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
+
+    public String getPreviousPreviousNodeID() {
+        return previousPreviousNodeID;
+    }
+
+    public void clearPreviousNodeID() {
+        this.previousNodeID = "";
+    }
 
     public String getPreviousNodeID() {
         return previousNodeID;
@@ -57,8 +66,11 @@ public class MapInteractionModel {
     }
 
     public void setNodeID(String nodeID) {
-        previousNodeID = this.nodeID.get();
-        this.nodeID.set(nodeID);
+        if(!this.nodeID.get().equals(nodeID)) {
+            previousPreviousNodeID = previousNodeID;
+            previousNodeID = this.nodeID.get();
+            this.nodeID.set(nodeID);
+        }
     }
 
     public String getEdgeID() {

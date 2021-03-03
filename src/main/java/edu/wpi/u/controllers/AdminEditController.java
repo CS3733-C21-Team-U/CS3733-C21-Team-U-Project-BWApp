@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
@@ -22,6 +23,7 @@ import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 public class AdminEditController {
 
@@ -39,7 +41,7 @@ public class AdminEditController {
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
-    public GesturePane map = new GesturePane(pane);;
+    public GesturePane map = new GesturePane(pane);
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -141,12 +143,14 @@ public class AdminEditController {
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDNODE");
+        App.mapInteractionModel.clearPreviousNodeID();
     }
 
     public void handleAddEdgeButtonEDIT(){
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        App.mapInteractionModel.setEdgeID("");
     }
 
     /**
@@ -233,8 +237,6 @@ public class AdminEditController {
         edgeNodeGroup.getChildren().add(edge);
     }
 
-
-
     public void generateEdges(String floor){
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
@@ -252,7 +254,6 @@ public class AdminEditController {
         });
         edgeNodeGroup.toFront();
     }
-
 
 
     /**
@@ -300,7 +301,54 @@ public class AdminEditController {
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
             pane.getChildren().add(contextAnchor);
             App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+        }else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+            App.mapInteractionModel.setNodeID(n.getNodeID());
+            Circle c1 = new Circle();
+            Circle c2 = new Circle();
+            Circle c3 = new Circle();
+            Line edge = new Line();
+            if(!App.mapInteractionModel.getNodeID().equals("")) { // Have 1st node
+                c1 = findCircleFromNode(n.getNodeID());
+                c1.toFront();
+                c1.setFill(Paint.valueOf("green"));
+            }
+            if(!App.mapInteractionModel.getPreviousNodeID().equals("")) { // Have 2nd node
+                c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
+                c2.toFront();
+                c2.setFill(Paint.valueOf("green"));
+                // Create physical Edge
+                double xdiff = c2.getCenterX()-c1.getCenterX();
+                double ydiff = c2.getCenterY()-c1.getCenterY();
+                edge.setLayoutX(c1.getCenterX());
+                edge.setStartX(0);
+                edge.setLayoutY(c1.getCenterY());
+                edge.setStartY(0);
+                edge.setEndX(xdiff);
+                edge.setEndY(ydiff);
+                edge.setId("tempedge");
+                edge.setStrokeWidth(3.0);
+                edge.toFront();
+                edge.setStroke(Paint.valueOf("green"));
+                edge.setVisible(true);
+                edgeNodeGroup.getChildren().add(edge);
+            }
+            if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
+                c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
+                c3.toFront();
+                c3.setFill(Paint.valueOf("black"));
+            }
+
+
         }
+    }
+
+    public Circle findCircleFromNode(String nodeID){
+        for(javafx.scene.Node n: edgeNodeGroup.getChildren()){
+            if(n.getId().equals(nodeID)){
+                return (Circle)n;
+            }
+        }
+        return null;
     }
 
     public void handleUndoButton() throws Exception{
