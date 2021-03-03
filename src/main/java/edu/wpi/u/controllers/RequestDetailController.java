@@ -48,7 +48,8 @@ public class RequestDetailController {
         currentIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
         Request request = currentIRequest.getGenericRequest();
         requestDetailTitleLabel.setText("Request Title: "+ request.getTitle());
-        requestDetailCreatorLabel.setText("Created By: " + request.getCreator());
+        requestDetailCreatorLabel.setText("Created By: Administrator");
+        //requestDetailCreatorLabel.setText("Created By: " + request.getCreator());
         requestDetailDescriptionLabel.setText(request.getDescription());
         //requestDetailLocationChipView.setText(request.getLocation());
       //  requestDetailStaffChipView.setText(request.getStaff());
