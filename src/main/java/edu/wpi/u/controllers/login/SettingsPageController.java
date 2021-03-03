@@ -194,7 +194,7 @@ public class SettingsPageController {
 
 
     public void handleSaveCSV(ActionEvent actionEvent) {
-        Database.getDB().saveCSV(tableNameTextFIeld1.getText(),filePathTextField.getText(),"Anything I want");
+        Database.getDB().saveCSV(tableNameTextFIeld1.getText(),"nodes","Anything I want");
     }
 }
 

@@ -150,7 +150,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: -primaryVariant;
+    -fx-background-color: lightPink;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
@@ -169,6 +169,10 @@
 .table-view > .virtual-flow > .scroll-bar > .increment-button,
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
     -fx-opacity: 0;
+}
+
+.table-view .filler{
+    -fx-background-color: -background;
 }
 
 
