@@ -1,4 +1,5 @@
 package edu.wpi.u.controllers;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
@@ -8,6 +9,7 @@ import edu.wpi.u.users.StaffType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -17,13 +19,18 @@ public class EdgeContextMenuController {
 
     @FXML
     JFXComboBox edgeComboBox;
+    @FXML
+    JFXButton deleteButton;
 
     @FXML
     public void initialize() {
-        Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
         ObservableList<String> list = FXCollections.observableArrayList();
-        list.add("PATIENT");
-        list.add("EMPLOYEE");
+        list.add("Admin only");
+        list.add("All Employees");
+        list.add("Everyone");
+        if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+            deleteButton.setText("Stop adding");
+        }
 
         edgeComboBox.setItems(list);
     }
@@ -33,9 +40,8 @@ public class EdgeContextMenuController {
      */
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
-        ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
-        userTypes.add(StaffType.valueOf(edgeComboBox.getValue().toString()));
-        System.out.println("DEBUG: " + edgeComboBox.getValue().toString());
+        ArrayList<StaffType> userTypes = new ArrayList<>();
+        userTypes.add(getEdgePermissionType());
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
             App.undoRedoService.updateEdge(thisEdge.getEdgeID(), thisEdge.getUserPermissions());
@@ -43,12 +49,32 @@ public class EdgeContextMenuController {
             App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
         }
         userTypes.clear();
-        //System.out.println(App.mapInteractionModel.getCoords()[0] + " " + App.mapInteractionModel.getCoords()[1]);
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
     }
+
+    public StaffType getEdgePermissionType(){
+        switch (edgeComboBox.getValue().toString()){
+            case "Admin only":
+                return StaffType.ADMIN;
+            case "All Employees":
+                return StaffType.DOCTOR;
+            default:
+                return StaffType.DEFUALT;
+        }
+
+    }
+
     @FXML
-    public void handleDeleteButton(){
-        App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
+    public void handleDeleteButton() {
+        if (App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) {
+            App.mapInteractionModel.setCurrentAction("NONE");
+            App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
+        }else {
+            App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
+        }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
     }
 }

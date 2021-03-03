@@ -27,7 +27,6 @@ public class MapManager {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
     if(_startNode == null || _endNode == null){
-      System.out.println("OOPS");
       _startNode = this.allNodes.get(_startNodeID);
     }
     Edge realEdge = new Edge(_edgeID, _startNode, _endNode, permissions);

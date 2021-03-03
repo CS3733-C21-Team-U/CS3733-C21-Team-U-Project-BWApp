@@ -265,7 +265,8 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                mm.addEdge(id,start,end, new ArrayList<>());
+                ArrayList<StaffType> perms = this.getUserTypes(id);
+                 mm.addEdge(id,start,end, perms);
             }
             rs2.close();
         }
@@ -320,10 +321,9 @@ public class MapData extends Data{
      * Updates Returns list of users who have permission to inputted edge
      * @param edgeID - Desired edge
      * @return Arraylist of Strings, representing types of users with permission
-     * TODO: Update this to return a list of StaffType
      */
     public ArrayList<StaffType> getUserTypes(String edgeID) {
-        ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
+        ArrayList<StaffType> userTypes = new ArrayList<>();
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);

@@ -35,7 +35,7 @@
                         <Insets left="16.0" right="16.0" />
                      </padding>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" minWidth="64.0" onAction="#handleDeleteButton" prefHeight="36.0" text="Delete">
+                  <JFXButton fx:id="deleteButton" alignment="CENTER" minWidth="64.0" onAction="#handleDeleteButton" prefHeight="36.0" text="Delete">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>
