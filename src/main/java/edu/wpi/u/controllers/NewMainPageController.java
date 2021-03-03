@@ -120,7 +120,12 @@ public class NewMainPageController {
         dialog.show();
 
     }
+    public void handleChangeTab(){
+        App.mapInteractionModel.setCurrentAction("NONE");
+    }
+
 }
+
 
 
 

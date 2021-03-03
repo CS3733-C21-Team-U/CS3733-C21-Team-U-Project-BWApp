@@ -357,8 +357,8 @@ public class AdminEditController {
                 }
                 edgeNodeGroup.getChildren().remove(edge);
                 // Create physical Edge
-                double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getCords()[0];
-                double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getCords()[1];
+                double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
+                double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
 
                 double xdiff = 0;
                 double ydiff = 0;
@@ -389,8 +389,8 @@ public class AdminEditController {
                     EdgeContextAnchor.setLayoutX(edge.getLayoutX() + (xdiff / 2));
                     EdgeContextAnchor.setLayoutY(edge.getLayoutY() + (ydiff / 2));
                 }else{
-                    EdgeContextAnchor.setLayoutX(c1.getLayoutX());
-                    EdgeContextAnchor.setLayoutY(c1.getLayoutY());
+                    EdgeContextAnchor.setLayoutX(c1.getCenterX());
+                    EdgeContextAnchor.setLayoutY(c1.getCenterY());
                 }
                 pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                 pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
