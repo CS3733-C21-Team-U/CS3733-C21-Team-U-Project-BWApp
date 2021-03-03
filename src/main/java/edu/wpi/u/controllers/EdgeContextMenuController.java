@@ -61,17 +61,21 @@ public class EdgeContextMenuController {
      */
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
-        ArrayList<StaffType> userTypes = new ArrayList<>();
-        userTypes.add(getEdgePermissionType());
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
-            Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-            App.undoRedoService.updateEdge(thisEdge.getEdgeID(), thisEdge.getUserPermissions());
-        } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
-            App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
+
+        if(!edgeComboBox.getValue().equals("")){
+            ArrayList<StaffType> userTypes = new ArrayList<>();
+            userTypes.add(getEdgePermissionType());
+            if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
+                Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
+                App.undoRedoService.updateEdge(thisEdge.getEdgeID(), thisEdge.getUserPermissions());
+            } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+                App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
+            }
+            userTypes.clear();
+            App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         }
-        userTypes.clear();
-        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
     }
 
     public StaffType getEdgePermissionType(){

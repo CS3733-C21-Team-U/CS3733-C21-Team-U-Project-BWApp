@@ -137,14 +137,22 @@ public class NodeContextMenuController {
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
-            Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
-            App.undoRedoService.updateNode(thisNode.getNodeID(), App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
+
+            if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getValue().equals("")){
+                Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
+                App.undoRedoService.updateNode(thisNode.getNodeID(), App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
+            }
+
+            App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
 
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
+            App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         }
-        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+
+
     }
 
     public String getNodeType(){
