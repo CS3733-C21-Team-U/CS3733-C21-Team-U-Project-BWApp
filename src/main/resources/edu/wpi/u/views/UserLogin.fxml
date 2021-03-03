@@ -2,8 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
     <children>
-        <JFXTextField fx:id="userNameTextField" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
+        <JFXTextField fx:id="userNameTextField" editable="false" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
         </JFXTextField>
         <JFXPasswordField fx:id="passWordField" layoutX="513.0" layoutY="519.0" prefHeight="48.0" prefWidth="486.0" promptText="Password">
         </JFXPasswordField>
@@ -26,5 +26,6 @@
                 <Image url="@brigham-health-logo-600x200.png" />
             </image>
         </ImageView>
+      <JFXProgressBar layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
     </children>
 </AnchorPane>

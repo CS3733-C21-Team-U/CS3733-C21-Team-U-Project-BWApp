@@ -164,6 +164,10 @@
     -jfx-default-thumb: -primary;
 }
 
+.jfx-progress-bar > .bar {
+    -fx-background-color: -primary;
+}
+
 /* ----------- BUTTON -------------- */
 .button-contained{
     -fx-background-color: -primary;
