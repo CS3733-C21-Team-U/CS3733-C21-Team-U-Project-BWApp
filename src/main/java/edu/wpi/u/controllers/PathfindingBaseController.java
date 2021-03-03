@@ -58,6 +58,7 @@ public class PathfindingBaseController {
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
         pane.getChildren().add(edgeNodeGroup);
+        edgeNodeGroup.toFront();
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -193,13 +194,12 @@ public class PathfindingBaseController {
             node1.setCenterY(n.getCords()[1]);
             node1.setRadius(7.0);
             node1.setId(n.getNodeID());
-            node1.toFront();
             node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
-                    handleNodeClicked(n);
                     App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
+                    handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
@@ -214,6 +214,7 @@ public class PathfindingBaseController {
                     }
             });
         edgeNodeGroup.getChildren().add(node1);
+        node1.toFront();
     }
 
 
