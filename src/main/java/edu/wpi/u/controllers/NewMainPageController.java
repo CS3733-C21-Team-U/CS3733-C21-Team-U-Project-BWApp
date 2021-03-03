@@ -62,6 +62,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.tabPaneRoot = mainTabPane;
         listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();

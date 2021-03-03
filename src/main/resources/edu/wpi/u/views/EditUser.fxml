@@ -40,11 +40,11 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXComboBox>
-            <HBox prefHeight="38.0" prefWidth="1675.0">
+            <HBox prefHeight="33.0" prefWidth="1675.0">
                <children>
-                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="324.0" promptText="Edit Next Appt">
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="358.0" promptText="Edit Next Appt">
                      <HBox.margin>
-                        <Insets right="66.0" />
+                        <Insets right="33.0" />
                      </HBox.margin>
                   </JFXDatePicker>
                </children>
@@ -56,6 +56,11 @@
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></JFXButton>
+            <JFXButton fx:id="addUserButton" buttonType="RAISED" onAction="#handleAddUserPage" prefWidth="475.0" styleClass="button-contained" text="Add New User">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </JFXButton>
          </children>
       </VBox>
    </children>
