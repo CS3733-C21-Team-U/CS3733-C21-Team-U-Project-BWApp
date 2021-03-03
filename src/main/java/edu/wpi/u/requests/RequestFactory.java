@@ -21,6 +21,8 @@ public class RequestFactory {
                 return new FloralRequest();
             case "Medical":
                 return new MedicalRequest();
+            case "Computer":
+                return new ComputerRequest();
             default:
                 System.out.println("Type does not exist!");
 

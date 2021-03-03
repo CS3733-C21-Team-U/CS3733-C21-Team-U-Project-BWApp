@@ -123,6 +123,10 @@ public class Database {
                 PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
                 MedicalRQ.execute();
 
+                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
+                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
+                computerRQ.execute();
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -295,6 +299,7 @@ public class Database {
         saveCSV( "AudioVisual","AudioVisual.csv", "Test");
         saveCSV( "Floral","Floral.csv", "Test");
         saveCSV("Medical", "Medical.csv", "Test");
+        saveCSV("Computer", "Computer.csv","Charlie was here");
     }
 
     public void makeCSVDependant(boolean yes){
