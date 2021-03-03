@@ -78,26 +78,26 @@ public class TextualDirections {
 
         }else {
             double angle = getAngle(curNode, nextNode);
-            if (previousNode != null) {
+            if (previousNode != curNode) {
                 double previousAngle = getAngle(previousNode, curNode);
                 double angleDifferance = angle - previousAngle;
                 if (angleDifferance < 0) {
                     angleDifferance = 180 + (180 - Math.abs(angleDifferance));
                 }
                 if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
-                    direction = "Take a slight left turn and continue straight for ";
+                    direction = "Take a slight right turn and continue straight for ";
                 } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
-                    direction = "Take a left turn and continue straight for ";
+                    direction = "Take a right turn and continue straight for ";
                 } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
-                    direction = "Take a sharp left turn and continue straight for ";
+                    direction = "Take a sharp right turn and continue straight for ";
                 } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
                     direction = "Turn around continue straight for ";
                 } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
-                    direction = "Take a sharp right turn and continue straight for ";
+                    direction = "Take a sharp left turn and continue straight for ";
                 } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
-                    direction = "Take a right turn and continue straight for ";
+                    direction = "Take a left turn and continue straight for ";
                 } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
-                    direction = "Take a slight right turn and continue straight for ";
+                    direction = "Take a slight left turn and continue straight for ";
                 } else {
                     direction = "Continue straight for ";
                 }
