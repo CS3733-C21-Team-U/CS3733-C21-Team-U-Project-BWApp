@@ -29,7 +29,11 @@ public class SanitationRequest implements IRequest{
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
 
-        hazardLevel = Integer.parseInt(l.get(0).toString());
+        try{
+            hazardLevel = Integer.parseInt(l.get(0).toString());        }
+        catch(Exception e){
+            hazardLevel =  999;
+        }
         spillType =  l.get(1).toString();
     }
 

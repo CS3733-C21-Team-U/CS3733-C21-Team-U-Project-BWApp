@@ -30,9 +30,21 @@ public class LaundryRequest implements IRequest{
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
 
-        dryStrength = Integer.parseInt(l.get(0).toString());
-        numLoad =  Integer.parseInt(l.get(1).toString());
-        washStrength = Integer.parseInt(l.get(2).toString());
+        try{
+            dryStrength = Integer.parseInt(l.get(0).toString());        }
+        catch(Exception e){
+            dryStrength =  999;
+        }
+        try{
+            numLoad = Integer.parseInt(l.get(1).toString());        }
+        catch(Exception e){
+            numLoad =  999;
+        }
+        try{
+            washStrength = Integer.parseInt(l.get(2).toString());        }
+        catch(Exception e){
+            washStrength =  999;
+        }
     }
 
     @Override

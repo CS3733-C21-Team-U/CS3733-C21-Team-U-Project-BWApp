@@ -25,7 +25,13 @@ public class FloralRequest implements IRequest {
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
 
-        numFlowers = Integer.parseInt(l.get(0).toString());
+        try{
+            numFlowers = Integer.parseInt(l.get(0).toString());        }
+        catch(Exception e){
+            numFlowers =  999;
+        }
+
+        //numFlowers = Integer.parseInt(l.get(0).toString());
         recipient =  l.get(1).toString();
     }
 
