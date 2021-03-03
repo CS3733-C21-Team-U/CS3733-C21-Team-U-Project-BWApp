@@ -34,13 +34,13 @@ public class AudioVisualRequest implements IRequest {
 
     @Override
     public String subtableCreateQuery() {//used for add request
-        String query = "insert into "+getType()+"(requestID, hazardLevel, spillType) values ('"+getGenericRequest().getRequestID()+"', "+isAudio+", '"+name+"')";
+        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+") values ('"+getGenericRequest().getRequestID()+"', "+isAudio+", '"+name+"')";
         return query;
     }
 
     @Override
     public String updateDBQuery() {
-        String query =  "update "+getType()+" set hazardLevel = "+isAudio+", spillType = '"+name+"' where requestID = '"+req.getRequestID()+"'";
+        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+isAudio+", "+getSpecificFields()[1]+" = '"+name+"' where requestID = '"+req.getRequestID()+"'";
         return query;
     }
 
