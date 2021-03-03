@@ -143,9 +143,9 @@ public class TextualDirections {
         // return the distance (weight)
         double pixelDistance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
         double footDistance = pixelDistance / pixelPerFoot;
-        double roundedDistanceBig = Math.round((footDistance * 100));
-        double roundedDistanceReal =roundedDistanceBig/100;
-        return  roundedDistanceReal;
+        double roundedDistanceBig = Math.round((footDistance));
+        double roundedDistanceReal =roundedDistanceBig;
+        return  (int)roundedDistanceReal;
     }
 
 

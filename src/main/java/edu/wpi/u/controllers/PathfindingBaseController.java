@@ -244,9 +244,9 @@ public class PathfindingBaseController {
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
-        edge.setStrokeWidth(3.0);
+        edge.setStrokeWidth(7);
         edge.toFront();
-        edge.setFill(Paint.valueOf("Black"));
+        edge.setStyle("-fx-stroke: -error");
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
             try {
