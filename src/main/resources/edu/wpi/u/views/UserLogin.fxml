@@ -54,7 +54,7 @@
                                 <Insets bottom="10.0" left="290.0" right="483.0" />
                             </VBox.margin>
                         </JFXPasswordField>
-                  <JFXProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="313.0">
+                  <JFXProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="313.0" style="-fx-opacity: 0;">
                      <VBox.margin>
                         <Insets bottom="3.0" left="290.0" />
                      </VBox.margin>
@@ -97,5 +97,7 @@
                 </StackPane>
             </children>
         </HBox>
+      <JFXButton fx:id="forgotPasswordButton1" onAction="#handleDebugLogin" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Admin)" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton fx:id="forgotPasswordButton11" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
     </children>
 </AnchorPane>

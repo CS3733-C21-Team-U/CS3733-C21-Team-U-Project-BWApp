@@ -238,8 +238,14 @@ public class LoginController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleLogin2(ActionEvent actionEvent) throws IOException {
+    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Guests");
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
+        App.userService.setUser("guest", "guest", "Guests");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
