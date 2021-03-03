@@ -32,10 +32,7 @@ public class PathfindingBaseController {
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
-    @FXML public SVGPath leftMenuHamburger;
     @FXML public AnchorPane mainAnchorPane;
-    @FXML public JFXDrawer leftMenuDrawer;
-    @FXML public JFXDrawer serviceRequestDrawer;
     @FXML public JFXToggleNode floorG;
     @FXML public JFXToggleNode floor1;
     @FXML public JFXToggleNode floor2;
@@ -199,7 +196,7 @@ public class PathfindingBaseController {
             node1.setRadius(7.0);
             node1.setId(n.getNodeID());
             node1.toFront();
-            node1.setFill(Paint.valueOf("Black"));
+            node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
             node1.setOnMouseClicked(event -> {
                 try {
@@ -330,7 +327,7 @@ public class PathfindingBaseController {
     public void handleFloorGButton(){
         edgeNodeGroup.getChildren().clear();
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
-            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampusDark.png");
+            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");
             edgeNodeGroup.toFront();
