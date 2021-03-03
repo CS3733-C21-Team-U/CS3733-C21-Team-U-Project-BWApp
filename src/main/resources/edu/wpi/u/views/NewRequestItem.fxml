@@ -2,51 +2,48 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXChipView?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1631.0" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1631.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestItemController">
    <children>
       <VBox prefHeight="200.0" prefWidth="1631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="301.0">
-                     <children>
-                        <Label fx:id="requestItemTitleLabel" styleClass="headline-1" text="Title" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="361.0">
-                     <children>
-                        <Label fx:id="requestItemRequestTypeLabel" styleClass="headline-3" text="Type of Request" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="384.0" styleClass="headline-3">
-                     <children>
-                        <Label fx:id="requestItemDate2BCompletedLabel" text="Date To Be Completed" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="344.0" styleClass="headline-3">
-                     <children>
-                        <Label fx:id="requestItemCreatorLabel" text="Creator" />
-                     </children>
-                  </VBox>
+                  <Label fx:id="requestItemTitleLabel" prefHeight="73.0" prefWidth="631.0" styleClass="headline-2" text="Cat Mat Hat Lap Map Cap Rap Lap" wrapText="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Label>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="requestItemRequestTypeLabel" styleClass="headline-3" text="Maintenace" />
+                  <Label fx:id="requestItemDate2BCompletedLabel" styleClass="headline-3" text="3-3-2021" />
+                  <Label fx:id="requestItemCreatorLabel" styleClass="headline-3" text="Michael Geary" />
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Label fx:id="requestItemDescriptionLabel" alignment="TOP_LEFT" prefHeight="100.0" prefWidth="555.0" styleClass="headline-3" text="Description" />
+                  <Label fx:id="requestItemDescriptionLabel" alignment="TOP_LEFT" prefHeight="100.0" prefWidth="884.0" styleClass="subtitle" text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem. Veritatisobcaecati tenetur iure eius earum ut molestias architecto voluptate aliqua" wrapText="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Label>
                   <AnchorPane prefHeight="100.0" prefWidth="453.0">
                      <children>
-                        <JFXChipView fx:id="requestItemLocationChipView" prefHeight="100.0" prefWidth="326.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXChipView fx:id="requestItemLocationChipView" prefHeight="100.0" prefWidth="326.0" promptText="Location" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <VBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="353.0">
                      <children>
-                        <JFXButton fx:id="viewRequestButton" onAction="#handleViewRequestInDetailButton" styleClass="button-contained" text="View Request Details" />
+                        <JFXButton fx:id="viewRequestButton" buttonType="RAISED" onAction="#handleViewRequestInDetailButton" styleClass="button-contained" text="View Request Details">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></JFXButton>
                      </children>
                   </VBox>
                </children>
@@ -55,4 +52,11 @@
       </VBox>
       <Separator layoutY="-5.0" prefHeight="24.0" prefWidth="1631.0" />
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </AnchorPane>
