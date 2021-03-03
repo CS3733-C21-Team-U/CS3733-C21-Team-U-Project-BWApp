@@ -68,8 +68,6 @@ public class App extends Application {
   public static Employee selectedEmployee;
 
 
-  public static JFXTabPane tabPaneRoot;
-
   public App(){
     System.out.println("App constructor");
     app_instance = this;

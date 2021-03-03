@@ -28,6 +28,7 @@ public class UserData extends Data{
         //this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
 
+        this.addGuest(new Guest("kaamil","testp","7813155706","pass","email", StaffType.ADMIN,"7813155706", new Date(800), false));
         this.addGuest(new Guest("admin","admin","admin","admin","admin", StaffType.ADMIN,"admin", new Date(800), false));
         printGuest();
 //        dropGuests();
