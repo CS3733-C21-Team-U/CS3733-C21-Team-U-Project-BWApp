@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
@@ -20,6 +21,9 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AdminEditController {
 
@@ -27,12 +31,17 @@ public class AdminEditController {
 
 
     static final Duration DURATION = Duration.millis(300);
+    @FXML public SVGPath leftMenuHamburger;
     @FXML public AnchorPane mainAnchorPane;
+    @FXML public JFXDrawer leftMenuDrawer;
+    @FXML public JFXDrawer serviceRequestDrawer;
 
+    AnchorPane rightServiceRequestPane;
+    AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
-    public GesturePane map = new GesturePane(pane);;
+    public GesturePane map = new GesturePane(pane);
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -124,11 +133,10 @@ public class AdminEditController {
         });
 
         // Creating nodes
-        generateNodes(App.mapInteractionModel.floor);
         generateEdges(App.mapInteractionModel.floor);
+        generateNodes(App.mapInteractionModel.floor);
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
-            pane.getChildren().remove(node);
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
             if(App.mapInteractionModel.floor.equals("G")){
                 node.setFitWidth(2987);
@@ -141,17 +149,23 @@ public class AdminEditController {
 
         App.mapInteractionModel.editFlag.addListener((observable, oldValue, newValue)  ->{
             //update nodes and edges
-            generateNodes(App.mapInteractionModel.floor);
             generateEdges(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floor);
         });
     } // End of initialize
 
     public void handleAddNodeButtonEDIT(){
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDNODE");
+        App.mapInteractionModel.clearPreviousNodeID();
     }
 
     public void handleAddEdgeButtonEDIT(){
+        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        App.mapInteractionModel.setEdgeID("");
     }
 
     /**
@@ -198,7 +212,6 @@ public class AdminEditController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
-        edgeNodeGroup.getChildren().clear();
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
@@ -243,6 +256,7 @@ public class AdminEditController {
     }
 
     public void generateEdges(String floor){
+        edgeNodeGroup.getChildren().clear();
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
@@ -260,13 +274,14 @@ public class AdminEditController {
         edgeNodeGroup.toFront();
     }
 
+
     /**
      * Function called when and edge is clicked on. This brings up the context menu.
      * @param e - Edge that is clicked on
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
             double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
             System.out.println("You clicked on an edge");
@@ -290,7 +305,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
             FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
@@ -303,8 +318,70 @@ public class AdminEditController {
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
             pane.getChildren().add(contextAnchor);
             App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+        }else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+            App.mapInteractionModel.setNodeID(n.getNodeID());
+            Circle c1 = new Circle();
+            Circle c2 = new Circle();
+            Circle c3 = new Circle();
+            Line edge = new Line();
+            if(!App.mapInteractionModel.getNodeID().equals("")) { // Have 1st node
+                c1 = findCircleFromNode(n.getNodeID());
+                c1.toFront();
+                c1.setFill(Paint.valueOf("green"));
+            }
+            if(!App.mapInteractionModel.getPreviousNodeID().equals("")) { // Have 2nd node
+                c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
+                c2.toFront();
+                c2.setFill(Paint.valueOf("green"));
+                edgeNodeGroup.getChildren().remove("tempedge");
+                // Create physical Edge
+                double xdiff = c2.getCenterX()-c1.getCenterX();
+                double ydiff = c2.getCenterY()-c1.getCenterY();
+                edge.setLayoutX(c1.getCenterX());
+                edge.setStartX(0);
+                edge.setLayoutY(c1.getCenterY());
+                edge.setStartY(0);
+                edge.setEndX(xdiff);
+                edge.setEndY(ydiff);
+                edge.setId("tempedge");
+                edge.setStrokeWidth(3.0);
+                edge.toFront();
+                edge.setStroke(Paint.valueOf("green"));
+                edge.setVisible(true);
+                edgeNodeGroup.getChildren().add(edge);
+
+                // Spawning context menu
+                FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+                AnchorPane EdgeContextAnchor = new AnchorPane();
+                EdgeContextAnchor = edgeContextMenu.load();
+                EdgeContextMenuController controller = edgeContextMenu.getController();
+
+                EdgeContextAnchor.setLayoutX(edge.getLayoutX()+(xdiff/2));
+                EdgeContextAnchor.setLayoutY(edge.getLayoutY()+(ydiff/2));
+                pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+                pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+                pane.getChildren().add(EdgeContextAnchor);
+                App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
+            }
+            if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
+                c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
+                c3.toFront();
+                c3.setFill(Paint.valueOf("black"));
+            }
+
+
         }
     }
+
+    public Circle findCircleFromNode(String nodeID){
+        for(javafx.scene.Node n: edgeNodeGroup.getChildren()){
+            if(n.getId().equals(nodeID)){
+                return (Circle)n;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Need to: Handle when node is dragged by updating coordinates on screen connecting edges. Coordinates saved in other helper function
@@ -338,7 +415,6 @@ public class AdminEditController {
         App.undoRedoService.undo();
     }
 
-    @FXML
     public void handleRedoButton() throws Exception{
         App.undoRedoService.redo();
     }

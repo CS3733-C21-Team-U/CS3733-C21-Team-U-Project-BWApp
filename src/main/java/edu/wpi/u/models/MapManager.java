@@ -36,6 +36,10 @@ public class MapManager {
     this.allNodes.put(_endNode.getNodeID(), _endNode);
   }
 
+  public void setNodeType(String nodeID, String nodeType){
+    this.allNodes.get(nodeID).setNodeType(nodeType);
+  }
+
   /**
    * removes an edge and handles
    * @param edgeId
@@ -88,7 +92,7 @@ public class MapManager {
           String _ShortName,
           String _teamAssigned) {
     Node n = new Node(_nodeID, _xcoord, _ycoord, floor, _building, _nodeType, _LongName, _ShortName, _teamAssigned);
-    allNodes.put(n.getNodeID(), n);
+    this.addNodeObject(n);
   }
 
   /**

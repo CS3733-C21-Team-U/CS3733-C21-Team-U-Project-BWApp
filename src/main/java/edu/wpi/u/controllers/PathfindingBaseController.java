@@ -58,7 +58,7 @@ public class PathfindingBaseController {
         floorG.setSelected(true);
         App.mapService.loadStuff();
         // Loading the map
-        node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
+        node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
@@ -126,13 +126,11 @@ public class PathfindingBaseController {
         });
 
         // Creating nodes
-        //generateNodes(App.mapInteractionModel.floor);
-        //generateEdges(App.mapInteractionModel.floor);
-
-        App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
+        generateNodes(App.mapInteractionModel.floorPathfinding);
+        App.mapInteractionModel.mapImageResourcePathfinding.addListener((observable, oldValue, newValue)  ->{
             pane.getChildren().remove(node);
-            node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
-            if(App.mapInteractionModel.floor.equals("G")){
+            node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
+            if(App.mapInteractionModel.floorPathfinding.equals("G")){
                 node.setFitWidth(2987);
             } else{
                 node.setFitWidth(2470);
@@ -172,7 +170,7 @@ public class PathfindingBaseController {
                     break;
             }
             generateEdges(floorStart);
-            generateNodes(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
 
@@ -327,10 +325,9 @@ public class PathfindingBaseController {
      * @param resource this a path that points to the correct floor map from the base package (/edu/wpi/u...)
      */
     public void loadNewMapAndGenerateHelper(String floor, String resource){
-        App.mapInteractionModel.floor = floor;
-        App.mapInteractionModel.mapImageResource.set(resource);
-        //generateNodes(floor); Since this is just the pathfinding page, we don't want to generate all the nodes and edges
-        //generateEdges(floor);
+        App.mapInteractionModel.floorPathfinding = floor;
+        App.mapInteractionModel.mapImageResourcePathfinding.set(resource);
+        generateNodes(floor); //Since this is just the pathfinding page, we don't want to generate all the nodes and edges
     }
 
     /**
@@ -338,9 +335,10 @@ public class PathfindingBaseController {
      */
     public void handleFloorGButton(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("G")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampusDark.png");
             node.setFitWidth(2987);
+            generateEdges("G");
             edgeNodeGroup.toFront();
 
         }
@@ -352,8 +350,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor1Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("1")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
+            generateEdges("1");
             edgeNodeGroup.toFront();
         }
     }
@@ -364,8 +363,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor2Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("2")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
+            generateEdges("2");
             edgeNodeGroup.toFront();
         }
     }
@@ -376,8 +376,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor3Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("3")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
+            generateEdges("3");
             edgeNodeGroup.toFront();
         }
     }
@@ -388,8 +389,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor4Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("4")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
+            generateEdges("4");
             edgeNodeGroup.toFront();
         }
     }
@@ -400,8 +402,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor5Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("5")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
+            generateEdges("5");
             edgeNodeGroup.toFront();
         }
     }

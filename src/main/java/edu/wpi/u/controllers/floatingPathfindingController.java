@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class floatingPathfindingController {
     @FXML
-    Label textualDirections;
+    JFXTextArea textualDirections;
     @FXML
     Label endNode;
     @FXML

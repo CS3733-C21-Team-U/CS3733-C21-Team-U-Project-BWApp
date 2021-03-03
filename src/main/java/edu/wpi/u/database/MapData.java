@@ -67,6 +67,21 @@ public class MapData extends Data{
         return 1;
     }
 
+    public int updateNodeType(String node_id, String newNodeType) {
+        try {
+            String str = "update Nodes set node_type=? where nodeID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, newNodeType);
+            ps.setString(2, node_id);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update node type in the database");
+            return 0;
+        }
+        return 1;
+    }
+
     public int updBuilding(String node_id, String new_building) {
         try {
             String str = "update Nodes set building=? where nodeID=?";
