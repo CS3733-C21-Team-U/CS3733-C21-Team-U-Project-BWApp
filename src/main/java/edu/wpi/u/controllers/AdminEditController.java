@@ -166,14 +166,23 @@ public class AdminEditController {
     public void handleAddNodeButtonEDIT(){
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        App.mapInteractionModel.setCurrentAction("ADDNODE");
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+            App.mapInteractionModel.setCurrentAction("ADDNODE");
+        }else{
+            App.mapInteractionModel.setCurrentAction("NONE");
+        }
 
     }
 
     public void handleAddEdgeButtonEDIT(){
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-        App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+            App.mapInteractionModel.setCurrentAction("ADDEDGE");
+        }else{
+            App.mapInteractionModel.setCurrentAction("NONE");
+        }
+
         App.mapInteractionModel.setEdgeID("");
         App.mapInteractionModel.clearPreviousNodeID();
     }
