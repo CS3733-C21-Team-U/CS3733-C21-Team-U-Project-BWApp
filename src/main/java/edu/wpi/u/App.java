@@ -3,8 +3,10 @@ package edu.wpi.u;
 import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
+
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
+
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,9 @@ public class App extends Application {
 
   public static SVGPath themeSVG;
 
+  public static String newNodeType;
+
+
   public static String lastSelectedNode;
   public static String nodeField1;
   public static String nodeField2;
@@ -62,6 +67,8 @@ public class App extends Application {
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
 
+
+  public static JFXTabPane tabPaneRoot;
 
   public App(){
     System.out.println("App constructor");
@@ -137,16 +144,8 @@ public class App extends Application {
 
   public void end() {
     System.out.println("Shutting Down");
-    requestService.saveCSVFile("Requests.csv", "Requests");
-    requestService.saveCSVFile("Assignments.csv", "Assignments");
-    requestService.saveCSVFile("Locations.csv", "Locations");
-    //TODO: Load Database through CSVs only on first invocation (when its empty)
-    //Database.getDB().stop();
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Requests.csv", "Requests");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Assignments.csv", "Assignments");
-//    requestService.saveCSVFile("src/main/resources/edu/wpi/u/Locations.csv", "Locations");
-//    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Nodes.csv", "Nodes");
-//    mapService.saveCSVFile("src/main/resources/edu/wpi/u/Edges.csv", "Edges");
+    Database.getDB().saveAll();
+    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

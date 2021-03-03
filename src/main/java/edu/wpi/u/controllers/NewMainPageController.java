@@ -65,7 +65,6 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
-
         App.themeSVG = themeIcon;
 
         listViewDemo.setItems(listView);

@@ -12,18 +12,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NewRequestController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NERController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="New Request" textAlignment="CENTER">
+            <Label text="Edit Request" textAlignment="CENTER">
                <font>
                   <Font size="42.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="makeTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="33.0" prefWidth="400.0" promptText="Title" />
-            <JFXTextArea fx:id="makeDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="134.0" prefWidth="400.0" promptText="Description" />
-            <JFXDatePicker fx:id="makeDate2BCompleteDatePicker" prefHeight="25.0" prefWidth="250.0" promptText="Date to Completed By">
+            <JFXTextField fx:id="makeEditTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="33.0" prefWidth="400.0" promptText="Title" />
+            <JFXTextArea fx:id="makeEditDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="134.0" prefWidth="400.0" promptText="Description" />
+            <JFXDatePicker fx:id="makeEditDate2BCompleteDatePicker" prefHeight="25.0" prefWidth="250.0" promptText="Date to Completed By">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -32,12 +32,12 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="550.0">
                      <children>
-                        <JFXChipView fx:id="makeLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXChipView fx:id="makeEditLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="550.0">
                      <children>
-                        <JFXChipView fx:id="makeStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXChipView fx:id="makeEditStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -73,8 +73,8 @@
             </AnchorPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <JFXButton onAction="#handleSaveNewRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
-                  <JFXButton onAction="#HandleMakeCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
+                  <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
+                  <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
                </children>
             </HBox>
          </children>

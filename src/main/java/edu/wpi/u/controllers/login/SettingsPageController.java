@@ -131,9 +131,6 @@ public class SettingsPageController {
 
     }
 
-    /**
-     * This function intakes two text fields and makes a change to the user in the database one the button is handled.
-     */
     public void handleContactChange() {
         String userType = "";
         if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||

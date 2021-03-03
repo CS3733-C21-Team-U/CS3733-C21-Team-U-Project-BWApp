@@ -1,12 +1,18 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -26,6 +32,9 @@ import java.io.IOException;
         @FXML public JFXToggleNode toggle2;
         @FXML public JFXToggleNode toggle3;
         @FXML public JFXToggleNode toggle4;
+
+        @FXML
+        public StackPane stackpane;
 
         @FXML
         public void initialize() throws IOException{
@@ -88,7 +97,7 @@ import java.io.IOException;
         }
 
         public void handleChangeToRequests(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "/edu/wpi/u/views/ViewRequest.fxml");
+            App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
             App.leftMenuScreenNum = 2;
             setRectVisibility(2);
             setTextColor(2);
@@ -109,6 +118,21 @@ import java.io.IOException;
         }
 
         public void handleExit(ActionEvent actionEvent) {
-            App.getInstance().end();
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Exit Application"));
+            content.setBody(new Text("You are about to exit the application!"));
+            JFXDialog dialog = new JFXDialog(stackpane, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("OK");
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                    App.getInstance().end();
+                }
+            });
+            button.setStyle("-fx-background-color: #4dadf7");
+            content.setActions(button);
+            dialog.show();
+
         }
     }

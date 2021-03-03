@@ -1,0 +1,25 @@
+package edu.wpi.u.requests;
+
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.LinkedList;
+
+//all methods below used as getters for each respective table
+
+public interface IRequest {
+    String getType();
+    LinkedList<Serializable> getSpecificData();//return formatted string for extra fields of a given request
+    void setSpecificData(LinkedList<Serializable> l);
+    //DO FIRST DUMMY
+    String subtableCreateQuery();
+    String updateDBQuery();
+    Request getGenericRequest();
+    void setRequest(Request r);
+    String[] getSpecificFields();
+    String getSpecificDataCode();
+    void fillObject(Request r, LinkedList<Serializable> l);
+
+
+
+
+}

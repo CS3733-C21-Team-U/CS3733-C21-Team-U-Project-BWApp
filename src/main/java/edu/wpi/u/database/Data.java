@@ -52,6 +52,22 @@ public abstract class Data {
         return true;
     }
 
+    public void printTableItem(String tableName, String columnName) {
+        try {
+            String str = "select * from " + tableName;
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            while (rset.next()) {
+                String id = rset.getString(columnName);
+                System.out.println(columnName + ": " + id);
+            }
+            rset.close();
+        } catch (Exception e) {
+            System.out.println("Failed");
+            e.printStackTrace();
+        }
+    }
+
 /*
 move readCSV to database
 move saveCSV to database

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestDetailController">
+   <children>
+      <VBox layoutX="-2.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="headline-1" text="View A Request In Detail" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="79.0" styleClass="headline-2" text="Title:" />
+                  <Label fx:id="requestDetailTitleLabel" prefHeight="42.0" prefWidth="151.0" styleClass="headline-2" text="TitleLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="42.0" prefWidth="184.0" styleClass="headline-2" text="Description:" wrapText="true" />
+                  <Label fx:id="requestDetailDescriptionLabel" alignment="TOP_LEFT" prefHeight="71.0" prefWidth="457.0" styleClass="headline-2" text="DescriptionLabel" wrapText="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="89.0" styleClass="headline-2" text="Type:" />
+                  <Label styleClass="headline-2" text="TypeLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="125.0" styleClass="headline-2" text="Creator:" />
+                  <Label fx:id="requestDetailCreatorLabel" styleClass="headline-2" text="CreatorLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="208.0" styleClass="headline-2" text="Date Created:" />
+                  <Label fx:id="requestDetailDateCreatedLabel" styleClass="headline-2" text="DateCreatedLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="389.0" styleClass="headline-2" text="Date to Be Completed By:" />
+                  <Label fx:id="requestDetailDate2BCompleteLabel" styleClass="headline-2" text="Date2BCompletedByLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="1700.0" spacing="15.0">
+               <children>
+                  <AnchorPane prefHeight="61.0" prefWidth="253.0">
+                     <children>
+                        <JFXChipView fx:id="requestDetailLocationChipView" prefHeight="100.0" prefWidth="200.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="61.0" prefWidth="251.0">
+                     <children>
+                        <JFXChipView fx:id="requestDetailStaffChipView" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <VBox fx:id="specificFields" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox fx:id="HBoxToClone" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="15.0" visible="false">
+                     <children>
+                        <Label prefHeight="42.0" prefWidth="139.0" styleClass="headline-2" text="Security:" />
+                        <Label fx:id="requestDetailSecurityLabel" styleClass="headline-2" text="SecurityLabel" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
+               <children>
+                  <JFXButton onAction="#handleEditRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Edit Request" />
+                  <JFXButton onAction="#handleResolveRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Resolve Request" />
+                  <JFXButton onAction="#handleRequestDetailCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Cancel" />
+               </children>
+            </HBox>
+            <JFXListView fx:id="commentListView" prefHeight="250.0" prefWidth="1700.0" visible="false" />
+   </children>
+      </VBox>
+   </children>
+</AnchorPane>

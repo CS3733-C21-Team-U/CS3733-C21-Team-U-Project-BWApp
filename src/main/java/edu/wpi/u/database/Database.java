@@ -18,6 +18,7 @@ public class Database {
     public Database() {
         driver();
         connect();
+        makeCSVDependant(false);
         createTables();
     }
 
@@ -72,8 +73,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50), dateNeeded date, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -100,9 +100,54 @@ public class Database {
                 String permissionsInit = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
+                //Service Request Tables
+                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
+                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
+                maintenanceRQ.execute();
+
+
+                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
+                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+                LaundryRQ.execute();
+
+                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
+                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
+                SanitationRQ.execute();
+
+                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
+                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
+                AudioVisualRQ.execute();
+
+                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
+                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
+                FloralRQ.execute();
+
+                String tbMedical = "create table Medical(requestID varchar(50) references Requests, name varchar(50), quantity varchar(50), supplier varchar(50), primary key(requestID))";
+                PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
+                MedicalRQ.execute();
+
+                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
+                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
+                ReligiousRQ.execute();
+
+                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
+                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
+                computerRQ.execute();
+
+                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
+                PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
+                SecurityRQ.execute();
+
+                String tbLanguage = "create table Language(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
+                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
+                languageRQ.execute();
+
+                String gift = "create table Gift(requestID varchar(50) references Requests, contents varchar(50), mass int, primary key(requestID))";
+                PreparedStatement giftRQ = conn.prepareStatement(gift);
+                giftRQ.execute();
 
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Table creation failed");
             e.printStackTrace();
         }
@@ -177,9 +222,9 @@ public class Database {
         }
     }
 
-    public void printRequests() {
+    public void printRequests(String aTable) { //what is happening here?
         try {
-            String str = "select * from Requests";
+            String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
             while (rset.next()) {
@@ -222,15 +267,87 @@ public class Database {
             s.execute(str);
             str = "delete from Assignments";
             s.execute(str);
-        } catch (SQLException e) {
+            str = "delete from Maintenance";
+            s.execute(str);
+            str = "delete from Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+        }
+    }
+
+    public void deleteTables() {
+        //System.out.println("here2");
+        try {
+            Statement s = conn.createStatement();
+            String str = "drop Nodes";
+            s.execute(str);
+            str = "drop Edges";
+            s.execute(str);
+            str = "drop Requests";
+            s.execute(str);
+            str = "drop Locations";
+            s.execute(str);
+            str = "drop Assignments";
+            s.execute(str);
+            str = "drop Maintenance";
+            s.execute(str);
+            str = "drop Laundry";
+            s.execute(str);
+            //str = "delete from Security";
+            //s.execute(str);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //TODO: Test
+
+
+    public void saveAll(){
+        saveCSV( "Requests", "Requests.csv","Test");
+        saveCSV( "Assignments", "Assignments.csv","Test");
+        saveCSV( "Locations", "Locations.csv","Test");
+        saveCSV("Nodes", "OutsideMapNodes.csv", "Test");
+        saveCSV( "Edges", "OutsideMapEdges.csv","Test");
+        saveCSV( "Maintenance","Maintenance.csv", "Test");
+        saveCSV( "Laundry","Laundry.csv", "Test");
+        saveCSV( "Sanitation","Sanitation.csv", "Test");
+        saveCSV( "AudioVisual","AudioVisual.csv", "Test");
+        saveCSV( "Floral","Floral.csv", "Test");
+        saveCSV("Medical", "Medical.csv", "Test");
+        saveCSV("Religious", "Religious.csv", "Test");
+        saveCSV("Computer", "Computer.csv","Charlie was here");
+        saveCSV("Security", "Security.csv","Jacob was here");
+        saveCSV("Language", "Language.csv","Neville was here");
+        saveCSV("Gift", "Gift.csv","Kohmei was here");
+    }
+
+    public void makeCSVDependant(boolean yes){
+
+        if(!yes) return;
+        dropValues();
+        deleteTables();
+        readCSV("Requests.csv", "Requests");
+        readCSV("Locations.csv", "Locations");
+        readCSV("Assignments.csv", "Assignments");
+        readCSV("OutsideMapNodes.csv", "Nodes");
+        readCSV("OutsideMapEdges.csv", "Edges");
+        readCSV("Maintenance.csv", "Maintenance");
+        readCSV("Laundry.csv", "Laundry");
+        //readCSV("Laundry.csv", "Laundry");
+
+
+
+    }
+
+
+
     public void stop() {
         try{
-            DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
         }
         catch (Exception e){
             e.printStackTrace();

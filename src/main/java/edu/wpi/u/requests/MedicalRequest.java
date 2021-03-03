@@ -1,44 +1,46 @@
 package edu.wpi.u.requests;
+
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.LinkedList;
 
-//TODO: Private or protected fields?
-public class SecurityRequest implements IRequest {
-    private String threatLevel;
-    private Request req;
-    private String responseRequired;
+public class MedicalRequest implements IRequest{
+    String name;
+    String quantity;
+    String supplier;
 
+    Request req;
 
     @Override
     public String getType() {
-        return "Security";
+        return "Medical";
     }
 
     //For Specific Request Class
     @Override
     public LinkedList<Serializable> getSpecificData() {
         LinkedList<Serializable> result = new LinkedList<Serializable>();
-        result.addLast(responseRequired);
-        result.addLast(threatLevel);
+        result.addLast(name);
+        result.addLast(quantity);
+        result.addLast(supplier);
         return result;
     }
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
-        responseRequired = l.get(0).toString();
-        threatLevel =  l.get(1).toString();
+        name = l.get(0).toString();
+        quantity =  l.get(1).toString();
+        supplier = l.get(2).toString();
     }
 
     @Override
     public String subtableCreateQuery() {//used for add request
-        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+") values ('"+getGenericRequest().getRequestID()+"', '"+responseRequired+"', '"+threatLevel+"')";
+        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+","+getSpecificFields()[2]+") values ('"+getGenericRequest().getRequestID()+"', '"+name+"', '"+quantity+"', '"+supplier+"')";
         return query;
     }
 
     @Override
     public String updateDBQuery() {
-        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+responseRequired+", "+getSpecificFields()[1]+" = '"+threatLevel+"' where requestID = '"+req.getRequestID()+"'";
+        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+name+", "+getSpecificFields()[1]+" = '"+quantity+"', "+getSpecificFields()[2]+" = '"+supplier+"' where requestID = '"+req.getRequestID()+"'";
         return query;
     }
 
@@ -55,13 +57,13 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public String[] getSpecificFields() {
-        String[] res = new String[]{"responseRequired", "threatLevel"};
+        String[] res = new String[]{"name", "quantity", "supplier"};
         return res;
     }
 
     @Override
     public String getSpecificDataCode() {
-        return "ss";
+        return "sss";
     }
 
     @Override
@@ -70,8 +72,4 @@ public class SecurityRequest implements IRequest {
         setSpecificData(l);
     }
 
-
-
-
 }
-
