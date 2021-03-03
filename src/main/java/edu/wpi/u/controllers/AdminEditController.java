@@ -254,6 +254,7 @@ public class AdminEditController {
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
             try {
+                App.mapInteractionModel.clickedOnNode=true;
                 handleEdgeClicked(ed);
             } catch (IOException e) {
                 e.printStackTrace();
