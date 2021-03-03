@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class ReligiousRequest implements IRequest{
 
     int priority;
-    String religionType;
+    String religion;
     Request req;
 
     @Override
@@ -21,7 +21,7 @@ public class ReligiousRequest implements IRequest{
     public LinkedList<Serializable> getSpecificData() {
         LinkedList<Serializable> result = new LinkedList<Serializable>();
         result.addLast(priority);
-        result.addLast(religionType);
+        result.addLast(religion);
         return result;
     }
 
@@ -29,18 +29,18 @@ public class ReligiousRequest implements IRequest{
     public void setSpecificData(LinkedList<Serializable> l){
 
         priority = Integer.parseInt(l.get(0).toString());
-        religionType =  l.get(1).toString();
+        religion =  l.get(1).toString();
     }
 
     @Override
     public String subtableCreateQuery() {//used for add request
-        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+") values ('"+getGenericRequest().getRequestID()+"', "+priority+", '"+religionType+"')";
+        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+") values ('"+getGenericRequest().getRequestID()+"', "+priority+", '"+religion+"')";
         return query;
     }
 
     @Override
     public String updateDBQuery() {
-        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+priority+", "+getSpecificFields()[1]+" = '"+religionType+"' where requestID = '"+req.getRequestID()+"'";
+        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+priority+", "+getSpecificFields()[1]+" = '"+religion+"' where requestID = '"+req.getRequestID()+"'";
         return query;
     }
 
@@ -57,7 +57,7 @@ public class ReligiousRequest implements IRequest{
 
     @Override
     public String[] getSpecificFields() {
-        String[] res = new String[]{"priority", "religionType"};
+        String[] res = new String[]{"priority", "religion"};
         return res;
     }
 
