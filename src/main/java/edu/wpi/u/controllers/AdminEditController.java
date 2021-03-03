@@ -166,7 +166,7 @@ public class AdminEditController {
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDNODE");
-        App.mapInteractionModel.clearPreviousNodeID();
+
     }
 
     public void handleAddEdgeButtonEDIT(){
@@ -174,6 +174,7 @@ public class AdminEditController {
         pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
         App.mapInteractionModel.setCurrentAction("ADDEDGE");
         App.mapInteractionModel.setEdgeID("");
+        App.mapInteractionModel.clearPreviousNodeID();
     }
 
     /**
@@ -199,11 +200,14 @@ public class AdminEditController {
                 }
             });
             node1.setOnMouseDragged(event -> {
-                try {
-                    handleNodeDragged(node1); // Set visual position (circle)
-                } catch (Exception e) {
-                e.printStackTrace();
+                if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+                    try {
+                        handleNodeDragged(node1); // Set visual position (circle)
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                    }
                 }
+
             });
             node1.setOnMouseReleased(event -> {
                 try {
@@ -285,6 +289,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
+        App.mapInteractionModel.setEdgeID(e.getEdgeID());
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
             double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];

@@ -383,14 +383,12 @@ public class MapData extends Data{
     /**
      * Removes a single permission from the table
      * @param edgeID - Edge in position
-     * @param stafftype - User type to be added to permission
      */
-    public void removePermission(String edgeID, StaffType stafftype){
+    public void removePermission(String edgeID){
         try {
-            String str = "delete from Permissions where edgeID=? and userType=?";
+            String str = "delete from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
-            ps.setString(2,String.valueOf(stafftype));
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();

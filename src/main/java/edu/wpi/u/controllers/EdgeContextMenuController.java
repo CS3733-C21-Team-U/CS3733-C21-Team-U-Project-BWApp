@@ -69,7 +69,6 @@ public class EdgeContextMenuController {
     public void handleDeleteButton() {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) {
             App.mapInteractionModel.setCurrentAction("NONE");
-            App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
         }else {
             App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
         }

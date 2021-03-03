@@ -264,6 +264,7 @@ public class MapService {
    */
   public String deleteEdge(String edge_id) {
     if (md.isEdge(edge_id)){
+      md.removePermission(edge_id);
       md.deleteEdge(edge_id);
       mm.deleteEdge(edge_id);
       return "";
