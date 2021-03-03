@@ -337,7 +337,7 @@ public class AdminEditController {
                 c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
                 c2.toFront();
                 c2.setFill(Paint.valueOf("green"));
-                edgeNodeGroup.getChildren().remove("tempedge");
+                edgeNodeGroup.getChildren().remove(edge);
                 // Create physical Edge
                 double xdiff = c2.getCenterX()-c1.getCenterX();
                 double ydiff = c2.getCenterY()-c1.getCenterY();
