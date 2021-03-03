@@ -40,7 +40,7 @@ public class ViewRequestController {
             controller.requestItemTitleLabel.setText(temp);
             controller.requestItemLocationChipView.getChips().addAll(req.getLocation());
             controller.requestItemDescriptionLabel.setText(req.getDescription());
-            controller.requestItemCreatorLabel.setText(req.getCreator());
+            controller.requestItemCreatorLabel.setText("");
 
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             Date today = req.getDateNeeded();
