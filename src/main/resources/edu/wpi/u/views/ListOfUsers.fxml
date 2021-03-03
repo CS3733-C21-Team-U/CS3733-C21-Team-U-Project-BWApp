@@ -54,6 +54,11 @@
               </columns>
             </TableView>
             <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee" />
+            <JFXButton fx:id="addUserButton" onAction="#handleAddUser" styleClass="button-contained" text="Add User">
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+            </JFXButton>
          </children>
       </VBox>
    </children>

@@ -121,6 +121,8 @@ public class LoginController {
         String username = userNameTextField.getText();
         String password = passWordField.getText();
         String token = tokenField.getText();
+        /*
+
             try {
                 URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ username + "&channel=sms");
                 URL url = uri.toURL(); // make GET request
@@ -142,11 +144,14 @@ public class LoginController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            */
         try {
-            if (!App.userService.checkUsername(username).equals("")) {
+            if (!App.userService.checkUsername(username).equals("") || !App.userService.checkPhoneNumber(username).equals("")) {
                 System.out.println("HERe");
                 if (!App.userService.checkPassword(password).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    App.getPrimaryStage().getScene().setRoot(root);
                 } else {
                     throw new PasswordNotFoundException();
                 }

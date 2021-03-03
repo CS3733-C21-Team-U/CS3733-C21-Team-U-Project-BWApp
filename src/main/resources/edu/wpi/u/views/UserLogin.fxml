@@ -30,7 +30,7 @@
                 <Font name="Calibri" size="39.0" />
             </font>
         </Text>
-        <JFXButton fx:id="forgotPasswordButton" layoutX="776.0" layoutY="661.0" prefHeight="63.0" prefWidth="190.0" text="Forgot Password" textFill="#101c38">
+        <JFXButton fx:id="forgotPasswordButton" layoutX="776.0" layoutY="661.0" onAction="#handleForgotPassword" prefHeight="63.0" prefWidth="190.0" text="Forgot Password" textFill="#101c38">
             <font>
                 <Font name="Calibri Light" size="22.0" />
             </font>

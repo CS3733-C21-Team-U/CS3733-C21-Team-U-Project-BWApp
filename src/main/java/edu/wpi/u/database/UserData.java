@@ -16,11 +16,11 @@ public class UserData extends Data{
     public UserData (){
         connect();
 
-//        this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
-//        this.addGuest(new Guest("newOne","testy","testy","testy","email", StaffType.PATIENT,"915", new Date(800), false));
-//        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
-       // this.addGuest(new Guest("nev","testp","9148394600","testp","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-        //this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
+        this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
+        this.addGuest(new Guest("newOne","testy","testy","testy","email", StaffType.PATIENT,"915", new Date(800), false));
+        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
+        this.addGuest(new Guest("nev","testp","9148394600","testp","email", StaffType.ADMIN,"9148394600", new Date(800), false));
+        this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
 
 
     }
@@ -443,18 +443,18 @@ public class UserData extends Data{
         String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? and appointmentDate=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, guest.getName());
-            ps.setString(2, guest.getUserName());
-            ps.setString(3, guest.getPassword());
-            ps.setString(4,guest.getEmail());
-            ps.setString(5, String.valueOf(guest.getType()));
-            ps.setString(6,guest.getPhoneNumber());
-            ps.setBoolean(7,guest.isDeleted());
+            ps.setString(1,guest.getUserID());
+            ps.setString(2,guest.getName());
+            ps.setString(3, guest.getUserName());
+            ps.setString(4, guest.getPassword());
+            ps.setString(5,guest.getEmail());
+            ps.setString(6,String.valueOf(guest.getType()));// StaffType.valueOf(string) to get ENUM type
+            ps.setString(7,guest.getPhoneNumber());
+            ps.setBoolean(8,true);
             java.util.Date d = guest.getAppointmentDate();
             java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(8,sqld);
-            ps.setString(9,guest.getUserID());
-            ps.executeUpdate();
+            ps.setDate(9,sqld);
+            ps.execute();
             ps.close();
         }catch (Exception e){
             e.printStackTrace();
