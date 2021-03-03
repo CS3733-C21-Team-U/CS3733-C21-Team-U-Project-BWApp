@@ -7,6 +7,7 @@ import edu.wpi.u.exceptions.UsernameNotFoundException;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +34,7 @@ public class AddUserController {
     public JFXDatePicker appointmentDatePicker;
     public JFXTimePicker appointmentTimePicker;
     public JFXTextField emailTextField;
+    public JFXButton cancelButton;
 
     public void initialize() throws IOException {
         userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFUALT.toString() );
@@ -124,5 +126,8 @@ public class AddUserController {
             }
         }
 
+    }
+
+    public void handleCancel(ActionEvent actionEvent) {
     }
 }

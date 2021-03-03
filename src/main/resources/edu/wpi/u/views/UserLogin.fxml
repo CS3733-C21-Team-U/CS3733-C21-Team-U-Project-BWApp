@@ -51,7 +51,7 @@
                         </JFXTextField>
                         <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" text="test">
                             <VBox.margin>
-                                <Insets bottom="10.0" left="290.0" right="483.0" />
+                                <Insets bottom="20.0" left="290.0" right="483.0" />
                             </VBox.margin>
                         </JFXPasswordField>
                   <JFXProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="313.0" style="-fx-opacity: 0;">
@@ -66,6 +66,7 @@
                                         <Insets left="290.0" />
                                     </HBox.margin>
                                 </JFXButton>
+                        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
                                 <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
                                     <HBox.margin>
                                         <Insets left="5.0" />
@@ -98,6 +99,6 @@
             </children>
         </HBox>
       <JFXButton fx:id="debugLoginAdminButton" onAction="#handleDebugLogin" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Admin)" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" />
-      <JFXButton fx:id="debugLoginGuest" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
+      <JFXButton fx:id="debugLoginGuestButton" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
     </children>
 </AnchorPane>
