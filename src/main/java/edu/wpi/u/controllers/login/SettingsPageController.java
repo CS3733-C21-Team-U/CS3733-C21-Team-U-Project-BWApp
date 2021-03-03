@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
 import static edu.wpi.u.users.StaffType.*;
@@ -43,6 +44,10 @@ public class SettingsPageController {
     public Label adminText;
 
     public FileChooser fileDirect = new FileChooser();
+    @FXML public JFXRadioButton aStarRadioButton;
+    public ToggleGroup pathFindingMode;
+    @FXML public JFXRadioButton dFSRadioButton;
+    @FXML public JFXRadioButton bFSRadioButton;
 
     public void initialize() throws IOException, FilePathNotFoundException {
 
