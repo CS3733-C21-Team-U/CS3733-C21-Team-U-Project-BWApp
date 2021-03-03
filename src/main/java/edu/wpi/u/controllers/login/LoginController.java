@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.sun.javafx.fxml.builder.URLBuilder;
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import edu.wpi.u.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -15,10 +17,13 @@ import edu.wpi.u.database.UserData;
 import edu.wpi.u.exceptions.AccountNameNotFoundException;
 import edu.wpi.u.exceptions.PasswordNotFoundException;
 import edu.wpi.u.users.User;
+import io.netty.handler.codec.http.HttpHeaders;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,14 +34,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jdk.nashorn.api.scripting.JSObject;
+import lombok.SneakyThrows;
 import org.apache.http.HttpConnection;
 import org.apache.http.client.methods.RequestBuilder;
-import org.eclipse.jetty.client.api.Request;
+import org.asynchttpclient.*;
+import org.asynchttpclient.netty.request.NettyRequest;
+import org.asynchttpclient.proxy.ProxyServer;
+import org.asynchttpclient.util.HttpConstants;
 import org.eclipse.jetty.http.MetaData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
-import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 import spark.Spark;
@@ -57,8 +65,6 @@ import java.util.Map;
 
 import static spark.Spark.*;
 import com.google.gson.Gson;
-import org.riversun.promise.Promise;
-
 import javafx.concurrent.Worker.State;
 import java.sql.SQLOutput;
 import java.util.Observable;
@@ -82,9 +88,8 @@ public class LoginController {
     @FXML
     public JFXButton forgotPasswordButton;
     @FXML
-    public JFXTextField tokenField;
-    @FXML
-    public JFXButton tokenSubmitButton;
+    public JFXProgressBar progressBar;
+    @FXML public JFXButton submitButton;
 
     public void initialize() throws IOException {
 
@@ -116,37 +121,70 @@ public class LoginController {
         });
     }
 
+
+
     public void handleLogin() throws IOException {
+        progressBar.setStyle("-fx-opacity: 1");
         // TODO : Ability to skip the 2fa
+//        Scene scene = new Scene(root);
+//        App.getPrimaryStage().setScene(scene);
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FAToken.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
-        String token = tokenField.getText();
-            try {
-                URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ username + "&channel=sms");
-                URL url = uri.toURL(); // make GET request
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-                con.setRequestProperty("Content-Type", "application/json");
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuffer content = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    content.append(inputLine);
-                }
-                in.close();
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                System.out.println("Content: " + content);
-                JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
-                String status = obj.get("status").toString();
-                System.out.println("Status from get/login: " + status);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        System.out.println("Username : " + username + " Password: " + password);
+        App.userService.setUser(username, password, App.userService.checkPassword(password));
+        System.out.println("Phonenumebr from user service: " + App.userService.getActiveUser().getPhoneNumber());
+        System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
+        // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
-                System.out.println("HERe");
                 if (!App.userService.checkPassword(password).equals("")) {
-                    App.userService.setUser(username, password, App.userService.checkPassword(password));
+                    // TODO : Send code
+
+                    try {
+                        URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ username + "&channel=sms");
+                        URL url = uri.toURL(); // make GET request
+                        AsyncHttpClient client = Dsl.asyncHttpClient();
+                        Future<Integer> whenStatusCode = client.prepareGet(url.toString())
+                                .execute(new AsyncHandler<Integer>() {
+                                    private Integer status;
+                                    @Override
+                                    public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
+                                        status = responseStatus.getStatusCode();
+                                        System.out.println("At status code");
+                                        return State.CONTINUE;
+                                    }
+                                    @Override
+                                    public State onHeadersReceived(HttpHeaders headers) throws Exception {
+                                        System.out.println("At headers code");
+                                        return State.CONTINUE;
+                                    }
+                                    @Override
+                                    public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
+                                        byte[] b = bodyPart.getBodyPartBytes();
+                                        String y = new String(b);
+                                        System.out.println(y.contains("pending"));
+                                        if (y.contains("pending")){
+                                            progressBar.setStyle("-fx-opacity: 0");
+                                            submitButton.setStyle("-fx-opacity: 1");
+                                            // TODO : Set alignment
+                                        }
+                                        return State.CONTINUE;
+                                    }
+
+                                    @Override
+                                    public Integer onCompleted() throws Exception {
+                                        return status;
+                                    }
+                                    @Override
+                                    public void onThrowable(Throwable t) {
+                                        t.printStackTrace();
+                                    }
+                                });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     throw new PasswordNotFoundException();
                 }
@@ -158,48 +196,17 @@ public class LoginController {
         }
     }
 
+
+
 //Throws exceptions if username or password not found
         public void handleForgotPassword() throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }
 
-    public void handleSubmit() {
-        System.out.println("In handle submit");
-        String token = tokenField.getText();
-        String username = userNameTextField.getText();
-        try {
-            URI uri2 = new URI("https://bw-webapp.herokuapp.com/" +"verify?phonenumber=" + "+1"+ username + "&code=" + token);
-            URL url2 = uri2.toURL(); // make GET request
-            System.out.println(url2.toString());
-            HttpURLConnection con = (HttpURLConnection) url2.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Content-Type", "application/json");
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println("Content: " + content);
-            JsonObject obj = new Gson().fromJson(String.valueOf(content), JsonObject.class);
-            String status = obj.get("status").toString(); // "approved" or "pending"
-            System.out.println("Status from get/verify: " + status);
-            if (status.startsWith("approved", 1)){
-                System.out.println("Approved");
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                Scene scene = new Scene(root);
-                App.getPrimaryStage().setScene(scene);
-            }
-            else if (status.startsWith("pending",1)){
-                System.out.println("Pending");
-                // TODO : UI display error incorrect token
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void handleSubmit() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FAToken.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 }
 

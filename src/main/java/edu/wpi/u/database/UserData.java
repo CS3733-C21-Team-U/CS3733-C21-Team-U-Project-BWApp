@@ -21,6 +21,8 @@ public class UserData extends Data{
 //        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
        // this.addGuest(new Guest("nev","testp","9148394600","testp","email", StaffType.ADMIN,"9148394600", new Date(800), false));
         //this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
+        //this.addGuest(new Guest("charles","testp","7742706792","testp","email", StaffType.ADMIN,"7742706792", new Date(800), false));
+        //this.addGuest(new Guest("nev2","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
 
 
     }
@@ -194,6 +196,7 @@ public class UserData extends Data{
         }
         //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
         String str = "select * from "+type+" where username=? and password=?";
+        System.out.println(str);
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, username);
@@ -222,6 +225,7 @@ public class UserData extends Data{
      * Checks if the database has the username
      * @param username username to be checked
      * @return type for user of setting the users type Employees or Guests (table name)
+     * TODO : Replace check with the ID -> Current system doesnt allow for users with same password
      */
     public String checkUsername(String username){
         String str = "select * from Employees where username=?";

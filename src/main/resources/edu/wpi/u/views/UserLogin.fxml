@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.LoginController">
     <children>
-        <JFXTextField fx:id="userNameTextField" editable="false" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
+        <JFXTextField fx:id="userNameTextField" layoutX="515.0" layoutY="404.0" prefHeight="45.0" prefWidth="486.0" promptText="Username">
         </JFXTextField>
         <JFXPasswordField fx:id="passWordField" layoutX="513.0" layoutY="519.0" prefHeight="48.0" prefWidth="486.0" promptText="Password">
         </JFXPasswordField>
@@ -27,5 +27,6 @@
             </image>
         </ImageView>
       <JFXProgressBar fx:id="progressBar" layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
+      <JFXButton fx:id="submitButton" buttonType="RAISED" layoutX="241.0" layoutY="552.0" onAction="#handleSubmit" opacity="0.0" prefHeight="47.0" prefWidth="183.0" styleClass="button-contained" text="VERIFY" textFill="WHITE" />
     </children>
 </AnchorPane>
