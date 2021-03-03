@@ -34,7 +34,7 @@ public class AudioVisualRequest implements IRequest {
 
     @Override
     public String subtableCreateQuery() {//used for add request
-        String query = "insert into Sanitation(requestID, hazardLevel, spillType) values ('"+getGenericRequest().getRequestID()+"', "+isAudio+", '"+name+"')";
+        String query = "insert into "+getType()+"(requestID, hazardLevel, spillType) values ('"+getGenericRequest().getRequestID()+"', "+isAudio+", '"+name+"')";
         return query;
     }
 

@@ -111,7 +111,7 @@ public class Database {
                 PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
                 SanitationRQ.execute();
 
-                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int , name varchar(50) , primary key(requestID))";
+                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
                 PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
                 AudioVisualRQ.execute();
 
