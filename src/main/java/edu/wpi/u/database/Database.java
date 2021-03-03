@@ -134,6 +134,10 @@ public class Database {
                 String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
                 PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
                 SecurityRQ.execute();
+
+                String tbLanguage = "create table Security(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
+                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
+                languageRQ.execute();
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -309,6 +313,7 @@ public class Database {
         saveCSV("Religious", "Religious.csv", "Test");
         saveCSV("Computer", "Computer.csv","Charlie was here");
         saveCSV("Security", "Security.csv","Jacob was here");
+        saveCSV("Language", "Language.csv","Neville was here");
     }
 
     public void makeCSVDependant(boolean yes){

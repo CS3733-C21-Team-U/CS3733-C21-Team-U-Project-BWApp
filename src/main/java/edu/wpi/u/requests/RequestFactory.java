@@ -25,6 +25,8 @@ public class RequestFactory {
                 return new ReligiousRequest();
             case "Computer":
                 return new ComputerRequest();
+            case "Language":
+                return new LanguageRequest();
             default:
                 System.out.println("Type does not exist!");
 

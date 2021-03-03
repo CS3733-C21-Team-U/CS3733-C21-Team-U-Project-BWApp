@@ -90,6 +90,12 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleLanguageButton() throws Exception{
+        App.newNodeType = "Language";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleSanitationButton() throws Exception{
