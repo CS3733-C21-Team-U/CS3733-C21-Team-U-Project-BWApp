@@ -22,6 +22,8 @@ import java.util.Stack;
 public class RequestDetailController {
     public HBox HBoxToClone;
     public VBox specificFields;
+    public VBox VBoxToAdd;
+    public Label typeLabel;
     @FXML Label requestDetailTitleLabel;
     @FXML Label requestDetailCreatorLabel;
     @FXML Label requestDetailDescriptionLabel;
@@ -45,15 +47,16 @@ public class RequestDetailController {
     public void initialize() throws IOException{
         currentIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
         Request request = currentIRequest.getGenericRequest();
-        requestDetailTitleLabel.setText(request.getTitle());
-        requestDetailCreatorLabel.setText(request.getCreator());
+        requestDetailTitleLabel.setText("Request Title: "+ request.getTitle());
+        requestDetailCreatorLabel.setText("Created By: " + request.getCreator());
         requestDetailDescriptionLabel.setText(request.getDescription());
         //requestDetailLocationChipView.setText(request.getLocation());
       //  requestDetailStaffChipView.setText(request.getStaff());
         System.out.println(request.getDateCreated().toString());
-        requestDetailDateCreatedLabel.setText(request.getDateCreated().toString());
+        requestDetailDateCreatedLabel.setText("Date Created: "+ request.getDateCreated().toString());
         //System.out.println(request.getDateNeeded());
-      //  requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
+        requestDetailDate2BCompleteLabel.setText("Date to Complete By: NA");
+        typeLabel.setText("Type: " + currentIRequest.getType());
         //requestDetailSecurityLabel.setText(request);
 //        setSpecifics();
         generateSpecificFields();
@@ -65,19 +68,10 @@ public class RequestDetailController {
        //Generate Labels ONLY, using fields/values of Irequest, no error checking needed
         //NO text fields, just for display
         for(int i = 0; i < currentIRequest.getSpecificFields().length; i++) {
-            HBox h = new HBox();
 
-            Label entryTitle = new Label(currentIRequest.getSpecificFields()[i] + ":              ");
-
-            Label entryData= new Label(currentIRequest.getSpecificData().get(i).toString());
-
-
-            h.setAlignment(HBoxToClone.getAlignment());
-            h.setSpacing(HBoxToClone.getSpacing());
-            h.getChildren().add(entryTitle);
-            h.getChildren().add(entryData);
-            h.setId(Integer.toString(i));
-            specificFields.getChildren().add(h);
+            Label entryData= new Label(currentIRequest.getSpecificFields()[i] +": "+ currentIRequest.getSpecificData().get(i).toString());
+            entryData.setStyle("-fx-font-size: 34");
+            VBoxToAdd.getChildren().add(entryData);
         }
 
     }

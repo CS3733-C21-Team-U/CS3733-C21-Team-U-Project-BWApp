@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
@@ -35,6 +36,12 @@ public class AdminEditController {
     @FXML public AnchorPane mainAnchorPane;
     @FXML public JFXDrawer leftMenuDrawer;
     @FXML public JFXDrawer serviceRequestDrawer;
+    public JFXToggleNode toggle1;
+    public JFXToggleNode toggle2;
+    public JFXToggleNode toggle3;
+    public JFXToggleNode toggle4;
+    public JFXToggleNode toggle5;
+    public JFXToggleNode toggle6;
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -490,6 +497,8 @@ public class AdminEditController {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             edgeNodeGroup.toFront();
+        }else{
+            toggle1.setSelected(true);
         }
     }
 
@@ -501,6 +510,8 @@ public class AdminEditController {
         if(!App.mapInteractionModel.floor.equals("1")) {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             edgeNodeGroup.toFront();
+        }else{
+            toggle2.setSelected(true);
         }
     }
 
@@ -512,6 +523,8 @@ public class AdminEditController {
         if(!App.mapInteractionModel.floor.equals("2")) {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             edgeNodeGroup.toFront();
+        }else{
+            toggle3.setSelected(true);
         }
     }
 
@@ -523,6 +536,8 @@ public class AdminEditController {
         if(!App.mapInteractionModel.floor.equals("3")) {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             edgeNodeGroup.toFront();
+        }else{
+            toggle4.setSelected(true);
         }
     }
 
@@ -534,6 +549,8 @@ public class AdminEditController {
         if(!App.mapInteractionModel.floor.equals("4")) {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             edgeNodeGroup.toFront();
+        }else{
+            toggle5.setSelected(true);
         }
     }
 
@@ -545,6 +562,8 @@ public class AdminEditController {
         if(!App.mapInteractionModel.floor.equals("5")) {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             edgeNodeGroup.toFront();
+        }else{
+            toggle6.setSelected(true);
         }
     }
 
