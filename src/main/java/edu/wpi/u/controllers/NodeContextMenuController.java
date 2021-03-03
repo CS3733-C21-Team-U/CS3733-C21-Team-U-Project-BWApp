@@ -3,6 +3,7 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.InvalidEdgeException;
@@ -30,11 +31,39 @@ public class NodeContextMenuController {
     @FXML
     JFXButton doneButton;
 
+
     /**
      * To be run when save button in node context menu is pressed. Needs to check if a node can be saved, then saves a node.
      */
     @FXML
     public void initialize(){
+        // Client side error handling for long name
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Input Required");
+        longNameText.getValidators().add(validator);
+        longNameText.focusedProperty().addListener((o, oldVal, newVal)-> {
+            if(!newVal){
+                longNameText.validate();
+            }
+        });
+        // Client side error handling for short name
+        validator.setMessage("Input Required");
+        shortNameText.getValidators().add(validator);
+        shortNameText.focusedProperty().addListener((o, oldVal, newVal)-> {
+            if(!newVal){
+                shortNameText.validate();
+            }
+        });
+        // Client side error handling for dropdown menu
+        validator.setMessage("Input Required");
+        nodeTypeDrop.getValidators().add(validator);
+        nodeTypeDrop.focusedProperty().addListener((o, oldVal, newVal)-> {
+            if(!newVal){
+                nodeTypeDrop.validate();
+            }
+        });
+
+
         Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
         ArrayList<String> nodeAList = new ArrayList<String>();
         ObservableList<String> list = FXCollections.observableArrayList();

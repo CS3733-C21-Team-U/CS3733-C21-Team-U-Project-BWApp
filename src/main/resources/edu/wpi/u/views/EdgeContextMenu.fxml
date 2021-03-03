@@ -19,7 +19,7 @@
                         <Insets left="10.0" top="4.0" />
                      </HBox.margin>
                   </Label>
-                  <JFXComboBox fx:id="edgeComboBox" minWidth="110.0" promptText="Select" />
+                  <JFXComboBox fx:id="edgeComboBox" labelFloat="true" minWidth="110.0" promptText="Select" />
                </children>
                <padding>
                   <Insets left="10.0" top="5.0" />
@@ -27,7 +27,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
                <children>
-                  <JFXButton alignment="CENTER" minWidth="64.0" onAction="#handleSaveButton" prefHeight="36.0" text="Save">
+                  <JFXButton alignment="CENTER" minWidth="64.0" onAction="#handleSaveButton" prefHeight="36.0" styleClass="button-contained" text="Save">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>
@@ -35,7 +35,7 @@
                         <Insets left="16.0" right="16.0" />
                      </padding>
                   </JFXButton>
-                  <JFXButton fx:id="deleteButton" alignment="CENTER" minWidth="64.0" onAction="#handleDeleteButton" prefHeight="36.0" text="Delete">
+                  <JFXButton fx:id="deleteButton" alignment="CENTER" minWidth="64.0" onAction="#handleDeleteButton" prefHeight="36.0" styleClass="button-text" text="Delete">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>

@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
@@ -24,6 +25,16 @@ public class EdgeContextMenuController {
 
     @FXML
     public void initialize() {
+        // Client side error handling for combo box
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Input Required");
+        edgeComboBox.getValidators().add(validator);
+        edgeComboBox.focusedProperty().addListener((o, oldVal, newVal)-> {
+            if(!newVal){
+                edgeComboBox.validate();
+            }
+        });
+
         ObservableList<String> list = FXCollections.observableArrayList();
         list.add("Admin only");
         list.add("All Employees");
