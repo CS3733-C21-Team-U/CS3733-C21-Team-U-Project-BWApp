@@ -337,7 +337,14 @@ public class AdminEditController {
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
             pane.getChildren().add(contextAnchor);
             App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+
         }else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+            javafx.scene.Node tempEdge = findTempLine();
+            if(tempEdge != null){
+                pane.getChildren().remove(tempEdge);
+                generateEdges(App.mapInteractionModel.floor);
+                generateNodes(App.mapInteractionModel.floor);
+            }
             App.mapInteractionModel.setNodeID(n.getNodeID());
             Circle c1 = new Circle();
             Circle c2 = new Circle();
@@ -410,6 +417,16 @@ public class AdminEditController {
         for(javafx.scene.Node n: edgeNodeGroup.getChildren()){
             if(n.getId().equals(nodeID)){
                 return (Circle)n;
+            }
+        }
+        //if failed to find maybe on other floor
+        return null;
+    }
+
+    public javafx.scene.Node findTempLine(){
+        for(javafx.scene.Node n: edgeNodeGroup.getChildren()){
+            if(n.getId().equals("tempedge")){
+                return n;
             }
         }
         //if failed to find maybe on other floor
