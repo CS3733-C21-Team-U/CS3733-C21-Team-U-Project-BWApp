@@ -131,7 +131,7 @@ public class MapEdit {
             this.type = "EDGE";
             this.edit = EditTypes.ADD;
             App.mapService.addEdge(start_node + "_" + end_node, start_node, end_node, permissions);
-            this.ID = start_node + "_" + end_node + "0";
+            this.ID = start_node + "_" + end_node;
         }catch (Exception e){
             throw e;
         }
