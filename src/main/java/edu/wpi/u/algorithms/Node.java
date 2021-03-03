@@ -150,9 +150,9 @@ public class Node {
     for (Edge e : this.edges) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(StaffType.DOCTOR) && !App.userService.getActiveUser().equals(StaffType.PATIENT)){
+            if(e.getUserPermissions().contains(StaffType.DOCTOR) && !App.userService.getActiveUser().equals((String.valueOf(StaffType.PATIENT)))){
               return true;
-            }else if(e.getUserPermissions().contains(StaffType.ADMIN) && App.userService.getActiveUser().equals(StaffType.ADMIN)){
+            }else if(e.getUserPermissions().contains(StaffType.ADMIN) && App.userService.getActiveUser().equals((String.valueOf(StaffType.ADMIN)))){
               return true;
             }else if(e.getUserPermissions().contains(StaffType.DEFUALT)){
               return true;

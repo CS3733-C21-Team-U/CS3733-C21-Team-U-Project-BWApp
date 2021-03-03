@@ -258,7 +258,7 @@ public class LoginController {
     }
 
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("staff", "staff", "Guests");
+        App.userService.setUser("patient", "patient", "Guests");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

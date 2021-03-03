@@ -30,8 +30,8 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop for demo
         //dropEmployee();
         this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
-        this.addGuest(new Guest("w","w","w","w","w", StaffType.ADMIN,"998234", new Date(1000), false));
-        this.addGuest(new Guest("staff","staff","staff","staff","staff", StaffType.PATIENT,"7742706792", new Date(1000), false));
+        this.addGuest(new Guest("patient","patient","patient","patient","w", StaffType.PATIENT,"1112223333", new Date(1000), false));
+        this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
         this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
 //        dropGuests();

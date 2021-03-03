@@ -22,7 +22,14 @@ public class Edge {
     _startNode.addAdjNode(_endNode);
     _endNode.addAdjNode(_startNode);
     this.permission = new ArrayList<>();
-    this.permission.add(StaffType.DEFUALT);
+    if (permissions.isEmpty()){
+      this.permission.add(StaffType.DEFUALT);
+    }
+    else
+    {
+      this.permission.add(permissions.get(0));
+    }
+
   }
 
   /**

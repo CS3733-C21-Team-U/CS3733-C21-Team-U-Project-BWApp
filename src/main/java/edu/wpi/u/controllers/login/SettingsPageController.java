@@ -51,7 +51,6 @@ public class SettingsPageController {
     public ToggleGroup pathFindingMode;
     @FXML public JFXRadioButton dFSRadioButton;
     @FXML public JFXRadioButton bFSRadioButton;
-    @FXML public JFXTextField tableNameTextFIeld1;
     @FXML public JFXComboBox<String> tableNameOptions;
     @FXML public Group onlyAdmin;
 
@@ -194,7 +193,7 @@ public class SettingsPageController {
 
 
     public void handleSaveCSV(ActionEvent actionEvent) {
-        Database.getDB().saveCSV(tableNameTextFIeld1.getText(),tableNameOptions.getValue(),"Anything I want");
+        Database.getDB().saveCSV(filePathTextField.getText(),tableNameOptions.getValue(),"Anything I want");
     }
 }
 
