@@ -18,7 +18,15 @@
    <children>
       <VBox layoutX="184.0" layoutY="49.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
-            <Label styleClass="headline-2" text="View Users" />
+            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1675.0" spacing="100.0">
+               <children>
+                  <Label styleClass="headline-2" text="View Users" />
+                  <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
             <HBox prefHeight="22.0" prefWidth="1675.0">
                <children>
                   <Label text="Scroll Through the Table to View All Users" />
@@ -41,7 +49,10 @@
                   <TableColumn fx:id="appDateColumn" prefWidth="428.0" text="AppDate" />
               </columns>
             </TableView>
-            <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest" />
+            <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin></JFXButton>
             <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="employeeID" />
@@ -53,8 +64,10 @@
                   <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="194.0" text="Phone Number" />
               </columns>
             </TableView>
-            <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee" />
-            <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
+            <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin></JFXButton>
          </children>
       </VBox>
    </children>

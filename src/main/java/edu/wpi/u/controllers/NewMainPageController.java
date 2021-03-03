@@ -66,16 +66,6 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
-        App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE) {
-                System.out.println("Escape button pressed, exiting");
-                try {
-                    handleExit();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        });
 
         App.themeSVG = themeIcon;
 

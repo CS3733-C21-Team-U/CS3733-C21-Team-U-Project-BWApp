@@ -19,6 +19,8 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+
 @Slf4j
 public class App extends Application {
 
@@ -123,6 +125,13 @@ public class App extends Application {
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
+
+    App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
+      if (e.getCode() == KeyCode.ESCAPE) {
+        System.out.println("Escape button pressed, exiting");
+          App.getInstance().end();
+      }
+    });
 
 
     //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
