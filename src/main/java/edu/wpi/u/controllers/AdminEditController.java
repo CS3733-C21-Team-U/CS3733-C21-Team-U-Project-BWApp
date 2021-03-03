@@ -69,7 +69,7 @@ public class AdminEditController {
         mainAnchorPane.getChildren().add(map);
         map.toBack();
 
-        map.setOnMouseReleased(e ->{
+        map.setOnMouseDragged(e ->{
             Affine invMatrix = null;
             try {
                 invMatrix = map.getAffine().createInverse();
@@ -83,12 +83,14 @@ public class AdminEditController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
         });
 
-        map.setOnMouseReleased(e ->{
-
-        });
 
         // Click and scroll map view functionality
         map.setOnMouseClicked(e -> {
+            if(!App.mapInteractionModel.clickedOnNode){
+                pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            }else{
+                App.mapInteractionModel.clickedOnNode = false;
+            }
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
             Affine invMatrix = null;
@@ -190,6 +192,7 @@ public class AdminEditController {
             node1.setVisible(true);
             node1.setOnMouseClicked(event -> {
                 try {
+                    App.mapInteractionModel.clickedOnNode=true;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
@@ -204,9 +207,7 @@ public class AdminEditController {
             });
             node1.setOnMouseReleased(event -> {
                 try {
-                    map.gestureEnabledProperty().set(true);
-                    node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
-                    node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
+                    handleNodeDragExit(n, node1);
                 } catch (Exception e) {
                     e.printStackTrace(); // Update node's actual storage
                 }
@@ -307,6 +308,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
+        App.mapInteractionModel.setCoords(new double[]{n.getCords()[0], n.getCords()[1]});
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
@@ -404,10 +406,9 @@ public class AdminEditController {
      * Saves node's coordinates whenever dragging ceases
      * @param n - Node being dragged
      */
-    public void handleNodeDragExit(Node n, Circle node1){
+    public void handleNodeDragExit(Node n, Circle node1) throws IOException {
         map.gestureEnabledProperty().set(true);
-        // Save coordinates of new node
-        System.out.println("Pretend like its actually saving the node here");
+        handleNodeClicked(n);
     }
 
     @FXML
