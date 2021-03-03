@@ -115,6 +115,10 @@ public class Database {
                 PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
                 AudioVisualRQ.execute();
 
+                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
+                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
+                FloralRQ.execute();
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -285,6 +289,7 @@ public class Database {
         saveCSV( "Laundry","Laundry.csv", "Test");
         saveCSV( "Sanitation","Sanitation.csv", "Test");
         saveCSV( "AudioVisual","AudioVisual.csv", "Test");
+        saveCSV( "Floral","Floral.csv", "Test");
     }
 
     public void makeCSVDependant(boolean yes){

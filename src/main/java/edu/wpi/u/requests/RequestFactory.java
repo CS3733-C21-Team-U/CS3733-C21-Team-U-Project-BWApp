@@ -17,6 +17,8 @@ public class RequestFactory {
                 return new SanitationRequest();
             case "AudioVisual":
                 return new AudioVisualRequest();
+            case "Floral":
+                return new FloralRequest();
             default:
                 System.out.println("Type does not exist!");
 
