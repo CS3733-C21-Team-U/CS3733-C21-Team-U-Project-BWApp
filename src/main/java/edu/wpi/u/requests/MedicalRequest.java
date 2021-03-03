@@ -12,7 +12,7 @@ public class MedicalRequest implements IRequest{
 
     @Override
     public String getType() {
-        return "AudioVisual";
+        return "Medical";
     }
 
     //For Specific Request Class
