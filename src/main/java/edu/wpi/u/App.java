@@ -94,7 +94,7 @@ public class App extends Application {
 
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/CovidSurveyPage.fxml"));
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
