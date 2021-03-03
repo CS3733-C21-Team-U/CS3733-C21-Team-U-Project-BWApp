@@ -100,7 +100,7 @@ public class UserData extends Data{
             while (rs.next()){
                 results.add(new Employee(rs.getString("employeeID"),
                         rs.getString("name"),
-                        rs.getString("username"),
+                        rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
                         StaffType.valueOf(rs.getString("type")),
@@ -126,7 +126,7 @@ public class UserData extends Data{
             while (rs.next()){
                 results.add(new Guest(rs.getString("guestID"),
                         rs.getString("name"),
-                        rs.getString("username"),
+                        rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
                         StaffType.valueOf(rs.getString("type")),
@@ -195,7 +195,7 @@ public class UserData extends Data{
      * @param type Employees or Guests (table name)
      */
     public void changePassword(String username, String newPassword, String type){
-        String str = "update " + type + " set password=? where username=?";
+        String str = "update " + type + " set password=? where userName=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,newPassword);
@@ -227,7 +227,7 @@ public class UserData extends Data{
             returnType=2;
         }
         //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
-        String str = "select * from "+type+" where username=? and password=?";
+        String str = "select * from "+type+" where userName=? and password=?";
         System.out.println(str);
         try {
             PreparedStatement ps = conn.prepareStatement(str);
@@ -260,7 +260,7 @@ public class UserData extends Data{
      * TODO : Replace check with the ID -> Current system doesnt allow for users with same password
      */
     public String checkUsername(String username){
-        String str = "select * from Employees where username=?";
+        String str = "select * from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,username);
@@ -269,7 +269,7 @@ public class UserData extends Data{
                 return "Employees";
             }
             else {
-                String str2 = "select * from Guests where username=?";
+                String str2 = "select * from Guests where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,username);
                 ResultSet rs2 = ps2.executeQuery();
@@ -279,7 +279,6 @@ public class UserData extends Data{
                 else{
                     return "";
                 }
-
             }
         }
         catch (Exception e){

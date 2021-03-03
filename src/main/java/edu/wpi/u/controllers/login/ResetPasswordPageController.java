@@ -52,11 +52,12 @@ public class ResetPasswordPageController {
         } else {
             userType = "Guests";
         }
+        System.out.println("Username in controller: " + username);
+        System.out.println(App.userService.checkUsername(username).equals(""));
         if (!App.userService.checkUsername(username).equals("")) {
             App.userService.changePassword(username, resetPasswordTextField.getText(), userType);
             //System.out.println(App.userService.getPassword(usernameTextField.getText(), userType));
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
-//                    Scene scene = new Scene(root);
             App.getPrimaryStage().getScene().setRoot(root);
         } else {
             throw new AccountNameNotFoundException();

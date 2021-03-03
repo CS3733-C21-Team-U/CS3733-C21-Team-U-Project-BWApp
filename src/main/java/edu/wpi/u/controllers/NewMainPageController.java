@@ -157,45 +157,6 @@ public class NewMainPageController {
     public void handleChangeTab() {
         App.mapInteractionModel.setCurrentAction("NONE");
     }
+
+
 }
-
-
-
-
-
-
-
-//    @FXML
-//    public void leftMenuToggle() throws Exception {
-//        if(App.leftDrawerRoot.getValue().equals("/edu/wpi/u/views/LeftDrawerMenu.fxml")){
-//            leftMenuDrawer.setPrefSize(80,1000);
-//            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenuSmall.fxml");
-//        }else{
-//            App.leftDrawerRoot.setValue("/edu/wpi/u/views/LeftDrawerMenu.fxml");
-//        }
-//    }
-//
-//
-//    @FXML
-//    public void handleZoomOutButton() {
-////        map.currentScaleProperty().setValue(map.getCurrentScale()/1.4);
-////        mapView.setFitHeight(mapView.getFitHeight()/1.4);
-////        mapView.setFitWidth(mapView.getFitWidth()/1.4);
-//        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
-//        // increment of scale makes more sense exponentially instead of linearly
-//        map.animate(DURATION)
-//                .interpolateWith(Interpolator.EASE_BOTH)
-//                .zoomBy(-0.35, pivotOnTarget);
-//    }
-//
-//    @FXML
-//    public void handleZoomInButton() {
-////        map.currentScaleProperty().setValue(map.getCurrentScale()*1.4);
-////        mapView.setFitHeight(mapView.getFitHeight()*1.4);
-////        mapView.setFitWidth(mapView.getFitWidth()*1.4);
-//        Point2D pivotOnTarget = map.targetPointAtViewportCentre();
-//        // increment of scale makes more sense exponentially instead of linearly
-//        map.animate(DURATION)
-//                .interpolateWith(Interpolator.EASE_BOTH)
-//                .zoomBy(0.35, pivotOnTarget);
-//    }

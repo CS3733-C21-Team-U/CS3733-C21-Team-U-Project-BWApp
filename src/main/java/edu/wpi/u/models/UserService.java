@@ -100,6 +100,7 @@ public class UserService {
      * @return Employees or Guests (table name)
      */
     public String checkUsername(String username) {
+        System.out.println("Value of check username: " + ud.checkUsername(username));
         return ud.checkUsername(username);
     }
 
