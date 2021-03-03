@@ -142,7 +142,7 @@ public class NERController {
         LinkedList<Serializable> specifics = new LinkedList<>();
         for(JFXTextField j : specificTextFields) {
             specifics.add(j.getText());
-        }
+    }
 
         //for loop(values stored in TextFields)
         return specifics;
@@ -162,6 +162,7 @@ public class NERController {
 
         //NEW
         currRequest.setDescription(makeEditDescriptionField.getText());
+        currRequest.setTitle(makeEditTitleField.getText());
         currRequest.setAssignee(assigneesToAdd);
         currRequest.setLocation(locationsToAdd);
         LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();

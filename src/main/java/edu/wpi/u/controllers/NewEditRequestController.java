@@ -134,9 +134,9 @@ public class NewEditRequestController {
         } editLocationErrorLabel.setText("Location Already Listed.");
     }*/
 
-    /*public void handleAddLocation(){
-        if (editLocField.getValue() == null) {
-            errorDrawer.open();
+/*public void handleAddLocation(){
+    if (editLocField.getValue() == null) {
+        errorDrawer.open();
         } else {
             currRequest.getLocation().add(editLocField.getValue().toString());
             showCurrentLocListView.getItems().add(editLocField.getValue().toString());
