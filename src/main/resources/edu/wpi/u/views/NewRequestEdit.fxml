@@ -85,12 +85,14 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1700.0" spacing="100.0">
                <children>
+                  <Pane prefHeight="200.0" prefWidth="400.0" />
                   <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="45.0" prefWidth="240.0" styleClass="button-contained" text="Save" />
                   <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="45.0" prefWidth="240.0" text="Cancel">
                      <styleClass>
                         <String fx:value="button-contained" />
                         <String fx:value="secondary-color" />
                      </styleClass></JFXButton>
+                  <Label fx:id="errorMsg" styleClass="headline-3" text="Error! Field(s) contain incorrect datatype!" textFill="#dd0d0d" visible="false" />
                </children>
             </HBox>
          </children>

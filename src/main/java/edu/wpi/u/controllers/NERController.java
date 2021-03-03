@@ -32,6 +32,7 @@ public class NERController {
     public HBox HBoxToClone;
     public VBox VBoxToAddTo;
     public Label specificTitle;
+    public Label errorMsg;
     //Generic Request Fields
     @FXML TextField makeEditTitleField;
 
@@ -152,34 +153,39 @@ public class NERController {
     }
 
     @FXML public void handleSaveNewEditRequest() throws IOException { //TODO: visibility?
+        try {
+            LinkedList<String> locationsToAdd = new LinkedList<>();
+            for(Object l : makeEditLocationChipView.getChips()) { //may break
+                locationsToAdd.add(l.toString());
+            }
 
-        LinkedList<String> locationsToAdd = new LinkedList<>();
-        for(Object l : makeEditLocationChipView.getChips()) { //may break
-            locationsToAdd.add(l.toString());
+            LinkedList<String> assigneesToAdd = new LinkedList<>();
+            for(Object l : makeEditLocationChipView.getChips()) { //may break
+                assigneesToAdd.add(l.toString());
+            }
+
+            //NEW
+            currRequest.setDescription(makeEditDescriptionField.getText());
+            currRequest.setAssignee(assigneesToAdd);
+            currRequest.setLocation(locationsToAdd);
+            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
+            //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+            Date date= new Date();
+            currRequest.setDateNeeded(date);
+            currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
+            App.requestService.updateRequest(currIRequest);
+
+
+            //SCENE Switch
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        } catch (Exception e) {
+            errorMsg.setVisible(true);
         }
 
-        LinkedList<String> assigneesToAdd = new LinkedList<>();
-        for(Object l : makeEditLocationChipView.getChips()) { //may break
-            assigneesToAdd.add(l.toString());
-        }
 
-        //NEW
-        currRequest.setDescription(makeEditDescriptionField.getText());
-        currRequest.setAssignee(assigneesToAdd);
-        currRequest.setLocation(locationsToAdd);
-        LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
-        //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-        Date date= new Date();
-        currRequest.setDateNeeded(date);
-        currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
-        App.requestService.updateRequest(currIRequest);
-
-
-        //SCENE Switch
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
 
     }
 

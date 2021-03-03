@@ -115,27 +115,32 @@ public class NewRequestController {
 
     @FXML
     public void handleSaveNewRequest() throws IOException {
-        LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
-        LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
-        LinkedList<Serializable> specifics = requestSpecificItems();
+        try {
+            LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
+            LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
+            LinkedList<Serializable> specifics = requestSpecificItems();
 
-        IRequest result = new RequestFactory().makeRequest(App.newNodeType);
-        Random rand = new Random();
-        int requestID = rand.nextInt();
-        String ID = Integer.toString(requestID);//make a random id
-        //TODO : fix date bug
-        Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-        Request newRequest = new Request(ID, staff, new Date(), new Date(), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
+            IRequest result = new RequestFactory().makeRequest(App.newNodeType);
+            Random rand = new Random();
+            int requestID = rand.nextInt();
+            String ID = Integer.toString(requestID);//make a random id
+            //TODO : fix date bug
+            Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
+            Request newRequest = new Request(ID, staff, new Date(), new Date(), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
 
-        result.setRequest(newRequest);
-        result.setSpecificData(specifics);
-        App.requestService.addRequest(result);
+            result.setRequest(newRequest);
+            result.setSpecificData(specifics);
+            App.requestService.addRequest(result);
 
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        } catch (Exception e) {
+            errorMsg.setVisible(true);
+        }
+
     }
 
     @FXML
