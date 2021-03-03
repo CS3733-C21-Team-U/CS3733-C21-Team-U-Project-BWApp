@@ -33,7 +33,7 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleFoodButton" prefHeight="23.0" prefWidth="153.0" text="Food (NOT IMPLEMENTED)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleFoodButton" prefHeight="23.0" prefWidth="229.0" text="Food (NOT IMPLEMENTED)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -42,7 +42,7 @@
                         <String fx:value="secondary-color" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton fx:id="ButtonPageForNRType7JFXButton" onAction="#handleMedicineButton" prefHeight="23.0" prefWidth="164.0" text="Medicine - Will Burke" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <JFXButton fx:id="ButtonPageForNRType7JFXButton" onAction="#handleMedicineButton" prefHeight="23.0" prefWidth="164.0" text="Medicine - Will" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -51,7 +51,7 @@
                         <String fx:value="secondary-color" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton fx:id="ButtonPageForNRType5JFXButton" onAction="#handleAudioVisualButton" prefHeight="23.0" prefWidth="147.0" text="Audio Visual - Nick" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <JFXButton fx:id="ButtonPageForNRType5JFXButton" onAction="#handleAudioVisualButton" prefHeight="23.0" prefWidth="175.0" text="Audio Visual - Nick" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <String fx:value="secondary-color" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton fx:id="ButtonPageForNRMaintenanceJFXButton" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="166.0" text="Maintenance - Kaamil" GridPane.halignment="CENTER">
+                  <JFXButton fx:id="ButtonPageForNRMaintenanceJFXButton" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="206.0" text="Maintenance - Kaamil" GridPane.halignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -132,7 +132,7 @@
                         <String fx:value="secondary-color" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton fx:id="ButtonPageForNRType12JFXButton111" onAction="#handleLanguageButton" prefHeight="23.0" prefWidth="146.0" text="Language - Neville" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <JFXButton fx:id="ButtonPageForNRType12JFXButton111" onAction="#handleLanguageButton" prefHeight="23.0" prefWidth="177.0" text="Language - Neville" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font size="15.0" />
                      </font>

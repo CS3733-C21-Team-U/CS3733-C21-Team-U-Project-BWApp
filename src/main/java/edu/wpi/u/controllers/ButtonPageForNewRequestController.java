@@ -82,8 +82,10 @@ public class ButtonPageForNewRequestController {
 
     @FXML
     public void ButtonPageForNRCancelJFXButton(ActionEvent actionEvent) throws IOException{
-        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
-        requestLoader.load();
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleLanguageButton() throws Exception{
