@@ -2,6 +2,7 @@ package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.IRequest;
 import edu.wpi.u.requests.Request;
@@ -11,9 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -21,6 +20,8 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class RequestDetailController {
+    public HBox HBoxToClone;
+    public VBox specificFields;
     @FXML Label requestDetailTitleLabel;
     @FXML Label requestDetailCreatorLabel;
     @FXML Label requestDetailDescriptionLabel;
@@ -37,7 +38,7 @@ public class RequestDetailController {
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
     IRequest currentIRequest;
-  
+
 
 
     @FXML
@@ -54,14 +55,30 @@ public class RequestDetailController {
         //System.out.println(request.getDateNeeded());
       //  requestDetailDate2BCompleteLabel.setText(request.getDateNeeded().toString());
         //requestDetailSecurityLabel.setText(request);
-        setSpecifics();
+//        setSpecifics();
+        generateSpecificFields();
 
     }
 
     //TODO : Replace with function written in NER Controller, based on current IREQUEST
-    public void generateSpecificFields(String type){
+    public void generateSpecificFields(){
        //Generate Labels ONLY, using fields/values of Irequest, no error checking needed
         //NO text fields, just for display
+        for(int i = 0; i < currentIRequest.getSpecificFields().length; i++) {
+            HBox h = new HBox();
+
+            Label entryTitle = new Label(currentIRequest.getSpecificFields()[i] + ":              ");
+
+            Label entryData= new Label(currentIRequest.getSpecificData().get(i).toString());
+
+
+            h.setAlignment(HBoxToClone.getAlignment());
+            h.setSpacing(HBoxToClone.getSpacing());
+            h.getChildren().add(entryTitle);
+            h.getChildren().add(entryData);
+            h.setId(Integer.toString(i));
+            specificFields.getChildren().add(h);
+        }
 
     }
 

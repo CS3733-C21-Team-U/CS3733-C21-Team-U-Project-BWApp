@@ -7,8 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.RequestDetailController">
@@ -70,36 +68,16 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox fx:id="specificFields" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="requestDetailStack" prefHeight="100.0" prefWidth="499.0">
-               <children>
-                        <Pane fx:id="requestDetailSecurityPane" prefHeight="100.0" prefWidth="681.0">
-         <children>
-                              <HBox prefHeight="100.0" prefWidth="950.0">
-               <children>
-                                    <Label prefHeight="19.0" prefWidth="70.0" text="Security:" />
-                                    <Label fx:id="requestDetailSecurityLabel" text="SecurityLabel" />
-                                 </children>
-                              </HBox>
+                  <HBox fx:id="HBoxToClone" visible="false" alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="19.0" prefWidth="70.0" text="Security:" />
+                        <Label fx:id="requestDetailSecurityLabel" text="SecurityLabel" />
+                     </children>
+                  </HBox>
                </children>
-            </Pane>
-            <Pane fx:id="requestDetailMaintenancePane" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <Label prefHeight="36.0" prefWidth="100.0" text="Maintenance:" />
-                  <Label fx:id="requestDetailMaintenanceLabel" layoutX="116.0" layoutY="2.0" prefHeight="27.0" prefWidth="120.0" text="MaintenanceLabel" />
-               </children>
-            </Pane>
-            <Pane fx:id="requestDetailLaundryPane" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <Label prefHeight="36.0" prefWidth="100.0" text="Laundry:" />
-                  <Label fx:id="requestDetailLaundryLabel" layoutX="117.0" prefHeight="27.0" prefWidth="120.0" text="LaundryLabel" />
-               </children>
-            </Pane>
-         </children>
-      </StackPane>
-               </children>
-            </HBox>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <JFXButton onAction="#handleEditRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Edit Request" />
