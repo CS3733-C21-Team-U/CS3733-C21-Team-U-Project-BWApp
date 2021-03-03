@@ -41,6 +41,16 @@ public class EdgeContextMenuController {
         list.add("Everyone");
         if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             deleteButton.setText("Stop adding");
+        }else {
+            Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
+            if(thisEdge.getUserPermissions().get(0).equals(StaffType.DEFUALT)){
+                edgeComboBox.setValue("Everyone");
+            } else if(thisEdge.getUserPermissions().get(0).equals(StaffType.DOCTOR)){
+                edgeComboBox.setValue("All Employees");
+            }else{
+                edgeComboBox.setValue("Admin only");
+            }
+
         }
 
         edgeComboBox.setItems(list);
