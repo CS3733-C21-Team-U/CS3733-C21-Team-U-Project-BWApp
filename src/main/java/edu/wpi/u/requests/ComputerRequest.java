@@ -24,8 +24,8 @@ public class ComputerRequest implements IRequest{
 
     @Override
     public void setSpecificData(LinkedList<Serializable> l){
-        electronicType = l.get(1).toString();
-        priority =  Integer.parseInt(l.get(0).toString());
+        electronicType = l.get(0).toString();
+        priority =  Integer.parseInt(l.get(1).toString());
     }
 
     @Override

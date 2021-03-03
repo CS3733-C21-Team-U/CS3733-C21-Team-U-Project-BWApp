@@ -131,7 +131,7 @@ public class Database {
                 PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
                 computerRQ.execute();
 
-                String tbSecurity = "create table Securtiy(requestID varchar(50) references Requests, thereatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
+                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
                 PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
                 SecurityRQ.execute();
             }
