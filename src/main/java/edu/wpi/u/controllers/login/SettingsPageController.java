@@ -1,11 +1,14 @@
 package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -14,6 +17,7 @@ import edu.wpi.u.App;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
@@ -50,8 +54,22 @@ public class SettingsPageController {
     @FXML public JFXRadioButton dFSRadioButton;
     @FXML public JFXRadioButton bFSRadioButton;
     public JFXTextField tableNameTextFIeld1;
+    @FXML public JFXComboBox<String> tableNameOptions;
+    @FXML public Group onlyAdmin;
 
     public void initialize() throws IOException, FilePathNotFoundException {
+
+        if(App.userService.getActiveUser().getType() ==  ADMIN){
+            onlyAdmin.setStyle("-fx-opacity: 1");
+            onlyAdmin.setDisable(false);
+        }
+        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+            onlyAdmin.setStyle("-fx-opacity: 0");
+            onlyAdmin.setDisable(true);
+        }
+
+
+        tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges","Requests","Employees","Guests","Assignments","Locations","Permissions","Maintenance","Laundry","Sanitation","AudioVisual","Floral","Medical","Religious","Computer","Security","Language","Gift"));
 
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator = new RequiredFieldValidator();

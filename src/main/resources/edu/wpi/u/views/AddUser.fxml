@@ -18,23 +18,23 @@
       <VBox layoutX="336.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
             <Label styleClass="headline-2" text="Add User" />
-            <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Enter Username" text="test">
+            <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Enter Username">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="nameTextField" labelFloat="true" promptText="Enter Name" text="test">
+            <JFXTextField fx:id="nameTextField" labelFloat="true" promptText="Enter Name">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="emailTextField" labelFloat="true" promptText="Enter Email" text="test">
+            <JFXTextField fx:id="emailTextField" labelFloat="true" promptText="Enter Email">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone #" text="test">
+            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone #">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="passwordTextField" labelFloat="true" promptText="Enter User Password" text="test">
+            <JFXTextField fx:id="passwordTextField" labelFloat="true" promptText="Enter User Password">
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
