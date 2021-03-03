@@ -351,42 +351,58 @@ public class AdminEditController {
             }
             if(!App.mapInteractionModel.getPreviousNodeID().equals("")) { // Have 2nd node
                 c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
-                c2.toFront();
-                c2.setFill(Paint.valueOf("green"));
+                if(c2 != null) {
+                    c2.toFront();
+                    c2.setFill(Paint.valueOf("green"));
+                }
                 edgeNodeGroup.getChildren().remove(edge);
                 // Create physical Edge
-                double xdiff = c2.getCenterX()-c1.getCenterX();
-                double ydiff = c2.getCenterY()-c1.getCenterY();
-                edge.setLayoutX(c1.getCenterX());
-                edge.setStartX(0);
-                edge.setLayoutY(c1.getCenterY());
-                edge.setStartY(0);
-                edge.setEndX(xdiff);
-                edge.setEndY(ydiff);
-                edge.setId("tempedge");
-                edge.setStrokeWidth(3.0);
-                edge.toFront();
-                edge.setStroke(Paint.valueOf("green"));
-                edge.setVisible(true);
-                edgeNodeGroup.getChildren().add(edge);
+                double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getCords()[0];
+                double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getCords()[1];
 
+                double xdiff = 0;
+                double ydiff = 0;
+
+                if(c2 != null) {
+                    xdiff = c2.getCenterX() - oldx;
+                    ydiff = c2.getCenterY() - oldy;
+                    edge.setLayoutX(c1.getCenterX());
+                    edge.setStartX(0);
+                    edge.setLayoutY(c1.getCenterY());
+                    edge.setStartY(0);
+                    edge.setEndX(xdiff);
+                    edge.setEndY(ydiff);
+                    edge.setId("tempedge");
+                    edge.setStrokeWidth(3.0);
+                    edge.toFront();
+                    edge.setStroke(Paint.valueOf("green"));
+                    edge.setVisible(true);
+                    edgeNodeGroup.getChildren().add(edge);
+                }
                 // Spawning context menu
                 FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
                 AnchorPane EdgeContextAnchor = new AnchorPane();
                 EdgeContextAnchor = edgeContextMenu.load();
                 EdgeContextMenuController controller = edgeContextMenu.getController();
 
-                EdgeContextAnchor.setLayoutX(edge.getLayoutX()+(xdiff/2));
-                EdgeContextAnchor.setLayoutY(edge.getLayoutY()+(ydiff/2));
+                if(c2 != null) {
+                    EdgeContextAnchor.setLayoutX(edge.getLayoutX() + (xdiff / 2));
+                    EdgeContextAnchor.setLayoutY(edge.getLayoutY() + (ydiff / 2));
+                }else{
+                    EdgeContextAnchor.setLayoutX(c1.getLayoutX());
+                    EdgeContextAnchor.setLayoutY(c1.getLayoutY());
+                }
                 pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
                 pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
                 pane.getChildren().add(EdgeContextAnchor);
                 App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
             }
             if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
-                c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
-                c3.toFront();
-                c3.setStyle("-fx-stroke: -error");
+                if(c3 != null) {
+                    c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
+                    c3.toFront();
+                    c3.setStyle("-fx-stroke: -error");
+                }
             }
 
 
@@ -399,6 +415,7 @@ public class AdminEditController {
                 return (Circle)n;
             }
         }
+        //if failed to find maybe on other floor
         return null;
     }
 
