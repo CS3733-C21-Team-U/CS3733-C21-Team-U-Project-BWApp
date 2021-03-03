@@ -107,14 +107,9 @@ public class Database {
                 PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
                 LaundryRQ.execute();
 
-
-               /* String tblLaundry = "create table Laundry(requestID varchar(50), washer varchar(50), Foreign Key requestID references Requests(requestID))";
-                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
-                LaundryRQ.execute();
-
-                String tblSecurity = "create table Security(requestID varchar(50), threatLevel varchar(50), primary key(requestID), Foreign Key requestID references Requests(requestID))";
-                PreparedStatement SecurityRQ = conn.prepareStatement(tblSecurity);
-                SecurityRQ.execute();*/
+                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
+                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
+                SanitationRQ.execute();
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -283,8 +278,7 @@ public class Database {
         saveCSV( "Edges", "OutsideMapEdges.csv","Test");
         saveCSV( "Maintenance","Maintenance.csv", "Test");
         saveCSV( "Laundry","Laundry.csv", "Test");
-        //saveCSV( "Laundry", "Laundry.csv","Test");
-        //saveCSV( "Laundry", "Security.csv","Test");
+        saveCSV( "Sanitation","Sanitation.csv", "Test");
     }
 
     public void makeCSVDependant(boolean yes){

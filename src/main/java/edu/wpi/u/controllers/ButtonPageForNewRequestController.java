@@ -86,30 +86,36 @@ public class ButtonPageForNewRequestController {
         requestLoader.load();
     }
 
-    public void handleLanguageButton() {
+    public void handleLanguageButton() throws Exception{
     }
 
-    public void handleSanitationButton() {
+    public void handleSanitationButton() throws Exception{
+        App.newNodeType = "Sanitation";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
-    public void handleGiftButton() {
+    public void handleGiftButton() throws Exception{
     }
 
-    public void handleFloralButton() {
+    public void handleFloralButton() throws Exception{
     }
 
-    public void handleReligiousButton() {
+    public void handleReligiousButton() throws Exception{
     }
 
-    public void handleComputerButton() {
+    public void handleComputerButton() throws Exception{
     }
 
-    public void handleAudioVisualButton() {
+    public void handleAudioVisualButton() throws Exception{
     }
 
-    public void handleMedicineButton() {
+    public void handleMedicineButton() throws Exception{
     }
 
-    public void handleFoodButton() {
+    public void handleFoodButton() throws Exception{
     }
 }

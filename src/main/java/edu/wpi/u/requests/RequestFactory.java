@@ -13,6 +13,8 @@ public class RequestFactory {
                 return new LaundryRequest();
             case "Security":
                 return new SecurityRequest();
+            case "Sanitation":
+                return new SanitationRequest();
             default:
                 System.out.println("Type does not exist!");
 
