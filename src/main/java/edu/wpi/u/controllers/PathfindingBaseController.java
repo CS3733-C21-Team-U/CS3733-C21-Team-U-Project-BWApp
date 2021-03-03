@@ -196,7 +196,7 @@ public class PathfindingBaseController {
                 }
             });
             node1.setOnMouseEntered(event -> {
-                    if(App.mapInteractionModel.pathThingy == true) {
+                    if(App.mapInteractionModel.pathThingy) {
                         try {
                             handleNodeClicked(n);
                         } catch (IOException e) {

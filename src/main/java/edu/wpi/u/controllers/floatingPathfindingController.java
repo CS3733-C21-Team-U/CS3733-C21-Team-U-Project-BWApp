@@ -50,9 +50,10 @@ public class floatingPathfindingController {
                 startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
                 targetNode = "END";
-            }
+            } else {
                 endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
+            }
 
             if(!startNodeID.equals("") && !endNodeID.equals("")){
                 try {
