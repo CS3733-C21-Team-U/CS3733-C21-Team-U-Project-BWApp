@@ -83,8 +83,14 @@ public class AdminEditController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
         });
 
+
         // Click and scroll map view functionality
         map.setOnMouseClicked(e -> {
+            if(!App.mapInteractionModel.clickedOnNode){
+                pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            }else{
+                App.mapInteractionModel.clickedOnNode = false;
+            }
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
             Affine invMatrix = null;
@@ -98,6 +104,7 @@ public class AdminEditController {
             double x = (realPoint.getX()) + map.getLayoutX();
             double y = (realPoint.getY()) + map.getLayoutY();
             App.mapInteractionModel.setCoords(new double[]{x,y});
+
 
             // Trying add node context menu
             try {
@@ -137,6 +144,7 @@ public class AdminEditController {
         generateNodes(App.mapInteractionModel.floor);
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
+            pane.getChildren().remove(node);
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
             if(App.mapInteractionModel.floor.equals("G")){
                 node.setFitWidth(2987);
@@ -184,6 +192,7 @@ public class AdminEditController {
             node1.setVisible(true);
             node1.setOnMouseClicked(event -> {
                 try {
+                    App.mapInteractionModel.clickedOnNode=true;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
@@ -196,7 +205,7 @@ public class AdminEditController {
                 e.printStackTrace();
                 }
             });
-            node1.setOnMouseDragExited(event -> {
+            node1.setOnMouseReleased(event -> {
                 try {
                     handleNodeDragExit(n, node1);
                 } catch (Exception e) {
@@ -216,8 +225,6 @@ public class AdminEditController {
             try {
                 if(n.getFloor().equals(floor)){
                     placeNodesHelper(n);
-                }else{
-                    System.out.println(n.getFloor()+" is not a valid node!!! We can't put this on the screen bruh");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -258,14 +265,10 @@ public class AdminEditController {
     public void generateEdges(String floor){
         edgeNodeGroup.getChildren().clear();
         App.mapService.getEdges().stream().forEach(e ->{
-            System.out.println("We're in the function");
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
                 placeEdgesHelper(e);
 
-            } else{
-                System.out.println(e.getStartNode().getFloor());
-                System.out.println("The edge is NOT a valid edge for printing");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -305,6 +308,7 @@ public class AdminEditController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
+        App.mapInteractionModel.setCoords(new double[]{n.getCords()[0], n.getCords()[1]});
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
@@ -388,26 +392,23 @@ public class AdminEditController {
      * @param node1 -
      */
     public void handleNodeDragged(Circle node1) {
-        if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){ // Should this be !(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) ?
             map.gestureEnabledProperty().set(false); // Disabling map zoom
-            System.out.println("You are dragging a node.");
             pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox); // Removing previous context menus when dragging
             pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
-
             // Update coordinates of node
             node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
             node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
-        }
+
+
     }
 
     /**
      * Saves node's coordinates whenever dragging ceases
      * @param n - Node being dragged
      */
-    public void handleNodeDragExit(Node n, Circle node1){
+    public void handleNodeDragExit(Node n, Circle node1) throws IOException {
         map.gestureEnabledProperty().set(true);
-        // Save coordinates of new node
-        System.out.println("Pretend like its actually saving the node here");
+        handleNodeClicked(n);
     }
 
     @FXML
@@ -430,8 +431,8 @@ public class AdminEditController {
     public void loadNewMapAndGenerateHelper(String floor, String resource){
         App.mapInteractionModel.floor = floor;
         App.mapInteractionModel.mapImageResource.set(resource);
-        generateNodes(floor);
         generateEdges(floor);
+        generateNodes(floor);
     }
 
     /**
@@ -442,7 +443,6 @@ public class AdminEditController {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampusLight.png");
             node.setFitWidth(2987);
             edgeNodeGroup.toFront();
-
         }
     }
 
@@ -500,6 +500,8 @@ public class AdminEditController {
             edgeNodeGroup.toFront();
         }
     }
+
+
 
 
 

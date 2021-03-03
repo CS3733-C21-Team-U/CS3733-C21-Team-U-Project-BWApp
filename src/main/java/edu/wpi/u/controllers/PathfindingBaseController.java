@@ -222,8 +222,6 @@ public class PathfindingBaseController {
             try {
                 if(n.getFloor().equals(floor)){
                     placeNodesHelper(n);
-                }else{
-                    System.out.println(n.getFloor()+" is not a valid node!!! We can't put this on the screen bruh");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -267,14 +265,10 @@ public class PathfindingBaseController {
 
     public void generateEdges(String floor){
         getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
-            System.out.println("We're in the function");
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
                 placeEdgesHelper(e);
 
-            } else{
-                System.out.println(e.getStartNode().getFloor());
-                System.out.println("The edge is NOT a valid edge for printing");
             }
         } catch (Exception ex) {
             ex.printStackTrace();

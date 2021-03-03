@@ -28,6 +28,7 @@ public class MapInteractionModel {
     public String floorPathfinding = "G";
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
+    public boolean clickedOnNode = false;
 
     public String getPreviousPreviousNodeID() {
         return previousPreviousNodeID;
