@@ -187,6 +187,9 @@ public class RequestData extends Data{
                     else if(dataChars[i] == 'd'){
                         list.addLast(ans.getDate(i+2));
                     }
+                    else if(dataChars[i] == 'b'){
+                        list.addLast(ans.getBoolean(i+2));
+                    }
 
                 }
                 result.fillObject(r, list);

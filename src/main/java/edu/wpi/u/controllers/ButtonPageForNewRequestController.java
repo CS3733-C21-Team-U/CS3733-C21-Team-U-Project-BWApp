@@ -52,10 +52,13 @@ public class ButtonPageForNewRequestController {
     }
 
     @FXML
-    public void handleMakeSecurityButton(ActionEvent actionEvent)throws IOException {
-        sendData(actionEvent);
-        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/MakeANewRequest.fxml"));
-        requestLoader.load();
+    public void handleMakeSecurityButton()throws IOException {
+        App.newNodeType = "Security";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     @FXML
@@ -89,6 +92,12 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleLanguageButton() throws Exception{
+        App.newNodeType = "Language";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleSanitationButton() throws Exception{
@@ -101,21 +110,57 @@ public class ButtonPageForNewRequestController {
     }
 
     public void handleGiftButton() throws Exception{
+        App.newNodeType = "Gift";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleFloralButton() throws Exception{
+        App.newNodeType = "Floral";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleReligiousButton() throws Exception{
+        App.newNodeType = "Religious";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleComputerButton() throws Exception{
+        App.newNodeType = "Computer";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleAudioVisualButton() throws Exception{
+        App.newNodeType = "AudioVisual";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleMedicineButton() throws Exception{
+        App.newNodeType = "Medical";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void handleFoodButton() throws Exception{

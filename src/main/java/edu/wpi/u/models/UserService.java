@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+
+
 public class UserService {
+
+  //  Guest currentGuest = ud.getGuests().get(App.lastClickedGuestNumber);
 
     static UserData ud = new UserData();
     //ArrayList<User> users = new ArrayList<>();

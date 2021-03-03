@@ -110,6 +110,39 @@ public class Database {
                 String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
                 PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
                 SanitationRQ.execute();
+
+                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
+                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
+                AudioVisualRQ.execute();
+
+                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
+                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
+                FloralRQ.execute();
+
+                String tbMedical = "create table Medical(requestID varchar(50) references Requests, name varchar(50), quantity varchar(50), supplier varchar(50), primary key(requestID))";
+                PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
+                MedicalRQ.execute();
+
+                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
+                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
+                ReligiousRQ.execute();
+
+                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
+                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
+                computerRQ.execute();
+
+                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
+                PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
+                SecurityRQ.execute();
+
+                String tbLanguage = "create table Language(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
+                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
+                languageRQ.execute();
+
+                String gift = "create table Gift(requestID varchar(50) references Requests, contents varchar(50), mass int, primary key(requestID))";
+                PreparedStatement giftRQ = conn.prepareStatement(gift);
+                giftRQ.execute();
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -279,6 +312,14 @@ public class Database {
         saveCSV( "Maintenance","Maintenance.csv", "Test");
         saveCSV( "Laundry","Laundry.csv", "Test");
         saveCSV( "Sanitation","Sanitation.csv", "Test");
+        saveCSV( "AudioVisual","AudioVisual.csv", "Test");
+        saveCSV( "Floral","Floral.csv", "Test");
+        saveCSV("Medical", "Medical.csv", "Test");
+        saveCSV("Religious", "Religious.csv", "Test");
+        saveCSV("Computer", "Computer.csv","Charlie was here");
+        saveCSV("Security", "Security.csv","Jacob was here");
+        saveCSV("Language", "Language.csv","Neville was here");
+        saveCSV("Gift", "Gift.csv","Kohmei was here");
     }
 
     public void makeCSVDependant(boolean yes){
