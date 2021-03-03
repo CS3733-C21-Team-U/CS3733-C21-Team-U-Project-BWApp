@@ -26,6 +26,6 @@
                 <Image url="@brigham-health-logo-600x200.png" />
             </image>
         </ImageView>
-      <JFXProgressBar layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
+      <JFXProgressBar fx:id="progressBar" layoutX="515.0" layoutY="614.0" opacity="0.0" prefHeight="0.0" prefWidth="486.0" />
     </children>
 </AnchorPane>
