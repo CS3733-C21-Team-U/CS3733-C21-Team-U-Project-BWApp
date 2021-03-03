@@ -78,36 +78,38 @@ public class ButtonPageForNewRequestController {
         anchor.getChildren().add(root);
     }
 
-    //For more request service types
-    @FXML
-    public void handleType9Button(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    public void handleType7Button(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void handleType5Button(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void handleType4Button(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void handleType6Button(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void handleType8Button(ActionEvent actionEvent) {
-    }
 
 
     @FXML
     public void ButtonPageForNRCancelJFXButton(ActionEvent actionEvent) throws IOException{
         FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
         requestLoader.load();
+    }
+
+    public void handleLanguageButton() {
+    }
+
+    public void handleSanitationButton() {
+    }
+
+    public void handleGiftButton() {
+    }
+
+    public void handleFloralButton() {
+    }
+
+    public void handleReligiousButton() {
+    }
+
+    public void handleComputerButton() {
+    }
+
+    public void handleAudioVisualButton() {
+    }
+
+    public void handleMedicineButton() {
+    }
+
+    public void handleFoodButton() {
     }
 }
