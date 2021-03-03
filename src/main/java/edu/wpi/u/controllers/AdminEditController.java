@@ -199,7 +199,7 @@ public class AdminEditController {
             node1.setRadius(7.0);
             node1.setId(n.getNodeID());
             node1.toFront();
-            node1.setFill(Paint.valueOf("Black"));
+            node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
             node1.setOnMouseClicked(event -> {
                 try {
@@ -262,9 +262,9 @@ public class AdminEditController {
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
-        edge.setStrokeWidth(3.0);
+        edge.setStrokeWidth(7);
         edge.toFront();
-        edge.setFill(Paint.valueOf("Black"));
+        edge.setStyle("-fx-stroke: -error");
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
             try {
@@ -386,7 +386,7 @@ public class AdminEditController {
             if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
                 c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
                 c3.toFront();
-                c3.setFill(Paint.valueOf("black"));
+                c3.setStyle("-fx-stroke: -error");
             }
 
 
@@ -456,7 +456,7 @@ public class AdminEditController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
-            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampusLight.png");
+            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             edgeNodeGroup.toFront();
         }
