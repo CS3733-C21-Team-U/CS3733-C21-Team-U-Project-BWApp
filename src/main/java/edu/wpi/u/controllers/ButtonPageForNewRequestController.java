@@ -52,10 +52,13 @@ public class ButtonPageForNewRequestController {
     }
 
     @FXML
-    public void handleMakeSecurityButton(ActionEvent actionEvent)throws IOException {
-        sendData(actionEvent);
-        FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/MakeANewRequest.fxml"));
-        requestLoader.load();
+    public void handleMakeSecurityButton()throws IOException {
+        App.newNodeType = "Security";
+
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequest.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     @FXML

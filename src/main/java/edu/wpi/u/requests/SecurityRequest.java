@@ -7,60 +7,69 @@ import java.util.LinkedList;
 public class SecurityRequest implements IRequest {
     private String threatLevel;
     private Request req;
-    private int priority;
+    private String responseRequired;
 
-    public SecurityRequest(){};
 
     @Override
     public String getType() {
-        return null;
+        return "Security";
     }
 
+    //For Specific Request Class
     @Override
     public LinkedList<Serializable> getSpecificData() {
-        return null;
+        LinkedList<Serializable> result = new LinkedList<Serializable>();
+        result.addLast(responseRequired);
+        result.addLast(threatLevel);
+        return result;
     }
 
     @Override
-    public void setSpecificData(LinkedList<Serializable> l) {
-
+    public void setSpecificData(LinkedList<Serializable> l){
+        responseRequired = l.get(0).toString();
+        threatLevel =  l.get(1).toString();
     }
 
     @Override
-    public String subtableCreateQuery() {
-        return null;
+    public String subtableCreateQuery() {//used for add request
+        String query = "insert into "+getType()+"(requestID, "+getSpecificFields()[0]+", "+getSpecificFields()[1]+") values ('"+getGenericRequest().getRequestID()+"', '"+responseRequired+"', '"+threatLevel+"')";
+        return query;
     }
 
     @Override
     public String updateDBQuery() {
-        return null;
+        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+responseRequired+", "+getSpecificFields()[1]+" = '"+threatLevel+"' where requestID = '"+req.getRequestID()+"'";
+        return query;
     }
 
     @Override
     public Request getGenericRequest() {
-        return null;
+        return req;
     }
 
     @Override
     public void setRequest(Request r) {
-
+        this.req = r;
     }
+
 
     @Override
     public String[] getSpecificFields() {
-        return new String[0];
+        String[] res = new String[]{"responseRequired", "threatLevel"};
+        return res;
     }
 
     @Override
     public String getSpecificDataCode() {
-        return null;
+        return "ss";
     }
 
     @Override
     public void fillObject(Request r, LinkedList<Serializable> l) {
-
+        setRequest(r);
+        setSpecificData(l);
     }
-    //Composition Pattern Type
+
 
 
 
