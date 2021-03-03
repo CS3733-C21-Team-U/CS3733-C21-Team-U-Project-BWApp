@@ -126,13 +126,6 @@ public class App extends Application {
 
 
     //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
-
-    App.primaryStage.getScene().setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.ESCAPE) {
-        System.out.println("Escape button pressed, exiting");
-        App.getInstance().end();
-      }
-    });
   }
 
   public static Stage getPrimaryStage() {

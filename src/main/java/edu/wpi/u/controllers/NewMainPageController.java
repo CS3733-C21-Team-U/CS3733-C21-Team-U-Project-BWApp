@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -65,6 +66,17 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ESCAPE) {
+                System.out.println("Escape button pressed, exiting");
+                try {
+                    handleExit();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+
         App.themeSVG = themeIcon;
 
         listViewDemo.setItems(listView);
@@ -101,7 +113,7 @@ public class NewMainPageController {
     }
 
 
-    public void handleExit(ActionEvent actionEvent) throws IOException {
+    public void handleExit() throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
