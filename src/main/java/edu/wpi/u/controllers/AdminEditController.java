@@ -103,6 +103,7 @@ public class AdminEditController {
             double y = (realPoint.getY()) + map.getLayoutY();
             App.mapInteractionModel.setCoords(new double[]{x,y});
 
+
             // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
