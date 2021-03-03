@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
@@ -25,6 +27,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
@@ -92,6 +95,8 @@ public class NewMainPageController {
         App.getInstance().switchTheme();
     }
 
+
+
     public void handleExit(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
@@ -122,6 +127,39 @@ public class NewMainPageController {
         content.setActions(actions);
         dialog.show();
 
+    }
+
+    public void handleLogout(ActionEvent actionEvent) throws IOException {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Log out?");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("CANCEL");
+        JFXButton button2 = new JFXButton("LOGOUT");
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @SneakyThrows
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+                App.getPrimaryStage().getScene().setRoot(root);
+            }
+        });
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
     }
 }
 
