@@ -117,9 +117,8 @@ public class AdminEditController {
         });
 
         // Creating nodes
-        generateNodes(App.mapInteractionModel.floor);
         generateEdges(App.mapInteractionModel.floor);
-        //bringNodesToFront(); //TODO uncomment if you want to force nodes to the front
+        generateNodes(App.mapInteractionModel.floor);
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
@@ -134,8 +133,8 @@ public class AdminEditController {
 
         App.mapInteractionModel.editFlag.addListener((observable, oldValue, newValue)  ->{
             //update nodes and edges
-            generateNodes(App.mapInteractionModel.floor);
             generateEdges(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floor);
         });
     } // End of initialize
 
@@ -184,7 +183,6 @@ public class AdminEditController {
      * @param floor this is the string representing the floor of a node ("g", "1", "2"...)
      */
     public void generateNodes(String floor){
-        edgeNodeGroup.getChildren().clear();
         App.mapService.getNodes().stream().forEach(n -> {
             try {
                 if(n.getFloor().equals(floor)){
@@ -197,15 +195,6 @@ public class AdminEditController {
             }
         });
         edgeNodeGroup.toFront();
-    }
-
-    public void bringNodesToFront(){
-        for(javafx.scene.Node n : edgeNodeGroup.getChildren()){
-            List<String> items = Arrays.asList(n.getId().split("\\s*_\\s*"));
-            if(items.size() == 1){
-                n.toFront();
-            }
-        }
     }
 
     /**
@@ -238,6 +227,7 @@ public class AdminEditController {
     }
 
     public void generateEdges(String floor){
+        edgeNodeGroup.getChildren().clear();
         App.mapService.getEdges().stream().forEach(e ->{
             System.out.println("We're in the function");
         try {
@@ -316,6 +306,7 @@ public class AdminEditController {
                 c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
                 c2.toFront();
                 c2.setFill(Paint.valueOf("green"));
+                edgeNodeGroup.getChildren().remove("tempedge");
                 // Create physical Edge
                 double xdiff = c2.getCenterX()-c1.getCenterX();
                 double ydiff = c2.getCenterY()-c1.getCenterY();
@@ -331,6 +322,19 @@ public class AdminEditController {
                 edge.setStroke(Paint.valueOf("green"));
                 edge.setVisible(true);
                 edgeNodeGroup.getChildren().add(edge);
+
+                // Spawning context menu
+                FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+                AnchorPane EdgeContextAnchor = new AnchorPane();
+                EdgeContextAnchor = edgeContextMenu.load();
+                EdgeContextMenuController controller = edgeContextMenu.getController();
+
+                EdgeContextAnchor.setLayoutX(edge.getLayoutX()+(xdiff/2));
+                EdgeContextAnchor.setLayoutY(edge.getLayoutY()+(ydiff/2));
+                pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+                pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+                pane.getChildren().add(EdgeContextAnchor);
+                App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
             }
             if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
                 c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
