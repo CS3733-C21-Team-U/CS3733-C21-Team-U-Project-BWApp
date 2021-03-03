@@ -169,7 +169,7 @@ public class NewMainPageController {
     public void handleChangeTab() {
         App.mapInteractionModel.setCurrentAction("NONE");
         App.mapInteractionModel.clearPreviousNodeID();
-        App.mapInteractionModel.setNodeID(null);
+        App.mapInteractionModel.setNodeID(" ");
     }
 
 

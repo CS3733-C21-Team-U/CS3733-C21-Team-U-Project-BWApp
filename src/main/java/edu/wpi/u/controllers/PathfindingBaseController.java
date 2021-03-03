@@ -173,16 +173,6 @@ public class PathfindingBaseController {
 
     } // End of initialize
 
-    @FXML
-    public void handleAddNodeButton(){
-        App.mapInteractionModel.setCurrentAction("ADDNODE");
-    }
-
-    @FXML
-    public void handleAddEdgeButton(){
-        App.mapInteractionModel.setCurrentAction("ADDEDGE");
-    }
-
     /**
      * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
      * @param n - Node that is being place
@@ -198,14 +188,14 @@ public class PathfindingBaseController {
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
-                    App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
+                    App.mapInteractionModel.pathThingy++;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
             node1.setOnMouseEntered(event -> {
-                    if(App.mapInteractionModel.pathThingy) {
+                    if(App.mapInteractionModel.pathThingy % 2 == 1) {
                         try {
                             handleNodeClicked(n);
                         } catch (IOException e) {

@@ -51,6 +51,10 @@ public class floatingPathfindingController {
                 startNodeID = newValue;
                 targetNode = "END";
             }else{
+                if(App.mapInteractionModel.pathThingy % 2 == 1){
+                    startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
+                    startNodeID = newValue;
+                }
                 endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
             }
