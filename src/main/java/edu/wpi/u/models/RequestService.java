@@ -29,7 +29,7 @@ public class RequestService {
    */
 
   public void loadCSVFile(String path, String tableName){
-    Database.getDB().dropValues();
+    Database.getDB().dropValues(tableName);
     Database.getDB().readCSV(path,tableName);
     //this.activeRequests = rd.loadActiveRequests();
   }

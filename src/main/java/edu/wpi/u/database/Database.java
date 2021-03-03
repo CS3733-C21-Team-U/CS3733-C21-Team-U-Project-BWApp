@@ -248,31 +248,35 @@ public class Database {
         return false;
     }
 
-    public void dropValues() {
+    public void dropValues(String tableName) {
         try {
             Statement s = conn.createStatement();
-            String str = "alter table Locations drop column nodeID";
-            s.execute(str);
-            str = "alter table Locations drop column requestID";
+            String str = "alter table Locations drop column requestID";
             s.execute(str);
             str = "alter table Assignments drop column requestID";
             s.execute(str);
-            str = "delete from Nodes";
+            str= "delete from " + tableName;
             s.execute(str);
-            str = "delete from Edges";
-            s.execute(str);
-            str = "delete from Requests";
-            s.execute(str);
-            str = "delete from Locations";
-            s.execute(str);
-            str = "delete from Assignments";
-            s.execute(str);
-            str = "delete from Maintenance";
-            s.execute(str);
-            str = "delete from Laundry";
-            s.execute(str);
-            //str = "delete from Security";
-            //s.execute(str);
+            if (str.equals("all")){
+                str = "alter table Locations drop column requestID";
+                s.execute(str);
+                str = "alter table Assignments drop column requestID";
+                s.execute(str);
+                str = "delete from Nodes";
+                s.execute(str);
+                str = "delete from Edges";
+                s.execute(str);
+                str = "delete from Requests";
+                s.execute(str);
+                str = "delete from Locations";
+                s.execute(str);
+                str = "delete from Assignments";
+                s.execute(str);
+                str = "delete from Maintenance";
+                s.execute(str);
+                str = "delete from Laundry";
+                s.execute(str);
+            }
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
         }
@@ -328,7 +332,7 @@ public class Database {
     public void makeCSVDependant(boolean yes){
 
         if(!yes) return;
-        dropValues();
+        dropValues("all");
         deleteTables();
         readCSV("Requests.csv", "Requests");
         readCSV("Locations.csv", "Locations");

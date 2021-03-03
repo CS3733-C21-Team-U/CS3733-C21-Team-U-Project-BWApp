@@ -61,7 +61,7 @@ public class MapService {
    */
   public void loadCSVFile(String path, String tableName){
     this.currentIDNumber = new HashMap<>();
-    Database.getDB().dropValues();
+    Database.getDB().dropValues(tableName);
     Database.getDB().readCSV(path,tableName);
   }
 

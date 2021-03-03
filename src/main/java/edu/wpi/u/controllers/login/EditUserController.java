@@ -5,6 +5,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +35,7 @@ public class EditUserController {
     @FXML public JFXComboBox userTypeComboBox;
     @FXML public JFXDatePicker appointmentDatePicker;
     @FXML public JFXButton editUserButton;
+    public JFXButton cancelButton;
 
 
     public void initialize() throws IOException {
@@ -154,6 +156,13 @@ public class EditUserController {
         }
 
 
+    }
+
+    public void handleCancelButton(ActionEvent actionEvent) throws IOException {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 //
 //    /**This function takes a user from the combobox and fills the fields and artifacts with the selected user's info

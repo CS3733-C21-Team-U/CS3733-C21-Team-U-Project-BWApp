@@ -38,8 +38,6 @@ public class SettingsPageController {
     @FXML
     public JFXButton createTableButton;
     @FXML
-    public JFXTextField tableNameTextFIeld;
-    @FXML
     public JFXTextField filePathTextField;
     @FXML
     public Label subtitleText;
@@ -53,7 +51,7 @@ public class SettingsPageController {
     public ToggleGroup pathFindingMode;
     @FXML public JFXRadioButton dFSRadioButton;
     @FXML public JFXRadioButton bFSRadioButton;
-    public JFXTextField tableNameTextFIeld1;
+    @FXML public JFXTextField tableNameTextFIeld1;
     @FXML public JFXComboBox<String> tableNameOptions;
     @FXML public Group onlyAdmin;
 
@@ -106,7 +104,7 @@ public class SettingsPageController {
             pathfindingText.setStyle("-fx-opacity: 0");
             filePathTextField.setStyle("-fx-opacity: 0");
             loadCSVButton.setStyle("-fx-opacity: 0");
-            tableNameTextFIeld.setStyle("-fx-opacity: 0");
+            tableNameOptions.setStyle("-fx-opacity: 0");
             createTableButton.setStyle("-fx-opacity: 0");
 
             pathfindingText.setDisable(true);
@@ -170,7 +168,7 @@ public class SettingsPageController {
     }
 
     public void handleCreateTable() {
-        App.mapService.loadCSVFile(filePathTextField.getText(), tableNameTextFIeld.getText());
+        App.mapService.loadCSVFile(filePathTextField.getText(), tableNameOptions.getValue());
     }
 
     /*public void handleSetTheme1(ActionEvent actionEvent) {

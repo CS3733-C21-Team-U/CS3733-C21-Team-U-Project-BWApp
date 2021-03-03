@@ -151,4 +151,10 @@ public class NewRequestController {
         anchor.getChildren().add(root);
 
     }
+
+    public void HandleMakeEditCancelButton(ActionEvent actionEvent) {
+    }
+
+    public void handleSaveNewEditRequest(ActionEvent actionEvent) {
+    }
 }
