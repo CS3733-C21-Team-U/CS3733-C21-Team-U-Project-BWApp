@@ -41,6 +41,7 @@
                   <TableColumn fx:id="appDateColumn" prefWidth="91.0" text="AppDate" />
               </columns>
             </TableView>
+            <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest" />
             <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="employeeID" />
@@ -52,7 +53,7 @@
                   <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="75.0" text="Phone Number" />
               </columns>
             </TableView>
-            <JFXButton fx:id="editSelectedButton" onAction="#handleEditUser" styleClass="button-contained" text="Edit Selected User" />
+            <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee" />
          </children>
       </VBox>
    </children>

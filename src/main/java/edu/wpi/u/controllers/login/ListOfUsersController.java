@@ -124,21 +124,26 @@ public class ListOfUsersController {
         employeeTableView.setItems(employeeList);
     }
 
-    public void handleEditUser(ActionEvent actionEvent) throws IOException {
-        if(guestTableView.getSelectionModel().getSelectedItem() != null){
-          myGuest = (Guest) guestTableView.getSelectionModel().getSelectedItem();
-          App.selectedGuest = myGuest;
-        }
-        if(employeeTableView.getSelectionModel().getSelectedItem() != null){
-            myEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
-            App.selectedEmployee = myEmployee;
-        }
-        //switch scene
+    public void handleEditUserList(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditUser.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
+    }
+
+    public void handleEditGuestList(ActionEvent actionEvent) throws IOException {
+        App.isEdtingGuest = true;
+        myGuest = (Guest) guestTableView.getSelectionModel().getSelectedItem();
+        App.selectedGuest = myGuest;
+        handleEditUserList(actionEvent);
+    }
+
+    public void handleEditEmpList(ActionEvent actionEvent) throws IOException {
+        App.isEdtingGuest = false;
+        myEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+        App.selectedEmployee = myEmployee;
+        handleEditUserList(actionEvent);
     }
 
     //getColumns(.add(treeTableColumnUserID));

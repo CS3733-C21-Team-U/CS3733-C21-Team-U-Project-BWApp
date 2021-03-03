@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: "com.twilio.sdk", name: "twilio", version: "8.8.0"
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation(
             'com.jfoenix:jfoenix:8.0.10',
 
@@ -28,6 +28,9 @@ dependencies {
             'org.slf4j:slf4j-simple:1.7.30',
             'net.kurobako:gesturefx:0.6.0',
     )
+    compile group: 'org.riversun', name: 'java-promise', version: '1.1.0'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.25'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
     compile group: 'net.kurobako', name:'gesturefx', version: '0.6.0'
     compile 'org.slf4j:slf4j-api:1.7.30'
@@ -35,11 +38,13 @@ dependencies {
     compile 'org.apache.derby:derby:10.14.2.0'
     compile 'com.jfoenix:jfoenix:8.0.10'
     compile group: "com.twilio.sdk", name: "twilio", version: "8.0.+"
-    compile group: "com.sparkjava", name: "spark-core", version: "2.7.1"
+    compile "com.sparkjava:spark-core:2.9.3"
     compile group: "org.slf4j", name: "slf4j-simple", version: "1.7.21"
     compile 'io.github.cdimascio:java-dotenv:5.2.2'
 
-
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testRuntime 'cglib:cglib-nodep:3.2.4'
+    testCompile 'org.objenesis:objenesis:1.2'
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
             'org.junit.jupiter:junit-jupiter:5.6.0',
@@ -47,6 +52,7 @@ dependencies {
     )
     implementation 'junit:junit:4.12'
     implementation group: "com.twilio.sdk", name: "twilio", version: "8.8.0"
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 
