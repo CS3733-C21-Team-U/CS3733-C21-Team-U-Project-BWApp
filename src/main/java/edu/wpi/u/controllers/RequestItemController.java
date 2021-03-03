@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.SVGPath;
 
 import java.io.IOException;
 
@@ -31,6 +32,7 @@ public class RequestItemController {
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
+    @FXML public SVGPath requestIcon;
 
     public String myRequestID;
     public Integer myID;
