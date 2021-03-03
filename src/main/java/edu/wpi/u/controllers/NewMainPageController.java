@@ -82,6 +82,19 @@ public class NewMainPageController {
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
+
+        if(App.userService.getActiveUser().getType() ==  ADMIN){
+            adminTab1.setStyle("-fx-opacity: 1");
+            adminTab1.setDisable(false);
+            adminTab2.setStyle("-fx-opacity: 1");
+            adminTab2.setDisable(false);
+        }
+        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+            adminTab1.setStyle("-fx-opacity: 0");
+            adminTab1.setDisable(true);
+            adminTab2.setStyle("-fx-opacity: 0");
+            adminTab2.setDisable(true);
+        }
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
