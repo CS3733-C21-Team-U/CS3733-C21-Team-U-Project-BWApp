@@ -67,7 +67,9 @@ public class EdgeContextMenuController {
             userTypes.add(getEdgePermissionType());
             if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
                 Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-                App.undoRedoService.updateEdge(thisEdge.getEdgeID(), thisEdge.getUserPermissions());
+                ArrayList<StaffType> perms = new ArrayList<>();
+                perms.add(getEdgePermissionType());
+                App.undoRedoService.updateEdge(thisEdge.getEdgeID(), perms);
             } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                 App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
             }
