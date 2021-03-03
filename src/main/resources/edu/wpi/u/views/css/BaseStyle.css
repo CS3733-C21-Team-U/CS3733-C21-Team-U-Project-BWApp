@@ -108,6 +108,10 @@
     -fx-font-size: 1em;
 }
 
+.error-label{
+    -fx-text-fill: #D34336;
+}
+
 
 /* ----------- CHECK-BOX -------------- */
 .jfx-check-box {
