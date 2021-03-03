@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXChipView?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
@@ -75,7 +74,6 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
                   <JFXButton onAction="#handleSaveNewEditRequest" prefHeight="31.0" prefWidth="166.0" text="Save" />
-                  <JFXCheckBox fx:id="makeEditDateCheckBox" prefHeight="21.0" prefWidth="118.0" text="Completed" />
                   <JFXButton onAction="#HandleMakeEditCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" text="Cancel" />
                </children>
             </HBox>
