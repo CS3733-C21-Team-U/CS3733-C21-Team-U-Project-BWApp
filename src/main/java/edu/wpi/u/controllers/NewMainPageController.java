@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -46,8 +47,6 @@ public class NewMainPageController {
     static final Duration DURATION = Duration.millis(300);
     @FXML
     public JFXTabPane mainTabPane;
-    //public JFXButton openDialogue;
-    public JFXDialog dialog;
     public JFXListView listViewDemo;
     public JFXTextField validationFeild;
     public StackPane newMainPageStackPane;
@@ -56,6 +55,7 @@ public class NewMainPageController {
     public Tab adminTab1;
 
     public SVGPath themeIcon;
+    public ToggleGroup group1;
 
 
     AnchorPane rightServiceRequestPane;
@@ -110,18 +110,10 @@ public class NewMainPageController {
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("CANCEL");
         JFXButton button2 = new JFXButton("EXIT");
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-                App.getInstance().end();
-            }
+        button1.setOnAction(event -> dialog.close());
+        button2.setOnAction(event -> {
+            dialog.close();
+            App.getInstance().end();
         });
         button1.getStyleClass().add("button-text");
         button2.getStyleClass().add("button-contained");

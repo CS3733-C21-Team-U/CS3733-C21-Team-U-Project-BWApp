@@ -104,8 +104,8 @@ public class App extends Application {
 
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/CovidSurveyPage.fxml"));
 
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllEdges.csv", "Edges");
+    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
 
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
