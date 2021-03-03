@@ -91,16 +91,19 @@ public class NERController {
 
             JFXTextField j = new JFXTextField();
             j.setPromptText(currIRequest.getSpecificFields()[i]);
-            j.setText(currIRequest.getSpecificData().get(i).toString());
             j.setLabelFloat(true);
+            j.setStyle("-fx-pref-width: 400px");
+            j.setStyle("-fx-pref-height: 50px");
+            j.setStyle("-fx-font-size: 16px");
+            j.setText(currIRequest.getSpecificData().get(i).toString());
 
             ans[i] = j;
 
-            h.setAlignment(HBoxToClone.getAlignment());
-            h.setSpacing(HBoxToClone.getSpacing());
-            h.getChildren().add(j);
-            h.setId(Integer.toString(i));
-            VBoxToAddTo.getChildren().add(h);
+//            h.setAlignment(HBoxToClone.getAlignment());
+//            h.setSpacing(HBoxToClone.getSpacing());
+//            h.getChildren().add(j);
+//            h.setId(Integer.toString(i));
+            VBoxToAddTo.getChildren().add(j);
         }
         return ans;
     }

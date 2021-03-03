@@ -41,6 +41,7 @@ public class NewRequestController {
     public VBox VBoxToAddTo;
     public Label specificTitle;
     public HBox HBoxToClone;
+    public Label errorMsg;
 
     private IRequest currIRequest;
     private JFXTextField[] specificTextFields;

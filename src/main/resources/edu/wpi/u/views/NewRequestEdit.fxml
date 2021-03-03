@@ -23,7 +23,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="850.0" spacing="40.0">
                      <children>
-                        <Label prefHeight="88.0" prefWidth="361.0" styleClass="headline-1" text="New Request" textAlignment="CENTER">
+                        <Label prefHeight="88.0" prefWidth="361.0" styleClass="headline-1" text="Edit Request" textAlignment="CENTER">
                            <font>
                               <Font size="60.0" />
                            </font>
