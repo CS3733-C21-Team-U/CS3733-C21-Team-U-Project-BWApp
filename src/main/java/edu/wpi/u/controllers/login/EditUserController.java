@@ -144,7 +144,7 @@ public class EditUserController {
             userTypeComboBox.setValue(App.selectedGuest.getType());
             phoneNumTextField.setText(App.selectedGuest.getPhoneNumber());
             appointmentDatePicker.setValue(App.selectedGuest.getAppointmentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            App.userService.updateGuest(userSelectComboBox.getValue().toString(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
+            App.userService.updateGuest(userSelectComboBox.getValue().toString(), nameTextField.getValue(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), (StaffType) userTypeComboBox.getValue(),  phoneNumTextField.getText(), Date.from(Instant.from(appointmentDatePicker.getValue()))  , false);
         }
 
     }
