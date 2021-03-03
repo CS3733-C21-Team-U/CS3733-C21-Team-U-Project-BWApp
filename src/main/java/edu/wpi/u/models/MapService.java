@@ -114,7 +114,7 @@ public class MapService {
       }else {
         curIndexString = String.valueOf(curIndex);
       }
-      String nodeID = "U" + nodeType + curIndexString;
+      String nodeID = "U" + nodeType + curIndexString + "0" + floor;
 
       md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
       mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");
