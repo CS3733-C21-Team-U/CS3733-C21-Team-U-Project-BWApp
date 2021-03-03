@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -background;" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.ViewRequestController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.ViewRequestController">
    <children>
       <VBox layoutX="201.0" layoutY="-45.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,9 +17,9 @@
             </HBox>
             <ScrollPane prefHeight="877.0" prefWidth="1631.0">
               <content>
-                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="3000.0" prefWidth="1629.0" stylesheets="@css/BaseStyle.css">
+                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="3000.0" prefWidth="1700.0" stylesheets="@css/BaseStyle.css">
                      <children>
-                        <VBox fx:id="requestList" layoutX="579.0" layoutY="238.0" prefHeight="875.0" prefWidth="1629.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <VBox fx:id="requestList" layoutX="579.0" layoutY="-5.0" prefHeight="3005.0" prefWidth="1700.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-71.0" AnchorPane.topAnchor="-5.0" />
                      </children>
                   </AnchorPane>
               </content>
