@@ -42,7 +42,7 @@
                </VBox.margin></JFXComboBox>
             <HBox prefHeight="33.0" prefWidth="1675.0">
                <children>
-                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="358.0" promptText="Edit Next Appt">
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="474.0" promptText="Edit Next Appt">
                      <HBox.margin>
                         <Insets right="33.0" />
                      </HBox.margin>

@@ -38,8 +38,11 @@
                   <TableColumn fx:id="userTypeColumn" prefWidth="75.0" text="User Type" />
                   <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
                   <TableColumn fx:id="phoneNumberColumn" prefWidth="112.0" text="Phone Number" />
-                  <TableColumn fx:id="appDateColumn" prefWidth="91.0" text="AppDate" />
+                  <TableColumn fx:id="appDateColumn" prefWidth="312.0" text="AppDate" />
               </columns>
+               <VBox.margin>
+                  <Insets right="800.0" />
+               </VBox.margin>
             </TableView>
             <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest" />
             <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0">
@@ -50,7 +53,7 @@
                   <TableColumn fx:id="employeePasswordColumn" prefWidth="75.0" text="Password" />
                   <TableColumn fx:id="employeeUserTypeColumn" prefWidth="75.0" text="User Type" />
                   <TableColumn fx:id="employeeEmailColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="75.0" text="Phone Number" />
+                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="95.0" text="Phone Number" />
               </columns>
             </TableView>
             <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee" />

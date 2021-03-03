@@ -85,6 +85,8 @@ public class LoginController {
     public JFXTextField tokenField;
     @FXML
     public JFXButton tokenSubmitButton;
+    @FXML
+    public JFXTextField accountNameTextField;
 
     public void initialize() throws IOException {
 
