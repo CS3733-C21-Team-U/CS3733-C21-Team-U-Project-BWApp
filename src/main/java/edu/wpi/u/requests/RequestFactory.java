@@ -27,6 +27,8 @@ public class RequestFactory {
                 return new ComputerRequest();
             case "Language":
                 return new LanguageRequest();
+            case "Gift":
+                return new GiftRequest();
             default:
                 System.out.println("Type does not exist!");
 
