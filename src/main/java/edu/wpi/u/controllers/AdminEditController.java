@@ -27,13 +27,8 @@ public class AdminEditController {
 
 
     static final Duration DURATION = Duration.millis(300);
-    @FXML public SVGPath leftMenuHamburger;
     @FXML public AnchorPane mainAnchorPane;
-    @FXML public JFXDrawer leftMenuDrawer;
-    @FXML public JFXDrawer serviceRequestDrawer;
 
-    AnchorPane rightServiceRequestPane;
-    AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
@@ -368,7 +363,7 @@ public class AdminEditController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
-            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
+            loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampusLight.png");
             node.setFitWidth(2987);
             edgeNodeGroup.toFront();
 
@@ -381,7 +376,7 @@ public class AdminEditController {
      */
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floor.equals("1")) {
-            loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+            loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             edgeNodeGroup.toFront();
         }
     }
@@ -392,7 +387,7 @@ public class AdminEditController {
      */
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floor.equals("2")) {
-            loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+            loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             edgeNodeGroup.toFront();
         }
     }
@@ -403,7 +398,7 @@ public class AdminEditController {
      */
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floor.equals("3")) {
-            loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+            loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             edgeNodeGroup.toFront();
         }
     }
@@ -414,7 +409,7 @@ public class AdminEditController {
      */
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floor.equals("4")) {
-            loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+            loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             edgeNodeGroup.toFront();
         }
     }
@@ -425,7 +420,7 @@ public class AdminEditController {
      */
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floor.equals("5")) {
-            loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+            loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             edgeNodeGroup.toFront();
         }
     }

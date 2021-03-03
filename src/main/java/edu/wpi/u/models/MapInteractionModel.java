@@ -21,7 +21,7 @@ public class MapInteractionModel {
     public SimpleStringProperty editFlag = new SimpleStringProperty("");
     public AnchorPane selectedNodeContextBox;
     public AnchorPane selectedEdgeContextBox;
-    public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
+    public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampusDark.png");
     public String floor = "G";
     public ArrayList<String> nodeIDList = new ArrayList<String>();
     public ArrayList<String> edgeIDList = new ArrayList<String>();
