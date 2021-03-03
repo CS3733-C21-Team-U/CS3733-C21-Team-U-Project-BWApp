@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,7 @@ public class SettingsPageController {
     public ToggleGroup pathFindingMode;
     @FXML public JFXRadioButton dFSRadioButton;
     @FXML public JFXRadioButton bFSRadioButton;
+    public JFXTextField tableNameTextFIeld1;
 
     public void initialize() throws IOException, FilePathNotFoundException {
 
@@ -170,6 +172,11 @@ public class SettingsPageController {
 
     public void handleBreadthFirst(ActionEvent actionEvent) {
         App.pathfindingAlgorithm = "BFS";
+    }
+
+
+    public void handleSaveCSV(ActionEvent actionEvent) {
+        Database.getDB().saveCSV(tableNameTextFIeld1.getText(),filePathTextField.getText(),"Anything I want");
     }
 }
 

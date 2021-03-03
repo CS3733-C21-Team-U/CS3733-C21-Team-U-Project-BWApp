@@ -73,6 +73,20 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
+            <HBox layoutX="10.0" layoutY="452.0" prefHeight="36.0" prefWidth="1675.0">
+               <children>
+                  <JFXTextField fx:id="tableNameTextFIeld1" labelFloat="true" promptText="New Table Name">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXButton buttonType="RAISED" onAction="#handleSaveCSV" prefHeight="33.0" prefWidth="275.0" styleClass="button-contained" text="Save to CSV">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
             <Label fx:id="pathfindingText" styleClass="headline-3" text="Path Finding Modes">
                <VBox.margin>
                   <Insets top="15.0" />
@@ -102,4 +116,8 @@
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>
