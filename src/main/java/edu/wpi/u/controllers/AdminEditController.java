@@ -12,7 +12,6 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
@@ -21,6 +20,8 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class AdminEditController {
 
@@ -116,6 +117,7 @@ public class AdminEditController {
         // Creating nodes
         generateNodes(App.mapInteractionModel.floor);
         generateEdges(App.mapInteractionModel.floor);
+        bringNodesToFront();
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
@@ -193,7 +195,14 @@ public class AdminEditController {
         edgeNodeGroup.toFront();
     }
 
-
+    public void bringNodesToFront(){
+        for(javafx.scene.Node n : edgeNodeGroup.getChildren()){
+            List<String> items = Arrays.asList(n.getId().split("\\s*_\\s*"));
+            if(items.size() == 1){
+                n.toFront();
+            }
+        }
+    }
 
     /**
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
