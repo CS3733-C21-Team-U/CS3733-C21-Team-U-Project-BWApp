@@ -10,7 +10,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ViewRequestController {
 
@@ -27,7 +31,6 @@ public class ViewRequestController {
         App.lastClickedRequestNumber = 0;
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
-
             FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewRequestItem.fxml"));
             AnchorPane request = requestLoader.load();
             Request req = listOfRequests.get(i).getGenericRequest();
@@ -38,7 +41,12 @@ public class ViewRequestController {
             controller.requestItemLocationChipView.getChips().addAll(req.getLocation());
             controller.requestItemDescriptionLabel.setText(req.getDescription());
             controller.requestItemCreatorLabel.setText(req.getCreator());
-            //controller.requestItemDate2BCompletedLabel.setText(req.getDateNeeded().toString());
+
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Date today = req.getDateNeeded();
+            System.out.println(today);
+            String dateAsString = df.format(today);
+            controller.requestItemDate2BCompletedLabel.setText(dateAsString);
             controller.requestItemRequestTypeLabel.setText(req.getType());
             //controller.myID = i;
             requestList.getChildren().add(request);

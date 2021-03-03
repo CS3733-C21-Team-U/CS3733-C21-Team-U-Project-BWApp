@@ -74,7 +74,7 @@ public class Database {
                 ps2.execute();
 
                 String tbl3 =
-                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))"; //TODO: Delete Type
+                        "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50), dateNeeded date, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 

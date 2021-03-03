@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
@@ -118,8 +119,10 @@ public class NewRequestController {
         Random rand = new Random();
         int requestID = rand.nextInt();
         String ID = Integer.toString(requestID);//make a random id
+        //TODO : fix date bug
+        Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-        Request newRequest = new Request(ID, staff, new Date(), null, makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
+        Request newRequest = new Request(ID, staff, new Date(), new Date(), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
 
         result.setRequest(newRequest);
         result.setSpecificData(specifics);
