@@ -27,8 +27,4 @@
             </image>
         </ImageView>
     </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
 </AnchorPane>

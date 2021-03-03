@@ -28,8 +28,4 @@
       <JFXButton layoutX="51.0" layoutY="154.0" onAction="#handleGoBack" prefHeight="63.0" prefWidth="190.0" styleClass="button-text" text="BACK TO LOGIN PAGE" textFill="#101c38">
       </JFXButton>
     </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
 </AnchorPane>
