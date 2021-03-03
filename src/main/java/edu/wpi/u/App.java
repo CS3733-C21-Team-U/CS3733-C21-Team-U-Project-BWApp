@@ -106,7 +106,6 @@ public class App extends Application {
 
     mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
-
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");

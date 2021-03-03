@@ -50,14 +50,11 @@ public class floatingPathfindingController {
                 startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
                 targetNode = "END";
-            }else{
-                if(App.mapInteractionModel.pathThingy % 2 == 1){
-                    startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
-                    startNodeID = newValue;
-                }
+            } else {
                 endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
             }
+
             if(!startNodeID.equals("") && !endNodeID.equals("")){
                 try {
                     path = App.mapService.runPathfinding(startNodeID,endNodeID);

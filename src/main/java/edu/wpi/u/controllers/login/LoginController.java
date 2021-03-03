@@ -91,8 +91,10 @@ public class LoginController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
-    public JFXButton loginButton2;
+    //public JFXButton loginButton2;
     @FXML public Label errorLabel;
+    @FXML public JFXButton debugLoginAdminButton;
+    @FXML public JFXButton debugLoginGuest;
 
     public void initialize() throws IOException {
 
@@ -161,7 +163,7 @@ public class LoginController {
         String password = passWordField.getText();
         System.out.println("Username : " + username + " Password: " + password);
         App.userService.setUser(username, password, App.userService.checkPassword(password));
-        System.out.println("Phonenumebr from user service: " + App.userService.getActiveUser().getPhoneNumber());
+        System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
         System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
         // TODO : Extract out to helper
         try {
@@ -238,8 +240,14 @@ public class LoginController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleLogin2(ActionEvent actionEvent) throws IOException {
+    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Guests");
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
+        App.userService.setUser("staff", "staff", "Guests");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

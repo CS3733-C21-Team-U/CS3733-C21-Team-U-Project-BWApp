@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,7 +41,7 @@
                </VBox.margin></JFXComboBox>
             <HBox prefHeight="38.0" prefWidth="1675.0">
                <children>
-                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="324.0" promptText="Edit Next Appt">
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="475.0" promptText="Edit Next Appt">
                      <HBox.margin>
                         <Insets right="66.0" />
                      </HBox.margin>
@@ -52,15 +51,16 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </HBox>
-            <JFXButton fx:id="editUserButton" buttonType="RAISED" onAction="#handleEditUser" prefWidth="475.0" styleClass="button-contained" text="Apply Changes">
+            <JFXButton fx:id="editUserButton" buttonType="RAISED" onAction="#handleEditUser" prefHeight="36.0" prefWidth="475.0" styleClass="button-contained" text="Apply Changes">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></JFXButton>
+            <JFXButton fx:id="cancelButton" onAction="#handleCancelButton" prefHeight="36.0" prefWidth="475.0" styleClass="button-outlined" text="Cancel">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </JFXButton>
          </children>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
 </AnchorPane>

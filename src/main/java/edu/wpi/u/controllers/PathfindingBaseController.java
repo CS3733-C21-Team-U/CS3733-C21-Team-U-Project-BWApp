@@ -183,19 +183,20 @@ public class PathfindingBaseController {
             node1.setCenterX(n.getCords()[0]);
             node1.setCenterY(n.getCords()[1]);
             node1.setRadius(7.0);
+
             node1.setId(n.getNodeID());
             node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
-                    App.mapInteractionModel.pathThingy++;
+                    App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
             node1.setOnMouseEntered(event -> {
-                    if(App.mapInteractionModel.pathThingy % 2 == 1) {
+                    if(App.mapInteractionModel.pathThingy) {
                         try {
                             handleNodeClicked(n);
                         } catch (IOException e) {

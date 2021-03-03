@@ -129,35 +129,36 @@ public class RequestData extends Data{
                 Date needed = rs.getDate("dateNeeded");
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
-                LinkedList<String> locations = new LinkedList<String>();
-                try { // TODO : Move to helper function
-                    String str2 = "select * from Locations where requestID=?";
-                    PreparedStatement ps2= conn.prepareStatement(str2);
-                    ps2.setString(1,id);
-                    ResultSet rs2 = ps2.executeQuery();
-                    while (rs2.next()){
-                        locations.add(rs2.getString("nodeID"));
-                    }
-                    rs2.close();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-                LinkedList<String> assignees = new LinkedList<String>();
-                try {
-                    String str3 = "select * from Assignments where requestID=?";
-                    PreparedStatement ps3 = conn.prepareStatement(str3);
-                    ps3.setString(1,id);
-                    ResultSet rs3 = ps3.executeQuery();
-                    while (rs3.next()){
-                        assignees.add(rs3.getString("userID"));
-                    }
-                    rs3.close();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
                 String type = rs.getString("type");
+                LinkedList<String> locations = new LinkedList<String>();
+//                try { // TODO : Move to helper function
+//                    String str2 = "select * from Locations where requestID=?";
+//                    PreparedStatement ps2= conn.prepareStatement(str2);
+//                    ps2.setString(1,id);
+//                    ResultSet rs2 = ps2.executeQuery();
+//                    while (rs2.next()){
+//                        locations.add(rs2.getString("nodeID"));
+//                    }
+//                    rs2.close();
+//                }
+//                catch (Exception e){
+//                    e.printStackTrace();
+//                }
+                LinkedList<String> assignees = new LinkedList<String>();
+//                try {
+//                    String str3 = "select * from Assignments where requestID=?";
+//                    PreparedStatement ps3 = conn.prepareStatement(str3);
+//                    ps3.setString(1,id);
+//                    ResultSet rs3 = ps3.executeQuery();
+//                    while (rs3.next()){
+//                        assignees.add(rs3.getString("userID"));
+//                    }
+//                    rs3.close();
+//                }
+//                catch (Exception e){
+//                    e.printStackTrace();
+//                }
+
 
                 //Make IRequest
                 RequestFactory rf = new RequestFactory();
@@ -196,7 +197,7 @@ public class RequestData extends Data{
                 specificTable.close();
                 results.add(result);
             }
-            //rs.close();
+            rs.close();
         }
         catch (Exception e){
             e.printStackTrace();

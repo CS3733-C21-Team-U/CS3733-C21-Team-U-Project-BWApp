@@ -5,8 +5,6 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTimePicker?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,9 +16,9 @@
       <VBox layoutX="336.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
             <Label styleClass="headline-2" text="Add User" />
-            <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Enter Username" text="test">
+            <JFXTextField fx:id="usernameTextField" labelFloat="true" prefWidth="188.0" promptText="Enter Username" text="test">
                <VBox.margin>
-                  <Insets right="1200.0" top="30.0" />
+                  <Insets right="1200.0" top="15.0" />
                </VBox.margin></JFXTextField>
             <JFXTextField fx:id="nameTextField" labelFloat="true" promptText="Enter Name" text="test">
                <VBox.margin>
@@ -42,14 +40,9 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXComboBox>
-            <HBox prefHeight="34.0" prefWidth="1675.0">
+            <HBox prefHeight="33.0" prefWidth="1675.0">
                <children>
-                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" promptText="Enter Appt Time" />
-                  <JFXTimePicker fx:id="appointmentTimePicker" overLay="true" promptText="Enter Appt Time">
-                     <HBox.margin>
-                        <Insets left="16.0" />
-                     </HBox.margin>
-                  </JFXTimePicker>
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="358.0" promptText="Enter Appt Time" />
                   <JFXCheckBox fx:id="userEmployStatus" text="Employee?">
                      <HBox.margin>
                         <Insets left="33.0" top="9.0" />
@@ -60,15 +53,15 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </HBox>
-            <JFXButton fx:id="addUserButton" onAction="#handleAddUser" prefWidth="475.0" styleClass="button-contained" text="Add User">
+            <JFXButton fx:id="addUserButton" buttonType="RAISED" onAction="#handleAddUser" prefWidth="475.0" styleClass="button-contained" text="Add User">
                <VBox.margin>
                   <Insets top="15.0" />
+               </VBox.margin></JFXButton>
+            <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#handleCancel" prefWidth="475.0" styleClass="button-contained" text="Cancel">
+               <VBox.margin>
+                  <Insets top="30.0" />
                </VBox.margin></JFXButton>
          </children>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
 </AnchorPane>
