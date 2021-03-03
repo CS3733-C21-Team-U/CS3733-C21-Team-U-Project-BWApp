@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.exceptions.AccountNameNotFoundException;
 import edu.wpi.u.exceptions.PasswordNotFoundException;
+import edu.wpi.u.exceptions.PhoneNumberNotFoundException;
 import edu.wpi.u.users.User;
 import io.netty.handler.codec.http.HttpHeaders;
 import javafx.application.Platform;
@@ -35,6 +36,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import lombok.SneakyThrows;
 import org.apache.http.HttpConnection;
 import org.apache.http.client.methods.RequestBuilder;
@@ -73,7 +75,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static edu.wpi.u.users.StaffType.*;
 
 public class LoginController {
@@ -167,6 +170,7 @@ public class LoginController {
         System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
         System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
+
         // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
@@ -174,6 +178,12 @@ public class LoginController {
                     // TODO : Send code
 
                     try {
+                        Pattern pattern = Pattern.compile("^\\d{10}$");
+                        Matcher matcher = pattern.matcher(phonenumber);
+                        if (!matcher.matches()){
+                            errorLabel.setText("Phonenumber associated with account is invalid");
+                            throw new PhoneNumberNotFoundException("Phone number is not valid");
+                        }
                         URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ phonenumber + "&channel=sms");
                         URL url = uri.toURL(); // make GET request
                         AsyncHttpClient client = Dsl.asyncHttpClient();

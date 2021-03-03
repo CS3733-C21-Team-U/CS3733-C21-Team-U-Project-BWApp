@@ -29,7 +29,7 @@ public class UserData extends Data{
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
         dropGuests(); // TODO : Stop for demo
         this.addGuest(new Guest("test","test","test","test","test", StaffType.ADMIN,"4016491137", new Date(1000), false));
-
+        this.addGuest(new Guest("w","w","w","w","w", StaffType.ADMIN,"998234", new Date(1000), false));
         this.addGuest(new Guest("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792", new Date(1000), false));
         this.addGuest(new Guest("admin","admin","admin","admin","admin", StaffType.ADMIN,"9148394600", new Date(800), false));
         printGuest();
