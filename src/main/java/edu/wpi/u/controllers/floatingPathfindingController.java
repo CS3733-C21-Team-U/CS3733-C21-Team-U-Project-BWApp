@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class floatingPathfindingController {
     @FXML
-    Label textualDirections;
+    JFXTextArea textualDirections;
     @FXML
     Label endNode;
     @FXML
@@ -45,11 +46,11 @@ public class floatingPathfindingController {
         textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
-                startNode.setText(newValue);
+                startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
                 targetNode = "END";
             }else{
-                endNode.setText(newValue);
+                endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
                 targetNode = "START";
             }

@@ -4,75 +4,66 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="150.0" prefWidth="230.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" stylesheets="@css/LightTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeContextMenuController">
+<AnchorPane prefHeight="200.0" prefWidth="180.0" style="-fx-background-color: -background; -fx-background-radius: 10;" stylesheets="@css/LightTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.NodeContextMenuController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" minWidth="105.0" prefWidth="105.0" text="Long Name:">
-                     <HBox.margin>
-                        <Insets left="10.0" top="8.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="longNameText" prefWidth="110.0" promptText="Long Name">
+                  <JFXTextField fx:id="longNameText" labelFloat="true" prefWidth="110.0" promptText="Long Name">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </JFXTextField>
                </children>
                <VBox.margin>
-                  <Insets top="8.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" minWidth="105.0" prefWidth="105.0" text="Short Name: ">
-                     <HBox.margin>
-                        <Insets left="10.0" top="8.0" />
-                     </HBox.margin>
-                  </Label>
-                  <JFXTextField fx:id="shortNameText" prefWidth="110.0" promptText="Long Name">
+                  <JFXTextField fx:id="shortNameText" labelFloat="true" prefWidth="110.0" promptText="Short Name">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </JFXTextField>
                </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" minWidth="105.0" prefWidth="105.0" text="Node Type:">
-                     <HBox.margin>
-                        <Insets left="10.0" top="4.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
-                  </Label>
-                  <JFXComboBox fx:id="nodeTypeDrop" minWidth="110.0" prefWidth="110.0" promptText="Node Type" />
+                  <JFXComboBox fx:id="nodeTypeDrop" labelFloat="true" minWidth="110.0" prefWidth="110.0" promptText="Node Type" />
                </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <JFXButton alignment="CENTER" onAction="#handleSaveButton" prefHeight="31.0" styleClass="button-outlined" text="Save">
+                  <JFXButton alignment="CENTER" onAction="#handleSaveButton" prefHeight="31.0" styleClass="button-contained" text="Save">
                      <HBox.margin>
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="doneButton" alignment="CENTER" onAction="#handleDeleteButton" prefHeight="31.0" styleClass="button-outlined" text="Delete">
+                  <JFXButton fx:id="doneButton" alignment="CENTER" onAction="#handleDeleteButton" prefHeight="31.0" styleClass="button-text" text="Delete">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
             </HBox>
          </children>
          <opaqueInsets>
@@ -80,4 +71,7 @@
          </opaqueInsets>
       </VBox>
    </children>
+   <effect>
+      <DropShadow />
+   </effect>
 </AnchorPane>

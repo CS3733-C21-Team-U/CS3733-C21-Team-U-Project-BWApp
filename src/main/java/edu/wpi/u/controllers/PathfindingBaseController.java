@@ -32,10 +32,7 @@ public class PathfindingBaseController {
     public GesturePane map;
 
     static final Duration DURATION = Duration.millis(300);
-    @FXML public SVGPath leftMenuHamburger;
     @FXML public AnchorPane mainAnchorPane;
-    @FXML public JFXDrawer leftMenuDrawer;
-    @FXML public JFXDrawer serviceRequestDrawer;
     @FXML public JFXToggleNode floorG;
     @FXML public JFXToggleNode floor1;
     @FXML public JFXToggleNode floor2;
@@ -58,7 +55,7 @@ public class PathfindingBaseController {
         floorG.setSelected(true);
         App.mapService.loadStuff();
         // Loading the map
-        node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
+        node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
         node.setFitWidth(2987);
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
@@ -126,13 +123,11 @@ public class PathfindingBaseController {
         });
 
         // Creating nodes
-        generateNodes(App.mapInteractionModel.floor);
-        generateEdges(App.mapInteractionModel.floor);
-
-        App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
+        generateNodes(App.mapInteractionModel.floorPathfinding);
+        App.mapInteractionModel.mapImageResourcePathfinding.addListener((observable, oldValue, newValue)  ->{
             pane.getChildren().remove(node);
-            node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
-            if(App.mapInteractionModel.floor.equals("G")){
+            node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
+            if(App.mapInteractionModel.floorPathfinding.equals("G")){
                 node.setFitWidth(2987);
             } else{
                 node.setFitWidth(2470);
@@ -172,7 +167,7 @@ public class PathfindingBaseController {
                     break;
             }
             generateEdges(floorStart);
-            generateNodes(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
 
@@ -201,7 +196,7 @@ public class PathfindingBaseController {
             node1.setRadius(7.0);
             node1.setId(n.getNodeID());
             node1.toFront();
-            node1.setFill(Paint.valueOf("Black"));
+            node1.setStyle("-fx-fill: -error");
             node1.setVisible(true);
             node1.setOnMouseClicked(event -> {
                 try {
@@ -224,8 +219,6 @@ public class PathfindingBaseController {
             try {
                 if(n.getFloor().equals(floor)){
                     placeNodesHelper(n);
-                }else{
-                    System.out.println(n.getFloor()+" is not a valid node!!! We can't put this on the screen bruh");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -251,9 +244,9 @@ public class PathfindingBaseController {
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
-        edge.setStrokeWidth(3.0);
+        edge.setStrokeWidth(7);
         edge.toFront();
-        edge.setFill(Paint.valueOf("Black"));
+        edge.setStyle("-fx-stroke: -error");
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
             try {
@@ -269,14 +262,10 @@ public class PathfindingBaseController {
 
     public void generateEdges(String floor){
         getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
-            System.out.println("We're in the function");
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
                 placeEdgesHelper(e);
 
-            } else{
-                System.out.println(e.getStartNode().getFloor());
-                System.out.println("The edge is NOT a valid edge for printing");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -327,10 +316,9 @@ public class PathfindingBaseController {
      * @param resource this a path that points to the correct floor map from the base package (/edu/wpi/u...)
      */
     public void loadNewMapAndGenerateHelper(String floor, String resource){
-        App.mapInteractionModel.floor = floor;
-        App.mapInteractionModel.mapImageResource.set(resource);
-        generateNodes(floor);
-        generateEdges(floor);
+        App.mapInteractionModel.floorPathfinding = floor;
+        App.mapInteractionModel.mapImageResourcePathfinding.set(resource);
+        generateNodes(floor); //Since this is just the pathfinding page, we don't want to generate all the nodes and edges
     }
 
     /**
@@ -338,9 +326,10 @@ public class PathfindingBaseController {
      */
     public void handleFloorGButton(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("G")) {
+        if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
+            generateEdges("G");
             edgeNodeGroup.toFront();
 
         }
@@ -352,8 +341,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor1Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("1")) {
-            loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1.png");
+        if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
+            loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
+            generateEdges("1");
             edgeNodeGroup.toFront();
         }
     }
@@ -364,8 +354,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor2Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("2")) {
-            loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2.png");
+        if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
+            loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
+            generateEdges("2");
             edgeNodeGroup.toFront();
         }
     }
@@ -376,8 +367,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor3Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("3")) {
-            loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3.png");
+        if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
+            loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
+            generateEdges("3");
             edgeNodeGroup.toFront();
         }
     }
@@ -388,8 +380,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor4Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("4")) {
-            loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4.png");
+        if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
+            loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
+            generateEdges("4");
             edgeNodeGroup.toFront();
         }
     }
@@ -400,8 +393,9 @@ public class PathfindingBaseController {
      */
     public void handleFloor5Button(){
         edgeNodeGroup.getChildren().clear();
-        if(!App.mapInteractionModel.floor.equals("5")) {
-            loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5.png");
+        if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
+            loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
+            generateEdges("5");
             edgeNodeGroup.toFront();
         }
     }

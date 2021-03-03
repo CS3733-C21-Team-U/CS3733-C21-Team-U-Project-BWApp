@@ -67,6 +67,21 @@ public class MapData extends Data{
         return 1;
     }
 
+    public int updateNodeType(String node_id, String newNodeType) {
+        try {
+            String str = "update Nodes set node_type=? where nodeID=?";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, newNodeType);
+            ps.setString(2, node_id);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update node type in the database");
+            return 0;
+        }
+        return 1;
+    }
+
     public int updBuilding(String node_id, String new_building) {
         try {
             String str = "update Nodes set building=? where nodeID=?";
@@ -250,7 +265,8 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                mm.addEdge(id,start,end, new ArrayList<>());
+                ArrayList<StaffType> perms = this.getUserTypes(id);
+                 mm.addEdge(id,start,end, perms);
             }
             rs2.close();
         }
@@ -305,10 +321,9 @@ public class MapData extends Data{
      * Updates Returns list of users who have permission to inputted edge
      * @param edgeID - Desired edge
      * @return Arraylist of Strings, representing types of users with permission
-     * TODO: Update this to return a list of StaffType
      */
     public ArrayList<StaffType> getUserTypes(String edgeID) {
-        ArrayList<StaffType> userTypes = new ArrayList<StaffType>();
+        ArrayList<StaffType> userTypes = new ArrayList<>();
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
@@ -368,14 +383,12 @@ public class MapData extends Data{
     /**
      * Removes a single permission from the table
      * @param edgeID - Edge in position
-     * @param stafftype - User type to be added to permission
      */
-    public void removePermission(String edgeID, StaffType stafftype){
+    public void removePermission(String edgeID){
         try {
-            String str = "delete from Permissions where edgeID=? and userType=?";
+            String str = "delete from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
-            ps.setString(2,String.valueOf(stafftype));
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -110,11 +110,11 @@ public class MapEdit {
      * @param longName
      * @param shortName
      */
-    public void updateNode(double xCoord, double yCoord, String longName, String shortName){
+    public void updateNode(double xCoord, double yCoord, String nodeType, String longName, String shortName){
         try{
             this.edit = EditTypes.UPDATE;
             this.oldNode = new Node(App.mapService.getNodeFromID(this.ID));
-            App.mapService.updateNode(this.ID,xCoord,yCoord,shortName,longName);
+            App.mapService.updateNode(this.ID,xCoord,yCoord, nodeType, shortName,longName);
         }catch (Exception e){
             throw e;
         }
@@ -128,6 +128,7 @@ public class MapEdit {
      */
     public void addEdge(String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.ADD;
             App.mapService.addEdge(start_node + "_" + end_node, start_node, end_node, permissions);
             this.ID = start_node + "_" + end_node;
@@ -140,6 +141,7 @@ public class MapEdit {
      */
     public void deleteEdge(){
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.DELETE;
             this.oldEdge = App.mapService.getEdgeFromID(this.ID);
             App.mapService.deleteEdge(this.ID);
@@ -154,6 +156,7 @@ public class MapEdit {
      */
     public void updateEdge(ArrayList<StaffType> permissions){
         try{
+            this.type = "EDGE";
             this.edit = EditTypes.UPDATE;
             this.oldEdge = App.mapService.getEdgeFromID(this.ID);
             App.mapService.updateEdgePermissions(this.ID, permissions);
@@ -170,26 +173,37 @@ public class MapEdit {
     public void toggleEdit() throws InvalidEdgeException, Exception{
         try {
             if (this.type.equals("NODE")) {
-                double x = this.oldNode.getCords()[0];
-                double y = this.oldNode.getCords()[1];
-                String floor = this.oldNode.getFloor();
-                String building = this.oldNode.getBuilding();
-                String nodeType = this.oldNode.getNodeType();
-                String longName = this.oldNode.getLongName();
-                String shortName = this.oldNode.getShortName();
+                double x,y;
+                String floor,building,nodeType,longName,shortName;
 
                 switch (this.edit) {
                     case UPDATE:
-                        this.updateNode(x, y, longName, shortName);
+                        x = this.oldNode.getCords()[0];
+                        y = this.oldNode.getCords()[1];
+                        floor = this.oldNode.getFloor();
+                        building = this.oldNode.getBuilding();
+                        nodeType = this.oldNode.getNodeType();
+                        longName = this.oldNode.getLongName();
+                        shortName = this.oldNode.getShortName();
+                        this.updateNode(x, y,nodeType, longName, shortName);
                         break;
                     case DELETE:
+                        x = this.oldNode.getCords()[0];
+                        y = this.oldNode.getCords()[1];
+                        floor = this.oldNode.getFloor();
+                        building = this.oldNode.getBuilding();
+                        nodeType = this.oldNode.getNodeType();
+                        longName = this.oldNode.getLongName();
+                        shortName = this.oldNode.getShortName();
                         this.addNode(this.ID, x, y, floor, building, nodeType, longName, shortName);
                         for(Edge curEdge: this.removedEdges){
                             this.addEdge(curEdge.getStartNode().getNodeID(),curEdge.getEndNode().getNodeID(),curEdge.getUserPermissions());
                         }
+                        this.edit = EditTypes.ADD;
                         break;
                     case ADD:
                         this.deleteNode();
+                        this.edit = EditTypes.DELETE;
                         break;
                 }
             }else if (this.type.equals("EDGE")){
@@ -199,9 +213,11 @@ public class MapEdit {
                         break;
                     case DELETE:
                         this.addEdge(oldEdge.getStartNode().getNodeID(),oldEdge.getEndNode().getNodeID(), oldEdge.getUserPermissions());
+                        this.edit = EditTypes.ADD;
                         break;
                     case ADD:
                         this.deleteEdge();
+                        this.edit = EditTypes.DELETE;
                         break;
                 }
             }else{
@@ -210,6 +226,7 @@ public class MapEdit {
         }catch (Exception e){
             throw e;
         }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
 

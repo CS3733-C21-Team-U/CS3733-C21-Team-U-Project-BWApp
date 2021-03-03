@@ -38,14 +38,17 @@ public class TextualDirections {
      * @return      textual directions saved into an array list
      */
     public static ArrayList<String> getTextualDirections(ArrayList<Node> path){
-        Node lastNode = null;
+        Node lastNode = path.get(0);
         Node curNode = path.get(0);
 
         ArrayList<String> returnMe = new ArrayList<>();
 
         for (int i = 1; i < path.size(); i++){
             Node nextNode = path.get(i);
-            returnMe.add(nodesToTextDirection(curNode,nextNode,lastNode));
+            String direction = nodesToTextDirection(curNode,nextNode,lastNode);
+            if(!direction.equals("")){
+                returnMe.add(direction);
+            }
             lastNode = curNode;
             curNode = nextNode;
         }
@@ -55,41 +58,54 @@ public class TextualDirections {
     /**
      * takes in two nodes and returns a string that is a textual direction
      * that a user could understand
-     * @param start
-     * @param end
+     * @param curNode
+     * @param nextNode
      * @return
      */
-    private static String nodesToTextDirection(Node start, Node end, Node previous){
+    private static String nodesToTextDirection(Node curNode, Node nextNode, Node previousNode) {
         String direction = "";
-        double angle = getAngle(start,end);
-        if(previous != null) {
-            double previousAngle = getAngle(previous, start);
-            double angleDifferance = angle - previousAngle;
-            if(angleDifferance < 0){
-                angleDifferance = 180 + (180 - Math.abs(angleDifferance));
-            }
-            if(angleDifferance >= 22.5 && angleDifferance < 67.5){
-                direction = "Take a slight left turn and continue straight for ";
-            }else if(angleDifferance >= 67.5 && angleDifferance < 112.5){
-                direction = "Take a left turn and continue straight for ";
-            }else if(angleDifferance >= 112.5 && angleDifferance < 157.5){
-                direction = "Take a sharp left turn and continue straight for ";
-            }else if(angleDifferance >= 157.5 && angleDifferance < 202.5){
-                direction = "Turn around continue straight for ";
-            }else if(angleDifferance >= 202.5 && angleDifferance < 247.5){
-                direction = "Take a sharp right turn and continue straight for ";
-            }else if(angleDifferance >= 247.5 && angleDifferance < 292.5){
-                direction = "Take a right turn and continue straight for ";
-            }else if(angleDifferance >= 292.5 && angleDifferance < 337.5){
-                direction = "Take a slight right turn and continue straight for ";
-            }else{
-                direction = "Continue straight for ";
-            }
-            direction = direction + calcDistance(start,end) + "ft\n";
-        }else{
-            direction = "Go to the starting location and walk " + calcDistance(start,end) + "ft\n";
-        }
+        if (nextNode.getNodeType().equals("ELEV") && !curNode.getNodeType().equals("ELEV")) {
+            direction = "Take the elevator";
+        }else if(nextNode.getNodeType().equals("STAI") && !curNode.getNodeType().equals("STAI")){
+            direction = "Take the stairs";
+        }else if(curNode.getNodeType().equals("ELEV") && !nextNode.getNodeType().equals("ELEV")){
+            direction = "Get off at floor " + nextNode.getFloor();
+        }else if(curNode.getNodeType().equals("STAI") && !nextNode.getNodeType().equals("STAI")){
+            direction = "Stop at floor " + nextNode.getFloor();
+        } else if (curNode.getNodeType().equals("ELEV") && nextNode.getNodeType().equals("ELEV")){
 
+        }else if (curNode.getNodeType().equals("STAI") && nextNode.getNodeType().equals("STAI")){
+
+        }else {
+            double angle = getAngle(curNode, nextNode);
+            if (previousNode != null) {
+                double previousAngle = getAngle(previousNode, curNode);
+                double angleDifferance = angle - previousAngle;
+                if (angleDifferance < 0) {
+                    angleDifferance = 180 + (180 - Math.abs(angleDifferance));
+                }
+                if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
+                    direction = "Take a slight left turn and continue straight for ";
+                } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
+                    direction = "Take a left turn and continue straight for ";
+                } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
+                    direction = "Take a sharp left turn and continue straight for ";
+                } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
+                    direction = "Turn around continue straight for ";
+                } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
+                    direction = "Take a sharp right turn and continue straight for ";
+                } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
+                    direction = "Take a right turn and continue straight for ";
+                } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
+                    direction = "Take a slight right turn and continue straight for ";
+                } else {
+                    direction = "Continue straight for ";
+                }
+                direction = direction + calcDistance(curNode, nextNode) + "ft";
+            } else {
+                direction = "Go to the starting location and walk " + calcDistance(curNode, nextNode) + "ft";
+            }
+        }
         return direction;
     }
 
@@ -127,9 +143,9 @@ public class TextualDirections {
         // return the distance (weight)
         double pixelDistance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
         double footDistance = pixelDistance / pixelPerFoot;
-        double roundedDistanceBig = Math.round((footDistance * 100));
-        double roundedDistanceReal =roundedDistanceBig/100;
-        return  roundedDistanceReal;
+        double roundedDistanceBig = Math.round((footDistance));
+        double roundedDistanceReal =roundedDistanceBig;
+        return  (int)roundedDistanceReal;
     }
 
 

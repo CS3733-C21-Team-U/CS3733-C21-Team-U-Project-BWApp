@@ -66,9 +66,9 @@ public class UndoRedoService {
      * @param longName
      * @param shortName
      */
-    public void updateNode(String nodeID,double xCoord, double yCoord, String longName, String shortName){
+    public void updateNode(String nodeID,double xCoord, double yCoord, String nodeType, String longName, String shortName){
         MapEdit thisEdit = new MapEdit(nodeID);
-        thisEdit.updateNode(xCoord,yCoord,longName,shortName);
+        thisEdit.updateNode(xCoord,yCoord, nodeType, longName,shortName);
         if(curIndex < edits.size() - 1){
             while(curIndex != edits.size() - 1){
                 edits.removeLast();
@@ -155,7 +155,7 @@ public class UndoRedoService {
      * @throws Exception
      */
     public void redo() throws Exception {
-        if(curIndex < edits.size()) {
+        if(curIndex < edits.size() - 1) {
             curIndex++;
             MapEdit curEdit = edits.get(curIndex);
             curEdit.toggleEdit();
