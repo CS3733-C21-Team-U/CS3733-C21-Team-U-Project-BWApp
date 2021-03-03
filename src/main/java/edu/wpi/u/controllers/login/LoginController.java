@@ -153,6 +153,7 @@ public class LoginController {
 
 
     public void handleLogin() throws IOException {
+        System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
         // TODO : Ability to skip the 2fa
 //        Scene scene = new Scene(root);
@@ -165,6 +166,7 @@ public class LoginController {
         App.userService.setUser(username, password, App.userService.checkPassword(password));
         System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
         System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
+        String phonenumber = App.userService.getActiveUser().getPhoneNumber();
         // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
@@ -172,7 +174,7 @@ public class LoginController {
                     // TODO : Send code
 
                     try {
-                        URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ username + "&channel=sms");
+                        URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ phonenumber + "&channel=sms");
                         URL url = uri.toURL(); // make GET request
                         AsyncHttpClient client = Dsl.asyncHttpClient();
                         Future<Integer> whenStatusCode = client.prepareGet(url.toString())
