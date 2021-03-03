@@ -117,7 +117,7 @@ public class AdminEditController {
         // Creating nodes
         generateNodes(App.mapInteractionModel.floor);
         generateEdges(App.mapInteractionModel.floor);
-        bringNodesToFront();
+        //bringNodesToFront(); //TODO uncomment if you want to force nodes to the front
 
         App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
