@@ -41,7 +41,6 @@ public class UserData extends Data{
         }
     }
 
-
     public void dropGuests() {
         String str = "delete from Guests";
         try {
@@ -142,7 +141,7 @@ public class UserData extends Data{
                         rs.getString("email"),
                         StaffType.valueOf(rs.getString("type")),
                         rs.getString("phoneNumber"),
-                        rs.getDate("appointmentDate"),
+                        //rs.getDate("appointmentDate"),
                         rs.getBoolean("deleted")));
             }
         }catch (Exception e){
@@ -452,7 +451,7 @@ public class UserData extends Data{
      */
     public void addGuest(Guest guest){
         //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
-        String str = "insert into Guests (guestID, name, userName, password, email, type, phoneNumber, deleted, appointmentDate) values (?,?,?,?,?,?,?,?,?)";
+        String str = "insert into Guests (guestID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,guest.getUserID());
@@ -463,9 +462,9 @@ public class UserData extends Data{
             ps.setString(6,String.valueOf(guest.getType()));// StaffType.valueOf(string) to get ENUM type
             ps.setString(7,guest.getPhoneNumber());
             ps.setBoolean(8,true);
-            java.util.Date d = guest.getAppointmentDate();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(9,sqld);
+//            java.util.Date d = guest.getAppointmentDate();
+//            java.sql.Date sqld = new java.sql.Date(d.getTime());
+            //ps.setDate(9,sqld);
             ps.execute();
             ps.close();
         }
@@ -540,7 +539,7 @@ public class UserData extends Data{
      */
     public void updGuest(Guest guest){
        //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
-        String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? and appointmentDate=? where employeeID=?";
+        String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? where guestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, guest.getName());
@@ -550,10 +549,10 @@ public class UserData extends Data{
             ps.setString(5, String.valueOf(guest.getType()));
             ps.setString(6,guest.getPhoneNumber());
             ps.setBoolean(7,guest.isDeleted());
-            java.util.Date d = guest.getAppointmentDate();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(8,sqld);
-            ps.setString(9,guest.getUserID());
+//            java.util.Date d = guest.getAppointmentDate();
+//            java.sql.Date sqld = new java.sql.Date(d.getTime());
+//            ps.setDate(8,sqld);
+            ps.setString(8,guest.getUserID());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
