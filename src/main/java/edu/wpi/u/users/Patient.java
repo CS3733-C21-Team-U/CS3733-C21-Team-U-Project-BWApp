@@ -4,27 +4,26 @@ import java.util.LinkedList;
 
 public class Patient extends User{
     protected LinkedList<Appointment> appointments = new LinkedList<>();
+    /*
     // TODO : Add table
     // Patient table -> Appointment Table <- Employee table
-    /*
     Make requests,
     Path find,
 
      */
     protected String providerName;
-    protected String recommendedSelfParkLocation;
-    protected String actualParkingLocation;
+    protected String parkingLocation;
     //TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
     //TODO: Link to radiology and blood
+    //TODO: Override editUser()
     public Patient() {
     }
 
-    public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, LinkedList<Appointment> appointments, String providerName, String recommendedSelfParkLocation, String actualParkingLocation) {
-        super(userID, name, accountName, password, email, type, phoneNumber, deleted);
+    public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, LinkedList<Appointment> appointments, String providerName, String recommendedSelfParkLocation, String parkingLocation) {
+        //super(userID, name, accountName, password, email, type, phoneNumber, deleted);
         this.appointments = appointments;
         this.providerName = providerName;
-        this.recommendedSelfParkLocation = recommendedSelfParkLocation;
-        this.actualParkingLocation = actualParkingLocation;
+        this.parkingLocation = parkingLocation;
     }
 
     public LinkedList<Appointment> getAppointments() {
@@ -43,19 +42,11 @@ public class Patient extends User{
         this.providerName = providerName;
     }
 
-    public String getRecommendedSelfParkLocation() {
-        return recommendedSelfParkLocation;
+    public String getParkingLocation() {
+        return parkingLocation;
     }
 
-    public void setRecommendedSelfParkLocation(String recommendedSelfParkLocation) {
-        this.recommendedSelfParkLocation = recommendedSelfParkLocation;
-    }
-
-    public String getActualParkingLocation() {
-        return actualParkingLocation;
-    }
-
-    public void setActualParkingLocation(String actualParkingLocation) {
-        this.actualParkingLocation = actualParkingLocation;
+    public void setParkingLocation(String parkingLocation) {
+        this.parkingLocation = parkingLocation;
     }
 }

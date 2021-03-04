@@ -12,11 +12,9 @@ public class Employee extends User{
     etc
      */
     public Employee(String employeeID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
-        super(employeeID, name,userName,password,email,type, phoneNumber, deleted);
+        //super(employeeID, name,userName,password,email,type, phoneNumber, deleted);
         // String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber
     }
-
-    public static void main(String[] args) {}
 
     //TODO: Override editUser()
 }

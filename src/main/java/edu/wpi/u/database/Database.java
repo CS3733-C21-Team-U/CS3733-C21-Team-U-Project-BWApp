@@ -64,9 +64,9 @@ public class Database {
             if (isTableEmpty()) {
                 String tbl1 =
                         "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor varchar(50), building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
-
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
+
                 String tbl2 =
                         "create table Edges (edgeID varchar(50) not null, startID varchar(50), endID varchar(50), primary key(edgeID))";
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
@@ -82,14 +82,19 @@ public class Database {
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
 
                 String tblPatient =
-                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate , primary key(patientID))";
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointment references Appointments,  providerName varchar(50), primary key(patientID))";
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
+
+                String tblAssignments =
+                        "create table Appointments(appointmentID varchar(50) not null, patientID varchar(50) references Patients, employeeID varchar(50) references Employees primary key(appointmentID))";
+                PreparedStatement psAssignments = conn.prepareStatement(tblAssignments);
+                psAssignments.execute();
 
                 String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
@@ -106,7 +111,6 @@ public class Database {
                 String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
                 PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
                 maintenanceRQ.execute();
-
 
                 String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
                 PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
@@ -341,9 +345,6 @@ public class Database {
         readCSV("Maintenance.csv", "Maintenance");
         readCSV("Laundry.csv", "Laundry");
         //readCSV("Laundry.csv", "Laundry");
-
-
-
     }
 
     public void stop() {

@@ -15,14 +15,18 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-        dropGuests(); // TODO : Stop for demo
-        dropEmployee(); // TODO : here too
+        dropGuests(); // TODO : Stop dropping values for demos
+        dropEmployee();
         this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", Role.ADMIN,"4016491137", false));
         this.addEmployee(new Employee("staff","staff","staff","staff","staff", Role.ADMIN,"7742706792",  false));
         this.addEmployee(new Employee("admin","admin","admin","admin","admin", Role.ADMIN,"7813155706", false));
         printGuest();
+        printEmployees();
     }
 
+    /**
+     * Drop all values from the Employees table
+     */
     public void dropEmployee() {
         String str = "delete from Employees";
         try {
@@ -35,6 +39,9 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Drop all values from the Guests table
+     */
     public void dropGuests() {
         String str = "delete from Guests";
         try {
@@ -47,6 +54,29 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Prints out the usernames of all employees
+     */
+    public void printEmployees(){
+        String str = "select * from Employees";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("===Employees===");
+            while (rs.next()){
+                System.out.println("Employee ID: " + rs.getString("userName"));
+            }
+            rs.close();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Prints out the usernames of all employees
+     */
     public void printGuest(){
         String str = "select * from Guests";
         try {
@@ -63,6 +93,7 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
+
     /**
      * Returns the StaffType for a user
      * @param userID users id
@@ -77,7 +108,7 @@ public class UserData extends Data{
         else if(type.equals("Guests")){
             id = "guestID";
         }
-        String str = "select type from " + type + " where " + id +"=?";
+        String str = "select from " + type + " where " + id +"=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,id);
@@ -128,15 +159,8 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                results.add(new Guest(rs.getString("guestID"),
-                        rs.getString("name"),
-                        rs.getString("userName"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        Role.valueOf(rs.getString("type")),
-                        rs.getString("phoneNumber"),
-                        //rs.getDate("appointmentDate"),
-                        rs.getBoolean("deleted")));
+                // (String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, Node locationOfSignificance, boolean deleted, LocalDate visitDate, String visitReason
+                results.add(new Guest()); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -158,11 +182,11 @@ public class UserData extends Data{
         else if (type.equals("Guests")){
             typeID = "guestID";
         }
-        String str = "update " + type + " set email=? where " + typeID + "=?";
+        String str = "update Employees set email=? where " + typeID + "=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,newEmail);
-            ps.setString(2, typeID);
+            ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
         }
@@ -171,6 +195,12 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Gets the password of a given user based on an ID
+     * @param userID the user id
+     * @param type the users type
+     * @return Employees, Guests, or "" for table names or not found
+     */
     public String getPassword(String userID, String type)  {
         String typeID ="";
         String password = "";
@@ -213,6 +243,7 @@ public class UserData extends Data{
     }
 
     /**
+     * TODO : UPDATE
      * Sets the active user on successful login
      * @param username username of the user
      * @param password password othe user
@@ -246,7 +277,7 @@ public class UserData extends Data{
                 Role staffType = Role.valueOf(rs.getString("type"));
                 String phoneNumber = rs.getString("phoneNumber");
                 if (returnType == 2){
-                    return new Guest(userID, name, staffType,phoneNumber, false, date);
+                    //return new Guest(userID, name, staffType,phoneNumber, false, date);
                 }
                 return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
             }
@@ -263,7 +294,7 @@ public class UserData extends Data{
      * @return Employees, Guests or empty string (table names or not found)
      */
     public String findUser(String userID) {
-        String str = "select * from Employees where userID=?";
+        String str = "select * from Employees where employeeID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,userID);
@@ -274,7 +305,7 @@ public class UserData extends Data{
                 return "Employees";
             }
             else {
-                str = "select * from Guests where userID=?";
+                str = "select * from Guests where guestID=?";
                 ps = conn.prepareStatement(str);
                 ps.setString(1,userID);
                 rs = ps.executeQuery();

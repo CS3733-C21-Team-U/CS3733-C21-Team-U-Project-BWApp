@@ -19,7 +19,7 @@ public class UserService {
     //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
-    //User activeUser = new User();
+    User activeUser;
     //TODO : Add getEmps, getGuests
     public UserService() {
         this.setEmployees();
@@ -140,7 +140,6 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
         ud.addEmployee(newEmployee);
         this.employees.add(newEmployee);
@@ -154,15 +153,13 @@ public class UserService {
      * @param email the email
      * @param type the type (Stafftype)
      * @param phoneNumber the phonenumber
-     * @param appointmentDate the appointment date
      * @param deleted whether or not the user is deleted
      */
     public void addGuest(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
-        Guest newGuest = new Guest(id,name,userName,password,email, type, phoneNumber, deleted);
+        Guest newGuest = new Guest(); // TODO : FIX
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }

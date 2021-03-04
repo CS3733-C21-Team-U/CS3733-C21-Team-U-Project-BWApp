@@ -23,7 +23,7 @@ public abstract class User extends RecursiveTreeObject<User> {
 
     public User(){}
 
-    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, Node locationOfSignificance, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -32,6 +32,7 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.locationOfSignificance = locationOfSignificance;
     }
 
     /**
