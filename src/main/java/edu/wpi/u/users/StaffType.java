@@ -11,3 +11,6 @@ public enum StaffType {
     TRANSLATORS,
     DEFAULT
 }
+/*
+TODO : Rename to Role and add all hospital roles / guests
+ */
