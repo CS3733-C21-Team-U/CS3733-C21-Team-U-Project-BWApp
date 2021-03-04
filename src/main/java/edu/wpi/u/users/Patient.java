@@ -1,24 +1,30 @@
 package edu.wpi.u.users;
 
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Patient extends User{
-    protected LinkedList<Appointment> appointments = new LinkedList<Appointment>();
+    protected LinkedList<Appointment> appointments = new LinkedList<>();
+    // TODO : Add table
+    // Patient table -> Appointment Table <- Employee table
+    /*
+    Make requests,
+    Path find,
+
+     */
     protected String providerName;
     protected String recommendedSelfParkLocation;
-    protected String parkingSpotNumber;
+    protected String actualParkingLocation;
     //TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
     //TODO: Link to radiology and blood
     public Patient() {
     }
 
-    public Patient(String userID, String name, String accountName, String password, String email, StaffType type, String phoneNumber, boolean deleted, LinkedList<Appointment> appointments, String providerName, String recommendedSelfParkLocation, String parkingSpotNumber) {
+    public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, LinkedList<Appointment> appointments, String providerName, String recommendedSelfParkLocation, String actualParkingLocation) {
         super(userID, name, accountName, password, email, type, phoneNumber, deleted);
         this.appointments = appointments;
         this.providerName = providerName;
         this.recommendedSelfParkLocation = recommendedSelfParkLocation;
-        this.parkingSpotNumber = parkingSpotNumber;
+        this.actualParkingLocation = actualParkingLocation;
     }
 
     public LinkedList<Appointment> getAppointments() {
@@ -45,11 +51,11 @@ public class Patient extends User{
         this.recommendedSelfParkLocation = recommendedSelfParkLocation;
     }
 
-    public String getParkingSpotNumber() {
-        return parkingSpotNumber;
+    public String getActualParkingLocation() {
+        return actualParkingLocation;
     }
 
-    public void setParkingSpotNumber(String parkingSpotNumber) {
-        this.parkingSpotNumber = parkingSpotNumber;
+    public void setActualParkingLocation(String actualParkingLocation) {
+        this.actualParkingLocation = actualParkingLocation;
     }
 }

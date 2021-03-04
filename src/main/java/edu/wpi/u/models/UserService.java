@@ -4,10 +4,9 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 import edu.wpi.u.users.User;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 
@@ -20,7 +19,7 @@ public class UserService {
     //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
-    User activeUser = new User();
+    //User activeUser = new User();
     //TODO : Add getEmps, getGuests
     public UserService() {
         this.setEmployees();
@@ -137,7 +136,7 @@ public class UserService {
      * @param email the email
      */
     //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
-    public void addEmployee(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
@@ -158,7 +157,7 @@ public class UserService {
      * @param appointmentDate the appointment date
      * @param deleted whether or not the user is deleted
      */
-    public void addGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+    public void addGuest(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
@@ -216,7 +215,7 @@ public class UserService {
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */
-    public String updateEmployee(String employeeID, String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+    public String updateEmployee(String employeeID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         for(Employee e : this.employees){
             if(e.getUserID().equals(employeeID)){
                 e.editUser(name, userName ,password,email,type, phoneNumber, deleted);
@@ -240,7 +239,7 @@ public class UserService {
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */
-    public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber,  boolean deleted){
+    public String updateGuest(String guestID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         for(Guest g : this.guests){
             if(g.getUserID().equals(guestID)){
                 g.editGuest(name, userName ,password,email,type, phoneNumber, deleted);

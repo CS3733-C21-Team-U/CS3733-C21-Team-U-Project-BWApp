@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Appointment {
 
     private LocalDate appointmentDate;
-    private String appointmentType; // TODO : Possibly make this ann enum ie : Radiology, blood work, etc
+    private String appointmentType; // TODO : Possibly make this an enum ie : Radiology, blood work, etc
 
     public Appointment(LocalDate appointmentDate, String appointmentType) {
         this.appointmentDate = appointmentDate;

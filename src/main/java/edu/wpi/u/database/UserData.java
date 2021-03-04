@@ -2,13 +2,14 @@ package edu.wpi.u.database;
 
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 import edu.wpi.u.users.User;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class UserData extends Data{
 
@@ -16,11 +17,12 @@ public class UserData extends Data{
         connect();
         dropGuests(); // TODO : Stop for demo
         dropEmployee(); // TODO : here too
-        this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
-        this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
-        this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
+        this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", Role.ADMIN,"4016491137", false));
+        this.addEmployee(new Employee("staff","staff","staff","staff","staff", Role.ADMIN,"7742706792",  false));
+        this.addEmployee(new Employee("admin","admin","admin","admin","admin", Role.ADMIN,"7813155706", false));
         printGuest();
     }
+
     public void dropEmployee() {
         String str = "delete from Employees";
         try {
@@ -67,7 +69,7 @@ public class UserData extends Data{
      * @param type Employees or Guests (table name)
      * @return the type of the user
      */
-    public StaffType getPermissions(String userID, String type){
+    public Role getPermissions(String userID, String type){
         String id = "";
         if (type.equals("Employees")){
             id = "employeeID";
@@ -81,12 +83,12 @@ public class UserData extends Data{
             ps.setString(1,id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                return StaffType.valueOf(rs.getString("type"));
+                return Role.valueOf(rs.getString("type"));
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-        return StaffType.DEFAULT;
+        return Role.DEFAULT;
     }
 
     /**
@@ -105,7 +107,7 @@ public class UserData extends Data{
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        StaffType.valueOf(rs.getString("type")),
+                        Role.valueOf(rs.getString("type")),
                         rs.getString("phoneNumber"),
                         rs.getBoolean("deleted")));
             }
@@ -131,7 +133,7 @@ public class UserData extends Data{
                         rs.getString("userName"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        StaffType.valueOf(rs.getString("type")),
+                        Role.valueOf(rs.getString("type")),
                         rs.getString("phoneNumber"),
                         //rs.getDate("appointmentDate"),
                         rs.getBoolean("deleted")));
@@ -240,10 +242,11 @@ public class UserData extends Data{
                 String userID= rs.getString(idColumn);
                 String name = rs.getString("name");
                 String email = rs.getString("email");
-                StaffType staffType = StaffType.valueOf(rs.getString("type"));
+                Date date = rs.getDate("visitDate");
+                Role staffType = Role.valueOf(rs.getString("type"));
                 String phoneNumber = rs.getString("phoneNumber");
                 if (returnType == 2){
-                    return new Guest(userID, name,username,password,email,staffType,phoneNumber, false);
+                    return new Guest(userID, name, staffType,phoneNumber, false, date);
                 }
                 return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
             }
@@ -251,7 +254,7 @@ public class UserData extends Data{
         catch (Exception e){
             e.printStackTrace();
         }
-        return new User();
+        return null;
     }
 
     /**

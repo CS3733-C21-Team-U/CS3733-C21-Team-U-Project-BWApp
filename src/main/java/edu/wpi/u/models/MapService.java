@@ -7,7 +7,7 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.database.MapData;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.exceptions.PathNotFoundException;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,7 +196,7 @@ public class MapService {
    * @throws InvalidEdgeException
    * TODO add Node ID checking
    */
-  public String addEdge(String edge_id, String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
+  public String addEdge(String edge_id, String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
       md.updatePermissions(edge_id, permissions);
@@ -215,7 +215,7 @@ public class MapService {
    * @param edgeID
    * @param permissions
    */
-  public void updateEdgePermissions(String edgeID, ArrayList<StaffType> permissions){
+  public void updateEdgePermissions(String edgeID, ArrayList<Role> permissions){
     md.updatePermissions(edgeID, permissions);
     mm.updateUserPermissions(edgeID, permissions);
   }

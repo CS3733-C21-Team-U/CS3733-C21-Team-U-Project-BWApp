@@ -2,7 +2,6 @@ package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
@@ -11,11 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-import javax.sound.midi.Soundbank;
-
 import java.io.IOException;
-
-import static edu.wpi.u.users.StaffType.*;
 
 public class ResetPasswordPageController {
     public JFXTextField resetPasswordTextField;

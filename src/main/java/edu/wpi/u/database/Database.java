@@ -21,7 +21,6 @@ public class Database {
         makeCSVDependant(false);
         createTables();
     }
-
     //Bill Pugh solution
     private static class SingletonHelper {
         //Nested class is referenced after getDB() is called
@@ -77,15 +76,13 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                //TODO: Change to employees and guests
-                //TODO: Check for username, phone number, or email
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) references Users, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) references Users, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
 
@@ -96,7 +93,7 @@ public class Database {
                 String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
-
+                // TODO : Change from arrayList to String
                 String permissionsInit = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
@@ -306,10 +303,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-
     //TODO: Test
-
-
     public void saveAll(){
         saveCSV( "Requests", "Requests.csv","Test");
         saveCSV( "Assignments", "Assignments.csv","Test");
@@ -346,8 +340,6 @@ public class Database {
 
 
     }
-
-
 
     public void stop() {
         try{

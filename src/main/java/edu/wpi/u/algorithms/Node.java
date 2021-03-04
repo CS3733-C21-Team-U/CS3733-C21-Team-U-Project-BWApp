@@ -1,7 +1,7 @@
 package edu.wpi.u.algorithms;
 
 import edu.wpi.u.App;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.util.LinkedList;
 
@@ -150,11 +150,11 @@ public class Node {
     for (Edge e : this.edges) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(StaffType.DOCTOR) && !App.userService.getActiveUser().equals((String.valueOf(StaffType.PATIENT)))){
+            if(e.getUserPermissions().contains(Role.DOCTOR) && !App.userService.getActiveUser().equals((String.valueOf(Role.PATIENT)))){
               return true;
-            }else if(e.getUserPermissions().contains(StaffType.ADMIN) && App.userService.getActiveUser().equals((String.valueOf(StaffType.ADMIN)))){
+            }else if(e.getUserPermissions().contains(Role.ADMIN) && App.userService.getActiveUser().equals((String.valueOf(Role.ADMIN)))){
               return true;
-            }else if(e.getUserPermissions().contains(StaffType.DEFAULT)){
+            }else if(e.getUserPermissions().contains(Role.DEFAULT)){
               return true;
             }else{
               return false;

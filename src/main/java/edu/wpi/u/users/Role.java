@@ -1,6 +1,6 @@
 package edu.wpi.u.users;
 
-public enum StaffType {
+public enum Role {
     DOCTOR,
     PATIENT,
     ADMIN,
@@ -9,7 +9,8 @@ public enum StaffType {
     SECURITY_GUARD,
     TECHNICAL_SUPPORT,
     TRANSLATORS,
-    DEFAULT
+    DEFAULT,
+    GUEST
 }
 /*
 TODO : Rename to Role and add all hospital roles / guests

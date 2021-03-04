@@ -2,21 +2,26 @@ package edu.wpi.u.users;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-public class User extends RecursiveTreeObject<User> {
+
+/*
+Users table
+Employees id references Users
+Patient id references Users
+ */
+
+public abstract class User extends RecursiveTreeObject<User> {
     protected String userID;
     protected String name;
     protected String userName;
     protected String password;
-    protected StaffType type;
+    protected Role type;
     protected String phoneNumber;
-    protected boolean deleted;
     protected String email;
+    protected boolean deleted;
 
-    public User(){
+    public User(){}
 
-    }
-
-    public User(String userID, String name, String accountName, String password, String email, StaffType type, String phoneNumber,boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -34,7 +39,7 @@ public class User extends RecursiveTreeObject<User> {
      * @param password
      * @param type
      */
-    public void editUser(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         this.name = name;
         this.userName = userName;
         this.password = password;
@@ -98,11 +103,11 @@ public class User extends RecursiveTreeObject<User> {
         this.password = password;
     }
 
-    public StaffType getType() {
+    public Role getType() {
         return type;
     }
 
-    public void setType(StaffType type) {
+    public void setType(Role type) {
         this.type = type;
     }
 }

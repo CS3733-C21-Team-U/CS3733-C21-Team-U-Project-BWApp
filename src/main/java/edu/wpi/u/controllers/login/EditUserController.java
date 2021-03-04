@@ -4,7 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static edu.wpi.u.users.StaffType.*;
+import static edu.wpi.u.users.Role.*;
 
 public class EditUserController {
 
@@ -133,7 +133,7 @@ public class EditUserController {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         if(!App.isEdtingGuest){
-            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
@@ -143,7 +143,7 @@ public class EditUserController {
         }
         else{
 
-            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
+            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  Role.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));

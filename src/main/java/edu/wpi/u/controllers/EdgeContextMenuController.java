@@ -6,7 +6,7 @@ import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.InvalidEdgeException;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,9 +42,9 @@ public class EdgeContextMenuController {
             deleteButton.setText("Stop adding");
         }else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-            if(thisEdge.getUserPermissions().get(0).equals(StaffType.DEFAULT)){
+            if(thisEdge.getUserPermissions().get(0).equals(Role.DEFAULT)){
                 edgeComboBox.setValue("Everyone");
-            } else if(thisEdge.getUserPermissions().get(0).equals(StaffType.DOCTOR)){
+            } else if(thisEdge.getUserPermissions().get(0).equals(Role.DOCTOR)){
                 edgeComboBox.setValue("All Employees");
             }else{
                 edgeComboBox.setValue("Admin only");
@@ -62,11 +62,11 @@ public class EdgeContextMenuController {
     public void handleSaveButton() throws InvalidEdgeException {
 
         if(!edgeComboBox.getValue().equals("")){
-            ArrayList<StaffType> userTypes = new ArrayList<>();
+            ArrayList<Role> userTypes = new ArrayList<>();
             userTypes.add(getEdgePermissionType());
             if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
                 Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-                ArrayList<StaffType> perms = new ArrayList<>();
+                ArrayList<Role> perms = new ArrayList<>();
                 perms.add(getEdgePermissionType());
                 App.undoRedoService.updateEdge(thisEdge.getEdgeID(), perms);
             } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
@@ -79,14 +79,14 @@ public class EdgeContextMenuController {
 
     }
 
-    public StaffType getEdgePermissionType(){
+    public Role getEdgePermissionType(){
         switch (edgeComboBox.getValue().toString()){
             case "Admin only":
-                return StaffType.ADMIN;
+                return Role.ADMIN;
             case "All Employees":
-                return StaffType.DOCTOR;
+                return Role.DOCTOR;
             default:
-                return StaffType.DEFAULT;
+                return Role.DEFAULT;
         }
 
     }
