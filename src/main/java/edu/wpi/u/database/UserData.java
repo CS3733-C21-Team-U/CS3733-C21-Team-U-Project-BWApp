@@ -17,7 +17,6 @@ public class UserData extends Data{
         dropGuests(); // TODO : Stop for demo
         dropEmployee(); // TODO : here too
         this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
-        this.addGuest(new Guest("patient","patient","patient","patient","w", StaffType.PATIENT,"1112223333", new Date(1000), false));
         this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
         this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
@@ -251,8 +250,7 @@ public class UserData extends Data{
                 StaffType staffType = StaffType.valueOf(rs.getString("type"));
                 String phoneNumber = rs.getString("phoneNumber");
                 if (returnType == 2){
-                    Date appointmentDate = rs.getDate("appointmentDate");
-                    return new Guest(userID, name,username,password,email,staffType,phoneNumber,appointmentDate, false);
+                    return new Guest(userID, name,username,password,email,staffType,phoneNumber, false);
                 }
                 return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
             }

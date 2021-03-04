@@ -158,12 +158,12 @@ public class UserService {
      * @param appointmentDate the appointment date
      * @param deleted whether or not the user is deleted
      */
-    public void addGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+    public void addGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
         //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
-        Guest newGuest = new Guest(id,name,userName,password,email, type, phoneNumber, appointmentDate, deleted);
+        Guest newGuest = new Guest(id,name,userName,password,email, type, phoneNumber, deleted);
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }
