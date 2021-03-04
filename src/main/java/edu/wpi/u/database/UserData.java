@@ -7,7 +7,6 @@ import edu.wpi.u.users.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,26 +14,14 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-
-
-//        this.addGuest(new Guest("areiugbneaing","testg","testg","testg","email", StaffType.PATIENT,"914", new Date(800), false));
-//        this.addGuest(new Guest("newOne","testy","testy","testy","email", StaffType.PATIENT,"915", new Date(800), false));
-//        this.addGuest(new Guest("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", new Date(800), false));
-       // this.addGuest(new Guest("nev","testp","9148394600","testp","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-        //this.addEmployee(new Employee("newTwo","testp","testp","testp","email", StaffType.ADMIN,"915", false));
-        //this.addGuest(new Guest("charles","testp","7742706792","testp","email", StaffType.ADMIN,"7742706792", new Date(800), false));
-        //this.addGuest(new Guest("nev2","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-        //this.addGuest(new Guest("nev","testp","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-        //this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
-        //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
-        //dropGuests(); // TODO : Stop for demo
-        //dropEmployee();
+        dropGuests(); // TODO : Stop for demo
+        dropEmployee(); // TODO : here too
         this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
         this.addGuest(new Guest("patient","patient","patient","patient","w", StaffType.PATIENT,"1112223333", new Date(1000), false));
         this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
         this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
-//        dropGuests();
+        //dropGuests();
 //        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
 //        this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
 //        printGuest();
@@ -108,7 +95,7 @@ public class UserData extends Data{
         } catch (Exception e){
             e.printStackTrace();
         }
-        return StaffType.DEFUALT;
+        return StaffType.DEFAULT;
     }
 
     /**
@@ -278,6 +265,42 @@ public class UserData extends Data{
     }
 
     /**
+     * Function used to find a user in the database based on a userID, used to check if user account is valid
+     * @param userID the user id
+     * @return Employees, Guests or empty string (table names or not found)
+     */
+    public String findUser(String userID) {
+        String str = "select * from Employees where userID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,userID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                rs.close();
+                ps.close();
+                return "Employees";
+            }
+            else {
+                str = "select * from Guests where userID=?";
+                ps = conn.prepareStatement(str);
+                ps.setString(1,userID);
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    rs.close();
+                    ps.close();
+                    return "Guests";
+                }
+                else {
+                    return "";
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Checks if the database has the username
      * @param username username to be checked
      * @return type for user of setting the users type Employees or Guests (table name)
@@ -321,37 +344,6 @@ public class UserData extends Data{
             return "";
         }
     }
-
-    /*
-    public String checkUsername(String username){
-        String str = "select * from Employees where username=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,username);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return "Employees";
-            }
-            else {
-                String str2 = "select * from Guests where username=?";
-                PreparedStatement ps2 = conn.prepareStatement(str2);
-                ps2.setString(1,username);
-                ResultSet rs2 = ps2.executeQuery();
-                if(rs2.next()){
-                    return "Guests";
-                }
-                else{
-                    return "";
-                }
-
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return "";
-        }
-    }
-     */
 
     /**
      * Checks if the database has the phone number matched with the given username

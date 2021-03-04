@@ -154,7 +154,7 @@ public class Node {
               return true;
             }else if(e.getUserPermissions().contains(StaffType.ADMIN) && App.userService.getActiveUser().equals((String.valueOf(StaffType.ADMIN)))){
               return true;
-            }else if(e.getUserPermissions().contains(StaffType.DEFUALT)){
+            }else if(e.getUserPermissions().contains(StaffType.DEFAULT)){
               return true;
             }else{
               return false;

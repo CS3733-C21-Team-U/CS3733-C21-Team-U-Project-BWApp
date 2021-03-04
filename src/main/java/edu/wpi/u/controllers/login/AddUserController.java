@@ -4,8 +4,6 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.exceptions.UsernameNotFoundException;
-import edu.wpi.u.users.Employee;
-import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.StaffType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +35,7 @@ public class AddUserController {
     public JFXButton cancelButton;
 
     public void initialize() throws IOException {
-        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFUALT.toString() );
+        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFAULT.toString() );
 
 
 

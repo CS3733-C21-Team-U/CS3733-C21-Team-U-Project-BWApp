@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class EdgeContextMenuController {
     Node node1;
@@ -43,7 +42,7 @@ public class EdgeContextMenuController {
             deleteButton.setText("Stop adding");
         }else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-            if(thisEdge.getUserPermissions().get(0).equals(StaffType.DEFUALT)){
+            if(thisEdge.getUserPermissions().get(0).equals(StaffType.DEFAULT)){
                 edgeComboBox.setValue("Everyone");
             } else if(thisEdge.getUserPermissions().get(0).equals(StaffType.DOCTOR)){
                 edgeComboBox.setValue("All Employees");
@@ -87,7 +86,7 @@ public class EdgeContextMenuController {
             case "All Employees":
                 return StaffType.DOCTOR;
             default:
-                return StaffType.DEFUALT;
+                return StaffType.DEFAULT;
         }
 
     }

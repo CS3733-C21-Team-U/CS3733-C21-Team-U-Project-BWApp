@@ -9,5 +9,5 @@ public enum StaffType {
     SECURITY_GUARD,
     TECHNICAL_SUPPORT,
     TRANSLATORS,
-    DEFUALT
+    DEFAULT
 }

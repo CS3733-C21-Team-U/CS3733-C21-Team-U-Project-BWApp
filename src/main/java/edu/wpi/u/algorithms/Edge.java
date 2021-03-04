@@ -23,7 +23,7 @@ public class Edge {
     _endNode.addAdjNode(_startNode);
     this.permission = new ArrayList<>();
     if (permissions.isEmpty()){
-      this.permission.add(StaffType.DEFUALT);
+      this.permission.add(StaffType.DEFAULT);
     }
     else
     {
