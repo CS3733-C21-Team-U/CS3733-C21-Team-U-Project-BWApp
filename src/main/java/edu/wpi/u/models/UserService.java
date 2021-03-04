@@ -240,10 +240,10 @@ public class UserService {
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */
-    public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted){
+    public String updateGuest(String guestID, String name, String userName, String password, String email, StaffType type, String phoneNumber,  boolean deleted){
         for(Guest g : this.guests){
             if(g.getUserID().equals(guestID)){
-                g.editGuest(name, userName ,password,email,type, phoneNumber, appointmentDate, deleted);
+                g.editGuest(name, userName ,password,email,type, phoneNumber, deleted);
                 ud.updGuest(g);
                 return "";
             }

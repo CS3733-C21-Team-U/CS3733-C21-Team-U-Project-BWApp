@@ -20,13 +20,6 @@ public class UserData extends Data{
         this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
         this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
-        //dropGuests();
-//        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
-//        this.addGuest(new Guest("charles","testp","7742706792","pass","email", StaffType.ADMIN,"7742706792", new Date(800), false));
-//        printGuest();
-//        dropGuests();
-//        printGuest();
-
     }
     public void dropEmployee() {
         String str = "delete from Employees";
@@ -295,6 +288,7 @@ public class UserData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
+        return "";
     }
 
     /**

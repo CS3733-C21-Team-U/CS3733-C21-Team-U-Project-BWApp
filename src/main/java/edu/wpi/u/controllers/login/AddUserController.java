@@ -113,7 +113,7 @@ public class AddUserController {
         }
         else{
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-                App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date  , false);
+                App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
                 anchor.getChildren().clear();

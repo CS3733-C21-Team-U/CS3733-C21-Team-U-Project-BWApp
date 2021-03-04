@@ -143,7 +143,7 @@ public class EditUserController {
         }
         else{
 
-            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date   , false);
+            App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));

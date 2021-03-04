@@ -13,7 +13,7 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
+    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=password";
 
     public Database() {
         driver();
