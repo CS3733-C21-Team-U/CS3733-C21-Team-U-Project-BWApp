@@ -1,6 +1,7 @@
 package edu.wpi.u.users;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.u.algorithms.Node;
 
 
 /*
@@ -18,6 +19,7 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
+    protected Node locationOfSignificance;
 
     public User(){}
 

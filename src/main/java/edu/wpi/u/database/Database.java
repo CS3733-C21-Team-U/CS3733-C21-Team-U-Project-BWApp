@@ -13,7 +13,7 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootPassword=password";
+    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
     public Database() {
         driver();
@@ -77,14 +77,19 @@ public class Database {
                 ps3.execute();
 
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) references Users, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) references Users, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
+
+                String tblPatient =
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate , primary key(patientID))";
+                PreparedStatement psPatient = conn.prepareStatement(tblPatient);
+                psPatient.execute();
 
                 String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);

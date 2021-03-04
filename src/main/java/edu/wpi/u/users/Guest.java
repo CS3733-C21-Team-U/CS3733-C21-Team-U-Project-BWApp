@@ -4,12 +4,14 @@ import java.time.LocalDate;
 
 public class Guest extends User{
     private LocalDate visitDate;
+    private String visitReason;
     //TODO : Maybe add a visitTime field for guest coming to hospital?
     //TODO : Maybe make Guest only have a phonenumber for account and use 2fa // maybe not need to store in db
 
-    public Guest(String userID, String name, Role type, String phoneNumber, boolean deleted, LocalDate visitDate) {
-
+    public Guest(String userID, String name, Role type, String phoneNumber, boolean deleted, LocalDate visitDate, String visitReason) {
+        //super(userID, name, type, phoneNumber, deleted);
         this.visitDate = visitDate;
+        this.visitReason = visitReason;
     }
 
     public static void main(String[] args) {}
