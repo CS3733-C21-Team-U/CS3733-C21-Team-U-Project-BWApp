@@ -14,8 +14,8 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-        System.out.println("# of request items: " + getNumTableItems("Requests"));
-        System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
+//        System.out.println("# of request items: " + getNumTableItems("Requests"));
+//        System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");

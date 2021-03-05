@@ -5,7 +5,8 @@ import java.sql.*;
 public abstract class Data {
     protected Connection conn = null;
     protected ResultSet rset;
-    protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
+    //protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
+    protected String url = "jdbc:derby:BWdb";
     protected static Database db;
 
     public Data(){

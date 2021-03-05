@@ -5,19 +5,19 @@ import java.util.LinkedList;
 
 public class Patient extends User{
     protected ArrayList<Appointment> appointments = new ArrayList<>();
-    /*
-    // TODO : Add table
-    // Patient table -> Appointment Table <- Employee table
-    Make requests,
-    Path find,
-
-     */
     protected String providerName;
     protected String parkingLocation;
     protected String recommendedParkingLocation;
     //TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
     //TODO: Link to radiology and blood
     //TODO: Override editUser()
+     /*
+    // TODO : Add table
+    // Patient table -> Appointment Table <- Employee table
+    Make requests,
+    Path find,
+
+     */
     public Patient() {
     }
 /*

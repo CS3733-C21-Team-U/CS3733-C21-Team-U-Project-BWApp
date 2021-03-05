@@ -17,9 +17,6 @@ public class UserData extends Data{
         connect();
         dropGuests(); // TODO : Stop dropping values for demos
         dropEmployee();
-        this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", Role.ADMIN,"4016491137", false));
-        this.addEmployee(new Employee("staff","staff","staff","staff","staff", Role.ADMIN,"7742706792",  false));
-        this.addEmployee(new Employee("admin","admin","admin","admin","admin", Role.ADMIN,"7813155706", false));
         printGuest();
         printEmployees();
     }
@@ -191,13 +188,10 @@ public class UserData extends Data{
         if (type.equals("Employees")){
             typeID = "employeeID"; //TODO: Extract this out to a helper function
         }
-        else if (type.equals("Guests")){
-            typeID = "guestID";
-        }
         else {
             typeID = "patientID";
         }
-        String str = "update Employees set email=? where " + typeID + "=?";
+        String str = "update "+ type +" set email=? where " + typeID + "=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newEmail);
@@ -257,6 +251,12 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Sets the employee user in the UserService class by fetching from the database
+     * @param username the username
+     * @param password the password
+     * @return the employee with the username and password
+     */
     public Employee setEmployee(String username, String password){
         String str = "select * from Employees where username=? and password=?";
         try{
@@ -280,16 +280,20 @@ public class UserData extends Data{
         return new Employee();
     }
 
-    public Guest setGuest(String username, String password){
-        String str = "select * from Guests where username=? and password=?";
+    /**
+     * Sets the guest user in the UserService class by fetching from the database
+     * TODO : Find a way to have guests with the same name ? Maybe by also passing in a otp or description of visit
+     * @param name the name of the Guest
+     * @return the guest with the name
+     */
+    public Guest setGuest(String name){
+        String str = "select * from Guests where name=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,username);
-            ps.setString(2,password);
+            ps.setString(1,name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 String guestId = rs.getString("guestID");
-                String name = rs.getString("name");
                 Date visitDate = rs.getDate("visitDate");
                 String visitReason = rs.getString("visitReason");
                 return new Guest(guestId,name, visitDate.toLocalDate(), visitReason, false);
@@ -300,6 +304,12 @@ public class UserData extends Data{
         return new Guest();
     }
 
+    /**
+     * Sets the guest user in the UserService class by fetching from the database
+     * @param username the username
+     * @param password the password
+     * @return the patient with the username and password
+     */
     public Patient setPatient(String username, String password){
         String str  = "select * from Patients where username=? and password=?";
         try {
@@ -327,6 +337,11 @@ public class UserData extends Data{
         return new Patient();
     }
 
+    /**
+     * Retrieves a patients appointments
+     * @param patientID the id of the patient
+     * @return list of Appointments
+     */
     private ArrayList<Appointment> getPatientAppointments(String patientID) {
         ArrayList<Appointment> results = new ArrayList<>();
         String str = "select * from Appointments where patientID=?";
@@ -346,6 +361,11 @@ public class UserData extends Data{
         return results;
     }
 
+    /**
+     * Retrieves a employees appointments
+     * @param employeeID the id of the employee
+     * @return list of Appointments
+     */
     private ArrayList<Appointment> getEmployeeAppointments(String employeeID) {
         ArrayList<Appointment> results = new ArrayList<>();
         String str = "select * from Appointments where employeeID=?";
@@ -364,53 +384,6 @@ public class UserData extends Data{
         }
         return results;
     }
-
-
-//    /**
-//     * TODO : UPDATE
-//     * Sets the active user on successful login
-//     * @param username username of the user
-//     * @param password password othe user
-//     * @param type Employees or Guests (table name)
-//     * @return the User object of the active user
-//     */
-//    public User setUser(String username, String password, String type){
-//        String idColumn = "";
-//        int returnType = 0; // 1 is employee, 2 is guest
-//        if (type.equals("Employees")){
-//            idColumn = "employeeID";
-//            returnType=1;
-//        }
-//        else if (type.equals("Guests")) {
-//            idColumn = "guestID";
-//            returnType=2;
-//        }
-//        //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
-//        String str = "select * from "+type+" where userName=? and password=?";
-//        System.out.println(str);
-//        try {
-//            PreparedStatement ps = conn.prepareStatement(str);
-//            ps.setString(1, username);
-//            ps.setString(2,password);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()){
-//                String userID= rs.getString(idColumn);
-//                String name = rs.getString("name");
-//                String email = rs.getString("email");
-//                Date date = rs.getDate("visitDate");
-//                Role staffType = Role.valueOf(rs.getString("type"));
-//                String phoneNumber = rs.getString("phoneNumber");
-//                if (returnType == 2){
-//                    //return new Guest(userID, name, staffType,phoneNumber, false, date);
-//                }
-//                return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     /**
      * Function used to find a user in the database based on a userID, used to check if user account is valid
@@ -470,17 +443,17 @@ public class UserData extends Data{
                 rs.close();
                 ps.close();
                 System.out.println("Not in employees");
-                String str2 = "select * from Guests where userName=?";
+                String str2 = "select * from Patients where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,username);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();
                     ps2.close();
-                    return "Guests";
+                    return "Patients";
                 }
                 else{
-                    System.out.println("Not in Guests");
+                    System.out.println("Not in Patients");
                     rs2.close();
                     ps2.close();
                     return "";
@@ -488,7 +461,7 @@ public class UserData extends Data{
             }
         }
         catch (Exception e){
-            System.out.println("Exception");
+            System.out.println("Checking username failed");
             e.printStackTrace();
             return "";
         }
@@ -510,17 +483,16 @@ public class UserData extends Data{
                return "Employees";
             }
             else {
-                String str2 = "select * from Guests where phoneNumber=?";
+                String str2 = "select * from Patients where phoneNumber=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,phoneNumber);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
-                    return "Guests";
+                    return "Patients";
                 }
                 else{
                     return "";
                 }
-
             }
         }
         catch (Exception e){
@@ -547,17 +519,17 @@ public class UserData extends Data{
                 rs.close();
                 ps.close();
                 System.out.println("Not in employees");
-                String str2 = "select * from Guests where password=?";
+                String str2 = "select * from Patients where password=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,password);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();
                     ps2.close();
-                    return "Guests";
+                    return "Patients";
                 }
                 else{
-                    System.out.println("Not in Guests");
+                    System.out.println("Not in Patients");
                     rs2.close();
                     ps2.close();
                     return "";

@@ -13,12 +13,14 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
+    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
+    private final static String url = "jdbc:derby:BWdb;create=true";
 
     private Database() {
         driver();
         connect();
         makeCSVDependant(false);
+        //dropValues("all");
         createTables();
     }
     //Bill Pugh solution
@@ -81,7 +83,7 @@ public class Database {
                 ps3.execute();
 
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, locationNodeID references Nodes, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, locationNodeID varchar(50) references Nodes, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
@@ -294,10 +296,10 @@ public class Database {
                 s.execute(str);
                 str = "delete from Assignments";
                 s.execute(str);
-                str = "delete from Maintenance";
-                s.execute(str);
-                str = "delete from Laundry";
-                s.execute(str);
+//                str = "delete from Maintenance";
+//                s.execute(str);
+//                str = "delete from Laundry";
+//                s.execute(str);
             }
         } catch (SQLException throwables) {
             //throwables.printStackTrace();

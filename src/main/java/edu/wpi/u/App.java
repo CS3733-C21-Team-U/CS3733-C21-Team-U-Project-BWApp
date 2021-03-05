@@ -143,8 +143,8 @@ public class App extends Application {
 
   public void end() {
     System.out.println("Shutting Down");
-    Database.getDB().saveAll();
-    Database.getDB().stop();
+//    Database.getDB().saveAll();
+//    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

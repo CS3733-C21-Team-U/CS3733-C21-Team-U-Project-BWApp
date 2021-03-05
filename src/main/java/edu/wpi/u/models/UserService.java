@@ -34,18 +34,17 @@ public class UserService {
      * Sets the active user of the application
      * @param username username of the user
      * @param password password of the user
-     * @param type Employees or Guests (table name)
+     * @param tableName Employees or Guests (table name)
      */
-    public void setUser(String username, String password, String type) {
-        Role r = Role.valueOf(type);
-        if (r == Role.ADMIN || r == Role.MAINTENANCE || r == Role.DOCTOR || r == Role.NURSE || r == Role.SECURITY_GUARD || r == Role.TECHNICAL_SUPPORT || r == Role.TRANSLATORS){
+    public void setUser(String username, String password, String tableName) {
+        if (tableName.equals("Employees")){
             this.activeUser = ud.setEmployee(username, password);
         }
-        else if (r == Role.PATIENT){
+        else if (tableName.equals("Patients")){
             this.activeUser = ud.setPatient(username, password);
         }
         else {
-            this.activeUser = ud.setGuest(username,password);
+            this.activeUser = ud.setGuest(username);
         }
     }
 
