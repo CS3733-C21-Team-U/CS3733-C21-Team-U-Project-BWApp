@@ -620,13 +620,14 @@ public class UserData extends Data{
      * @param guest the object containing all of the information on the user
      */
     public void addGuest(Guest guest){
-        String str = "insert into Guests (guestID, name, visitDate, visitReason, deleted) values (?,?,?,?)";
+        String str = "insert into Guests (guestID, name, visitDate, visitReason, deleted) values (?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,guest.getUserID());
             ps.setString(2,guest.getName());
-            ps.setString(3, String.valueOf(Date.valueOf(guest.getVisitDate())));
+            ps.setDate(3, Date.valueOf(guest.getVisitDate()));
             ps.setString(4, guest.getVisitReason());
+            ps.setBoolean(5,false);
             ps.execute();
             ps.close();
         }
@@ -639,7 +640,7 @@ public class UserData extends Data{
         String str = "update Patients set deleted=? where patientID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,true);
+            ps.setBoolean(1,true);
             ps.setString(2,patient.getUserID());
         }catch (Exception e){
             e.printStackTrace();
@@ -732,21 +733,14 @@ public class UserData extends Data{
      * @param guest the object containing all of the information on the user
      */
     public void updGuest(Guest guest){
-       //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
-        String str = "update Guests set name=? and userName=? and password=? and email=? and type=? and phoneNumber=? and deleted=? where guestID=?";
+        String str = "update Guests set name=? and visitDate=? and visitReason=? and deleted=? where guestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, guest.getName());
-            ps.setString(2, guest.getUserName());
-            ps.setString(3, guest.getPassword());
-            ps.setString(4,guest.getEmail());
-            ps.setString(5, String.valueOf(guest.getType()));
-            ps.setString(6,guest.getPhoneNumber());
-            ps.setBoolean(7,guest.isDeleted());
-//            java.util.Date d = guest.getAppointmentDate();
-//            java.sql.Date sqld = new java.sql.Date(d.getTime());
-//            ps.setDate(8,sqld);
-            ps.setString(8,guest.getUserID());
+            ps.setDate(2,Date.valueOf(guest.getVisitDate()));
+            ps.setString(3,guest.getVisitReason());
+            ps.setBoolean(4, guest.isDeleted());
+            ps.setString(5, guest.getGuestID());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
