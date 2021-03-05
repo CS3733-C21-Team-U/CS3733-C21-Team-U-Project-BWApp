@@ -133,6 +133,17 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                /*
+                userID,
+                 name,
+                 accountName,
+                 password,
+                 email,
+                 type,
+                 phoneNumber,
+                 locationNodeID,
+                 deleted
+                 */
                 results.add(new Employee(rs.getString("employeeID"),
                         rs.getString("name"),
                         rs.getString("userName"),
@@ -140,6 +151,7 @@ public class UserData extends Data{
                         rs.getString("email"),
                         Role.valueOf(rs.getString("type")),
                         rs.getString("phoneNumber"),
+                        rs.getString("locationNodeID"),
                         rs.getBoolean("deleted")));
             }
         }catch (Exception e){
@@ -258,8 +270,9 @@ public class UserData extends Data{
                 String email = rs.getString("email");
                 String role = rs.getString("type");
                 String phonenumber = rs.getString("phonenumber");
+                String locationNodeID = rs.getString("locationNodeID");
                 // TODO : Where to put rs.close and ps.close ?
-                return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber,false);
+                return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber, locationNodeID, false);
             }
         }catch (Exception e){
             e.printStackTrace();
