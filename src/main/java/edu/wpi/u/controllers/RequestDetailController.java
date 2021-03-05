@@ -1,12 +1,9 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
-import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.IRequest;
 import edu.wpi.u.requests.Request;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +12,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.Stack;
 
 public class RequestDetailController {
     public HBox HBoxToClone;
@@ -93,7 +87,7 @@ public class RequestDetailController {
         //Resolve Request()
 
         IRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        App.requestService.deleteRequest(r.getGenericRequest().getRequestID());
+        App.requestService.resolveRequest(r);
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
@@ -112,7 +106,7 @@ public class RequestDetailController {
     }
 
     private void setSpecifics(){
-        switch(currentIRequest.getGenericRequest().getType()) {
+        switch(currentIRequest.getType()) {
             case("Maintenance") :
                 requestDetailMaintenancePane.setVisible(true);
                 break;

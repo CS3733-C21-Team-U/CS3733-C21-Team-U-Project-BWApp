@@ -172,7 +172,7 @@ public class NERController {
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
             Date date= new Date();
             currRequest.setDateNeeded(date);
-            currIRequest.setSpecificData(requestSpecificItems(currRequest.getType()));
+            currIRequest.setSpecificData(requestSpecificItems(currIRequest.getType()));
             App.requestService.updateRequest(currIRequest);
 
 

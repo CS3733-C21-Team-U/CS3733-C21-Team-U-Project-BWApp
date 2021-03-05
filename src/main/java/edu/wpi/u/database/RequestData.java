@@ -42,7 +42,7 @@ public class RequestData extends Data{
        // if(request.getDateCompleted() != null) this.resolveRequest(request);
         this.updRequestDescription(request.getRequestID(), request.getDescription());
         this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestType(request.getRequestID(), request.getType());
+        this.updRequestType(request.getRequestID(), obj.getType());
         this.updLocations(request.getRequestID(), request.getLocation());
         this.updAssignees(request.getRequestID(), request.getAssignee());
 
@@ -53,7 +53,7 @@ public class RequestData extends Data{
             ps1.execute();
         }
         catch (Exception e){
-            System.out.println("Check " + request.getType() + "update query");
+            System.out.println("Check " + obj.getType() + "update query");
             e.printStackTrace();
         }
 
@@ -204,35 +204,36 @@ public class RequestData extends Data{
         }
         return results;
     }
-   public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
+   public void addRequest(IRequest obj) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded) values (?,?,?,?,?,?,?)";
         try{
+            Request req = obj.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,request.getGenericRequest().getRequestID());
-            java.util.Date d = request.getGenericRequest().getDateCreated();
+            ps.setString(1,req.getRequestID());
+            java.util.Date d = req.getDateCreated();
             java.sql.Date sqld = new java.sql.Date(d.getTime());
             ps.setDate(2, sqld);
             ps.setDate(3,null);
-            ps.setString(4,request.getGenericRequest().getDescription());
-            ps.setString(5,request.getGenericRequest().getTitle());
-            ps.setString(6,request.getGenericRequest().getType());
-            java.util.Date d2 = request.getGenericRequest().getDateNeeded();
+            ps.setString(4,req.getDescription());
+            ps.setString(5,req.getTitle());
+            ps.setString(6,obj.getType());
+            java.util.Date d2 = req.getDateNeeded();
             java.sql.Date sqld2 = new java.sql.Date(d2.getTime());
             ps.setDate(7,sqld2);
             ps.execute();
             // Adding data into joint tables
-            for(String locationID : request.getGenericRequest().getLocation()){
-                addLocation(locationID, request.getGenericRequest().getRequestID());
+            for(String locationID : req.getLocation()){
+                addLocation(locationID, req.getRequestID());
             }
-            for(String assignmentID : request.getGenericRequest().getAssignee()){
-                addAssignee(assignmentID, request.getGenericRequest().getRequestID());
+            for(String assignmentID : req.getAssignee()){
+                addAssignee(assignmentID, req.getRequestID());
             }
 
             //Now place into specific subtable based on class
-            System.out.println(request.subtableCreateQuery());
-            PreparedStatement ps1 = conn.prepareStatement(request.subtableCreateQuery());
+            System.out.println(obj.subtableCreateQuery());
+            PreparedStatement ps1 = conn.prepareStatement(obj.subtableCreateQuery());
             ps1.execute();
         }
         catch (Exception e){
