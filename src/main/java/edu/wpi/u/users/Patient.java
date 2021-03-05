@@ -8,15 +8,11 @@ public class Patient extends User{
     protected String providerName;
     protected String parkingLocation;
     protected String recommendedParkingLocation;
-    //TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
+    /*TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
     //TODO: Link to radiology and blood
     //TODO: Override editUser()
-     /*
-    // TODO : Add table
-    // Patient table -> Appointment Table <- Employee table
-    Make requests,
-    Path find,
 
+    // Patient table -> Appointment Table <- Employee table
      */
     public Patient() {
     }
@@ -44,27 +40,9 @@ public class Patient extends User{
         this.recommendedParkingLocation = recommendedParkingLocation;
     }
 
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
+    @Override
+    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted) {
+        super.editUser(name, userName, password, email, type, phoneNumber, deleted);
 
-    public void setAppointments(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
-    }
-
-    public String getParkingLocation() {
-        return parkingLocation;
-    }
-
-    public void setParkingLocation(String parkingLocation) {
-        this.parkingLocation = parkingLocation;
     }
 }
