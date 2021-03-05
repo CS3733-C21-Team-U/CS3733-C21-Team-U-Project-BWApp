@@ -218,7 +218,7 @@ public class PathfindingBaseController {
     public void generateNodes(String floor){
         App.mapService.getNodes().stream().forEach(n -> {
             try {
-                if(n.getFloor().equals(floor)){
+                if(n.getFloor().equals(floor) && !n.getNodeType().equals("WALK") && !n.getNodeType().equals("HALL")){
                     placeNodesHelper(n);
                 }
             } catch (IOException e) {
