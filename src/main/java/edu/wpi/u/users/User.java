@@ -17,7 +17,7 @@ public abstract class User {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-    protected String locationOfSignificance;
+    //protected String locationOfSignificance;
 
     public User(){}
 
@@ -30,7 +30,7 @@ public abstract class User {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.locationOfSignificance = locationOfSignificance;
+        //this.locationOfSignificance = locationOfSignificance;
     }
 
     /**

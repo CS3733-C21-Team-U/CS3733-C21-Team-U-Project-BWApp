@@ -6,10 +6,10 @@ import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.Role;
 import edu.wpi.u.users.User;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
-
-
 
 public class UserService {
 
@@ -111,7 +111,7 @@ public class UserService {
      */
     public void changePassword(String username, String newPassword, String type){
         this.getActiveUser().setPassword(newPassword);
-        ud.changePassword(username,newPassword);
+        ud.changePassword(username,newPassword, type);
     }
 
     /**
@@ -153,11 +153,12 @@ public class UserService {
      * @param email the email
      */
     //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
-    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
+    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
+        //(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted)
+        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, locationNodeID, deleted);
         ud.addEmployee(newEmployee);
         this.employees.add(newEmployee);
     }
@@ -165,14 +166,9 @@ public class UserService {
     /**
      * Adds an guest to list and calls database
      * @param name the name
-     * @param userName the username
-     * @param password the password
-     * @param email the email
-     * @param type the type (Stafftype)
-     * @param phoneNumber the phonenumber
      * @param deleted whether or not the user is deleted
      */
-    public void addGuest(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
+    public void addGuest(String name, LocalDate visitDate, String visitReason, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
@@ -244,18 +240,15 @@ public class UserService {
      * Updates the list of guests and calls database
      * @param guestID the id
      * @param name the name
-     * @param userName the username
-     * @param password the password
-     * @param email the email
-     * @param type the type (StaffType)
-     * @param phoneNumber the phone number
+     * @param visitDate the visit date
+     * @param visitReason the visit reason
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */
-    public String updateGuest(String guestID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
+    public String updateGuest(String guestID, String name, LocalDate visitDate, String visitReason, boolean deleted){
         for(Guest g : this.guests){
             if(g.getUserID().equals(guestID)){
-                g.editGuest(name, userName ,password,email,type, phoneNumber, deleted);
+                g.editGuest(name, visitDate, visitReason, deleted);
                 ud.updGuest(g);
                 return "";
             }

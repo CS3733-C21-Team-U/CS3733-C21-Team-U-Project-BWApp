@@ -98,7 +98,8 @@ public class AddUserController {
         String userType = "";
         if(userEmployStatus.isSelected()){
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-                App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+                // TODO : Fix
+                //App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
                 anchor.getChildren().clear();
@@ -110,7 +111,8 @@ public class AddUserController {
         }
         else{
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-                App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
+                // TODO : Fix
+                //App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ListOfUsers.fxml"));
                 anchor.getChildren().clear();

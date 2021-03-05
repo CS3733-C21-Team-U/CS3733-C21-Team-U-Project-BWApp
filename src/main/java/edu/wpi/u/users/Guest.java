@@ -24,4 +24,11 @@ public class Guest extends User{
 
         //Timestamp t = Timestamp.valueOf(String.valueOf(this.visitDate));
     }
+
+    public void editGuest(String name, LocalDate visitDate, String visitReason, boolean deleted) {
+        this.name = name;
+        this.visitDate = visitDate;
+        this.visitReason = visitReason;
+        this.deleted = deleted;
+    }
 }

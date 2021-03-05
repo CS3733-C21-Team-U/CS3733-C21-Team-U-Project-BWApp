@@ -182,10 +182,13 @@ public class UserData extends Data{
         else if (type.equals("Guests")){
             typeID = "guestID";
         }
+        else {
+            typeID = "patientID";
+        }
         String str = "update Employees set email=? where " + typeID + "=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,newEmail);
+            ps.setString(1, newEmail);
             ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
@@ -228,7 +231,7 @@ public class UserData extends Data{
      * @param newPassword the new password
      * @param type Employees or Guests (table name)
      */
-    public void changePassword(String username, String newPassword){
+    public void changePassword(String username, String newPassword, String type){
         String str = "update " + type + " set password=? where userName=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
@@ -255,6 +258,7 @@ public class UserData extends Data{
                 String email = rs.getString("email");
                 String role = rs.getString("type");
                 String phonenumber = rs.getString("phonenumber");
+                // TODO : Where to put rs.close and ps.close ?
                 return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber,false);
             }
         }catch (Exception e){
