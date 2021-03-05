@@ -15,7 +15,18 @@ public class Employee extends User{
     public Employee() {
 
     }
+/*
+    String userID,
+    String name,
+    String accountName,
+    String password,
+    String email,
+    Role type,
+    String phoneNumber,
+    String locationNodeID,
+    boolean deleted) {
 
+ */
     public Employee(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
         super(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted);
     }

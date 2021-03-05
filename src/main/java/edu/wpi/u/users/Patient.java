@@ -21,15 +21,19 @@ public class Patient extends User{
     public Patient() {
     }
 /*
-    protected String userID;
-    protected String name;
-    protected String userName;
-    protected String password;
-    protected Role type;
-    protected String phoneNumber;
-    protected String email;
-    protected boolean deleted;
-    protected String locationOfSignificance;
+    String userID,
+    String name,
+    String accountName,
+    String password,
+    String email,
+    Role type,
+    String phoneNumber,
+    String locationNodeID,
+    boolean deleted,
+    ArrayList<Appointment> appointments,
+    String providerName,
+    String parkingLocation,
+    String recommendedParkingLocation) {
  */
 
     public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
