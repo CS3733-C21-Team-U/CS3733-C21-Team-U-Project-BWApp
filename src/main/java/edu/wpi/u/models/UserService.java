@@ -19,21 +19,15 @@ public class UserService {
     //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
-    User activeUser;
+    User activeUser; //= new Employee("testid", "testname", "testusername", "testpassword", "testemail",  Role.MAINTENANCE, "9118332323", false);
     //TODO : Add getEmployees, getGuests
     public UserService() {
         this.setEmployees();
         this.setGuests();
     }
 
-    /**
-     * Sets the employees list
-     */
     public void setEmployees() {this.employees = ud.getEmployees();}
 
-    /**
-     * Sets the guests list
-     */
     public void setGuests() {this.guests = ud.getGuests();}
 
     /**
@@ -43,7 +37,16 @@ public class UserService {
      * @param type Employees or Guests (table name)
      */
     public void setUser(String username, String password, String type) {
-        this.activeUser = ud.setUser(username,password,type);
+        Role r = Role.valueOf(type);
+        if (r == Role.ADMIN || r == Role.MAINTENANCE || r == Role.DOCTOR || r == Role.NURSE || r == Role.SECURITY_GUARD || r == Role.TECHNICAL_SUPPORT || r == Role.TRANSLATORS){
+            this.activeUser = ud.setEmployee(username, password);
+        }
+        else if (r == Role.PATIENT){
+            this.activeUser = ud.setPatient(username, password);
+        }
+        else {
+            this.activeUser = ud.setGuest(username,password);
+        }
     }
 
     public User getActiveUser() {
@@ -108,7 +111,7 @@ public class UserService {
      */
     public void changePassword(String username, String newPassword, String type){
         this.getActiveUser().setPassword(newPassword);
-        ud.changePassword(username,newPassword, type);
+        ud.changePassword(username,newPassword);
     }
 
     /**

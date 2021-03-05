@@ -16,6 +16,10 @@ public class Employee extends User{
         // String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber
     }
 
+    public Employee() {
+
+    }
+
     //TODO: Override editUser()
 }
 

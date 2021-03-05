@@ -17,11 +17,11 @@ public abstract class User {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-    protected Node locationOfSignificance;
+    protected String locationOfSignificance;
 
     public User(){}
 
-    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, Node locationOfSignificance, boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;

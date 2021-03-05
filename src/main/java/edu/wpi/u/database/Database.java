@@ -86,17 +86,17 @@ public class Database {
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) not null, name varchar(50), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), visitDate date, visitReason varchar(250), deleted boolean, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
 
                 String tblPatient =
-                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointment references Appointments,  providerName varchar(50), primary key(patientID))";
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, providerName varchar(50), parkingLocation varchar(50) references Nodes, recommendedParkingLocation varchar(100), primary key(patientID))";
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
                 String tblAssignments =
-                        "create table Appointments(appointmentID varchar(50) not null, patientID varchar(50) references Patients, employeeID varchar(50) references Employees primary key(appointmentID))";
+                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate date, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAssignments = conn.prepareStatement(tblAssignments);
                 psAssignments.execute();
 
@@ -112,49 +112,49 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
                 //Service Request Tables
-                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
-                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
-                maintenanceRQ.execute();
-
-                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
-                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
-                LaundryRQ.execute();
-
-                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
-                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
-                SanitationRQ.execute();
-
-                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
-                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
-                AudioVisualRQ.execute();
-
-                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
-                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
-                FloralRQ.execute();
-
-                String tbMedical = "create table Medical(requestID varchar(50) references Requests, name varchar(50), quantity varchar(50), supplier varchar(50), primary key(requestID))";
-                PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
-                MedicalRQ.execute();
-
-                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
-                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
-                ReligiousRQ.execute();
-
-                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
-                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
-                computerRQ.execute();
-
-                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
-                PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
-                SecurityRQ.execute();
-
-                String tbLanguage = "create table Language(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
-                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
-                languageRQ.execute();
-
-                String gift = "create table Gift(requestID varchar(50) references Requests, contents varchar(50), mass int, primary key(requestID))";
-                PreparedStatement giftRQ = conn.prepareStatement(gift);
-                giftRQ.execute();
+//                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
+//                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
+//                maintenanceRQ.execute();
+//
+//                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
+//                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
+//                LaundryRQ.execute();
+//
+//                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
+//                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
+//                SanitationRQ.execute();
+//
+//                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
+//                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
+//                AudioVisualRQ.execute();
+//
+//                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
+//                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
+//                FloralRQ.execute();
+//
+//                String tbMedical = "create table Medical(requestID varchar(50) references Requests, name varchar(50), quantity varchar(50), supplier varchar(50), primary key(requestID))";
+//                PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
+//                MedicalRQ.execute();
+//
+//                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
+//                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
+//                ReligiousRQ.execute();
+//
+//                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
+//                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
+//                computerRQ.execute();
+//
+//                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
+//                PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
+//                SecurityRQ.execute();
+//
+//                String tbLanguage = "create table Language(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
+//                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
+//                languageRQ.execute();
+//
+//                String gift = "create table Gift(requestID varchar(50) references Requests, contents varchar(50), mass int, primary key(requestID))";
+//                PreparedStatement giftRQ = conn.prepareStatement(gift);
+//                giftRQ.execute();
 
             }
         } catch (Exception e) {
@@ -312,20 +312,20 @@ public class Database {
         //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
-            String str = "drop Nodes";
+            String str = "drop table Nodes";
             s.execute(str);
-            str = "drop Edges";
+            str = "drop table Edges";
             s.execute(str);
-            str = "drop Requests";
+            str = "drop table Requests";
             s.execute(str);
-            str = "drop Locations";
+            str = "drop table Locations";
             s.execute(str);
-            str = "drop Assignments";
+            str = "drop table Assignments";
             s.execute(str);
-            str = "drop Maintenance";
-            s.execute(str);
-            str = "drop Laundry";
-            s.execute(str);
+//            str = "drop tabl";
+//            s.execute(str);
+//            str = "drop Laundry";
+//            s.execute(str);
             //str = "delete from Security";
             //s.execute(str);
         } catch (Exception e) {
@@ -333,7 +333,6 @@ public class Database {
         }
     }
     //TODO: Test
-
     /**
      * Saves all tables to respective CSV files (ie: Nodes table saved to Nodes.csv)
      */

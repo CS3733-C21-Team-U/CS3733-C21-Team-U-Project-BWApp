@@ -1,15 +1,15 @@
 package edu.wpi.u.database;
 
-import edu.wpi.u.users.Employee;
-import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.Role;
-import edu.wpi.u.users.User;
+import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.users.*;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class UserData extends Data{
 
@@ -228,7 +228,7 @@ public class UserData extends Data{
      * @param newPassword the new password
      * @param type Employees or Guests (table name)
      */
-    public void changePassword(String username, String newPassword, String type){
+    public void changePassword(String username, String newPassword){
         String str = "update " + type + " set password=? where userName=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
@@ -242,51 +242,158 @@ public class UserData extends Data{
         }
     }
 
-    /**
-     * TODO : UPDATE
-     * Sets the active user on successful login
-     * @param username username of the user
-     * @param password password othe user
-     * @param type Employees or Guests (table name)
-     * @return the User object of the active user
-     */
-    public User setUser(String username, String password, String type){
-        String idColumn = "";
-        int returnType = 0; // 1 is employee, 2 is guest
-        if (type.equals("Employees")){
-            idColumn = "employeeID";
-            returnType=1;
-        }
-        else if (type.equals("Guests")) {
-            idColumn = "guestID";
-            returnType=2;
-        }
-        //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
-        String str = "select * from "+type+" where userName=? and password=?";
-        System.out.println(str);
-        try {
+    public Employee setEmployee(String username, String password){
+        String str = "select * from Employees where username=? and password=?";
+        try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, username);
+            ps.setString(1,username);
             ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                String userID= rs.getString(idColumn);
+                String employeeID = rs.getString("employeeID");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
-                Date date = rs.getDate("visitDate");
-                Role staffType = Role.valueOf(rs.getString("type"));
-                String phoneNumber = rs.getString("phoneNumber");
-                if (returnType == 2){
-                    //return new Guest(userID, name, staffType,phoneNumber, false, date);
-                }
-                return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
+                String role = rs.getString("type");
+                String phonenumber = rs.getString("phonenumber");
+                return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber,false);
             }
-        }
-        catch (Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return new Employee();
     }
+
+    public Guest setGuest(String username, String password){
+        String str = "select * from Guests where username=? and password=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,username);
+            ps.setString(2,password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                String guestId = rs.getString("guestID");
+                String name = rs.getString("name");
+                Date visitDate = rs.getDate("visitDate");
+                String visitReason = rs.getString("visitReason");
+                return new Guest(guestId,name, visitDate.toLocalDate(), visitReason, false);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new Guest();
+    }
+
+    public Patient setPatient(String username, String password){
+        String str  = "select * from Patients where username=? and password=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,username);
+            ps.setString(2,password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                String patientID = rs.getString("userID");
+                String name = rs.getString("name");
+                Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role
+                String phonenumber = rs.getString("phonenumber");
+                String email = rs.getString("email");
+                String nodeID = rs.getString("location");
+                boolean deleted = rs.getBoolean("deleted");
+                ArrayList<Appointment> appointments = getPatientAppointments(patientID);
+                String providerName = rs.getString("providerName");
+                String parkingLocation = rs.getString("parkingLocation");
+                String recommendedParkingLocation = rs.getString("recommendedParkingLocation");
+                return new Patient(patientID, name, username, password, email, role, phonenumber, nodeID, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new Patient();
+    }
+
+    private ArrayList<Appointment> getPatientAppointments(String patientID) {
+        ArrayList<Appointment> results = new ArrayList<>();
+        String str = "select * from Appointments where patientID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, patientID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String appointmentType = rs.getString("appointmentType");
+                LocalDate appointmentDate = rs.getDate("appointmentDate").toLocalDate();
+                String employeeID = rs.getString("employeeID");
+                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    private ArrayList<Appointment> getEmployeeAppointments(String employeeID) {
+        ArrayList<Appointment> results = new ArrayList<>();
+        String str = "select * from Appointments where employeeID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, employeeID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String appointmentType = rs.getString("appointmentType");
+                LocalDate appointmentDate = rs.getDate("appointmentDate").toLocalDate();
+                String patientID = rs.getString("patientID");
+                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+
+//    /**
+//     * TODO : UPDATE
+//     * Sets the active user on successful login
+//     * @param username username of the user
+//     * @param password password othe user
+//     * @param type Employees or Guests (table name)
+//     * @return the User object of the active user
+//     */
+//    public User setUser(String username, String password, String type){
+//        String idColumn = "";
+//        int returnType = 0; // 1 is employee, 2 is guest
+//        if (type.equals("Employees")){
+//            idColumn = "employeeID";
+//            returnType=1;
+//        }
+//        else if (type.equals("Guests")) {
+//            idColumn = "guestID";
+//            returnType=2;
+//        }
+//        //employeeID varchar(50), name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
+//        String str = "select * from "+type+" where userName=? and password=?";
+//        System.out.println(str);
+//        try {
+//            PreparedStatement ps = conn.prepareStatement(str);
+//            ps.setString(1, username);
+//            ps.setString(2,password);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()){
+//                String userID= rs.getString(idColumn);
+//                String name = rs.getString("name");
+//                String email = rs.getString("email");
+//                Date date = rs.getDate("visitDate");
+//                Role staffType = Role.valueOf(rs.getString("type"));
+//                String phoneNumber = rs.getString("phoneNumber");
+//                if (returnType == 2){
+//                    //return new Guest(userID, name, staffType,phoneNumber, false, date);
+//                }
+//                return new Employee(userID, name,username,password,email,staffType,phoneNumber,false);
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     /**
      * Function used to find a user in the database based on a userID, used to check if user account is valid
