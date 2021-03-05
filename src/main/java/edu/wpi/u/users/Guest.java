@@ -8,7 +8,7 @@ public class Guest extends User{
     private LocalDate visitDate;
     private String visitReason;
     //TODO : Maybe add a visitTime field for guest coming to hospital?
-    //TODO : Maybe make Guest only have a phonenumber for account and use 2fa // maybe not need to store in db
+    //TODO : Maybe make Guest only have a phone number for account and use 2fa // maybe not need to store in db
     public Guest() {}
 
     public Guest(LocalDate visitDate, String visitReason) {

@@ -27,6 +27,10 @@ public class Database {
         private static final Database db = new Database();
     }
 
+    /**
+     * Singleton helper to keep Database instance singular
+     * @return the database class reference
+     */
     public static Database getDB() {
         return SingletonHelper.db;
     }
@@ -228,7 +232,11 @@ public class Database {
         }
     }
 
-    public void printRequests(String aTable) { //what is happening here?
+    /**
+     * This will print all of the requests from a Request table
+     * @param aTable table name
+     */
+    public void printRequestTable(String aTable) {
         try {
             String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
@@ -243,6 +251,10 @@ public class Database {
         }
     }
 
+    /**
+     * Checks to see if the Nodes table is populated and assumes the rest of the tables are created if it is
+     * @return true if no tables have been created, false otherwise
+     */
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
@@ -254,6 +266,10 @@ public class Database {
         return false;
     }
 
+    /**
+     * Drops a table or all if the tableName = "all"
+     * @param tableName the table to drop or "all"
+     */
     public void dropValues(String tableName) {
         try {
             Statement s = conn.createStatement();
@@ -288,6 +304,10 @@ public class Database {
         }
     }
 
+    /**
+     * Deletes all tables
+     * TODO : Update to have newly created sprint 2&3 tables
+     */
     public void deleteTables() {
         //System.out.println("here2");
         try {
@@ -313,6 +333,10 @@ public class Database {
         }
     }
     //TODO: Test
+
+    /**
+     * Saves all tables to respective CSV files (ie: Nodes table saved to Nodes.csv)
+     */
     public void saveAll(){
         saveCSV( "Requests", "Requests.csv","Test");
         saveCSV( "Assignments", "Assignments.csv","Test");
@@ -332,6 +356,10 @@ public class Database {
         saveCSV("Gift", "Gift.csv","Kohmei was here");
     }
 
+    /**
+     * Will make the database not persistent in between sessions and reliant on the loading of CSV files on app startup
+     * @param yes whether or not to make Database CSV dependent
+     */
     public void makeCSVDependant(boolean yes){
 
         if(!yes) return;
@@ -347,6 +375,10 @@ public class Database {
         //readCSV("Laundry.csv", "Laundry");
     }
 
+    /**
+     * Stops the database on app shutdown
+     * TODO : Enable and test
+     */
     public void stop() {
         try{
            // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");

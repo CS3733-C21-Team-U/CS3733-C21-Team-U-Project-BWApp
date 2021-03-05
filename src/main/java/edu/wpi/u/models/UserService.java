@@ -20,16 +20,20 @@ public class UserService {
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     User activeUser;
-    //TODO : Add getEmps, getGuests
+    //TODO : Add getEmployees, getGuests
     public UserService() {
         this.setEmployees();
         this.setGuests();
     }
 
-    //public void addAuthyUser(String name,)
-
+    /**
+     * Sets the employees list
+     */
     public void setEmployees() {this.employees = ud.getEmployees();}
 
+    /**
+     * Sets the guests list
+     */
     public void setGuests() {this.guests = ud.getGuests();}
 
     /**
@@ -54,6 +58,11 @@ public class UserService {
         return guests;
     }
 
+    /**
+     * Loads the CSV file into the table
+     * @param path the path to the file
+     * @param tableName the table to be loaded into
+     */
     public void loadCSVFile(String path, String tableName){
         Database.getDB().dropValues(tableName);
         Database.getDB().readCSV(path,tableName);
@@ -61,6 +70,11 @@ public class UserService {
         this.setEmployees();
     }
 
+    /**
+     * Saves the CSV file to the path
+     * @param path the path to the file
+     * @param tableName the table to be saved
+     */
     public void saveCSVFile(String path, String tableName){
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
@@ -232,7 +246,6 @@ public class UserService {
      * @param email the email
      * @param type the type (StaffType)
      * @param phoneNumber the phone number
-     * @param appointmentDate the appointment date
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */

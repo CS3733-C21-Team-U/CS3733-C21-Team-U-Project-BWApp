@@ -1,8 +1,6 @@
 package edu.wpi.u.users;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.algorithms.Node;
-
 
 /*
 Users table
@@ -10,7 +8,7 @@ Employees id references Users
 Patient id references Users
  */
 
-public abstract class User extends RecursiveTreeObject<User> {
+public abstract class User {
     protected String userID;
     protected String name;
     protected String userName;
@@ -37,10 +35,10 @@ public abstract class User extends RecursiveTreeObject<User> {
 
     /**
      * This function will be called by UserService to update the ArrayList of Users / the active user
-     * @param name
-     * @param userName
-     * @param password
-     * @param type
+     * @param name the name
+     * @param userName the username
+     * @param password the password
+     * @param type the role type
      */
     public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         this.name = name;
