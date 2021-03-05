@@ -2,10 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
-import edu.wpi.u.users.Employee;
-import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.Role;
-import edu.wpi.u.users.User;
+import edu.wpi.u.users.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ public class UserService {
     //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
+    ArrayList<Patient> patients = new ArrayList<>();
     User activeUser; //= new Employee("testid", "testname", "testusername", "testpassword", "testemail",  Role.MAINTENANCE, "9118332323", false);
     //TODO : Add getEmployees, getGuests
     public UserService() {
@@ -48,14 +46,30 @@ public class UserService {
         }
     }
 
+    /**
+     * Gets an instance of the active user
+     * @return active user
+     */
     public User getActiveUser() {
         return this.activeUser;
     }
 
+    public ArrayList<Patient> getPatients(){
+        return patients;
+    }
+
+    /**
+     * Gets a list of all of the employees
+     * @return list of employees
+     */
     public ArrayList<Employee> getEmployees() {
         return employees;
     }
 
+    /**
+     * Gets a list of all the guests
+     * @return list of guests
+     */
     public ArrayList<Guest> getGuests() {
         return guests;
     }
@@ -145,6 +159,7 @@ public class UserService {
     public String getPassword(String userID, String type){
         return ud.getPassword(userID, type);
     }
+
     /**
      * Adds an employee to list and calls database
      * @param name the name
@@ -155,7 +170,6 @@ public class UserService {
      * @param phoneNumber the phonenumber
      * @param email the email
      */
-    //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
     public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
