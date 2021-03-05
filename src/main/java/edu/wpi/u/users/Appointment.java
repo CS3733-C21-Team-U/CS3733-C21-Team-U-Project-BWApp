@@ -1,15 +1,16 @@
 package edu.wpi.u.users;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Appointment {
 
     private String patientID;
     private String employeeID;
-    private LocalDate appointmentDate;
+    private Timestamp appointmentDate;
     private String appointmentType; // TODO : Possibly make this an enum ie : Radiology, blood work, etc
 
-    public Appointment(String patientID, String employeeID, LocalDate appointmentDate, String appointmentType) {
+    public Appointment(String patientID, String employeeID, Timestamp appointmentDate, String appointmentType) {
         this.patientID = patientID;
         this.employeeID = employeeID;
         this.appointmentDate = appointmentDate;
@@ -32,11 +33,11 @@ public class Appointment {
         this.employeeID = employeeID;
     }
 
-    public LocalDate getAppointmentDate() {
+    public Timestamp getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(LocalDate appointmentDate) {
+    public void setAppointmentDate(Timestamp appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

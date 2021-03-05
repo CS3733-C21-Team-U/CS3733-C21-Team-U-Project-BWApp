@@ -7,6 +7,7 @@ import edu.wpi.u.users.*;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -120,27 +121,50 @@ public class UserData extends Data{
     }
 
     /**
+     * Gets a list of patients from database
+     * @return list of patients
+     */
+    public ArrayList<Patient> getPatients() {
+        ArrayList<Patient> results = new ArrayList<>();
+        String str = "select * from Patients where deleted=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setBoolean(1,false);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                results.add(new Patient(
+                        rs.getString("patientID"),
+                        rs.getString("name"),
+                        rs.getString("userName"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        Role.valueOf(rs.getString("type")),
+                        rs.getString("phonenumber"),
+                        rs.getString("parkingLocation"),
+                        rs.getBoolean("deleted"),
+                        getPatientAppointments(rs.getString("patientID")),
+                        rs.getString("providerName"),
+                        rs.getString("parkingLocation"),
+                        rs.getString("recommendedParkingLocation")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    /**
      * Gets list of employees from database
      * @return list of employees
      */
     public ArrayList<Employee> getEmployees(){
         ArrayList<Employee> results = new ArrayList<>();
-        String str = "select * from Employees";
+        String str = "select * from Employees where deleted=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                /*
-                userID,
-                 name,
-                 accountName,
-                 password,
-                 email,
-                 type,
-                 phoneNumber,
-                 locationNodeID,
-                 deleted
-                 */
                 results.add(new Employee(rs.getString("employeeID"),
                         rs.getString("name"),
                         rs.getString("userName"),
@@ -163,13 +187,13 @@ public class UserData extends Data{
      */
     public ArrayList<Guest> getGuests(){
         ArrayList<Guest> results = new ArrayList<>();
-        String str = "select * from Guests";
+        String str = "select * from Guests where deleted=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                // (String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, Node locationOfSignificance, boolean deleted, LocalDate visitDate, String visitReason
-                results.add(new Guest()); // TODO : FIX
+                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getDate("visitDate").toLocalDate(), rs.getString("visitReason"), false)); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -377,7 +401,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 String appointmentType = rs.getString("appointmentType");
-                LocalDate appointmentDate = rs.getDate("appointmentDate").toLocalDate();
+                Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String employeeID = rs.getString("employeeID");
                 results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
             }
@@ -401,7 +425,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 String appointmentType = rs.getString("appointmentType");
-                LocalDate appointmentDate = rs.getDate("appointmentDate").toLocalDate();
+                Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String patientID = rs.getString("patientID");
                 results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
             }
@@ -595,7 +619,6 @@ public class UserData extends Data{
      * @param employee the object containing all the information on the user
      */
     public void addEmployee(Employee employee){
-        //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
         String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
@@ -636,6 +659,10 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Marks a user as deleted by setting the deleted field to false
+     * @param patient the patient
+     */
     public void delPatient(Patient patient){
         String str = "update Patients set deleted=? where patientID=?";
         try{
@@ -683,6 +710,10 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Will update the field of a user in the database
+     * @param patient the patient
+     */
     public void updPatient(Patient patient){
         String str = "update Patients set name=? and userName=? and password=? and email=? and type=? and phonenumber=? and deleted=? and providerName=? and parkingLocation=? and recommendedParkingLocation=? where patientID=?";
         try {
@@ -709,7 +740,6 @@ public class UserData extends Data{
      * @param employee the object containing all of the information on the user
      */
     public void updEmployee(Employee employee){
-        //"employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), employed boolean, deleted boolean
         String str = "update Employees set name=? and userName=? and password=? and email=? and type=? and deleted=? and phoneNumber=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);

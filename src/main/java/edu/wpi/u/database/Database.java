@@ -78,7 +78,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50), dateNeeded date, primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated timestamp, dateCompleted timestamp,description varchar(200),title varchar(50),type varchar(50), dateNeeded timestamp, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -88,7 +88,7 @@ public class Database {
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) not null, name varchar(50), visitDate date, visitReason varchar(250), deleted boolean, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), visitDate timestamp, visitReason varchar(250), deleted boolean, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
 
@@ -97,8 +97,9 @@ public class Database {
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
+                //TODO :
                 String tblAssignments =
-                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate date, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
+                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAssignments = conn.prepareStatement(tblAssignments);
                 psAssignments.execute();
 
