@@ -25,10 +25,8 @@ public abstract class Data {
     }
     public boolean updateField(String tableName, String idField, String id, String field, String val) {
         try {
-            String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
+            String str = "update "+tableName+" set "+field+"='"+val+"' where "+idField+"='"+id+"'";
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, val);
-            ps.setString(2, id);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,10 +37,8 @@ public abstract class Data {
     }
     public boolean updateField(String tableName, String idField, String id, String field, int val) {
         try {
-            String str = "update " + tableName + " set" + field + "=? where " + idField + "=?";
+            String str = "update "+tableName+" set "+field+"="+val+" where "+idField+"="+id;
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setInt(1, val);
-            ps.setString(2, id);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();

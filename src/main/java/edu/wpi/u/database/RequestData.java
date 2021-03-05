@@ -40,11 +40,11 @@ public class RequestData extends Data{
         //requestID, dateCreated, dateCompleted, description, title, type
        // System.out.println("Can anyone even hear me??????????????????????????????????");
        // if(request.getDateCompleted() != null) this.resolveRequest(request);
-        this.updRequestDescription(request.getRequestID(), request.getDescription());
-        this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestType(request.getRequestID(), obj.getType());
-        this.updLocations(request.getRequestID(), request.getLocation());
-        this.updAssignees(request.getRequestID(), request.getAssignee());
+        updateField("Requests", "requestID", request.getRequestID(), "description", request.getDescription());
+        updateField("Requests", "requestID", request.getRequestID(), "title", request.getTitle());
+        updateField("Requests", "requestID", request.getRequestID(), "type", obj.getType());
+        //this.updLocations(request.getRequestID(), request.getLocation());
+       // this.updAssignees(request.getRequestID(), request.getAssignee());
 
         //Now place into specific subtable based on class
         try{

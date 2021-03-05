@@ -38,7 +38,7 @@ public class SecurityRequest implements IRequest {
 
     @Override
     public String updateDBQuery() {
-        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = "+responseRequired+", "+getSpecificFields()[1]+" = '"+threatLevel+"' where requestID = '"+req.getRequestID()+"'";
+        String query =  "update "+getType()+" set "+getSpecificFields()[0]+" = '"+responseRequired+"', "+getSpecificFields()[1]+" = '"+threatLevel+"' where requestID = '"+req.getRequestID()+"'";
         return query;
     }
 

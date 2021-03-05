@@ -165,6 +165,7 @@ public class NERController {
             }
 
             //NEW
+            currRequest.setTitle(makeEditTitleField.getText());
             currRequest.setDescription(makeEditDescriptionField.getText());
             currRequest.setAssignee(assigneesToAdd);
             currRequest.setLocation(locationsToAdd);
