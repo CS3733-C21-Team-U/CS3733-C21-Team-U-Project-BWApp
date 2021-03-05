@@ -15,7 +15,7 @@ public class Database {
     private static Connection conn = null;
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
-    public Database() {
+    private Database() {
         driver();
         connect();
         makeCSVDependant(false);
