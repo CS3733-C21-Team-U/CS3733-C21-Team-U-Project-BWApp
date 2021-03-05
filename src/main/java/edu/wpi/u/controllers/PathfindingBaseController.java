@@ -6,6 +6,7 @@ import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.algorithms.getEdgesTest;
 import javafx.animation.Interpolator;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -13,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Affine;
@@ -44,6 +46,7 @@ public class PathfindingBaseController {
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
+    Group pathPreviewGroup = new Group();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -169,7 +172,11 @@ public class PathfindingBaseController {
             generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
-
+        App.mapInteractionModel.pathPreviewFlag.addListener((observable, oldValue, newValue)  ->{
+            pathPreviewGroup.getChildren().clear();
+            generatePathPreview(App.mapInteractionModel.floor);
+            pathPreviewGroup.toFront();
+        });
 
     } // End of initialize
 
@@ -189,21 +196,15 @@ public class PathfindingBaseController {
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
-                    App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
-//            node1.setOnMouseEntered(event -> {
-//                    if(App.mapInteractionModel.pathThingy) {
-//                        try {
-//                            handleNodeClicked(n);
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//            });
+
+            node1.setOnMouseEntered(event -> {
+                App.mapInteractionModel.nodeIDForHover.setValue(n.getNodeID());
+            });
         edgeNodeGroup.getChildren().add(node1);
         node1.toFront();
     }
@@ -225,6 +226,7 @@ public class PathfindingBaseController {
             }
         });
         edgeNodeGroup.toFront();
+        pathPreviewGroup.toFront();
     }
 
 
@@ -260,6 +262,35 @@ public class PathfindingBaseController {
 
 
 
+    /**
+     * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
+     * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
+     */
+    public void placePathPreview(Edge ed){
+        double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
+        double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
+        Line previewEdge = new Line();
+        previewEdge.setLayoutX(ed.getStartNode().getCords()[0]);
+        previewEdge.setStartX(0);
+        previewEdge.setLayoutY(ed.getStartNode().getCords()[1]);
+        previewEdge.setStartY(0);
+        previewEdge.setEndX(xdiff);
+        previewEdge.setEndY(ydiff);
+        previewEdge.setId(ed.getEdgeID()+ "_preview");
+        previewEdge.setStrokeWidth(7);
+        previewEdge.toFront();
+        previewEdge.setStroke(Paint.valueOf("green"));
+        previewEdge.setVisible(true);
+        previewEdge.setOnMouseClicked(event -> {
+            try {
+                handleEdgeClicked(ed);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        pathPreviewGroup.getChildren().add(previewEdge);
+    }
+
     public void generateEdges(String floor){
         getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
         try {
@@ -271,10 +302,25 @@ public class PathfindingBaseController {
             ex.printStackTrace();
         }
         });
+        pathPreviewGroup.toFront();
         edgeNodeGroup.toFront();
+
     }
 
+    public void generatePathPreview(String floor){
+        getEdgesTest.EdgesFollowed(App.mapInteractionModel.pathPreview).stream().forEach(e ->{
+            try {
+                if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
+                    placePathPreview(e);
 
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        pathPreviewGroup.toFront();
+        edgeNodeGroup.toFront();
+    }
 
     /**
      * Function called when and edge is clicked on. This brings up the context menu.
@@ -295,16 +341,6 @@ public class PathfindingBaseController {
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
     }
-    @FXML
-    public void handleUndoButton() throws Exception{
-        App.undoRedoService.undo();
-    }
-
-    @FXML
-    public void handleRedoButton() throws Exception{
-        App.undoRedoService.redo();
-    }
-
 
     /**
      * This is a helper function for the floor buttons.
@@ -325,6 +361,7 @@ public class PathfindingBaseController {
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");

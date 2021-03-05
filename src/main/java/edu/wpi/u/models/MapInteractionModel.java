@@ -12,12 +12,15 @@ public class MapInteractionModel {
 
     private String currentAction = "NONE";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
+    public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
     private double Coords[] = new double[2];
     public SimpleStringProperty pathFlag = new SimpleStringProperty("");
+    public SimpleStringProperty pathPreviewFlag = new SimpleStringProperty("");
     public ArrayList<Node> path = new ArrayList<>();
+    public ArrayList<Node> pathPreview = new ArrayList<>();
     private String building = "Faulkner";
     public SimpleStringProperty editFlag = new SimpleStringProperty("");
     public AnchorPane selectedNodeContextBox;

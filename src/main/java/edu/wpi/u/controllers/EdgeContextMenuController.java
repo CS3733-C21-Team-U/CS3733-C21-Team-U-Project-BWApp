@@ -72,6 +72,8 @@ public class EdgeContextMenuController {
                 App.undoRedoService.updateEdge(thisEdge.getEdgeID(), perms);
             } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                 App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
+                App.mapInteractionModel.setEdgeID("");
+                App.mapInteractionModel.clearPreviousNodeID();
             }
             userTypes.clear();
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));

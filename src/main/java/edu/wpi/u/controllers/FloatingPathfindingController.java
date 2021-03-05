@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
-public class floatingPathfindingController {
+public class FloatingPathfindingController {
     @FXML
     JFXTextArea textualDirections;
     @FXML
@@ -70,6 +70,18 @@ public class floatingPathfindingController {
                     textualDirectionsMegaString = textualDirectionsMegaString + curString + "\n";
                 }
                 textualDirections.setText(textualDirectionsMegaString);
+            }
+        });
+
+        App.mapInteractionModel.nodeIDForHover.addListener((observable, oldValue, newValue)  ->{
+            if(!startNodeID.equals("") && !App.mapInteractionModel.nodeIDForHover.getValue().equals("")){
+                try {
+                    path = App.mapService.runPathfinding(startNodeID,App.mapInteractionModel.nodeIDForHover.getValue());
+                } catch (PathNotFoundException e) {
+                    e.printStackTrace();
+                }
+                App.mapInteractionModel.pathPreview = path;
+                App.mapInteractionModel.pathPreviewFlag.set(String.valueOf(Math.random()));
             }
         });
     }
