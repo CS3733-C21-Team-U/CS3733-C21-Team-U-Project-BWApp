@@ -227,7 +227,7 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab closable="false" disable="true" style="-fx-opacity: 0;">
+                  <Tab closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
@@ -258,17 +258,17 @@
                                  <children>
                                     <JFXButton buttonType="RAISED" styleClass="button-contained" text="BUTTON" GridPane.columnIndex="1" />
                                     <JFXCheckBox GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <JFXChipView style="-fx-background-color: lightgrey;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                    <JFXChipView fx:id="chipView" minWidth="360.0" onKeyTyped="#onChipEnter" promptText="enter something" style="-fx-background-color: lightgrey;" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
                                        <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                          <Insets />
                                        </GridPane.margin></JFXChipView>
                                     <JFXComboBox labelFloat="true" promptText="Prompt Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
                                     <JFXRadioButton GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                     <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <JFXToggleButton GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <JFXToggleButton GridPane.columnIndex="4" GridPane.rowIndex="9" />
                                     <Label text="Chipview - type something! Then press &lt;Enter&gt;" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                                     <Label text="noClass (default checkbox)" GridPane.rowIndex="7" />
                                     <JFXButton layoutX="210.0" layoutY="38.0" styleClass="button-outlined" text="BUTTON" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -307,7 +307,7 @@
                                     <Label alignment="CENTER" text="fab-default (TYPE=RAISED, Content Display=CENTER)" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                     <Label alignment="CENTER" text="button-contained" wrapText="true" />
                                     <Label alignment="CENTER" text="noClass (default toggleNode in hbox) this is for floor selection" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                    <Label alignment="CENTER" text="default ToggleButton" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" text="default ToggleButton" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                                     <JFXTextArea labelFloat="true" promptText="Promt Text Here" text="Real Text Here" GridPane.columnIndex="4" GridPane.rowIndex="6">
                                        <GridPane.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -317,9 +317,8 @@
                                     <Label text="default comboBox, labelFloat" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                                     <JFXColorPicker GridPane.columnIndex="4" GridPane.rowIndex="7" />
                                     <JFXDatePicker GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                                    <JFXTimePicker GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                    <JFXTimePicker GridPane.columnIndex="5" GridPane.rowIndex="8" />
                                     <Label text="default date picker" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                    <Label text="default time picker" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                                     <Label text="default color picker" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                                     <JFXListView fx:id="listViewDemo" GridPane.columnIndex="8" />
                                     <Label text="listView" GridPane.columnIndex="7" />
@@ -357,6 +356,12 @@
                                     <JFXButton styleClass="secondary-button-text" text="BUTTON" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                     <JFXTextField fx:id="validationFeild" labelFloat="true" promptText="This value is required!" styleClass="text-field-filled" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label alignment="CENTER" text="noClass (default textField)" GridPane.rowIndex="3" />
+                                    <JFXChipView fx:id="chipViewOnly" layoutX="768.0" layoutY="418.0" minHeight="0.0" minWidth="360.0" mouseTransparent="true" style="-fx-background-color: lightgrey;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </JFXChipView>
+                                    <Label layoutX="584.0" layoutY="445.0" text="Chipview - type something! Then press &lt;Enter&gt;" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
