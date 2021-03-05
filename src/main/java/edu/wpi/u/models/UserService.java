@@ -81,6 +81,11 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
+    public void changePhoneNumer(String userID, String newPhoneNumber, String type){
+        this.getActiveUser().setPhoneNumber(newPhoneNumber);
+        ud.changePhoneNumber(userID,newPhoneNumber, type);
+    }
+
     /**
      * Changes the email of the user
      * @param userID id of the user
@@ -90,16 +95,6 @@ public class UserService {
     public void changeEmail(String userID, String newEmail, String type){
         this.getActiveUser().setEmail(newEmail);
         ud.changeEmail(userID,newEmail,type);
-    }
-
-    /**
-     *  Gets the password of the user
-     * @param userID id of the user
-     * @param type position of user
-     * @return the password of the user
-     */
-    public String getPassword(String userID, String type){
-        return ud.getPassword(userID, type);
     }
 
     /**
@@ -141,6 +136,15 @@ public class UserService {
         return ud.checkPhoneNumber(username);
     }
 
+    /**
+     *  Gets the password of the user
+     * @param userID id of the user
+     * @param type position of user
+     * @return the password of the user
+     */
+    public String getPassword(String userID, String type){
+        return ud.getPassword(userID, type);
+    }
     /**
      * Adds an employee to list and calls database
      * @param name the name

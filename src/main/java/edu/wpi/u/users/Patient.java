@@ -43,6 +43,37 @@ public class Patient extends User{
     @Override
     public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted) {
         super.editUser(name, userName, password, email, type, phoneNumber, deleted);
+    }
 
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(ArrayList<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public String getParkingLocation() {
+        return parkingLocation;
+    }
+
+    public void setParkingLocation(String parkingLocation) {
+        this.parkingLocation = parkingLocation;
+    }
+
+    public String getRecommendedParkingLocation() {
+        return recommendedParkingLocation;
+    }
+
+    public void setRecommendedParkingLocation(String recommendedParkingLocation) {
+        this.recommendedParkingLocation = recommendedParkingLocation;
     }
 }

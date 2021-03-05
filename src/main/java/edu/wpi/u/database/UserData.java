@@ -178,10 +178,36 @@ public class UserData extends Data{
     }
 
     /**
+     * Changes the phonenumbr of a user
+     * @param userID the id of the user
+     * @param newPhoneNumber the phone number of the user
+     * @param type Employees or Patients (table name)
+     */
+    public void changePhoneNumber(String userID, String newPhoneNumber, String type){
+        String typeID ="";
+        if (type.equals("Employees")){
+            typeID = "employeeID"; //TODO: Extract this out to a helper function
+        }
+        else {
+            typeID = "patientID";
+        }
+        String str = "update " + type + " set phonenumber=? where " + typeID + "=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, newPhoneNumber);
+            ps.setString(2, typeID);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Changes the email of a user
      * @param userID id of the user
      * @param newEmail the new email
-     * @param type Employees or Guests (table name)
+     * @param type Employees or Patients (table name)
      */
     public void changeEmail(String userID, String newEmail, String type){
         String typeID ="";
@@ -195,7 +221,7 @@ public class UserData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newEmail);
-            ps.setString(2, userID);
+            ps.setString(2, typeID);
             ps.executeUpdate();
             ps.close();
         }
@@ -208,7 +234,7 @@ public class UserData extends Data{
      * Gets the password of a given user based on an ID
      * @param userID the user id
      * @param type the users type
-     * @return Employees, Guests, or "" for table names or not found
+     * @return Employees or Patients (table name) or "" if not found
      */
     public String getPassword(String userID, String type)  {
         String typeID ="";
@@ -235,7 +261,7 @@ public class UserData extends Data{
      * Changes a users password
      * @param username username of user
      * @param newPassword the new password
-     * @param type Employees or Guests (table name)
+     * @param type Employees or Patients (table name)
      */
     public void changePassword(String username, String newPassword, String type){
         String str = "update " + type + " set password=? where userName=?";
@@ -388,7 +414,7 @@ public class UserData extends Data{
     /**
      * Function used to find a user in the database based on a userID, used to check if user account is valid
      * @param userID the user id
-     * @return Employees, Guests or empty string (table names or not found)
+     * @return Employees or Patients (table name) or "" if not found
      */
     public String findUser(String userID) {
         String str = "select * from Employees where employeeID=?";
@@ -425,7 +451,7 @@ public class UserData extends Data{
     /**
      * Checks if the database has the username
      * @param username username to be checked
-     * @return type for user of setting the users type Employees or Guests (table name)
+     * @return Employees or Patients (table name) or "" if not found
      * TODO : Replace check with the ID -> Current system doesnt allow for users with same password
      */
     public String checkUsername(String username){
@@ -470,7 +496,7 @@ public class UserData extends Data{
     /**
      * Checks if the database has the phone number matched with the given username
      * @param phoneNumber phone number to be checked
-     * @return the phone number of the user or " " if the username doesn't exist
+     * @return the phone number of the user or "" if the username doesn't exist
      */
     public String checkPhoneNumber(String phoneNumber){
         String str = "select * from Employees where phoneNumber=?";
@@ -504,7 +530,7 @@ public class UserData extends Data{
     /**
      * Checks to see if the password is valid
      * @param password the password to be checked
-     * @return type for user of setting the users type Employees or Guests (table name)
+     * @return Employees or Patients (table name) or "" for not found
      */
     public String checkPassword(String password){
         String str = "select * from Employees where password=?";
@@ -542,6 +568,28 @@ public class UserData extends Data{
         }
     }
 
+    public void addPatient(Patient patient) {
+        String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,patient.getUserID());
+            ps.setString(2,patient.getName());
+            ps.setString(3,patient.getUserName());
+            ps.setString(4,patient.getPassword());
+            ps.setString(5,patient.getEmail());
+            ps.setString(6,String.valueOf(patient.getType()));
+            ps.setString(7,patient.getPhoneNumber());
+            ps.setBoolean(7,false);
+            ps.setString(8,patient.getProviderName());
+            ps.setString(9,patient.getParkingLocation());
+            ps.setString(10,patient.getRecommendedParkingLocation());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Adds a user to the table Users
      * @param employee the object containing all the information on the user
@@ -572,25 +620,28 @@ public class UserData extends Data{
      * @param guest the object containing all of the information on the user
      */
     public void addGuest(Guest guest){
-        //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
-        String str = "insert into Guests (guestID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
+        String str = "insert into Guests (guestID, name, visitDate, visitReason, deleted) values (?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,guest.getUserID());
             ps.setString(2,guest.getName());
-            ps.setString(3, guest.getUserName());
-            ps.setString(4, guest.getPassword());
-            ps.setString(5,guest.getEmail());
-            ps.setString(6,String.valueOf(guest.getType()));// StaffType.valueOf(string) to get ENUM type
-            ps.setString(7,guest.getPhoneNumber());
-            ps.setBoolean(8,true);
-//            java.util.Date d = guest.getAppointmentDate();
-//            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            //ps.setDate(9,sqld);
+            ps.setString(3, String.valueOf(Date.valueOf(guest.getVisitDate())));
+            ps.setString(4, guest.getVisitReason());
             ps.execute();
             ps.close();
         }
         catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void delPatient(Patient patient){
+        String str = "update Patients set deleted=? where patientID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,true);
+            ps.setString(2,patient.getUserID());
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -627,6 +678,27 @@ public class UserData extends Data{
             ps.close();
         }
         catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updPatient(Patient patient){
+        String str = "update Patients set name=? and userName=? and password=? and email=? and type=? and phonenumber=? and deleted=? and providerName=? and parkingLocation=? and recommendedParkingLocation=? where patientID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,patient.getName());
+            ps.setString(2,patient.getUserName());
+            ps.setString(3,patient.getPassword());
+            ps.setString(4,patient.getEmail());
+            ps.setString(5,String.valueOf(patient.getType()));
+            ps.setString(6,patient.getPhoneNumber());
+            ps.setBoolean(7,patient.isDeleted());
+            ps.setString(8,patient.getProviderName());
+            ps.setString(9,patient.getParkingLocation());
+            ps.setString(10,patient.getUserID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
