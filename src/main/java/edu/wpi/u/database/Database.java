@@ -15,6 +15,7 @@ public class Database {
     private static Connection conn = null;
     // Url for live code
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
+    private final static String testURL = "jdbc:derby:testDB;create=true";
 
     public Database() {
         driver();
@@ -26,7 +27,7 @@ public class Database {
     public Database(String urlIn) {
         driver();
         connect(urlIn);
-        makeCSVDependant(false);
+        // makeCSVDependant(false);
         createTables();
     }
 
@@ -42,7 +43,7 @@ public class Database {
 
     private static class SingletonHelperTest {
         //Nested class is referenced after getDB() is called
-        private static final Database dbStaging = new Database();
+        private static final Database dbStaging = new Database(testURL);
     }
 
     public static Database getDBTest() {

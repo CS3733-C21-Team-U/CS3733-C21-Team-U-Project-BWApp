@@ -1,5 +1,6 @@
 package edu.wpi.u;
 
+import edu.wpi.u.database.Database;
 import org.junit.Test;
 
 public class DatabaseTest {
@@ -19,6 +20,10 @@ public class DatabaseTest {
     - Note: DAO = data access object
 
      */
+
+    public static void main(String[] args) {
+        Database.getDBTest();
+    }
 
 
 }
