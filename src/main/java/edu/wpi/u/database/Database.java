@@ -91,16 +91,17 @@ public class Database {
                         "create table Guests (guestID varchar(50) not null, name varchar(50), visitDate timestamp, visitReason varchar(250), deleted boolean, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
-
+                // TODO : REQUEST WILL HAVE PARKING LOCATION
                 String tblPatient =
                         "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50) references Nodes, recommendedParkingLocation varchar(100), primary key(patientID))";
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
-                String tblAssignments =
+                //TODO : MOVE INTO ASSIGNMENTS
+                String tblAppointments =
                         "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
-                PreparedStatement psAssignments = conn.prepareStatement(tblAssignments);
-                psAssignments.execute();
+                PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
+                psAppointments.execute();
 
                 String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);

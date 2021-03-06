@@ -17,7 +17,7 @@ public abstract class User {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-    //protected String locationOfSignificance;
+    protected String locationNodeID; // TODO MOVE
 
     public User(){}
 
@@ -30,7 +30,7 @@ public abstract class User {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        //this.locationOfSignificance = locationOfSignificance;
+        this.locationNodeID = locationNodeID;
     }
 
     /**
@@ -48,6 +48,14 @@ public abstract class User {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public String getLocationNodeID() {
+        return locationNodeID;
+    }
+
+    public void setLocationNodeID(String locationNodeID) {
+        this.locationNodeID = locationNodeID;
     }
 
     public String getUserID() {
