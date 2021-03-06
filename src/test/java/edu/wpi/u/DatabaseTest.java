@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
+import edu.wpi.u.models.*;
 import org.junit.Test;
 
 public class DatabaseTest {
@@ -16,13 +17,26 @@ public class DatabaseTest {
 
     Additions to staging area: Staging area is defined as the testing class that is separate from the live code
     - Staging area will create a new instance of the database class, this time with a different url
-    - Staging area will utilize DAO and service objects to test the DB and its related classes as needed
+    - Staging area will test DAO, service objects and the database itself ideally
     - Note: DAO = data access object
 
      */
 
+    private static String testURL = "jdbc:derby:testDB;bootUser=admin;bootPassword=testdbpassword";
+
+    // TODO: Modify Data classes to support different url
+    private static Database dbTest = Database.getDBTest();
+    private static MapService mapServiceTest = new MapService(testURL);
+
+    private static UserService userServiceTest = new UserService();
+    private static MapInteractionModel mapInteractionModelTest = new MapInteractionModel();
+    private static RequestService requestServiceTest = new RequestService();
+    private static AdminToolStorage AdminStorageTest = new AdminToolStorage();
+    private static PathHandling PathHandlingTest = new PathHandling();
+    private static UndoRedoService undoRedoServiceTest = new UndoRedoService();
+
     public static void main(String[] args) {
-        Database.getDBTest();
+
     }
 
 

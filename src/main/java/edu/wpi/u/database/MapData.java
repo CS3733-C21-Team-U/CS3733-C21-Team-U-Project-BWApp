@@ -14,6 +14,10 @@ public class MapData extends Data{
         connect();
     }
 
+    public MapData(String testURL){
+        testConnect(testURL);
+    }
+
     public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
         try {
             String str =

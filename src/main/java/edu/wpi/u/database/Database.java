@@ -27,7 +27,7 @@ public class Database {
     public Database(String urlIn) {
         driver();
         connect(urlIn);
-        // makeCSVDependant(false);
+        makeCSVDependant(false);
         createTables();
     }
 
