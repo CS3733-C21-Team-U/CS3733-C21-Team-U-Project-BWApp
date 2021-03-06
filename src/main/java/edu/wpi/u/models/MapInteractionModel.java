@@ -1,7 +1,6 @@
 package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.controllers.NodeContextMenuController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 

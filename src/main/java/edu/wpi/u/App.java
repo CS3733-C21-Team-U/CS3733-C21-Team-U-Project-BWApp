@@ -13,13 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
 
 @Slf4j
 public class App extends Application {
@@ -30,7 +26,7 @@ public class App extends Application {
   public static App app_instance = null;
 
   public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
-  public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/LeftDrawerMenu.fxml");
+  public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   public static boolean isEdtingGuest;
   private static Stage primaryStage;
@@ -102,9 +98,9 @@ public class App extends Application {
   public void start(Stage stage) throws Exception {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/CovidSurveyPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
 
     mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
@@ -123,7 +119,7 @@ public class App extends Application {
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-//    App.primaryStage.setFullScreen(true);
+    App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {

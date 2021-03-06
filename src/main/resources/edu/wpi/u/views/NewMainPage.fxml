@@ -17,6 +17,7 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
@@ -82,8 +83,8 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
-                              <fx:include source="PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
-                              <fx:include source="floatingPathfinding.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
+                              <fx:include source="pathfinding/PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="pathfinding/FloatingPathfindingPane.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -110,7 +111,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="NewViewRequest.fxml" />
+                              <fx:include source="request/ViewRequestList.fxml" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -141,7 +142,7 @@
                               <Insets top="80.0" />
                            </padding>
                            <children>
-                              <fx:include source="SettingsPageSprint2.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include source="SettingsBase.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -177,7 +178,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="AdminEdit.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="mapbuilder/MapBuilderBase.fxml" AnchorPane.bottomAnchor="0.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -204,7 +205,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="ListOfUsers.fxml" />
+                              <fx:include source="user/ViewUserList.fxml" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -227,11 +228,35 @@
                         </Group>
                      </graphic>
                   </Tab>
+                  <Tab fx:id="adminTab11" closable="false" style="fx-opacity: 0;">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Guest List">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
                   <Tab closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <GridPane alignment="CENTER" hgap="10.0" layoutX="493.0" layoutY="524.0" prefHeight="1080.0" prefWidth="1688.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <GridPane fx:id="listTestingPane" alignment="CENTER" hgap="10.0" layoutX="493.0" layoutY="524.0" prefHeight="1080.0" prefWidth="1688.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -320,7 +345,7 @@
                                     <JFXTimePicker GridPane.columnIndex="5" GridPane.rowIndex="8" />
                                     <Label text="default date picker" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                                     <Label text="default color picker" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                    <JFXListView fx:id="listViewDemo" GridPane.columnIndex="8" />
+                                    <JFXListView fx:id="listViewDemoNormal" GridPane.columnIndex="8" />
                                     <Label text="listView" GridPane.columnIndex="7" />
                                     <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text=" " textFill="WHITE" GridPane.columnIndex="5">
                                        <graphic>
@@ -362,6 +387,8 @@
                                        </opaqueInsets>
                                     </JFXChipView>
                                     <Label layoutX="584.0" layoutY="445.0" text="Chipview - type something! Then press &lt;Enter&gt;" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <AnchorPane minHeight="287.0" prefHeight="287.0" prefWidth="174.0" style="-fx-background-color: red;" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                                    <JFXListView fx:id="listViewTesting" minHeight="286.0" prefHeight="286.0" prefWidth="174.0" styleClass="mylistview" GridPane.columnIndex="6" GridPane.rowIndex="8" />
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -390,9 +417,43 @@
                         </Group>
                      </graphic>
                   </Tab>
+                  <Tab closable="false">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="CSS Demo 2">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <JFXListView fx:id="list2" prefHeight="378.0" prefWidth="311.0" styleClass="mylistview" />
+                              <JFXButton fx:id="expandButton" layoutX="197.0" layoutY="451.0" onAction="#handleExpandButton" text="Expand" />
+                              <JFXButton fx:id="collapseButton" layoutX="356.0" layoutY="450.0" onAction="#handleCollapseButton" text="Collapse" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
                </tabs>
             </JFXTabPane>
          </center>
       </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </StackPane>

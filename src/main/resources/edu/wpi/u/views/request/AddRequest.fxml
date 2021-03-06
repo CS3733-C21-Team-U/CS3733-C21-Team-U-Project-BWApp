@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.AddRequestController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox fillHeight="false" prefHeight="800.0" prefWidth="1700.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="850.0" spacing="40.0">
+                     <children>
+                        <Label prefHeight="88.0" prefWidth="361.0" styleClass="headline-1" text="New Request" textAlignment="CENTER">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="125.0" prefWidth="850.0" />
+                        <JFXTextField fx:id="makeTitleField" labelFloat="true" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" promptText="Title">
+                           <font>
+                              <Font size="18.0" />
+                           </font></JFXTextField>
+                        <JFXTextArea fx:id="makeDescriptionField" focusColor="BLACK" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="170.0" prefWidth="600.0" promptText="Description">
+                           <font>
+                              <Font size="15.0" />
+                           </font></JFXTextArea>
+                        <JFXDatePicker fx:id="makeDate2BCompleteDatePicker" prefHeight="40.0" prefWidth="400.0" promptText="Date to Completed By">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </JFXDatePicker>
+                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="900.0">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                                 <children>
+                                    <JFXChipView fx:id="makeLocationChipView" visible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="550.0">
+                                 <children>
+                                    <JFXChipView fx:id="makeStaffChipView" visible="false" layoutX="-14.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="VBoxToAddTo" alignment="TOP_CENTER" fillWidth="false" prefHeight="745.0" prefWidth="800.0" spacing="40.0">
+                     <children>
+                        <Label fx:id="specificTitle" prefHeight="88.0" styleClass="headline-1" text="Maintenence Fields" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="125.0" prefWidth="850.0" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@../css/BaseStyle.css" />
+                        <URL value="@../css/LightTheme.css" />
+                     </stylesheets>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1700.0" spacing="100.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="400.0" />
+                  <JFXButton onAction="#handleSaveNewRequest" prefHeight="45.0" prefWidth="240.0" styleClass="button-contained" text="Save" />
+                  <JFXButton onAction="#HandleMakeCancelButton" opacity="0.5" prefHeight="45.0" prefWidth="240.0" text="Cancel">
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass></JFXButton>
+                  <Label fx:id="errorMsg" styleClass="headline-3" text="Error! Field(s) contain incorrect datatype!" textFill="#dd0d0d" visible="false" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

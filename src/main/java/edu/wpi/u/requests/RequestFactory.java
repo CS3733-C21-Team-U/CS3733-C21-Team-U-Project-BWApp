@@ -1,11 +1,8 @@
 package edu.wpi.u.requests;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 public class RequestFactory {
     public RequestFactory(){}
-    public IRequest makeRequest(String type){
+    public SpecificRequest makeRequest(String type){
         switch (type){
             case "Maintenance":
                 return new MaintenanceRequest();

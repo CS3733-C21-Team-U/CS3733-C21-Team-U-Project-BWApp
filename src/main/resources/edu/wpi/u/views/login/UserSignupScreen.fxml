@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.SelectUserScreenController">
+   <right>
+      <ImageView fitHeight="1556.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../Images/pexels-anna-shvets-4421550.jpg" />
+         </image>
+      </ImageView>
+   </right>
+   <left>
+      <BorderPane prefHeight="1080.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+         <center>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </opaqueInsets>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Region prefHeight="0.0" prefWidth="360.0" />
+                        <Label styleClass="headline-2" text="Sign Up" />
+                        <Region prefHeight="13.0" prefWidth="360.0" />
+                        <JFXTextField labelFloat="true" promptText="Full Name" />
+                        <JFXTextField labelFloat="true" promptText="Username" />
+                        <JFXTextField labelFloat="true" layoutX="30.0" layoutY="386.0" promptText="Phone Number" />
+                        <JFXTextField labelFloat="true" layoutX="30.0" layoutY="498.0" promptText="Email" />
+                        <JFXPasswordField labelFloat="true" promptText="Password" />
+                        <JFXPasswordField labelFloat="true" promptText="Password Confirm" />
+                        <Region prefHeight="0.0" prefWidth="360.0" />
+                        <JFXButton onAction="#handleSignUpButton" styleClass="button-contained" text="SIGN UP" />
+                        <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding></VBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </left>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</BorderPane>
