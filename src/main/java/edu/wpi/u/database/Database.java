@@ -13,11 +13,19 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
+    // Url for live code
     private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
 
     public Database() {
         driver();
         connect();
+        makeCSVDependant(false);
+        createTables();
+    }
+
+    public Database(String urlIn) {
+        driver();
+        connect(urlIn);
         makeCSVDependant(false);
         createTables();
     }
@@ -30,6 +38,15 @@ public class Database {
 
     public static Database getDB() {
         return SingletonHelper.db;
+    }
+
+    private static class SingletonHelperTest {
+        //Nested class is referenced after getDB() is called
+        private static final Database dbStaging = new Database();
+    }
+
+    public static Database getDBTest() {
+        return SingletonHelperTest.dbStaging;
     }
 
     /**
@@ -50,6 +67,16 @@ public class Database {
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
+        } catch (Exception e) {
+            System.out.println("Connection failed");
+            e.printStackTrace();
+        }
+    }
+
+    public static void connect(String urlIn) {
+        try {
+            conn = DriverManager.getConnection(urlIn);
             conn.setAutoCommit(true);
         } catch (Exception e) {
             System.out.println("Connection failed");
