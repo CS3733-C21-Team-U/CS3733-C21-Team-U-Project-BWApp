@@ -238,8 +238,8 @@ public class NewMainPageController {
         content.setBody(text);
         content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button1 = new JFXButton("CANCEL");
-        JFXButton button2 = new JFXButton("Help Page");
+        JFXButton button1 = new JFXButton("Cancel");
+        JFXButton button2 = new JFXButton("Proceed to Help Page");
         button1.setOnAction(event -> dialog.close());
             button2.setOnAction(event -> {
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
