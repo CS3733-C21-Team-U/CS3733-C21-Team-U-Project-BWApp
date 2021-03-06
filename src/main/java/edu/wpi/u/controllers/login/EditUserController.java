@@ -120,12 +120,7 @@ public class EditUserController {
             }
         });
     }
-    //
-//
-//    /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to
-//     * the database to edit an existing user
-//
-//     */
+
     public void handleEditUser() throws IOException, ParseException {
 
 

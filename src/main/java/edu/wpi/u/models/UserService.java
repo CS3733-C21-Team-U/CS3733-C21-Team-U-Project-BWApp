@@ -4,6 +4,7 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class UserService {
         Random rand = new Random();
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
-        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation)
+        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
         ud.addPatient(patient);
         this.patients.add(patient);
     }
@@ -304,7 +305,7 @@ public class UserService {
      * @param deleted whether or not the user is deleted
      * @return "" on success and the id on failure
      */
-    public String updateGuest(String guestID, String name, LocalDate visitDate, String visitReason, boolean deleted){
+    public String updateGuest(String guestID, String name, Timestamp visitDate, String visitReason, boolean deleted){
         for(Guest g : this.guests){
             if(g.getUserID().equals(guestID)){
                 g.editGuest(name, visitDate, visitReason, deleted);

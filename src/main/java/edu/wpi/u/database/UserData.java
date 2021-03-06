@@ -193,7 +193,7 @@ public class UserData extends Data{
             ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getDate("visitDate").toLocalDate(), rs.getString("visitReason"), false)); // TODO : FIX
+                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -344,9 +344,9 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 String guestId = rs.getString("guestID");
-                Date visitDate = rs.getDate("visitDate");
+                Timestamp visitDate = rs.getTimestamp("visitDate");
                 String visitReason = rs.getString("visitReason");
-                return new Guest(guestId,name, visitDate.toLocalDate(), visitReason, false);
+                return new Guest(guestId,name, visitDate, visitReason, false);
             }
         }catch (Exception e){
             e.printStackTrace();
