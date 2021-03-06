@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: -background; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.EdgeContextMenuController">
+<AnchorPane prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: -background; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mapbuilder.ContextMenuEdgeController">
    <children>
       <VBox alignment="TOP_CENTER">
          <children>
