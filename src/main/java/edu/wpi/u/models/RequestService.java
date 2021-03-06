@@ -11,11 +11,11 @@ public class RequestService {
 
 
   static RequestData rd = new RequestData();
-  ArrayList<IRequest> activeRequests = new ArrayList<>();
+  ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-    for (IRequest x : this.activeRequests){
+    for (SpecificRequest x : this.activeRequests){
 
       System.out.println("Req: "+ x.getGenericRequest().getRequestID());
     }
@@ -31,16 +31,16 @@ public class RequestService {
     Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
   }
 
-  public void addRequest(IRequest result) {
+  public void addRequest(SpecificRequest result) {
     rd.addRequest(result);
     this.activeRequests.add(result);
   }
 
-  public void updateRequest(IRequest result) {
+  public void updateRequest(SpecificRequest result) {
     rd.updateRequest(result);
   }
 
-  public void resolveRequest(IRequest result) {
+  public void resolveRequest(SpecificRequest result) {
     long time = System.currentTimeMillis();
     Date now = new Date(time);
     result.getGenericRequest().setDateCompleted(now);
@@ -48,7 +48,7 @@ public class RequestService {
     rd.resolveRequest(result.getGenericRequest().getRequestID(), time);
   }
 
-  public ArrayList<IRequest> getRequests() {
+  public ArrayList<SpecificRequest> getRequests() {
       return this.activeRequests;
     }
 

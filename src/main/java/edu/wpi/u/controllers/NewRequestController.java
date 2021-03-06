@@ -1,9 +1,8 @@
 package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.IRequest;
+import edu.wpi.u.requests.SpecificRequest;
 import edu.wpi.u.requests.Request;
 import edu.wpi.u.requests.RequestFactory;
 import javafx.event.ActionEvent;
@@ -12,11 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
@@ -43,7 +42,7 @@ public class NewRequestController {
     public HBox HBoxToClone;
     public Label errorMsg;
 
-    private IRequest currIRequest;
+    private SpecificRequest currSpecificRequest;
     private JFXTextField[] specificTextFields;
 
     public boolean isInteger(String s) {
@@ -57,13 +56,13 @@ public class NewRequestController {
 
     public JFXTextField[] generateSpecificFields() {
 
-        specificTitle.setText(currIRequest.getType() + " Fields");
-        JFXTextField[] ans = new JFXTextField[currIRequest.getSpecificFields().length];
-        for(int i = 0; i < currIRequest.getSpecificFields().length; i++) {
+        specificTitle.setText(currSpecificRequest.getType() + " Fields");
+        JFXTextField[] ans = new JFXTextField[currSpecificRequest.getSpecificFields().length];
+        for(int i = 0; i < currSpecificRequest.getSpecificFields().length; i++) {
             HBox h = new HBox();
 
             JFXTextField j = new JFXTextField();
-            j.setPromptText(currIRequest.getSpecificFields()[i]);
+            j.setPromptText(currSpecificRequest.getSpecificFields()[i]);
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
@@ -86,7 +85,7 @@ public class NewRequestController {
         Stage stage = (Stage) node.getScene().getWindow();*/
         // receiveData Step 2
         String type = App.newNodeType;
-        currIRequest = new RequestFactory().makeRequest(type);
+        currSpecificRequest = new RequestFactory().makeRequest(type);
 
         //TODO: redo so it does not use a switch statement
         specificTextFields = generateSpecificFields();
@@ -102,13 +101,11 @@ public class NewRequestController {
 
     }
 
-    public LinkedList<Serializable> requestSpecificItems() {
-        LinkedList<Serializable> specifics = new LinkedList<>();
+    public ArrayList<String> requestSpecificItems() {
+        ArrayList<String> specifics = new ArrayList<>();
         for(JFXTextField j : specificTextFields) {
             specifics.add(j.getText());
         }
-
-        //for loop(values stored in TextFields)
         return specifics;
     }
 
@@ -118,9 +115,9 @@ public class NewRequestController {
         try {
             LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
             LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
-            LinkedList<Serializable> specifics = requestSpecificItems();
+            ArrayList<String> specifics = requestSpecificItems();
 
-            IRequest result = new RequestFactory().makeRequest(App.newNodeType);
+            SpecificRequest result = new RequestFactory().makeRequest(App.newNodeType);
             Random rand = new Random();
             int requestID = rand.nextInt();
             String ID = Integer.toString(requestID);//make a random id

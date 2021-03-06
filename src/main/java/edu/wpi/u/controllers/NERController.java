@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.sun.javafx.scene.control.skin.LabelSkin;
 import edu.wpi.u.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -60,7 +56,7 @@ public class NERController {
     JFXCheckBox makeEditDateCheckBox;
 
 
-    private IRequest currIRequest;
+    private SpecificRequest currSpecificRequest;
     private Request currRequest;
     private JFXTextField[] specificTextFields;
 
@@ -85,18 +81,18 @@ public class NERController {
 
     public JFXTextField[] generateSpecificFields() {
 
-        specificTitle.setText(currIRequest.getType());
-        JFXTextField[] ans = new JFXTextField[currIRequest.getSpecificFields().length];
-        for(int i = 0; i < currIRequest.getSpecificFields().length; i++) {
+        specificTitle.setText(currSpecificRequest.getType());
+        JFXTextField[] ans = new JFXTextField[currSpecificRequest.getSpecificFields().length];
+        for(int i = 0; i < currSpecificRequest.getSpecificFields().length; i++) {
             HBox h = new HBox();
 
             JFXTextField j = new JFXTextField();
-            j.setPromptText(currIRequest.getSpecificFields()[i]);
+            j.setPromptText(currSpecificRequest.getSpecificFields()[i]);
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
             j.setStyle("-fx-font-size: 16px");
-            j.setText(currIRequest.getSpecificData().get(i).toString());
+            j.setText(currSpecificRequest.getSpecificData().get(i).toString());
 
             ans[i] = j;
 
@@ -117,8 +113,8 @@ public class NERController {
         //        currIRequest.getSpecificData() - LinkedList of INFORMATION, corresponding to labels
         //        currIRequest.getSpecificDataCode() - string of chars describing what datatype they are if you can do error checking (see RequestData line 177 -190)
 
-        currIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        currRequest = currIRequest.getGenericRequest();
+        currSpecificRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        currRequest = currSpecificRequest.getGenericRequest();
 
         System.out.println(currRequest.getTitle());
 
@@ -139,16 +135,13 @@ public class NERController {
 
     /**
      * Take the get values from unique fields, put it in a linkedList
-     * @param type
      * @return
      */
-    public LinkedList<Serializable> requestSpecificItems(String type) {
-        LinkedList<Serializable> specifics = new LinkedList<>();
+    public ArrayList<String> requestSpecificItems() {
+        ArrayList<String> specifics = new ArrayList<>();
         for(JFXTextField j : specificTextFields) {
             specifics.add(j.getText());
         }
-
-        //for loop(values stored in TextFields)
         return specifics;
     }
 
@@ -173,8 +166,8 @@ public class NERController {
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
             Date date= new Date();
             currRequest.setDateNeeded(date);
-            currIRequest.setSpecificData(requestSpecificItems(currIRequest.getType()));
-            App.requestService.updateRequest(currIRequest);
+            currSpecificRequest.setSpecificData(requestSpecificItems());
+            App.requestService.updateRequest(currSpecificRequest);
 
 
             //SCENE Switch
