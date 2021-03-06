@@ -1,63 +1,60 @@
 package edu.wpi.u.requests;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Date;
 
 public class Request {
     private String requestID;
-    private Date dateCreated;
-
-    public Date getDateNeeded() {
-        return dateNeeded;
-    }
-    public void setDateNeeded(Date d) {
-        this.dateNeeded = d;
-    }
-
-    private Date dateNeeded;
-    private Date dateCompleted;
-    private String description;
-    private String title;
+    private Timestamp dateNeeded;
+    private boolean isResolved = false;
     private LinkedList<String> location;
     private LinkedList<String> assignee;
-    private String creator;
-    private LinkedList<String> comments;
+    private ArrayList<Comment> comments;
 
-    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateNeeded, String description, String title, LinkedList<String> location, String type, String creator) {
+    public Request(String requestID, Timestamp dateNeeded, boolean isResolved, LinkedList<String> location, LinkedList<String> assignee, Comment comment) {
         this.requestID = requestID;
-        this.assignee = assignee;
-        this.dateCreated = dateCreated;
         this.dateNeeded = dateNeeded;
-        this.description = description;
-        this.title = title;
-        this.location = location;
-        this.creator = creator;
-    }
-    public void resolveRequest() {} //TODO: Belongs in request?
-    public void editRequest(Date endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
-        this.dateCompleted = endDate;
-        this.description = description;
-        this.title = title;
+        this.isResolved = isResolved;
         this.location = location;
         this.assignee = assignee;
-        this.creator = creator;
+        this.comments.add(comment);
+    }
+
+
+    public void editRequest(Timestamp needDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
+        this.dateNeeded = needDate;
+        primaryComment().description = description;
+        primaryComment().title = title;
+        this.location = location;
+        this.assignee = assignee;
+        primaryComment().author = creator;
     }
     public String getRequestID() {
         return requestID;
     }
-    public Date getDateCreated() {
-        return dateCreated;
+    public Timestamp getDateCreated() {
+        return primaryComment().timestamp;
     }
-    public Date getDateCompleted() {
-        return dateCompleted;
+    public Timestamp getDateNeeded() {
+        return dateNeeded;
+    }
+    public void setDateNeeded(Timestamp d) {
+        this.dateNeeded = d;
+    }
+    public Timestamp getDateCompleted() {
+        if(isResolved){
+            return comments.get(comments.size()-1).timestamp;
+        }
+        else{
+            return null;
+        }
     }
     public String getDescription() {
-        return description;
+        return primaryComment().description;
     }
     public String getTitle() {
-        return title;
+        return primaryComment().title;
     }
     public LinkedList<String> getLocation() {
         return location;
@@ -65,17 +62,14 @@ public class Request {
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-    public void setDateCompleted(Date dateCompleted) {
-        this.dateCompleted = dateCompleted;
+    public void setDateCreated(Timestamp dateCreated) {
+        primaryComment().timestamp = dateCreated;
     }
     public void setDescription(String description) {
-        this.description = description;
+        primaryComment().description = description;
     }
     public void setTitle(String title) {
-        this.title = title;
+        primaryComment().title = title;
     }
     public void setLocation(LinkedList<String> location) {
         this.location = location;
@@ -84,26 +78,15 @@ public class Request {
     public void setAssignee(LinkedList<String> assignee) {
         this.assignee = assignee;
     }
-    public String getCreator() {
-        return creator;
-    }
-    public void setCreator(String creator) {
-        this.creator = creator;
+
+    public void resolveRequest(Comment c) {
+        isResolved = true;
+        addComment(c);
     }
 
-    public String displayAssignees() {
-        String aAssignee = this.assignee.getFirst();
-        int numAssigned = this.assignee.size();
-        String out = "Assigned: " + aAssignee + " + " + numAssigned + " others";
-        return out;
-    }
+    public void addComment(Comment c) { this.comments.add(c); }
 
-    public String displayLocation() {
-        String aLocation = this.location.getFirst();
-        int numAssigned = this.location.size();
-        String out = "Assigned: " + aLocation + " + " + numAssigned + " others";
-        return out;
+    public Comment primaryComment(){
+        return this.comments.get(0);
     }
-
-    public void addComment(String c) { this.comments.add(c); }
 }
