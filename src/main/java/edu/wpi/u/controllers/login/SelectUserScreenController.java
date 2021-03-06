@@ -36,6 +36,11 @@ public class SelectUserScreenController {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
+
+    public void handleSignUpButton(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserSignupScreen.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
 }
 
 
