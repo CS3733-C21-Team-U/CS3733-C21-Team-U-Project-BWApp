@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,10 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
@@ -47,6 +50,12 @@ public class NewMainPageController {
     public ToggleGroup group1;
     public JFXChipView chipView;
     public JFXChipView chipViewOnly;
+    public JFXListView listViewDemoNormal;
+    public GridPane listTestingPane;
+    public JFXListView listViewTesting;
+    public JFXListView list2;
+    public JFXButton expandButton;
+    public JFXButton collapseButton;
 
 
     AnchorPane rightServiceRequestPane;
@@ -59,13 +68,33 @@ public class NewMainPageController {
 
         App.themeSVG = themeIcon;
 
+        this.expandButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(true);
+        });
+        this.collapseButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(!list2.isExpanded());
+        });
+
+        for(int i = 0; i < 4; ++i) {
+            list2.getItems().add(new Label("ItemB " + i));
+            listViewTesting.getItems().add(new Label("Item " + i));
+        }
+
+        listViewTesting.getStyleClass().clear();
+//        list2.getStyleClass().clear();
+//        list2.getStyleClass().add("mylistview2");
+
+//        list2.expandedProperty().set(true);
+
+
+
         chipView.getChips().addAll("Start with one item");
         chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
 //        chipView.setSelectionHandler();
 
         chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
 
-        listViewDemo.setItems(listView);
+//        listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
@@ -213,4 +242,11 @@ public class NewMainPageController {
 //        }
     }
 
+    public void handleCollapseButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(true);
+    }
+
+    public void handleExpandButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(false);
+    }
 }
