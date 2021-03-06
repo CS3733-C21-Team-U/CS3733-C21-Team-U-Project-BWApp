@@ -105,7 +105,7 @@ public class UserData extends Data{
             return "Patient with that password already exists";
         }
         else {
-            addPatient(patient.getName(), patient.getUserName(), patient.getPassword(), patient.getEmail(), patient.getType(), patient.getPhoneNumber(), patient.getLocationNodeID(), patient.isDeleted(), patient.getAppointments(), patient.getProviderName(), patient.getParkingLocation(), patient.getRecommendedParkingLocation());
+            addPatient(patient);
             return "Patient added";
         }
     }
@@ -118,7 +118,10 @@ public class UserData extends Data{
             return "Patient with that password already exists";
         }
         else {
-            addEmployee(employee.getName(), employee.getUserName(), employee.getPassword(), employee.getEmail(), employee.getType(), employee.getPhoneNumber(), employee.getLocationNodeID(), employee.isDeleted());
+            /*
+            employeeID, name, userName, password, email, type, phoneNumber, deleted)
+             */
+            addEmployee(employee);
             return "Patient added";
         }
     }
@@ -650,7 +653,7 @@ public class UserData extends Data{
      * @param employee the object containing all the information on the user
      */
     public void addEmployee(Employee employee){
-        String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
+        String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, locationNodeID, deleted) values (?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,employee.getUserID());
@@ -660,7 +663,8 @@ public class UserData extends Data{
             ps.setString(5,employee.getEmail());
             ps.setString(6,String.valueOf(employee.getType()));// StaffType.valueOf(string) to get ENUM type
             ps.setString(7,employee.getPhoneNumber());
-            ps.setBoolean(8,false);
+            ps.setString(8,employee.getLocationNodeID());
+            ps.setBoolean(9,false);
             ps.execute();
             ps.close();
         }
