@@ -46,6 +46,8 @@ public class PathfindingBaseController {
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
     Group pathPreviewGroup = new Group();
+    Group nodesForPath_back = new Group();
+    Group nodesForPath_front = new Group();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -61,6 +63,12 @@ public class PathfindingBaseController {
         pane.getChildren().add(node);
         pane.getChildren().add(edgeNodeGroup);
         edgeNodeGroup.toFront();
+        pane.getChildren().add(pathPreviewGroup);
+        pathPreviewGroup.toFront();
+        pane.getChildren().add(nodesForPath_back);
+        nodesForPath_back.toFront();
+        pane.getChildren().add(nodesForPath_front);
+        nodesForPath_front.toFront();
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -175,6 +183,9 @@ public class PathfindingBaseController {
             pathPreviewGroup.getChildren().clear();
             generatePathPreview(App.mapInteractionModel.floor);
             pathPreviewGroup.toFront();
+            edgeNodeGroup.toFront();
+            nodesForPath_back.toFront();
+            nodesForPath_front.toFront();
         });
 
     } // End of initialize
@@ -208,6 +219,14 @@ public class PathfindingBaseController {
         node1.toFront();
     }
 
+    private void setMapItemsOrder(){
+        pathPreviewGroup.toFront();
+        edgeNodeGroup.toFront();
+        nodesForPath_back.toFront();
+        nodesForPath_front.toFront();
+    }
+
+
 
     /**
      * This generates the visible nodes that go on a particular floor. This is outside of
@@ -234,29 +253,82 @@ public class PathfindingBaseController {
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
+    String outlineColor = "ffbfbfff";
+    String fillColor = "ff8989ff";
     public void placeEdgesHelper(Edge ed){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
-        Line edge = new Line();
+        Line edge = new Line(), edgeBack = new Line();
+        edgeBack.setLayoutX(ed.getStartNode().getCords()[0]);
+        edgeBack.setStartX(0);
+        edgeBack.setLayoutY(ed.getStartNode().getCords()[1]);
+        edgeBack.setStartY(0);
+        edgeBack.setEndX(xdiff);
+        edgeBack.setEndY(ydiff);
+        edgeBack.setId(ed.getEdgeID()+"_back");
+        edgeBack.setStrokeWidth(20);
+        edgeBack.toFront();
+        edgeBack.setStroke(Paint.valueOf(outlineColor));
+        edgeBack.setVisible(true);
+        edgeNodeGroup.getChildren().add(edgeBack);
         edge.setLayoutX(ed.getStartNode().getCords()[0]);
         edge.setStartX(0);
         edge.setLayoutY(ed.getStartNode().getCords()[1]);
         edge.setStartY(0);
         edge.setEndX(xdiff);
         edge.setEndY(ydiff);
-        edge.setId(ed.getEdgeID());
-        edge.setStrokeWidth(7);
+        edge.setId(ed.getEdgeID()+"_fill");
+        edge.setStrokeWidth(10);
         edge.toFront();
-        edge.setStyle("-fx-stroke: -error");
+        edge.setStroke(Paint.valueOf(fillColor));
         edge.setVisible(true);
-        edge.setOnMouseClicked(event -> {
-            try {
-                handleEdgeClicked(ed);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
         edgeNodeGroup.getChildren().add(edge);
+
+        Circle node1 = new Circle(), node2 = new Circle();
+        node1.setCenterX(ed.getStartNode().getCords()[0]);
+        node1.setCenterY(ed.getStartNode().getCords()[1]);
+        node1.setRadius(5*2);
+        node1.setId(ed.getStartNode().getNodeID() + "forPath_fill1");
+        node1.setFill(Paint.valueOf(fillColor));
+        node1.setVisible(true);
+
+        node2.setCenterX(ed.getEndNode().getCords()[0]);
+        node2.setCenterY(ed.getEndNode().getCords()[1]);
+        node2.setRadius(10*2);
+        node2.setId(ed.getStartNode().getNodeID() + "forPath_outline1");
+        node2.setFill(Paint.valueOf(outlineColor));
+        node2.setVisible(true);
+
+        node1.toFront();
+        node2.toFront();
+        if(!edgeNodeGroup.getChildren().contains(node1)){
+            nodesForPath_front.getChildren().add(node1);
+            nodesForPath_back.getChildren().add(node2);
+        }
+
+
+
+        Circle node3 = new Circle(), node4 = new Circle();
+        node3.setCenterX(ed.getEndNode().getCords()[0]);
+        node3.setCenterY(ed.getEndNode().getCords()[1]);
+        node3.setRadius(5*2);
+        node3.setId(ed.getEndNode().getNodeID() + "forPath_fill2");
+        node3.setFill(Paint.valueOf(fillColor));
+        node3.setVisible(true);
+
+        node4.setCenterX(ed.getEndNode().getCords()[0]);
+        node4.setCenterY(ed.getEndNode().getCords()[1]);
+        node4.setRadius(10*2);
+        node4.setId(ed.getEndNode().getNodeID() + "forPath_outline2");
+        node4.setFill(Paint.valueOf(outlineColor));
+        node4.setVisible(true);
+
+        node3.toFront();
+        node4.toFront();
+        if(!edgeNodeGroup.getChildren().contains(node3)){
+            nodesForPath_front.getChildren().add(node3);
+            nodesForPath_back.getChildren().add(node4);
+        }
     }
 
 
@@ -275,18 +347,11 @@ public class PathfindingBaseController {
         previewEdge.setStartY(0);
         previewEdge.setEndX(xdiff);
         previewEdge.setEndY(ydiff);
-        previewEdge.setId(ed.getEdgeID()+ "_preview");
+        previewEdge.setId(ed.getEdgeID() + "_preview");
         previewEdge.setStrokeWidth(7);
         previewEdge.toFront();
         previewEdge.setStroke(Paint.valueOf("green"));
         previewEdge.setVisible(true);
-        previewEdge.setOnMouseClicked(event -> {
-            try {
-                handleEdgeClicked(ed);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
         pathPreviewGroup.getChildren().add(previewEdge);
     }
 
@@ -295,15 +360,16 @@ public class PathfindingBaseController {
         try {
             if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
                 placeEdgesHelper(e);
-
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         });
+
         pathPreviewGroup.toFront();
         edgeNodeGroup.toFront();
-
+        nodesForPath_back.toFront();
+        nodesForPath_front.toFront();
     }
 
     public void generatePathPreview(String floor){
@@ -319,14 +385,6 @@ public class PathfindingBaseController {
         });
         pathPreviewGroup.toFront();
         edgeNodeGroup.toFront();
-    }
-
-    /**
-     * Function called when and edge is clicked on. This brings up the context menu.
-     * @param e - Edge that is clicked on
-     * @throws IOException
-     */
-    public void handleEdgeClicked(Edge e) throws IOException {
     }
 
 
@@ -361,6 +419,7 @@ public class PathfindingBaseController {
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
             edgeNodeGroup.getChildren().clear();
             pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "G";
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");
@@ -378,6 +437,8 @@ public class PathfindingBaseController {
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "1";
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             generateEdges("1");
             edgeNodeGroup.toFront();
@@ -393,6 +454,8 @@ public class PathfindingBaseController {
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "2";
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             generateEdges("2");
             edgeNodeGroup.toFront();
@@ -408,6 +471,8 @@ public class PathfindingBaseController {
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "3";
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             generateEdges("3");
             edgeNodeGroup.toFront();
@@ -423,6 +488,8 @@ public class PathfindingBaseController {
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "4";
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             generateEdges("4");
             edgeNodeGroup.toFront();
@@ -438,6 +505,8 @@ public class PathfindingBaseController {
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
             edgeNodeGroup.getChildren().clear();
+            pathPreviewGroup.getChildren().clear();
+            App.mapInteractionModel.floor = "5";
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             generateEdges("5");
             edgeNodeGroup.toFront();
@@ -445,14 +514,4 @@ public class PathfindingBaseController {
             floor5.setSelected(true);
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

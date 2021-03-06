@@ -440,8 +440,6 @@ public class MapBuilderBaseController {
             // Update coordinates of node
             node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
             node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
-
-
     }
 
     /**
@@ -554,16 +552,4 @@ public class MapBuilderBaseController {
             toggle6.setSelected(true);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
