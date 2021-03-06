@@ -2,17 +2,14 @@ package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,7 +24,7 @@ public class ViewRequestController {
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
 
-        ArrayList<IRequest> listOfRequests = App.requestService.getRequests();
+        ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
         App.lastClickedRequestNumber = 0;
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here

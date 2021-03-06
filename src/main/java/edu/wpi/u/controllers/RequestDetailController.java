@@ -2,7 +2,7 @@ package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.IRequest;
+import edu.wpi.u.requests.SpecificRequest;
 import edu.wpi.u.requests.Request;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,14 +33,14 @@ public class RequestDetailController {
     @FXML Pane requestDetailSecurityPane;
     @FXML Pane requestDetailMaintenancePane;
     @FXML Pane requestDetailLaundryPane;
-    IRequest currentIRequest;
+    SpecificRequest currentSpecificRequest;
 
 
 
     @FXML
     public void initialize() throws IOException{
-        currentIRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        Request request = currentIRequest.getGenericRequest();
+        currentSpecificRequest = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        Request request = currentSpecificRequest.getGenericRequest();
         requestDetailTitleLabel.setText("Request Title: "+ request.getTitle());
         requestDetailCreatorLabel.setText("Created By: Administrator");
         //requestDetailCreatorLabel.setText("Created By: " + request.getCreator());
@@ -51,7 +51,7 @@ public class RequestDetailController {
         requestDetailDateCreatedLabel.setText("Date Created: "+ request.getDateCreated().toString());
         //System.out.println(request.getDateNeeded());
         requestDetailDate2BCompleteLabel.setText("Date to Complete By: NA");
-        typeLabel.setText("Type: " + currentIRequest.getType());
+        typeLabel.setText("Type: " + currentSpecificRequest.getType());
         //requestDetailSecurityLabel.setText(request);
 //        setSpecifics();
         generateSpecificFields();
@@ -62,9 +62,9 @@ public class RequestDetailController {
     public void generateSpecificFields(){
        //Generate Labels ONLY, using fields/values of Irequest, no error checking needed
         //NO text fields, just for display
-        for(int i = 0; i < currentIRequest.getSpecificFields().length; i++) {
+        for(int i = 0; i < currentSpecificRequest.getSpecificFields().length; i++) {
 
-            Label entryData= new Label(currentIRequest.getSpecificFields()[i] +": "+ currentIRequest.getSpecificData().get(i).toString());
+            Label entryData= new Label(currentSpecificRequest.getSpecificFields()[i] +": "+ currentSpecificRequest.getSpecificData().get(i).toString());
             entryData.setStyle("-fx-font-size: 34");
             VBoxToAdd.getChildren().add(entryData);
         }
@@ -86,7 +86,7 @@ public class RequestDetailController {
     public void handleResolveRequestButton() throws IOException {
         //Resolve Request()
 
-        IRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
+        SpecificRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
         App.requestService.resolveRequest(r);
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
@@ -106,7 +106,7 @@ public class RequestDetailController {
     }
 
     private void setSpecifics(){
-        switch(currentIRequest.getType()) {
+        switch(currentSpecificRequest.getType()) {
             case("Maintenance") :
                 requestDetailMaintenancePane.setVisible(true);
                 break;
