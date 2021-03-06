@@ -110,19 +110,24 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Creates a new employee via createAccount portal
+     * @param employee the employee object created
+     * @return Employee with that username already exists or Employee with that password already exists or Employee added
+     */
     public String createEmployee(Employee employee){
         if (checkUsername(employee.getUserName()).equals("")){
-            return "Patient with that username already exists";
+            return "Employee with that username already exists";
         }
         else if (checkPassword(employee.getPassword()).equals("")){
-            return "Patient with that password already exists";
+            return "Employee with that password already exists";
         }
         else {
             /*
             employeeID, name, userName, password, email, type, phoneNumber, deleted)
              */
             addEmployee(employee);
-            return "Patient added";
+            return "Employee added";
         }
     }
 

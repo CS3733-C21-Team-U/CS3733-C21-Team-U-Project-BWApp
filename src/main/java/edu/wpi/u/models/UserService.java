@@ -40,8 +40,6 @@ public class UserService {
      */
     public void setGuests() {this.guests = ud.getGuests();}
 
-
-
     /**
      * Sets the active user of the application
      * @param username username of the user
@@ -202,7 +200,7 @@ public class UserService {
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
-        ud.addPatient(patient);
+        ud.createPatient(patient);
         this.patients.add(patient);
     }
 
@@ -221,7 +219,7 @@ public class UserService {
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, locationNodeID, deleted);
-        ud.addEmployee(newEmployee);
+        ud.createEmployee(newEmployee);
         this.employees.add(newEmployee);
     }
 
