@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.ButtonPageForNewRequestController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label prefHeight="67.0" prefWidth="576.0" styleClass="headline-2" text="Please Choose a Request Type to Add">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <GridPane prefHeight="427.0" prefWidth="1700.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="ButtonPageForNRType9JFXButton" onAction="#handleFoodButton" prefHeight="23.0" prefWidth="250.0" text="Food (NOT IMPLEMENTED)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType7JFXButton" onAction="#handleMedicineButton" prefHeight="23.0" prefWidth="250.0" text="Medicine - Will Burke" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType5JFXButton" onAction="#handleAudioVisualButton" prefHeight="23.0" prefWidth="250.0" text="Audio Visual - Nick" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRMaintenanceJFXButton" onAction="#handleMakeMaintenanceButton" prefHeight="31.0" prefWidth="250.0" text="Maintenance - Kaamil" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRLaundryJFXButton" onAction="#handleMakeLaundryButton" prefHeight="31.0" prefWidth="250.0" text="Laundry - Michael" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRSecurityJFXButton" onAction="#handleMakeSecurityButton" prefHeight="31.0" prefWidth="250.0" text="Security - Jacob" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType4JFXButton" onAction="#handleComputerButton" prefHeight="23.0" prefWidth="250.0" text="Computer - Charlie" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType6JFXButton" onAction="#handleReligiousButton" prefHeight="23.0" prefWidth="250.0" text="Religiious - Tyler" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType8JFXButton" onAction="#handleFloralButton" prefHeight="23.0" prefWidth="250.0" text="Floral - Ola" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType10JFXButton1" onAction="#handleGiftButton" prefHeight="23.0" prefWidth="250.0" text="Gift - Kohmei" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType11JFXButton11" onAction="#handleSanitationButton" prefHeight="23.0" prefWidth="250.0" text="Sanitation - Lily" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="ButtonPageForNRType12JFXButton111" onAction="#handleLanguageButton" prefHeight="23.0" prefWidth="250.0" text="Language - Neville" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button-contained" />
+                        <String fx:value="secondary-color" />
+                     </styleClass>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</AnchorPane>

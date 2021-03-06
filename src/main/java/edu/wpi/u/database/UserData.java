@@ -29,10 +29,10 @@ public class UserData extends Data{
         //this.addGuest(new Guest("tyler","testp","6507030779","pass","email", StaffType.ADMIN,"6507030779", new Date(800), false));
         //dropGuests(); // TODO : Stop for demo
         //dropEmployee();
-        this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
-        this.addGuest(new Guest("patient","patient","patient","patient","w", StaffType.PATIENT,"1112223333", new Date(1000), false));
-        this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
-        this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
+       // this.addEmployee(new Employee("Will","William","wburke","password","test@gmail.com", StaffType.ADMIN,"4016491137", false));
+      //  this.addGuest(new Guest("patient","patient","patient","patient","w", StaffType.PATIENT,"1112223333", new Date(1000), false));
+       // this.addEmployee(new Employee("staff","staff","staff","staff","staff", StaffType.ADMIN,"7742706792",  false));
+      //  this.addEmployee(new Employee("admin","admin","admin","admin","admin", StaffType.ADMIN,"7813155706", false));
         printGuest();
 //        dropGuests();
 //        this.addGuest(new Guest("nev","neville","9148394600","admin","email", StaffType.ADMIN,"9148394600", new Date(800), false));
