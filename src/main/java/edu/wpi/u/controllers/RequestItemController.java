@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.SVGPath;
 
 import java.io.IOException;
@@ -45,7 +44,7 @@ public class RequestItemController {
     @FXML public void handleViewRequestInDetailButton() throws Exception {
         App.lastClickedRequestNumber = myID;
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestInDetail.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/RequestListItemExpanded.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

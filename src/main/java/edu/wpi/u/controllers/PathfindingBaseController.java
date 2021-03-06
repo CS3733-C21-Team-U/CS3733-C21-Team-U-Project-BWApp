@@ -21,8 +21,6 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PathfindingBaseController {
 
@@ -92,7 +90,7 @@ public class PathfindingBaseController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuNode.fxml"));
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
                     NodeContextMenuController controller = nodeContextMenu.getController();

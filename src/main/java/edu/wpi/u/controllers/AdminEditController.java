@@ -13,7 +13,6 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.transform.Affine;
@@ -22,9 +21,6 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
 
 public class AdminEditController {
 
@@ -117,7 +113,7 @@ public class AdminEditController {
             // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuNode.fxml"));
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
                     NodeContextMenuController controller = nodeContextMenu.getController();
@@ -310,7 +306,7 @@ public class AdminEditController {
             double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
             double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
             System.out.println("You clicked on an edge");
-            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuEdge.fxml"));
             AnchorPane EdgeContextAnchor = new AnchorPane();
             EdgeContextAnchor = edgeContextMenu.load();
             EdgeContextMenuController controller = edgeContextMenu.getController();
@@ -334,7 +330,7 @@ public class AdminEditController {
         if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
-            FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeContextMenu.fxml"));
+            FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuNode.fxml"));
             AnchorPane contextAnchor = new AnchorPane();
             contextAnchor = nodeContextMenu.load();
             NodeContextMenuController controller = nodeContextMenu.getController();
@@ -393,7 +389,7 @@ public class AdminEditController {
                     edgeNodeGroup.getChildren().add(edge);
                 }
                 // Spawning context menu
-                FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/EdgeContextMenu.fxml"));
+                FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuEdge.fxml"));
                 AnchorPane EdgeContextAnchor = new AnchorPane();
                 EdgeContextAnchor = edgeContextMenu.load();
                 EdgeContextMenuController controller = edgeContextMenu.getController();

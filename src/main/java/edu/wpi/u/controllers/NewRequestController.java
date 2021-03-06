@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,7 +130,7 @@ public class NewRequestController {
             App.requestService.addRequest(result);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
         } catch (Exception e) {
@@ -143,7 +142,7 @@ public class NewRequestController {
     @FXML
     public void HandleMakeCancelButton() throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 

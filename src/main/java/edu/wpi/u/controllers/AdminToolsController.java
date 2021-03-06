@@ -30,7 +30,7 @@ public class AdminToolsController {
 
         for (int i = 0; i < nodes.size(); i++) {
             Node currentNodeInfo = nodes.get(i);
-            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NodeListItem.fxml"));
+            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Oldfxml/NodeListItem.fxml"));
             AnchorPane node = nodeLoader.load();
             NodeItemController controller = nodeLoader.getController();
             controller.nodeID.setText(App.mapService.getNodeFromID(currentNodeInfo.getNodeID()).getLongName());
@@ -78,11 +78,11 @@ public class AdminToolsController {
 
 
     public void handleNewNodeButton() {
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/NewNode.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/NewNode.fxml");
     }
 
     public void handleNewEdgeButton() {
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/NewEdge.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/NewEdge.fxml");
     }
 
     public void handleEditNodeButton(){

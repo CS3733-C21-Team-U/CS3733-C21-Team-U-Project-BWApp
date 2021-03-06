@@ -1,83 +1,30 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.sun.javafx.fxml.builder.URLBuilder;
-import com.sun.javafx.property.adapter.PropertyDescriptor;
 import edu.wpi.u.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import edu.wpi.u.database.UserData;
 import edu.wpi.u.exceptions.AccountNameNotFoundException;
 import edu.wpi.u.exceptions.PasswordNotFoundException;
 import edu.wpi.u.exceptions.PhoneNumberNotFoundException;
-import edu.wpi.u.users.User;
 import io.netty.handler.codec.http.HttpHeaders;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import jdk.nashorn.api.scripting.JSObject;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
-import lombok.SneakyThrows;
-import org.apache.http.HttpConnection;
-import org.apache.http.client.methods.RequestBuilder;
 import org.asynchttpclient.*;
-import org.asynchttpclient.netty.request.NettyRequest;
-import org.asynchttpclient.proxy.ProxyServer;
-import org.asynchttpclient.util.HttpConstants;
-import org.eclipse.jetty.http.MetaData;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
-import org.w3c.dom.events.EventListener;
-import org.w3c.dom.events.EventTarget;
-import spark.Spark;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import static spark.Spark.*;
-import com.google.gson.Gson;
-import javafx.concurrent.Worker.State;
-import java.sql.SQLOutput;
-import java.util.Observable;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static edu.wpi.u.users.StaffType.*;
 
 public class LoginController {
 
@@ -160,7 +107,7 @@ public class LoginController {
         // TODO : Ability to skip the 2fa
 //        Scene scene = new Scene(root);
 //        App.getPrimaryStage().setScene(scene);
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FAToken.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
 //        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
@@ -242,12 +189,12 @@ public class LoginController {
 
 //Throws exceptions if username or password not found
         public void handleForgotPassword() throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPassword.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPasswordScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }
 
     public void handleSubmit() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FAToken.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 

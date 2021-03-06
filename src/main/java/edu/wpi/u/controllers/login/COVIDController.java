@@ -4,7 +4,6 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.u.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -31,7 +30,7 @@ public class COVIDController {
 
     public void handleCovidSurveyFill() throws IOException {
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +

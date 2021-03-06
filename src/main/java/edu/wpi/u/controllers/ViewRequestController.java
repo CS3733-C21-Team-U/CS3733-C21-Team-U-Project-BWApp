@@ -28,7 +28,7 @@ public class ViewRequestController {
         App.lastClickedRequestNumber = 0;
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
-            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewRequestItem.fxml"));
+            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/RequestListItem.fxml"));
             AnchorPane request = requestLoader.load();
             Request req = listOfRequests.get(i).getGenericRequest();
             RequestItemController controller = requestLoader.getController();

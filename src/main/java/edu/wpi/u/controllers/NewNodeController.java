@@ -23,7 +23,7 @@ public class NewNodeController {
     ErrorMessageController controller;
 
     public void initialize() throws IOException {
-        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Oldfxml/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
         controller.errorMessage.setText("Please Input a Valid Node");
@@ -39,7 +39,7 @@ public class NewNodeController {
                     Integer.parseInt(XCoordinate.getText());
                     Integer.parseInt(YCoordinate.getText());
                 //App.mapService.addNode(NodeIDField.getText(), Double.parseDouble(XCoordinate.getText()), Double.parseDouble(YCoordinate.getText()));
-                App.rightDrawerRoot.set("/edu/wpi/u/views/AdminTools.fxml");
+                App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){
                 errorDrawer.open();
@@ -48,7 +48,7 @@ public class NewNodeController {
     }
     @FXML
     public void handleNodeCancelButton() {
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/AdminTools.fxml");
     }
     public void handleErrorMessageClear(){
         errorDrawer.close();

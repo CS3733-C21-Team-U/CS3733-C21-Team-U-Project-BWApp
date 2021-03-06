@@ -77,7 +77,7 @@ public class RequestDetailController {
     @FXML
     public void handleRequestDetailCancelButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -90,7 +90,7 @@ public class RequestDetailController {
         App.requestService.resolveRequest(r);
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewViewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -100,7 +100,7 @@ public class RequestDetailController {
         System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewRequestEdit.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ModifyRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

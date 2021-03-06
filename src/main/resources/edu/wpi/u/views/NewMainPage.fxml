@@ -83,7 +83,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
                               <fx:include source="PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
-                              <fx:include source="floatingPathfinding.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
+                              <fx:include source="FloatingPathfindingPane.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -110,7 +110,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="NewViewRequest.fxml" />
+                              <fx:include source="ViewRequestList.fxml" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -141,7 +141,7 @@
                               <Insets top="80.0" />
                            </padding>
                            <children>
-                              <fx:include source="SettingsPageSprint2.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <fx:include source="SettingsBase.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -177,7 +177,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="AdminEdit.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="MapBuilderBase.fxml" AnchorPane.bottomAnchor="0.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -204,7 +204,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="ListOfUsers.fxml" />
+                              <fx:include source="ViewUserList.fxml" />
                            </children></AnchorPane>
                      </content>
                      <graphic>

@@ -18,7 +18,7 @@ public class NewEdgeController {
     ErrorMessageController controller;
 
     public void initialize() throws IOException {
-        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Oldfxml/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
         controller.errorMessage.setText("Please Input Valid Edges");
@@ -32,7 +32,7 @@ public class NewEdgeController {
         } else {
             try {
                 //App.mapService.addEdge(EdgeIDField.getText(), StartingNode.getText(), EndingNode.getText());
-                App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
+                App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/AdminTools.fxml");
                 errorDrawer.close();
             } catch (Exception e){
                 errorDrawer.open();
@@ -43,7 +43,7 @@ public class NewEdgeController {
 
     @FXML
     public void handleEdgeCancelButton() {
-        App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
+        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/AdminTools.fxml");
     }
     public void handleErrorMessageClear(){
         errorDrawer.close();

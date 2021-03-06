@@ -55,7 +55,7 @@ public class PathfindingRightPageController {
 
 
 
-        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ErrorMessage.fxml"));
+        FXMLLoader errorMessageLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Oldfxml/ErrorMessage.fxml"));
         AnchorPane error = errorMessageLoader.load();
         controller = errorMessageLoader.getController();
         controller.errorMessage.setText("Please Input Valid Nodes");

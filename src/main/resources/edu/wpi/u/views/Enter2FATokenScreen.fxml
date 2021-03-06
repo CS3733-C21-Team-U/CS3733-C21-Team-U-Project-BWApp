@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.Enter2FATokenController">
@@ -19,7 +20,7 @@
                <children>
                   <ImageView fitHeight="120.0" fitWidth="115.0">
                      <image>
-                        <Image url="/edu/wpi/u/views/Images/logo.png" />
+                        <Image url="@Images/logo.png" />
                      </image>
                      <VBox.margin>
                         <Insets left="290.0" top="210.0" />
@@ -56,10 +57,14 @@
                      </VBox.margin></JFXButton>
                </children>
             </VBox>
-            <ImageView fitHeight="1080.0" fitWidth="1020.0">
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="1360.0" fitWidth="1030.0" preserveRatio="true">
                <image>
-                  <Image url="/edu/wpi/u/views/Images/pexels-karolina-grabowska-4021773.jpg" />
+                  <Image url="@Images/pexels-anthony-shkraba-5215013.jpg" />
                </image>
+               <HBox.margin>
+                  <Insets top="-100.0" />
+               </HBox.margin>
             </ImageView>
          </children>
       </HBox>

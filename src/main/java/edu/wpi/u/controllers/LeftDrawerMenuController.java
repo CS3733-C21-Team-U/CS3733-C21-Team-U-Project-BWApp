@@ -90,7 +90,7 @@ import java.io.IOException;
 
 
         public void handleChangeToPathPlanning(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "/edu/wpi/u/views/PathfindingRightPage.fxml");
+            App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/PathfindingRightPage.fxml");
             App.leftMenuScreenNum = 1;
             setRectVisibility(1);
             setTextColor(1);
@@ -104,14 +104,14 @@ import java.io.IOException;
         }
 
         public void handleChangeToAdmin(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "/edu/wpi/u/views/AdminTools.fxml");
+            App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/AdminTools.fxml");
             App.leftMenuScreenNum = 3;
             setRectVisibility(3);
             setTextColor(3);
         }
 
         public void handleChangeToSettings(ActionEvent actionEvent) {
-            App.rightDrawerRoot.set( "/edu/wpi/u/views/Settings.fxml");
+            App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/Settings.fxml");
             App.leftMenuScreenNum = 4;
             setRectVisibility(4);
             setTextColor(4);

@@ -1,32 +1,20 @@
 package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.User;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TreeTableColumn;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.control.TableColumnBase;
-import javafx.scene.control.TableColumn;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ListOfUsersController {
@@ -127,7 +115,7 @@ public class ListOfUsersController {
 
     public void handleEditUserList(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/EditUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ModifyUser.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
