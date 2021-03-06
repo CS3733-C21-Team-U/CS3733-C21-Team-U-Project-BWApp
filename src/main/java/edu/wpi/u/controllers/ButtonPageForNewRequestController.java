@@ -178,7 +178,7 @@ public class ButtonPageForNewRequestController {
             JFXDialogLayout content = new JFXDialogLayout();
             Label header = new Label("Help Page");
             Text text = new Text("Please click button for the type Service Request you require. " +
-                    "It will bring you to the next page to fill all the information. ");
+                "It will bring you to the next page to fill all the information. ");
             header.getStyleClass().add("headline-2");
             content.setHeading(header);
             content.setBody(text);
