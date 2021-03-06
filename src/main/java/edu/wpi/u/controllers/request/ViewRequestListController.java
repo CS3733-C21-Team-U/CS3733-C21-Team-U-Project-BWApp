@@ -1,6 +1,7 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import edu.wpi.u.App;
+import edu.wpi.u.controllers.request.RequestListItemController;
 import edu.wpi.u.requests.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ViewRequestController {
+public class ViewRequestListController {
 
     @FXML public VBox requestList;
 
@@ -28,10 +29,10 @@ public class ViewRequestController {
         App.lastClickedRequestNumber = 0;
         for (int i = 0; i < listOfRequests.size(); i++) {
             //This is how you add title panes here
-            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/RequestListItem.fxml"));
+            FXMLLoader requestLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItem.fxml"));
             AnchorPane request = requestLoader.load();
             Request req = listOfRequests.get(i).getGenericRequest();
-            RequestItemController controller = requestLoader.getController();
+            RequestListItemController controller = requestLoader.getController();
             String temp = req.getTitle();
             controller.myRequestID = req.getRequestID();
             controller.requestItemTitleLabel.setText(temp);
@@ -118,7 +119,7 @@ case "Computer":
      */
     @FXML public void handleNewRequestButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ButtonPageForNewRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ButtonPageForNewRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

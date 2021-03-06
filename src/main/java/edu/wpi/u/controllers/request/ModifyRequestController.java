@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXChipView;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class NERController {
+public class ModifyRequestController {
 
     public AnchorPane SpecificRequestAPane;
     public HBox HBoxToClone;

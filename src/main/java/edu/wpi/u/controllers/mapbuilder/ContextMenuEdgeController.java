@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.mapbuilder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class EdgeContextMenuController {
+public class ContextMenuEdgeController {
     Node node1;
 
     @FXML

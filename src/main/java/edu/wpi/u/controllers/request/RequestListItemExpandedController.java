@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 
-public class RequestDetailController {
+public class RequestListItemExpandedController {
     public HBox HBoxToClone;
     public VBox specificFields;
     public VBox VBoxToAdd;

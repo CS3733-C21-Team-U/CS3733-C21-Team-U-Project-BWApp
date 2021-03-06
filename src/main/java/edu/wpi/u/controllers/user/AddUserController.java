@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers.user;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -103,7 +103,7 @@ public class AddUserController {
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewUserList.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();
                 anchor.getChildren().add(root);
             }
@@ -115,7 +115,7 @@ public class AddUserController {
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date  , false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewUserList.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();
                 anchor.getChildren().add(root);
             }

@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class NewRequestController {
+public class AddRequestController {
 
 
     public JFXTextField makeTitleField;
@@ -130,7 +130,7 @@ public class NewRequestController {
             App.requestService.addRequest(result);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public class NewRequestController {
     @FXML
     public void HandleMakeCancelButton() throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 

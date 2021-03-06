@@ -26,7 +26,7 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoginController {
+public class UserLoginScreenController {
 
 
     // TODO: Properly rename JFX artifacts

@@ -82,7 +82,7 @@ public class Enter2FATokenController {
     }
 
     public void handleGoBack(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 

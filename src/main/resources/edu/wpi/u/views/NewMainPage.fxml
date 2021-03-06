@@ -82,8 +82,8 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
-                              <fx:include source="PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
-                              <fx:include source="FloatingPathfindingPane.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
+                              <fx:include source="pathfinding/PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="pathfinding/FloatingPathfindingPane.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -110,7 +110,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="ViewRequestList.fxml" />
+                              <fx:include source="request/ViewRequestList.fxml" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -177,7 +177,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="MapBuilderBase.fxml" AnchorPane.bottomAnchor="0.0" />
+                              <fx:include source="mapbuilder/MapBuilderBase.fxml" AnchorPane.bottomAnchor="0.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>
@@ -204,7 +204,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
-                              <fx:include source="ViewUserList.fxml" />
+                              <fx:include source="user/ViewUserList.fxml" />
                            </children></AnchorPane>
                      </content>
                      <graphic>

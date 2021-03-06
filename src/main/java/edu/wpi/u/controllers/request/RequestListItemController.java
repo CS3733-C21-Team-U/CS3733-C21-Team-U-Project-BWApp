@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
@@ -12,7 +12,7 @@ import javafx.scene.shape.SVGPath;
 
 import java.io.IOException;
 
-public class RequestItemController {
+public class RequestListItemController {
 
     //@FXML public Button expandCollapseButton;     DNE
     //@FXML public Button editRequestButton;        DNE
@@ -44,7 +44,7 @@ public class RequestItemController {
     @FXML public void handleViewRequestInDetailButton() throws Exception {
         App.lastClickedRequestNumber = myID;
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/RequestListItemExpanded.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/RequestListItemExpanded.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

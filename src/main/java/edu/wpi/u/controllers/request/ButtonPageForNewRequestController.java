@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
@@ -55,7 +55,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Security";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -65,7 +65,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Laundry";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -75,7 +75,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Maintenance";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -85,7 +85,7 @@ public class ButtonPageForNewRequestController {
     @FXML
     public void ButtonPageForNRCancelJFXButton(ActionEvent actionEvent) throws IOException{
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -94,7 +94,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Language";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -103,7 +103,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Sanitation";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -112,7 +112,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Gift";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -121,7 +121,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Floral";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -130,7 +130,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Religious";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -139,7 +139,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Computer";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -148,7 +148,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "AudioVisual";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
@@ -157,7 +157,7 @@ public class ButtonPageForNewRequestController {
         App.newNodeType = "Medical";
 
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/AddRequest.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

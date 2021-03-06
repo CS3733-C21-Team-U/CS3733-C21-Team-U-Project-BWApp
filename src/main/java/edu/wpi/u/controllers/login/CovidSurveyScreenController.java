@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class COVIDController {
+public class CovidSurveyScreenController {
 
     public JFXCheckBox Q1CheckBox;
     public JFXCheckBox Q2CheckBox;
@@ -30,7 +30,7 @@ public class COVIDController {
 
     public void handleCovidSurveyFill() throws IOException {
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +

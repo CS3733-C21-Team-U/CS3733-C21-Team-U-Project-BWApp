@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers.user;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class ListOfUsersController {
+public class ViewUserListController {
 
 
     public TableView guestTableView;
@@ -115,7 +115,7 @@ public class ListOfUsersController {
 
     public void handleEditUserList(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ModifyUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ModifyUser.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
@@ -137,7 +137,7 @@ public class ListOfUsersController {
 
     public void handleAddUserButton(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AddUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/AddUser.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

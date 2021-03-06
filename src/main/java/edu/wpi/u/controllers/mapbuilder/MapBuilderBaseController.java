@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.mapbuilder;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXToggleNode;
@@ -22,7 +22,7 @@ import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 
-public class AdminEditController {
+public class MapBuilderBaseController {
 
 
 
@@ -116,7 +116,7 @@ public class AdminEditController {
                     FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
-                    NodeContextMenuController controller = nodeContextMenu.getController();
+                    ContextMenuNodeController controller = nodeContextMenu.getController();
                     contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
                     contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]); // Careful
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
@@ -309,7 +309,7 @@ public class AdminEditController {
             FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
             AnchorPane EdgeContextAnchor = new AnchorPane();
             EdgeContextAnchor = edgeContextMenu.load();
-            EdgeContextMenuController controller = edgeContextMenu.getController();
+            ContextMenuEdgeController controller = edgeContextMenu.getController();
 
             EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
             EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
@@ -333,7 +333,7 @@ public class AdminEditController {
             FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
             AnchorPane contextAnchor = new AnchorPane();
             contextAnchor = nodeContextMenu.load();
-            NodeContextMenuController controller = nodeContextMenu.getController();
+            ContextMenuNodeController controller = nodeContextMenu.getController();
             contextAnchor.setLayoutX(n.getCords()[0]);
             contextAnchor.setLayoutY(n.getCords()[1]);
             pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
@@ -392,7 +392,7 @@ public class AdminEditController {
                 FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
                 AnchorPane EdgeContextAnchor = new AnchorPane();
                 EdgeContextAnchor = edgeContextMenu.load();
-                EdgeContextMenuController controller = edgeContextMenu.getController();
+                ContextMenuEdgeController controller = edgeContextMenu.getController();
 
                 if(c2 != null) {
                     EdgeContextAnchor.setLayoutX(edge.getLayoutX() + (xdiff / 2));

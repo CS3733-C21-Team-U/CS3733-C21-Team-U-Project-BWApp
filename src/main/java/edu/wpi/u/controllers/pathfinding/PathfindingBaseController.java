@@ -1,10 +1,11 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.pathfinding;
 
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.algorithms.getEdgesTest;
+import edu.wpi.u.controllers.mapbuilder.ContextMenuNodeController;
 import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,10 +91,10 @@ public class PathfindingBaseController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/ContextMenuNode.fxml"));
+                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
                     AnchorPane contextAnchor = new AnchorPane();
                     contextAnchor = nodeContextMenu.load();
-                    NodeContextMenuController controller = nodeContextMenu.getController();
+                    ContextMenuNodeController controller = nodeContextMenu.getController();
                     contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
                     contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);

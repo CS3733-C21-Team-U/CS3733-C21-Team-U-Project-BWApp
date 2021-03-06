@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers.user;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 import static edu.wpi.u.users.StaffType.*;
 
-public class EditUserController {
+public class ModifyUserController {
 
 
     @FXML public JFXTextField usernameTextField;
@@ -136,7 +136,7 @@ public class EditUserController {
             App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewUserList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
 
@@ -146,7 +146,7 @@ public class EditUserController {
             App.userService.updateGuest(App.selectedGuest.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),  StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date   , false);
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewUserList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
 
@@ -157,7 +157,7 @@ public class EditUserController {
 
     public void handleCancelButton(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewUserList.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

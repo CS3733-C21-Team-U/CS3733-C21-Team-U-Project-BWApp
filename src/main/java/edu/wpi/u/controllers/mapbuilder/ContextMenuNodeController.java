@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.mapbuilder;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
-public class NodeContextMenuController {
+public class ContextMenuNodeController {
     Node node1;
 
     @FXML

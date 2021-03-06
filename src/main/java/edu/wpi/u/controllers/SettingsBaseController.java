@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -24,7 +24,7 @@ import javafx.stage.FileChooser;
 
 import static edu.wpi.u.users.StaffType.*;
 
-public class SettingsPageController {
+public class SettingsBaseController {
 
 
     @FXML

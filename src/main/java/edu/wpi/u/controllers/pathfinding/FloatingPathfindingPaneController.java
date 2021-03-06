@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.pathfinding;
 
 import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.u.App;
@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
-public class floatingPathfindingController {
+public class FloatingPathfindingPaneController {
     @FXML
     JFXTextArea textualDirections;
     @FXML
