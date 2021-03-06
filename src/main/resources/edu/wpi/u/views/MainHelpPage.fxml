@@ -2,17 +2,65 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainHelpPageController">
    <children>
-      <Text layoutX="561.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're here to help" wrappingWidth="578.240234375">
+      <Text fx:id="weAreHereToHelpTitle" layoutX="696.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're here to help" wrappingWidth="578.240234375">
          <font>
             <Font size="49.0" />
          </font>
       </Text>
-      <JFXButton layoutX="1417.0" layoutY="14.0" text="Log in" />
+      <JFXButton fx:id="BackToMainPageButton" layoutX="1498.0" layoutY="14.0" onAction="#handleBackToMainPageButton" prefHeight="30.0" prefWidth="145.0" text="Back to Main Page">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="414.0" layoutY="308.0" prefHeight="458.0" prefWidth="937.0">
+         <children>
+            <VBox prefHeight="458.0" prefWidth="492.0">
+               <children>
+                  <JFXButton prefHeight="137.0" prefWidth="517.0" text="Accounts">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton onAction="#handleServicesButton" prefHeight="148.0" prefWidth="560.0" text="Services">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton prefHeight="178.0" prefWidth="492.0" text="Legal and privacy">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox prefHeight="458.0" prefWidth="445.0">
+               <children>
+                  <JFXButton prefHeight="145.0" prefWidth="479.0" text="Covid-19">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton prefHeight="153.0" prefWidth="445.0" text="Insurance&amp;Payment">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton onAction="#handleContactUsButton" prefHeight="162.0" prefWidth="445.0" text="Contact us">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
