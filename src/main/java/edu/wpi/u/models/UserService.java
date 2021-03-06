@@ -40,23 +40,7 @@ public class UserService {
      */
     public void setGuests() {this.guests = ud.getGuests();}
 
-    /**
-     * Creates a new patient via createAccount portal
-     * @param patient the patient object created
-     * @return Patient with that username already exists or Patient with that password already exists or Patient added
-     */
-    public String createPatient(Patient patient){
-        if (checkUsername(patient.getUserName()).equals("")){
-            return "Patient with that username already exists";
-        }
-        else if (checkPassword(patient.getPassword()).equals("")){
-            return "Patient with that password already exists";
-        }
-        else {
-            addPatient(patient.getName(), patient.getUserName(), patient.getPassword(), patient.getEmail(), patient.getType(), patient.getPhoneNumber(), patient.getLocationNodeID(), patient.isDeleted(), patient.getAppointments(), patient.getProviderName(), patient.getParkingLocation(), patient.getRecommendedParkingLocation());
-            return "Patient added";
-        }
-    }
+
 
     /**
      * Sets the active user of the application

@@ -93,6 +93,37 @@ public class UserData extends Data{
     }
 
     /**
+     * Creates a new patient via createAccount portal
+     * @param patient the patient object created
+     * @return Patient with that username already exists or Patient with that password already exists or Patient added
+     */
+    public String createPatient(Patient patient){
+        if (checkUsername(patient.getUserName()).equals("")){
+            return "Patient with that username already exists";
+        }
+        else if (checkPassword(patient.getPassword()).equals("")){
+            return "Patient with that password already exists";
+        }
+        else {
+            addPatient(patient.getName(), patient.getUserName(), patient.getPassword(), patient.getEmail(), patient.getType(), patient.getPhoneNumber(), patient.getLocationNodeID(), patient.isDeleted(), patient.getAppointments(), patient.getProviderName(), patient.getParkingLocation(), patient.getRecommendedParkingLocation());
+            return "Patient added";
+        }
+    }
+
+    public String createEmployee(Employee employee){
+        if (checkUsername(employee.getUserName()).equals("")){
+            return "Patient with that username already exists";
+        }
+        else if (checkPassword(employee.getPassword()).equals("")){
+            return "Patient with that password already exists";
+        }
+        else {
+            addEmployee(employee.getName(), employee.getUserName(), employee.getPassword(), employee.getEmail(), employee.getType(), employee.getPhoneNumber(), employee.getLocationNodeID(), employee.isDeleted());
+            return "Patient added";
+        }
+    }
+
+    /**
      * Returns the StaffType for a user
      * @param userID users id
      * @param type Employees or Guests (table name)
