@@ -4,28 +4,39 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class UserService {
 
-  //  Guest currentGuest = ud.getGuests().get(App.lastClickedGuestNumber);
-
     static UserData ud = new UserData();
-    //ArrayList<User> users = new ArrayList<>();
+
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
-    User activeUser; //= new Employee("testid", "testname", "testusername", "testpassword", "testemail",  Role.MAINTENANCE, "9118332323", false);
-    //TODO : Add getEmployees, getGuests
+
+    User activeUser;
+
     public UserService() {
         this.setEmployees();
         this.setGuests();
     }
 
+    /**
+     * Sets the list of patients
+     */
+    public void setPatients(){this.patients = ud.getPatients();}
+
+    /**
+     * Sets the list of employees
+     */
     public void setEmployees() {this.employees = ud.getEmployees();}
 
+    /**
+     * Sets the list of guests
+     */
     public void setGuests() {this.guests = ud.getGuests();}
 
     /**
@@ -54,6 +65,10 @@ public class UserService {
         return this.activeUser;
     }
 
+    /**
+     * Gets a list of all the patients
+     * @return list of patients
+     */
     public ArrayList<Patient> getPatients(){
         return patients;
     }
@@ -95,7 +110,13 @@ public class UserService {
         Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
-    public void changePhoneNumer(String userID, String newPhoneNumber, String type){
+    /**
+     * Changes the phone number of a user
+     * @param userID the id
+     * @param newPhoneNumber the new phone number
+     * @param type Employees or Patients (table name)
+     */
+    public void changePhoneNumber(String userID, String newPhoneNumber, String type){
         this.getActiveUser().setPhoneNumber(newPhoneNumber);
         ud.changePhoneNumber(userID,newPhoneNumber, type);
     }
@@ -104,7 +125,7 @@ public class UserService {
      * Changes the email of the user
      * @param userID id of the user
      * @param newEmail the new email
-     * @param type Employees or Guests (table name)
+     * @param type Employees or Patients (table name)
      */
     public void changeEmail(String userID, String newEmail, String type){
         this.getActiveUser().setEmail(newEmail);
@@ -115,7 +136,7 @@ public class UserService {
      * Changes the password of the user
      * @param username username of the user
      * @param newPassword the new password
-     * @param type Employees or Guests (table name)
+     * @param type Employees or Patients (table name)
      */
     public void changePassword(String username, String newPassword, String type){
         this.getActiveUser().setPassword(newPassword);
@@ -125,7 +146,6 @@ public class UserService {
     /**
      * Validates a username
      * @param username the username to be validated
-     * @return Employees or Guests (table name)
      */
     public String checkUsername(String username) {
         System.out.println("Value of check username: " + ud.checkUsername(username));
@@ -135,7 +155,6 @@ public class UserService {
     /**
      * Validates a password
      * @param password the password to be validated
-     * @return Employees or Guests (table name)
      */
     public String checkPassword(String password) {
         return ud.checkPassword(password);
@@ -161,6 +180,30 @@ public class UserService {
     }
 
     /**
+     * Adds a patient to list and calls database
+     * @param name the name
+     * @param userName the username
+     * @param password the password
+     * @param email the email
+     * @param role the role
+     * @param phonenumber the phonenumber
+     * @param locationNodeID the node id of location
+     * @param deleted whether or not they're deleted
+     * @param appointments list of appointments
+     * @param providerName insurance provider name
+     * @param parkingLocation parking location most recent visit
+     * @param recommendedParkingLocation recommended parking location for next visit
+     */
+    public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
+        Random rand = new Random();
+        int patientID = rand.nextInt();
+        String id = Integer.toString(patientID);
+        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation)
+        ud.addPatient(patient);
+        this.patients.add(patient);
+    }
+
+    /**
      * Adds an employee to list and calls database
      * @param name the name
      * @param userName the username
@@ -174,7 +217,6 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        //(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted)
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, locationNodeID, deleted);
         ud.addEmployee(newEmployee);
         this.employees.add(newEmployee);
@@ -185,11 +227,11 @@ public class UserService {
      * @param name the name
      * @param deleted whether or not the user is deleted
      */
-    public void addGuest(String name, LocalDate visitDate, String visitReason, boolean deleted){
+    public void addGuest(String name, Timestamp visitDate, String visitReason, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Guest newGuest = new Guest(); // TODO : FIX
+        Guest newGuest = new Guest(id, name, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }

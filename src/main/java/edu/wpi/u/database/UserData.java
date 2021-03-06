@@ -648,7 +648,7 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,guest.getUserID());
             ps.setString(2,guest.getName());
-            ps.setDate(3, Date.valueOf(guest.getVisitDate()));
+            ps.setTimestamp(3, guest.getVisitDate());
             ps.setString(4, guest.getVisitReason());
             ps.setBoolean(5,false);
             ps.execute();
@@ -767,7 +767,7 @@ public class UserData extends Data{
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, guest.getName());
-            ps.setDate(2,Date.valueOf(guest.getVisitDate()));
+            ps.setTimestamp(2,guest.getVisitDate());
             ps.setString(3,guest.getVisitReason());
             ps.setBoolean(4, guest.isDeleted());
             ps.setString(5, guest.getGuestID());

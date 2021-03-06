@@ -97,7 +97,6 @@ public class Database {
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
-                //TODO :
                 String tblAssignments =
                         "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAssignments = conn.prepareStatement(tblAssignments);

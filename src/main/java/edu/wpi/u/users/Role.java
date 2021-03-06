@@ -10,7 +10,7 @@ public enum Role {
     TECHNICAL_SUPPORT,
     TRANSLATORS,
     DEFAULT,
-    GUEST
+    GUEST,
 }
 /*
 TODO : Rename to Role and add all hospital roles / guests

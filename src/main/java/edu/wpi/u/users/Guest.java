@@ -1,14 +1,12 @@
 package edu.wpi.u.users;
 
-import edu.wpi.u.algorithms.Node;
-
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Guest extends User{
     private String guestID;
     private String name;
-    private LocalDate visitDate;
+    private Timestamp visitDate;
     private String visitReason;
     private boolean deleted;
     //TODO : Maybe add a visitTime field for guest coming to hospital?
@@ -21,7 +19,7 @@ public class Guest extends User{
     String visitReason,
     boolean deleted
      */
-    public Guest(String guestID, String name, LocalDate visitDate, String visitReason, boolean deleted) {
+    public Guest(String guestID, String name, Timestamp visitDate, String visitReason, boolean deleted) {
         this.guestID = guestID;
         this.name = name;
         this.visitDate = visitDate;
@@ -31,7 +29,7 @@ public class Guest extends User{
         //Timestamp t = Timestamp.valueOf(String.valueOf(this.visitDate));
     }
 
-    public void editGuest(String name, LocalDate visitDate, String visitReason, boolean deleted) {
+    public void editGuest(String name, Timestamp visitDate, String visitReason, boolean deleted) {
         this.name = name;
         this.visitDate = visitDate;
         this.visitReason = visitReason;
@@ -56,11 +54,11 @@ public class Guest extends User{
         this.name = name;
     }
 
-    public LocalDate getVisitDate() {
+    public Timestamp getVisitDate() {
         return visitDate;
     }
 
-    public void setVisitDate(LocalDate visitDate) {
+    public void setVisitDate(Timestamp visitDate) {
         this.visitDate = visitDate;
     }
 
