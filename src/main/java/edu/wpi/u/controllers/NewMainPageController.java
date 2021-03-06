@@ -228,4 +228,29 @@ public class NewMainPageController {
 //        }
     }
 
+    public void handleHelpPageButton(ActionEvent actionEvent) {
+
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Help Page");
+        Text text = new Text("This is the Main page.If there is an emergency situation, Please call 911");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.setBody(text);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("CANCEL");
+        //JFXButton button2 = new JFXButton("EXIT");
+        button1.setOnAction(event -> dialog.close());
+            /*button2.setOnAction(event -> {
+                dialog.close();
+                App.getInstance().end();
+            });*/
+        button1.getStyleClass().add("button-text");
+        //button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        //actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+    }
 }

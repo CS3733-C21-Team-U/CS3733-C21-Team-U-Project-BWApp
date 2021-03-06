@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainHelpPageController">
+   <children>
+      <Text layoutX="561.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're here to help" wrappingWidth="578.240234375">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="1417.0" layoutY="14.0" text="Log in" />
+   </children>
+</AnchorPane>

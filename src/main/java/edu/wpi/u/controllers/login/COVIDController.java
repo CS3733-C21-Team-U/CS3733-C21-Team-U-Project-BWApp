@@ -57,7 +57,8 @@ public class COVIDController {
     public void handleHelpPageButton() throws IOException{
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Help Page");
-        Text text = new Text("Please be responsible with your selection. If you have any questions, Please contact 888-888-8888.");
+        Text text = new Text("Please be responsible with your selection. If you have any questions, Please contact 888-888-8888. \n " +
+                "If there is an emergency, Please call 911!");
         header.getStyleClass().add("headline-2");
         content.setHeading(header);
         content.setBody(text);
