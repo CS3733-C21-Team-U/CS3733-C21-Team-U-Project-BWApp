@@ -52,7 +52,7 @@ public class ResetPasswordPageController {
         if (!App.userService.checkUsername(username).equals("")) {
             App.userService.changePassword(username, resetPasswordTextField.getText(), userType);
             //System.out.println(App.userService.getPassword(usernameTextField.getText(), userType));
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         } else {
             throw new AccountNameNotFoundException();
@@ -60,7 +60,7 @@ public class ResetPasswordPageController {
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 }

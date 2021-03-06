@@ -171,7 +171,7 @@ public class NERController {
 
             //SCENE Switch
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
         } catch (Exception e) {
@@ -185,7 +185,7 @@ public class NERController {
     @FXML public void HandleMakeEditCancelButton() throws IOException { //TODO: visibility?
         //exits off of fxml without doing shit
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ViewRequestList.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

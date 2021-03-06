@@ -20,7 +20,7 @@
                <children>
                   <ImageView fitHeight="120.0" fitWidth="115.0">
                      <image>
-                        <Image url="@Images/logo.png" />
+                        <Image url="@../Images/logo.png" />
                      </image>
                      <VBox.margin>
                         <Insets left="290.0" top="210.0" />
@@ -60,7 +60,7 @@
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="1360.0" fitWidth="1030.0" preserveRatio="true">
                <image>
-                  <Image url="@Images/pexels-anthony-shkraba-5215013.jpg" />
+                  <Image url="@../Images/pexels-anthony-shkraba-5215013.jpg" />
                </image>
                <HBox.margin>
                   <Insets top="-100.0" />

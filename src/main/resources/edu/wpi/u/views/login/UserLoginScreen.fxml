@@ -26,7 +26,7 @@
                             <children>
                                 <ImageView fitHeight="120.0" fitWidth="115.0">
                                     <image>
-                                        <Image url="@Images/logo.png" />
+                                        <Image url="@../Images/logo.png" />
                                     </image>
                                     <HBox.margin>
                                         <Insets bottom="10.0" left="290.0" />
@@ -91,7 +91,7 @@
                     <children>
                         <ImageView fitHeight="1080.0" fitWidth="835.0" smooth="false">
                             <image>
-                                <Image url="@Images/pexels-anna-shvets-4421550.jpg" />
+                                <Image url="@../Images/pexels-anna-shvets-4421550.jpg" />
                             </image>
                         </ImageView>
                     </children>

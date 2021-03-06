@@ -189,12 +189,12 @@ public class LoginController {
 
 //Throws exceptions if username or password not found
         public void handleForgotPassword() throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/ForgotPasswordScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }
 
     public void handleSubmit() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
