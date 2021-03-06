@@ -2,23 +2,25 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.CovidSurveyScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.CovidSurveyScreenController">
    <children>
-      <HBox prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="728.0" prefWidth="1000.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1000.0">
                <children>
                   <ImageView fitHeight="120.0" fitWidth="115.0">
                      <image>
-                        <Image url="/edu/wpi/u/views/Images/logo.png" />
+                        <Image url="@../Images/logo.png" />
                      </image>
                      <VBox.margin>
                         <Insets left="290.0" top="270.0" />
@@ -99,17 +101,43 @@
                         <Insets left="290.0" top="15.0" />
                      </VBox.margin>
                   </JFXButton>
+                  <Region prefHeight="86.0" prefWidth="1000.0" />
+                  <JFXButton onAction="#handleDebugButton" styleClass="button-outlined" text="Debug Mode (Disables Full Screen)">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="300.0" layoutY="688.0" onAction="#handleSkipToGuestButton" styleClass="button-text" text="Goto Main Page as Guest (Skip login prodcedure)">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="300.0" layoutY="724.0" onAction="#handleSkipToPatientButton" styleClass="button-text" text="Goto Main Page as Patient (Skip login prodcedure)">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="760.0" onAction="#handleSkipToAdminButton" styleClass="button-text" text="Goto Main Page as Admin (Skip login prodcedure)">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
             </VBox>
-            <ImageView fitHeight="1080.0" fitWidth="802.0">
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="1415.0" fitWidth="897.0" preserveRatio="true">
                <image>
-                  <Image url="/edu/wpi/u/views/Images/pexels-anthony-shkraba-5215013.jpg" />
+                  <Image url="@../Images/pexels-anthony-shkraba-5215013.jpg" />
                </image>
                <HBox.margin>
-                  <Insets left="119.0" />
+                  <Insets top="-200.0" />
                </HBox.margin>
             </ImageView>
          </children>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

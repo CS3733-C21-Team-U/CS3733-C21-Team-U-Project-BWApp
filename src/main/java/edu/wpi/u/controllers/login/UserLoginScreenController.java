@@ -209,6 +209,11 @@ public class UserLoginScreenController {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
+
+    public void handleBackButton(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
 }
 
 

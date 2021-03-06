@@ -4,6 +4,8 @@ package edu.wpi.u.controllers.login;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.u.App;
+import edu.wpi.u.users.StaffType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -30,7 +32,7 @@ public class CovidSurveyScreenController {
 
     public void handleCovidSurveyFill() throws IOException {
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
@@ -43,5 +45,32 @@ public class CovidSurveyScreenController {
                     "\n" +
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
         }
+    }
+
+    public void handleDebugButton(ActionEvent actionEvent) {
+        App.getPrimaryStage().setFullScreen(false);
+        App.getPrimaryStage().setWidth(1900);
+        App.getPrimaryStage().setHeight(1000);
+    }
+
+    public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
+        App.userService.setUser("patient", "patient", "Guests");
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
+        //TODO: the set user!
+//        App.userService.setUser("patient", "patient", "Guests");
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
+        //TODO: this is broken!!!
+        App.userService.setUser("admin", "admin", "Admin");
+        App.userService.getActiveUser().setType(StaffType.ADMIN);
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 }

@@ -119,7 +119,7 @@ public class App extends Application {
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-//    App.primaryStage.setFullScreen(true);
+    App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
 
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
