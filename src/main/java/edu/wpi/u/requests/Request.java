@@ -21,7 +21,6 @@ public class Request {
     private String description;
     private String title;
     private LinkedList<String> location;
-    private String type;
     private LinkedList<String> assignee;
     private String creator;
     private LinkedList<String> comments;
@@ -34,7 +33,6 @@ public class Request {
         this.description = description;
         this.title = title;
         this.location = location;
-        this.type = type;
         this.creator = creator;
     }
     public void resolveRequest() {} //TODO: Belongs in request?
@@ -43,7 +41,6 @@ public class Request {
         this.description = description;
         this.title = title;
         this.location = location;
-        this.type = type;
         this.assignee = assignee;
         this.creator = creator;
     }
@@ -65,9 +62,6 @@ public class Request {
     public LinkedList<String> getLocation() {
         return location;
     }
-    public String getType() {
-        return type;
-    }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
@@ -85,9 +79,6 @@ public class Request {
     }
     public void setLocation(LinkedList<String> location) {
         this.location = location;
-    }
-    public void setType(String type) {
-        this.type = type;
     }
     public LinkedList<String> getAssignee() {return assignee;}
     public void setAssignee(LinkedList<String> assignee) {

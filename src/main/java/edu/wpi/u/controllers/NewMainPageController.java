@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,9 +13,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
+
+import javafx.scene.input.KeyEvent;
+
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
@@ -44,6 +50,14 @@ public class NewMainPageController {
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
+    public JFXChipView chipView;
+    public JFXChipView chipViewOnly;
+    public JFXListView listViewDemoNormal;
+    public GridPane listTestingPane;
+    public JFXListView listViewTesting;
+    public JFXListView list2;
+    public JFXButton expandButton;
+    public JFXButton collapseButton;
 
 
     AnchorPane rightServiceRequestPane;
@@ -56,7 +70,33 @@ public class NewMainPageController {
 
         App.themeSVG = themeIcon;
 
-        listViewDemo.setItems(listView);
+        this.expandButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(true);
+        });
+        this.collapseButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(!list2.isExpanded());
+        });
+
+        for(int i = 0; i < 4; ++i) {
+            list2.getItems().add(new Label("ItemB " + i));
+            listViewTesting.getItems().add(new Label("Item " + i));
+        }
+
+        listViewTesting.getStyleClass().clear();
+//        list2.getStyleClass().clear();
+//        list2.getStyleClass().add("mylistview2");
+
+//        list2.expandedProperty().set(true);
+
+
+
+        chipView.getChips().addAll("Start with one item");
+        chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
+//        chipView.setSelectionHandler();
+
+        chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
+
+//        listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
@@ -83,6 +123,32 @@ public class NewMainPageController {
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
         }
+
+//        chipView.getChips().addListener((new ListChangeListener<String>(){
+//
+//            @Override
+//            public void onChanged(Change<? extends String> c) {
+//                System.out.println("In onChange for newMainPage");
+//                ObservableList<String> currently = chipView.getChips();
+//                ObservableList<String> options = chipView.getSuggestions();
+//
+//                for(int i = 0; i < currently.size(); i++){
+//                    boolean isValid = false;
+//                    for(String option : options){
+//                        if(option.equals(currently.get(i))){
+//                            isValid = true;
+//                        }
+//                    }
+//                    if(!isValid){
+//                        currently.remove(i);
+//                        i--;
+//                    }
+//                }
+//
+//                chipView.getChips().clear();
+//                chipView.getChips().addAll(currently);
+//            }
+//        }));
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
@@ -134,7 +200,7 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
             }
         });
@@ -154,4 +220,35 @@ public class NewMainPageController {
     }
 
 
+    public void onChipEnter(KeyEvent keyEvent) {
+////        System.out.println("In function");
+//        if(keyEvent.getCode() == KeyCode.ENTER){
+//            ObservableList<String> currently = chipView.getChips();
+//            ObservableList<String> options = chipView.getSuggestions();
+//
+//            for(int i = 0; i < currently.size(); i++){
+//                boolean isValid = false;
+//                for(String option : options){
+//                    if(option.equals(currently.get(i))){
+//                        isValid = true;
+//                    }
+//                }
+//                if(!isValid){
+//                    currently.remove(i);
+//                    i--;
+//                }
+//            }
+//
+//            chipView.getChips().clear();
+//            chipView.getChips().addAll(currently);
+//        }
+    }
+
+    public void handleCollapseButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(true);
+    }
+
+    public void handleExpandButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(false);
+    }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: -background; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mapbuilder.ContextMenuEdgeController">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0">
+               <children>
+                  <JFXComboBox fx:id="edgeComboBox" labelFloat="true" minWidth="110.0" promptText="Select" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <JFXButton alignment="CENTER" minWidth="64.0" onAction="#handleSaveButton" prefHeight="36.0" styleClass="button-contained" text="Save">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="16.0" right="16.0" />
+                     </padding>
+                  </JFXButton>
+                  <JFXButton fx:id="deleteButton" alignment="CENTER" minWidth="64.0" onAction="#handleDeleteButton" prefHeight="36.0" styleClass="button-text" text="Delete">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="16.0" right="16.0" />
+                     </padding>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

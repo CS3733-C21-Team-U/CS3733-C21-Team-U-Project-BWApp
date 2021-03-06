@@ -14,8 +14,7 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-//        System.out.println("# of request items: " + getNumTableItems("Requests"));
-//        System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
+
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
@@ -35,28 +34,17 @@ public class RequestData extends Data{
     }
 
 
-    public void updateRequest(IRequest obj){
+    public void updateRequest(SpecificRequest obj){
         Request request= obj.getGenericRequest();
         //requestID, dateCreated, dateCompleted, description, title, type
        // System.out.println("Can anyone even hear me??????????????????????????????????");
        // if(request.getDateCompleted() != null) this.resolveRequest(request);
-        this.updRequestDescription(request.getRequestID(), request.getDescription());
-        this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestType(request.getRequestID(), request.getType());
-        this.updLocations(request.getRequestID(), request.getLocation());
-        this.updAssignees(request.getRequestID(), request.getAssignee());
-
-        //Now place into specific subtable based on class
-        try{
-            System.out.println(obj.updateDBQuery());
-            PreparedStatement ps1 = conn.prepareStatement(obj.updateDBQuery());
-            ps1.execute();
-        }
-        catch (Exception e){
-            System.out.println("Check " + request.getType() + "update query");
-            e.printStackTrace();
-        }
-
+        updateField("Requests", "requestID", request.getRequestID(), "description", request.getDescription());
+        updateField("Requests", "requestID", request.getRequestID(), "title", request.getTitle());
+        updateField("Requests", "requestID", request.getRequestID(), "type", obj.getType());
+        //this.updLocations(request.getRequestID(), request.getLocation());
+       // this.updAssignees(request.getRequestID(), request.getAssignee());
+        updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
     }
 
    /* public void updateRequest(Request request){ //
@@ -112,13 +100,13 @@ public class RequestData extends Data{
      * The pulling of database information into java class objects
      * @return list of IRequest objects
      */
-    public ArrayList<IRequest> loadActiveRequests(){ // TODO: refactor for IRequest
+    public ArrayList<SpecificRequest> loadActiveRequests(){ // TODO: refactor for IRequest
         //go through requests, make a request object
         //go to subtable based on type(stored in field of request db)
         //set unique fields into correct object
         //If we do factory, this is where we do it
 
-        ArrayList<IRequest> results = new ArrayList<>();
+        ArrayList<SpecificRequest> results = new ArrayList<>();
         String requestQuery = "select * from Requests where dateCompleted is null";
         try{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
@@ -130,8 +118,9 @@ public class RequestData extends Data{
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
                 String type = rs.getString("type");
+                String specificData = rs.getString("specificData");
                 LinkedList<String> locations = new LinkedList<String>();
-//                try { // TODO : Move to helper function
+//                try { // TODO : UNCOMMENT AND FIX
 //                    String str2 = "select * from Locations where requestID=?";
 //                    PreparedStatement ps2= conn.prepareStatement(str2);
 //                    ps2.setString(1,id);
@@ -159,42 +148,11 @@ public class RequestData extends Data{
 //                    e.printStackTrace();
 //                }
 
-
-                //Make IRequest
                 RequestFactory rf = new RequestFactory();
-                IRequest result = rf.makeRequest(type);
+                SpecificRequest result = rf.makeRequest(type);
                 Request r = new Request(id,assignees, created,needed,desc,title,locations,type, "Test creator");
-
-                String subtableQuery = "select * from "+type+" where requestID=?";
-                PreparedStatement specificTable = conn.prepareStatement(subtableQuery);
-                specificTable.setString(1,id);
-                ResultSet ans = specificTable.executeQuery();
-                if (!ans.next()) {
-                    System.out.println("Item does not exist in " + type);
-                    break;
-                }
-                //System.out.println(ans.getString(2));
-
-                LinkedList<Serializable> list = new LinkedList<Serializable>();
-                char[] dataChars = result.getSpecificDataCode().toCharArray();
-                for(int i = 0; i < result.getSpecificFields().length; i++){
-
-                    if(dataChars[i] == 's'){
-                        list.addLast(ans.getString(i+2));
-                    }
-                    else if(dataChars[i] == 'i'){
-                        list.addLast(ans.getInt(i+2));
-                    }
-                    else if(dataChars[i] == 'd'){
-                        list.addLast(ans.getDate(i+2));
-                    }
-                    else if(dataChars[i] == 'b'){
-                        list.addLast(ans.getBoolean(i+2));
-                    }
-
-                }
-                result.fillObject(r, list);
-                specificTable.close();
+                result.readStorageString(specificData);
+                result.setRequest(r);
                 results.add(result);
             }
             rs.close();
@@ -204,45 +162,38 @@ public class RequestData extends Data{
         }
         return results;
     }
-   public void addRequest(IRequest request) { // TODO: Add to interface IRequest instead
+   public void addRequest(SpecificRequest obj) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded) values (?,?,?,?,?,?,?)";
+        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded, specificData) values (?,?,?,?,?,?,?,?)";
         try{
+            Request req = obj.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,request.getGenericRequest().getRequestID());
-            java.util.Date d = request.getGenericRequest().getDateCreated();
+            ps.setString(1,req.getRequestID());
+            java.util.Date d = req.getDateCreated();
             java.sql.Date sqld = new java.sql.Date(d.getTime());
             ps.setDate(2, sqld);
             ps.setDate(3,null);
-            ps.setString(4,request.getGenericRequest().getDescription());
-            ps.setString(5,request.getGenericRequest().getTitle());
-            ps.setString(6,request.getGenericRequest().getType());
-            java.util.Date d2 = request.getGenericRequest().getDateNeeded();
+            ps.setString(4,req.getDescription());
+            ps.setString(5,req.getTitle());
+            ps.setString(6,obj.getType());
+            java.util.Date d2 = req.getDateNeeded();
             java.sql.Date sqld2 = new java.sql.Date(d2.getTime());
             ps.setDate(7,sqld2);
+            ps.setString(8,obj.specificsStorageString());
             ps.execute();
             // Adding data into joint tables
-            for(String locationID : request.getGenericRequest().getLocation()){
-                addLocation(locationID, request.getGenericRequest().getRequestID());
+            for(String locationID : req.getLocation()){
+                addLocation(locationID, req.getRequestID());
             }
-            for(String assignmentID : request.getGenericRequest().getAssignee()){
-                addAssignee(assignmentID, request.getGenericRequest().getRequestID());
+            for(String assignmentID : req.getAssignee()){
+                addAssignee(assignmentID, req.getRequestID());
             }
-
-            //Now place into specific subtable based on class
-            System.out.println(request.subtableCreateQuery());
-            PreparedStatement ps1 = conn.prepareStatement(request.subtableCreateQuery());
-            ps1.execute();
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        printTableItem("Maintenance", "machineUsed");
-       printTableItem("Maintenance", "priority");
-
-
-
+        printTableItem("Requests", "specificData");
     }
 
     public void addAssignee(String userID, String requestID){
@@ -286,32 +237,7 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void updRequestDescription(String requestID, String description) {
-        String str = "update Requests set description=? where requestID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,description);
-            ps.setString(2,requestID);
-            ps.execute();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public void updRequestTitle(String requestID, String title) {
-        String str = "update Requests set title=? where requestID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,title);
-            ps.setString(2,requestID);
-            ps.execute();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+
     public void deleteLocation(String requestID, String nodeID){
         String str = "delete * from Locations where requestID=? and nodeID=?";
         try{
@@ -367,7 +293,6 @@ public class RequestData extends Data{
             e.printStackTrace();
 
         }
-
         return -999;
     }
 //    public void getRequests() {}

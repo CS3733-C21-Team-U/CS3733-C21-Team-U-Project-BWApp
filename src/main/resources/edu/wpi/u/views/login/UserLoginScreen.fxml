@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserLoginScreenController">
+    <children>
+        <HBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefWidth="1086.0">
+                    <children>
+                        <HBox prefHeight="107.0" prefWidth="1086.0">
+                            <VBox.margin>
+                                <Insets top="270.0" />
+                            </VBox.margin>
+                            <children>
+                                <ImageView fitHeight="120.0" fitWidth="115.0">
+                                    <image>
+                                        <Image url="@../Images/logo.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets bottom="10.0" left="290.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <Label styleClass="headline-2" text="Login Portal">
+                                    <HBox.margin>
+                                        <Insets left="16.0" top="50.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Label prefHeight="15.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System" textAlignment="CENTER">
+                            <VBox.margin>
+                                <Insets left="290.0" />
+                            </VBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
+                            <VBox.margin>
+                                <Insets bottom="30.0" left="290.0" right="483.0" top="25.0" />
+                            </VBox.margin>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" text="test">
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="290.0" right="483.0" />
+                            </VBox.margin>
+                        </JFXPasswordField>
+                  <JFXProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="313.0" style="-fx-opacity: 0;">
+                     <VBox.margin>
+                        <Insets bottom="3.0" left="290.0" />
+                     </VBox.margin>
+                  </JFXProgressBar>
+                        <HBox prefHeight="41.0" prefWidth="1086.0">
+                            <children>
+                                <JFXButton fx:id="loginButton" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
+                                    <HBox.margin>
+                                        <Insets left="290.0" />
+                                    </HBox.margin>
+                                </JFXButton>
+                        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
+                                <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
+                                    <HBox.margin>
+                                        <Insets left="5.0" />
+                                    </HBox.margin>
+                                </JFXButton>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </HBox>
+                  <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
+                     <VBox.margin>
+                        <Insets left="290.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
+                     <VBox.margin>
+                        <Insets left="290.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </VBox>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="1080.0" fitWidth="835.0" smooth="false">
+                            <image>
+                                <Image url="@../Images/pexels-anna-shvets-4421550.jpg" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </StackPane>
+            </children>
+        </HBox>
+      <JFXButton fx:id="debugLoginAdminButton" onAction="#handleDebugLogin" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Admin)" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0" />
+      <JFXButton fx:id="debugLoginGuestButton" layoutX="30.0" layoutY="1044.0" onAction="#handleDebugLoginGuest" prefWidth="157.0" styleClass="button-text" text="DEBUG LOGIN (as Guest)" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="1500.0" />
+    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</AnchorPane>

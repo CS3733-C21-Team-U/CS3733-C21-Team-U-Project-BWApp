@@ -23,6 +23,7 @@ public class Database {
         //dropValues("all");
         createTables();
     }
+
     //Bill Pugh solution
     private static class SingletonHelper {
         //Nested class is referenced after getDB() is called
@@ -31,6 +32,7 @@ public class Database {
 
     /**
      * Singleton helper to keep Database instance singular
+     *
      * @return the database class reference
      */
     public static Database getDB() {
@@ -78,7 +80,8 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated timestamp, dateCompleted timestamp,description varchar(200),title varchar(50),type varchar(50), dateNeeded timestamp, primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(250),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
+
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -159,6 +162,7 @@ public class Database {
 //                PreparedStatement giftRQ = conn.prepareStatement(gift);
 //                giftRQ.execute();
 
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -169,21 +173,21 @@ public class Database {
     /**
      * Will read the csv file from a given path
      *
-     * @param filePath the path to be read from
+     * @param filePath  the path to be read from
      * @param tableName the table to load the data from the csv into
      */
-    public void readCSV(String filePath, String tableName){
+    public void readCSV(String filePath, String tableName) {
 
         String tempPath = "temp.csv"; //TODO : Change path in jar file
         String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
 
         try {
-            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
             String[] columns = content.split("\n", 2);
             //String[] attributes = content.split(","); TODO: Make table columns from header values
             columns[1] += "\n";
             File temp = new File(tempPath);
-            if(temp.createNewFile()){
+            if (temp.createNewFile()) {
                 System.out.println("File created");
             }
             FileWriter myWriter = new FileWriter(tempPath);
@@ -195,8 +199,7 @@ public class Database {
         try {
             PreparedStatement p = conn.prepareStatement(str1);
             p.execute();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Path: " + filePath);
             //e.printStackTrace();
         }
@@ -204,13 +207,14 @@ public class Database {
 
     /**
      * Saves a csv to a given file path
+     *
      * @param tableName the table to be saved to a csv
-     * @param filePath the path that the csv file will be written to
-     * @param header header of the csv file (the first line)
+     * @param filePath  the path that the csv file will be written to
+     * @param header    header of the csv file (the first line)
      */
-    public void saveCSV(String tableName, String filePath, String header){
+    public void saveCSV(String tableName, String filePath, String header) {
         File f = new File(filePath);
-        if(f.delete()){
+        if (f.delete()) {
             System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
         }
         String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
@@ -224,7 +228,7 @@ public class Database {
         }
 
         try {
-            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
             FileWriter fw = new FileWriter(filePath);
             fw.write(header);
             fw.write("\n");
@@ -237,6 +241,7 @@ public class Database {
 
     /**
      * This will print all of the requests from a Request table
+     *
      * @param aTable table name
      */
     public void printRequestTable(String aTable) {
@@ -256,6 +261,7 @@ public class Database {
 
     /**
      * Checks to see if the Nodes table is populated and assumes the rest of the tables are created if it is
+     *
      * @return true if no tables have been created, false otherwise
      */
     public static boolean isTableEmpty() {
@@ -271,45 +277,45 @@ public class Database {
 
     /**
      * Drops a table or all if the tableName = "all"
+     *
      * @param tableName the table to drop or "all"
      */
-    public void dropValues(String tableName) {
-        try {
-            Statement s = conn.createStatement();
-            String str = "alter table Locations drop column requestID";
-            s.execute(str);
-            str = "alter table Assignments drop column requestID";
-            s.execute(str);
-            str= "delete from " + tableName;
-            s.execute(str);
-            if (str.equals("all")){
-                str = "alter table Locations drop column requestID";
-                s.execute(str);
-                str = "alter table Assignments drop column requestID";
-                s.execute(str);
-                str = "delete from Nodes";
-                s.execute(str);
-                str = "delete from Edges";
-                s.execute(str);
-                str = "delete from Requests";
-                s.execute(str);
-                str = "delete from Locations";
-                s.execute(str);
-                str = "delete from Assignments";
-                s.execute(str);
-//                str = "delete from Maintenance";
+//    public void dropValues(String tableName) {
+//        try {
+//            Statement s = conn.createStatement();
+//            String str = "alter table Locations drop column requestID";
+//            s.execute(str);
+//            str = "alter table Assignments drop column requestID";
+//            s.execute(str);
+//            str = "delete from " + tableName;
+//            s.execute(str);
+//            if (str.equals("all")) {
+//                str = "alter table Locations drop column requestID";
 //                s.execute(str);
-//                str = "delete from Laundry";
+//                str = "alter table Assignments drop column requestID";
 //                s.execute(str);
-            }
-        } catch (SQLException throwables) {
-            //throwables.printStackTrace();
-        }
-    }
+//                str = "delete from Nodes";
+//                s.execute(str);
+//                str = "delete from Edges";
+//                s.execute(str);
+//                str = "delete from Requests";
+//                s.execute(str);
+//                str = "delete from Locations";
+//                s.execute(str);
+//                str = "delete from Assignments";
+//                s.execute(str);
+////                str = "delete from Maintenance";
+////                s.execute(str);
+////                str = "delete from Laundry";
+////                s.execute(str);
+//            }
+//        } catch (SQLException throwables) {
+//            //throwables.printStackTrace();
+//        }
+//    }
 
     /**
-     * Deletes all tables
-     * TODO : Update to have newly created sprint 2&3 tables
+     * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
      */
     public void deleteTables() {
         //System.out.println("here2");
@@ -336,57 +342,45 @@ public class Database {
         }
     }
     //TODO: Test
+
     /**
      * Saves all tables to respective CSV files (ie: Nodes table saved to Nodes.csv)
      */
-    public void saveAll(){
-        saveCSV( "Requests", "Requests.csv","Test");
-        saveCSV( "Assignments", "Assignments.csv","Test");
-        saveCSV( "Locations", "Locations.csv","Test");
+    public void saveAll() {
+        saveCSV("Requests", "Requests.csv", "Test");
+        saveCSV("Assignments", "Assignments.csv", "Test");
+        saveCSV("Locations", "Locations.csv", "Test");
         saveCSV("Nodes", "MapUAllNodes.csv", "Test");
-        saveCSV( "Edges", "MapUAllEdges.csv","Test");
-        saveCSV( "Maintenance","Maintenance.csv", "Test");
-        saveCSV( "Laundry","Laundry.csv", "Test");
-        saveCSV( "Sanitation","Sanitation.csv", "Test");
-        saveCSV( "AudioVisual","AudioVisual.csv", "Test");
-        saveCSV( "Floral","Floral.csv", "Test");
-        saveCSV("Medical", "Medical.csv", "Test");
-        saveCSV("Religious", "Religious.csv", "Test");
-        saveCSV("Computer", "Computer.csv","Charlie was here");
-        saveCSV("Security", "Security.csv","Jacob was here");
-        saveCSV("Language", "Language.csv","Neville was here");
-        saveCSV("Gift", "Gift.csv","Kohmei was here");
+        saveCSV("Edges", "MapUAllEdges.csv", "Test");
     }
 
     /**
      * Will make the database not persistent in between sessions and reliant on the loading of CSV files on app startup
+     *
      * @param yes whether or not to make Database CSV dependent
      */
-    public void makeCSVDependant(boolean yes){
+    public void makeCSVDependant(boolean yes) {
 
-        if(!yes) return;
-        dropValues("all");
+        if (!yes) return;
+        //dropValues("all");
         deleteTables();
         readCSV("Requests.csv", "Requests");
         readCSV("Locations.csv", "Locations");
         readCSV("Assignments.csv", "Assignments");
         readCSV("OutsideMapNodes.csv", "Nodes");
         readCSV("OutsideMapEdges.csv", "Edges");
-        readCSV("Maintenance.csv", "Maintenance");
-        readCSV("Laundry.csv", "Laundry");
-        //readCSV("Laundry.csv", "Laundry");
     }
 
-    /**
-     * Stops the database on app shutdown
-     * TODO : Enable and test
-     */
-    public void stop() {
-        try{
-           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        /**
+         * Stops the database on app shutdown
+         * TODO : Enable and test
+         */
+        public void stop () {
+            try {
+                // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
+
