@@ -3,10 +3,7 @@ package edu.wpi.u.database;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -14,65 +11,173 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-
-        //readCSV("Requests.csv", "Requests");
-       // readCSV("Locations.csv", "Locations");
-      //  readCSV("Assignments.csv", "Assignments");
-        printTableItem("Requests", "title");
-        LinkedList<String> l1 = new LinkedList<String>();
-        l1.add("UPARK00101");
-        LinkedList<String> s1 = new LinkedList<String>();
-        s1.add("Mary");
-        Date d = new Date(900);
-        //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
+//        printTableItem("Requests", "title");
+//        LinkedList<String> l1 = new LinkedList<String>();
+//        l1.add("UPARK00101");
+//        LinkedList<String> s1 = new LinkedList<String>();
+//        s1.add("Mary");
+//        Date d = new Date(900);
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
-
-        //saveCSV("Requests", "Requests.csv", "Requests");
-        //saveCSV("Locations", "Locations.csv", "Location");
-      //  saveCSV("Assignments", "Assignments.csv", "Assignments");
-        //printRequests();
     }
 
+    /**
+     * Updates a request by using its ID
+     * @param specificRequest the new request object
+     */
+    public void updateRequest(SpecificRequest specificRequest){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
+        Request request= specificRequest.getGenericRequest();
 
-    public void updateRequest(SpecificRequest obj){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
-        Request request= obj.getGenericRequest();
-        //requestID, dateCreated, dateCompleted, description, title, type
-       // System.out.println("Can anyone even hear me??????????????????????????????????");
-       // if(request.getDateCompleted() != null) this.resolveRequest(request);
-        updateField("Requests", "requestID", request.getRequestID(), "description", request.getDescription());
-        updateField("Requests", "requestID", request.getRequestID(), "title", request.getTitle());
-        updateField("Requests", "requestID", request.getRequestID(), "type", obj.getType());
-        //this.updLocations(request.getRequestID(), request.getLocation());
-       // this.updAssignees(request.getRequestID(), request.getAssignee());
-        updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
+        String str = "update Requests set dateNeeded=? where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setTimestamp(1, request.getDateNeeded());
+            ps.setString(1,request.getRequestID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
+        updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
 
         Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
         request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
-        addCommenttoRequest(request.getRequestID(), c);
+        addCommentToRequest(request.getRequestID(), c);
     }
 
-   /* public void updateRequest(Request request){ //
-        requestID, dateCreated, dateCompleted, description, title, type
-         *//*
-        System.out.println("Can anyone even hear me??????????????????????????????????");
-        if(request.getDateCompleted() != null) this.resolveRequest(request);
-        this.updRequestDescription(request.getRequestID(), request.getDescription());
-        this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestType(request.getRequestID(), request.getType());
-        this.updLocations(request.getRequestID(), request.getLocation());
-        this.updAssignees(request.getRequestID(), request.getAssignee());
-    }*/
+    /**
+     * Returns whether or not a request is active
+     * @param requestID the request id
+     * @return true if the request is active, false if it is complete
+     */
+    public boolean getActiveStatus(String requestID){
+        String str = "select dateCompleted from Requests where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                rs.close();
+                ps.close();
+                return false;
+            }
+            rs.close();
+            ps.close();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 
-    public void updLocations(String requestId, LinkedList<String> locations){
+    /**
+     * Returns a list of resolved requests
+     * @return list of resolved requests
+     */
+    public ArrayList<Request> getResolvedRequests(){
+        ArrayList<Request> result = new ArrayList<>();
+        String str = "select * from Requests where dateCompleted is not null";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+//                result.add(new Request(rs.getString("requestId"), todo : fix
+//                        rs.getTimestamp("dateCreated"),
+//                        rs.getTimestamp("dateNeeded"),
+//                        rs.getTimestamp("dateCompleted"),
+//                        rs.getString("description"),
+//                        rs.getString("title"),
+//                        getAssignees(rs.getString("requestId")),
+//                        getLocations(rs.getString("requestId")),
+//                        rs.getString("creator")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Returns a list of comments for a given request
+     * @param requestID the request id
+     * @return list of comments
+     */
+    public ArrayList<Comment> getComments(String requestID){
+        ArrayList<Comment> result = new ArrayList<>();
+        try {
+            String str = "select * from Comments where requestID=? order by created DESC";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(new Comment(rs.getString("title"), rs.getString("description"), rs.getString("author"), CommentType.valueOf(rs.getString("type")), rs.getTimestamp("created")));
+            }
+            rs.close();
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Returns a list of employeeID's for a given requestID
+     * @param requestID the request ID
+     * @return list of assignees
+     */
+    public ArrayList<String> getAssignees(String requestID){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select * from Assignments where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("employeeID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Returns a list of nodeID's for a given requestID
+     * @param requestID the request id
+     * @return list of locations
+     */
+    public ArrayList<String> getLocations(String requestID){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select * from Locations where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("nodeID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Updates the list of locatioons for a given requestID
+     * @param requestID the request id
+     * @param locations the list of locations
+     */
+    public void updLocations(String requestID, ArrayList<String> locations){
 
         //Take whole list: do new one
         String str = "delete from Locations where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, requestId);
+            ps.setString(1, requestID);
             ps.execute();
             for (String node : locations) {
-                addLocation(node,requestId);
+                addLocation(node,requestID);
             }
             ps.close();
         }
@@ -81,17 +186,22 @@ public class RequestData extends Data{
         }
     }
 
-    public void updAssignees(String requestId, LinkedList<String> assignees){
+    /**
+     * Updates the list of assignees for a given requestID
+     * @param requestID the request id
+     * @param assignees the list of assignees for that request
+     */
+    public void updAssignees(String requestID, ArrayList<String> assignees){
         /*
         Take whole list: do new one
          */
         String str = "delete from Assignments where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, requestId);
+            ps.setString(1, requestID);
             ps.execute();
             for (String assignee : assignees) {
-                addAssignee(assignee,requestId);
+                addAssignee(assignee,requestID);
             }
             ps.close();
         }
@@ -109,67 +219,23 @@ public class RequestData extends Data{
         //go to subtable based on type(stored in field of request db)
         //set unique fields into correct object
         //If we do factory, this is where we do it
-
         ArrayList<SpecificRequest> results = new ArrayList<>();
-        String requestQuery = "select * from Requests where dateCompleted is null";
+        String requestQuery = "select * from Requests where resolved=false";
         try{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 String id = rs.getString("requestID");
-                Date created = rs.getDate("dateCreated");
-                Date needed = rs.getDate("dateNeeded");
-                String desc = rs.getString("description");
-                String title = rs.getString("title");
                 String type = rs.getString("type");
+                Timestamp dateNeeded = rs.getTimestamp("dateNeeded");
                 String specificData = rs.getString("specificData");
-                ArrayList<String> locations = new ArrayList<String>();
-//                try { // TODO : UNCOMMENT AND FIX
-//                    String str2 = "select * from Locations where requestID=?";
-//                    PreparedStatement ps2= conn.prepareStatement(str2);
-//                    ps2.setString(1,id);
-//                    ResultSet rs2 = ps2.executeQuery();
-//                    while (rs2.next()){
-//                        locations.add(rs2.getString("nodeID"));
-//                    }
-//                    rs2.close();
-//                }
-//                catch (Exception e){
-//                    e.printStackTrace();
-//                }
-                ArrayList<String> assignees = new ArrayList<String>();
-//                try {
-//                    String str3 = "select * from Assignments where requestID=?";
-//                    PreparedStatement ps3 = conn.prepareStatement(str3);
-//                    ps3.setString(1,id);
-//                    ResultSet rs3 = ps3.executeQuery();
-//                    while (rs3.next()){
-//                        assignees.add(rs3.getString("userID"));
-//                    }
-//                    rs3.close();
-//                }
-//                catch (Exception e){
-//                    e.printStackTrace();
-//                }
-                ArrayList<Comment> comments = new ArrayList<Comment>();
-                try {
-                    String str4 = "select * from Comments where requestID=? order by created DESC";
-                    PreparedStatement ps4 = conn.prepareStatement(str4);
-                    ps4.setString(1,id);
-                    ResultSet rs4 = ps4.executeQuery();
-                    while (rs4.next()){
-                        comments.add(new Comment(rs4.getString("title"), rs4.getString("description"), rs4.getString("author"), CommentType.valueOf(rs4.getString("type")), rs4.getTimestamp("created")));
-                    }
-                    rs4.close();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-                RequestFactory rf = new RequestFactory();
-                SpecificRequest result = rf.makeRequest(type);
-                Request r = new Request(id, new Timestamp(created.getTime()), locations, assignees, comments);
-                result.readStorageString(specificData);
+                ArrayList<String> locations = getLocations(id);
+                ArrayList<String> assignees = getAssignees(id);
+                ArrayList<Comment> comments = getComments(id);
+                Request r = new Request(id, dateNeeded, locations, assignees, comments);
+                SpecificRequest result = new RequestFactory().makeRequest(type);
                 result.setRequest(r);
+                result.readStorageString(specificData);
                 results.add(result);
             }
             rs.close();
@@ -179,56 +245,55 @@ public class RequestData extends Data{
         }
         return results;
     }
-   public void addRequest(SpecificRequest obj) { // TODO: Add to interface IRequest instead
-       //
-        //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
-        String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded, specificData) values (?,?,?,?,?,?,?,?)";
+
+    /**
+     * Adds a request to the database
+     * @param specificRequest the request to add
+     */
+    public void addRequest(SpecificRequest specificRequest) { // TODO: Add to interface IRequest instead
+        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?)";
         try{
-            Request req = obj.getGenericRequest();
+            Request req = specificRequest.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,req.getRequestID());
-            java.util.Date d = req.getDateCreated();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());
-            ps.setDate(2, sqld);
-            ps.setDate(3,null);
-            ps.setString(4,req.getDescription());
-            ps.setString(5,req.getTitle());
-            ps.setString(6,obj.getType());
-            java.util.Date d2 = req.getDateNeeded();
-            java.sql.Date sqld2 = new java.sql.Date(d2.getTime());
-            ps.setDate(7,sqld2);
-            ps.setString(8,obj.specificsStorageString());
+            ps.setString(2, specificRequest.getType());
+            ps.setTimestamp(3,req.getDateNeeded());
+            ps.setString(4,specificRequest.specificsStorageString());
             ps.execute();
-            // Adding data into joint tables
-            for(String locationID : req.getLocation()){
-                addLocation(locationID, req.getRequestID());
-            }
-            for(String assignmentID : req.getAssignee()){
-                addAssignee(assignmentID, req.getRequestID());
-            }
-            for(Comment c : req.getComments()){
-                addCommenttoRequest(req.getRequestID(), c);
+            for(Comment comment : req.getComments()){
+                addCommentToRequest(req.getRequestID(), comment);
             }
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        printTableItem("Requests", "specificData");
+        //printTableItem("Requests", "specificData");
     }
 
-    public void addAssignee(String userID, String requestID){
+    /**
+     * Adds an assignee to a request
+     * @param employeeID user id of the assigned person
+     * @param requestID request id
+     */
+    public void addAssignee(String employeeID, String requestID){
         String str = "insert into Assignments(assignmentID, requestID, userID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID+"_"+userID);
+            ps.setString(1,requestID+"_"+employeeID);
             ps.setString(2,requestID);
-            ps.setString(3,userID);
+            ps.setString(3,employeeID);
             ps.execute();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Adds a location to a request
+     * @param nodeID node id
+     * @param requestID the request id
+     */
     public void addLocation(String nodeID, String requestID){
         String str = "insert into Locations(locationID, requestID, nodeID) values (?,?,?)";
         try{
@@ -244,41 +309,38 @@ public class RequestData extends Data{
     }
 
     /**
-     *
+     * Adds a comment to a request
      * @param requestID - the request taken in
-     * @param c - the comment that will be connected with it using Comments table
+     * @param comment - the comment that will be connected with it using Comments table
      */
-//requestID , title , description, author, type, created timestamp;
-    public void addCommenttoRequest(String requestID, Comment c){
+    public void addCommentToRequest(String requestID, Comment comment){
         String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
-            ps.setString(2,c.getTitle());
-            ps.setString(3,c.getDescription());
-            ps.setString(4,c.getDescription());
-            ps.setString(5,c.getType().toString());
-            ps.setTimestamp(6,c.getTimestamp());
+            ps.setString(2,comment.getTitle());
+            ps.setString(3,comment.getDescription());
+            ps.setString(4,comment.getDescription());
+            ps.setString(5,comment.getType().toString());
+            ps.setTimestamp(6,comment.getTimestamp());
             ps.execute();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
-     *
-     * @param requestID
-     * @param time
+     * Resolves a request
+     * @param requestID the id of the request
+     * @param comment the comment resolving the request
      */
-    public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
-        String str = "update Requests set dateCompleted=? where requestID=?";
+    public void resolveRequest(String requestID, Comment comment) { // TODO: Add resolve comment
+        addCommentToRequest(requestID,comment);
+        String str = "update Requests set resolved=true where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-           /* java.util.Date d = request.getDateCompleted();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());*/
-            java.sql.Date d = new java.sql.Date(time);
-            ps.setDate(1, d);
-            ps.setString(2,requestID);
+            ps.setString(1,requestID);
             ps.execute();
         }
         catch (Exception e){
@@ -286,6 +348,11 @@ public class RequestData extends Data{
         }
     }
 
+    /**
+     * Deletes a location assignment for a request
+     * @param requestID the request id
+     * @param nodeID the node id
+     */
     public void deleteLocation(String requestID, String nodeID){
         String str = "delete * from Locations where requestID=? and nodeID=?";
         try{
@@ -298,18 +365,30 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void deleteAssignment(String requestID, String userID){
+
+    /**
+     * Deletes an assignment for a request
+     * @param requestID the request id
+     * @param employeeID the user id
+     */
+    public void deleteAssignment(String requestID, String employeeID){
         String str = "delete * from Assignments where requestID=? and userID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
-            ps.setString(2,userID);
+            ps.setString(2,employeeID);
             ps.execute();
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    /**
+     * Updates the type of request of a given requestID
+     * @param requestID the requestId
+     * @param type the new type of request
+     */
     public void updRequestType(String requestID, String type) {
         String str = "update Requests set type=? where requestID=?";
         try {
@@ -326,7 +405,7 @@ public class RequestData extends Data{
 
     /**
      * For debugging
-     * @param tableName
+     * @param tableName the table name
      * @return number of entries in table
      */
     public int getNumTableItems(String tableName) {
@@ -343,7 +422,4 @@ public class RequestData extends Data{
         }
         return -999;
     }
-//    public void getRequests() {}
-//    public void getRequestByID(String id) {
-//    }
 }

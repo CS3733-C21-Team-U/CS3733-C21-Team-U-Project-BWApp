@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -119,8 +118,10 @@ public class AddRequestController {
             Random rand = new Random();
             int requestID = rand.nextInt();
             String ID = Integer.toString(requestID);//make a random id
+            //TODO : fix date bug
+            Timestamp needed = Timestamp.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
             //TODO : FIX DATE BUG
-            Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(), "KAAMIL", CommentType.PRIMARY, new Timestamp( needed.getTime() ));
             Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             result.setRequest(newRequest);

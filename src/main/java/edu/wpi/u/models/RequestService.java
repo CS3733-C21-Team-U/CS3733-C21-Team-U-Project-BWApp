@@ -3,6 +3,8 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +21,22 @@ public class RequestService {
 
       System.out.println("Req: "+ x.getGenericRequest().getRequestID());
     }
+  }
+
+  public ArrayList<String> getAssignees(String requestID){
+    return rd.getAssignees(requestID);
+  }
+
+  public ArrayList<String> getLocations(String requestID){
+    return rd.getLocations(requestID);
+  }
+
+  public void setAssignees(String requestID, ArrayList<String> assignees){
+    rd.updAssignees(requestID, assignees);
+  }
+
+  public void setLocations(String requestID, ArrayList<String> locations){
+    rd.updLocations(requestID, locations);
   }
 
   public void loadCSVFile(String path, String tableName){
@@ -42,9 +60,11 @@ public class RequestService {
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {
     long time = System.currentTimeMillis();
-    result.getGenericRequest().resolveRequest(resolveComment);
+//    Timestamp now = new Date(time); todo: fix
+//    result.getGenericRequest().setDateCompleted(now);
+    result.getGenericRequest().resolveRequest(resolveComment); // todo : does this assign the dateCompleted?
     this.activeRequests.remove(result);
-    rd.resolveRequest(result.getGenericRequest().getRequestID(), time);
+    rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
   public ArrayList<SpecificRequest> getRequests() {

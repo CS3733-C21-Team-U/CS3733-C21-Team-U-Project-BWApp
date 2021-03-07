@@ -17,12 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class ModifyRequestController {
 
@@ -119,12 +114,12 @@ public class ModifyRequestController {
         makeEditTitleField.setText(currRequest.getTitle());
         makeEditDescriptionField.setText(currRequest.getDescription());
 
-        //TODO: Probably broken
-        for (String l : currRequest.getLocation()) { //Locations
+        // todo: fixed but test
+        for (String l : currRequest.getLocations()) { //Locations
             makeEditLocationChipView.getChips().add(l);
         }
 
-        for (String a : currRequest.getAssignee()) { //Assignees
+        for (String a : currRequest.getAssignees()) { //Assignees
             makeEditStaffChipView.getChips().add(a);
         }
     }
@@ -156,20 +151,26 @@ public class ModifyRequestController {
             //NEW
             currRequest.setTitle(makeEditTitleField.getText());
             currRequest.setDescription(makeEditDescriptionField.getText());
-            currRequest.setAssignee(assigneesToAdd);
-            currRequest.setLocation(locationsToAdd);
 
-            //TODO: FIX THIS DATE STUFF - DOES NOT UPDATE
-            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
+            App.requestService.setAssignees(currRequest.getRequestID(), assigneesToAdd);
+            App.requestService.setLocations(currRequest.getRequestID(), locationsToAdd);
+//            currRequest.setAssignees(assigneesToAdd);
+//            currRequest.setLocations(locationsToAdd); todo : fixed but test ^
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-            LocalDateTime localDateTime = LocalDateTime.now();
-            ZonedDateTime zdt = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
-            long date = zdt.toInstant().toEpochMilli();
+            Timestamp date= new Timestamp(System.currentTimeMillis());
+            currRequest.setDateNeeded(date);
+            currRequest.setAssignees(assigneesToAdd);
+            currRequest.setLocations(locationsToAdd);
 
-            Timestamp t = new Timestamp(date);
-            currRequest.setDateNeeded(t);
-            currSpecificRequest.setSpecificData(requestSpecificItems());
-            App.requestService.updateRequest(currSpecificRequest);
+//            //TODO: FIX THIS DATE STUFF - DOES NOT UPDATE
+//            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
+//            //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
+//            LocalDateTime localDateTime = LocalDateTime.now();
+//            ZonedDateTime zdt = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
+//            //long date = zdt.toInstant().toEpochMilli();
+//            currRequest.setDateNeeded(t);
+//            currSpecificRequest.setSpecificData(requestSpecificItems());
+//            App.requestService.updateRequest(currSpecificRequest);
 
 
             //SCENE Switch

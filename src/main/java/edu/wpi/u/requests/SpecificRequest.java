@@ -38,7 +38,6 @@ public abstract class SpecificRequest {
     public void readStorageString(String specificFields){
         ArrayList<String> result = new ArrayList<String>();
         for(int i = 0; i < getSpecificFields().length; i++){
-
             String str = specificFields.split("&")[i];
             str = str.split("%")[1];
             result.add(i, str);
