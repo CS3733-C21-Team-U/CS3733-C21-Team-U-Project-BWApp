@@ -1,11 +1,13 @@
 package edu.wpi.u.database;
 
 import java.sql.*;
+import java.util.LinkedList;
 
 public abstract class Data {
     protected Connection conn = null;
     protected ResultSet rset;
-    protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
+    //protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
+    protected String url = "jdbc:derby:BWdb";
 
     protected static Database db;
 
@@ -58,7 +60,37 @@ public abstract class Data {
         }
         return true;
     }
-
+    public int addToJoinTable(String tableName, String id1, String id2) {
+        try {
+            System.out.println("Edges are being added to the Database");
+            String str = "insert into "+tableName+" (edgeId, startID, endID) values (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, id1+"_"+id2);
+            ps.setString(2, id1);
+            ps.setString(3, id2);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to add edge");
+            return 0;
+        }
+        return 1;
+    }
+    public void updJoinedList(String searchIDName, String joinTable, String searchID, String addID, LinkedList<String> newList){
+        String str = "delete from "+joinTable+" where "+searchIDName+"=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, searchID);
+            ps.execute();
+            for (String node : newList) {
+                addToJoinTable(joinTable, searchID, addID);
+            }
+            ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void printTableItem(String tableName, String columnName) {
         try {
             String str = "select * from " + tableName;

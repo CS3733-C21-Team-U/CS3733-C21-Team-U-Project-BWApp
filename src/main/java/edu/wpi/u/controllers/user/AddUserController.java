@@ -4,7 +4,6 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.exceptions.UsernameNotFoundException;
-import edu.wpi.u.users.StaffType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static edu.wpi.u.users.StaffType.*;
+import static edu.wpi.u.users.Role.*;
 
 public class AddUserController {
 
@@ -30,14 +29,12 @@ public class AddUserController {
     public JFXCheckBox userEmployStatus;
     public JFXButton addUserButton;
     public JFXDatePicker appointmentDatePicker;
-    public JFXTimePicker appointmentTimePicker;
+    //public JFXTimePicker appointmentTimePicker;
     public JFXTextField emailTextField;
     public JFXButton cancelButton;
 
     public void initialize() throws IOException {
-        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFUALT.toString() );
-
-
+        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFAULT.toString() );
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator2.setMessage("Password Required");
@@ -92,7 +89,6 @@ public class AddUserController {
 
     /**This function intakes a set of text fields, a combo box, and a checkbox, and sends that info to be
      * made into a user object to be added to the database
-     *
      */
     public void handleAddUser() throws UsernameNotFoundException, IOException {
         LocalDate localDate = appointmentDatePicker.getValue();
@@ -101,7 +97,8 @@ public class AddUserController {
         String userType = "";
         if(userEmployStatus.isSelected()){
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-                App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+                // TODO : Fix
+                //App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();
@@ -113,7 +110,8 @@ public class AddUserController {
         }
         else{
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-                App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), StaffType.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText(), date  , false);
+                // TODO : Fix
+                //App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();
@@ -123,7 +121,6 @@ public class AddUserController {
                 throw new UsernameNotFoundException();
             }
         }
-
     }
 
     public void handleCancel(ActionEvent actionEvent) {

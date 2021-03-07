@@ -1,6 +1,6 @@
 package edu.wpi.u.algorithms;
 
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.util.ArrayList;
 
@@ -10,9 +10,9 @@ public class Edge {
   private Node endNode;
   private double weight;
   private boolean walkable = true;
-  private ArrayList<StaffType> permission;
+  private ArrayList<Role> permission;
 
-  public Edge(String _edgeID, Node _startNode, Node _endNode, ArrayList<StaffType> permissions) {
+  public Edge(String _edgeID, Node _startNode, Node _endNode, ArrayList<Role> permissions) {
     this.edgeID = _edgeID;
     this.startNode = _startNode;
     this.endNode = _endNode;
@@ -23,7 +23,7 @@ public class Edge {
     _endNode.addAdjNode(_startNode);
     this.permission = new ArrayList<>();
     if (permissions.isEmpty()){
-      this.permission.add(StaffType.DEFUALT);
+      this.permission.add(Role.DEFAULT);
     }
     else
     {
@@ -53,20 +53,20 @@ public class Edge {
    * default means all
    * @param staffType
    */
-  public void addUserPermission(StaffType staffType){}
+  public void addUserPermission(Role staffType){}
 
   /**
    * remove a users permission to use an edge
    * default means all
    * @param staffType
    */
-  public void removeUserPermission(StaffType staffType){}
+  public void removeUserPermission(Role staffType){}
 
   /**
    * returns the array list of permissions
    * @return
    */
-  public ArrayList<StaffType> getUserPermissions(){
+  public ArrayList<Role> getUserPermissions(){
     return this.permission;
   }
 
@@ -90,7 +90,7 @@ public class Edge {
     return this.walkable;
   }
 
-  public void setUserPermission(ArrayList<StaffType> permissions) {
+  public void setUserPermission(ArrayList<Role> permissions) {
     this.permission = permissions;
   }
 }

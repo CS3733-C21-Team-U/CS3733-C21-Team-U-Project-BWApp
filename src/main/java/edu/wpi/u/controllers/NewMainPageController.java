@@ -3,8 +3,8 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.models.MapService;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,11 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+
 import javafx.scene.input.KeyEvent;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -24,12 +23,16 @@ import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
-import static edu.wpi.u.users.StaffType.ADMIN;
+import static edu.wpi.u.users.Role.ADMIN;
 
 public class NewMainPageController {
 
@@ -65,6 +68,23 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
+//        validationFeild
+        TextField test = new TextField("test");
+//        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");
+        HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
+        Set<String> strings = namesAndIDs.keySet();
+
+        AutoCompletionBinding<String> acb = TextFields.bindAutoCompletion(validationFeild , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+//        acb.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<String>>()
+//        {
+//
+//            @Override
+//            public void handle(AutoCompletionBinding.AutoCompletionEvent<String> event)
+//            {
+//                String valueFromAutoCompletion = event.getCompletion();
+//            }
+//        });
 
         App.themeSVG = themeIcon;
 

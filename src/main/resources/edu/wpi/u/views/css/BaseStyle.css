@@ -332,6 +332,14 @@
 }
 
 
+.scroll-pane > .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane{
+    -fx-background-color: -background;
+}
+
 /* The main scrollbar **track** CSS class  */
 .mylistview .scroll-bar:horizontal .track,
 .mylistview .scroll-bar:vertical .track {
@@ -398,11 +406,11 @@
     -fx-text-fill: white;
 }
 
-.list-view .list-cell:even {
+.jfx-list-view .list-cell:even {
     -fx-background-color: blue;
     -fx-text-fill: black;
 }
-.list-view .list-cell:odd {
+.jfx-list-view .list-cell:odd {
     -fx-background-color: blue;
     -fx-text-fill: black;
 }

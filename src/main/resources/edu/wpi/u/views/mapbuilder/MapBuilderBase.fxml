@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,17 +16,7 @@
    <children>
     <AnchorPane fx:id="mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -backgroundAlt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="1310.0" layoutY="585.0" maxHeight="71.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn" visible="false">
-               <graphic>
-                  <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
-               </graphic>
-            </Button>
-            <Button layoutX="1310.0" layoutY="500.0" maxHeight="130.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="90.0" styleClass="map-btn" visible="false">
-               <graphic>
-                  <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
-               </graphic>
-            </Button>
-            <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <children>
                   <JFXToggleNode fx:id="toggle6" layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor5Button" styleClass="floor-toggle" text="5">
                      <toggleGroup>
@@ -56,7 +45,7 @@
                   <JFXToggleNode fx:id="toggle1" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                </children>
             </VBox>
-            <HBox alignment="CENTER" layoutX="1432.0" layoutY="14.0" prefHeight="56.0" prefWidth="196.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <HBox alignment="CENTER" disable="true" layoutX="1432.0" layoutY="14.0" prefHeight="56.0" prefWidth="196.0" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
                   <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleUndoButton" styleClass="fab-mini" text="Button">
                      <graphic>
@@ -116,6 +105,19 @@
                   </JFXNodesList>
                </children>
             </HBox>
+            <VBox AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <JFXToggleNode onMouseClicked="#handleSelcectButton" selected="true" text="select">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tools" />
+                     </toggleGroup>
+                  </JFXToggleNode>
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" onMouseClicked="#handleMultiSelcectButton" text="multi-select" toggleGroup="$tools" />
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" onAction="#handleAddNodeButtonEDIT" text="addNode" toggleGroup="$tools" />
+                  <JFXToggleNode layoutX="10.0" layoutY="10.0" onAction="#handleAddEdgeButtonEDIT" text="addEdge" toggleGroup="$tools" />
+                  <JFXToggleNode layoutX="10.0" layoutY="66.0" onAction="#handelAlineButtin" text="aline" toggleGroup="$tools" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

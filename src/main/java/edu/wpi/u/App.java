@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.ocpsoft.prettytime.PrettyTime;
 
 @Slf4j
 public class App extends Application {
@@ -64,6 +65,8 @@ public class App extends Application {
   public static Integer lastClickedRequestNumber;
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
+
+  public static PrettyTime p = new PrettyTime();
 
 
   public App(){
@@ -140,7 +143,7 @@ public class App extends Application {
   public void end() {
     System.out.println("Shutting Down");
     Database.getDB().saveAll();
-    Database.getDB().stop();
+//    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

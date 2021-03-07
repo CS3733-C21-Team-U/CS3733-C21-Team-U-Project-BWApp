@@ -3,8 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
-import edu.wpi.u.users.StaffType;
-import sun.awt.image.ImageWatched;
+import edu.wpi.u.users.Role;
 
 import java.util.*;
 
@@ -23,7 +22,7 @@ public class MapManager {
    * @param _startNodeID
    * @param _endNodeID
    */
-  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, ArrayList<StaffType> permissions) {
+  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, ArrayList<Role> permissions) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
     if(_startNode == null || _endNode == null){
@@ -486,7 +485,7 @@ public class MapManager {
     this.addEdge(edge_id, startNodeId,end_node, edge.getUserPermissions());
   }
 
-  public void updateUserPermissions(String edgeID, ArrayList<StaffType> permissions){
+  public void updateUserPermissions(String edgeID, ArrayList<Role> permissions){
     Edge edge = this.allEdges.get(edgeID);
     edge.setUserPermission(permissions);
   }
