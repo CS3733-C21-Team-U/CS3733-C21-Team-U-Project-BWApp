@@ -28,7 +28,8 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
             'net.kurobako:gesturefx:0.6.0',
-            'org.controlsfx:controlsfx:8.0.5'
+            'org.controlsfx:controlsfx:8.0.5',
+            'org.ocpsoft.prettytime:prettytime:5.0.0.Final',
 
     )
     compile group: 'org.asynchttpclient', name: 'async-http-client', version: '2.2.0'

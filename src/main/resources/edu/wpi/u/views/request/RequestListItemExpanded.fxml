@@ -4,47 +4,93 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.RequestListItemExpandedController">
-   <children>
-      <VBox alignment="CENTER" layoutY="6.0" prefHeight="1000.0" prefWidth="1700.0" spacing="10.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
-         <children>
-            <Label styleClass="headline-1" text="View A Request In Detail">
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
-            </Label>
-            <Label fx:id="requestDetailTitleLabel" styleClass="headline-2" text="TitleLabel" />
-            <Label alignment="TOP_LEFT" styleClass="headline-2" text="Description:" wrapText="true" />
-            <Label fx:id="requestDetailDescriptionLabel" alignment="TOP_CENTER" maxWidth="400.0" prefHeight="100.0" prefWidth="400.0" styleClass="headline-3" text="DescriptionBody" textAlignment="CENTER" wrapText="true" />
-            <Label fx:id="requestDetailCreatorLabel" styleClass="headline-2" text="CreatorLabel" />
-            <Label fx:id="requestDetailDateCreatedLabel" styleClass="headline-2" text="DateCreatedLabel" />
-            <Label fx:id="requestDetailDate2BCompleteLabel" styleClass="headline-2" text="Date2BCompletedByLabel" />
-            <Label fx:id="typeLabel" styleClass="headline-2" text="TypeLabel">
-               <padding>
-                  <Insets bottom="25.0" />
-               </padding></Label>
-            <VBox fx:id="VBoxToAdd" alignment="CENTER" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
-               <children>
-                  <JFXButton onAction="#handleEditRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Edit Request" />
-                  <JFXButton onAction="#handleResolveRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Resolve Request" />
-                  <JFXButton onAction="#handleRequestDetailCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Cancel" />
-               </children>
-            </HBox>
-   </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </children>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
    </stylesheets>
-</AnchorPane>
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <HBox prefHeight="405.0" prefWidth="1330.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="365.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label prefHeight="3.0" prefWidth="430.0" styleClass="headline-2" text="Sample Long Headline" />
+                        <Label text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true" />
+                        <Region prefHeight="17.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Created by: " />
+                        <Label layoutX="10.0" layoutY="164.0" styleClass="headline-3" text="Michael Gary on 3/3/2021" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Asssignees:" />
+                        <Label layoutX="10.0" layoutY="182.0" styleClass="headline-3" text="John Adams, Empolyee 2, and Securtity Guard" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Special Field Label 1:" />
+                        <Label styleClass="headline-3" text="Special Field Value" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Special Field Label 2:" />
+                        <Label styleClass="headline-3" text="The Seccond Special Field Value" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Requested Completitoin Date:" />
+                        <Label styleClass="headline-3" text="3/12/2021 9:12 AM EST" />
+                        <Region prefHeight="0.0" prefWidth="443.0" VBox.vgrow="ALWAYS" />
+                        <HBox prefHeight="36.0" prefWidth="443.0">
+                           <children>
+                              <JFXButton styleClass="button-contained" text="EDIT REQUEST" />
+                              <Region prefHeight="36.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                              <JFXButton layoutX="10.0" layoutY="10.0" styleClass="button-outlined" text="View On Map" />
+                              <Region prefHeight="36.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                              <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCollapseButton" styleClass="button-text" text="Collapse" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="commentsRoot" layoutX="184.0" layoutY="47.0" prefHeight="365.0" prefWidth="499.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Interaction Timeline:">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ScrollPane prefHeight="458.0" prefWidth="430.0" styleClass="back">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="430.0">
+                           <children>
+                              <TextField prefHeight="36.0" prefWidth="280.0" promptText="Enter an update" />
+                              <JFXButton styleClass="button-contained" text="Submit Update" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="mapViewRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="-20.0" left="-20.0" right="-20.0" top="-20.0" />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</fx:root>

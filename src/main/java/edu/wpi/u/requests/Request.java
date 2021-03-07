@@ -100,8 +100,13 @@ public class Request {
 
     public void setComments(ArrayList<Comment> comments) { this.comments = comments; }
 
-    public Comment getPrimaryComment(){
-        return this.comments.get(0);
+    public Comment getPrimaryComment() {
+        if(this.comments != null && this.comments.size() != 0) {
+            return this.comments.get(0);
+        }else{
+            System.out.println("Request is missing primary comment!");
+            return null;
+        }
     }
 
 

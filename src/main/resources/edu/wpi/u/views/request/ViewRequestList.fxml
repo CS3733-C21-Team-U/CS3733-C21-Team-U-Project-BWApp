@@ -1,30 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.ViewRequestListController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.ViewRequestListController">
    <children>
-      <VBox layoutX="201.0" layoutY="-45.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="1620.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton onAction="#handleNewRequestButton" styleClass="button-contained" text="Add A New Request" />
+                  <Label styleClass="headline-2" text="My Serivce Requests" />
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton styleClass="button-contained" text="NEW REQUEST">
+                     <graphic>
+                        <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.5" scaleY="0.5" styleClass="on-primary" />
+                     </graphic>
+                  </JFXButton>
+                  <Region prefHeight="100.0" prefWidth="291.0" />
                </children>
-            </HBox>
-            <ScrollPane prefHeight="877.0" prefWidth="1631.0">
-              <content>
-                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="3000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css">
+               <BorderPane.margin>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </BorderPane.margin></HBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="40.0" left="40.0" right="40.0" />
+               </BorderPane.margin>
+               <content>
+                  <VBox fx:id="sampleRequestItem" prefHeight="200.0" prefWidth="1330.0" spacing="20.0">
                      <children>
-                        <VBox fx:id="requestList" layoutX="579.0" layoutY="-5.0" prefHeight="3005.0" prefWidth="1700.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-71.0" AnchorPane.topAnchor="-5.0" />
+<!--                        <fx:include source="RequestListItemContainer.fxml" />-->
                      </children>
-                  </AnchorPane>
-              </content>
+                  </VBox>
+               </content>
             </ScrollPane>
-         </children>
-      </VBox>
+         </center>
+         <right>
+            <AnchorPane prefHeight="900.0" prefWidth="290.0" style="-fx-background-color: lighjtgreyu;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="92.0" layoutY="176.0" text="To be used for filtering" />
+               </children></AnchorPane>
+         </right>
+      </BorderPane>
    </children>
-</AnchorPane>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</StackPane>

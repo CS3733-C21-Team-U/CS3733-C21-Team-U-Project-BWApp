@@ -75,16 +75,16 @@ public class NewMainPageController {
         HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
         Set<String> strings = namesAndIDs.keySet();
 
-        AutoCompletionBinding<String> acb = TextFields.bindAutoCompletion(validationFeild , FXCollections.observableArrayList(strings));
-        acb.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<String>>()
-        {
-
-            @Override
-            public void handle(AutoCompletionBinding.AutoCompletionEvent<String> event)
-            {
-                String valueFromAutoCompletion = event.getCompletion();
-            }
-        });
+        AutoCompletionBinding<String> acb = TextFields.bindAutoCompletion(validationFeild , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+//        acb.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<String>>()
+//        {
+//
+//            @Override
+//            public void handle(AutoCompletionBinding.AutoCompletionEvent<String> event)
+//            {
+//                String valueFromAutoCompletion = event.getCompletion();
+//            }
+//        });
 
         App.themeSVG = themeIcon;
 

@@ -5,7 +5,9 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
+import edu.wpi.u.models.MapService;
 import edu.wpi.u.models.TextualDirections;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -13,8 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
@@ -73,6 +79,13 @@ public class FloatingPathfindingPaneController {
 
     public void initialize(){
 //        textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
+
+        //TODO: In theory this gives all Longnames as string but something is broken! Kohmei
+        HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
+        Set<String> strings = namesAndIDs.keySet();
+
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
