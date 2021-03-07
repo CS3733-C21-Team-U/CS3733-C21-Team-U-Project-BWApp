@@ -8,10 +8,13 @@ import javafx.scene.layout.AnchorPane;
 
 public class AboutController {
 
+    /**
+     * Brings AboutPage back to Pathfinding.
+     * @throws Exception
+     * Author Lily
+     */
     @FXML public void handleAboutCancel() throws Exception{
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/PathfindingBase.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 }
