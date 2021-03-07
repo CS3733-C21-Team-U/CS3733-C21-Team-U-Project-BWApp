@@ -17,10 +17,3 @@ public class Comment{
         this.timestamp = timestamp;
     }
 }
-
-enum CommentType {
-    PRIMARY,
-    DEFAULT,
-    UPDATE,
-    RESOLVE
-}

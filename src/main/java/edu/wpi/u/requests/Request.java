@@ -2,17 +2,16 @@ package edu.wpi.u.requests;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Request {
     private String requestID;
     private Timestamp dateNeeded;
-    private boolean isResolved = false;
-    private LinkedList<String> location;
-    private LinkedList<String> assignee;
+    private boolean isResolved = false;//access
+    private ArrayList<String> location;
+    private ArrayList<String> assignee;
     private ArrayList<Comment> comments;
 
-    public Request(String requestID, Timestamp dateNeeded, boolean isResolved, LinkedList<String> location, LinkedList<String> assignee, Comment comment) {
+    public Request(String requestID, Timestamp dateNeeded, boolean isResolved, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
         this.requestID = requestID;
         this.dateNeeded = dateNeeded;
         this.isResolved = isResolved;
@@ -21,20 +20,28 @@ public class Request {
         this.comments.add(comment);
     }
 
-
-    public void editRequest(Timestamp needDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
-        this.dateNeeded = needDate;
-        primaryComment().description = description;
-        primaryComment().title = title;
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
+        this.requestID = requestID;
+        this.dateNeeded = dateNeeded;
         this.location = location;
         this.assignee = assignee;
-        primaryComment().author = creator;
+        this.comments.add(comment);
+    }
+
+
+    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, String type, ArrayList<String> assignee, String creator) {
+        this.dateNeeded = needDate;
+        getPrimaryComment().description = description;
+        getPrimaryComment().title = title;
+        this.location = location;
+        this.assignee = assignee;
+        getPrimaryComment().author = creator;
     }
     public String getRequestID() {
         return requestID;
     }
     public Timestamp getDateCreated() {
-        return primaryComment().timestamp;
+        return getPrimaryComment().timestamp;
     }
     public Timestamp getDateNeeded() {
         return dateNeeded;
@@ -51,31 +58,31 @@ public class Request {
         }
     }
     public String getDescription() {
-        return primaryComment().description;
+        return getPrimaryComment().description;
     }
     public String getTitle() {
-        return primaryComment().title;
+        return getPrimaryComment().title;
     }
-    public LinkedList<String> getLocation() {
+    public ArrayList<String> getLocation() {
         return location;
     }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
     public void setDateCreated(Timestamp dateCreated) {
-        primaryComment().timestamp = dateCreated;
+        getPrimaryComment().timestamp = dateCreated;
     }
     public void setDescription(String description) {
-        primaryComment().description = description;
+        getPrimaryComment().description = description;
     }
     public void setTitle(String title) {
-        primaryComment().title = title;
+        getPrimaryComment().title = title;
     }
-    public void setLocation(LinkedList<String> location) {
+    public void setLocation(ArrayList<String> location) {
         this.location = location;
     }
-    public LinkedList<String> getAssignee() {return assignee;}
-    public void setAssignee(LinkedList<String> assignee) {
+    public ArrayList<String> getAssignee() {return assignee;}
+    public void setAssignee(ArrayList<String> assignee) {
         this.assignee = assignee;
     }
 
@@ -86,7 +93,7 @@ public class Request {
 
     public void addComment(Comment c) { this.comments.add(c); }
 
-    public Comment primaryComment(){
+    public Comment getPrimaryComment(){
         return this.comments.get(0);
     }
 }

@@ -43,7 +43,7 @@ public class RequestService {
   public void resolveRequest(SpecificRequest result) {
     long time = System.currentTimeMillis();
     Date now = new Date(time);
-    result.getGenericRequest().setDateCompleted(now);
+    result.getGenericRequest().setDateCompleted(new timeStamp(time));
     this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(), time);
   }

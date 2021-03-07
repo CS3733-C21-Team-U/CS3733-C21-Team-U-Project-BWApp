@@ -3,10 +3,10 @@ package edu.wpi.u.database;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -120,7 +120,7 @@ public class RequestData extends Data{
                 String title = rs.getString("title");
                 String type = rs.getString("type");
                 String specificData = rs.getString("specificData");
-                LinkedList<String> locations = new LinkedList<String>();
+                ArrayList<String> locations = new ArrayList<String>();
 //                try { // TODO : UNCOMMENT AND FIX
 //                    String str2 = "select * from Locations where requestID=?";
 //                    PreparedStatement ps2= conn.prepareStatement(str2);
@@ -134,7 +134,7 @@ public class RequestData extends Data{
 //                catch (Exception e){
 //                    e.printStackTrace();
 //                }
-                LinkedList<String> assignees = new LinkedList<String>();
+                ArrayList<String> assignees = new ArrayList<String>();
 //                try {
 //                    String str3 = "select * from Assignments where requestID=?";
 //                    PreparedStatement ps3 = conn.prepareStatement(str3);
@@ -151,7 +151,8 @@ public class RequestData extends Data{
 
                 RequestFactory rf = new RequestFactory();
                 SpecificRequest result = rf.makeRequest(type);
-                Request r = new Request(id,assignees, created,needed,desc,title,locations,type, "Test creator");
+                Comment primaryComment = new Comment(title, desc, "Kaamil", CommentType.PRIMARY, new Timestamp(created.getTime()));
+                Request r = new Request(id, new Timestamp(created.getTime()), false, locations, assignees, primaryComment);
                 result.readStorageString(specificData);
                 result.setRequest(r);
                 results.add(result);
