@@ -102,7 +102,7 @@ public class Database {
 
                 //TODO : MOVE INTO ASSIGNMENTS
                 String tblAppointments =
-                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
+                        "create table Appointments(appointmentID varchar(50) not null , appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
                 psAppointments.execute();
 

@@ -89,7 +89,7 @@ public class MapData extends Data{
 
     public int updateNodeType(String node_id, String newNodeType) {
         try {
-            String str = "update Nodes set node_type=? where nodeID=?";
+            String str = "update Nodes set nodeType=? where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newNodeType);
             ps.setString(2, node_id);

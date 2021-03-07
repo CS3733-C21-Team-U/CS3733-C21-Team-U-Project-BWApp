@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
@@ -39,6 +40,18 @@ public class UserService {
      * Sets the list of guests
      */
     public void setGuests() {this.guests = ud.getGuests();}
+
+    public void setGuest(String name){
+       this.activeUser = ud.setGuest(name);
+    }
+
+    public void setPatient(String username, String password){
+        this.activeUser = ud.setPatient(username,password);
+    }
+
+    public void setEmployee(String username, String password){
+        this.activeUser = ud.setEmployee(username,password);
+    }
 
     /**
      * Sets the active user of the application
@@ -203,15 +216,43 @@ public class UserService {
         ud.createPatient(patient);
         this.patients.add(patient);
     }
+    public void addAppointments(ArrayList<Appointment> appointments){
+        ud.addAppointments(appointments);
+    }
 
+    public void addAppointment(Appointment appointment){
+        Random rand = new Random();
+        int appointmentID = rand.nextInt();
+        String id = Integer.toString(appointmentID);
+        //String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType
+        Appointment appointment1 = new Appointment(id, appointment.getPatientID(), appointment.getEmployeeID(), appointment.getAppointmentDate(), appointment.getAppointmentType());
+        ud.addAppointment(appointment1);
+    }
+
+    //TODO : CALL THESE NEXT THREE FUNCTIONS AS AN ADMIN/DOCTOR TO UPDATE LOCATIONS
+    /**
+     * Add a location (nodeID) to a patient
+     * @param patientID patient ID
+     * @param locationID node ID
+     */
     public void addLocationID(String patientID, String locationID){
         ud.addLocationID(patientID, locationID);
     }
 
+    /**
+     * Add a parking location to a patient
+     * @param patientID patient id
+     * @param parkingLocation parking location
+     */
     public void addParkingLocation(String patientID, String parkingLocation){
         ud.addPatientParkingLocation(patientID, parkingLocation);
     }
 
+    /**
+     * Add a recommended parking location to a patient
+     * @param patientID patient id
+     * @param recommendedParkingLocation recommended parking location
+     */
     public void addRecommendedParkingLocation(String patientID, String recommendedParkingLocation){
         ud.addPatientRecommendedParkingLocation(patientID, recommendedParkingLocation);
     }

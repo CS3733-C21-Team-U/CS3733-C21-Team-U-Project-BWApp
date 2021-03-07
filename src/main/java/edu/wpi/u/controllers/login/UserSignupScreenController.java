@@ -20,6 +20,7 @@ public class UserSignupScreenController {
     public JFXTextField emailTextField;
     public JFXPasswordField passwordTextField;
     public JFXPasswordField confirmTextField;
+    public JFXTextField providerNameTextField;
 
 
     public void initialize() throws IOException {
@@ -31,12 +32,10 @@ public class UserSignupScreenController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleSignupButton(ActionEvent actionEvent) throws IOException {
-        //TODO: Create patient!
-        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), null, false,null,null,null,null);
-    }
-
-    public void handleSignUpButton(ActionEvent actionEvent) {
+    public void handleSignUpButton(ActionEvent actionEvent) throws IOException {
+        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), null, false,null,providerNameTextField.getText(),null,null);
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 }
 
