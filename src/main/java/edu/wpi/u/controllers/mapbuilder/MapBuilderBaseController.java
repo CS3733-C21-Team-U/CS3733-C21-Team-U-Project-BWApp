@@ -351,7 +351,6 @@ public class MapBuilderBaseController {
             App.mapInteractionModel.setNodeID(n.getNodeID());
             Circle c1 = new Circle();
             Circle c2 = new Circle();
-            Circle c3 = new Circle();
             Line edge = new Line();
             if(!App.mapInteractionModel.getNodeID().equals("")) { // Have 1st node
                 c1 = findCircleFromNode(n.getNodeID());
@@ -406,13 +405,6 @@ public class MapBuilderBaseController {
                 pane.getChildren().add(EdgeContextAnchor);
                 App.mapInteractionModel.selectedNodeContextBox = EdgeContextAnchor;
             }
-            if(!App.mapInteractionModel.getPreviousPreviousNodeID().equals("")){ // Have 3rd node
-                if(c3 != null) {
-                    c3 = findCircleFromNode(App.mapInteractionModel.getPreviousPreviousNodeID());
-                    c3.toFront();
-                    c3.setStyle("-fx-stroke: -error");
-                }
-            }
         }
     }
 
@@ -448,8 +440,6 @@ public class MapBuilderBaseController {
             // Update coordinates of node
             node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
             node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
-
-
     }
 
     /**
@@ -562,16 +552,4 @@ public class MapBuilderBaseController {
             toggle6.setSelected(true);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
