@@ -162,7 +162,6 @@ public class UserService {
      * @param username the username to be validated
      */
     public String checkUsername(String username) {
-        System.out.println("Value of check username: " + ud.checkUsername(username));
         return ud.checkUsername(username);
     }
 
@@ -213,13 +212,22 @@ public class UserService {
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
-        ud.createPatient(patient);
+        System.out.println(ud.createPatient(patient));
         this.patients.add(patient);
     }
+
+    /**
+     * Adds a list of appointments
+     * @param appointments the list of appointments
+     */
     public void addAppointments(ArrayList<Appointment> appointments){
         ud.addAppointments(appointments);
     }
 
+    /**
+     * Adds a singular appointment
+     * @param appointment the appointment
+     */
     public void addAppointment(Appointment appointment){
         Random rand = new Random();
         int appointmentID = rand.nextInt();

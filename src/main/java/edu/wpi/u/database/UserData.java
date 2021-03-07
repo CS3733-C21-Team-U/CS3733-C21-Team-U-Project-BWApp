@@ -710,20 +710,20 @@ public class UserData extends Data{
     public void addPatient(Patient patient) {
         String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, locationNodeID, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            addAppointments(patient.getAppointments());
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,patient.getUserID());
-            ps.setString(2,patient.getName());
-            ps.setString(3,patient.getUserName());
-            ps.setString(4,patient.getPassword());
-            ps.setString(5,patient.getEmail());
-            ps.setString(6,String.valueOf(patient.getType()));
-            ps.setString(7,patient.getPhoneNumber());
-            ps.setString(8,patient.getLocationNodeID());
-            ps.setBoolean(9,false);
-            ps.setString(10,patient.getProviderName());
-            ps.setString(11,patient.getParkingLocation());
-            ps.setString(12,patient.getRecommendedParkingLocation());
+            addAppointments(patient.getAppointments());
+            ps.setString(1,patient.getUserID()); // id
+            ps.setString(2,patient.getName()); // name
+            ps.setString(3,patient.getUserName()); // username
+            ps.setString(4,patient.getPassword()); //password
+            ps.setString(5,patient.getEmail()); //email
+            ps.setString(6,String.valueOf(patient.getType())); // role/type
+            ps.setString(7,patient.getPhoneNumber()); // phonenumer
+            ps.setString(8,patient.getLocationNodeID()); //location
+            ps.setBoolean(9,false); // deleted
+            ps.setString(10,patient.getProviderName()); // provider name
+            ps.setString(11,patient.getParkingLocation()); // park location
+            ps.setString(12,patient.getRecommendedParkingLocation()); // recommended park location
             ps.execute();
             ps.close();
         }catch (Exception e){
@@ -757,7 +757,9 @@ public class UserData extends Data{
      */
     public void addAppointments(ArrayList<Appointment> appointments){
         for (Appointment appointment: appointments){
-            addAppointment(appointment);
+            if (appointment != null){
+                addAppointment(appointment);
+            }
         }
     }
 
