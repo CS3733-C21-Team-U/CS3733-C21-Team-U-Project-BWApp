@@ -37,7 +37,12 @@ public class test {
 
         Scanner data = new Scanner(port.getInputStream());
         while(data.hasNextLine()){ // wait input from serialport from Arduino
-            System.out.println(data.nextLine());
+            //System.out.println(data.nextLine());
+            int number =0; //init the number
+            try{Integer.parseInt(data.nextLine());}
+            catch(Exception e){}
+            slider.setValue(number);
+
 
         }
 
