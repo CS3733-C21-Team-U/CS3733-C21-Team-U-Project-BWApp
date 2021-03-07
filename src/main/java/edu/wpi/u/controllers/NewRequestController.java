@@ -122,7 +122,7 @@ public class NewRequestController {
             //TODO : FIX DATE BUG
             Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(), "KAAMIL", CommentType.PRIMARY, new Timestamp( needed.getTime() ));
-            Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()),false, locations, staff, primaryComment);
+            Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             result.setRequest(newRequest);
             result.setSpecificData(specifics);
             App.requestService.addRequest(result);

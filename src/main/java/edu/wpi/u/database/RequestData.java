@@ -152,7 +152,7 @@ public class RequestData extends Data{
                 RequestFactory rf = new RequestFactory();
                 SpecificRequest result = rf.makeRequest(type);
                 Comment primaryComment = new Comment(title, desc, "Kaamil", CommentType.PRIMARY, new Timestamp(created.getTime()));
-                Request r = new Request(id, new Timestamp(created.getTime()), false, locations, assignees, primaryComment);
+                Request r = new Request(id, new Timestamp(created.getTime()), locations, assignees, primaryComment);
                 result.readStorageString(specificData);
                 result.setRequest(r);
                 results.add(result);

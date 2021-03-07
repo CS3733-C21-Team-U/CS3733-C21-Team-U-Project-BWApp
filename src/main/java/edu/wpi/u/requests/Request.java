@@ -6,19 +6,9 @@ import java.util.ArrayList;
 public class Request {
     private String requestID;
     private Timestamp dateNeeded;
-    private boolean isResolved = false;//access
     private ArrayList<String> location;
     private ArrayList<String> assignee;
     private ArrayList<Comment> comments;
-
-    public Request(String requestID, Timestamp dateNeeded, boolean isResolved, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
-        this.requestID = requestID;
-        this.dateNeeded = dateNeeded;
-        this.isResolved = isResolved;
-        this.location = location;
-        this.assignee = assignee;
-        this.comments.add(comment);
-    }
 
     public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
         this.requestID = requestID;
@@ -50,7 +40,7 @@ public class Request {
         this.dateNeeded = d;
     }
     public Timestamp getDateCompleted() {
-        if(isResolved){
+        if(isResolved()){
             return comments.get(comments.size()-1).timestamp;
         }
         else{
@@ -87,8 +77,13 @@ public class Request {
     }
 
     public void resolveRequest(Comment c) {
-        isResolved = true;
         addComment(c);
+        c.type = CommentType.RESOLVE;
+    }
+
+    public boolean isResolved(){
+        if(comments.size() == 0){return false;}
+        return comments.get(comments.size() - 1).type == CommentType.RESOLVE;
     }
 
     public void addComment(Comment c) { this.comments.add(c); }
