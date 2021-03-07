@@ -81,7 +81,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(250),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(500),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -118,7 +118,7 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
 
-                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(100), author varchar(50), type varchar(50), created timestamp)";
+                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
