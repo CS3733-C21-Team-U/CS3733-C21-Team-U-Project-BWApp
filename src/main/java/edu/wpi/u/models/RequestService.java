@@ -64,7 +64,7 @@ public class RequestService {
 //    result.getGenericRequest().setDateCompleted(now);
     result.getGenericRequest().resolveRequest(resolveComment); // todo : does this assign the dateCompleted?
     this.activeRequests.remove(result);
-    rd.resolveRequest(result.getGenericRequest().getRequestID(), result.getGenericRequest().getDateCompleted());
+    rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
   public ArrayList<SpecificRequest> getRequests() {

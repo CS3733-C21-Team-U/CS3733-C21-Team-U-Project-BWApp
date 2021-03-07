@@ -11,12 +11,12 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-        printTableItem("Requests", "title");
-        LinkedList<String> l1 = new LinkedList<String>();
-        l1.add("UPARK00101");
-        LinkedList<String> s1 = new LinkedList<String>();
-        s1.add("Mary");
-        Date d = new Date(900);
+//        printTableItem("Requests", "title");
+//        LinkedList<String> l1 = new LinkedList<String>();
+//        l1.add("UPARK00101");
+//        LinkedList<String> s1 = new LinkedList<String>();
+//        s1.add("Mary");
+//        Date d = new Date(900);
         //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
     }
@@ -308,12 +308,12 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
     /**
-     *
+     * Adds a comment to a request
      * @param requestID - the request taken in
      * @param comment - the comment that will be connected with it using Comments table
      */
-
     public void addCommentToRequest(String requestID, Comment comment){
         String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
         try{
@@ -330,15 +330,16 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
     /**
      * Resolves a request
      * @param requestID the id of the request
-     * @param timestamp when it was resolved
+     * @param comment the comment resolving the request
      */
-    public void resolveRequest(String requestID, Timestamp timestamp) { // TODO: Add resolve comment
+    public void resolveRequest(String requestID, Comment comment) { // TODO: Add resolve comment
+        addCommentToRequest(requestID,comment);
         String str = "update Requests set resolved=true where requestID=?";
         try {
-            // todo : add
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
             ps.execute();
@@ -405,7 +406,7 @@ public class RequestData extends Data{
 
     /**
      * For debugging
-     * @param tableName
+     * @param tableName the table name
      * @return number of entries in table
      */
     public int getNumTableItems(String tableName) {
@@ -422,7 +423,4 @@ public class RequestData extends Data{
         }
         return -999;
     }
-//    public void getRequests() {}
-//    public void getRequestByID(String id) {
-//    }
 }
