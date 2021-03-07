@@ -167,7 +167,7 @@ public class MapBuilderBaseController {
                     e.printStackTrace();
                 }
             });
-            curNode.setOnMouseDragExited(event -> {
+            curNode.setOnMouseDragged(event -> {
                 if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                     try {
                         handleNodeDragged(curNode); // Set visual position (circle)
@@ -176,13 +176,23 @@ public class MapBuilderBaseController {
                     }
                 }
             });
-            curNode.setOnMouseReleased(event -> {
-                try {
-                    handleNodeDragExit(n, curNode);
-                } catch (Exception e) {
-                    e.printStackTrace(); // Update node's actual storage
+            curNode.setOnMouseDragExited(event -> {
+                if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+                    try {
+                        handleNodeDragExit(App.mapService.getNodeFromID(curNode.getId()), curNode); // Set visual position (circle)
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
+
+//            curNode.setOnMouseReleased(event -> {
+//                try {
+//                    handleNodeDragExit(n, curNode);
+//                } catch (Exception e) {
+//                    e.printStackTrace(); // Update node's actual storage
+//                }
+//            });
         nodesAndEdges.getChildren().add(curNode);
     }
 
