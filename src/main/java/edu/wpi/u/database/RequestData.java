@@ -148,11 +148,24 @@ public class RequestData extends Data{
 //                catch (Exception e){
 //                    e.printStackTrace();
 //                }
-
+                ArrayList<Comment> comments = new ArrayList<Comment>();
+                try {
+                    String str4 = "select * from Comments where requestID=? order by created";
+                    PreparedStatement ps4 = conn.prepareStatement(str4);
+                    ps4.setString(1,id);
+                    ResultSet rs4 = ps4.executeQuery();
+                    while (rs4.next()){
+                        comments.add(new Comment(rs4.getString("title"), rs4.getString("description"), rs4.getString("author"), CommentType.valueOf(rs4.getString("type")), rs4.getTimestamp("timeStamp")));
+                    }
+                    rs4.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 RequestFactory rf = new RequestFactory();
                 SpecificRequest result = rf.makeRequest(type);
-                Comment primaryComment = new Comment(title, desc, "Kaamil", CommentType.PRIMARY, new Timestamp(created.getTime()));
-                Request r = new Request(id, new Timestamp(created.getTime()), locations, assignees, primaryComment);
+                //Comment primaryComment = new Comment(title, desc, "Kaamil", CommentType.PRIMARY, new Timestamp(created.getTime()));
+                Request r = new Request(id, new Timestamp(created.getTime()), locations, assignees, comments);
                 result.readStorageString(specificData);
                 result.setRequest(r);
                 results.add(result);
@@ -190,6 +203,9 @@ public class RequestData extends Data{
             }
             for(String assignmentID : req.getAssignee()){
                 addAssignee(assignmentID, req.getRequestID());
+            }
+            for(Comment c : req.getComments()){
+                addCommenttoRequest(req.getRequestID(), c);
             }
         }
         catch (Exception e){
@@ -230,19 +246,23 @@ public class RequestData extends Data{
      * @param requestID - the request taken in
      * @param c - the comment that will be connected with it using Comments table
      */
-//    public void addCommenttoRequest(String requestID, Comment c){
-//        String str = "insert into Comments(locationID, requestID, nodeID) values (?,?,?)";
-//        try{
-//            PreparedStatement ps = conn.prepareStatement(str);
-//            ps.setString(1,requestID+"_"+nodeID);
-//            ps.setString(2,requestID);
-//            ps.setString(3,nodeID);
-//            ps.execute();
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+//requestID , title , description, author, type, created timestamp;
+    public void addCommenttoRequest(String requestID, Comment c){
+        String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,c.getTitle());
+            ps.setString(3,c.getDescription());
+            ps.setString(4,c.getDescription());
+            ps.setString(5,c.getType().toString());
+            ps.setTimestamp(6,c.getTimestamp());
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      *
      * @param requestID

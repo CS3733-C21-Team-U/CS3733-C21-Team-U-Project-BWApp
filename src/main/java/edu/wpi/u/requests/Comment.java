@@ -15,4 +15,24 @@ public class Comment{
         this.type = type;
         this.timestamp = timestamp;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public CommentType getType() {
+        return type;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 }

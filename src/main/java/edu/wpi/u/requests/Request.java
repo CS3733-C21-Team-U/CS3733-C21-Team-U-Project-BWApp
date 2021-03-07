@@ -8,7 +8,7 @@ public class Request {
     private Timestamp dateNeeded;
     private ArrayList<String> location;
     private ArrayList<String> assignee;
-    private ArrayList<Comment> comments;
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
 
     public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
         this.requestID = requestID;
@@ -16,6 +16,14 @@ public class Request {
         this.location = location;
         this.assignee = assignee;
         this.comments.add(comment);
+    }
+
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, ArrayList<Comment> comments) {
+        this.requestID = requestID;
+        this.dateNeeded = dateNeeded;
+        this.location = location;
+        this.assignee = assignee;
+        this.comments = comments;
     }
 
 
@@ -87,6 +95,10 @@ public class Request {
     }
 
     public void addComment(Comment c) { this.comments.add(c); }
+
+    public ArrayList<Comment> getComments() { return this.comments; }
+
+    public void setComments(ArrayList<Comment> comments) { this.comments = comments; }
 
     public Comment getPrimaryComment(){
         return this.comments.get(0);
