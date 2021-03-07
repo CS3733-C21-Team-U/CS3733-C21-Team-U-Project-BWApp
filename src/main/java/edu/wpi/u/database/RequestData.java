@@ -155,7 +155,7 @@ public class RequestData extends Data{
                     ps4.setString(1,id);
                     ResultSet rs4 = ps4.executeQuery();
                     while (rs4.next()){
-                        comments.add(new Comment(rs4.getString("title"), rs4.getString("description"), rs4.getString("author"), CommentType.valueOf(rs4.getString("type")), rs4.getTimestamp("timeStamp")));
+                        comments.add(new Comment(rs4.getString("title"), rs4.getString("description"), rs4.getString("author"), CommentType.valueOf(rs4.getString("type")), rs4.getTimestamp("created")));
                     }
                     rs4.close();
                 }

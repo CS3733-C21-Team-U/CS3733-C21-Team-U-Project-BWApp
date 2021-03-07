@@ -103,7 +103,7 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
 
-                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(100), author varchar(50), type varchar(50), created timeStamp)";
+                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(100), author varchar(50), type varchar(50), created timestamp)";
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
