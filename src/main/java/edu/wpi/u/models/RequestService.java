@@ -21,6 +21,11 @@ public class RequestService {
     }
   }
 
+  /**
+   * Second constructor for RS used to pass through a connection to second database
+   * Note: SHOULD BE SAME AS NO ARGS except for where instance of rd is created
+   * @param testURL
+   */
   public RequestService(String testURL){
     rd  = new RequestData(testURL);
     this.activeRequests = rd.loadActiveRequests();

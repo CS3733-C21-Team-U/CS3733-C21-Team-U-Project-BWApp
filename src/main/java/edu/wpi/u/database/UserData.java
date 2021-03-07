@@ -22,6 +22,10 @@ public class UserData extends Data{
         printEmployees();
     }
 
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
     public UserData(String testURL){
         testConnect(testURL);
         dropGuests(); // TODO : Stop dropping values for demos

@@ -16,6 +16,10 @@ public class RequestData extends Data{
         connect();
     }
 
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
     public RequestData(String testURL){
         testConnect(testURL);
     }

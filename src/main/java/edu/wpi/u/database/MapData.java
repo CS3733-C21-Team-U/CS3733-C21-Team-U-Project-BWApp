@@ -14,6 +14,10 @@ public class MapData extends Data{
         connect();
     }
 
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
     public MapData(String testURL){
         testConnect(testURL);
     }

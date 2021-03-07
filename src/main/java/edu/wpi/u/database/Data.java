@@ -27,6 +27,10 @@ public abstract class Data {
         }
     }
 
+    /**
+     * Creates the connection to the database with given URL (necessary for testing db)
+     * @param testURL
+     */
     public void testConnect(String testURL) {
         try {
             conn = DriverManager.getConnection(testURL);

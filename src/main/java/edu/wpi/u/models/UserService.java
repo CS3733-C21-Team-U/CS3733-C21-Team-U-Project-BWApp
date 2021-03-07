@@ -27,6 +27,11 @@ public class UserService {
         this.setGuests();
     }
 
+    /**
+     * Constructor that takes in a URL to create test database
+     * SHOULD BE SAME AS NO ARGS except where instance of ud is created
+     * @param testURL - URL of testDB passed down from testing class
+     */
     public UserService(String testURL){
         ud = new UserData(testURL);
         this.setEmployees();

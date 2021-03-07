@@ -27,6 +27,10 @@ public class MapService {
     md = new MapData();
   }
 
+  /**
+   * No args constructor used to pass through connection to test DB
+   * @param testURL
+   */
   public MapService(String testURL){
     md = new MapData(testURL);
   }

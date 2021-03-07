@@ -23,9 +23,8 @@ public class DatabaseTest {
 
      */
 
-    private static String testURL = "jdbc:derby:testDB;bootUser=admin;bootPassword=testdbpassword";
+    private static String testURL = "jdbc:derby:testDB";
 
-    // TODO: Modify Data classes to support different url
     private static Database dbTest = Database.getDBTest();
     private static MapService mapServiceTest = new MapService(testURL);
     private static RequestService requestServiceTest = new RequestService(testURL);

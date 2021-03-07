@@ -16,11 +16,14 @@ Twillio covid screenings
 public class Database {
     private static Connection conn = null;
     // Url for live code
-    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
+    private final static String url = "jdbc:derby:BWdb;create=true";
+    // Url for testing
     private final static String testURL = "jdbc:derby:testDB;create=true";
     //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
-    private final static String url = "jdbc:derby:BWdb;create=true";
 
+    /**
+     *  Constructor for database that is used for DB
+     */
     private Database() {
         driver();
         connect();
@@ -28,6 +31,10 @@ public class Database {
         createTables();
     }
 
+    /**
+     * Constructor for database that is called in 2nd singleton to create a second DB for testing
+     * @param urlIn - URL of testing db, has to be defined in this file
+     */
     public Database(String urlIn) {
         driver();
         connect(urlIn);
@@ -35,7 +42,9 @@ public class Database {
         createTables();
     }
 
-    //Bill Pugh solution
+    /**
+     * Singleton class for live DB (BWDB)
+     */
     private static class SingletonHelper {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
@@ -43,18 +52,24 @@ public class Database {
 
     /**
      * Singleton helper to keep Database instance singular
-     *
      * @return the database class reference
      */
     public static Database getDB() {
         return SingletonHelper.db;
     }
 
+    /**
+     * Single class for testing DB
+     */
     private static class SingletonHelperTest {
         //Nested class is referenced after getDB() is called
         private static final Database dbStaging = new Database(testURL);
     }
 
+    /**
+     * Singleton helped to keep Test DB instance singular
+     * @return the database class reference
+     */
     public static Database getDBTest() {
         return SingletonHelperTest.dbStaging;
     }
@@ -84,6 +99,10 @@ public class Database {
         }
     }
 
+    /**
+     * Creates the connection to the database by passing in a url, mainly used for url of testing db
+     * @param urlIn - URL of database, used for url of testDB
+     */
     public static void connect(String urlIn) {
         try {
             conn = DriverManager.getConnection(urlIn);
