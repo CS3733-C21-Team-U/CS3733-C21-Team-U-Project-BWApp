@@ -24,8 +24,8 @@ public class UserData extends Data{
 //        dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
-//        addEmployee(new Employee("debug", "debug", "debug", "debug", "debug", Role.DOCTOR, "debug", "UDEPT00101", false));
-//        addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
+        //addEmployee(new Employee("debug", "debug", "debug", "debug", "debug", Role.DOCTOR, "debug", "UDEPT00101", false));
+        //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         //addGuest(new Guest("debug", "debug", new Timestamp(System.currentTimeMillis()), "debugreason", false));
         /*
         String guestID,

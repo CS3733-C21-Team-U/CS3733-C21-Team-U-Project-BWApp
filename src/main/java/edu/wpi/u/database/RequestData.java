@@ -17,7 +17,6 @@ public class RequestData extends Data{
 //        LinkedList<String> s1 = new LinkedList<String>();
 //        s1.add("Mary");
 //        Date d = new Date(900);
-        //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
     }
 
@@ -252,7 +251,7 @@ public class RequestData extends Data{
      * @param specificRequest the request to add
      */
     public void addRequest(SpecificRequest specificRequest) { // TODO: Add to interface IRequest instead
-        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?,?,?,?,?)";
+        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?)";
         try{
             Request req = specificRequest.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
