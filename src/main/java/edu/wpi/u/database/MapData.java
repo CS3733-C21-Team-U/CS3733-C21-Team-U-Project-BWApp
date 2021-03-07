@@ -36,6 +36,7 @@ public class MapData extends Data{
         }
         return 1;
     }
+
     public int updateCoords(String node_id, double new_x, double new_y) {
         try {
             String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
@@ -54,9 +55,11 @@ public class MapData extends Data{
 
     public HashMap<String, String> getLongnames(){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select longName and nodeID from Nodes";
+        String str = "select longName and nodeID from Nodes where nodeType !=? and nodeType !=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, "HALL");
+            ps.setString(2, "WALK");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.put(rs.getString("longName"), rs.getString("nodeID"));
