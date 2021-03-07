@@ -84,7 +84,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
                               <fx:include source="pathfinding/PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
-                              <fx:include source="pathfinding/FloatingPathfindingPane.fxml" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="20.0" />
+                              <fx:include source="pathfinding/FloatingPathfindingPane.fxml" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
                            </children></AnchorPane>
                      </content>
                      <graphic>

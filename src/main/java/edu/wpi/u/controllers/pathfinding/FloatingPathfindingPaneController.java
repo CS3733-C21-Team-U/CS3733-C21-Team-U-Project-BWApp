@@ -1,18 +1,25 @@
 package edu.wpi.u.controllers.pathfinding;
 
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.TextualDirections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.SVGPath;
 
 import java.util.ArrayList;
 
 public class FloatingPathfindingPaneController {
-    @FXML
-    JFXTextArea textualDirections;
+    public VBox textDirectionContainer;
+    public JFXTextField endNodeField;
+    public JFXTextField startNodeField;
     @FXML
     Label endNode;
     @FXML
@@ -24,6 +31,28 @@ public class FloatingPathfindingPaneController {
     ArrayList<Node> path = new ArrayList<>();
     ArrayList<String> textualDirectionsStrings = new ArrayList<>();
     String textualDirectionsMegaString = "";
+
+
+    public void handleTestAddTextField(ActionEvent actionEvent) {
+
+        Label turnText = new Label("Turn left at the corner of the MRI room");
+        turnText.getStyleClass().add("subtitle");
+        Label distanceText = new Label("Continue straight for 15 meters");
+        distanceText.getStyleClass().add("caption");
+        SVGPath turnIcon = new SVGPath();
+        turnIcon.setStyle("-fx-padding: 20px");
+        turnIcon.setContent("M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z");
+        VBox textVBox = new VBox();
+        textVBox.getChildren().add(turnText);
+        textVBox.getChildren().add(distanceText);
+        HBox stepHBoxContainer = new HBox();
+        stepHBoxContainer.setAlignment(Pos.CENTER_LEFT);
+        stepHBoxContainer.getChildren().add(turnIcon);
+        stepHBoxContainer.getChildren().add(textVBox);
+        stepHBoxContainer.setStyle("-fx-padding: 10px 40px");
+        stepHBoxContainer.setSpacing(40);
+        textDirectionContainer.getChildren().add(stepHBoxContainer);
+    }
 
     /**
      * sets flag for what field is being filled to END
@@ -43,7 +72,7 @@ public class FloatingPathfindingPaneController {
     }
 
     public void initialize(){
-        textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
+//        textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
@@ -69,7 +98,7 @@ public class FloatingPathfindingPaneController {
                 for(String curString : textualDirectionsStrings){
                     textualDirectionsMegaString = textualDirectionsMegaString + curString + "\n";
                 }
-                textualDirections.setText(textualDirectionsMegaString);
+//                textualDirections.setText(textualDirectionsMegaString);
             }
         });
 
@@ -86,6 +115,11 @@ public class FloatingPathfindingPaneController {
         });
     }
 
+    public void handleStartEndSwap(ActionEvent actionEvent) {
+        String tempStorage = startNodeField.getText();
+        startNodeField.setText(endNodeField.getText());
+        endNodeField.setText(tempStorage);
+    }
 }
 
 
