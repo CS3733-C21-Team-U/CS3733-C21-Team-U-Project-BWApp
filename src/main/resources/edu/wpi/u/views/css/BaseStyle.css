@@ -332,6 +332,14 @@
 }
 
 
+.scroll-pane > .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane{
+    -fx-background-color: -background;
+}
+
 /* The main scrollbar **track** CSS class  */
 .mylistview .scroll-bar:horizontal .track,
 .mylistview .scroll-bar:vertical .track {

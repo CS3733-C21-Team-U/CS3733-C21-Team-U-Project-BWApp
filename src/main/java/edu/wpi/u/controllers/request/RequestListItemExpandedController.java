@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -76,6 +77,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         miniMap = new GesturePane(node);
         miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
         miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
+        miniMap.setPrefHeight(518);
+        miniMap.centreOn(new Point2D(170, 90));
+        miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
         mapViewRoot.getChildren().add(miniMap);
 
         titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
