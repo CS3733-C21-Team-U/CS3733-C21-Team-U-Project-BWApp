@@ -87,9 +87,9 @@ public class MapBuilderBaseController {
 
 
         map.setOnMouseClicked(e -> {//mouse clicking listener -----------------------------------------------
-            if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
-                findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
-            }//this makes sure any nodes that were previously clicked are changes back to the original red color
+//            if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
+//                findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf(errorColor));
+//            }//this makes sure any nodes that were previously clicked are changes back to the original red color
 
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
@@ -303,10 +303,6 @@ public class MapBuilderBaseController {
      */
     String errorColor = "B00020";
     public void handleNodeClicked(Node n) throws IOException {
-        if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
-            findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
-        }
-
         //find the old edge and reset its color
         for(javafx.scene.Node node : nodesAndEdges.getChildren()){
             if(node.getId().equals(App.mapInteractionModel.getEdgeID())){
@@ -325,7 +321,7 @@ public class MapBuilderBaseController {
                     pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
                     Circle drawnNode = findCircleFromNode(n.getNodeID());
                     drawnNode.setFill(Paint.valueOf("green"));
-                    Circle removedNode = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
+                    Circle removedNode = findCircleFromNode(App.mapInteractionModel.toggledNodeID);
                     if(removedNode != null){
                         removedNode.setFill(Paint.valueOf(errorColor));
                     }
@@ -356,61 +352,54 @@ public class MapBuilderBaseController {
                 clickedCircle.setFill(Paint.valueOf(selectedColor));
                 Circle previousCircle = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
                 if(previousCircle != null){ //to prevent a null pointer when the previous node isn't being displayed
-                    previousCircle.setFill(Paint.valueOf("B00020"));
+                    previousCircle.setFill(Paint.valueOf(errorColor));
                 }
                 break;
             case "ADDEDGE"://TODO fix to remove the need to refresh everything to draw correctly
-                javafx.scene.Node tempEdge = findTempLine();
-                if(tempEdge != null){
-                    pane.getChildren().remove(tempEdge);
-                    generateEdges(App.mapInteractionModel.floor);
-                    generateNodes(App.mapInteractionModel.floor);
+                //remove old temp line
+                javafx.scene.Node oldTempEdge = findTempLine();
+                if(oldTempEdge != null){
+                    pane.getChildren().remove(oldTempEdge);
                 }
                 App.mapInteractionModel.setNodeID(n.getNodeID());
-                Circle c1 = new Circle();
-                Circle c2 = new Circle();
-                Line edge = new Line();
-                if(!App.mapInteractionModel.getNodeID().equals("")) { // Have 1st node
-                    c1 = findCircleFromNode(n.getNodeID());
-                    c1.toFront();
-                    c1.setFill(Paint.valueOf(selectedColor));
-                }
-                if(!App.mapInteractionModel.getPreviousNodeID().equals("")) { // Have 2nd node
-                    c2 = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
-                    if(c2 != null) {
-                        c2.toFront();
-                        c2.setFill(Paint.valueOf(selectedColor));
-                    }
-                    nodesAndEdges.getChildren().remove(edge);
-                    // Create physical Edge
+                Circle c1 = findCircleFromNode(n.getNodeID());
+                Circle c2 = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
+                Line tempEdge = new Line();
+
+                //set the most recent clicked node color
+                c1.setFill(Paint.valueOf(selectedColor));
+
+                //if the previse node is on the current floor if yes draw edge
+                if(App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getFloor().equals(App.mapInteractionModel.floor)) {
+                    c2.toFront();
+                    c2.setFill(Paint.valueOf(selectedColor));
+                    // Create drawn Edge
                     double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
                     double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
 
                     double xdiff = 0;
                     double ydiff = 0;
+                    xdiff = c2.getCenterX() - oldx;
+                    ydiff = c2.getCenterY() - oldy;
+                    tempEdge.setLayoutX(c1.getCenterX());
+                    tempEdge.setStartX(0);
+                    tempEdge.setLayoutY(c1.getCenterY());
+                    tempEdge.setStartY(0);
+                    tempEdge.setEndX(xdiff);
+                    tempEdge.setEndY(ydiff);
+                    tempEdge.setId("tempedge");
+                    tempEdge.setStrokeWidth(3.0);
+                    tempEdge.toFront();
+                    tempEdge.setStroke(Paint.valueOf(selectedColor));
+                    tempEdge.setVisible(true);
+                    nodesAndEdges.getChildren().add(tempEdge);
+                    makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
 
-                    if(c2 != null) {
-                        xdiff = c2.getCenterX() - oldx;
-                        ydiff = c2.getCenterY() - oldy;
-                        edge.setLayoutX(c1.getCenterX());
-                        edge.setStartX(0);
-                        edge.setLayoutY(c1.getCenterY());
-                        edge.setStartY(0);
-                        edge.setEndX(xdiff);
-                        edge.setEndY(ydiff);
-                        edge.setId("tempedge");
-                        edge.setStrokeWidth(3.0);
-                        edge.toFront();
-                        edge.setStroke(Paint.valueOf(selectedColor));
-                        edge.setVisible(true);
-                        nodesAndEdges.getChildren().add(edge);
-                    }
-                    if(c2 != null) {
-                        makeContextMenu(edge, edge.getLayoutX() + (xdiff / 2), edge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
-                    }else{
-                        makeContextMenu(edge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
-                    }
+                }else{
+                    makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
                 }
+
+
                 break;
             case "ALINE":
                 //TODO add align logic
@@ -603,11 +592,50 @@ public class MapBuilderBaseController {
     public void handleAlineButton() {
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(!App.mapInteractionModel.getCurrentAction().equals("ALINE")){
+            if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
+                alineFromMultiSelect();
+            }
             App.mapInteractionModel.setCurrentAction("ALINE");
         }else{
             alineButton.setSelected(true);
         }
     }
+
+    public void alineFromMultiSelect(){
+        double totalX = 0.0, totalY = 0.0;
+        for ( String curNodeId:App.mapInteractionModel.nodeIDList){
+            Node curNode = App.mapService.getNodeFromID(curNodeId);
+            totalX += curNode.getCords()[0];
+            totalY += curNode.getCords()[1];
+        }
+        double avgX = totalX / App.mapInteractionModel.nodeIDList.size();
+        double avgY = totalY / App.mapInteractionModel.nodeIDList.size();
+
+        double varianceX = 0.0, varianceY = 0.0;
+        for ( String curNodeId:App.mapInteractionModel.nodeIDList){
+            Node curNode = App.mapService.getNodeFromID(curNodeId);
+            varianceX += Math.abs(curNode.getCords()[0] - avgX);
+            varianceY += Math.abs(curNode.getCords()[1] - avgY);
+        }
+        double avgVarianceX = varianceX / App.mapInteractionModel.nodeIDList.size();
+        double avgVarianceY = varianceY / App.mapInteractionModel.nodeIDList.size();
+
+        if(avgVarianceX < avgVarianceY){
+            //aline to x coord
+            for(String curNodeId:App.mapInteractionModel.nodeIDList){
+                Node curNode = App.mapService.getNodeFromID(curNodeId);
+                App.undoRedoService.updateNode(curNodeId,avgX,curNode.getCords()[1],curNode.getNodeType(),curNode.getLongName(),curNode.getShortName());
+            }
+        }else{
+            //aline to y coord
+            for(String curNodeId:App.mapInteractionModel.nodeIDList){
+                Node curNode = App.mapService.getNodeFromID(curNodeId);
+                App.undoRedoService.updateNode(curNodeId,curNode.getCords()[0],avgY,curNode.getNodeType(),curNode.getLongName(),curNode.getShortName());
+            }
+        }
+        App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+    }
+
 
     public void handleAddNodeButtonEDIT(){
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();

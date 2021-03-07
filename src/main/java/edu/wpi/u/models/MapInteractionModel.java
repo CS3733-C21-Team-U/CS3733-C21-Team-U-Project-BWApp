@@ -33,6 +33,7 @@ public class MapInteractionModel {
     public String floorPathfinding = "G";
     public LinkedList<String> nodeIDList = new LinkedList<>();
     public String deselectedNodeID = "";
+    public String toggledNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
@@ -43,6 +44,7 @@ public class MapInteractionModel {
             this.nodeIDList.addFirst(nodeID);
         }else {
             this.nodeIDList.remove(nodeID);
+            this.toggledNodeID = nodeID;
         }
 
     }
