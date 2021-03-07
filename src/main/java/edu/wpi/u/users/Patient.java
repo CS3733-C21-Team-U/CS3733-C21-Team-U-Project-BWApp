@@ -1,5 +1,8 @@
 package edu.wpi.u.users;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -40,9 +43,8 @@ public class Patient extends User{
         this.recommendedParkingLocation = recommendedParkingLocation;
     }
 
-    public Patient(String s, String s1) {
-        this.userID = s;
-        this.name = s1;
+    public Patient(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx, StringProperty locationNodeIDfx) {
+        super(userIDfx, namefx, userNamefx, passwordfx, typefx, phoneNumberfx, emailfx, deletedfx, locationNodeIDfx);
     }
 
     @Override

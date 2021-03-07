@@ -4,6 +4,8 @@ import edu.wpi.u.App;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -25,8 +27,13 @@ public class UserService {
         this.setEmployees();
         this.setGuests();
         this.setPatients();
-        System.out.println("patinets from user service");
-        System.out.println(getPatients().toString());
+    }
+
+    public ObservableList<User> getUsers(){
+        ObservableList<User> result = FXCollections.observableArrayList();
+        result.addAll(ud.getEmployees());
+        result.addAll(ud.getPatients());
+        return result;
     }
 
     /**

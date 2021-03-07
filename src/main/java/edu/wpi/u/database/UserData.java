@@ -3,6 +3,11 @@ package edu.wpi.u.database;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.users.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,6 +23,15 @@ public class UserData extends Data{
         connect();
         dropGuests(); // TODO : Stop dropping values for demos
         dropEmployee();
+        //StringProperty userIDfx,
+        // StringProperty namefx,
+        // StringProperty userNamefx,
+        // StringProperty passwordfx,
+        // StringProperty typefx,
+        // StringProperty phoneNumberfx,
+        // StringProperty emailfx,
+        // BooleanProperty deletedfx,
+        // StringProperty locationNodeIDfx) {
 //        printPatients();
 //        printGuest();
 //        printEmployees();

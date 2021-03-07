@@ -1,18 +1,29 @@
 package edu.wpi.u.controllers.user;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import edu.wpi.u.App;
 import edu.wpi.u.users.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ViewUserListController {
 
@@ -42,7 +53,7 @@ public class ViewUserListController {
     public JFXButton addUserButton;
     Guest myGuest;
     Employee myEmployee;
-    public TreeTableView<Patient> patientTreeTableView = new TreeTableView<>();
+    @FXML private JFXTreeTableView<User> treeTableView = new JFXTreeTableView<>();
 
 //    TableColumn<User, String> guestTableColumnUserID = new TableColumn<User, String>("userID");
 //    TableColumn<User, String> guestTableColumnName = new TableColumn<>("name");
@@ -64,16 +75,61 @@ public class ViewUserListController {
 
     public void initialize() throws IOException {
 
-        TreeTableColumn<Patient, String> treeTableColumnName = new TreeTableColumn<>("Name");
-        treeTableColumnName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
-        patientTreeTableView.getColumns().add(treeTableColumnName);
+        JFXTreeTableColumn<User, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
+        treeTableColumnName.setCellValueFactory(param -> param.getValue().getValue().namefxProperty());
+        treeTableColumnName.setPrefWidth(100);
 
-        TreeItem<Patient> patient1 = new TreeItem<>(new Patient("testree", "Test name", "t", "t", "t", Role.PATIENT, "9998887777", null,false,null,"tesprov",null,null));
+        JFXTreeTableColumn<User, String> treeTableColumnUserName = new JFXTreeTableColumn<>("Username");
+        treeTableColumnUserName.setCellValueFactory(param -> param.getValue().getValue().userNamefxProperty());
+        treeTableColumnUserName.setPrefWidth(125);
 
-        TreeItem<Patient> patients = new TreeItem<>(new Patient("Column id", "name col"));
-        patients.getChildren().add(patient1);
+        JFXTreeTableColumn<User, String> treeTableColumnPassword = new JFXTreeTableColumn<>("Password");
+        treeTableColumnPassword.setCellValueFactory(param -> param.getValue().getValue().passwordfxProperty());
+        treeTableColumnPassword.setPrefWidth(125);
 
-        patientTreeTableView.setRoot(patients);
+        JFXTreeTableColumn<User, String> treeTableColumnEmail = new JFXTreeTableColumn<>("Email");
+        treeTableColumnEmail.setCellValueFactory(param -> param.getValue().getValue().emailfxProperty());
+        treeTableColumnEmail.setPrefWidth(125);
+
+        JFXTreeTableColumn<User, String> treeTableColumnType = new JFXTreeTableColumn<>("Role");
+        treeTableColumnType.setCellValueFactory(param -> param.getValue().getValue().typefxProperty());
+        treeTableColumnType.setPrefWidth(100);
+
+        JFXTreeTableColumn<User, String> treeTableColumnPhonenumber = new JFXTreeTableColumn<>("Phone Number");
+        treeTableColumnPhonenumber.setCellValueFactory(param -> param.getValue().getValue().phoneNumberfxProperty());
+        treeTableColumnPhonenumber.setPrefWidth(135);
+
+        JFXTreeTableColumn<User, String> treeTableColumnLocationNodeID = new JFXTreeTableColumn<>("Location (NodeID)");
+        treeTableColumnLocationNodeID.setCellValueFactory(param -> param.getValue().getValue().locationNodeIDfxProperty());
+        treeTableColumnLocationNodeID.setPrefWidth(100);
+
+
+        //StringProperty userIDfx,
+        // StringProperty namefx,
+        // StringProperty userNamefx,
+        // StringProperty passwordfx,
+        // StringProperty typefx,
+        // StringProperty phoneNumberfx,
+        // StringProperty emailfx,
+        // BooleanProperty deletedfx,
+        // StringProperty locationNodeIDfx)
+        ObservableList<User> users2 = FXCollections.observableArrayList();
+        for (User u : App.userService.getUsers()){
+            users2.add(new Patient(new SimpleStringProperty(u.getUserID())
+            , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
+            , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
+            , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted()), new SimpleStringProperty(u.getLocationNodeID())));
+        }
+        final TreeItem<User> root = new RecursiveTreeItem<User>(users2, RecursiveTreeObject::getChildren);
+        treeTableView.setRoot(root);
+        treeTableView.setShowRoot(false);
+        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnUserName, treeTableColumnPassword, treeTableColumnEmail, treeTableColumnType, treeTableColumnPhonenumber, treeTableColumnLocationNodeID);
+
+        /*
+        todo : users.add();
+         */
+
+
         /*
     String userID,
     String name,
@@ -106,7 +162,7 @@ public class ViewUserListController {
 //        employeeTableView.getColumns().add(employeeTableColumnUserType);
 //        employeeTableView.getColumns().add(employeeTableColumnEmail);
 //        employeeTableView.getColumns().add(employeeTableColumnPhoneNum);
-        myGuest = App.selectedGuest;
+                myGuest = App.selectedGuest;
         myEmployee = App.selectedEmployee;
 
         //PropertyValueFactory factoryUserID = new PropertyValueFactory<>("Name");
