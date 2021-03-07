@@ -33,7 +33,7 @@ public class UserSignupScreenController {
 
     public void handleSignupButton(ActionEvent actionEvent) throws IOException {
         //TODO: Create patient!
-        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), );
+        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), null, false,null,null,null,null);
     }
 
     public void handleSignUpButton(ActionEvent actionEvent) {

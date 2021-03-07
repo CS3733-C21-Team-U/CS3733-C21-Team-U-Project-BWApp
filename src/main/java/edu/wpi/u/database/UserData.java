@@ -631,8 +631,26 @@ public class UserData extends Data{
         }
     }
 
-    /*
-    providerName, parkingLocation, recommendedParkingLocation
+    /**
+     * Adds a location (nodeID) to the patient
+     * @param patientID patient id
+     * @param nodeID node id
+     */
+    public void addLocationID(String patientID, String nodeID){
+        String str = "update Patients set locationNodeID=? where patientID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, nodeID);
+            ps.setString(2, patientID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds a parking location to the patient location
+     * @param patientID id of the patient
+     * @param parkingLocation location of the patient
      */
     public void addPatientParkingLocation(String patientID, String parkingLocation){
         String str = "update Patients set parkingLocation=? where patientID=?";
@@ -647,10 +665,19 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Adds a recommended parking location
+     * @param patientID id of the patient
+     * @param recommendedParkingLocation the recommended parking location
+     */
     public void addPatientRecommendedParkingLocation (String patientID, String recommendedParkingLocation){
         String str = "update Patients set recommendedParkingLocation=? where patientID=?";
         try{
-
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,recommendedParkingLocation);
+            ps.setString(2,patientID);
+            ps.executeUpdate();
+            ps.close();
         }catch (Exception e){
             e.printStackTrace();
         }

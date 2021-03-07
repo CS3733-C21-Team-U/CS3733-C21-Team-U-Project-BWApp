@@ -204,6 +204,18 @@ public class UserService {
         this.patients.add(patient);
     }
 
+    public void addLocationID(String patientID, String locationID){
+        ud.addLocationID(patientID, locationID);
+    }
+
+    public void addParkingLocation(String patientID, String parkingLocation){
+        ud.addPatientParkingLocation(patientID, parkingLocation);
+    }
+
+    public void addRecommendedParkingLocation(String patientID, String recommendedParkingLocation){
+        ud.addPatientRecommendedParkingLocation(patientID, recommendedParkingLocation);
+    }
+
     /**
      * Adds an employee to list and calls database
      * @param name the name
