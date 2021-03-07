@@ -76,7 +76,7 @@ public class ContextMenuEdgeController {
             }
             userTypes.clear();
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
         }
 
     }
@@ -101,7 +101,7 @@ public class ContextMenuEdgeController {
             App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+        ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
 
     }
 }

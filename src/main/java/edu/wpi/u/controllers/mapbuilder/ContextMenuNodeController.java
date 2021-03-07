@@ -7,15 +7,10 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.InvalidEdgeException;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.util.*;
 
@@ -144,12 +139,12 @@ public class ContextMenuNodeController {
             }
 
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
 
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
         }
 
 
@@ -191,12 +186,12 @@ public class ContextMenuNodeController {
     public void handleDeleteButton() {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
             App.mapInteractionModel.setCurrentAction("NONE");
-            ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
         } else {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-        ((Pane) App.mapInteractionModel.selectedNodeContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+        ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
     }
 
 

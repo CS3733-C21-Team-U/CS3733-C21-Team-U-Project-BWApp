@@ -22,7 +22,7 @@ public class MapInteractionModel {
     public ArrayList<Node> pathPreview = new ArrayList<>();
     private String building = "Faulkner";
     public SimpleStringProperty editFlag = new SimpleStringProperty("");
-    public AnchorPane selectedNodeContextBox;
+    public AnchorPane selecteContextBox;
     public AnchorPane selectedEdgeContextBox;
     public SimpleStringProperty mapImageResourcePathfinding = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");

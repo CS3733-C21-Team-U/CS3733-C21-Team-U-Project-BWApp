@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +25,6 @@ import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -113,9 +111,9 @@ public class PathfindingBaseController {
                     contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
                     contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-                    pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+                    pane.getChildren().remove(App.mapInteractionModel.selecteContextBox);
                     pane.getChildren().add(contextAnchor);
-                    App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+                    App.mapInteractionModel.selecteContextBox = contextAnchor;
                 }else{
 
                 }
@@ -342,15 +340,23 @@ public class PathfindingBaseController {
         for(int i = 0;  i < edgePath.size(); i++){
             if(i != edgePath.size() - 1){
                 if(edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getEndNode())){
-                    placeEdgesHelper(edgePath.get(i), true);
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), true);
+                    }
                 }else{
-                    placeEdgesHelper(edgePath.get(i), false);
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), false);
+                    }
                 }
             }else{
                 if(edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getEndNode())){
-                    placeEdgesHelper(edgePath.get(i), false);
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), false);
+                    }
                 }else{
-                    placeEdgesHelper(edgePath.get(i), true);
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), true);
+                    }
                 }
             }
 
@@ -409,7 +415,6 @@ public class PathfindingBaseController {
             node.setFitWidth(2987);
             generateEdges("G");
             setMapItemsOrder();
-
         }else{
             floorG.setSelected(true);
         }
