@@ -1,7 +1,6 @@
 package edu.wpi.u.controllers.request;
 
 import edu.wpi.u.App;
-import edu.wpi.u.controllers.request.RequestListItemController;
 import edu.wpi.u.requests.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +35,7 @@ public class ViewRequestListController {
             String temp = req.getTitle();
             controller.myRequestID = req.getRequestID();
             controller.requestItemTitleLabel.setText(temp);
-            controller.requestItemLocationChipView.getChips().addAll(req.getLocation());
+            controller.requestItemLocationChipView.getChips().addAll(req.getLocations());
             controller.requestItemDescriptionLabel.setText(req.getDescription());
             controller.requestItemCreatorLabel.setText("");
 

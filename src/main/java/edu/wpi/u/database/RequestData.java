@@ -3,7 +3,6 @@ package edu.wpi.u.database;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,16 +45,102 @@ public class RequestData extends Data{
         this.updAssignees(request.getRequestID(), request.getAssignee());
     }*/
 
-    public void updLocations(String requestId, LinkedList<String> locations){
+    /**
+     * Returns whether or not a request is active
+     * @param requestID the request id
+     * @return true if the request is active, false if it is complete
+     */
+    public boolean getActiveStatus(String requestID){
+        String str = "select dateCompleted from Requests where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                rs.close();
+                ps.close();
+                return false;
+            }
+            rs.close();
+            ps.close();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public ArrayList<Request> getResolvedRequests(){
+        ArrayList<Request> result = new ArrayList<>();
+        String str = "select * from Requests where dateCompleted is not null";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                /*
+                 String requestID,
+                 Timestamp dateCreated,
+                 Timestamp dateNeeded,
+                 Timestamp dateCompleted,
+                 String description,
+                 String title,
+                 LinkedList<String> locations,
+                 LinkedList<String> assignees,
+                 String creator) {
+
+                 */
+                result.add(new Request(rs.getString("requestId"),
+                        rs.getTimestamp("dateCreated"),
+                        rs.getTimestamp("dateNeeded"),
+                        rs.getTimestamp("dateCompleted"),
+                        rs.getString("description"),
+                        rs.getString("title"),
+                        getAssignees(rs.getString("requestId")),
+                        getLocations(rs.getString("requestId")),
+                        rs.getString("creator")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Returns a list of employeeID's for a given requestID
+     * @param requestID the request ID
+     * @return list of assignees
+     */
+    public Timestamp getAssignees(String requestID){
+        Timestamp result = new ArrayList<>();
+        String str = "select * from Assignments where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("employeeID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Updates the list of locatioons for a given requestID
+     * @param requestID the request id
+     * @param locations the list of locations
+     */
+    public void updLocations(String requestID, LinkedList<String> locations){
 
         //Take whole list: do new one
         String str = "delete from Locations where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, requestId);
+            ps.setString(1, requestID);
             ps.execute();
             for (String node : locations) {
-                addLocation(node,requestId);
+                addLocation(node,requestID);
             }
             ps.close();
         }
@@ -106,7 +191,7 @@ public class RequestData extends Data{
             while (rs.next()){
                 String id = rs.getString("requestID");
                 Date created = rs.getDate("dateCreated");
-                Date needed = rs.getDate("dateNeeded");
+                Timestamp needed = rs.getDate("dateNeeded");
                 String desc = rs.getString("description");
                 String title = rs.getString("title");
                 String type = rs.getString("type");
@@ -125,7 +210,7 @@ public class RequestData extends Data{
 //                catch (Exception e){
 //                    e.printStackTrace();
 //                }
-                LinkedList<String> assignees = new LinkedList<String>();
+                Timestamp assignees = new LinkedList<String>();
 //                try {
 //                    String str3 = "select * from Assignments where requestID=?";
 //                    PreparedStatement ps3 = conn.prepareStatement(str3);
@@ -175,10 +260,10 @@ public class RequestData extends Data{
             ps.setString(8,obj.specificsStorageString());
             ps.execute();
             // Adding data into joint tables
-            for(String locationID : req.getLocation()){
+            for(String locationID : req.getLocations()){
                 addLocation(locationID, req.getRequestID());
             }
-            for(String assignmentID : req.getAssignee()){
+            for(String assignmentID : req.getAssignees()){
                 addAssignee(assignmentID, req.getRequestID());
             }
         }
@@ -227,7 +312,7 @@ public class RequestData extends Data{
     }
 
     /**
-     * Resolves a reuqest
+     * Resolves a request
      * @param requestID the request id
      * @param time the time is was completed
      */

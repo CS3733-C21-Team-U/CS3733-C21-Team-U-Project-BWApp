@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -123,11 +124,11 @@ public class ModifyRequestController {
         makeEditDescriptionField.setText(currRequest.getDescription());
 
         //TODO: Probably broken
-        for (String l : currRequest.getLocation()) { //Locations
+        for (String l : currRequest.getLocations()) { //Locations
             makeEditLocationChipView.getChips().add(l);
         }
 
-        for (String a : currRequest.getAssignee()) { //Assignees
+        for (String a : currRequest.getAssignees()) { //Assignees
             makeEditStaffChipView.getChips().add(a);
         }
     }
@@ -159,11 +160,11 @@ public class ModifyRequestController {
             //NEW
             currRequest.setTitle(makeEditTitleField.getText());
             currRequest.setDescription(makeEditDescriptionField.getText());
-            currRequest.setAssignee(assigneesToAdd);
-            currRequest.setLocation(locationsToAdd);
+            currRequest.setAssignees(assigneesToAdd);
+            currRequest.setLocations(locationsToAdd);
             LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-            Date date= new Date();
+            Timestamp date= new Date();
             currRequest.setDateNeeded(date);
             currSpecificRequest.setSpecificData(requestSpecificItems());
             App.requestService.updateRequest(currSpecificRequest);

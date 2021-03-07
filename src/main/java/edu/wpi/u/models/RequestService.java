@@ -3,6 +3,8 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -42,7 +44,7 @@ public class RequestService {
 
   public void resolveRequest(SpecificRequest result) {
     long time = System.currentTimeMillis();
-    Date now = new Date(time);
+    Timestamp now = new Date(time);
     result.getGenericRequest().setDateCompleted(now);
     this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(), time);

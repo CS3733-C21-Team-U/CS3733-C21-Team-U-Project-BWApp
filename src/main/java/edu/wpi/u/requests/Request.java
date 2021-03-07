@@ -1,47 +1,49 @@
 package edu.wpi.u.requests;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Date;
 
 public class Request {
     private String requestID;
-    private Date dateCreated;
+    private Timestamp dateCreated;
 
-    public Date getDateNeeded() {
+    public Timestamp getDateNeeded() {
         return dateNeeded;
     }
-    public void setDateNeeded(Date d) {
+    public void setDateNeeded(Timestamp d) {
         this.dateNeeded = d;
     }
 
-    private Date dateNeeded;
-    private Date dateCompleted;
+    private Timestamp dateNeeded;
+    private Timestamp dateCompleted;
     private String description;
     private String title;
-    private LinkedList<String> location;
-    private LinkedList<String> assignee;
+    private LinkedList<String> locations;
+    private LinkedList<String> assignees;
     private String creator;
     private LinkedList<String> comments;
 
-    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateNeeded, String description, String title, LinkedList<String> location, String type, String creator) {
+    public Request(String requestID, Timestamp dateCreated, Timestamp dateNeeded, Timestamp dateCompleted, String description, String title, LinkedList<String> locations, LinkedList<String> assignees, String creator) {
         this.requestID = requestID;
-        this.assignee = assignee;
         this.dateCreated = dateCreated;
         this.dateNeeded = dateNeeded;
+        this.dateCompleted = dateCompleted;
         this.description = description;
         this.title = title;
-        this.location = location;
+        this.locations = locations;
+        this.assignees = assignees;
         this.creator = creator;
+        //this.comments = comments;
     }
+
     public void resolveRequest() {} //TODO: Belongs in request?
-    public void editRequest(Date endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
+    public void editRequest(Timestamp endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
         this.dateCompleted = endDate;
         this.description = description;
         this.title = title;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = location;
+        this.assignees = assignee;
         this.creator = creator;
     }
     public String getRequestID() {
@@ -59,16 +61,16 @@ public class Request {
     public String getTitle() {
         return title;
     }
-    public LinkedList<String> getLocation() {
-        return location;
+    public LinkedList<String> getLocations() {
+        return locations;
     }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
     }
-    public void setDateCompleted(Date dateCompleted) {
+    public void setDateCompleted(Timestamp dateCompleted) {
         this.dateCompleted = dateCompleted;
     }
     public void setDescription(String description) {
@@ -77,12 +79,12 @@ public class Request {
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setLocation(LinkedList<String> location) {
-        this.location = location;
+    public void setLocations(LinkedList<String> locations) {
+        this.locations = locations;
     }
-    public LinkedList<String> getAssignee() {return assignee;}
-    public void setAssignee(LinkedList<String> assignee) {
-        this.assignee = assignee;
+    public LinkedList<String> getAssignees() {return assignees;}
+    public void setAssignees(LinkedList<String> assignees) {
+        this.assignees = assignees;
     }
     public String getCreator() {
         return creator;
@@ -92,15 +94,15 @@ public class Request {
     }
 
     public String displayAssignees() {
-        String aAssignee = this.assignee.getFirst();
-        int numAssigned = this.assignee.size();
+        String aAssignee = this.assignees.getFirst();
+        int numAssigned = this.assignees.size();
         String out = "Assigned: " + aAssignee + " + " + numAssigned + " others";
         return out;
     }
 
     public String displayLocation() {
-        String aLocation = this.location.getFirst();
-        int numAssigned = this.location.size();
+        String aLocation = this.locations.getFirst();
+        int numAssigned = this.locations.size();
         String out = "Assigned: " + aLocation + " + " + numAssigned + " others";
         return out;
     }

@@ -13,9 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -112,7 +112,7 @@ public class AddRequestController {
     @FXML
     public void handleSaveNewRequest() throws IOException {
         try {
-            LinkedList<String> staff = new LinkedList<String>(makeStaffChipView.getChips());
+            Timestamp staff = new LinkedList<String>(makeStaffChipView.getChips());
             LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
             ArrayList<String> specifics = requestSpecificItems();
 
@@ -121,9 +121,9 @@ public class AddRequestController {
             int requestID = rand.nextInt();
             String ID = Integer.toString(requestID);//make a random id
             //TODO : fix date bug
-            Date needed = Date.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Timestamp needed = Timestamp.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-            Request newRequest = new Request(ID, staff, new Date(), new Date(), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
+            Request newRequest = new Request(ID, staff, needed, new Timestamp(System.currentTimeMillis()), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
 
             result.setRequest(newRequest);
             result.setSpecificData(specifics);
