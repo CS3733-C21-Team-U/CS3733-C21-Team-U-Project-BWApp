@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,9 +12,14 @@
    <children>
       <VBox layoutX="330.0" layoutY="78.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="184.0" prefWidth="1700.0">
+            <HBox alignment="CENTER" prefHeight="164.0" prefWidth="1700.0">
                <children>
                   <Label styleClass="headline-1" text="About Us" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="1700.0">
+               <children>
+                  <ImageView fx:id="aboutImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
             <HBox prefHeight="449.0" prefWidth="1700.0">
@@ -21,12 +27,12 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="850.0" spacing="15.0">
                      <children>
                         <Label styleClass="headline-2" text="Project Sponsors" />
-                        <Label styleClass="headline-3" text="Brigham and Women's Hospital" />
+                        <Label fx:id="brighamWomensLabel" onMouseEntered="#showBrighamWomens" onMouseExited="#hideIMG" styleClass="headline-3" text="Brigham and Women's Hospital" />
                         <Label styleClass="headline-3" text="Brigham and Women's Hospital Representative Andrew Shinn" />
                         <Label styleClass="headline-3" text="Worcester Polytechnic Institute's Department of Computer Science" />
                         <Label styleClass="headline-3" text="CS3733-C21 Software Engineering Course" />
-                        <Label styleClass="headline-3" text="Professor Wilson Wong" />
-                        <Label styleClass="headline-3" text="Team Coach Andrew Bonaventura" />
+                        <Label fx:id="wilsonWongLabel" onMouseEntered="#showWilsonWong" onMouseExited="#hideIMG" styleClass="headline-3" text="Professor Wilson Wong" />
+                        <Label fx:id="andrewBonaventuraLabel" onMouseEntered="#showAndrewBonaventura" onMouseExited="#hideIMG" styleClass="headline-3" text="Team Coach Andrew Bonaventura" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="850.0" spacing="15.0">
@@ -58,17 +64,17 @@
                               </VBox>
                               <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="425.0" spacing="15.0">
                                  <children>
-                                    <Label styleClass="headline-3" text="Kohmei Kadoya" />
-                                    <Label styleClass="headline-3" text="Neville Ingram" />
-                                    <Label styleClass="headline-3" text="Kaamil Lokhandwala" />
-                                    <Label styleClass="headline-3" text="Charles Kittler" />
-                                    <Label styleClass="headline-3" text="Lily Durkin" />
-                                    <Label styleClass="headline-3" text="Tyler Sanderville" />
-                                    <Label styleClass="headline-3" text="Jacbob Bernard" />
-                                    <Label styleClass="headline-3" text="Tianyang Gao" />
-                                    <Label styleClass="headline-3" text="William Burke" />
-                                    <Label styleClass="headline-3" text="Michael Geary" />
-                                    <Label styleClass="headline-3" text="Olajumoke Jackson" />
+                                    <Label fx:id="kohmeiKadoyaLabel" onMouseEntered="#showKohmeiKadoya" onMouseExited="#hideIMG" styleClass="headline-3" text="Kohmei Kadoya" />
+                                    <Label fx:id="nevilleIngramLabel" onMouseEntered="#showNevilleIngram" onMouseExited="#hideIMG" styleClass="headline-3" text="Neville Ingram" />
+                                    <Label fx:id="kaamilLokhandwalaLabel" onMouseEntered="#showKaamilLokhandwala" onMouseExited="#hideIMG" styleClass="headline-3" text="Kaamil Lokhandwala" />
+                                    <Label fx:id="charlieKittlerLabel" onMouseEntered="#showCharlieKittler" onMouseExited="#hideIMG" styleClass="headline-3" text="Charles Kittler" />
+                                    <Label fx:id="lilyDurkinLabel" onMouseEntered="#showLilyDurkin" onMouseExited="#hideIMG" styleClass="headline-3" text="Lily Durkin" />
+                                    <Label fx:id="tylerSandervilleLabel" onMouseEntered="#showTylerSanderville" onMouseExited="#hideIMG" styleClass="headline-3" text="Tyler Sanderville" />
+                                    <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacbob Bernard" />
+                                    <Label fx:id="nickGaoLabel" onMouseEntered="#showNickGao" onMouseExited="#hideIMG" styleClass="headline-3" text="Tianyang Gao" />
+                                    <Label fx:id="willBurkeLabel" onMouseEntered="#showWillBurke" onMouseExited="#hideIMG" styleClass="headline-3" text="William Burke" />
+                                    <Label fx:id="michaelGearyLabel" onMouseEntered="#showMichaelGeary" onMouseExited="#hideIMG" styleClass="headline-3" text="Michael Geary" />
+                                    <Label fx:id="olaJacksonLabel" onMouseEntered="#showOlaJackson" onMouseExited="#hideIMG" styleClass="headline-3" text="Olajumoke Jackson" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="25.0" />
@@ -80,7 +86,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="202.0" prefWidth="1700.0">
+            <HBox alignment="CENTER" prefHeight="155.0" prefWidth="1700.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="139.0" prefWidth="1499.0" styleClass="headline-3">
                      <children>
@@ -89,7 +95,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="141.0" prefWidth="1700.0">
+            <HBox alignment="CENTER" prefHeight="88.0" prefWidth="1700.0">
                <children>
                   <JFXButton onAction="#handleAboutCancel" styleClass="button-contained" text="Click Here to Return to Pathfinding" />
                </children>
