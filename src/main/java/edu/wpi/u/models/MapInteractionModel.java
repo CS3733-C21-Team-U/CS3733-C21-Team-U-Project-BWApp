@@ -1,6 +1,7 @@
 package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
@@ -30,17 +31,36 @@ public class MapInteractionModel {
     public String floor = "G";
     public String floorPathfinding = "G";
     public LinkedList<String> nodeIDList = new LinkedList<>();
+    public String deselectedNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
 
 
     public void addToNodeIdList(String nodeID){
-        this.nodeIDList.addFirst(nodeID);
+        if(!this.nodeIDList.contains(nodeID)){
+            this.nodeIDList.addFirst(nodeID);
+        }else {
+            this.nodeIDList.remove(nodeID);
+        }
+
     }
 
-    public void resetNodeIDList(){
+    public LinkedList<String> resetNodeIDList(){
+        String firstID = this.nodeIDList.getFirst();
+        this.nodeIDList.remove(firstID);
+        LinkedList<String> returnMe = this.nodeIDList;
         this.nodeIDList = new LinkedList<>();
+        addToNodeIdList(firstID);
+        return returnMe;
+    }
+
+    public double avgSelectedCords(){
+        double xTotal = 0.0, yTotal = 0.0;
+        for (String nodeID: this.nodeIDList ) {
+            //todo finish
+        }
+        return 0.0;
     }
 
     public String getPreviousPreviousNodeID() {
@@ -81,6 +101,7 @@ public class MapInteractionModel {
 
     public void setNodeID(String nodeID) {
         if(!this.nodeID.get().equals(nodeID)) {
+            deselectedNodeID = this.nodeID.get();
             this.nodeID.set(nodeID);
             addToNodeIdList(nodeID);
         }

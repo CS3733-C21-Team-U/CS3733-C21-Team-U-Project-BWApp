@@ -21,6 +21,7 @@ import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class MapBuilderBaseController {
 
@@ -112,6 +113,7 @@ public class MapBuilderBaseController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
 
 
+            // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
                     Node n = new Node();//jsut an empty node to make the context menu appear correctly
@@ -273,21 +275,24 @@ public class MapBuilderBaseController {
      */
     public void handleEdgeClicked(Edge e) throws IOException {
         App.mapInteractionModel.setEdgeID(e.getEdgeID());
-        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
-            double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
-            double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
-            System.out.println("You clicked on an edge");
-            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
-            AnchorPane EdgeContextAnchor = new AnchorPane();
-            EdgeContextAnchor = edgeContextMenu.load();
-            ContextMenuEdgeController controller = edgeContextMenu.getController();
+        switch (App.mapInteractionModel.getCurrentAction()){
+            case "ADDEDGE":
+                break;
+            case "SELECT":
+                double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
+                double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
+                FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
+                AnchorPane EdgeContextAnchor = new AnchorPane();
+                EdgeContextAnchor = edgeContextMenu.load();
+                ContextMenuEdgeController controller = edgeContextMenu.getController();
 
-            EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
-            EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
-            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-            pane.getChildren().add(EdgeContextAnchor);
-            App.mapInteractionModel.selectedContextBox = EdgeContextAnchor;
+                EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
+                EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
+                pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+                pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+                pane.getChildren().add(EdgeContextAnchor);
+                App.mapInteractionModel.selectedContextBox = EdgeContextAnchor;
+                break;
         }
     }
 
@@ -296,6 +301,7 @@ public class MapBuilderBaseController {
      * @param n - Node that is clicked on
      * @throws IOException
      */
+    String errorColor = "B00020";
     public void handleNodeClicked(Node n) throws IOException {
         if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
             findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
@@ -305,13 +311,38 @@ public class MapBuilderBaseController {
 
         switch (App.mapInteractionModel.getCurrentAction()){
             case "MULTISELECT":
-                App.mapInteractionModel.addToNodeIdList(n.getNodeID());
+                App.mapInteractionModel.setNodeID(n.getNodeID());
                 // if its the first click treat it like it was a normal select (fall through)
                 if(App.mapInteractionModel.nodeIDList.size() > 1){
+                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+                    Circle drawnNode = findCircleFromNode(n.getNodeID());
+                    drawnNode.setFill(Paint.valueOf("green"));
+                    Circle removedNode = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
+                    if(removedNode != null){
+                        removedNode.setFill(Paint.valueOf(errorColor));
+                    }
+                    //spawn context menu
+                    AnchorPane contextAnchor;
+                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
+                    contextAnchor = nodeContextMenu.load();
+                    contextAnchor.setLayoutX(n.getCords()[0]);
+                    contextAnchor.setLayoutY(n.getCords()[1]);
+                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+                    pane.getChildren().add(contextAnchor);
+                    App.mapInteractionModel.selectedContextBox = contextAnchor;
                     break;
                 }
             case "SELECT":
                 App.mapInteractionModel.setNodeID(n.getNodeID());
+                App.mapInteractionModel.resetNodeIDList();
+                FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
+                AnchorPane contextAnchor;
+                contextAnchor = nodeContextMenu.load();
+                contextAnchor.setLayoutX(n.getCords()[0]);
+                contextAnchor.setLayoutY(n.getCords()[1]);
+                pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+                pane.getChildren().add(contextAnchor);
+                App.mapInteractionModel.selectedContextBox = contextAnchor;
                 makeContextMenu(n, n.getCords()[0], n.getCords()[1]);//The creation of the context menu for the node
                 Circle clickedCircle = findCircleFromNode(n.getNodeID());
                 clickedCircle.setFill(Paint.valueOf(selectedColor));
@@ -460,6 +491,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floor.equals("G")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             nodesAndEdges.toFront();
@@ -474,6 +506,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floor.equals("1")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             nodesAndEdges.toFront();
         }else{
@@ -487,6 +520,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floor.equals("2")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             nodesAndEdges.toFront();
         }else{
@@ -500,6 +534,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floor.equals("3")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             nodesAndEdges.toFront();
         }else{
@@ -513,6 +548,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floor.equals("4")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             nodesAndEdges.toFront();
         }else{
@@ -526,6 +562,7 @@ public class MapBuilderBaseController {
      */
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floor.equals("5")) {
+            pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             nodesAndEdges.toFront();
         }else{
@@ -534,7 +571,11 @@ public class MapBuilderBaseController {
     }
 
     public void handleSelectButton() {
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
+        for(String curNodeID : nodesToReset){
+            Circle drawnNode = findCircleFromNode(curNodeID);
+            drawnNode.setFill(Paint.valueOf(errorColor));
+        }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
             App.mapInteractionModel.setCurrentAction("SELECT");
@@ -544,17 +585,15 @@ public class MapBuilderBaseController {
     }
 
     public void handleMultiSelectButton() {
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
             App.mapInteractionModel.setCurrentAction("MULTISELECT");
         }else{
-            App.mapInteractionModel.setCurrentAction("NONE");
+            multiSelectButton.setSelected(true);
         }
     }
 
     public void handleAlineButton() {
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
             App.mapInteractionModel.setCurrentAction("ALINE");
@@ -564,7 +603,11 @@ public class MapBuilderBaseController {
     }
 
     public void handleAddNodeButtonEDIT(){
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
+        for(String curNodeID : nodesToReset){
+            Circle drawnNode = findCircleFromNode(curNodeID);
+            drawnNode.setFill(Paint.valueOf(errorColor));
+        }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
             App.mapInteractionModel.setCurrentAction("ADDNODE");
@@ -575,7 +618,11 @@ public class MapBuilderBaseController {
     }
 
     public void handleAddEdgeButtonEDIT(){
-        pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
+        LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
+        for(String curNodeID : nodesToReset){
+            Circle drawnNode = findCircleFromNode(curNodeID);
+            drawnNode.setFill(Paint.valueOf(errorColor));
+        }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
             App.mapInteractionModel.setCurrentAction("ADDEDGE");
