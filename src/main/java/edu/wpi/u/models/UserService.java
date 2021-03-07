@@ -24,6 +24,9 @@ public class UserService {
     public UserService() {
         this.setEmployees();
         this.setGuests();
+        this.setPatients();
+        System.out.println("patinets from user service");
+        System.out.println(getPatients().toString());
     }
 
     /**

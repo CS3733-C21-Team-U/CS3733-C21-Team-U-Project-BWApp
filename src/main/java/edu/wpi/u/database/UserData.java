@@ -18,7 +18,7 @@ public class UserData extends Data{
         connect();
         dropGuests(); // TODO : Stop dropping values for demos
         dropEmployee();
-        printPatients();
+//        printPatients();
 //        printGuest();
 //        printEmployees();
     }
