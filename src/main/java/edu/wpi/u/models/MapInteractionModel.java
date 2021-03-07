@@ -68,11 +68,11 @@ public class MapInteractionModel {
     }
 
     public void clearPreviousNodeID() {
-        this.previousNodeID = "";
+        this.deselectedNodeID = "";
     }
 
     public String getPreviousNodeID() {
-        return previousNodeID;
+        return deselectedNodeID;
     }
 
     public String getBuilding() {

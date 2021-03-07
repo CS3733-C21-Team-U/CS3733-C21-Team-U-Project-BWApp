@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
@@ -78,18 +79,10 @@ public class MapBuilderBaseController {
 
 
         map.setOnMouseDragged(e ->{//mouse dragging listener---------------------------------------------
-            Affine invMatrix = null;
-            try {
-                invMatrix = map.getAffine().createInverse();
-            } catch (NonInvertibleTransformException nonInvertibleTransformException) {
-                nonInvertibleTransformException.printStackTrace();
-            }
-            Point2D realPoint = invMatrix.transform(e.getX(),e.getY());
-
-            double x = (realPoint.getX()) + map.getLayoutX();
-            double y = (realPoint.getY()) + map.getLayoutY();
-            App.mapInteractionModel.setCoords(new double[]{x,y});
-
+            setMouseCoordinates(e);
+        });
+        map.setOnMouseDragReleased(e ->{//mouse dragging ending listener---------------------------------------------
+            setMouseCoordinates(e);
         });
 
 
@@ -100,23 +93,14 @@ public class MapBuilderBaseController {
 
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
-            Affine invMatrix = null;
-            try {
-                invMatrix = map.getAffine().createInverse();
-            } catch (NonInvertibleTransformException nonInvertibleTransformException) {
-                nonInvertibleTransformException.printStackTrace();
-            }
-            Point2D realPoint = invMatrix.transform(e.getX(),e.getY());
 
-            double x = (realPoint.getX()) + map.getLayoutX();
-            double y = (realPoint.getY()) + map.getLayoutY();
-            App.mapInteractionModel.setCoords(new double[]{x,y});
+            setMouseCoordinates(e);//this sets the mouse coordinates
 
 
             // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-                    Node n = new Node();//jsut an empty node to make the context menu appear correctly
+                    Node n = new Node();//just an empty node to make the context menu appear correctly
                     makeContextMenu(n, App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1] );
                 }else{
 
@@ -183,7 +167,7 @@ public class MapBuilderBaseController {
                     e.printStackTrace();
                 }
             });
-            curNode.setOnMouseDragged(event -> {
+            curNode.setOnMouseDragExited(event -> {
                 if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                     try {
                         handleNodeDragged(curNode); // Set visual position (circle)
@@ -446,7 +430,6 @@ public class MapBuilderBaseController {
      */
     public void handleNodeDragged(Circle node1) {
             map.gestureEnabledProperty().set(false); // Disabling map zoom
-            pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox); // Removing previous context menus when dragging
             pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
             // Update coordinates of node
             node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
@@ -577,10 +560,10 @@ public class MapBuilderBaseController {
             drawnNode.setFill(Paint.valueOf(errorColor));
         }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("SELECT")){
             App.mapInteractionModel.setCurrentAction("SELECT");
         }else{
-            App.mapInteractionModel.setCurrentAction("NONE");
+            selectButton.setSelected(true);
         }
     }
 
@@ -595,10 +578,10 @@ public class MapBuilderBaseController {
 
     public void handleAlineButton() {
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ALINE")){
             App.mapInteractionModel.setCurrentAction("ALINE");
         }else{
-            App.mapInteractionModel.setCurrentAction("NONE");
+            alineButton.setSelected(true);
         }
     }
 
@@ -609,10 +592,10 @@ public class MapBuilderBaseController {
             drawnNode.setFill(Paint.valueOf(errorColor));
         }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.mapInteractionModel.setCurrentAction("ADDNODE");
         }else{
-            App.mapInteractionModel.setCurrentAction("NONE");
+            addNodeButton.setSelected(true);
         }
 
     }
@@ -624,16 +607,24 @@ public class MapBuilderBaseController {
             drawnNode.setFill(Paint.valueOf(errorColor));
         }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+        if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             App.mapInteractionModel.setCurrentAction("ADDEDGE");
         }else{
-            App.mapInteractionModel.setCurrentAction("NONE");
+            addEdgeButton.setSelected(true);
         }
 
         App.mapInteractionModel.setEdgeID("");
         App.mapInteractionModel.clearPreviousNodeID();
     }
 
+
+    /**
+     * This is a helper to make the context menu for a node or an edge.
+     * @param NE this in a Node or an Edge. This isn't necessarily used to make the context menu, it is just needed to know if it is a node or an edge menu
+     * @param x this is the x coordinate of the context menu
+     * @param y this is the y coordinate of the context menu
+     * @throws IOException this is just the usual thing. Have never seen it throw this exception but whatever....
+     */
     public void makeContextMenu(Object NE, double x, double y ) throws IOException {
         AnchorPane contextAnchor;
         if(NE.getClass() == Node.class){
@@ -649,5 +640,24 @@ public class MapBuilderBaseController {
         pane.getChildren().add(contextAnchor);
         App.mapInteractionModel.selectedContextBox = contextAnchor;
 
+    }
+
+
+    /**
+     * This sets the mouse coordinates
+     * @param e this is the event. this has to be passed in to do the scaling stuff
+     */
+    public void setMouseCoordinates(MouseEvent e){
+        Affine invMatrix = null;
+        try {
+            invMatrix = map.getAffine().createInverse();
+        } catch (NonInvertibleTransformException nonInvertibleTransformException) {
+            nonInvertibleTransformException.printStackTrace();
+        }
+        Point2D realPoint = invMatrix.transform(e.getX(),e.getY());
+
+        double x = (realPoint.getX()) + map.getLayoutX();
+        double y = (realPoint.getY()) + map.getLayoutY();
+        App.mapInteractionModel.setCoords(new double[]{x,y});
     }
 }
