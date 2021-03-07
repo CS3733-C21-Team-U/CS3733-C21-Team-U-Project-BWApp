@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class MapData extends Data{
     public MapData(){
         connect();
+        getLongnames();
     }
 
     public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
@@ -55,7 +56,7 @@ public class MapData extends Data{
 
     public HashMap<String, String> getLongnames(){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select longName and nodeID from Nodes where nodeType !=? and nodeType !=?";
+        String str = "select longName,nodeID from Nodes where nodeType !=? and nodeType !=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, "HALL");

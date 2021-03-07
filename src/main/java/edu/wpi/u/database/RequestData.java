@@ -21,9 +21,12 @@ public class RequestData extends Data{
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
     }
 
-
-    public void updateRequest(SpecificRequest obj){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
-        Request request= obj.getGenericRequest();
+    /**
+     * Updates a request by using its ID
+     * @param specificRequest the new request object
+     */
+    public void updateRequest(SpecificRequest specificRequest){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
+        Request request= specificRequest.getGenericRequest();
 
         String str = "update Requests set dateNeeded=? where requestID=?";
         try{
@@ -35,25 +38,13 @@ public class RequestData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-        updateField("Requests", "requestID", request.getRequestID(), "type", obj.getType());
-        updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
+        updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
+        updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
 
         Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
         request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
         addCommentToRequest(request.getRequestID(), c);
     }
-
-   /* public void updateRequest(Request request){ //
-        requestID, dateCreated, dateCompleted, description, title, type
-         *//*
-        System.out.println("Can anyone even hear me??????????????????????????????????");
-        if(request.getDateCompleted() != null) this.resolveRequest(request);
-        this.updRequestDescription(request.getRequestID(), request.getDescription());
-        this.updRequestTitle(request.getRequestID(), request.getTitle());
-        this.updRequestType(request.getRequestID(), request.getType());
-        this.updLocations(request.getRequestID(), request.getLocation());
-        this.updAssignees(request.getRequestID(), request.getAssignee());
-    }*/
 
     /**
      * Returns whether or not a request is active
@@ -320,19 +311,19 @@ public class RequestData extends Data{
     /**
      *
      * @param requestID - the request taken in
-     * @param c - the comment that will be connected with it using Comments table
+     * @param comment - the comment that will be connected with it using Comments table
      */
 
-    public void addCommentToRequest(String requestID, Comment c){
+    public void addCommentToRequest(String requestID, Comment comment){
         String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
-            ps.setString(2,c.getTitle());
-            ps.setString(3,c.getDescription());
-            ps.setString(4,c.getDescription());
-            ps.setString(5,c.getType().toString());
-            ps.setTimestamp(6,c.getTimestamp());
+            ps.setString(2,comment.getTitle());
+            ps.setString(3,comment.getDescription());
+            ps.setString(4,comment.getDescription());
+            ps.setString(5,comment.getType().toString());
+            ps.setTimestamp(6,comment.getTimestamp());
             ps.execute();
         }
         catch (Exception e) {
@@ -340,18 +331,16 @@ public class RequestData extends Data{
         }
     }
     /**
-     *
-     * @param requestID
-     * @param time
+     * Resolves a request
+     * @param requestID the id of the request
+     * @param timestamp when it was resolved
      */
-    public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
-        String str = "update Requests set dateCompleted=? where requestID=?";
+    public void resolveRequest(String requestID, Timestamp timestamp) { // TODO: Add resolve comment
+        String str = "update Requests set resolved=true where requestID=?";
         try {
-            Timestamp t = new Timestamp(time);
+            // todo : add
             PreparedStatement ps = conn.prepareStatement(str);
-//            java.sql.Date d = new java.sql.Date(time);
-            ps.setTimestamp(1, t);
-            ps.setString(2,requestID);
+            ps.setString(1,requestID);
             ps.execute();
         }
         catch (Exception e){
