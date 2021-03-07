@@ -21,20 +21,48 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-        dropGuests(); // TODO : Stop dropping values for demos
-        dropEmployee();
-        //StringProperty userIDfx,
-        // StringProperty namefx,
-        // StringProperty userNamefx,
-        // StringProperty passwordfx,
-        // StringProperty typefx,
-        // StringProperty phoneNumberfx,
-        // StringProperty emailfx,
-        // BooleanProperty deletedfx,
-        // StringProperty locationNodeIDfx) {
-//        printPatients();
-//        printGuest();
-//        printEmployees();
+//        dropGuests(); // TODO : Stop dropping values for demos
+//        dropEmployee();
+        //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+//        addEmployee(new Employee("debug", "debug", "debug", "debug", "debug", Role.DOCTOR, "debug", "UDEPT00101", false));
+//        addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
+//        addGuest(new Guest("debug", "debug", new Timestamp(System.currentTimeMillis()), "debugreason", false));
+        /*
+        String guestID,
+        String name,
+        Timestamp visitDate,
+        String visitReason,
+        boolean deleted
+
+        String userID,
+        String name,
+        String accountName,
+        String password,
+        String email,
+        Role type,
+        String phoneNumber,
+        String locationNodeID,
+        boolean deleted,
+        ArrayList<Appointment> appointments,
+        String providerName,
+        String parkingLocation,
+        String recommendedParkingLocation
+
+
+         StringProperty userIDfx,
+         StringProperty namefx,
+         StringProperty userNamefx,
+         StringProperty passwordfx,
+         StringProperty typefx,
+         StringProperty phoneNumberfx,
+         StringProperty emailfx,
+         BooleanProperty deletedfx,
+         StringProperty locationNodeIDfx) {
+         printPatients();
+         printGuest();
+         printEmployees();
+*/
+
     }
 
     /**
@@ -264,7 +292,7 @@ public class UserData extends Data{
             ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
+                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  Role.GUEST, rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -417,7 +445,7 @@ public class UserData extends Data{
                 String guestId = rs.getString("guestID");
                 Timestamp visitDate = rs.getTimestamp("visitDate");
                 String visitReason = rs.getString("visitReason");
-                return new Guest(guestId,name, visitDate, visitReason, false);
+                return new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false);
             }
         }catch (Exception e){
             e.printStackTrace();

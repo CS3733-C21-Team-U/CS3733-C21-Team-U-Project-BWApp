@@ -38,33 +38,10 @@
                   </Label>
                </children>
             </HBox>
-            <TableView fx:id="guestTableView" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                  <TableColumn fx:id="guestIDColumn" prefWidth="75.0" text="guestID" />
-                <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Name" />
-                  <TableColumn fx:id="userNameColumn" prefWidth="98.99996948242188" text="Username" />
-                  <TableColumn fx:id="passwordColumn" prefWidth="92.0" text="Password" />
-                  <TableColumn fx:id="userTypeColumn" prefWidth="48.0" text="User Type" />
-                  <TableColumn fx:id="emailColumn" prefWidth="97.0" text="Email" />
-                  <TableColumn fx:id="phoneNumberColumn" prefWidth="96.0" text="Phone Number" />
-                  <TableColumn fx:id="appDateColumn" prefWidth="428.0" text="AppDate" />
-              </columns>
-            </TableView>
             <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin></JFXButton>
-            <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                  <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="employeeID" />
-                <TableColumn fx:id="employeeNameTableColumn" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="employeeUserNameColumn" prefWidth="98.99996948242188" text="Username" />
-                  <TableColumn fx:id="employeePasswordColumn" prefWidth="91.0" text="Password" />
-                  <TableColumn fx:id="employeeUserTypeColumn" prefWidth="113.0" text="User Type" />
-                  <TableColumn fx:id="employeeEmailColumn" prefWidth="159.0" text="Email" />
-                  <TableColumn fx:id="employeePhoneNumberColumn" prefWidth="194.0" text="Phone Number" />
-              </columns>
-            </TableView>
             <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

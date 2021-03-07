@@ -33,6 +33,7 @@ public class UserService {
         ObservableList<User> result = FXCollections.observableArrayList();
         result.addAll(ud.getEmployees());
         result.addAll(ud.getPatients());
+        result.addAll(ud.getGuests());
         return result;
     }
 
@@ -51,14 +52,29 @@ public class UserService {
      */
     public void setGuests() {this.guests = ud.getGuests();}
 
+    /**
+     * This function if for debugging purposes and assumes the Guest in already in the database
+     * Sets the active user to a guest
+     * @param name name of guest
+     */
     public void setGuest(String name){
        this.activeUser = ud.setGuest(name);
     }
-
+    /**
+     * This function if for debugging purposes and assumes the Patient in already in the database
+     * Sets the active user to a patient
+     * @param username username of patient
+     * @param password password of patient
+     */
     public void setPatient(String username, String password){
         this.activeUser = ud.setPatient(username,password);
     }
-
+    /**
+     * This function if for debugging purposes and assumes the Employee in already in the database
+     * Sets the active user to a employee
+     * @param username username of employee
+     * @param password password of employee
+     */
     public void setEmployee(String username, String password){
         this.activeUser = ud.setEmployee(username,password);
     }
@@ -303,7 +319,7 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Guest newGuest = new Guest(id, name, visitDate, visitReason, deleted);
+        Guest newGuest = new Guest(id, name, Role.GUEST, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }
