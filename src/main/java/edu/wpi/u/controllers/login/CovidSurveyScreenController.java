@@ -54,21 +54,19 @@ public class CovidSurveyScreenController {
     }
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setGuest("patient");
+        App.userService.setGuest("debug");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        //TODO: the set user!
-        App.userService.setPatient("patient", "patient");
+        App.userService.setPatient("debug", "debug");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
-        //TODO: this is broken!!!
-        App.userService.setEmployee("admin", "admin");
+        App.userService.setEmployee("debug", "debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
