@@ -249,4 +249,16 @@ public class NewMainPageController {
     public void handleExpandButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(false);
     }
+
+    /**
+     * Sends users from the main pathfinding page the About Page
+     * @throws Exception
+     * Author Lily
+     */
+    @FXML public void handleAboutPage() throws Exception {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/BaseAboutPage.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
 }

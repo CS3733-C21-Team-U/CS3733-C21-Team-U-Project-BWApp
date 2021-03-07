@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" stylesheets="@css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AboutController">
+   <children>
+      <VBox layoutX="330.0" layoutY="78.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="89.0" prefWidth="1700.0">
+               <children>
+                  <Label styleClass="headline-1" text="About Us" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="1700.0">
+               <children>
+                  <Label styleClass="headline-2" text="Project Sponsors" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="1700.0" spacing="50.0">
+               <children>
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1700.0">
+                     <children>
+                        <HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1700.0" spacing="230.0">
+                           <children>
+                              <ImageView fitHeight="185.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/logo.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="185.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/WPI.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="185.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/Wilson%20Wong.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="185.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/Andrew%20Bonaventura.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="125.0" prefWidth="1700.0" spacing="160.0">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="217.0" styleClass="headline-3" text="Brigham and Women's Hospital Representative Andre Shinn" textAlignment="CENTER" wrapText="true" />
+                              <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="242.0" styleClass="headline-3" text="Worcester Polytechnic Institute's Department of Computer Science" textAlignment="CENTER" wrapText="true" />
+                              <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="302.0" styleClass="headline-3" text="CS3733-C21 Software Engineering Professor Wilson Wong" textAlignment="CENTER" wrapText="true" />
+                              <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="194.0" styleClass="headline-3" text="Team Coach Andrew Bonaventura" textAlignment="CENTER" wrapText="true" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="520.0" prefWidth="1700.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="449.0" prefWidth="850.0" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="850.0">
+                           <children>
+                              <ImageView fx:id="aboutImage" fitHeight="314.0" fitWidth="452.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/brigham-health-logo-600x200.png" />
+                                 </image></ImageView>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="151.0" prefWidth="879.0">
+                           <children>
+                              <Label fx:id="aboutDescriptionLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="We would like to give a special thank you to Brigham and Women's Hospitalm, and their representative Andrew Shinn, for making this project possible with their cooperation, time, and input. We would also like to thank Worcester Polytechnic Institute, and specifically the Department of Computer Science, for making this course possible. Additionally, we would like to thank Professor Wilson Wong for advising this class, as well as our team coach Andew Bonaventura for providing guidance throughout this course to our team." textAlignment="CENTER" wrapText="true" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="850.0" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="850.0">
+                           <children>
+                              <Label styleClass="headline-2" text="Team Ultraviolet Unicorns" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="369.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="425.0" spacing="15.0">
+                                 <children>
+                                    <Label styleClass="headline-3" text="Lead Software Engineer" />
+                                    <Label styleClass="headline-3" text="Assistant Lead Software Engineer" />
+                                    <Label styleClass="headline-3" text="Assistant Lead Software Engineer" />
+                                    <Label styleClass="headline-3" text="Assistant Lead Software Engineer" />
+                                    <Label styleClass="headline-3" text="Documentation Analyst" />
+                                    <Label styleClass="headline-3" text="Product Owner" />
+                                    <Label styleClass="headline-3" text="Project Manager" />
+                                    <Label styleClass="headline-3" text="Scrum Master" />
+                                    <Label styleClass="headline-3" text="Full-Time Software Engineer" />
+                                    <Label styleClass="headline-3" text="Full-Time Software Engineer" />
+                                    <Label styleClass="headline-3" text="Full-Time Software Engineer" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="25.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="425.0" spacing="15.0">
+                                 <children>
+                                    <Label fx:id="kohmeiKadoyaLabel" onMouseEntered="#showKohmeiKadoya" onMouseExited="#hideIMG" styleClass="headline-3" text="Kohmei Kadoya" />
+                                    <Label fx:id="nevilleIngramLabel" onMouseEntered="#showNevilleIngram" onMouseExited="#hideIMG" styleClass="headline-3" text="Neville Ingram" />
+                                    <Label fx:id="kaamilLokhandwalaLabel" onMouseEntered="#showKaamilLokhandwala" onMouseExited="#hideIMG" styleClass="headline-3" text="Kaamil Lokhandwala" />
+                                    <Label fx:id="charlieKittlerLabel" onMouseEntered="#showCharlieKittler" onMouseExited="#hideIMG" styleClass="headline-3" text="Charles Kittler" />
+                                    <Label fx:id="lilyDurkinLabel" onMouseEntered="#showLilyDurkin" onMouseExited="#hideIMG" styleClass="headline-3" text="Lily Durkin" />
+                                    <Label fx:id="tylerSandervilleLabel" onMouseEntered="#showTylerSanderville" onMouseExited="#hideIMG" styleClass="headline-3" text="Tyler Sanderville" />
+                                    <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacbob Bernard" />
+                                    <Label fx:id="nickGaoLabel" onMouseEntered="#showNickGao" onMouseExited="#hideIMG" styleClass="headline-3" text="Tianyang Gao" />
+                                    <Label fx:id="willBurkeLabel" onMouseEntered="#showWillBurke" onMouseExited="#hideIMG" styleClass="headline-3" text="William Burke" />
+                                    <Label fx:id="michaelGearyLabel" onMouseEntered="#showMichaelGeary" onMouseExited="#hideIMG" styleClass="headline-3" text="Michael Geary" />
+                                    <Label fx:id="olaJacksonLabel" onMouseEntered="#showOlaJackson" onMouseExited="#hideIMG" styleClass="headline-3" text="Olajumoke Jackson" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="25.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton onAction="#handleAboutCancel" styleClass="button-contained" text="Return to Pathfinding" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
