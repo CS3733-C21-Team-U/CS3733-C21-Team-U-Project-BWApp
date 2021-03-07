@@ -2,17 +2,14 @@ package edu.wpi.u.controllers.user;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
-import edu.wpi.u.users.Employee;
-import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.User;
+import edu.wpi.u.users.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -20,8 +17,8 @@ import java.io.IOException;
 public class ViewUserListController {
 
 
-    public TableView guestTableView;
-    public TableView employeeTableView;
+    public TableView<Guest> guestTableView;
+    public TableView<Employee> employeeTableView;
     public JFXButton editSelectedButton;
     public TableColumn nameTableColumn;
     public ObservableList<User> guestList = FXCollections.observableArrayList();
@@ -40,11 +37,12 @@ public class ViewUserListController {
     public TableColumn employeePhoneNumberColumn;
 //    public TableView.TableViewSelectionModel guestSelectionModel = guestTableView.getSelectionModel();
 //    public TableView.TableViewSelectionModel employeeSelectionModel = employeeTableView.getSelectionModel();
-    public TableColumn guestIDColumn;
-    public TableColumn employeeIDColumn;
+//    public TableColumn guestIDColumn;
+//    public TableColumn employeeIDColumn;
     public JFXButton addUserButton;
     Guest myGuest;
     Employee myEmployee;
+    public TreeTableView<Patient> patientTreeTableView = new TreeTableView<>();
 
 //    TableColumn<User, String> guestTableColumnUserID = new TableColumn<User, String>("userID");
 //    TableColumn<User, String> guestTableColumnName = new TableColumn<>("name");
@@ -65,6 +63,33 @@ public class ViewUserListController {
 
 
     public void initialize() throws IOException {
+
+        TreeTableColumn<Patient, String> treeTableColumnName = new TreeTableColumn<>("Name");
+        treeTableColumnName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
+        patientTreeTableView.getColumns().add(treeTableColumnName);
+
+        TreeItem<Patient> patient1 = new TreeItem<>(new Patient("testree", "Test name", "t", "t", "t", Role.PATIENT, "9998887777", null,false,null,"tesprov",null,null));
+
+        TreeItem<Patient> patients = new TreeItem<>(new Patient("Column id", "name col"));
+        patients.getChildren().add(patient1);
+
+        patientTreeTableView.setRoot(patients);
+        /*
+    String userID,
+    String name,
+    String accountName,
+    String password,
+    String email,
+    Role type,
+    String phoneNumber,
+    String locationNodeID,
+    boolean deleted,
+    ArrayList<Appointment> appointments,
+    String providerName,
+    String parkingLocation,
+    String recommendedParkingLocation) {
+ */
+
 //        guestTableView.getColumns().add(guestTableColumnUserID);
 //        guestTableView.getColumns().add(guestTableColumnName);
 //        guestTableView.getColumns().add(guestTableColumnUserName);
@@ -85,32 +110,32 @@ public class ViewUserListController {
         myEmployee = App.selectedEmployee;
 
         //PropertyValueFactory factoryUserID = new PropertyValueFactory<>("Name");
-        guestIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
-        userNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
-        userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
-        appDateColumn.setCellValueFactory(new PropertyValueFactory<User, String>("AppointmentDate"));
-
-        employeeIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
-        employeeNameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
-        employeeUserNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
-        employeePasswordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
-        employeeUserTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
-        employeeEmailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
-        employeePhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
-
-        //PropertyValueFactory factory = new PropertyValueFactory<>("Name");
-        //nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"))
-
-        guestList.addAll(App.userService.getGuests());
-        guestTableView.setItems(guestList);
-     //   guestTableView.getItems().add(App.userService.getGuests());
-
-        employeeList.addAll(App.userService.getEmployees());
-        employeeTableView.setItems(employeeList);
+//        guestIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
+//        nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+//        userNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
+//        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
+//        userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
+//        emailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
+//        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
+//        appDateColumn.setCellValueFactory(new PropertyValueFactory<User, String>("AppointmentDate"));
+//
+//        employeeIDColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userID"));
+//        employeeNameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"));
+//        employeeUserNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("UserName"));
+//        employeePasswordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Password"));
+//        employeeUserTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Type"));
+//        employeeEmailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Email"));
+//        employeePhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<User, String>("PhoneNumber"));
+//
+//        //PropertyValueFactory factory = new PropertyValueFactory<>("Name");
+//        //nameTableColumn.setCellValueFactory(new PropertyValueFactory<User, String>("Name"))
+//
+//        guestList.addAll(App.userService.getGuests());
+//        guestTableView.setItems(guestList);
+//     //   guestTableView.getItems().add(App.userService.getGuests());
+//
+//        employeeList.addAll(App.userService.getEmployees());
+//        employeeTableView.setItems(employeeList);
     }
 
     public void handleEditUserList(ActionEvent actionEvent) throws IOException {
@@ -123,14 +148,14 @@ public class ViewUserListController {
 
     public void handleEditGuestList(ActionEvent actionEvent) throws IOException {
         App.isEdtingGuest = true;
-        myGuest = (Guest) guestTableView.getSelectionModel().getSelectedItem();
+        myGuest = guestTableView.getSelectionModel().getSelectedItem();
         App.selectedGuest = myGuest;
         handleEditUserList(actionEvent);
     }
 
     public void handleEditEmpList(ActionEvent actionEvent) throws IOException {
         App.isEdtingGuest = false;
-        myEmployee = (Employee) employeeTableView.getSelectionModel().getSelectedItem();
+        myEmployee = employeeTableView.getSelectionModel().getSelectedItem();
         App.selectedEmployee = myEmployee;
         handleEditUserList(actionEvent);
     }
@@ -142,17 +167,4 @@ public class ViewUserListController {
         anchor.getChildren().add(root);
     }
 
-    //getColumns(.add(treeTableColumnUserID));
-
-//   @Override
-//   public void handle(MouseEvent t)
-//   {
-//       TableCell c;
-//       c = (TableCell) t.getSource();
-//       c.getIndex();
-//       PanelController.selectedItem = c.getIndex();}
-//
-//
-//    public void handleEditUser() {
-//    }
 }

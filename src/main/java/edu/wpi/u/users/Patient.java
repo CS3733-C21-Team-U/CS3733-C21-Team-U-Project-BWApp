@@ -32,13 +32,17 @@ public class Patient extends User{
     String parkingLocation,
     String recommendedParkingLocation) {
  */
-
     public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
         super(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted);
         this.appointments = appointments;
         this.providerName = providerName;
         this.parkingLocation = parkingLocation;
         this.recommendedParkingLocation = recommendedParkingLocation;
+    }
+
+    public Patient(String s, String s1) {
+        this.userID = s;
+        this.name = s1;
     }
 
     @Override
