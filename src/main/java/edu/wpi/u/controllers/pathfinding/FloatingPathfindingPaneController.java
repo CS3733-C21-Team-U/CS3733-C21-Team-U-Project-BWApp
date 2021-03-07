@@ -45,6 +45,11 @@ public class FloatingPathfindingPaneController {
         targetNode = "START";
     }
 
+    /**
+     * Sends users from the main pathfinding page the About Page
+     * @throws Exception
+     * Author Lily
+     */
     @FXML public void handleAboutPage() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/BaseAboutPage.fxml"));
