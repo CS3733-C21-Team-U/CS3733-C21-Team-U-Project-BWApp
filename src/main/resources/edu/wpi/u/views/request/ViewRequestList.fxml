@@ -21,7 +21,7 @@
                <children>
                   <Label styleClass="headline-2" text="My Serivce Requests" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton styleClass="button-contained" text="NEW REQUEST">
+                  <JFXButton onAction="#handleNewRequestButton" styleClass="button-contained" text="NEW REQUEST">
                      <graphic>
                         <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.5" scaleY="0.5" styleClass="on-primary" />
                      </graphic>
@@ -47,7 +47,7 @@
             </ScrollPane>
          </center>
          <right>
-            <AnchorPane prefHeight="900.0" prefWidth="290.0" style="-fx-background-color: lighjtgreyu;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="900.0" prefWidth="290.0" style="-fx-background-color: lighjtgrey;" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="92.0" layoutY="176.0" text="To be used for filtering" />
                </children></AnchorPane>

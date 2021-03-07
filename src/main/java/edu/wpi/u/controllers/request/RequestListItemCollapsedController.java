@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.SVGPath;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,11 +35,11 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     //public boolean isCollapsed = true;
     @FXML public Label requestItemTitleLabel;
-    @FXML public JFXChipView requestItemLocationChipView;
+//    @FXML public JFXChipView requestItemLocationChipView;
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
-    @FXML public SVGPath requestIcon;
+//    @FXML public SVGPath requestIcon;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
@@ -51,7 +52,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
-//        requestItemDate2BCompletedLabel.setText(parent.request.getGenericRequest().getDateNeeded());
+        requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
+        requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
+        requestItemRequestTypeLabel.setText(parent.request.getType());
     }
 
     public void handleShowDetailButton(ActionEvent actionEvent) throws IOException {

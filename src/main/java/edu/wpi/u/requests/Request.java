@@ -41,6 +41,9 @@ public class Request {
     public Timestamp getDateCreated() {
         return getPrimaryComment().timestamp;
     }
+    public String getCreator() {
+        return getPrimaryComment().author;
+    }
     public Timestamp getDateNeeded() {
         return dateNeeded;
     }

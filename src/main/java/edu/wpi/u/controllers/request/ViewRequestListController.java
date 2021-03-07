@@ -33,22 +33,26 @@ public class ViewRequestListController {
 
         ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
         //TODO: Remove (for debug since line above doesn't return anything)
+        ArrayList<String> sampleArray = new ArrayList<String>();
+        sampleArray.add("Field 1");
+        sampleArray.add("Field 2");
+
         MaintenanceRequest testRequest = new MaintenanceRequest();
         Comment primaryComment = new Comment("Primary Comment","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
         ArrayList<Comment> commentlist = new ArrayList<Comment>();
         commentlist.add(primaryComment);
-        Request request1 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), new ArrayList<String>(),new ArrayList<String>(),commentlist);
+        Request request1 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray,sampleArray,commentlist);
         testRequest.setRequest(request1);
-        testRequest.setSpecificData(new ArrayList<String>());
+        testRequest.setSpecificData(sampleArray);
         listOfRequests.add(testRequest);
 
         MaintenanceRequest testRequest2 = new MaintenanceRequest();
         Comment primaryComment2 = new Comment("Seccond title for new request","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
         ArrayList<Comment> commentlist2 = new ArrayList<Comment>();
         commentlist2.add(primaryComment2);
-        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), new ArrayList<String>(),new ArrayList<String>(),commentlist2);
+        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray, sampleArray,commentlist2);
         testRequest2.setRequest(request2);
-        testRequest2.setSpecificData(new ArrayList<String>());
+        testRequest2.setSpecificData(sampleArray);
         listOfRequests.add(testRequest2);
         //End Remove
 
@@ -91,7 +95,7 @@ public class ViewRequestListController {
 //                    controller.requestIcon.setContent("M0 0h24v24H0V0zM20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z");
 //                    break;
 //                case "Medical":
-//                    controller.requestIcon.setContent("M0 0h24v24H0V0zM21 5h-2.64l1.14-3.14L17.15 1l-1.46 4H3v2l2 6-2 6v2h18v-2l-2-6 2-6V5zm-3.9 8.63L18.89 19H5.11l1.79-5.37.21-.63-.21-.63L5.11 7h13.78l-1.79 5.37-.21.63.21.63zM13 9h-2v3H8v2h3v3h2v-3h3v-2h-3z");
+//                    controller.requestIcon.setContent("M0 0h24v24H0V0zM21 5h-2.64l1.14-3.14L17.15 1l-1.46 4H3v2l2 6-2 6v2h18v-2l-2-6 2-6V5zm-3.9 8.63L18.89 19H5.11l1.79-5.37.21-.63-.21-.63L5.11 7h13.78l-1.79 5.37-.21.63.21.63z M13 9h-2v3H8v2h3v3h2v-3h3v-2h-3z");
 //                    break;
 //                case "Gift":
 //                    controller.requestIcon.setContent("M0 0h24v24H0V0zM19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z");
