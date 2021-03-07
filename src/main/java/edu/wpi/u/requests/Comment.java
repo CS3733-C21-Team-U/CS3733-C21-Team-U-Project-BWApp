@@ -7,7 +7,6 @@ public class Comment{
     String author;
     CommentType type;
     Timestamp timestamp;
-    Request parent;
 
     public Comment(String title, String description, String author, CommentType type, Timestamp timestamp) {
         this.title = title;

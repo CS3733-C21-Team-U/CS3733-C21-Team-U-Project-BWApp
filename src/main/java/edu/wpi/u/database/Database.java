@@ -1,5 +1,7 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.requests.CommentType;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -101,6 +103,10 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
 
+                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(100), author varchar(50), type varchar(50), created timestamp)";
+                PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
+                commentStatement.execute();
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -122,7 +128,6 @@ public class Database {
         try {
             String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
             String[] columns = content.split("\n", 2);
-            //String[] attributes = content.split(","); TODO: Make table columns from header values
             columns[1] += "\n";
             File temp = new File(tempPath);
             if(temp.createNewFile()){
@@ -153,7 +158,7 @@ public class Database {
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if(f.delete()){
-            System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
+            System.out.println("File deleted when saving");
         }
         String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
@@ -227,10 +232,7 @@ public class Database {
                 s.execute(str);
                 str = "delete from Assignments";
                 s.execute(str);
-                str = "delete from Maintenance";
-                s.execute(str);
-                str = "delete from Laundry";
-                s.execute(str);
+
             }
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
@@ -251,12 +253,7 @@ public class Database {
             s.execute(str);
             str = "drop Assignments";
             s.execute(str);
-            str = "drop Maintenance";
-            s.execute(str);
-            str = "drop Laundry";
-            s.execute(str);
-            //str = "delete from Security";
-            //s.execute(str);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,6 +268,7 @@ public class Database {
         saveCSV( "Locations", "Locations.csv","Test");
         saveCSV("Nodes", "MapUAllNodes.csv", "Test");
         saveCSV( "Edges", "MapUAllEdges.csv","Test");
+        saveCSV( "Comments", "Comments.csv","Test");
     }
 
     public void makeCSVDependant(boolean yes){

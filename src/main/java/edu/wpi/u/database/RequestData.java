@@ -224,6 +224,30 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param requestID - the request taken in
+     * @param c - the comment that will be connected with it using Comments table
+     */
+//    public void addCommenttoRequest(String requestID, Comment c){
+//        String str = "insert into Comments(locationID, requestID, nodeID) values (?,?,?)";
+//        try{
+//            PreparedStatement ps = conn.prepareStatement(str);
+//            ps.setString(1,requestID+"_"+nodeID);
+//            ps.setString(2,requestID);
+//            ps.setString(3,nodeID);
+//            ps.execute();
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    /**
+     *
+     * @param requestID
+     * @param time
+     */
     public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
