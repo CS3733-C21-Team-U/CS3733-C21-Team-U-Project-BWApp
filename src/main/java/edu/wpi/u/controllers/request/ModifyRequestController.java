@@ -17,12 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class ModifyRequestController {
 
@@ -120,11 +115,11 @@ public class ModifyRequestController {
         makeEditDescriptionField.setText(currRequest.getDescription());
 
         // todo: fixed but test
-        for (String l : App.requestService.getAssignees(currRequest.getRequestID())) { //Locations
+        for (String l : currRequest.getLocations()) { //Locations
             makeEditLocationChipView.getChips().add(l);
         }
 
-        for (String a : App.requestService.getLocations(currRequest.getRequestID())) { //Assignees
+        for (String a : currRequest.getAssignees()) { //Assignees
             makeEditStaffChipView.getChips().add(a);
         }
     }
@@ -164,8 +159,8 @@ public class ModifyRequestController {
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
             Timestamp date= new Timestamp(System.currentTimeMillis());
             currRequest.setDateNeeded(date);
-            currRequest.setAssignee(assigneesToAdd);
-            currRequest.setLocation(locationsToAdd);
+            currRequest.setAssignees(assigneesToAdd);
+            currRequest.setLocations(locationsToAdd);
 
 //            //TODO: FIX THIS DATE STUFF - DOES NOT UPDATE
 //            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();

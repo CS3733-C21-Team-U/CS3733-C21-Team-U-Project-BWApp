@@ -35,7 +35,7 @@ public class ViewRequestListController {
             String temp = req.getTitle();
             controller.myRequestID = req.getRequestID();
             controller.requestItemTitleLabel.setText(temp);
-            controller.requestItemLocationChipView.getChips().addAll(req.getLocations());
+            controller.requestItemLocationChipView.getChips().addAll(App.requestService.getLocations(req.getRequestID())); // todo : fixed
             controller.requestItemDescriptionLabel.setText(req.getDescription());
             controller.requestItemCreatorLabel.setText("");
 

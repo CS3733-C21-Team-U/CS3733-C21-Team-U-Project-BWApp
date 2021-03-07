@@ -6,23 +6,23 @@ import java.util.ArrayList;
 public class Request {
     private String requestID;
     private Timestamp dateNeeded;
-    private ArrayList<String> location;
-    private ArrayList<String> assignee;
-    private ArrayList<Comment> comments = new ArrayList<Comment>();
+    private ArrayList<String> locations;
+    private ArrayList<String> assignees;
+    private ArrayList<Comment> comments = new ArrayList<>();
 
-    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> locations, ArrayList<String> assignees, Comment comment) {
         this.requestID = requestID;
         this.dateNeeded = dateNeeded;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = locations;
+        this.assignees = assignees;
         this.comments.add(comment);
     }
 
-    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, ArrayList<Comment> comments) {
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> locations, ArrayList<String> assignees, ArrayList<Comment> comments) {
         this.requestID = requestID;
         this.dateNeeded = dateNeeded;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = locations;
+        this.assignees = assignees;
         this.comments = comments;
     }
 
@@ -31,8 +31,8 @@ public class Request {
         this.dateNeeded = needDate;
         getPrimaryComment().description = description;
         getPrimaryComment().title = title;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = location;
+        this.assignees = assignee;
         getPrimaryComment().author = creator;
     }
     public String getRequestID() {
@@ -61,8 +61,8 @@ public class Request {
     public String getTitle() {
         return getPrimaryComment().title;
     }
-    public ArrayList<String> getLocation() {
-        return location;
+    public ArrayList<String> getLocations() {
+        return locations;
     }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
@@ -76,12 +76,12 @@ public class Request {
     public void setTitle(String title) {
         getPrimaryComment().title = title;
     }
-    public void setLocation(ArrayList<String> location) {
-        this.location = location;
+    public void setLocations(ArrayList<String> locations) {
+        this.locations = locations;
     }
-    public ArrayList<String> getAssignee() {return assignee;}
-    public void setAssignee(ArrayList<String> assignee) {
-        this.assignee = assignee;
+    public ArrayList<String> getAssignees() {return assignees;}
+    public void setAssignees(ArrayList<String> assignees) {
+        this.assignees = assignees;
     }
 
     public void resolveRequest(Comment c) {
