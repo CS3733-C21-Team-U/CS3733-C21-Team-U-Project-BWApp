@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.user.ModifyUserController">
+   <children>
+      <VBox layoutX="210.0" layoutY="49.0" prefHeight="449.0" prefWidth="810.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <Label styleClass="headline-2" text="Edit User" />
+            <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Edit Username" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" top="15.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="nameTextField" labelFloat="true" promptText="Edit Name" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="emailTextField" labelFloat="true" promptText="Edit Email" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Edit Phone #" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXTextField fx:id="passwordTextField" labelFloat="true" promptText="Edit User Password" text="test">
+               <VBox.margin>
+                  <Insets right="1200.0" top="30.0" />
+               </VBox.margin></JFXTextField>
+            <JFXComboBox fx:id="userTypeComboBox" labelFloat="true" prefHeight="23.0" prefWidth="475.0" promptText="Edit User Type">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></JFXComboBox>
+            <HBox prefHeight="38.0" prefWidth="1675.0">
+               <children>
+                  <JFXDatePicker fx:id="appointmentDatePicker" overLay="true" prefHeight="30.0" prefWidth="475.0" promptText="Edit Next Appt">
+                     <HBox.margin>
+                        <Insets right="66.0" />
+                     </HBox.margin>
+                  </JFXDatePicker>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <JFXButton fx:id="editUserButton" buttonType="RAISED" onAction="#handleEditUser" prefHeight="36.0" prefWidth="475.0" styleClass="button-contained" text="Apply Changes">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></JFXButton>
+            <JFXButton fx:id="cancelButton" onAction="#handleCancelButton" prefHeight="36.0" prefWidth="475.0" styleClass="button-outlined" text="Cancel">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

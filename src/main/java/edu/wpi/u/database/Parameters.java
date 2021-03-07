@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class Parameters {
     private String fieldName;
     private String fieldToUpd;
+    private String updatedValue;
 
     public Parameters(String fieldName, String fieldToUpd) {
         this.fieldName = fieldName;

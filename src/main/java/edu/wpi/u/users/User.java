@@ -1,22 +1,27 @@
 package edu.wpi.u.users;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.u.algorithms.Node;
 
-public class User extends RecursiveTreeObject<User> {
+/*
+Users table
+Employees id references Users
+Patient id references Users
+ */
+
+public abstract class User {
     protected String userID;
     protected String name;
     protected String userName;
     protected String password;
-    protected StaffType type;
+    protected Role type;
     protected String phoneNumber;
-    protected boolean deleted;
     protected String email;
+    protected boolean deleted;
+    protected String locationNodeID; // TODO MOVE
 
-    public User(){
+    public User(){}
 
-    }
-
-    public User(String userID, String name, String accountName, String password, String email, StaffType type, String phoneNumber,boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -25,16 +30,17 @@ public class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.locationNodeID = locationNodeID;
     }
 
     /**
      * This function will be called by UserService to update the ArrayList of Users / the active user
-     * @param name
-     * @param userName
-     * @param password
-     * @param type
+     * @param name the name
+     * @param userName the username
+     * @param password the password
+     * @param type the role type
      */
-    public void editUser(String name, String userName, String password, String email, StaffType type, String phoneNumber, boolean deleted){
+    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         this.name = name;
         this.userName = userName;
         this.password = password;
@@ -44,31 +50,17 @@ public class User extends RecursiveTreeObject<User> {
         this.email = email;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLocationNodeID() {
+        return locationNodeID;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLocationNodeID(String locationNodeID) {
+        this.locationNodeID = locationNodeID;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getUserID() {
+        return userID;
     }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserID() {return userID;}
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -98,11 +90,35 @@ public class User extends RecursiveTreeObject<User> {
         this.password = password;
     }
 
-    public StaffType getType() {
+    public Role getType() {
         return type;
     }
 
-    public void setType(StaffType type) {
+    public void setType(Role type) {
         this.type = type;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

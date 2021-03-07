@@ -3,11 +3,11 @@ package edu.wpi.u.database;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.models.MapManager;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 
 public class MapData extends Data{
     public MapData(){
@@ -36,6 +36,7 @@ public class MapData extends Data{
         }
         return 1;
     }
+
     public int updateCoords(String node_id, double new_x, double new_y) {
         try {
             String str = "update Nodes set xcoord=?, ycoord=? where nodeID=?";
@@ -50,6 +51,25 @@ public class MapData extends Data{
             return 0;
         }
         return 1;
+    }
+
+    public HashMap<String, String> getLongnames(){
+        HashMap<String,String> result = new HashMap<>();
+        String str = "select longName and nodeID from Nodes where nodeType !=? and nodeType !=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, "HALL");
+            ps.setString(2, "WALK");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.put(rs.getString("longName"), rs.getString("nodeID"));
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public int updFloor(String node_id, String new_floor_number) {
@@ -265,7 +285,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                ArrayList<StaffType> perms = this.getUserTypes(id);
+                ArrayList<Role> perms = this.getUserTypes(id);
                  mm.addEdge(id,start,end, perms);
             }
             rs2.close();
@@ -322,15 +342,15 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @return Arraylist of Strings, representing types of users with permission
      */
-    public ArrayList<StaffType> getUserTypes(String edgeID) {
-        ArrayList<StaffType> userTypes = new ArrayList<>();
+    public ArrayList<Role> getUserTypes(String edgeID) {
+        ArrayList<Role> userTypes = new ArrayList<>();
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                userTypes.add(StaffType.valueOf(rs.getString("userType")));
+                userTypes.add(Role.valueOf(rs.getString("userType")));
             }
             rs.close();
         } catch (Exception e) {
@@ -345,14 +365,14 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @param permissions - new permission to be added
      */
-    public void updatePermissions(String edgeID, ArrayList<StaffType> permissions){
+    public void updatePermissions(String edgeID, ArrayList<Role> permissions){
         try {
             String str = "delete from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,edgeID);
             ps.execute();
             // Add function
-            for(StaffType user: permissions){
+            for(Role user: permissions){
                 addPermission(edgeID, user);
             }
         } catch (SQLException e) {
@@ -366,7 +386,7 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @param staffType - New permission to be added
      */
-    public void addPermission(String edgeID, StaffType staffType){
+    public void addPermission(String edgeID, Role staffType){
         try {
             String str = "insert into Permissions (permissionID, edgeID, userType) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);

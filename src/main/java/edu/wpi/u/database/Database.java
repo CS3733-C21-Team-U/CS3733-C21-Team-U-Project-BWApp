@@ -15,7 +15,8 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;bootUser=admin;bootPassword=bwdbpassword";
+    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
+    private final static String url = "jdbc:derby:BWdb;create=true";
 
     private Database() {
         driver();
@@ -30,6 +31,11 @@ public class Database {
         private static final Database db = new Database();
     }
 
+    /**
+     * Singleton helper to keep Database instance singular
+     *
+     * @return the database class reference
+     */
     public static Database getDB() {
         return SingletonHelper.db;
     }
@@ -79,17 +85,26 @@ public class Database {
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
-                //TODO: Change to employees and guests
-                //TODO: Check for username, phone number, or email
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
                 String tbl7 =
-                        "create table Guests (guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
+                        "create table Guests (guestID varchar(50) not null, name varchar(50), visitDate timestamp, visitReason varchar(250), deleted boolean, primary key(guestID))";
                 PreparedStatement ps7 = conn.prepareStatement(tbl7);
                 ps7.execute();
+                // TODO : REQUEST WILL HAVE PARKING LOCATION
+                String tblPatient =
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50) references Nodes, recommendedParkingLocation varchar(100), primary key(patientID))";
+                PreparedStatement psPatient = conn.prepareStatement(tblPatient);
+                psPatient.execute();
+
+                //TODO : MOVE INTO ASSIGNMENTS
+                String tblAppointments =
+                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
+                PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
+                psAppointments.execute();
 
                 String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
@@ -98,7 +113,7 @@ public class Database {
                 String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
-
+                // TODO : Change from arrayList to String
                 String permissionsInit = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
@@ -117,7 +132,7 @@ public class Database {
     /**
      * Will read the csv file from a given path
      *
-     * @param filePath the path to be read from
+     * @param filePath  the path to be read from
      * @param tableName the table to load the data from the csv into
      */
     public void readCSV(String filePath, String tableName){
@@ -157,8 +172,8 @@ public class Database {
      */
     public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
-        if(f.delete()){
-            System.out.println("File deleted when saving");
+        if (f.delete()) {
+            System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
         }
         String str = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE ('APP','" + tableName.toUpperCase() + "','" + filePath + "',',',null,null)";
         try {
@@ -182,7 +197,12 @@ public class Database {
         }
     }
 
-    public void printRequests(String aTable) { //what is happening here?
+    /**
+     * This will print all of the requests from a Request table
+     *
+     * @param aTable table name
+     */
+    public void printRequestTable(String aTable) {
         try {
             String str = "select * from " + aTable;
             PreparedStatement ps = conn.prepareStatement(str);
@@ -197,6 +217,11 @@ public class Database {
         }
     }
 
+    /**
+     * Checks to see if the Nodes table is populated and assumes the rest of the tables are created if it is
+     *
+     * @return true if no tables have been created, false otherwise
+     */
     public static boolean isTableEmpty() {
         try {
             DatabaseMetaData dmd = conn.getMetaData();
@@ -208,6 +233,11 @@ public class Database {
         return false;
     }
 
+    /**
+     * Drops a table or all if the tableName = "all"
+     *
+     * @param tableName the table to drop or "all"
+     */
     public void dropValues(String tableName) {
         try {
             Statement s = conn.createStatement();
@@ -215,7 +245,7 @@ public class Database {
             s.execute(str);
             str = "alter table Assignments drop column requestID";
             s.execute(str);
-            str= "delete from " + tableName;
+            str = "delete from " + tableName;
             s.execute(str);
             if (str.equals("all")){
                 str = "alter table Locations drop column requestID";
@@ -239,19 +269,22 @@ public class Database {
         }
     }
 
+    /**
+     * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
+     */
     public void deleteTables() {
         //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
-            String str = "drop Nodes";
+            String str = "drop table Nodes";
             s.execute(str);
-            str = "drop Edges";
+            str = "drop table Edges";
             s.execute(str);
-            str = "drop Requests";
+            str = "drop table Requests";
             s.execute(str);
-            str = "drop Locations";
+            str = "drop table Locations";
             s.execute(str);
-            str = "drop Assignments";
+            str = "drop table Assignments";
             s.execute(str);
 
         } catch (Exception e) {
@@ -261,20 +294,27 @@ public class Database {
 
     //TODO: Test
 
-
-    public void saveAll(){
-        saveCSV( "Requests", "Requests.csv","Test");
-        saveCSV( "Assignments", "Assignments.csv","Test");
-        saveCSV( "Locations", "Locations.csv","Test");
+    /**
+     * Saves all tables to respective CSV files (ie: Nodes table saved to Nodes.csv)
+     */
+    public void saveAll() {
+        saveCSV("Requests", "Requests.csv", "Test");
+        saveCSV("Assignments", "Assignments.csv", "Test");
+        saveCSV("Locations", "Locations.csv", "Test");
         saveCSV("Nodes", "MapUAllNodes.csv", "Test");
         saveCSV( "Edges", "MapUAllEdges.csv","Test");
         saveCSV( "Comments", "Comments.csv","Test");
     }
 
-    public void makeCSVDependant(boolean yes){
+    /**
+     * Will make the database not persistent in between sessions and reliant on the loading of CSV files on app startup
+     *
+     * @param yes whether or not to make Database CSV dependent
+     */
+    public void makeCSVDependant(boolean yes) {
 
-        if(!yes) return;
-        dropValues("all");
+        if (!yes) return;
+        //dropValues("all");
         deleteTables();
         readCSV("Requests.csv", "Requests");
         readCSV("Locations.csv", "Locations");
@@ -283,14 +323,15 @@ public class Database {
         readCSV("OutsideMapEdges.csv", "Edges");
     }
 
-
-
-    public void stop() {
-        try{
-           // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        /**
+         * Stops the database on app shutdown
+         * TODO : Enable and test
+         */
+        public void stop () {
+            try {
+                // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
