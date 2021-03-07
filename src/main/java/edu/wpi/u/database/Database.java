@@ -280,39 +280,39 @@ public class Database {
      *
      * @param tableName the table to drop or "all"
      */
-//    public void dropValues(String tableName) {
-//        try {
-//            Statement s = conn.createStatement();
-//            String str = "alter table Locations drop column requestID";
-//            s.execute(str);
-//            str = "alter table Assignments drop column requestID";
-//            s.execute(str);
-//            str = "delete from " + tableName;
-//            s.execute(str);
-//            if (str.equals("all")) {
-//                str = "alter table Locations drop column requestID";
+    public void dropValues(String tableName) {
+        try {
+            Statement s = conn.createStatement();
+            String str = "alter table Locations drop column requestID";
+            s.execute(str);
+            str = "alter table Assignments drop column requestID";
+            s.execute(str);
+            str = "delete from " + tableName;
+            s.execute(str);
+            if (str.equals("all")) {
+                str = "alter table Locations drop column requestID";
+                s.execute(str);
+                str = "alter table Assignments drop column requestID";
+                s.execute(str);
+                str = "delete from Nodes";
+                s.execute(str);
+                str = "delete from Edges";
+                s.execute(str);
+                str = "delete from Requests";
+                s.execute(str);
+                str = "delete from Locations";
+                s.execute(str);
+                str = "delete from Assignments";
+                s.execute(str);
+//                str = "delete from Maintenance";
 //                s.execute(str);
-//                str = "alter table Assignments drop column requestID";
+//                str = "delete from Laundry";
 //                s.execute(str);
-//                str = "delete from Nodes";
-//                s.execute(str);
-//                str = "delete from Edges";
-//                s.execute(str);
-//                str = "delete from Requests";
-//                s.execute(str);
-//                str = "delete from Locations";
-//                s.execute(str);
-//                str = "delete from Assignments";
-//                s.execute(str);
-////                str = "delete from Maintenance";
-////                s.execute(str);
-////                str = "delete from Laundry";
-////                s.execute(str);
-//            }
-//        } catch (SQLException throwables) {
-//            //throwables.printStackTrace();
-//        }
-//    }
+            }
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+        }
+    }
 
     /**
      * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
