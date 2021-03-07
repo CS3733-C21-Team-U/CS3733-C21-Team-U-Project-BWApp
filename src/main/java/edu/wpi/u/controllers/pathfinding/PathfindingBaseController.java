@@ -111,9 +111,9 @@ public class PathfindingBaseController {
                     contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
                     contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-                    pane.getChildren().remove(App.mapInteractionModel.selecteContextBox);
+                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
                     pane.getChildren().add(contextAnchor);
-                    App.mapInteractionModel.selecteContextBox = contextAnchor;
+                    App.mapInteractionModel.selectedContextBox = contextAnchor;
                 }else{
 
                 }

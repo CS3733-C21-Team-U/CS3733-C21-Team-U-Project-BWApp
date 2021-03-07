@@ -139,12 +139,12 @@ public class ContextMenuNodeController {
             }
 
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
+            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
 
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
+            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         }
 
 
@@ -186,12 +186,12 @@ public class ContextMenuNodeController {
     public void handleDeleteButton() {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
             App.mapInteractionModel.setCurrentAction("NONE");
-            ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
+            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         } else {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-        ((Pane) App.mapInteractionModel.selecteContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selecteContextBox);
+        ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
     }
 
 

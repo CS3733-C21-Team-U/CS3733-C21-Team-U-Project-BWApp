@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MapInteractionModel {
 
 
-    private String currentAction = "NONE";
+    private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
     private String previousNodeID = "";
@@ -22,16 +22,25 @@ public class MapInteractionModel {
     public ArrayList<Node> pathPreview = new ArrayList<>();
     private String building = "Faulkner";
     public SimpleStringProperty editFlag = new SimpleStringProperty("");
-    public AnchorPane selecteContextBox;
+    public AnchorPane selectedContextBox;
     public AnchorPane selectedEdgeContextBox;
     public SimpleStringProperty mapImageResourcePathfinding = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public String floor = "G";
     public String floorPathfinding = "G";
-    public ArrayList<String> nodeIDList = new ArrayList<String>();
-    public ArrayList<String> edgeIDList = new ArrayList<String>();
+    public ArrayList<String> nodeIDList = new ArrayList<>();
+    public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
+
+
+    public void addToNodeIdList(String nodeID){
+        this.nodeIDList.add(nodeID);
+    }
+
+    public void resetNodeIDList(){
+        this.nodeIDList = new ArrayList<>();
+    }
 
     public String getPreviousPreviousNodeID() {
         return previousPreviousNodeID;
