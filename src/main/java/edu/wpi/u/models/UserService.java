@@ -16,15 +16,21 @@ public class UserService {
 
   //  Guest currentGuest = ud.getGuests().get(App.lastClickedGuestNumber);
 
-    static UserData ud = new UserData();
+    static UserData ud;
     //ArrayList<User> users = new ArrayList<>();
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     User activeUser = new User();
+
     //TODO : Add getEmps, getGuests
     public UserService() {
+        ud = new UserData();
         this.setEmployees();
         this.setGuests();
+    }
+
+    public UserService(String testURL){
+        ud = new UserData(testURL);
     }
 
     //public void addAuthyUser(String name,)

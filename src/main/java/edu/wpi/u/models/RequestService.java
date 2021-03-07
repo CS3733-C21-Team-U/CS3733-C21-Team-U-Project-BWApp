@@ -10,15 +10,20 @@ import java.util.Date;
 public class RequestService {
 
 
-  static RequestData rd = new RequestData();
+  static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public RequestService() {
+    rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
     for (SpecificRequest x : this.activeRequests){
-
       System.out.println("Req: "+ x.getGenericRequest().getRequestID());
     }
+  }
+
+  public RequestService(String testURL){
+    rd  = new RequestData(testURL);
+    this.activeRequests = rd.loadActiveRequests();
   }
 
   public void loadCSVFile(String path, String tableName){

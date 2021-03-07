@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.database.Database;
+import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.models.*;
 import org.junit.Test;
 
@@ -27,16 +28,17 @@ public class DatabaseTest {
     // TODO: Modify Data classes to support different url
     private static Database dbTest = Database.getDBTest();
     private static MapService mapServiceTest = new MapService(testURL);
+    private static RequestService requestServiceTest = new RequestService(testURL);
+    private static UserService userServiceTest = new UserService(testURL);
 
-    private static UserService userServiceTest = new UserService();
-    private static MapInteractionModel mapInteractionModelTest = new MapInteractionModel();
-    private static RequestService requestServiceTest = new RequestService();
-    private static AdminToolStorage AdminStorageTest = new AdminToolStorage();
-    private static PathHandling PathHandlingTest = new PathHandling();
-    private static UndoRedoService undoRedoServiceTest = new UndoRedoService();
+    // private static MapInteractionModel mapInteractionModelTest = new MapInteractionModel(); // for UI stuff?
+    // private static AdminToolStorage AdminStorageTest = new AdminToolStorage(); // not needed
+    // private static PathHandling PathHandlingTest = new PathHandling(); // not even used yet
+    // private static UndoRedoService undoRedoServiceTest = new UndoRedoService(); // used in UI, could be added for testing
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws InvalidEdgeException {
+        mapServiceTest.addNode("TEST1234",50,50,"1", "Faulkner", "HALL", "LOOOOONG", "SHORT");
+        mapServiceTest.deleteNode("TEST1234");
     }
 
 

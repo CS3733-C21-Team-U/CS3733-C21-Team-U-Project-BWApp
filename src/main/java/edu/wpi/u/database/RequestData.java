@@ -14,24 +14,10 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-        System.out.println("# of request items: " + getNumTableItems("Requests"));
-        //System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
-        //readCSV("Requests.csv", "Requests");
-       // readCSV("Locations.csv", "Locations");
-      //  readCSV("Assignments.csv", "Assignments");
-        printTableItem("Requests", "title");
-        LinkedList<String> l1 = new LinkedList<String>();
-        l1.add("UPARK00101");
-        LinkedList<String> s1 = new LinkedList<String>();
-        s1.add("Mary");
-        Date d = new Date(900);
-        //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
-      //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
+    }
 
-        //saveCSV("Requests", "Requests.csv", "Requests");
-        //saveCSV("Locations", "Locations.csv", "Location");
-      //  saveCSV("Assignments", "Assignments.csv", "Assignments");
-        //printRequests();
+    public RequestData(String testURL){
+        testConnect(testURL);
     }
 
 
