@@ -5,6 +5,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.animation.Interpolator;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -37,6 +39,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.function.BiPredicate;
 
 import static edu.wpi.u.users.StaffType.ADMIN;
 
@@ -57,6 +60,8 @@ public class NewMainPageController {
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
+    public JFXChipView chipView;
+    public JFXChipView chipViewOnly;
 
 
     AnchorPane rightServiceRequestPane;
@@ -68,6 +73,12 @@ public class NewMainPageController {
     public void initialize() throws IOException {
 
         App.themeSVG = themeIcon;
+
+        chipView.getChips().addAll("Start with one item");
+        chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
+//        chipView.setSelectionHandler();
+
+        chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
 
         listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
@@ -96,6 +107,32 @@ public class NewMainPageController {
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
         }
+
+//        chipView.getChips().addListener((new ListChangeListener<String>(){
+//
+//            @Override
+//            public void onChanged(Change<? extends String> c) {
+//                System.out.println("In onChange for newMainPage");
+//                ObservableList<String> currently = chipView.getChips();
+//                ObservableList<String> options = chipView.getSuggestions();
+//
+//                for(int i = 0; i < currently.size(); i++){
+//                    boolean isValid = false;
+//                    for(String option : options){
+//                        if(option.equals(currently.get(i))){
+//                            isValid = true;
+//                        }
+//                    }
+//                    if(!isValid){
+//                        currently.remove(i);
+//                        i--;
+//                    }
+//                }
+//
+//                chipView.getChips().clear();
+//                chipView.getChips().addAll(currently);
+//            }
+//        }));
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
@@ -166,5 +203,29 @@ public class NewMainPageController {
         App.mapInteractionModel.setNodeID(" ");
     }
 
+
+    public void onChipEnter(KeyEvent keyEvent) {
+////        System.out.println("In function");
+//        if(keyEvent.getCode() == KeyCode.ENTER){
+//            ObservableList<String> currently = chipView.getChips();
+//            ObservableList<String> options = chipView.getSuggestions();
+//
+//            for(int i = 0; i < currently.size(); i++){
+//                boolean isValid = false;
+//                for(String option : options){
+//                    if(option.equals(currently.get(i))){
+//                        isValid = true;
+//                    }
+//                }
+//                if(!isValid){
+//                    currently.remove(i);
+//                    i--;
+//                }
+//            }
+//
+//            chipView.getChips().clear();
+//            chipView.getChips().addAll(currently);
+//        }
+    }
 
 }
