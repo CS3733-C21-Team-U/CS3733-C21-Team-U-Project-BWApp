@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 public class MapService {
   static MapManager mm = new MapManager();
-  static MapData md;
+  public static MapData md; //Temporairly did this to acess md.getLong name - Kohmei
   public HashMap<String, Integer> currentIDNumber = new HashMap<>();
 
 
