@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -8,64 +10,136 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainHelpPageController">
    <children>
-      <StackPane fx:id="newMainPageStackPane" layoutX="340.0" layoutY="297.0" prefHeight="592.0" prefWidth="1057.0">
+      <VBox alignment="TOP_CENTER" layoutX="322.0" layoutY="97.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="573.0" prefWidth="1077.0">
+            <JFXButton fx:id="BackToMainPageButton" onAction="#handleBackToMainPageButton" prefHeight="30.0" prefWidth="145.0" text="Back to Main Page">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="1500.0" />
+               </VBox.margin>
+            </JFXButton>
+            <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-1" text="We're here to help" wrappingWidth="474.240234375">
+               <font>
+                  <Font size="49.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="150.0" />
+               </VBox.margin>
+            </Text>
+            <StackPane fx:id="newMainPageStackPane" prefHeight="592.0" prefWidth="1057.0">
                <children>
-                  <VBox prefHeight="458.0" prefWidth="492.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="1700.0">
                      <children>
-                        <JFXButton prefHeight="137.0" prefWidth="517.0" text="Accounts">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton onAction="#handleServicesButton" prefHeight="148.0" prefWidth="560.0" text="Services">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton prefHeight="178.0" prefWidth="492.0" text="Legal and privacy">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
+                        <VBox prefHeight="592.0" prefWidth="580.0">
+                           <children>
+                              <JFXButton onAction="#handleLogInButton" prefHeight="137.0" prefWidth="607.0" styleClass="button-contained" text="Log in">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleTwoFactorAButton" prefHeight="148.0" prefWidth="601.0" styleClass="button-contained" text="Two Factor Authorization">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleForgotPasswordButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="Forgot Password">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handlePathFindingButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="PathFinding">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleContactUsButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="Contact us">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleSettingPageButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="SettingPage">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="592.0" prefWidth="571.0">
+                           <children>
+                              <JFXButton onAction="#handleAddUserButton" prefHeight="145.0" prefWidth="582.0" styleClass="button-contained" text="Add User">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleEditUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="Edit User">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleViewUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="View User">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton onAction="#handleLoadAndSaveCSVButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="Load and Save CSV">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="50.0" right="50.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox prefHeight="592.0" prefWidth="571.0">
-                     <children>
-                        <JFXButton prefHeight="145.0" prefWidth="479.0" text="Covid-19">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton prefHeight="153.0" prefWidth="445.0" text="Insurance&amp;Payment">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton onAction="#handleContactUsButton" prefHeight="162.0" prefWidth="445.0" text="Contact us">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </VBox>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </HBox>
                </children>
-            </HBox>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </StackPane>
          </children>
-      </StackPane>
-      <Text fx:id="weAreHereToHelpTitle" layoutX="696.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We're here to help" wrappingWidth="578.240234375">
-         <font>
-            <Font size="49.0" />
-         </font>
-      </Text>
-      <JFXButton fx:id="BackToMainPageButton" layoutX="1498.0" layoutY="14.0" onAction="#handleBackToMainPageButton" prefHeight="30.0" prefWidth="145.0" text="Back to Main Page">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
+      </VBox>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>
