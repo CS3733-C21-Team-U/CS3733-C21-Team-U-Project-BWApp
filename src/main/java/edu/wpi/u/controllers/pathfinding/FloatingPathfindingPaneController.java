@@ -72,6 +72,18 @@ public class FloatingPathfindingPaneController {
                 textualDirections.setText(textualDirectionsMegaString);
             }
         });
+
+        App.mapInteractionModel.nodeIDForHover.addListener((observable, oldValue, newValue)  ->{
+            if(!startNodeID.equals("") && !App.mapInteractionModel.nodeIDForHover.getValue().equals("")){
+                try {
+                    path = App.mapService.runPathfinding(startNodeID,App.mapInteractionModel.nodeIDForHover.getValue());
+                } catch (PathNotFoundException e) {
+                    e.printStackTrace();
+                }
+                App.mapInteractionModel.pathPreview = path;
+                App.mapInteractionModel.pathPreviewFlag.set(String.valueOf(Math.random()));
+            }
+        });
     }
 
 }
