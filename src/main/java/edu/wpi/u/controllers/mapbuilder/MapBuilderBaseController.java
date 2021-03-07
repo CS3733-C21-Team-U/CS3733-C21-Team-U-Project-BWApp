@@ -266,10 +266,26 @@ public class MapBuilderBaseController {
                 double xdiff = e.getEndNode().getCords()[0]-e.getStartNode().getCords()[0];
                 double ydiff = e.getEndNode().getCords()[1]-e.getStartNode().getCords()[1];
                 FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
-                AnchorPane EdgeContextAnchor = new AnchorPane();
+                AnchorPane EdgeContextAnchor;
                 EdgeContextAnchor = edgeContextMenu.load();
-                ContextMenuEdgeController controller = edgeContextMenu.getController();
-
+                Circle previousCircle = findCircleFromNode(App.mapInteractionModel.getNodeID());
+                if(previousCircle != null){ //to prevent a null pointer when the previous node isn't being displayed
+                    previousCircle.setFill(Paint.valueOf(errorColor));
+                }
+                //find and set current edge to green
+                for(javafx.scene.Node n : nodesAndEdges.getChildren()){
+                    if(n.getId().equals(e.getEdgeID())){
+                        Line edge = (Line) n;
+                        edge.setStroke(Paint.valueOf("Green"));
+                    }
+                }
+                //find the old edge and reset its color
+                for(javafx.scene.Node n : nodesAndEdges.getChildren()){
+                    if(n.getId().equals(App.mapInteractionModel.previusEdgeID)){
+                        Line edge = (Line) n;
+                        edge.setStroke(Paint.valueOf(errorColor));
+                    }
+                }
                 EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
                 EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
                 pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
@@ -289,6 +305,14 @@ public class MapBuilderBaseController {
     public void handleNodeClicked(Node n) throws IOException {
         if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
             findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
+        }
+
+        //find the old edge and reset its color
+        for(javafx.scene.Node node : nodesAndEdges.getChildren()){
+            if(node.getId().equals(App.mapInteractionModel.getEdgeID())){
+                Line edge = (Line) node;
+                edge.setStroke(Paint.valueOf(errorColor));
+            }
         }
 
         App.mapInteractionModel.setCoords(new double[]{n.getCords()[0], n.getCords()[1]});

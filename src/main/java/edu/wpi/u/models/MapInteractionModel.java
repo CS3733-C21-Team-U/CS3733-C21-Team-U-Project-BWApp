@@ -17,6 +17,7 @@ public class MapInteractionModel {
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
+    public String previusEdgeID = "";
     private double Coords[] = new double[2];
     public SimpleStringProperty pathFlag = new SimpleStringProperty("");
     public SimpleStringProperty pathPreviewFlag = new SimpleStringProperty("");
@@ -112,6 +113,7 @@ public class MapInteractionModel {
     }
 
     public void setEdgeID(String edgeID) {
+        this.previusEdgeID = this.edgeID;
         this.edgeID = edgeID;
     }
 
