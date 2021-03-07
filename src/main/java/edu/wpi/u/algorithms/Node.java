@@ -64,6 +64,10 @@ public class Node {
     this.edges = new LinkedList<>();
     this.adjNodes = new LinkedList<>();
   }
+  public Node() {
+    this.edges = new LinkedList<>();
+    this.adjNodes = new LinkedList<>();
+  }
 
   public LinkedList<Node> whatAreAdjNodes(){
     return this.adjNodes;

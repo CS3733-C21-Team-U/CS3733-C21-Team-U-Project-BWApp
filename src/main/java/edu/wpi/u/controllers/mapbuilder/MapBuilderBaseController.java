@@ -74,7 +74,9 @@ public class MapBuilderBaseController {
         addEdgeButton.setTooltip(new Tooltip("Add Edge"));
         alineButton.setTooltip(new Tooltip("Aline Selected Nodes"));
         //handle converting converting clicks on the screen into map space
-        map.setOnMouseDragged(e ->{
+
+
+        map.setOnMouseDragged(e ->{//mouse dragging listener---------------------------------------------
             Affine invMatrix = null;
             try {
                 invMatrix = map.getAffine().createInverse();
@@ -86,10 +88,15 @@ public class MapBuilderBaseController {
             double x = (realPoint.getX()) + map.getLayoutX();
             double y = (realPoint.getY()) + map.getLayoutY();
             App.mapInteractionModel.setCoords(new double[]{x,y});
+
         });
 
-        // Click and scroll map view functionality
-        map.setOnMouseClicked(e -> {
+
+        map.setOnMouseClicked(e -> {//mouse clicking listener -----------------------------------------------
+            if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
+                findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
+            }//this makes sure any nodes that were previously clicked are changes back to the original red color
+
             Point2D pivotOnTarget = map.targetPointAt(new Point2D(e.getX(), e.getY()))
                     .orElse(map.targetPointAtViewportCentre());
             Affine invMatrix = null;
@@ -105,19 +112,10 @@ public class MapBuilderBaseController {
             App.mapInteractionModel.setCoords(new double[]{x,y});
 
 
-            // Trying add node context menu
             try {
                 if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-                    FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
-                    AnchorPane contextAnchor = new AnchorPane();
-                    contextAnchor = nodeContextMenu.load();
-                    ContextMenuNodeController controller = nodeContextMenu.getController();
-                    contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
-                    contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
-                    //clearing old context menus and setting new one
-                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                    pane.getChildren().add(contextAnchor);
-                    App.mapInteractionModel.selectedContextBox = contextAnchor;
+                    Node n = new Node();//jsut an empty node to make the context menu appear correctly
+                    makeContextMenu(n, App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1] );
                 }else{
 
                 }
@@ -141,17 +139,18 @@ public class MapBuilderBaseController {
         // Creating nodes and edges
         generateEdges(App.mapInteractionModel.floor);
         generateNodes(App.mapInteractionModel.floor);
-        //set maps?
-        App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{
+
+
+        App.mapInteractionModel.mapImageResource.addListener((observable, oldValue, newValue)  ->{//this is setting the listener for changing the maps when the floor is changed
             pane.getChildren().remove(node);
             node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
             if(App.mapInteractionModel.floor.equals("G")){
-                node.setFitWidth(2987);
+                node.setFitWidth(2987);//this is the correct width for the ground floor map
             } else{
-                node.setFitWidth(2470);
+                node.setFitWidth(2470);//this is the correct width for the regular floor map
             }
             node.setPreserveRatio(true);
-            pane.getChildren().add(node);
+            pane.getChildren().add(node);//adding the new image to the GesturePane
         });
 
         App.mapInteractionModel.editFlag.addListener((observable, oldValue, newValue)  ->{
@@ -159,7 +158,7 @@ public class MapBuilderBaseController {
             generateEdges(App.mapInteractionModel.floor);
             generateNodes(App.mapInteractionModel.floor);
         });
-    } // End of initialize
+    } // End of initialize-------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
@@ -298,6 +297,9 @@ public class MapBuilderBaseController {
      * @throws IOException
      */
     public void handleNodeClicked(Node n) throws IOException {
+        if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
+            findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf("B00020"));
+        }
 
         App.mapInteractionModel.setCoords(new double[]{n.getCords()[0], n.getCords()[1]});
 
@@ -310,14 +312,7 @@ public class MapBuilderBaseController {
                 }
             case "SELECT":
                 App.mapInteractionModel.setNodeID(n.getNodeID());
-                FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
-                AnchorPane contextAnchor;
-                contextAnchor = nodeContextMenu.load();
-                contextAnchor.setLayoutX(n.getCords()[0]);
-                contextAnchor.setLayoutY(n.getCords()[1]);
-                pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                pane.getChildren().add(contextAnchor);
-                App.mapInteractionModel.selectedContextBox = contextAnchor;
+                makeContextMenu(n, n.getCords()[0], n.getCords()[1]);//The creation of the context menu for the node
                 Circle clickedCircle = findCircleFromNode(n.getNodeID());
                 clickedCircle.setFill(Paint.valueOf(selectedColor));
                 Circle previousCircle = findCircleFromNode(App.mapInteractionModel.getPreviousNodeID());
@@ -371,23 +366,11 @@ public class MapBuilderBaseController {
                         edge.setVisible(true);
                         nodesAndEdges.getChildren().add(edge);
                     }
-                    // Spawning context menu
-                    FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
-                    AnchorPane EdgeContextAnchor = new AnchorPane();
-                    EdgeContextAnchor = edgeContextMenu.load();
-                    ContextMenuEdgeController controller = edgeContextMenu.getController();
-
                     if(c2 != null) {
-                        EdgeContextAnchor.setLayoutX(edge.getLayoutX() + (xdiff / 2));
-                        EdgeContextAnchor.setLayoutY(edge.getLayoutY() + (ydiff / 2));
+                        makeContextMenu(edge, edge.getLayoutX() + (xdiff / 2), edge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
                     }else{
-                        EdgeContextAnchor.setLayoutX(c1.getCenterX());
-                        EdgeContextAnchor.setLayoutY(c1.getCenterY());
+                        makeContextMenu(edge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
                     }
-                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                    pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-                    pane.getChildren().add(EdgeContextAnchor);
-                    App.mapInteractionModel.selectedContextBox = EdgeContextAnchor;
                 }
                 break;
             case "ALINE":
@@ -553,7 +536,7 @@ public class MapBuilderBaseController {
     public void handleSelectButton() {
         pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")){
+        if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
             App.mapInteractionModel.setCurrentAction("SELECT");
         }else{
             App.mapInteractionModel.setCurrentAction("NONE");
@@ -602,5 +585,22 @@ public class MapBuilderBaseController {
 
         App.mapInteractionModel.setEdgeID("");
         App.mapInteractionModel.clearPreviousNodeID();
+    }
+
+    public void makeContextMenu(Object NE, double x, double y ) throws IOException {
+        AnchorPane contextAnchor;
+        if(NE.getClass() == Node.class){
+            FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
+            contextAnchor = nodeContextMenu.load();
+        } else {
+            FXMLLoader edgeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuEdge.fxml"));
+            contextAnchor = edgeContextMenu.load();
+        }
+        contextAnchor.setLayoutX(x);
+        contextAnchor.setLayoutY(y);
+        pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+        pane.getChildren().add(contextAnchor);
+        App.mapInteractionModel.selectedContextBox = contextAnchor;
+
     }
 }
