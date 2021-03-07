@@ -80,7 +80,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(250),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated timestamp, dateCompleted timestamp,description varchar(250),title varchar(100),type varchar(50), dateNeeded timestamp, specificData varchar(250), primary key(requestID))";
 
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();

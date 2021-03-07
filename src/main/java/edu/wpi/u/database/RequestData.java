@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -14,10 +15,6 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-
-        //readCSV("Requests.csv", "Requests");
-       // readCSV("Locations.csv", "Locations");
-      //  readCSV("Assignments.csv", "Assignments");
         printTableItem("Requests", "title");
         LinkedList<String> l1 = new LinkedList<String>();
         l1.add("UPARK00101");
@@ -26,24 +23,14 @@ public class RequestData extends Data{
         Date d = new Date(900);
         //addRequest(new Request("Newest req", s1, d,null, "descript","title", l1, "type", "creator"));
       //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
-
-        //saveCSV("Requests", "Requests.csv", "Requests");
-        //saveCSV("Locations", "Locations.csv", "Location");
-      //  saveCSV("Assignments", "Assignments.csv", "Assignments");
-        //printRequests();
     }
 
 
     public void updateRequest(SpecificRequest obj){
         Request request= obj.getGenericRequest();
-        //requestID, dateCreated, dateCompleted, description, title, type
-       // System.out.println("Can anyone even hear me??????????????????????????????????");
-       // if(request.getDateCompleted() != null) this.resolveRequest(request);
         updateField("Requests", "requestID", request.getRequestID(), "description", request.getDescription());
         updateField("Requests", "requestID", request.getRequestID(), "title", request.getTitle());
         updateField("Requests", "requestID", request.getRequestID(), "type", obj.getType());
-        //this.updLocations(request.getRequestID(), request.getLocation());
-       // this.updAssignees(request.getRequestID(), request.getAssignee());
         updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
     }
 
@@ -77,17 +64,22 @@ public class RequestData extends Data{
         }
     }
 
-    public void updAssignees(String requestId, LinkedList<String> assignees){
+    /**
+     * Updates the list of assignees for a given requestID
+     * @param requestID the request id
+     * @param assignees the list of assignees for that request
+     */
+    public void updAssignees(String requestID, LinkedList<String> assignees){
         /*
         Take whole list: do new one
          */
         String str = "delete from Assignments where requestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, requestId);
+            ps.setString(1, requestID);
             ps.execute();
             for (String assignee : assignees) {
-                addAssignee(assignee,requestId);
+                addAssignee(assignee,requestID);
             }
             ps.close();
         }
@@ -162,7 +154,7 @@ public class RequestData extends Data{
         }
         return results;
     }
-   public void addRequest(SpecificRequest obj) { // TODO: Add to interface IRequest instead
+    public void addRequest(SpecificRequest obj) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";
         String str = "insert into Requests (requestID, dateCreated, dateCompleted, description, title, type, dateNeeded, specificData) values (?,?,?,?,?,?,?,?)";
@@ -196,19 +188,30 @@ public class RequestData extends Data{
         printTableItem("Requests", "specificData");
     }
 
-    public void addAssignee(String userID, String requestID){
+    /**
+     * Adds an assignee to a request
+     * @param employeeID user id of the assigned person
+     * @param requestID request id
+     */
+    public void addAssignee(String employeeID, String requestID){
         String str = "insert into Assignments(assignmentID, requestID, userID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID+"_"+userID);
+            ps.setString(1,requestID+"_"+employeeID);
             ps.setString(2,requestID);
-            ps.setString(3,userID);
+            ps.setString(3,employeeID);
             ps.execute();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Adds a location to a request
+     * @param nodeID node id
+     * @param requestID the request id
+     */
     public void addLocation(String nodeID, String requestID){
         String str = "insert into Locations(locationID, requestID, nodeID) values (?,?,?)";
         try{
@@ -222,14 +225,19 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Resolves a reuqest
+     * @param requestID the request id
+     * @param time the time is was completed
+     */
     public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {
+            Timestamp t = new Timestamp(time);
             PreparedStatement ps = conn.prepareStatement(str);
-           /* java.util.Date d = request.getDateCompleted();
-            java.sql.Date sqld = new java.sql.Date(d.getTime());*/
-            java.sql.Date d = new java.sql.Date(time);
-            ps.setDate(1, d);
+//            java.sql.Date d = new java.sql.Date(time);
+            ps.setTimestamp(1, t);
             ps.setString(2,requestID);
             ps.execute();
         }
@@ -238,6 +246,11 @@ public class RequestData extends Data{
         }
     }
 
+    /**
+     * Deletes a location assignment for a request
+     * @param requestID the request id
+     * @param nodeID the node id
+     */
     public void deleteLocation(String requestID, String nodeID){
         String str = "delete * from Locations where requestID=? and nodeID=?";
         try{
@@ -250,18 +263,30 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
-    public void deleteAssignment(String requestID, String userID){
+
+    /**
+     * Deletes an assignment for a request
+     * @param requestID the request id
+     * @param employeeID the user id
+     */
+    public void deleteAssignment(String requestID, String employeeID){
         String str = "delete * from Assignments where requestID=? and userID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
-            ps.setString(2,userID);
+            ps.setString(2,employeeID);
             ps.execute();
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    /**
+     * Updates the type of request of a given requestID
+     * @param requestID the requestId
+     * @param type the new type of request
+     */
     public void updRequestType(String requestID, String type) {
         String str = "update Requests set type=? where requestID=?";
         try {
