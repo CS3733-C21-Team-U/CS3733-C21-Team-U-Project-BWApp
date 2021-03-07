@@ -28,10 +28,13 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
             'net.kurobako:gesturefx:0.6.0',
+            'org.controlsfx:controlsfx:8.0.5'
+
     )
     compile group: 'org.asynchttpclient', name: 'async-http-client', version: '2.2.0'
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.slf4j:jcl-over-slf4j:1.7.25'
+    compile group: 'org.controlsfx', name: 'controlsfx', version: '8.0.5'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
     compile group: 'net.kurobako', name:'gesturefx', version: '0.6.0'
     compile 'org.slf4j:slf4j-api:1.7.30'
