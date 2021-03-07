@@ -35,11 +35,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <JFXTextArea fx:id="textualDirections" editable="false" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="430.0" styleClass="label" text="Text Directions">
+            <JFXTextArea fx:id="textualDirections" editable="false" maxWidth="1.7976931348623157E308" prefHeight="661.0" prefWidth="410.0" styleClass="label" text="Text Directions">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXTextArea>
+            <JFXButton text="About Us" />
          </children>
       </VBox>
    </children>
