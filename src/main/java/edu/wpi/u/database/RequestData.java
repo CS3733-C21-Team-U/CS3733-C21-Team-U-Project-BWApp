@@ -77,18 +77,6 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                /*
-                 String requestID,
-                 Timestamp dateCreated,
-                 Timestamp dateNeeded,
-                 Timestamp dateCompleted,
-                 String description,
-                 String title,
-                 LinkedList<String> locations,
-                 LinkedList<String> assignees,
-                 String creator) {
-
-                 */
                 result.add(new Request(rs.getString("requestId"),
                         rs.getTimestamp("dateCreated"),
                         rs.getTimestamp("dateNeeded"),
@@ -110,8 +98,8 @@ public class RequestData extends Data{
      * @param requestID the request ID
      * @return list of assignees
      */
-    public Timestamp getAssignees(String requestID){
-        Timestamp result = new ArrayList<>();
+    public ArrayList<String> getAssignees(String requestID){
+        ArrayList<String> result = new ArrayList<>();
         String str = "select * from Assignments where requestID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
@@ -119,6 +107,22 @@ public class RequestData extends Data{
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.add(rs.getString("employeeID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<String> getLocations(String requestID){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select * from Locations where requestID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, requestID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("nodeID"));
             }
         }catch (Exception e){
             e.printStackTrace();
