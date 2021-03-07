@@ -6,7 +6,10 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.TextualDirections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,13 @@ public class FloatingPathfindingPaneController {
     @FXML
     public void startNodeButtonHandler(){
         targetNode = "START";
+    }
+
+    @FXML public void handleAboutPage() throws Exception {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/BaseAboutPage.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 
     public void initialize(){

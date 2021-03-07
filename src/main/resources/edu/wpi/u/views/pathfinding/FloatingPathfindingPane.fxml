@@ -40,7 +40,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXTextArea>
-            <JFXButton text="About Us" />
+            <JFXButton onAction="#handleAboutPage" text="About Us" />
          </children>
       </VBox>
    </children>
