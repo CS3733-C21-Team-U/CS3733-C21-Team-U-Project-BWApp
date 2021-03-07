@@ -1,6 +1,8 @@
 package edu.wpi.u.controllers.login;
 
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,6 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class SelectUserScreenController {
-
-
 
 
     public void initialize() throws IOException {

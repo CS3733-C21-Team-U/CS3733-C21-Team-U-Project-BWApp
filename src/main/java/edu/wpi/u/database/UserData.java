@@ -631,6 +631,35 @@ public class UserData extends Data{
         }
     }
 
+    /*
+    providerName, parkingLocation, recommendedParkingLocation
+     */
+    public void addPatientParkingLocation(String patientID, String parkingLocation){
+        String str = "update Patients set parkingLocation=? where patientID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, parkingLocation);
+            ps.setString(2,patientID);
+            ps.executeUpdate();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addPatientRecommendedParkingLocation (String patientID, String recommendedParkingLocation){
+        String str = "update Patients set recommendedParkingLocation=? where patientID=?";
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds a patient to the table Patients
+     * @param patient the object containing all the information on the user
+     */
     public void addPatient(Patient patient) {
         String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?)";
         try {

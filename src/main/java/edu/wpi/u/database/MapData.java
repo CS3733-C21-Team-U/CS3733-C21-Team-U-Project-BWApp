@@ -7,6 +7,7 @@ import edu.wpi.u.users.Role;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapData extends Data{
     public MapData(){
@@ -49,6 +50,23 @@ public class MapData extends Data{
             return 0;
         }
         return 1;
+    }
+
+    public HashMap<String, String> getLongnames(){
+        HashMap<String,String> result = new HashMap<>();
+        String str = "select longName and nodeID from Nodes";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.put(rs.getString("longName"), rs.getString("nodeID"));
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public int updFloor(String node_id, String new_floor_number) {
