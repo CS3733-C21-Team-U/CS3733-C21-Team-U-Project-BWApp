@@ -145,6 +145,9 @@ public class ContextMenuNodeController {
             App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
+        } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
+            longNameText.setDisable(true);
+            shortNameText.setDisable(true);
         }
 
 
