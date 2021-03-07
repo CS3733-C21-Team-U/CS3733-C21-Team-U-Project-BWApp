@@ -119,14 +119,14 @@ public class ModifyRequestController {
         makeEditTitleField.setText(currRequest.getTitle());
         makeEditDescriptionField.setText(currRequest.getDescription());
 
-        //TODO: Probably broken
-//        for (String l : currRequest.getLocations()) { //Locations todo : userService
-//            makeEditLocationChipView.getChips().add(l);
-//        }
-//
-//        for (String a : currRequest.getAssignees()) { //Assignees
-//            makeEditStaffChipView.getChips().add(a);
-//        }
+        // todo: fixed but test
+        for (String l : App.requestService.getAssignees(currRequest.getRequestID())) { //Locations
+            makeEditLocationChipView.getChips().add(l);
+        }
+
+        for (String a : App.requestService.getLocations(currRequest.getRequestID())) { //Assignees
+            makeEditStaffChipView.getChips().add(a);
+        }
     }
 
     /**
@@ -157,8 +157,10 @@ public class ModifyRequestController {
             currRequest.setTitle(makeEditTitleField.getText());
             currRequest.setDescription(makeEditDescriptionField.getText());
 
+            App.requestService.setAssignees(currRequest.getRequestID(), assigneesToAdd);
+            App.requestService.setLocations(currRequest.getRequestID(), locationsToAdd);
 //            currRequest.setAssignees(assigneesToAdd);
-//            currRequest.setLocations(locationsToAdd); todo : fix
+//            currRequest.setLocations(locationsToAdd); todo : fixed but test ^
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
             Timestamp date= new Timestamp(System.currentTimeMillis());
             currRequest.setDateNeeded(date);

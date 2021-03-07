@@ -139,7 +139,7 @@ public class RequestData extends Data{
      * @param requestID the request id
      * @param locations the list of locations
      */
-    public void updLocations(String requestID, LinkedList<String> locations){
+    public void updLocations(String requestID, ArrayList<String> locations){
 
         //Take whole list: do new one
         String str = "delete from Locations where requestID=?";
@@ -162,7 +162,7 @@ public class RequestData extends Data{
      * @param requestID the request id
      * @param assignees the list of assignees for that request
      */
-    public void updAssignees(String requestID, LinkedList<String> assignees){
+    public void updAssignees(String requestID, ArrayList<String> assignees){
         /*
         Take whole list: do new one
          */
