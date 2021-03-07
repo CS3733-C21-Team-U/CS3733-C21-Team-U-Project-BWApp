@@ -27,7 +27,7 @@ public class Request {
     }
 
 
-    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, String type, ArrayList<String> assignee, String creator) {
+    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee, String creator) {
         this.dateNeeded = needDate;
         getPrimaryComment().description = description;
         getPrimaryComment().title = title;
@@ -102,5 +102,26 @@ public class Request {
 
     public Comment getPrimaryComment(){
         return this.comments.get(0);
+    }
+
+
+    /*
+    * Comment:
+    * Title
+    *
+    * Description
+    *
+    * By who, date
+    *
+    * */
+
+
+    //UPDATE: title, description
+    //title chnaged from "booty" to "Charlie"
+    //description chnaged from "booty" to "Charlie"
+    private String updateRecord(String fieldName, String oldVal, String newVal){
+        String str;
+        str = fieldName + " changed from " + oldVal + " to " + newVal;
+        return str;
     }
 }

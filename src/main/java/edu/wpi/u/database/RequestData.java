@@ -34,7 +34,7 @@ public class RequestData extends Data{
     }
 
 
-    public void updateRequest(SpecificRequest obj){
+    public void updateRequest(SpecificRequest obj){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
         Request request= obj.getGenericRequest();
         //requestID, dateCreated, dateCompleted, description, title, type
        // System.out.println("Can anyone even hear me??????????????????????????????????");
@@ -45,6 +45,10 @@ public class RequestData extends Data{
         //this.updLocations(request.getRequestID(), request.getLocation());
        // this.updAssignees(request.getRequestID(), request.getAssignee());
         updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
+
+        Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
+        request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
+        addCommenttoRequest(request.getRequestID(), c);
     }
 
    /* public void updateRequest(Request request){ //
@@ -149,7 +153,7 @@ public class RequestData extends Data{
 //                }
                 ArrayList<Comment> comments = new ArrayList<Comment>();
                 try {
-                    String str4 = "select * from Comments where requestID=? order by created";
+                    String str4 = "select * from Comments where requestID=? order by created DESC";
                     PreparedStatement ps4 = conn.prepareStatement(str4);
                     ps4.setString(1,id);
                     ResultSet rs4 = ps4.executeQuery();
