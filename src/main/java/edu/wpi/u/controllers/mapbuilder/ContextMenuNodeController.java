@@ -59,6 +59,7 @@ public class ContextMenuNodeController {
         });
 
 
+
         Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
         ArrayList<String> nodeAList = new ArrayList<String>();
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -78,6 +79,9 @@ public class ContextMenuNodeController {
 
         if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
             doneButton.setText("Stop adding");
+        } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT") && App.mapInteractionModel.nodeIDList.size() > 1){
+            longNameText.setDisable(true);
+            shortNameText.setDisable(true);
         }else{
             longNameText.setText(thisNode.getLongName());
             shortNameText.setText(thisNode.getShortName());
@@ -146,8 +150,11 @@ public class ContextMenuNodeController {
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
-            longNameText.setDisable(true);
-            shortNameText.setDisable(true);
+            for(String curNodeID : App.mapInteractionModel.nodeIDList){
+                Node curNode = App.mapService.getNodeFromID(curNodeID);
+                App.undoRedoService.updateNode(curNodeID,curNode.getCords()[0],curNode.getCords()[1],getNodeType(),curNode.getLongName(),curNode.getShortName());
+            }
+            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         }
 
 
@@ -190,6 +197,10 @@ public class ContextMenuNodeController {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
             App.mapInteractionModel.setCurrentAction("NONE");
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
+        } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
+            for(String curNodeID : App.mapInteractionModel.nodeIDList){
+                App.undoRedoService.deleteNode(curNodeID);
+            }
         } else {
             App.undoRedoService.deleteNode(App.mapInteractionModel.getNodeID());
         }

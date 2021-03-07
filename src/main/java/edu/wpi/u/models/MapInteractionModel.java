@@ -40,10 +40,8 @@ public class MapInteractionModel {
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){
             this.nodeIDList.addFirst(nodeID);
-            deselectedNodeID = "";
         }else {
             this.nodeIDList.remove(nodeID);
-            deselectedNodeID = nodeID;
         }
 
     }
@@ -103,6 +101,7 @@ public class MapInteractionModel {
 
     public void setNodeID(String nodeID) {
         if(!this.nodeID.get().equals(nodeID)) {
+            deselectedNodeID = this.nodeID.get();
             this.nodeID.set(nodeID);
             addToNodeIdList(nodeID);
         }
