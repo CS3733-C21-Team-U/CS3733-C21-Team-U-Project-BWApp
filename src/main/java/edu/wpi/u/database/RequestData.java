@@ -114,34 +114,38 @@ public class RequestData extends Data{
                 String title = rs.getString("title");
                 String type = rs.getString("type");
                 String specificData = rs.getString("specificData");
+
                 ArrayList<String> locations = new ArrayList<String>();
-//                try { // TODO : UNCOMMENT AND FIX
-//                    String str2 = "select * from Locations where requestID=?";
-//                    PreparedStatement ps2= conn.prepareStatement(str2);
-//                    ps2.setString(1,id);
-//                    ResultSet rs2 = ps2.executeQuery();
-//                    while (rs2.next()){
-//                        locations.add(rs2.getString("nodeID"));
-//                    }
-//                    rs2.close();
-//                }
-//                catch (Exception e){
-//                    e.printStackTrace();
-//                }
+                // Start of broken code
+                try { // TODO : UNCOMMENT AND FIX
+                    String str2 = "select * from Locations where requestID=?";
+                    PreparedStatement ps2= conn.prepareStatement(str2);
+                    ps2.setString(1,id);
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()){
+                        locations.add(rs2.getString("nodeID"));
+                    }
+                    rs2.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 ArrayList<String> assignees = new ArrayList<String>();
-//                try {
-//                    String str3 = "select * from Assignments where requestID=?";
-//                    PreparedStatement ps3 = conn.prepareStatement(str3);
-//                    ps3.setString(1,id);
-//                    ResultSet rs3 = ps3.executeQuery();
-//                    while (rs3.next()){
-//                        assignees.add(rs3.getString("userID"));
-//                    }
-//                    rs3.close();
-//                }
-//                catch (Exception e){
-//                    e.printStackTrace();
-//                }
+                try {
+                    String str3 = "select * from Assignments where requestID=?";
+                    PreparedStatement ps3 = conn.prepareStatement(str3);
+                    ps3.setString(1,id);
+                    ResultSet rs3 = ps3.executeQuery();
+                    while (rs3.next()){
+                        assignees.add(rs3.getString("userID"));
+                    }
+                    rs3.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                // End of broken code
+
                 ArrayList<Comment> comments = new ArrayList<Comment>();
                 try {
                     String str4 = "select * from Comments where requestID=? order by created DESC";
@@ -170,6 +174,8 @@ public class RequestData extends Data{
         }
         return results;
     }
+
+
    public void addRequest(SpecificRequest obj) { // TODO: Add to interface IRequest instead
        //
         //requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(200),title varchar(50),type varchar(50),  primary key(requestID))";

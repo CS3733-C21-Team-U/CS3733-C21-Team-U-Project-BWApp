@@ -3,7 +3,12 @@ package edu.wpi.u;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.models.*;
+import edu.wpi.u.requests.*;
+import edu.wpi.u.users.Role;
 import org.junit.Test;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class DatabaseTest {
 
@@ -36,8 +41,33 @@ public class DatabaseTest {
     // private static UndoRedoService undoRedoServiceTest = new UndoRedoService(); // used in UI, could be added for testing
 
     public static void main(String[] args) throws InvalidEdgeException {
+        // Locations for testing
+        ArrayList<String> locations = new ArrayList<String>();
+        locations.add("TEST1234");
+
+        // Stafflist for testing
+        ArrayList<String> staffList = new ArrayList<String>();
+        staffList.add("BillWurke"); // TODO: does the list of staff represent their names or id's (auto generated)
+
+        // Comment for testing
+        Comment testComment = new Comment("WillComment", "This comment is for testing purposes", "BillWurke", CommentType.PRIMARY, new Timestamp(0));
+
+        // Request for testing
+        ArrayList<String> specificFields = new ArrayList<>();
+        specificFields.add("Machine 1");
+        specificFields.add("High"); // Is this a valid string for priority??
+        SpecificRequest result = new RequestFactory().makeRequest("Maintenance");
+        Request newRequest = new Request("TestWill", new Timestamp(System.currentTimeMillis()), locations, staffList, testComment);
+        result.setRequest(newRequest);
+        result.setSpecificData(specificFields);
+
         mapServiceTest.addNode("TEST1234",50,50,"1", "Faulkner", "HALL", "LOOOOONG", "SHORT");
-        mapServiceTest.deleteNode("TEST1234");
+        mapServiceTest.addNode("TEST5678",100,100,"1", "Faulkner", "HALL", "LOOOOONG", "SHORT");
+        userServiceTest.addEmployee("BillWurke", "willdabeast29", "cookies123", "billwurke7@gmail.com", Role.ADMIN, "4016491137", "TEST1234",false);
+
+
+        requestServiceTest.addRequest(result);
+
     }
 
 

@@ -10,7 +10,7 @@ import java.util.Date;
 public class RequestService {
 
 
-  static RequestData rd;
+  public static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public RequestService() {
@@ -28,7 +28,7 @@ public class RequestService {
    */
   public RequestService(String testURL){
     rd  = new RequestData(testURL);
-    this.activeRequests = rd.loadActiveRequests();
+    // this.activeRequests = rd.loadActiveRequests(); // TODO: Uncomment when loadActiveRequests() works
   }
 
   public void loadCSVFile(String path, String tableName){
