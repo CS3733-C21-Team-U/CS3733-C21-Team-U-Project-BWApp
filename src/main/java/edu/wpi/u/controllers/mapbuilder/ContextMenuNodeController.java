@@ -131,7 +131,7 @@ public class ContextMenuNodeController {
     }
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
-        if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
+        if(App.mapInteractionModel.getCurrentAction().equals("SELECT")) {
 
             if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getValue().equals("")){
                 Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());

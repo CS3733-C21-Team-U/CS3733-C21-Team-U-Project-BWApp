@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MapInteractionModel {
 
@@ -28,18 +29,18 @@ public class MapInteractionModel {
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public String floor = "G";
     public String floorPathfinding = "G";
-    public ArrayList<String> nodeIDList = new ArrayList<>();
+    public LinkedList<String> nodeIDList = new LinkedList<>();
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
 
 
     public void addToNodeIdList(String nodeID){
-        this.nodeIDList.add(nodeID);
+        this.nodeIDList.addFirst(nodeID);
     }
 
     public void resetNodeIDList(){
-        this.nodeIDList = new ArrayList<>();
+        this.nodeIDList = new LinkedList<>();
     }
 
     public String getPreviousPreviousNodeID() {
@@ -80,9 +81,8 @@ public class MapInteractionModel {
 
     public void setNodeID(String nodeID) {
         if(!this.nodeID.get().equals(nodeID)) {
-            previousPreviousNodeID = previousNodeID;
-            previousNodeID = this.nodeID.get();
             this.nodeID.set(nodeID);
+            addToNodeIdList(nodeID);
         }
     }
 
