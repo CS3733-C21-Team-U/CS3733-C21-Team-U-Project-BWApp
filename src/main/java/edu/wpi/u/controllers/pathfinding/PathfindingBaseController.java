@@ -7,23 +7,29 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.algorithms.getEdgesTest;
 import edu.wpi.u.controllers.mapbuilder.ContextMenuNodeController;
 import javafx.animation.Interpolator;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class PathfindingBaseController {
 
@@ -46,8 +52,9 @@ public class PathfindingBaseController {
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
     Group pathPreviewGroup = new Group();
-    Group nodesForPath_back = new Group();
-    Group nodesForPath_front = new Group();
+    Group pathBorder = new Group();
+    Group pathFill = new Group();
+    Group pathArrow = new Group();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -62,13 +69,10 @@ public class PathfindingBaseController {
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
         pane.getChildren().add(edgeNodeGroup);
-        edgeNodeGroup.toFront();
         pane.getChildren().add(pathPreviewGroup);
-        pathPreviewGroup.toFront();
-        pane.getChildren().add(nodesForPath_back);
-        nodesForPath_back.toFront();
-        pane.getChildren().add(nodesForPath_front);
-        nodesForPath_front.toFront();
+        pane.getChildren().add(pathBorder);
+        pane.getChildren().add(pathFill);
+        pane.getChildren().add(pathArrow);
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -146,7 +150,7 @@ public class PathfindingBaseController {
         });
 
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
             String floorStart = App.mapInteractionModel.path.get(0).getFloor();
             String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size()-1).getFloor();
             switch (floorStart){
@@ -175,17 +179,14 @@ public class PathfindingBaseController {
                     handleFloor5Button();
                     break;
             }
-            generateEdges(floorStart);
+            generateEdges(App.mapInteractionModel.floorPathfinding);
             generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
         App.mapInteractionModel.pathPreviewFlag.addListener((observable, oldValue, newValue)  ->{
             pathPreviewGroup.getChildren().clear();
-            generatePathPreview(App.mapInteractionModel.floor);
-            pathPreviewGroup.toFront();
-            edgeNodeGroup.toFront();
-            nodesForPath_back.toFront();
-            nodesForPath_front.toFront();
+            generatePathPreview(App.mapInteractionModel.floorPathfinding);
+            setMapItemsOrder();
         });
 
     } // End of initialize
@@ -216,14 +217,26 @@ public class PathfindingBaseController {
                 App.mapInteractionModel.nodeIDForHover.setValue(n.getNodeID());
             });
         edgeNodeGroup.getChildren().add(node1);
-        node1.toFront();
     }
 
+    /**
+     * sets the proper order for generated objects on the map
+     * @author Charles Kittler (cvkittler)
+     */
     private void setMapItemsOrder(){
         pathPreviewGroup.toFront();
         edgeNodeGroup.toFront();
-        nodesForPath_back.toFront();
-        nodesForPath_front.toFront();
+        pathBorder.toFront();
+        pathFill.toFront();
+        pathArrow.toFront();
+    }
+
+    private void clearMapItems(){
+        edgeNodeGroup.getChildren().clear();
+        pathPreviewGroup.getChildren().clear();
+        pathBorder.getChildren().clear();
+        pathFill.getChildren().clear();
+        pathArrow.getChildren().clear();
     }
 
 
@@ -243,8 +256,6 @@ public class PathfindingBaseController {
                 e.printStackTrace();
             }
         });
-        edgeNodeGroup.toFront();
-        pathPreviewGroup.toFront();
     }
 
 
@@ -254,83 +265,55 @@ public class PathfindingBaseController {
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
     String outlineColor = "ffbfbfff";
-    String fillColor = "ff8989ff";
-    public void placeEdgesHelper(Edge ed){
+    String fillColor = "e86060ff";
+    public void placeEdgesHelper(Edge ed, boolean forward){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
-        Line edge = new Line(), edgeBack = new Line();
-        edgeBack.setLayoutX(ed.getStartNode().getCords()[0]);
-        edgeBack.setStartX(0);
-        edgeBack.setLayoutY(ed.getStartNode().getCords()[1]);
-        edgeBack.setStartY(0);
-        edgeBack.setEndX(xdiff);
-        edgeBack.setEndY(ydiff);
-        edgeBack.setId(ed.getEdgeID()+"_back");
-        edgeBack.setStrokeWidth(20);
-        edgeBack.toFront();
-        edgeBack.setStroke(Paint.valueOf(outlineColor));
-        edgeBack.setVisible(true);
-        edgeNodeGroup.getChildren().add(edgeBack);
-        edge.setLayoutX(ed.getStartNode().getCords()[0]);
-        edge.setStartX(0);
-        edge.setLayoutY(ed.getStartNode().getCords()[1]);
-        edge.setStartY(0);
-        edge.setEndX(xdiff);
-        edge.setEndY(ydiff);
-        edge.setId(ed.getEdgeID()+"_fill");
-        edge.setStrokeWidth(10);
-        edge.toFront();
-        edge.setStroke(Paint.valueOf(fillColor));
-        edge.setVisible(true);
-        edgeNodeGroup.getChildren().add(edge);
-
-        Circle node1 = new Circle(), node2 = new Circle();
-        node1.setCenterX(ed.getStartNode().getCords()[0]);
-        node1.setCenterY(ed.getStartNode().getCords()[1]);
-        node1.setRadius(5*2);
-        node1.setId(ed.getStartNode().getNodeID() + "forPath_fill1");
-        node1.setFill(Paint.valueOf(fillColor));
-        node1.setVisible(true);
-
-        node2.setCenterX(ed.getEndNode().getCords()[0]);
-        node2.setCenterY(ed.getEndNode().getCords()[1]);
-        node2.setRadius(10*2);
-        node2.setId(ed.getStartNode().getNodeID() + "forPath_outline1");
-        node2.setFill(Paint.valueOf(outlineColor));
-        node2.setVisible(true);
-
-        node1.toFront();
-        node2.toFront();
-        if(!edgeNodeGroup.getChildren().contains(node1)){
-            nodesForPath_front.getChildren().add(node1);
-            nodesForPath_back.getChildren().add(node2);
-        }
-
-
-
-        Circle node3 = new Circle(), node4 = new Circle();
-        node3.setCenterX(ed.getEndNode().getCords()[0]);
-        node3.setCenterY(ed.getEndNode().getCords()[1]);
-        node3.setRadius(5*2);
-        node3.setId(ed.getEndNode().getNodeID() + "forPath_fill2");
-        node3.setFill(Paint.valueOf(fillColor));
-        node3.setVisible(true);
-
-        node4.setCenterX(ed.getEndNode().getCords()[0]);
-        node4.setCenterY(ed.getEndNode().getCords()[1]);
-        node4.setRadius(10*2);
-        node4.setId(ed.getEndNode().getNodeID() + "forPath_outline2");
-        node4.setFill(Paint.valueOf(outlineColor));
-        node4.setVisible(true);
-
-        node3.toFront();
-        node4.toFront();
-        if(!edgeNodeGroup.getChildren().contains(node3)){
-            nodesForPath_front.getChildren().add(node3);
-            nodesForPath_back.getChildren().add(node4);
-        }
+        Line fill = new Line(), backround = new Line();
+        backround.setLayoutX(ed.getStartNode().getCords()[0]);
+        backround.setStartX(0);
+        backround.setLayoutY(ed.getStartNode().getCords()[1]);
+        backround.setStartY(0);
+        backround.setEndX(xdiff);
+        backround.setEndY(ydiff);
+        backround.setId(ed.getEdgeID()+"_back");
+        backround.setStrokeWidth(20);
+        backround.setStroke(Paint.valueOf(outlineColor));
+        backround.setVisible(true);
+        backround.setStrokeLineCap(StrokeLineCap.ROUND);
+        pathBorder.getChildren().add(backround);
+        fill.setLayoutX(ed.getStartNode().getCords()[0]);
+        fill.setStartX(0);
+        fill.setLayoutY(ed.getStartNode().getCords()[1]);
+        fill.setStartY(0);
+        fill.setEndX(xdiff);
+        fill.setEndY(ydiff);
+        fill.setId(ed.getEdgeID()+"_fill");
+        fill.setStrokeWidth(10);
+        fill.setStroke(Paint.valueOf(fillColor));
+        fill.setVisible(true);
+        fill.setStrokeLineCap(StrokeLineCap.ROUND);
+        fill.getStrokeDashArray().addAll(1d, 20d);
+        pathFill.getChildren().add(fill);
+        start(fill, forward);
     }
 
+    public void start(Line fill, boolean forward) {
+
+        final double maxOffset = fill.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+        Timeline timeline = new Timeline();
+        if(forward) {
+            timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(fill.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.millis(2000), new KeyValue(fill.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
+        }else{
+            timeline = new Timeline(
+                    new KeyFrame(Duration.millis(2000), new KeyValue(fill.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.ZERO, new KeyValue(fill.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
+        }
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
 
 
     /**
@@ -349,27 +332,31 @@ public class PathfindingBaseController {
         previewEdge.setEndY(ydiff);
         previewEdge.setId(ed.getEdgeID() + "_preview");
         previewEdge.setStrokeWidth(7);
-        previewEdge.toFront();
         previewEdge.setStroke(Paint.valueOf("green"));
         previewEdge.setVisible(true);
         pathPreviewGroup.getChildren().add(previewEdge);
     }
 
     public void generateEdges(String floor){
-        getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
-        try {
-            if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
-                placeEdgesHelper(e);
+        LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
+        for(int i = 0;  i < edgePath.size(); i++){
+            if(i != edgePath.size() - 1){
+                if(edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getEndNode())){
+                    placeEdgesHelper(edgePath.get(i), true);
+                }else{
+                    placeEdgesHelper(edgePath.get(i), false);
+                }
+            }else{
+                if(edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getEndNode())){
+                    placeEdgesHelper(edgePath.get(i), false);
+                }else{
+                    placeEdgesHelper(edgePath.get(i), true);
+                }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        });
 
-        pathPreviewGroup.toFront();
-        edgeNodeGroup.toFront();
-        nodesForPath_back.toFront();
-        nodesForPath_front.toFront();
+        }
+
+        setMapItemsOrder();
     }
 
     public void generatePathPreview(String floor){
@@ -383,8 +370,7 @@ public class PathfindingBaseController {
                 ex.printStackTrace();
             }
         });
-        pathPreviewGroup.toFront();
-        edgeNodeGroup.toFront();
+        setMapItemsOrder();
     }
 
 
@@ -417,13 +403,12 @@ public class PathfindingBaseController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "G";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "G";
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
 
         }else{
             floorG.setSelected(true);
@@ -436,12 +421,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "1";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "1";
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             generateEdges("1");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor1.setSelected(true);
         }
@@ -453,12 +437,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "2";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "2";
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             generateEdges("2");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor2.setSelected(true);
         }
@@ -470,12 +453,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "3";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "3";
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             generateEdges("3");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor3.setSelected(true);
         }
@@ -487,12 +469,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "4";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "4";
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             generateEdges("4");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor4.setSelected(true);
         }
@@ -504,12 +485,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
-            edgeNodeGroup.getChildren().clear();
-            pathPreviewGroup.getChildren().clear();
-            App.mapInteractionModel.floor = "5";
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "5";
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             generateEdges("5");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor5.setSelected(true);
         }
