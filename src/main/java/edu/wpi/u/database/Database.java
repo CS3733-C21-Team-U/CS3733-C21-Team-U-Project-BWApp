@@ -1,5 +1,7 @@
 package edu.wpi.u.database;
 
+import edu.wpi.u.requests.CommentType;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +22,6 @@ public class Database {
         driver();
         connect();
         makeCSVDependant(false);
-        //dropValues("all");
         createTables();
     }
 
@@ -72,16 +73,15 @@ public class Database {
             if (isTableEmpty()) {
                 String tbl1 =
                         "create table Nodes (nodeID varchar(50) not null, xcoord int, ycoord int, floor varchar(50), building varchar(50), nodeType varchar(4), longName varchar(50), shortName varchar(20), teamAssigned varchar(50), primary key (nodeID))";
+
                 PreparedStatement ps1 = conn.prepareStatement(tbl1);
                 ps1.execute();
-
                 String tbl2 =
                         "create table Edges (edgeID varchar(50) not null, startID varchar(50), endID varchar(50), primary key(edgeID))";
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
                 String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated timestamp, dateCompleted timestamp,description varchar(250),title varchar(100),type varchar(50), dateNeeded timestamp, specificData varchar(250), primary key(requestID))";
-
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -117,51 +117,10 @@ public class Database {
                 String permissionsInit = "create table Permissions(permissionID varchar(50) not null, edgeID varchar(50) references Edges, userType varchar(50), primary key(permissionID))";
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
-                //Service Request Tables
-//                String tblMaintenance = "create table Maintenance(requestID varchar(50) references Requests, machineUsed varchar(50), priority int, primary key(requestID))";
-//                PreparedStatement maintenanceRQ = conn.prepareStatement(tblMaintenance);
-//                maintenanceRQ.execute();
-//
-//                String tblLaundry = "create table Laundry(requestID varchar(50) references Requests, dryStrength int, numLoad int, washStrength int, primary key(requestID))";
-//                PreparedStatement LaundryRQ = conn.prepareStatement(tblLaundry);
-//                LaundryRQ.execute();
-//
-//                String tblSanitation = "create table Sanitation(requestID varchar(50) references Requests, hazardLevel int, spillType varchar(50), primary key(requestID))";
-//                PreparedStatement SanitationRQ = conn.prepareStatement(tblSanitation);
-//                SanitationRQ.execute();
-//
-//                String tbAudioVisual = "create table AudioVisual(requestID varchar(50) references Requests, isAudio int, name varchar(50), primary key(requestID))";
-//                PreparedStatement AudioVisualRQ = conn.prepareStatement(tbAudioVisual);
-//                AudioVisualRQ.execute();
-//
-//                String tbFloral = "create table Floral(requestID varchar(50) references Requests, numFlowers int, recipient varchar(50), primary key(requestID))";
-//                PreparedStatement FloralRQ = conn.prepareStatement(tbFloral);
-//                FloralRQ.execute();
-//
-//                String tbMedical = "create table Medical(requestID varchar(50) references Requests, name varchar(50), quantity varchar(50), supplier varchar(50), primary key(requestID))";
-//                PreparedStatement MedicalRQ = conn.prepareStatement(tbMedical);
-//                MedicalRQ.execute();
-//
-//                String tbReligious = "create table Religious(requestID varchar(50) references Requests, priority int, religion varchar(50), primary key(requestID))";
-//                PreparedStatement ReligiousRQ = conn.prepareStatement(tbReligious);
-//                ReligiousRQ.execute();
-//
-//                String tbComputer = "create table Computer(requestID varchar(50) references Requests, electronicType varchar(50), priority int , primary key(requestID))";
-//                PreparedStatement computerRQ = conn.prepareStatement(tbComputer);
-//                computerRQ.execute();
-//
-//                String tbSecurity = "create table Security(requestID varchar(50) references Requests, threatLevel varchar(50), responseRequired varchar(50) , primary key(requestID))";
-//                PreparedStatement SecurityRQ = conn.prepareStatement(tbSecurity);
-//                SecurityRQ.execute();
-//
-//                String tbLanguage = "create table Language(requestID varchar(50) references Requests, language varchar(50), numInterpreters int , primary key(requestID))";
-//                PreparedStatement languageRQ = conn.prepareStatement(tbLanguage);
-//                languageRQ.execute();
-//
-//                String gift = "create table Gift(requestID varchar(50) references Requests, contents varchar(50), mass int, primary key(requestID))";
-//                PreparedStatement giftRQ = conn.prepareStatement(gift);
-//                giftRQ.execute();
 
+                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
+                PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
+                commentStatement.execute();
 
             }
         } catch (Exception e) {
@@ -176,18 +135,17 @@ public class Database {
      * @param filePath  the path to be read from
      * @param tableName the table to load the data from the csv into
      */
-    public void readCSV(String filePath, String tableName) {
+    public void readCSV(String filePath, String tableName){
 
         String tempPath = "temp.csv"; //TODO : Change path in jar file
         String str1 = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE ('APP', '" + tableName.toUpperCase() + "', '" + tempPath + "', ', ', null, null,1)";
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
             String[] columns = content.split("\n", 2);
-            //String[] attributes = content.split(","); TODO: Make table columns from header values
             columns[1] += "\n";
             File temp = new File(tempPath);
-            if (temp.createNewFile()) {
+            if(temp.createNewFile()){
                 System.out.println("File created");
             }
             FileWriter myWriter = new FileWriter(tempPath);
@@ -199,7 +157,8 @@ public class Database {
         try {
             PreparedStatement p = conn.prepareStatement(str1);
             p.execute();
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             System.out.println("Path: " + filePath);
             //e.printStackTrace();
         }
@@ -207,12 +166,11 @@ public class Database {
 
     /**
      * Saves a csv to a given file path
-     *
      * @param tableName the table to be saved to a csv
-     * @param filePath  the path that the csv file will be written to
-     * @param header    header of the csv file (the first line)
+     * @param filePath the path that the csv file will be written to
+     * @param header header of the csv file (the first line)
      */
-    public void saveCSV(String tableName, String filePath, String header) {
+    public void saveCSV(String tableName, String filePath, String header){
         File f = new File(filePath);
         if (f.delete()) {
             System.out.println("File deleted when saving"); //TODO : Used to be "file deleted"
@@ -228,7 +186,7 @@ public class Database {
         }
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            String content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
             FileWriter fw = new FileWriter(filePath);
             fw.write(header);
             fw.write("\n");
@@ -289,7 +247,7 @@ public class Database {
             s.execute(str);
             str = "delete from " + tableName;
             s.execute(str);
-            if (str.equals("all")) {
+            if (str.equals("all")){
                 str = "alter table Locations drop column requestID";
                 s.execute(str);
                 str = "alter table Assignments drop column requestID";
@@ -304,10 +262,7 @@ public class Database {
                 s.execute(str);
                 str = "delete from Assignments";
                 s.execute(str);
-//                str = "delete from Maintenance";
-//                s.execute(str);
-//                str = "delete from Laundry";
-//                s.execute(str);
+
             }
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
@@ -331,16 +286,12 @@ public class Database {
             s.execute(str);
             str = "drop table Assignments";
             s.execute(str);
-//            str = "drop tabl";
-//            s.execute(str);
-//            str = "drop Laundry";
-//            s.execute(str);
-            //str = "delete from Security";
-            //s.execute(str);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     //TODO: Test
 
     /**
@@ -351,7 +302,8 @@ public class Database {
         saveCSV("Assignments", "Assignments.csv", "Test");
         saveCSV("Locations", "Locations.csv", "Test");
         saveCSV("Nodes", "MapUAllNodes.csv", "Test");
-        saveCSV("Edges", "MapUAllEdges.csv", "Test");
+        saveCSV( "Edges", "MapUAllEdges.csv","Test");
+        saveCSV( "Comments", "Comments.csv","Test");
     }
 
     /**
@@ -383,4 +335,3 @@ public class Database {
             }
         }
     }
-

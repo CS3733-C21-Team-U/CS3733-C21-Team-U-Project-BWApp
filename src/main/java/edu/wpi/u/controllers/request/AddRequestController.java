@@ -2,9 +2,7 @@ package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.SpecificRequest;
-import edu.wpi.u.requests.Request;
-import edu.wpi.u.requests.RequestFactory;
+import edu.wpi.u.requests.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,8 +110,8 @@ public class AddRequestController {
     @FXML
     public void handleSaveNewRequest() throws IOException {
         try {
-            Timestamp staff = new LinkedList<String>(makeStaffChipView.getChips());
-            LinkedList<String> locations = new LinkedList<String>(makeLocationChipView.getChips());
+            ArrayList<String> staff = new ArrayList<String>(makeStaffChipView.getChips());
+            ArrayList<String> locations = new ArrayList<String>(makeLocationChipView.getChips());
             ArrayList<String> specifics = requestSpecificItems();
 
             SpecificRequest result = new RequestFactory().makeRequest(App.newNodeType);
@@ -123,8 +121,9 @@ public class AddRequestController {
             //TODO : fix date bug
             Timestamp needed = Timestamp.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-            Request newRequest = new Request(ID, staff, needed, new Timestamp(System.currentTimeMillis()), makeDescriptionField.getText() ,makeTitleField.getText(),locations, App.newNodeType, "Creator_here");
-
+            //TODO : FIX DATE BUG
+            Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(), "KAAMIL", CommentType.PRIMARY, new Timestamp( needed.getTime() ));
+            Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             result.setRequest(newRequest);
             result.setSpecificData(specifics);
             App.requestService.addRequest(result);
