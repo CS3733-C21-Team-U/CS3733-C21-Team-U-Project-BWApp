@@ -159,7 +159,6 @@ public class ModifyRequestController {
             currRequest.setAssignee(assigneesToAdd);
             currRequest.setLocation(locationsToAdd);
 
-            //TODO: FIX THIS DATE STUFF - DOES NOT UPDATE
             LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
             //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
             LocalDateTime localDateTime = LocalDateTime.now();
