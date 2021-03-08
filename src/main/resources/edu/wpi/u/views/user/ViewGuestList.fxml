@@ -18,7 +18,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1675.0" spacing="100.0">
                     <children>
-                        <Label styleClass="headline-2" text="Guests" />
+                        <Label styleClass="headline-2" text="Guest List" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" />

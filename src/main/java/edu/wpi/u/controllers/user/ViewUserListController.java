@@ -52,7 +52,7 @@ public class ViewUserListController {
                         , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
                         , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted())));
             }
-            else {
+            else if (u.getType() != Role.GUEST){
                 users2.add(new Employee(new SimpleStringProperty(u.getUserID())
                         , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
                         , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
