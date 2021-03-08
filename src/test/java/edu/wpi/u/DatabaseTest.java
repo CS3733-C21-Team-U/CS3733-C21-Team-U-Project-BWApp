@@ -19,17 +19,12 @@ import java.util.GregorianCalendar;
 public class DatabaseTest {
 
     private static String testURL = "jdbc:derby:testDB";
-
     private static Database dbTest = Database.getDBTest();
+
+    // Only used for live staging
     private static MapService mapServiceTestStaging = new MapService(testURL);
     private static RequestService requestServiceTest = new RequestService(testURL);
     private static UserService userServiceTest = new UserService(testURL);
-
-//    private Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node2 = new Node("TESTNODE2", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node3 = new Node("TESTNODE3", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node4 = new Node("TESTNODE4", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-
 
     public void main(String[] args) throws InvalidEdgeException {
         // Permissions for testing
@@ -225,6 +220,82 @@ public class DatabaseTest {
         assertEquals(mapServiceTest.getEdges().get(1).getEdgeID(),"NODETEST23_NODETEST24");
     }
 
+    @Test
+    public void testSetPatients(){
+        UserService userServiceTest = new UserService(testURL);
+        userServiceTest.
+    }
 
+    @Test
+    public void testSetEmployees(){}
+
+    @Test
+    public void testSetGuests(){}
+
+    @Test
+    public void testSetUser(){}
+
+    @Test
+    public void testGetActiveUser(){}
+
+    @Test
+    public void testgetPatients(){}
+
+    @Test
+    public void testGetEmployees(){}
+
+    @Test
+    public void testGetGuests(){}
+
+    @Test
+    public void testChangePhoneNumber(){}
+
+    @Test
+    public void testChangeEmail(){}
+
+    @Test
+    public void testChangePassword(){}
+
+    @Test
+    public void testCheckUsername(){}
+
+    @Test
+    public void testCheckPassword(){}
+
+    @Test
+    public void testCheckPhoneNumber(){}
+
+    @Test
+    public void testGetPassword(){}
+
+    @Test
+    public void testAddPatient(){}
+
+    @Test
+    public void testAddLocationID(){}
+
+    @Test
+    public void testAddParkingLocation(){}
+
+    @Test
+    public void testAddRecommendedParkingLocation(){}
+
+    @Test
+    public void testAddEmployee(){}
+
+    @Test
+    public void testAddGuest(){}
+
+    @Test
+    public void testDeleteEmployee(){}
+
+    @Test
+    public void testDeleteGuest(){}
+
+    @Test
+    public void testUpdateEmployee(){}
+
+    @Test
+    public void testupdateGuest(){}
 
 }
