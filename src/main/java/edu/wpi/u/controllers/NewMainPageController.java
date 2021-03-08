@@ -1,10 +1,11 @@
 package edu.wpi.u.controllers;
 
+//import animatefx.animation.Bounce;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.models.MapService;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import javafx.scene.input.KeyEvent;
 
@@ -23,13 +21,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import static edu.wpi.u.users.Role.ADMIN;
 
@@ -67,6 +70,24 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
+
+//        validationFeild
+        TextField test = new TextField("test");
+//        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");
+        HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
+        Set<String> strings = namesAndIDs.keySet();
+
+        AutoCompletionBinding<String> acb = TextFields.bindAutoCompletion(validationFeild , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+//        acb.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<String>>()
+//        {
+//
+//            @Override
+//            public void handle(AutoCompletionBinding.AutoCompletionEvent<String> event)
+//            {
+//                String valueFromAutoCompletion = event.getCompletion();
+//            }
+//        });
 
         App.themeSVG = themeIcon;
 
@@ -244,6 +265,41 @@ public class NewMainPageController {
 //        }
     }
 
+    public void handleHelpPageButton(ActionEvent actionEvent) {
+
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Help Page");
+        Text text = new Text("This is the Main page.If there is an emergency situation, Please call 911");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.setBody(text);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("Cancel");
+        JFXButton button2 = new JFXButton("Proceed to Help Page");
+        button1.setOnAction(event -> dialog.close());
+            button2.setOnAction(event -> {
+                AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                anchor.getChildren().clear();
+                anchor.getChildren().add(root);
+                dialog.close();
+            });
+
+
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+    }
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);
     }
