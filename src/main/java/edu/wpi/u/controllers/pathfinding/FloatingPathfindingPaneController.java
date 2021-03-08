@@ -50,7 +50,6 @@ public class FloatingPathfindingPaneController {
 
 
     public void handleTestAddTextField(ActionEvent actionEvent) {
-
         Label turnText = new Label("Turn left at the corner of the MRI room");
         turnText.getStyleClass().add("subtitle");
         Label distanceText = new Label("Continue straight for 15 meters");

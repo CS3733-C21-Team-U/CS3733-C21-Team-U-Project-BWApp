@@ -34,8 +34,8 @@ public class ViewRequestListController {
         ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
         //TODO: Remove (for debug since line above doesn't return anything)
         ArrayList<String> sampleArray = new ArrayList<String>();
-        sampleArray.add("Field 1");
-        sampleArray.add("Field 2");
+        sampleArray.add("UPARK0300G");
+        sampleArray.add("UPARK0150G");
 
         MaintenanceRequest testRequest = new MaintenanceRequest();
         Comment primaryComment = new Comment("Primary Comment","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
@@ -54,6 +54,15 @@ public class ViewRequestListController {
         testRequest2.setRequest(request2);
         testRequest2.setSpecificData(sampleArray);
         listOfRequests.add(testRequest2);
+
+//        MaintenanceRequest testRequest3 = new MaintenanceRequest();
+//        Comment primaryComment3 = new Comment("asdasdasda","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
+//        ArrayList<Comment> commentlist3 = new ArrayList<Comment>();
+//        commentlist.add(primaryComment3);
+//        Request request3 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray,sampleArray,commentlist3);
+//        testRequest.setRequest(request3);
+//        testRequest.setSpecificData(sampleArray);
+//        listOfRequests.add(testRequest3);
         //End Remove
 
         for (SpecificRequest request: listOfRequests) {

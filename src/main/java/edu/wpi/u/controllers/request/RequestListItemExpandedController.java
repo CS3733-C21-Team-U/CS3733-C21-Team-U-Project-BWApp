@@ -18,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -37,6 +39,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label completeByLabel;
     @FXML public VBox commentsRoot;
     @FXML public VBox mainSpecialFieldVbox;
+
+    AnchorPane mainMapPane = new AnchorPane();
 
     //    public HBox HBoxToClone;
 //    public VBox specificFields;
@@ -74,7 +78,13 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
         node.setFitWidth(430);
         node.setPreserveRatio(true);
-        miniMap = new GesturePane(node);
+        mainMapPane.getChildren().add(node);
+        //node.toFront();
+        miniMap = new GesturePane(mainMapPane);
+        mainMapPane.setMinSize(300, 300);
+        mainMapPane.setPrefWidth(300);
+        mainMapPane.setPrefHeight(300);
+        mainMapPane.setStyle("-fx-background-color: #000000");
         miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
         miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
         miniMap.setPrefHeight(518);
@@ -90,11 +100,11 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         creatorAndDateLabel.setText(creatorAndDateString);
         assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
         completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
-
 //        //requestDetailSecurityLabel.setText(request);
 //        setSpecifics();
         generateSpecificFields();
         generateComments();
+        //loadLocationsOnMap("G", mainMapPane);
 
     }
 
@@ -193,6 +203,25 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void handleCollapseButton(){
         this.parent.switchToCollapsed();
+    }
+
+
+
+    public void loadLocationsOnMap(String floor, AnchorPane pane){
+        ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
+        for(String nodeIDLocation: locationNodeList){
+            if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
+                Circle mapLocation = new Circle();
+                mapLocation.setCenterX(200);
+                //(App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]
+                //App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]
+                mapLocation.setCenterX(200);
+                mapLocation.setRadius(30);
+                mapLocation.setStyle("-fx-fill: yellow");
+                mapLocation.toFront();
+                pane.getChildren().add(mapLocation);
+            }
+        }
     }
 
 //    private void setSpecifics(){

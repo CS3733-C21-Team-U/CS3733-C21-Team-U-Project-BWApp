@@ -105,8 +105,8 @@ public class App extends Application {
 
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
 
-    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+    //mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+    //mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -124,7 +124,6 @@ public class App extends Application {
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
     App.primaryStage.show();
-
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");
