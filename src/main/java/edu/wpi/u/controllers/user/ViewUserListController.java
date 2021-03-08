@@ -76,7 +76,6 @@ public class ViewUserListController {
                     // todo : add checking the password too for more accuracy on the user
                     if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
                         p.setName(t.getNewValue());
-                        System.out.println(t.getNewValue());
                         App.userService.updatePatient(p);
                     }
                 }
@@ -104,11 +103,35 @@ public class ViewUserListController {
 
         treeTableColumnUserName.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnUserName.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .userNamefxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnUserName.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .userNamefxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    /*
+                    When username field is changed everything breaks
+                     */
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        System.out.println("Nev value here : " + t.getNewValue());
+                        p.setUserName(t.getNewValue());
+                        App.userService.updatePatient(p);
+                        System.out.println("Updated patient : " + App.userService.getPatient(p.getUserID()).getUserName());
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setUserName(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
 
 
@@ -125,11 +148,30 @@ public class ViewUserListController {
 
         treeTableColumnPassword.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnPassword.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .passwordfxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnPassword.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .passwordfxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setPassword(t.getNewValue());
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setPassword(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
         JFXTreeTableColumn<User, String> treeTableColumnEmail = new JFXTreeTableColumn<>("Email");
         treeTableColumnEmail.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
@@ -144,11 +186,30 @@ public class ViewUserListController {
 
         treeTableColumnEmail.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnEmail.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .emailfxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnEmail.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .emailfxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setEmail(t.getNewValue());
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setEmail(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
         JFXTreeTableColumn<User, String> treeTableColumnType = new JFXTreeTableColumn<>("Role / Type");
         treeTableColumnType.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
@@ -163,11 +224,30 @@ public class ViewUserListController {
 
         treeTableColumnType.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnType.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .typefxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnType.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .typefxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setType(Role.valueOf(t.getNewValue())); // todo : somehow add a dropdown
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setType(Role.valueOf(t.getNewValue()));
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
         JFXTreeTableColumn<User, String> treeTableColumnPhonenumber = new JFXTreeTableColumn<>("Phone number");
         treeTableColumnPhonenumber.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
@@ -182,11 +262,30 @@ public class ViewUserListController {
 
         treeTableColumnPhonenumber.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnPhonenumber.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .phoneNumberfxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnPhonenumber.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .phoneNumberfxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setPhoneNumber(t.getNewValue());
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setPhoneNumber(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
 
         JFXTreeTableColumn<User, String> treeTableColumnLocationNodeID = new JFXTreeTableColumn<>("Location (Node ID)");
@@ -202,11 +301,30 @@ public class ViewUserListController {
 
         treeTableColumnLocationNodeID.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnLocationNodeID.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .locationNodeIDfxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnLocationNodeID.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .locationNodeIDfxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setLocationNodeID(t.getNewValue());
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setLocationNodeID(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
 
         final TreeItem<User> root = new RecursiveTreeItem<>(users2, RecursiveTreeObject::getChildren);

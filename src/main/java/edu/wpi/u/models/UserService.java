@@ -74,10 +74,18 @@ public class UserService {
         System.out.println("Guest in us" + ud.setGuest(name));
     }
 
+    /**
+     * Returns the active Guest object
+     * @return guest object
+     */
     public Guest getActiveGuest() {
         return activeGuest;
     }
 
+    /**
+     * Sets the active guest
+     * @param activeGuest the guest object
+     */
     public void setActiveGuest(Guest activeGuest) {
         this.activeGuest = activeGuest;
     }
