@@ -245,7 +245,7 @@ public class DatabaseTest {
         mapServiceTest.getNodes().clear();
         mapServiceTest.addNodeWithID("NODETEST20", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST21", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
-        assertEquals(mapServiceTest.getNodes().get(0).getNodeID(),"NODETEST20"); // TODO: change, correct when run alone
+        assertEquals(mapServiceTest.getNodes().get(1).getNodeID(),"NODETEST20");
     }
 
     @Test
@@ -579,7 +579,6 @@ public class DatabaseTest {
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getEmployees().clear();
         mapServiceTest.addNodeWithID("NODETEST41", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
-        ArrayList<Appointment> tempList = new ArrayList<>();
         userServiceTest.addEmployee("Name9", "Name9Username", "Name9Pass", "Name9Email", Role.NURSE, "Name9Phone", "NODETEST41", false);
         userServiceTest.updateEmployee(userServiceTest.getEmployees().get(0).getUserID(), "Name9New", "Name9UsernameNew", "Name9PassNew", "Name9EmailNew", Role.NURSE, "Name9PhoneNew",  false);
         assertEquals(userServiceTest.getEmployees().get(0).getName(),"Name9New");
@@ -608,5 +607,35 @@ public class DatabaseTest {
         userServiceTest.updateGuest(userServiceTest.getGuests().get(0).getGuestID(), "Name10New", new Timestamp(2), "Still testing", false);
         assertEquals(userServiceTest.getGuests().get(0).getName(),"Name10New");
     }
+
+    @Test
+    public void testAddAppointments() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+
+        // Creating nodes for patient
+        mapServiceTest.addNodeWithID("NODETESTX", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("UPARK0030G", 50, 50, "G", "Faulkner", "PARK", "ParkTest", "PT");
+
+        // Creating appt
+        Appointment appt = new Appointment("TestAppt1", "TestPatientX", "TestEmployeeX", new Timestamp(1), "Radiology");
+
+        // Creating patient
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        tempList.add(appt);
+        userServiceTest.getPatients().clear();
+        userServiceTest.addPatient("NameX", "UserNameX", "PasswordX", "EmailX", Role.PATIENT, "PhoneX", "NODETESTX", false, tempList, "ProviderName", "UPARK0030G", "UPARK0030G");
+
+        // Creating employee
+        userServiceTest.getEmployees().clear();
+        userServiceTest.addEmployee("NameY", "UserNameY", "PasswordY", "EmailY", Role.NURSE, "PhoneY", "NODETESTX", false);
+
+        appt.setEmployeeID(userServiceTest.getEmployees().get(0).getUserID());
+        appt.setPatientID(userServiceTest.getPatients().get(0).getUserID());
+        userServiceTest.addAppointment(appt);
+
+        assertEquals(userServiceTest.getPatients().get(0).getAppointments().get(0).getAppointmentType(), "Radiology");
+
+    } // TODO: Reevaluate when appointments is talked about
 
 }
