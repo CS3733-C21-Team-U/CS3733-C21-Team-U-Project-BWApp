@@ -21,15 +21,17 @@ public class DatabaseTest {
     private static String testURL = "jdbc:derby:testDB";
 
     private static Database dbTest = Database.getDBTest();
-    private static MapService mapServiceTest = new MapService(testURL);
+    private static MapService mapServiceTestStaging = new MapService(testURL);
     private static RequestService requestServiceTest = new RequestService(testURL);
     private static UserService userServiceTest = new UserService(testURL);
-    private Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-    private Node node2 = new Node("TESTNODE2", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-    private Node node3 = new Node("TESTNODE3", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-    private Node node4 = new Node("TESTNODE4", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
 
-    public static void main(String[] args) throws InvalidEdgeException {
+//    private Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
+//    private Node node2 = new Node("TESTNODE2", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
+//    private Node node3 = new Node("TESTNODE3", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
+//    private Node node4 = new Node("TESTNODE4", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
+
+
+    public void main(String[] args) throws InvalidEdgeException {
         // Permissions for testing
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -69,10 +71,10 @@ public class DatabaseTest {
         result.setRequest(newRequest);
         result.setSpecificData(specificFields);
 
-        mapServiceTest.addNode(node1.getNodeID(),node1.getCords()[0],node1.getCords()[1], node1.getFloor(),node1.getBuilding(),node1.getNodeType(), node1.getLongName(), node1.getShortName());
-        mapServiceTest.addNode(node2.getNodeID(),node2.getCords()[0],node2.getCords()[1], node2.getFloor(),node2.getBuilding(),node2.getNodeType(), node2.getLongName(), node2.getShortName());
-        mapServiceTest.addNode(node3.getNodeID(),node3.getCords()[0],node3.getCords()[1], node3.getFloor(),node3.getBuilding(),node3.getNodeType(), node3.getLongName(), node3.getShortName());
-        mapServiceTest.addNode(node4.getNodeID(),node4.getCords()[0],node4.getCords()[1], node4.getFloor(),node4.getBuilding(),node4.getNodeType(), node4.getLongName(), node4.getShortName());
+        mapServiceTestStaging.addNode(node1.getNodeID(),node1.getCords()[0],node1.getCords()[1], node1.getFloor(),node1.getBuilding(),node1.getNodeType(), node1.getLongName(), node1.getShortName());
+        mapServiceTestStaging.addNode(node2.getNodeID(),node2.getCords()[0],node2.getCords()[1], node2.getFloor(),node2.getBuilding(),node2.getNodeType(), node2.getLongName(), node2.getShortName());
+        mapServiceTestStaging.addNode(node3.getNodeID(),node3.getCords()[0],node3.getCords()[1], node3.getFloor(),node3.getBuilding(),node3.getNodeType(), node3.getLongName(), node3.getShortName());
+        mapServiceTestStaging.addNode(node4.getNodeID(),node4.getCords()[0],node4.getCords()[1], node4.getFloor(),node4.getBuilding(),node4.getNodeType(), node4.getLongName(), node4.getShortName());
 
         userServiceTest.addEmployee("PersonName1", "UserName1", "password1", "email1", Role.ADMIN, "1111111111", "TEST1",false);
         userServiceTest.addEmployee("PersonName2", "UserName2", "password2", "email2", Role.MAINTENANCE, "2222222222", "TEST2",false);
@@ -85,22 +87,43 @@ public class DatabaseTest {
 
     @Test
     public void testNodeFromID() throws InvalidEdgeException {
-//        MapService mapServiceTest1 = new MapService(testURL);
-//        mapServiceTest1.addNode(node1.getNodeID(),node1.getCords()[0],node1.getCords()[1], node1.getFloor(),node1.getBuilding(),node1.getNodeType(), node1.getLongName(), node1.getShortName());
-//        assertTrue(mapServiceTest1.getNodeFromID(node1.getNodeID()).equals(node1));
+        Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNode(node1.getNodeID(),node1.getCords()[0],node1.getCords()[1], node1.getFloor(),node1.getBuilding(),node1.getNodeType(), node1.getLongName(), node1.getShortName());
+        assertEquals(mapServiceTest.getNodeFromID(node1.getNodeID()).getNodeID(),node1.getNodeID());
     }
 
     @Test
-    public void testEdgeFromID(){}
+    public void testEdgeFromID() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("UWALK00401", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("UWALK00501", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("UWALK00401_UWALK00501", "UWALK00401", "UWALK00501", roles);
+        assertEquals(mapServiceTest.getEdgeFromID("UWALK00401_UWALK00501").getEdgeID(),"UWALK00401_UWALK00501");
+    }
 
     @Test
-    public void testAddNode1(){}
+    public void testAddNode1() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST3", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        assertEquals(mapServiceTest.getNodeFromID("NODETEST3").getNodeID(),"NODETEST3"); // Node was found in db/data structure
+    }
 
     @Test
-    public void testAddNode2(){}
+    public void testAddNode2() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNode(1,1,"1","Faulkner", "TEST","longname","shortname");
+        assertEquals(mapServiceTest.getNodeFromID("UTEST00101").getNodeID(),"UTEST00101"); // Node was found in db/data structure
+    }
 
     @Test
-    public void testAddNodeWithID(){}
+    public void testAddNodeWithID() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST4", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        assertEquals(mapServiceTest.getNodeFromID("NODETEST4").getNodeID(),"NODETEST4"); // Node was found in db/data structure
+    }
 
     @Test
     public void testUpdateNode(){}
