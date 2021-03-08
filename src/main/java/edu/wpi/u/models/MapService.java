@@ -30,6 +30,9 @@ public class MapService {
     md.loadGraph(mm); //TODO: Can cause app to crash, this is ran before database initializes
   }
 
+  public HashMap<String, String> getLongNames(){
+    return md.getLongnames();
+  }
   /**
    * returns a node object from the node ID reference
    * @param nodeID

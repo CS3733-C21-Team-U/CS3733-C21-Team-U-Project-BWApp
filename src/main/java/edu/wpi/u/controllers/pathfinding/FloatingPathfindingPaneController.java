@@ -2,16 +2,23 @@ package edu.wpi.u.controllers.pathfinding;
 
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RegexValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.MapService;
 import edu.wpi.u.models.TextualDirections;
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
@@ -21,6 +28,8 @@ import org.controlsfx.control.textfield.TextFields;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+
 
 public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
@@ -37,6 +46,7 @@ public class FloatingPathfindingPaneController {
     ArrayList<Node> path = new ArrayList<>();
     ArrayList<String> textualDirectionsStrings = new ArrayList<>();
     String textualDirectionsMegaString = "";
+    HashMap<String, String> namesAndIDs;
 
 
     public void handleTestAddTextField(ActionEvent actionEvent) {
@@ -78,23 +88,78 @@ public class FloatingPathfindingPaneController {
     }
 
     public void initialize(){
-//        textualDirections.setText("Click on a node to select a location.\nUse the buttons to pick which location to fill.");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                startNodeField.requestFocus();
+            }
+        });
 
-        //TODO: In theory this gives all Longnames as string but something is broken! Kohmei
-        HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("Input Required");
+        endNodeField.getValidators().add(validator);
+        endNodeField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) { //Focus loss
+                endNodeField.validate();
+            }else{ //Focus gain
+                System.out.println("Trag: END");
+                targetNode = "END";
+            }
+        });
+        endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
+            endNodeField.requestFocus();
+            targetNode = "END";
+            if(namesAndIDs.get(newValue) != null){
+                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+            }else{
+                System.out.println("No valid node ID for this end input");
+            }
+        });
+
+        startNodeField.getValidators().add(validator);
+        startNodeField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) { //Foucs Loss
+                startNodeField.validate();
+            }else{ //Focus gain
+                System.out.println("Trag: START");
+                targetNode = "START";
+            }
+        });
+        startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
+            targetNode = "START";
+            startNodeField.requestFocus();
+            if(namesAndIDs.get(newValue) != null){
+                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+                if(endNodeField.getText().equals("")){
+                    endNodeField.requestFocus();
+                }
+            }else{
+                System.out.println("No valid node ID for this start input");
+            }
+        });
+
+        namesAndIDs = App.mapService.getLongNames();
         Set<String> strings = namesAndIDs.keySet();
 
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , strings);
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(strings));
+
+
+//        String test = namesAndIDs.get(startNodeField.getText());
+
+
+
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
-                startNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
+                startNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
-                targetNode = "END";
-            } else {
-                endNode.setText(App.mapService.getNodeFromID(newValue).getLongName());
+            } else if(targetNode.equals("END")){
+                endNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
+//                endNodeField.requestFocus();
             }
 
             if(!startNodeID.equals("") && !endNodeID.equals("")){
@@ -126,12 +191,22 @@ public class FloatingPathfindingPaneController {
                 App.mapInteractionModel.pathPreviewFlag.set(String.valueOf(Math.random()));
             }
         });
+
+        startNodeField.requestFocus();
     }
 
     public void handleStartEndSwap(ActionEvent actionEvent) {
         String tempStorage = startNodeField.getText();
+        String originalTarget = targetNode;
+        targetNode = "START";
         startNodeField.setText(endNodeField.getText());
+        targetNode = "END";
         endNodeField.setText(tempStorage);
+        targetNode = originalTarget;
+    }
+
+    public void handleInputMethodChange(InputMethodEvent inputMethodEvent) {
+        System.out.println("Help!");
     }
 }
 
