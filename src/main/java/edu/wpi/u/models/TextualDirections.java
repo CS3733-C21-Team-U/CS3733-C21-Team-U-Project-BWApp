@@ -4,6 +4,7 @@ import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TextualDirections {
 
@@ -143,19 +144,19 @@ public class TextualDirections {
             ans = "Take a slight right at ";
 
         } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
-            ans = "Take a right turn at ";
+            ans = "M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z";
         } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
-            ans = "Take a sharp right turn at ";
+            ans = "M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z";
         } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
-            ans = "Turn around at ";
+            ans = "M19,15l-1.41-1.41L13,18.17V2H11v16.17l-4.59-4.59L5,15l7,7L19,15z";
         } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
-            ans = "Take a sharp left turn at ";
+            ans = "M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z";
         } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
-            ans = "Take a left turn at ";
+            ans = "M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z";
         } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
-            ans = "Take a slight left turn at ";
+            ans = "M5,15h2V8.41L18.59,20L20,18.59L8.41,7H15V5H5V15z";
         } else {
-            ans = "Continue straight at ";
+            ans = "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z";
         }
         return ans;
     }
