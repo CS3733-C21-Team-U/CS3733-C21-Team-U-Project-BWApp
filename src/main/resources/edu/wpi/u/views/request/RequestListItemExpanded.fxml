@@ -1,50 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.RequestListItemExpandedController">
-   <children>
-      <VBox alignment="CENTER" layoutY="6.0" prefHeight="1000.0" prefWidth="1700.0" spacing="10.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
-         <children>
-            <Label styleClass="headline-1" text="View A Request In Detail">
-               <padding>
-                  <Insets bottom="20.0" />
-               </padding>
-            </Label>
-            <Label fx:id="requestDetailTitleLabel" styleClass="headline-2" text="TitleLabel" />
-            <Label alignment="TOP_LEFT" styleClass="headline-2" text="Description:" wrapText="true" />
-            <Label fx:id="requestDetailDescriptionLabel" alignment="TOP_CENTER" maxWidth="400.0" prefHeight="100.0" prefWidth="400.0" styleClass="headline-3" text="DescriptionBody" textAlignment="CENTER" wrapText="true" />
-            <Label fx:id="requestDetailCreatorLabel" styleClass="headline-2" text="CreatorLabel" />
-            <Label fx:id="requestDetailDateCreatedLabel" styleClass="headline-2" text="DateCreatedLabel" />
-            <Label fx:id="requestDetailDate2BCompleteLabel" styleClass="headline-2" text="Date2BCompletedByLabel" />
-            <Label fx:id="typeLabel" styleClass="headline-2" text="TypeLabel">
-               <padding>
-                  <Insets bottom="25.0" />
-               </padding></Label>
-            <VBox fx:id="VBoxToAdd" alignment="CENTER" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
-               <children>
-                  <JFXButton onAction="#handleEditRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Edit Request" />
-                  <JFXButton onAction="#handleResolveRequestButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Resolve Request" />
-                  <JFXButton onAction="#handleRequestDetailCancelButton" opacity="0.5" prefHeight="33.0" prefWidth="166.0" styleClass="button-outlined" text="Cancel" />
-               </children>
-            </HBox>
-   </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </children>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
    </stylesheets>
-</AnchorPane>
+   <children>
+      <HBox prefHeight="405.0" prefWidth="1330.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="365.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox prefWidth="200.0" style="-fx-background-color: -primary;">
+                           <children>
+                              <SVGPath fx:id="typeIconSVG" content="M21.67,18.17l-5.3-5.3h-0.99l-2.54,2.54v0.99l5.3,5.3c0.39,0.39,1.02,0.39,1.41,0l2.12-2.12 C22.06,19.2,22.06,18.56,21.67,18.17z M18.84,19.59l-4.24-4.24l0.71-0.71l4.24,4.24L18.84,19.59zM17.34,10.19l1.41-1.41l2.12,2.12c1.17-1.17,1.17-3.07,0-4.24l-3.54-3.54l-1.41,1.41V1.71L15.22,1l-3.54,3.54l0.71,0.71 h2.83l-1.41,1.41l1.06,1.06l-2.89,2.89L7.85,6.48V5.06L4.83,2.04L2,4.87l3.03,3.03h1.41l4.13,4.13l-0.85,0.85H7.6l-5.3,5.3 c-0.39,0.39-0.39,1.02,0,1.41l2.12,2.12c0.39,0.39,1.02,0.39,1.41,0l5.3-5.3v-2.12l5.15-5.15L17.34,10.19z M9.36,15.34 l-4.24,4.24l-0.71-0.71l4.24-4.24l0,0L9.36,15.34L9.36,15.34z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </SVGPath>
+                              <Label fx:id="titleLabel" prefWidth="382.0" text="Sample Long Headline" wrapText="true">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="headline-2" />
+                                    <String fx:value="white-text" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="-20.0" right="-20.0" top="-20.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="descriptionLabel" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></Label>
+                        <Region prefHeight="17.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Created by: " />
+                        <Label fx:id="creatorAndDateLabel" layoutX="10.0" layoutY="164.0" styleClass="headline-3" text="Michael Gary on 3/3/2021" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Asssignees:" />
+                        <Label fx:id="assigneesLabel" layoutX="10.0" layoutY="182.0" styleClass="headline-3" text="John Adams, Empolyee 2, and Securtity Guard" />
+                        <Region prefHeight="14.0" prefWidth="430.0" />
+                        <Label styleClass="subtitle" text="Requested Completitoin Date:" />
+                        <Label fx:id="completeByLabel" styleClass="headline-3" text="3/12/2021 9:12 AM EST" />
+                        <VBox fx:id="mainSpecialFieldVbox" prefHeight="200.0" prefWidth="100.0" />
+                        <Region fx:id="pushDown1" prefHeight="0.0" prefWidth="443.0" VBox.vgrow="ALWAYS" />
+                        <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
+                           <children>
+                              <JFXButton onAction="#handleEditRequest" styleClass="button-contained" text="EDIT REQUEST" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="commentsRoot" layoutX="184.0" layoutY="47.0" prefHeight="365.0" prefWidth="499.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label styleClass="subtitle" text="Interaction Timeline:">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="458.0" prefWidth="430.0">
+                           <content>
+                              <VBox fx:id="commentsRoot2" prefWidth="430.0">
+                                 <children>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <JFXButton contentDisplay="GRAPHIC_ONLY" styleClass="fab-mini">
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                             <graphic>
+                                                <SVGPath content="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                                             </graphic>
+                                          </JFXButton>
+                                          <VBox prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="36.0" prefWidth="350.0">
+                                                   <children>
+                                                      <Label styleClass="headline-3" text="Comment Type" />
+                                                      <Region HBox.hgrow="ALWAYS" />
+                                                      <Label styleClass="caption" text="Fuzzy Time" />
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <Label styleClass="subtitle" text="Comment Title" />
+                                                <Label text="Comment Description, which should be much much logner than the comment and is allowed to wrap around" wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="54.0" prefWidth="430.0">
+                           <children>
+                              <TextField prefHeight="36.0" prefWidth="280.0" promptText="Enter an update" />
+                              <JFXButton styleClass="button-contained" text="Submit Update" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="mapViewRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="-20.0" left="-20.0" right="-20.0" top="-20.0" />
+               </HBox.margin>
+               <children>
+                  <HBox fx:id="pushDown21" alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="413.0" AnchorPane.bottomAnchor="-50.0">
+                     <children>
+                        <JFXButton styleClass="button-outlined" text="PATHFIND TO LOCATION" />
+                        <Region prefHeight="36.0" prefWidth="24.0" />
+                        <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCollapseButton" styleClass="button-text" text="Collapse" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Separator layoutX="354.0" layoutY="575.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Separator layoutX="-9.0" layoutY="405.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="448.0" AnchorPane.topAnchor="-20.0" />
+   </children>
+</fx:root>

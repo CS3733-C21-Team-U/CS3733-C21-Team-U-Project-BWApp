@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 public class MapService {
   static MapManager mm = new MapManager();
-  static MapData md;
+  public static MapData md; //Temporairly did this to acess md.getLong name - Kohmei
   public HashMap<String, Integer> currentIDNumber = new HashMap<>();
 
 
@@ -30,6 +30,9 @@ public class MapService {
     md.loadGraph(mm); //TODO: Can cause app to crash, this is ran before database initializes
   }
 
+  public HashMap<String, String> getLongNames(){
+    return md.getLongnames();
+  }
   /**
    * returns a node object from the node ID reference
    * @param nodeID

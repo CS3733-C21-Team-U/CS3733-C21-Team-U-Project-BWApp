@@ -24,14 +24,14 @@ public class RequestData extends Data{
      * Updates a request by using its ID
      * @param specificRequest the new request object
      */
-    public void updateRequest(SpecificRequest specificRequest){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
+    public void updateRequest(SpecificRequest specificRequest){
         Request request= specificRequest.getGenericRequest();
 
         String str = "update Requests set dateNeeded=? where requestID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setTimestamp(1, request.getDateNeeded());
-            ps.setString(1,request.getRequestID());
+            ps.setString(2,request.getRequestID());
             ps.execute();
             ps.close();
         }catch (Exception e){
@@ -39,10 +39,27 @@ public class RequestData extends Data{
         }
         updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
         updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
+        updLocations(request.getRequestID(), request.getLocations());
+        updAssignees(request.getRequestID(), request.getAssignees());
 
-        Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
-        request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
-        addCommentToRequest(request.getRequestID(), c);
+        String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(updComment);
+            ps.setString(1, request.getTitle());
+            ps.setString(2, request.getDescription());
+            ps.setString(3, request.getAuthor());
+            ps.setTimestamp(4, request.getDateCreated());
+            ps.setString(5, String.valueOf(CommentType.PRIMARY));
+            ps.setString(6, request.getRequestID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //add the latest comment to the database
+        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
+        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
     }
 
     /**
@@ -81,14 +98,14 @@ public class RequestData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-//                result.add(new Request(rs.getString("requestId"), todo : fix
+//                result.add(new Request(rs.getString("request"), todo : fix
 //                        rs.getTimestamp("dateCreated"),
 //                        rs.getTimestamp("dateNeeded"),
 //                        rs.getTimestamp("dateCompleted"),
 //                        rs.getString("description"),
 //                        rs.getString("title"),
-//                        getAssignees(rs.getString("requestId")),
-//                        getLocations(rs.getString("requestId")),
+//                        getAssignees(rs.getString("request")),
+//                        getLocations(rs.getString("request")),
 //                        rs.getString("creator")));
             }
         }catch (Exception e){
@@ -105,7 +122,7 @@ public class RequestData extends Data{
     public ArrayList<Comment> getComments(String requestID){
         ArrayList<Comment> result = new ArrayList<>();
         try {
-            String str = "select * from Comments where requestID=? order by created DESC";
+            String str = "select * from Comments where request=? order by created DESC";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
             ResultSet rs = ps.executeQuery();
@@ -128,7 +145,7 @@ public class RequestData extends Data{
      */
     public ArrayList<String> getAssignees(String requestID){
         ArrayList<String> result = new ArrayList<>();
-        String str = "select * from Assignments where requestID=?";
+        String str = "select * from Assignments where request=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestID);
@@ -149,7 +166,7 @@ public class RequestData extends Data{
      */
     public ArrayList<String> getLocations(String requestID){
         ArrayList<String> result = new ArrayList<>();
-        String str = "select * from Locations where requestID=?";
+        String str = "select * from Locations where request=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestID);
@@ -171,7 +188,7 @@ public class RequestData extends Data{
     public void updLocations(String requestID, ArrayList<String> locations){
 
         //Take whole list: do new one
-        String str = "delete from Locations where requestID=?";
+        String str = "delete from Locations where request=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestID);
@@ -195,7 +212,7 @@ public class RequestData extends Data{
         /*
         Take whole list: do new one
          */
-        String str = "delete from Assignments where requestID=?";
+        String str = "delete from Assignments where request=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, requestID);
@@ -215,10 +232,6 @@ public class RequestData extends Data{
      * @return list of IRequest objects
      */
     public ArrayList<SpecificRequest> loadActiveRequests(){ // TODO: refactor for IRequest
-        //go through requests, make a request object
-        //go to subtable based on type(stored in field of request db)
-        //set unique fields into correct object
-        //If we do factory, this is where we do it
         ArrayList<SpecificRequest> results = new ArrayList<>();
         String requestQuery = "select * from Requests where resolved=false";
         try{
@@ -233,9 +246,7 @@ public class RequestData extends Data{
                 ArrayList<String> assignees = getAssignees(id);
                 ArrayList<Comment> comments = getComments(id);
                 Request r = new Request(id, dateNeeded, locations, assignees, comments);
-                SpecificRequest result = new RequestFactory().makeRequest(type);
-                result.setRequest(r);
-                result.readStorageString(specificData);
+                SpecificRequest result = new RequestFactory().makeRequest(type).setRequest(r).readStorageString(specificData);
                 results.add(result);
             }
             rs.close();
@@ -251,7 +262,7 @@ public class RequestData extends Data{
      * @param specificRequest the request to add
      */
     public void addRequest(SpecificRequest specificRequest) { // TODO: Add to interface IRequest instead
-        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?,?)";
+        String str = "insert into Requests (requestID, type, dateNeeded, specificData, resolved) values (?,?,?,?,?)";
         try{
             Request req = specificRequest.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
@@ -277,7 +288,7 @@ public class RequestData extends Data{
      * @param requestID request id
      */
     public void addAssignee(String employeeID, String requestID){
-        String str = "insert into Assignments(assignmentID, requestID, userID) values (?,?,?)";
+        String str = "insert into Assignments(assignmentID, request, employeeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID+"_"+employeeID);
@@ -296,7 +307,7 @@ public class RequestData extends Data{
      * @param requestID the request id
      */
     public void addLocation(String nodeID, String requestID){
-        String str = "insert into Locations(locationID, requestID, nodeID) values (?,?,?)";
+        String str = "insert into Locations(locationID, request, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID+"_"+nodeID);
@@ -315,13 +326,13 @@ public class RequestData extends Data{
      * @param comment - the comment that will be connected with it using Comments table
      */
     public void addCommentToRequest(String requestID, Comment comment){
-        String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
+        String str = "insert into Comments(request, title, description, author, type, created) values (?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
             ps.setString(2,comment.getTitle());
             ps.setString(3,comment.getDescription());
-            ps.setString(4,comment.getDescription());
+            ps.setString(4,comment.getAuthor());
             ps.setString(5,comment.getType().toString());
             ps.setTimestamp(6,comment.getTimestamp());
             ps.execute();
@@ -355,7 +366,7 @@ public class RequestData extends Data{
      * @param nodeID the node id
      */
     public void deleteLocation(String requestID, String nodeID){
-        String str = "delete * from Locations where requestID=? and nodeID=?";
+        String str = "delete from Locations where request=? and nodeID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
@@ -373,7 +384,7 @@ public class RequestData extends Data{
      * @param employeeID the user id
      */
     public void deleteAssignment(String requestID, String employeeID){
-        String str = "delete * from Assignments where requestID=? and userID=?";
+        String str = "delete from Assignments where request=? and employeeID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);

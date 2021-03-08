@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModifyRequestController {
@@ -147,31 +148,10 @@ public class ModifyRequestController {
             for(Object l : makeEditLocationChipView.getChips()) { //may break
                 assigneesToAdd.add(l.toString());
             }
-
-            //NEW
-            currRequest.setTitle(makeEditTitleField.getText());
-            currRequest.setDescription(makeEditDescriptionField.getText());
-
-            App.requestService.setAssignees(currRequest.getRequestID(), assigneesToAdd);
-            App.requestService.setLocations(currRequest.getRequestID(), locationsToAdd);
-//            currRequest.setAssignees(assigneesToAdd);
-//            currRequest.setLocations(locationsToAdd); todo : fixed but test ^
-            //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-            Timestamp date= new Timestamp(System.currentTimeMillis());
-            currRequest.setDateNeeded(date);
-            currRequest.setAssignees(assigneesToAdd);
-            currRequest.setLocations(locationsToAdd);
-
-//            //TODO: FIX THIS DATE STUFF - DOES NOT UPDATE
-//            LocalDate localDate = makeEditDate2BCompleteDatePicker.getValue();
-//            //Date date = Date.from(Instant.from(localDate.atStartOfDay(ZoneId.systemDefault())));
-//            LocalDateTime localDateTime = LocalDateTime.now();
-//            ZonedDateTime zdt = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
-//            //long date = zdt.toInstant().toEpochMilli();
-//            currRequest.setDateNeeded(t);
-//            currSpecificRequest.setSpecificData(requestSpecificItems());
-//            App.requestService.updateRequest(currSpecificRequest);
-
+            currSpecificRequest.updateRequest(makeEditTitleField.getText(), makeEditDescriptionField.getText(),
+                    Timestamp.valueOf(makeEditDate2BCompleteDatePicker.getValue().atStartOfDay()),
+                    locationsToAdd, assigneesToAdd, requestSpecificItems());
+            App.requestService.updateRequest(currSpecificRequest);
 
             //SCENE Switch
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
