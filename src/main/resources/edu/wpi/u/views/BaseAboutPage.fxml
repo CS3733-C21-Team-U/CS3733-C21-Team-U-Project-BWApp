@@ -31,7 +31,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1700.0">
                      <children>
-                        <Pane prefHeight="312.0" prefWidth="1680.0" style="-fx-background-color: white; -fx-background-radius: 7;">
+                        <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="1670.0" style="-fx-background-color: white; -fx-background-radius: 7;">
                            <children>
                               <VBox prefHeight="311.0" prefWidth="1681.0">
                                  <children>
