@@ -1,6 +1,9 @@
 package edu.wpi.u.users;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.algorithms.Node;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.StringProperty;
 
 /*
 Users table
@@ -8,7 +11,7 @@ Employees id references Users
 Patient id references Users
  */
 
-public abstract class User {
+public abstract class User extends RecursiveTreeObject<User> {
     protected String userID;
     protected String name;
     protected String userName;
@@ -18,6 +21,16 @@ public abstract class User {
     protected String email;
     protected boolean deleted;
     protected String locationNodeID; // TODO MOVE
+
+    protected StringProperty userIDfx;
+    protected StringProperty namefx;
+    protected StringProperty userNamefx;
+    protected StringProperty passwordfx;
+    protected StringProperty typefx;
+    protected StringProperty phoneNumberfx;
+    protected StringProperty emailfx;
+    protected BooleanProperty deletedfx;
+    protected StringProperty locationNodeIDfx;
 
     public User(){}
 
@@ -31,6 +44,126 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.locationNodeID = locationNodeID;
+    }
+
+    public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx, StringProperty locationNodeIDfx) {
+        this.userIDfx = userIDfx;
+        this.namefx = namefx;
+        this.userNamefx = userNamefx;
+        this.passwordfx = passwordfx;
+        this.typefx = typefx;
+        this.phoneNumberfx = phoneNumberfx;
+        this.emailfx = emailfx;
+        this.deletedfx = deletedfx;
+        this.locationNodeIDfx = locationNodeIDfx;
+    }
+
+    public String getUserIDfx() {
+        return userIDfx.get();
+    }
+
+    public StringProperty userIDfxProperty() {
+        return userIDfx;
+    }
+
+    public void setUserIDfx(String userIDfx) {
+        this.userIDfx.set(userIDfx);
+    }
+
+    public String getNamefx() {
+        return namefx.get();
+    }
+
+    public StringProperty namefxProperty() {
+        return namefx;
+    }
+
+    public void setNamefx(String namefx) {
+        this.namefx.set(namefx);
+    }
+
+    public String getUserNamefx() {
+        return userNamefx.get();
+    }
+
+    public StringProperty userNamefxProperty() {
+        return userNamefx;
+    }
+
+    public void setUserNamefx(String userNamefx) {
+        this.userNamefx.set(userNamefx);
+    }
+
+    public String getPasswordfx() {
+        return passwordfx.get();
+    }
+
+    public StringProperty passwordfxProperty() {
+        return passwordfx;
+    }
+
+    public void setPasswordfx(String passwordfx) {
+        this.passwordfx.set(passwordfx);
+    }
+
+    public String getTypefx() {
+        return typefx.get();
+    }
+
+    public StringProperty typefxProperty() {
+        return typefx;
+    }
+
+    public void setTypefx(String typefx) {
+        this.typefx.set(typefx);
+    }
+
+    public String getPhoneNumberfx() {
+        return phoneNumberfx.get();
+    }
+
+    public StringProperty phoneNumberfxProperty() {
+        return phoneNumberfx;
+    }
+
+    public void setPhoneNumberfx(String phoneNumberfx) {
+        this.phoneNumberfx.set(phoneNumberfx);
+    }
+
+    public String getEmailfx() {
+        return emailfx.get();
+    }
+
+    public StringProperty emailfxProperty() {
+        return emailfx;
+    }
+
+    public void setEmailfx(String emailfx) {
+        this.emailfx.set(emailfx);
+    }
+
+    public boolean isDeletedfx() {
+        return deletedfx.get();
+    }
+
+    public BooleanProperty deletedfxProperty() {
+        return deletedfx;
+    }
+
+    public void setDeletedfx(boolean deletedfx) {
+        this.deletedfx.set(deletedfx);
+    }
+
+    public String getLocationNodeIDfx() {
+        return locationNodeIDfx.get();
+    }
+
+    public StringProperty locationNodeIDfxProperty() {
+        return locationNodeIDfx;
+    }
+
+    public void setLocationNodeIDfx(String locationNodeIDfx) {
+        this.locationNodeIDfx.set(locationNodeIDfx);
     }
 
     /**

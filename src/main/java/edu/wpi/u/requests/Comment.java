@@ -16,6 +16,14 @@ public class Comment{
         this.timestamp = timestamp;
     }
 
+    public Comment(String title, String description, String author, CommentType type) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.type = type;
+        this.timestamp = new Timestamp(System.currentTimeMillis());
+    }
+
     public String getTitle() {
         return title;
     }
