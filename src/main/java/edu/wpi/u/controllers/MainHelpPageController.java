@@ -61,12 +61,6 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleBackToMainPageButton()  throws IOException{
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/PathfindingBase.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
-    }
 
     public void handleLogInButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -216,7 +210,7 @@ public class MainHelpPageController {
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = null;
             try {
-                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/SettingsPageSprint2.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/SettingsBase.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

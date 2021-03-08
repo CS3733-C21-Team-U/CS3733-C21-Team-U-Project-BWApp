@@ -5,7 +5,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import edu.wpi.u.App;
 import edu.wpi.u.users.*;
 import javafx.beans.property.SimpleBooleanProperty;
