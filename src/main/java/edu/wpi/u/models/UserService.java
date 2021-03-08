@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class UserService {
 
-    static UserData ud = new UserData();
+    static UserData ud;
 
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();

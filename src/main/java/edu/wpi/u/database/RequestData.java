@@ -116,7 +116,9 @@ public class RequestData extends Data{
                 String specificData = rs.getString("specificData");
 
                 ArrayList<String> locations = new ArrayList<String>();
+                ArrayList<String> assignees = new ArrayList<String>();
                 // Start of broken code
+
                 try { // TODO : UNCOMMENT AND FIX
                     String str2 = "select * from Locations where requestID=?";
                     PreparedStatement ps2= conn.prepareStatement(str2);
@@ -130,7 +132,7 @@ public class RequestData extends Data{
                 catch (Exception e){
                     e.printStackTrace();
                 }
-                ArrayList<String> assignees = new ArrayList<String>();
+
                 try {
                     String str3 = "select * from Assignments where requestID=?";
                     PreparedStatement ps3 = conn.prepareStatement(str3);
@@ -144,6 +146,8 @@ public class RequestData extends Data{
                 catch (Exception e){
                     e.printStackTrace();
                 }
+
+
                 // End of broken code
 
                 ArrayList<Comment> comments = new ArrayList<Comment>();

@@ -54,6 +54,7 @@ public class MapService {
    * @return
    */
   public Edge getEdgeFromID(String edgeId){ return mm.getEdgeFromID(edgeId);}
+
   /**
    * saves the currtent database to a csv
    * @param path
@@ -96,14 +97,7 @@ public class MapService {
     }
   }
 
-  public String  addNode (
-          double xCoord,
-          double yCoord,
-          String floor,
-          String building,
-          String nodeType,
-          String longName,
-          String shortName) throws InvalidEdgeException{
+  public String  addNode (double xCoord, double yCoord, String floor, String building, String nodeType, String longName, String shortName) throws InvalidEdgeException{
     try{
       int curIndex;
       if(!currentIDNumber.containsKey(nodeType + floor)){
@@ -135,15 +129,7 @@ public class MapService {
     }
   }
 
-  public void addNodeWithID(
-          String nodeID,
-          double xCoord,
-          double yCoord,
-          String floor,
-          String building,
-          String nodeType,
-          String longName,
-          String shortName) throws InvalidEdgeException{
+  public void addNodeWithID(String nodeID,double xCoord,double yCoord,String floor,String building,String nodeType,String longName,String shortName) throws InvalidEdgeException{
     try{
       md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
       mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");
@@ -317,7 +303,6 @@ public class MapService {
         return new ArrayList<>();
     }
   }
-
 
   /**
    * runs A* on the model and gets a linked list of the path

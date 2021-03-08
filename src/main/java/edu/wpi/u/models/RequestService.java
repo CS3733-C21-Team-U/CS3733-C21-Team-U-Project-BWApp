@@ -61,5 +61,9 @@ public class RequestService {
       return this.activeRequests;
     }
 
+  public RequestData getRd(){
+    return this.rd;
+  }
+
 }
 
