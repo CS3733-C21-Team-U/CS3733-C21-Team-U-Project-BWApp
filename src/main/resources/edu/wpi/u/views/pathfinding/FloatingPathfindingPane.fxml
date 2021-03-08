@@ -5,6 +5,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -57,11 +58,19 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <VBox fx:id="textDirectionContainer" alignment="CENTER" prefWidth="100.0" styleClass="headline-3">
-               <children>
-                  <Label text="Text Directions" />
-               </children>
-            </VBox>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <VBox fx:id="textDirectionContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" prefWidth="450.0" styleClass="headline-3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-250.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Text Directions" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
             <JFXButton minHeight="30.0" onAction="#handleTestAddTextField" styleClass="button-text" text="Test Add Text Step" />
             <JFXButton minHeight="30.0" onAction="#startNodeButtonHandler" styleClass="button-contained" text="Start Location">
                <VBox.margin>

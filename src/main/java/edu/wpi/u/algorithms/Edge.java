@@ -86,6 +86,8 @@ public class Edge {
     this.walkable = value;
   }
 
+  public double getWeight() {return this.weight;} //TODO: Should this be here I just added this crap - Michael G
+
   public boolean isWalkable() {
     return this.walkable;
   }

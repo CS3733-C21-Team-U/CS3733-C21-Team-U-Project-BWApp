@@ -44,7 +44,11 @@ public class FloatingPathfindingPaneController {
     String textualDirectionsMegaString = "";
 
 
-    public void handleTestAddTextField(ActionEvent actionEvent) {
+    public void handleTestAddTextField() {
+
+
+        textDirectionContainer.getChildren().clear();
+
 
         LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
         if(edgePath.isEmpty()) System.out.println("empty list!!");
@@ -53,8 +57,10 @@ public class FloatingPathfindingPaneController {
 
             Node bNode = null;
             Node eNode = path.get(0);
-
+            int index = 0;
             for(Edge e : edgePath) {
+                index++;
+                String iconID = "";
                 int eDist = (int) Math.round(e.getWeight()/3); //3 being pixels for foot, see TextualDirections.java
 
                 String angleDescription = "";
@@ -63,11 +69,26 @@ public class FloatingPathfindingPaneController {
                 if (sNode == e.getStartNode())  eNode = e.getEndNode();
                 else eNode = e.getStartNode(); //makes sure start and end nodes are actually what we want
 
-                if(bNode == null) angleDescription = "";
-                else angleDescription = TextualDirections.textualAngleDescription(sNode, eNode, bNode);
+                //Finds angle for path
+                if(bNode == null) {
+                    angleDescription = "";
+                    iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z";
+                }
+                else {
+                    double angle = TextualDirections.getAngle(sNode, eNode);
+                    double previousAngle = TextualDirections.getAngle(bNode, sNode);
+                    double angleDifferance = angle - previousAngle;
 
-                String iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z"; //TODO: make dynamic to type of turn
-                Label turnText = new Label(angleDescription + " from " + sNode.getLongName() + " to " + eNode.getLongName()); //TODO: add tailored directions here
+                    if (angleDifferance < 0) {
+                        angleDifferance = 180 + (180 - Math.abs(angleDifferance));
+                    }
+                    angleDescription = TextualDirections.textualAngleDescription(angleDifferance);
+                    iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z";
+                }
+
+
+                iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z"; //TODO: make dynamic to type of turn
+                Label turnText = new Label(index + ": " + angleDescription + sNode.getLongName() + " to " + eNode.getLongName()); //TODO: add tailored directions here
                 turnText.getStyleClass().add("subtitle");
                 turnText.setWrapText(true);
                 Label distanceText = new Label("Continue straight for "+ eDist +" feet");// TODO: add distance to walk after
@@ -158,6 +179,10 @@ public class FloatingPathfindingPaneController {
                 App.mapInteractionModel.pathPreview = path;
                 App.mapInteractionModel.pathPreviewFlag.set(String.valueOf(Math.random()));
             }
+        });
+
+        App.mapInteractionModel.pathFlag.addListener(observable -> {
+            handleTestAddTextField();
         });
     }
 
