@@ -99,6 +99,7 @@ public class UserService {
     public void setPatient(String username, String password){
         this.activeUser = ud.setPatient(username,password);
     }
+
     /**
      * This function if for debugging purposes and assumes the Employee in already in the database
      * Sets the active user to a employee
