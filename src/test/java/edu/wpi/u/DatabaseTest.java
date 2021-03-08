@@ -18,9 +18,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DatabaseTest {
+    /**
+     * RUN TESTS INDIVIDUALLY
+     * When they are all run at the same time, some WILL fail because of how they are accessed
+     * All tests in this class HAVE been tested indiviudally and should be working as described
+     * DELETE "testDB" file after every run (under resources above .gitignore)
+     */
 
     private static String testURL = "jdbc:derby:testDB";
-
     private static Database dbTest = Database.getDBTest();
 
     // Only used for live staging
@@ -28,6 +33,10 @@ public class DatabaseTest {
     private static RequestService requestServiceTest = new RequestService(testURL);
     private static UserService userServiceTest = new UserService(testURL);
 
+    /**
+     * Main - Uncomment and run to do any live testing, NOT NEEDED FOR UNIT TESTS
+     * @throws InvalidEdgeException
+     */
     /*
     public void main(String[] args) throws InvalidEdgeException {
         // Permissions for testing
@@ -85,7 +94,12 @@ public class DatabaseTest {
 
     */
 
-    // Testing Maps
+    /**
+     * MapService Testing
+     * Constraints:
+     * For every edge added, it needs to consist of 2 valid nodes (in the Service), doing otherwise will error the code
+     * Do not delete a node or edge that doesn't exist - AssertionError
+     */
 
     @Test
     public void testNodeFromID() throws InvalidEdgeException {
@@ -134,6 +148,13 @@ public class DatabaseTest {
         mapServiceTest.updateNode("NODETEST5", 5, 5,"WALK","testy", "testywesty");
         assertEquals(mapServiceTest.getNodeFromID("NODETEST5").getCords()[0],5,0);
     }
+    @Test
+    public void testUpdateNode2() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST5B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.updateNode("NODETEST5B", 5, 5,"WALK","testy", "testywesty");
+        assertEquals(mapServiceTest.getNodeFromID("NODETEST5B").getCords()[1],5,0);
+    }
 
     @Test
     public void testDeleteNode() throws InvalidEdgeException {
@@ -144,6 +165,17 @@ public class DatabaseTest {
 
     @Test
     public void testAddEdge() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST7", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST8", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST7_NODETEST8", "NODETEST7", "NODETEST8", roles);
+        assertEquals(mapServiceTest.getEdgeFromID("NODETEST7_NODETEST8").getEdgeID(),"NODETEST7_NODETEST8");
+    }
+
+    @Test
+    public void testAddEdge2() throws InvalidEdgeException {
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -210,9 +242,10 @@ public class DatabaseTest {
     @Test
     public void testGetNodes() throws InvalidEdgeException {
         MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.getNodes().clear();
         mapServiceTest.addNodeWithID("NODETEST20", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST21", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
-        assertEquals(mapServiceTest.getNodes().get(0).getNodeID(),"NODETEST20"); // TODO: change, current when run alone
+        assertEquals(mapServiceTest.getNodes().get(0).getNodeID(),"NODETEST20"); // TODO: change, correct when run alone
     }
 
     @Test
@@ -223,12 +256,15 @@ public class DatabaseTest {
         mapServiceTest.addNodeWithID("NODETEST22", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST23", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST24", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.getEdges().clear();
         mapServiceTest.addEdge("NODETEST22_NODETEST23", "NODETEST22", "NODETEST23", roles);
         mapServiceTest.addEdge("NODETEST23_NODETEST24", "NODETEST23", "NODETEST24", roles);
         assertEquals(mapServiceTest.getEdges().get(1).getEdgeID(),"NODETEST23_NODETEST24");
     }
 
-    // Testing Requests
+    /**
+     * RequestService Testing
+     */
     @Test
     public void testAddRequest() {
         RequestService requestServiceTest = new RequestService(testURL);
@@ -326,7 +362,14 @@ public class DatabaseTest {
         assertEquals(requestServiceTest.getRequests(), testRequests);
     }
 
-    // Testing Users
+    /**
+     * UserService Testing
+     * Constraints:
+     * A patient must have a valid locationNodeID (stored in the service)
+     * A patient must have a valid parkingLocation, and recommendedParkingLocation (should be PARK nodes)
+     * Only delete patients/users/guests that actually exist
+     * After changing a password (ex: for a patient), you must use setPatients() in order for patients(UserService list) to be updated
+     */
     @Test
     public void testAddPatient() throws InvalidEdgeException { // Note: Fails if patient is created without a park node
         UserService userServiceTest = new UserService(testURL);
@@ -342,11 +385,11 @@ public class DatabaseTest {
     public void testAddLocationID() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
-        userServiceTest.getPatients().clear();
         mapServiceTest.addNodeWithID("NODETEST25A", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST25B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("UPARK0010G", 50, 50, "G", "Faulkner", "PARK", "ParkTest", "PT");
         ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.getPatients().clear();
         userServiceTest.addPatient("Name1B", "Name1BUsername", "Name1BPass", "Name1BEmail", Role.PATIENT, "Name1BPhone", "NODETEST25A", false, tempList, "ProviderName", "UPARK0010G", "UPARK0010G");
         userServiceTest.addLocationID(userServiceTest.getPatients().get(0).getUserID(), "NODETEST25B");
         userServiceTest.setPatients();
@@ -394,6 +437,16 @@ public class DatabaseTest {
     }
 
     @Test
+    public void testAddEmployee2() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST26B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.addEmployee("Name2B", "Name2BUsername", "Name2BPass", "Name2BEmail", Role.GUEST, "Name2BPhone", "NODETEST26B", false);
+        assertEquals(userServiceTest.getEmployees().get(0).getType().toString(), "GUEST");
+    }
+
+    @Test
     public void testAddGuest() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
         ArrayList<Appointment> tempList = new ArrayList<>();
@@ -403,7 +456,16 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testChangePhoneNumber() throws InvalidEdgeException {
+    public void testAddGuest2() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        Timestamp t = new Timestamp(1);
+        userServiceTest.addGuest("Name3B", t, "For testing... ha ha, I'm tired",true); // can still be accessed while deleted
+        assertEquals(userServiceTest.getGuests().get(0).getName(), "Name3B");
+    }
+
+    @Test
+    public void testChangePhoneNumberPatient() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST28", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -418,7 +480,21 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testChangeEmail() throws InvalidEdgeException {
+    public void testChangePhoneNumberEmployee() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST28B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("UPARK0040G", 50, 50, "G", "Faulkner", "PARK", "ParkTest", "PT");
+        userServiceTest.getEmployees().clear();
+        userServiceTest.addEmployee("TotallyUniqueName2", "TotallyUniqueName2", "TotallyUniquePass2", "TotallyUniqueEmail2", Role.MAINTENANCE, "TotallyUniquePhone2", "NODETEST28B", false);
+        userServiceTest.setUser("TotallyUniqueName2", "TotallyUniquePass2", "Employees");
+        userServiceTest.changePhoneNumber(userServiceTest.getEmployees().get(0).getUserID(), "Name5BNewPhone","Employees");
+        userServiceTest.setEmployees();
+        assertEquals(userServiceTest.getEmployees().get(0).getPhoneNumber(), "Name5BNewPhone");
+    }
+
+    @Test
+    public void testChangeEmailPatient() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST29", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -433,7 +509,21 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testChangePassword() throws InvalidEdgeException {
+    public void testChangeEmailEmployee() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST29B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("UPARK0100G", 50, 50, "G", "Faulkner", "PARK", "ParkTest", "PT");
+        userServiceTest.getEmployees().clear();
+        userServiceTest.addEmployee("Name51", "UserName51", "Password51", "Email51", Role.MAINTENANCE, "Phone51", "NODETEST29B", false);
+        userServiceTest.setUser("TotallyUniqueName", "TotallyUniquePass", "Employees");
+        userServiceTest.changeEmail(userServiceTest.getEmployees().get(0).getUserID(), "NewEmail51","Employees");
+        userServiceTest.setEmployees();
+        assertEquals(userServiceTest.getEmployees().get(0).getEmail(), "NewEmail51");
+    }
+
+    @Test
+    public void testChangePasswordPatient() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST30", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -445,6 +535,20 @@ public class DatabaseTest {
         userServiceTest.changePassword("UserName51", "NewPass51", "Patients");
         userServiceTest.setPatients();
         assertEquals(userServiceTest.getPatients().get(0).getPassword(), "NewPass51");
+    }
+
+    @Test
+    public void testChangePasswordEmployee() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST30B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("UPARK0110G", 50, 50, "G", "Faulkner", "PARK", "ParkTest", "PT");
+        userServiceTest.getEmployees().clear();
+        userServiceTest.addEmployee("Name51B", "UserName51B", "Password51B", "Email51B", Role.NURSE, "Phone51B", "NODETEST30B", false);
+        userServiceTest.setUser("TotallyUniqueNameB", "TotallyUniquePassB", "Employees");
+        userServiceTest.changePassword("UserName51B", "NewPass51B", "Employees");
+        userServiceTest.setEmployees();
+        assertEquals(userServiceTest.getEmployees().get(0).getPassword(), "NewPass51B");
     }
 
     @Test
@@ -479,6 +583,18 @@ public class DatabaseTest {
         userServiceTest.addEmployee("Name9", "Name9Username", "Name9Pass", "Name9Email", Role.NURSE, "Name9Phone", "NODETEST41", false);
         userServiceTest.updateEmployee(userServiceTest.getEmployees().get(0).getUserID(), "Name9New", "Name9UsernameNew", "Name9PassNew", "Name9EmailNew", Role.NURSE, "Name9PhoneNew",  false);
         assertEquals(userServiceTest.getEmployees().get(0).getName(),"Name9New");
+    }
+
+    @Test
+    public void testUpdateEmployee2() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        userServiceTest.getEmployees().clear();
+        mapServiceTest.addNodeWithID("NODETEST41B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.addEmployee("Name9", "Name9Username", "Name9Pass", "Name9Email", Role.NURSE, "Name9Phone", "NODETEST41B", false);
+        userServiceTest.updateEmployee(userServiceTest.getEmployees().get(0).getUserID(), "Name9", "Name9Username", "Name9Pass", "Name9Email", Role.NURSE, "Name9Phone",  false);
+        assertEquals(userServiceTest.getEmployees().get(0).getName(),"Name9");
     }
 
     @Test
