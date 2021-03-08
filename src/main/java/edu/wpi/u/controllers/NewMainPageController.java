@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import animatefx.animation.Bounce;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
@@ -68,6 +70,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
 
 //        validationFeild
         TextField test = new TextField("test");
@@ -262,6 +265,41 @@ public class NewMainPageController {
 //        }
     }
 
+    public void handleHelpPageButton(ActionEvent actionEvent) {
+
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Help Page");
+        Text text = new Text("This is the Main page.If there is an emergency situation, Please call 911");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.setBody(text);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("Cancel");
+        JFXButton button2 = new JFXButton("Proceed to Help Page");
+        button1.setOnAction(event -> dialog.close());
+            button2.setOnAction(event -> {
+                AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                anchor.getChildren().clear();
+                anchor.getChildren().add(root);
+                dialog.close();
+            });
+
+
+        button1.getStyleClass().add("button-text");
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+    }
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);
     }

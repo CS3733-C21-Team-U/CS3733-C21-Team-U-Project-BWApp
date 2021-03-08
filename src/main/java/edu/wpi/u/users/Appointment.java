@@ -4,17 +4,26 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Appointment {
-
+    private String appointmentID;
     private String patientID;
     private String employeeID;
     private Timestamp appointmentDate;
     private String appointmentType; // TODO : Possibly make this an enum ie : Radiology, blood work, etc
 
-    public Appointment(String patientID, String employeeID, Timestamp appointmentDate, String appointmentType) {
+    public Appointment(String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType) {
+        this.appointmentID = appointmentID;
         this.patientID = patientID;
         this.employeeID = employeeID;
         this.appointmentDate = appointmentDate;
         this.appointmentType = appointmentType;
+    }
+
+    public String getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
     }
 
     public String getPatientID() {

@@ -1,16 +1,23 @@
 package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.u.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ButtonPageForNewRequestController {
@@ -24,6 +31,8 @@ public class ButtonPageForNewRequestController {
     @FXML public JFXButton ButtonPageForNRType6JFXButton;
     @FXML public JFXButton ButtonPageForNRType8JFXButton;
     @FXML public JFXButton cancel;
+    @FXML public JFXButton helpPageButtonPageButton;
+    @FXML public StackPane newStackPane;
 
     @FXML
     private void sendData(ActionEvent event) {
@@ -164,4 +173,32 @@ public class ButtonPageForNewRequestController {
 
     public void handleFoodButton() throws Exception{
     }
+
+    public void handleHelpPageButton() throws IOException {
+            JFXDialogLayout content = new JFXDialogLayout();
+            Label header = new Label("Help Page");
+            Text text = new Text("Please click button for the type Service Request you require. " +
+                "It will bring you to the next page to fill all the information. ");
+            header.getStyleClass().add("headline-2");
+            content.setHeading(header);
+            content.setBody(text);
+            content.getStyleClass().add("dialogue");
+            JFXDialog dialog = new JFXDialog(newStackPane, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button1 = new JFXButton("CANCEL");
+            //JFXButton button2 = new JFXButton("EXIT");
+            button1.setOnAction(event -> dialog.close());
+            /*button2.setOnAction(event -> {
+                dialog.close();
+                App.getInstance().end();
+            });*/
+            button1.getStyleClass().add("button-text");
+            //button2.getStyleClass().add("button-contained");
+            ArrayList<Node> actions = new ArrayList<>();
+            actions.add(button1);
+            //actions.add(button2);
+            content.setActions(actions);
+            dialog.show();
+
+        }
 }
+

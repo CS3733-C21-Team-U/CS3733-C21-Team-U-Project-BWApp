@@ -6,35 +6,60 @@ import java.util.ArrayList;
 public class Request {
     private String requestID;
     private Timestamp dateNeeded;
-    private ArrayList<String> location;
-    private ArrayList<String> assignee;
-    private ArrayList<Comment> comments = new ArrayList<Comment>();
+    private ArrayList<String> locations;
+    private ArrayList<String> assignees;
+    private ArrayList<Comment> comments = new ArrayList<>();
 
-    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> locations, ArrayList<String> assignees, Comment comment) {
         this.requestID = requestID;
         this.dateNeeded = dateNeeded;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = locations;
+        this.assignees = assignees;
         this.comments.add(comment);
     }
 
-    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, ArrayList<Comment> comments) {
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> locations, ArrayList<String> assignees, ArrayList<Comment> comments) {
         this.requestID = requestID;
         this.dateNeeded = dateNeeded;
-        this.location = location;
-        this.assignee = assignee;
+        this.locations = locations;
+        this.assignees = assignees;
         this.comments = comments;
     }
 
-
-    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee, String creator) {
-        this.dateNeeded = needDate;
-        getPrimaryComment().description = description;
-        getPrimaryComment().title = title;
-        this.location = location;
-        this.assignee = assignee;
-        getPrimaryComment().author = creator;
+    /**
+     * returns string used in update comments
+     * @param needDate
+     * @param description
+     * @param title
+     * @param location
+     * @param assignee
+     * @return
+     */
+    public String editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee) {
+        String result = "";
+        if(!title.equals(getTitle())){
+            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"'");
+            getPrimaryComment().title = title;
+        }
+        if(!description.equals(getDescription())){
+            result = result.concat("\nDescription changed from '"+getDescription()+"' to "+description);
+            getPrimaryComment().description = description;
+        }
+        if(!needDate.equals(dateNeeded)){
+            result = result.concat("\nDue Date changed from '"+dateNeeded.toString()+"' to "+needDate.toString());
+            this.dateNeeded = needDate;
+        }
+        if(!location.equals(this.locations)){
+            result = result.concat("\nLocations were updated");
+            this.locations = location;
+        }
+        if(!assignee.equals(this.assignees)){
+            result = result.concat("\nAssignees were updated");
+            this.assignees = assignee;
+        }
+        return result;
     }
+
     public String getRequestID() {
         return requestID;
     }
@@ -64,8 +89,8 @@ public class Request {
     public String getTitle() {
         return getPrimaryComment().title;
     }
-    public ArrayList<String> getLocation() {
-        return location;
+    public ArrayList<String> getLocations() {
+        return locations;
     }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
@@ -79,12 +104,12 @@ public class Request {
     public void setTitle(String title) {
         getPrimaryComment().title = title;
     }
-    public void setLocation(ArrayList<String> location) {
-        this.location = location;
+    public void setLocations(ArrayList<String> locations) {
+        this.locations = locations;
     }
-    public ArrayList<String> getAssignee() {return assignee;}
-    public void setAssignee(ArrayList<String> assignee) {
-        this.assignee = assignee;
+    public ArrayList<String> getAssignees() {return assignees;}
+    public void setAssignees(ArrayList<String> assignees) {
+        this.assignees = assignees;
     }
 
     public void resolveRequest(Comment c) {
@@ -112,24 +137,9 @@ public class Request {
         }
     }
 
-
-    /*
-    * Comment:
-    * Title
-    *
-    * Description
-    *
-    * By who, date
-    *
-    * */
-
-
-    //UPDATE: title, description
-    //title chnaged from "booty" to "Charlie"
-    //description chnaged from "booty" to "Charlie"
-    private String updateRecord(String fieldName, String oldVal, String newVal){
-        String str;
-        str = fieldName + " changed from " + oldVal + " to " + newVal;
-        return str;
+    public String getAuthor(){
+        return getPrimaryComment().author;
     }
+
+
 }

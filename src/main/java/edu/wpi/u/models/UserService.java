@@ -1,8 +1,11 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -25,6 +28,15 @@ public class UserService {
         ud = new UserData();
         this.setEmployees();
         this.setGuests();
+        this.setPatients();
+    }
+
+    public ObservableList<User> getUsers(){
+        ObservableList<User> result = FXCollections.observableArrayList();
+        result.addAll(ud.getEmployees());
+        result.addAll(ud.getPatients());
+        result.addAll(ud.getGuests());
+        return result;
     }
 
     /**
@@ -53,6 +65,33 @@ public class UserService {
      * Sets the list of guests
      */
     public void setGuests() {this.guests = ud.getGuests();}
+
+    /**
+     * This function if for debugging purposes and assumes the Guest in already in the database
+     * Sets the active user to a guest
+     * @param name name of guest
+     */
+    public void setGuest(String name){
+       this.activeUser = ud.setGuest(name);
+    }
+    /**
+     * This function if for debugging purposes and assumes the Patient in already in the database
+     * Sets the active user to a patient
+     * @param username username of patient
+     * @param password password of patient
+     */
+    public void setPatient(String username, String password){
+        this.activeUser = ud.setPatient(username,password);
+    }
+    /**
+     * This function if for debugging purposes and assumes the Employee in already in the database
+     * Sets the active user to a employee
+     * @param username username of employee
+     * @param password password of employee
+     */
+    public void setEmployee(String username, String password){
+        this.activeUser = ud.setEmployee(username,password);
+    }
 
     /**
      * Sets the active user of the application
@@ -163,7 +202,6 @@ public class UserService {
      * @param username the username to be validated
      */
     public String checkUsername(String username) {
-        System.out.println("Value of check username: " + ud.checkUsername(username));
         return ud.checkUsername(username);
     }
 
@@ -214,18 +252,55 @@ public class UserService {
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
-        ud.createPatient(patient);
+        System.out.println(ud.createPatient(patient));
         this.patients.add(patient);
     }
 
+    /**
+     * Adds a list of appointments
+     * @param appointments the list of appointments
+     */
+    public void addAppointments(ArrayList<Appointment> appointments){
+        ud.addAppointments(appointments);
+    }
+
+    /**
+     * Adds a singular appointment
+     * @param appointment the appointment
+     */
+    public void addAppointment(Appointment appointment){
+        Random rand = new Random();
+        int appointmentID = rand.nextInt();
+        String id = Integer.toString(appointmentID);
+        //String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType
+        Appointment appointment1 = new Appointment(id, appointment.getPatientID(), appointment.getEmployeeID(), appointment.getAppointmentDate(), appointment.getAppointmentType());
+        ud.addAppointment(appointment1);
+    }
+
+    //TODO : CALL THESE NEXT THREE FUNCTIONS AS AN ADMIN/DOCTOR TO UPDATE LOCATIONS
+    /**
+     * Add a location (nodeID) to a patient
+     * @param patientID patient ID
+     * @param locationID node ID
+     */
     public void addLocationID(String patientID, String locationID){
         ud.addLocationID(patientID, locationID);
     }
 
+    /**
+     * Add a parking location to a patient
+     * @param patientID patient id
+     * @param parkingLocation parking location
+     */
     public void addParkingLocation(String patientID, String parkingLocation){
         ud.addPatientParkingLocation(patientID, parkingLocation);
     }
 
+    /**
+     * Add a recommended parking location to a patient
+     * @param patientID patient id
+     * @param recommendedParkingLocation recommended parking location
+     */
     public void addRecommendedParkingLocation(String patientID, String recommendedParkingLocation){
         ud.addPatientRecommendedParkingLocation(patientID, recommendedParkingLocation);
     }
@@ -258,7 +333,7 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Guest newGuest = new Guest(id, name, visitDate, visitReason, deleted);
+        Guest newGuest = new Guest(id, name, Role.GUEST, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }

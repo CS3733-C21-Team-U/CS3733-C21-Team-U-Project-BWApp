@@ -3,6 +3,11 @@ package edu.wpi.u.database;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.users.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,10 +21,48 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-        dropGuests(); // TODO : Stop dropping values for demos
-        dropEmployee();
-        printGuest();
-        printEmployees();
+//        dropGuests(); // TODO : Stop dropping values for demos
+//        dropEmployee();
+        //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+        //addEmployee(new Employee("debug", "debug", "debug", "debug", "debug", Role.DOCTOR, "debug", "UDEPT00101", false));
+        //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
+        //addGuest(new Guest("debug", "debug", new Timestamp(System.currentTimeMillis()), "debugreason", false));
+        /*
+        String guestID,
+        String name,
+        Timestamp visitDate,
+        String visitReason,
+        boolean deleted
+
+        String userID,
+        String name,
+        String accountName,
+        String password,
+        String email,
+        Role type,
+        String phoneNumber,
+        String locationNodeID,
+        boolean deleted,
+        ArrayList<Appointment> appointments,
+        String providerName,
+        String parkingLocation,
+        String recommendedParkingLocation
+
+
+         StringProperty userIDfx,
+         StringProperty namefx,
+         StringProperty userNamefx,
+         StringProperty passwordfx,
+         StringProperty typefx,
+         StringProperty phoneNumberfx,
+         StringProperty emailfx,
+         BooleanProperty deletedfx,
+         StringProperty locationNodeIDfx) {
+         printPatients();
+         printGuest();
+         printEmployees();
+*/
+
     }
 
     /**
@@ -58,6 +101,23 @@ public class UserData extends Data{
                 PreparedStatement ps = conn.prepareStatement(str);
                 ps.execute();
                 ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void printPatients(){
+        String str = "select * from Patients";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("===Patients===");
+            while (rs.next()){
+                System.out.println("Patients username: " + rs.getString("patientID"));
+            }
+            rs.close();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -110,10 +170,10 @@ public class UserData extends Data{
      * @return Patient with that username already exists or Patient with that password already exists or Patient added
      */
     public String createPatient(Patient patient){
-        if (!checkUsername(patient.getUserName()).equals("")){
+        if (checkUsername(patient.getUserName()).equals("Patients")){
             return "Patient with that username already exists";
         }
-        else if (!checkPassword(patient.getPassword()).equals("")){
+        else if (checkPassword(patient.getPassword()).equals("Patients")){
             return "Patient with that password already exists";
         }
         else {
@@ -244,7 +304,7 @@ public class UserData extends Data{
             ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
+                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  Role.GUEST, rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -397,7 +457,7 @@ public class UserData extends Data{
                 String guestId = rs.getString("guestID");
                 Timestamp visitDate = rs.getTimestamp("visitDate");
                 String visitReason = rs.getString("visitReason");
-                return new Guest(guestId,name, visitDate, visitReason, false);
+                return new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -451,10 +511,11 @@ public class UserData extends Data{
             ps.setString(1, patientID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                String appointmentID = rs.getString("appointmentID");
                 String appointmentType = rs.getString("appointmentType");
                 Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String employeeID = rs.getString("employeeID");
-                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -475,10 +536,11 @@ public class UserData extends Data{
             ps.setString(1, employeeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                String appointmentID = rs.getString("appointmentID");
                 String appointmentType = rs.getString("appointmentType");
                 Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String patientID = rs.getString("patientID");
-                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -700,24 +762,58 @@ public class UserData extends Data{
      * @param patient the object containing all the information on the user
      */
     public void addPatient(Patient patient) {
-        String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, locationNodeID, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,patient.getUserID());
-            ps.setString(2,patient.getName());
-            ps.setString(3,patient.getUserName());
-            ps.setString(4,patient.getPassword());
-            ps.setString(5,patient.getEmail());
-            ps.setString(6,String.valueOf(patient.getType()));
-            ps.setString(7,patient.getPhoneNumber());
-            ps.setBoolean(7,false);
-            ps.setString(8,patient.getProviderName());
-            ps.setString(9,patient.getParkingLocation());
-            ps.setString(10,patient.getRecommendedParkingLocation());
+            addAppointments(patient.getAppointments());
+            ps.setString(1,patient.getUserID()); // id
+            ps.setString(2,patient.getName()); // name
+            ps.setString(3,patient.getUserName()); // username
+            ps.setString(4,patient.getPassword()); //password
+            ps.setString(5,patient.getEmail()); //email
+            ps.setString(6,String.valueOf(patient.getType())); // role/type
+            ps.setString(7,patient.getPhoneNumber()); // phonenumer
+            ps.setString(8,patient.getLocationNodeID()); //location
+            ps.setBoolean(9,false); // deleted
+            ps.setString(10,patient.getProviderName()); // provider name
+            ps.setString(11,patient.getParkingLocation()); // park location
+            ps.setString(12,patient.getRecommendedParkingLocation()); // recommended park location
             ps.execute();
             ps.close();
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds a single appointment
+     * @param appointment the appointment
+     */
+    public void addAppointment(Appointment appointment){
+        String str = "insert into Appointments (appointmentID, appointmentDate, appointmentType, patientID, employeeID) values (?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,appointment.getAppointmentID());
+            ps.setTimestamp(2,appointment.getAppointmentDate());
+            ps.setString(3,appointment.getAppointmentType());
+            ps.setString(4,appointment.getPatientID());
+            ps.setString(5,appointment.getEmployeeID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Used to add a list of appointments
+     * @param appointments list of appointments
+     */
+    public void addAppointments(ArrayList<Appointment> appointments){
+        for (Appointment appointment: appointments){
+            if (appointment != null){
+                addAppointment(appointment);
+            }
         }
     }
 
@@ -754,7 +850,7 @@ public class UserData extends Data{
         String str = "insert into Guests (guestID, name, visitDate, visitReason, deleted) values (?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,guest.getUserID());
+            ps.setString(1,guest.getGuestID());
             ps.setString(2,guest.getName());
             ps.setTimestamp(3, guest.getVisitDate());
             ps.setString(4, guest.getVisitReason());
