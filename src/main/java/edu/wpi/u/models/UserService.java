@@ -363,7 +363,7 @@ public class UserService {
      */
     public String deleteGuest(String guestID) {
         for (Guest g : this.guests) {
-            if (g.getUserID().equals(guestID)) {
+            if (g.getGuestID().equals(guestID)) {
                 this.guests.remove(g);
                 //this.users.remove(g);
                 ud.delGuest(g);
@@ -408,7 +408,7 @@ public class UserService {
      */
     public String updateGuest(String guestID, String name, Timestamp visitDate, String visitReason, boolean deleted){
         for(Guest g : this.guests){
-            if(g.getUserID().equals(guestID)){
+            if(g.getGuestID().equals(guestID)){
                 g.editGuest(name, visitDate, visitReason, deleted);
                 ud.updGuest(g);
                 return "";

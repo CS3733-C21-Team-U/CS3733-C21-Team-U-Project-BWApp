@@ -188,10 +188,10 @@ public class UserData extends Data{
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
      */
     public String createEmployee(Employee employee){
-        if (checkUsername(employee.getUserName()).equals("")){
+        if (checkUsername(employee.getUserName()).equals("Employees")){
             return "Employee with that username already exists";
         }
-        else if (checkPassword(employee.getPassword()).equals("")){
+        else if (checkPassword(employee.getPassword()).equals("Employees")){
             return "Employee with that password already exists";
         }
         else {
@@ -251,7 +251,7 @@ public class UserData extends Data{
                         rs.getString("email"),
                         Role.valueOf(rs.getString("type")),
                         rs.getString("phonenumber"),
-                        rs.getString("parkingLocation"),
+                        rs.getString("locationNodeID"),
                         rs.getBoolean("deleted"),
                         getPatientAppointments(rs.getString("patientID")),
                         rs.getString("providerName"),
@@ -330,7 +330,7 @@ public class UserData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newPhoneNumber);
-            ps.setString(2, typeID);
+            ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -356,7 +356,7 @@ public class UserData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newEmail);
-            ps.setString(2, typeID);
+            ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
         }
@@ -479,12 +479,12 @@ public class UserData extends Data{
             ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                String patientID = rs.getString("userID");
+                String patientID = rs.getString("patientID");
                 String name = rs.getString("name");
                 Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role
                 String phonenumber = rs.getString("phonenumber");
                 String email = rs.getString("email");
-                String nodeID = rs.getString("location");
+                String nodeID = rs.getString("locationNodeID");
                 boolean deleted = rs.getBoolean("deleted");
                 ArrayList<Appointment> appointments = getPatientAppointments(patientID);
                 String providerName = rs.getString("providerName");
@@ -716,6 +716,8 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, nodeID);
             ps.setString(2, patientID);
+            ps.executeUpdate();
+            ps.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -944,7 +946,7 @@ public class UserData extends Data{
      * @param employee the object containing all of the information on the user
      */
     public void updEmployee(Employee employee){
-        String str = "update Employees set name=? and userName=? and password=? and email=? and type=? and deleted=? and phoneNumber=? where employeeID=?";
+        String str = "update Employees set name=?, userName=?, password=?, email=?, type=?, deleted=?, phoneNumber=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, employee.getName());
@@ -967,7 +969,7 @@ public class UserData extends Data{
      * @param guest the object containing all of the information on the user
      */
     public void updGuest(Guest guest){
-        String str = "update Guests set name=? and visitDate=? and visitReason=? and deleted=? where guestID=?";
+        String str = "update Guests set name=?, visitDate=?, visitReason=?, deleted=? where guestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, guest.getName());
