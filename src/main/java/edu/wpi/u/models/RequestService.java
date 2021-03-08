@@ -59,10 +59,7 @@ public class RequestService {
   }
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {
-    long time = System.currentTimeMillis();
-//    Timestamp now = new Date(time); todo: fix
-//    result.getGenericRequest().setDateCompleted(now);
-    result.getGenericRequest().resolveRequest(resolveComment); // todo : does this assign the dateCompleted?
+    result.getGenericRequest().resolveRequest(resolveComment);
     this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }

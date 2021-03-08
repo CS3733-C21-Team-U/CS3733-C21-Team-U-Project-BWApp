@@ -25,18 +25,8 @@ public class AddRequestController {
     public JFXDatePicker makeDate2BCompleteDatePicker;
     public JFXChipView makeLocationChipView;
     public JFXChipView makeStaffChipView;
-    public StackPane laundryStack;
-    public Pane makeLaundryPane;
-    public JFXTextField madeLaundryField;
-    public Pane makeSecurityPane;
-    public JFXTextField madeSecurityField;
-    public Pane makeMaintenancePane;
-    public JFXTextField madeMaintenanceFieldMachineUsed;
-    public JFXTextField madeMaintenanceFieldPriority;
-    public AnchorPane SpecificRequestAPane;
     public VBox VBoxToAddTo;
     public Label specificTitle;
-    public HBox HBoxToClone;
     public Label errorMsg;
 
     private SpecificRequest currSpecificRequest;
@@ -67,10 +57,6 @@ public class AddRequestController {
 
             ans[i] = j;
 
-//            h.setAlignment(HBoxToClone.getAlignment());
-//            h.setSpacing(HBoxToClone.getSpacing());
-//            h.getChildren().add(j);
-//            h.setId(Integer.toString(i));
             VBoxToAddTo.getChildren().add(j);
         }
         return ans;
@@ -78,9 +64,6 @@ public class AddRequestController {
 
     @FXML
     public void initialize() throws IOException {
-        /*javafx.scene.Node node = (javafx.scene.Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();*/
-        // receiveData Step 2
         String type = App.newNodeType;
         currSpecificRequest = new RequestFactory().makeRequest(type);
 
@@ -98,6 +81,10 @@ public class AddRequestController {
 
     }
 
+    /**
+     * This returns the needed array list.
+     * @return
+     */
     public ArrayList<String> requestSpecificItems() {
         ArrayList<String> specifics = new ArrayList<>();
         for(JFXTextField j : specificTextFields) {
@@ -107,6 +94,11 @@ public class AddRequestController {
     }
 
 
+    /**
+     * This is the primary function of this page.
+     * Calls requestService to add them.
+     * @throws IOException
+     */
     @FXML
     public void handleSaveNewRequest() throws IOException {
         try {
@@ -114,13 +106,13 @@ public class AddRequestController {
             ArrayList<String> locations = new ArrayList<String>(makeLocationChipView.getChips());
             ArrayList<String> specifics = requestSpecificItems();
 
-            SpecificRequest result = new RequestFactory().makeRequest(App.newNodeType);
             Random rand = new Random();
             int requestID = rand.nextInt();
             String ID = Integer.toString(requestID);//make a random id
-            //TODO : fix date bug
-            Timestamp needed = Timestamp.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(), "KAAMIL", CommentType.PRIMARY, new Timestamp( needed.getTime() ));
+
+            //make components of specifc request,  then set them
+            Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(),
+                    "KAAMIL", CommentType.PRIMARY, Timestamp.valueOf(makeDate2BCompleteDatePicker.getValue().atStartOfDay()));
             Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(specifics));
 

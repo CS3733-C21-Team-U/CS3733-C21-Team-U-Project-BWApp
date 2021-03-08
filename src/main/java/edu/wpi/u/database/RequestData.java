@@ -24,14 +24,14 @@ public class RequestData extends Data{
      * Updates a request by using its ID
      * @param specificRequest the new request object
      */
-    public void updateRequest(SpecificRequest specificRequest){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
+    public void updateRequest(SpecificRequest specificRequest){
         Request request= specificRequest.getGenericRequest();
 
         String str = "update Requests set dateNeeded=? where requestID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setTimestamp(1, request.getDateNeeded());
-            ps.setString(1,request.getRequestID());
+            ps.setString(2,request.getRequestID());
             ps.execute();
             ps.close();
         }catch (Exception e){
@@ -39,10 +39,27 @@ public class RequestData extends Data{
         }
         updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
         updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
+        updLocations(request.getRequestID(), request.getLocations());
+        updAssignees(request.getRequestID(), request.getAssignees());
 
-        Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
-        request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
-        addCommentToRequest(request.getRequestID(), c);
+        String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(updComment);
+            ps.setString(1, request.getTitle());
+            ps.setString(2, request.getDescription());
+            ps.setString(3, request.getAuthor());
+            ps.setTimestamp(4, request.getDateCreated());
+            ps.setString(5, String.valueOf(CommentType.PRIMARY));
+            ps.setString(6, request.getRequestID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //add the latest comment to the database
+        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
+        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
     }
 
     /**
@@ -316,7 +333,7 @@ public class RequestData extends Data{
             ps.setString(1,requestID);
             ps.setString(2,comment.getTitle());
             ps.setString(3,comment.getDescription());
-            ps.setString(4,comment.getDescription());
+            ps.setString(4,comment.getAuthor());
             ps.setString(5,comment.getType().toString());
             ps.setTimestamp(6,comment.getTimestamp());
             ps.execute();

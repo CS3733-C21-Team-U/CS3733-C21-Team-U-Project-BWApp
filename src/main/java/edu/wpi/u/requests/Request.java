@@ -26,14 +26,40 @@ public class Request {
         this.comments = comments;
     }
 
-    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee, String creator) {
-        this.dateNeeded = needDate;
-        getPrimaryComment().description = description;
-        getPrimaryComment().title = title;
-        this.locations = location;
-        this.assignees = assignee;
-        getPrimaryComment().author = creator;
+    /**
+     * returns string used in update comments
+     * @param needDate
+     * @param description
+     * @param title
+     * @param location
+     * @param assignee
+     * @return
+     */
+    public String editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee) {
+        String result = "";
+        if(!title.equals(getTitle())){
+            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"'");
+            getPrimaryComment().title = title;
+        }
+        if(!description.equals(getDescription())){
+            result = result.concat("\nDescription changed from '"+getDescription()+"' to "+description);
+            getPrimaryComment().description = description;
+        }
+        if(!needDate.equals(dateNeeded)){
+            result = result.concat("\nDue Date changed from '"+dateNeeded.toString()+"' to "+needDate.toString());
+            this.dateNeeded = needDate;
+        }
+        if(!location.equals(this.locations)){
+            result = result.concat("\nLocations were updated");
+            this.locations = location;
+        }
+        if(!assignee.equals(this.assignees)){
+            result = result.concat("\nAssignees were updated");
+            this.assignees = assignee;
+        }
+        return result;
     }
+
     public String getRequestID() {
         return requestID;
     }
@@ -103,24 +129,9 @@ public class Request {
         return this.comments.get(0);
     }
 
-
-    /*
-    * Comment:
-    * Title
-    *
-    * Description
-    *
-    * By who, date
-    *
-    * */
-
-
-    //UPDATE: title, description
-    //title chnaged from "booty" to "Charlie"
-    //description chnaged from "booty" to "Charlie"
-    private String updateRecord(String fieldName, String oldVal, String newVal){
-        String str;
-        str = fieldName + " changed from " + oldVal + " to " + newVal;
-        return str;
+    public String getAuthor(){
+        return getPrimaryComment().author;
     }
+
+
 }

@@ -1,4 +1,5 @@
 package edu.wpi.u.requests;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public abstract class SpecificRequest {
@@ -6,9 +7,35 @@ public abstract class SpecificRequest {
     private Request req;
     private ArrayList<String> specificFields;
 
+
+    /**
+     * This updates all allowed fields and constructs a comment based on what has changed.
+     * @param title
+     * @param description
+     * @param needDate
+     * @param locations
+     * @param assignee
+     * @param specifics
+     */
+    public void updateRequest(String title, String description, Timestamp needDate, ArrayList<String> locations,
+                              ArrayList<String> assignee,  ArrayList<String> specifics){
+        String updateDescription = req.editRequest(needDate, description, title, locations,
+                assignee);
+
+        for(int i=0; i<specifics.size(); i++){
+            if(!specifics.get(i).toString().equals(specificFields.get(i).toString())){
+                updateDescription = updateDescription.concat("\n"+getSpecificFields()[i]+" changed from '"+specificFields.get(i)+"' to "+specifics.get(i));
+            }
+        }
+
+        Comment updateComment = new Comment("UPDATE", updateDescription, "CurrentUser", CommentType.UPDATE);
+        req.addComment(updateComment);
+        setSpecificData(specifics);
+    }
+
+
     public abstract String[] getSpecificFields();
     public abstract String getType();
-
 
     public ArrayList<String> getSpecificData() {
         return specificFields;
@@ -36,7 +63,6 @@ public abstract class SpecificRequest {
         }
         return str;
     }
-
     public SpecificRequest readStorageString(String specificFields){
         ArrayList<String> result = new ArrayList<String>();
         for(int i = 0; i < getSpecificFields().length; i++){
