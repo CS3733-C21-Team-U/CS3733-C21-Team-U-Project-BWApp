@@ -25,9 +25,9 @@ public class GuestSignInScreenController {
         //TODO: set active user to guest
         Timestamp t = new Timestamp(System.currentTimeMillis());
         App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
-        System.out.println("Name to be added " + nameGuestTextField.getText());
+//        System.out.println("Name to be added " + nameGuestTextField.getText());
         App.userService.setGuest(nameGuestTextField.getText());
-        System.out.println("Name from activeGuest: " + App.userService.getActiveGuest().getName());
+//        System.out.println("Name from activeGuest: " + App.userService.getActiveGuest().getName());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

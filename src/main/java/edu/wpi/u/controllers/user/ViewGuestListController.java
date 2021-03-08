@@ -25,15 +25,17 @@ public class ViewGuestListController {
 
     public void initialize() throws IOException {
 
+        // todo : make page only visible to admins and Role.SECURITY
+
         ObservableList<User> users = FXCollections.observableArrayList();
-        for (Guest u : App.userService.getGuests()){
-            users.add(new Guest(new SimpleStringProperty(u.getGuestID()), new SimpleStringProperty(u.getName()), new SimpleStringProperty(String.valueOf(u.getType())), new SimpleLongProperty(u.getVisitDate().getTime()), new SimpleStringProperty(u.getVisitReason())));
+        for (User u : App.userService.getGuests()){
+            users.add(new Guest(new SimpleStringProperty(u.getGuestID()), new SimpleStringProperty(u.getName()),new SimpleStringProperty(String.valueOf(Role.GUEST)), new SimpleLongProperty(u.getVisitDate().getTime()), new SimpleStringProperty(u.getVisitReason())));
         }
-        System.out.println("Guest list : " + users);
-        JFXTreeTableColumn<User, String> treeTableColumnID = new JFXTreeTableColumn<>("Name");
+
+        JFXTreeTableColumn<User, String> treeTableColumnID = new JFXTreeTableColumn<>("ID");
         treeTableColumnID.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
             if (treeTableColumnID.validateValue(param)){
-                return param.getValue().getValue().namefxProperty();
+                return param.getValue().getValue().guestIDfxProperty();
             }
             else {
                 return treeTableColumnID.getComputedValue(param);
@@ -41,9 +43,47 @@ public class ViewGuestListController {
         });
         treeTableColumnID.setPrefWidth(100);
         treeTableColumnID.setEditable(false);
+
+        JFXTreeTableColumn<User, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
+        treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+            if (treeTableColumnName.validateValue(param)){
+                return param.getValue().getValue().namefxProperty();
+            }
+            else {
+                return treeTableColumnName.getComputedValue(param);
+            }
+        });
+        treeTableColumnName.setPrefWidth(100);
+        treeTableColumnName.setEditable(false);
+
+        JFXTreeTableColumn<User, String> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
+        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+            if (treeTableColumnVisitDate.validateValue(param)){
+                return param.getValue().getValue().visitDatefxProperty().asString(); // todo : date format
+            }
+            else {
+                return treeTableColumnVisitDate.getComputedValue(param);
+            }
+        });
+        treeTableColumnVisitDate.setPrefWidth(150);
+        treeTableColumnVisitDate.setEditable(false);
+
+        JFXTreeTableColumn<User, String> treeTableColumnVisitReason = new JFXTreeTableColumn<>("Visit reason");
+        treeTableColumnVisitReason.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+            if (treeTableColumnVisitReason.validateValue(param)){
+                return param.getValue().getValue().visitReasonfxProperty();
+            }
+            else {
+                return treeTableColumnVisitReason.getComputedValue(param);
+            }
+        });
+        treeTableColumnVisitReason.setPrefWidth(150);
+        treeTableColumnVisitReason.setEditable(false);
+
+
         final TreeItem<User> root = new RecursiveTreeItem<>(users, RecursiveTreeObject::getChildren);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
-        treeTableView.getColumns().setAll(treeTableColumnID);
+        treeTableView.getColumns().setAll(treeTableColumnID, treeTableColumnName ,treeTableColumnVisitDate, treeTableColumnVisitReason);
     }
 }
