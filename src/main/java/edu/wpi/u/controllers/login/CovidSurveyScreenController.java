@@ -1,7 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
-import animatefx.animation.*;
+//import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
@@ -35,9 +35,6 @@ public class CovidSurveyScreenController {
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
     // if requirements are not met, the user should be sent to another page that directs them to seek help or go home.
     // Will throw an error if any of the check boxes are not completed.
-    /**
-
-     */
 
     public void handleCovidSurveyFill() throws IOException {
 
@@ -70,13 +67,13 @@ public class CovidSurveyScreenController {
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setPatient("debug", "debug");
+        App.userService.setPatient("debug");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setEmployee("debug", "debug");
+        App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
