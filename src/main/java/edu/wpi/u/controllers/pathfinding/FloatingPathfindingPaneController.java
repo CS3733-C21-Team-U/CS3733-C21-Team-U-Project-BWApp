@@ -31,10 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
 
 public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
@@ -60,7 +56,72 @@ public class FloatingPathfindingPaneController {
 
         textDirectionContainer.getChildren().clear();
 
+    public void handleTestAddTextField() {
 
+
+        textDirectionContainer.getChildren().clear();
+
+
+        LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
+        if(edgePath.isEmpty()) System.out.println("empty list!!");
+        else {
+            double currentAngle = 0, prevAngle = 0;
+
+            Node bNode = null;
+            Node eNode = path.get(0);
+            int index = 0;
+            for(Edge e : edgePath) {
+                index++;
+                String iconID = "";
+                int eDist = (int) Math.round(e.getWeight()/3); //3 being pixels for foot, see TextualDirections.java
+
+                String angleDescription = "";
+
+                Node sNode = eNode;
+                if (sNode == e.getStartNode())  eNode = e.getEndNode();
+                else eNode = e.getStartNode(); //makes sure start and end nodes are actually what we want
+
+                //Finds angle for path
+                if(bNode == null) {
+                    angleDescription = "";
+                    iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z";
+                }
+                else {
+                    double angle = TextualDirections.getAngle(sNode, eNode);
+                    double previousAngle = TextualDirections.getAngle(bNode, sNode);
+                    double angleDifferance = angle - previousAngle;
+
+                    if (angleDifferance < 0) {
+                        angleDifferance = 180 + (180 - Math.abs(angleDifferance));
+                    }
+                    angleDescription = TextualDirections.textualAngleDescription(angleDifferance);
+                    iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z";
+                }
+
+
+                iconID = "M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z"; //TODO: make dynamic to type of turn
+                Label turnText = new Label(index + ": " + angleDescription + sNode.getLongName() + " to " + eNode.getLongName()); //TODO: add tailored directions here
+                turnText.getStyleClass().add("subtitle");
+                turnText.setWrapText(true);
+                Label distanceText = new Label("Continue straight for "+ eDist +" feet");// TODO: add distance to walk after
+                distanceText.getStyleClass().add("caption");
+                SVGPath turnIcon = new SVGPath();
+                turnIcon.setStyle("-fx-padding: 20px");
+                turnIcon.setContent(iconID);
+                VBox textVBox = new VBox();
+                textVBox.getChildren().add(turnText);
+                textVBox.getChildren().add(distanceText);
+                HBox stepHBoxContainer = new HBox();
+                stepHBoxContainer.setAlignment(Pos.CENTER_LEFT);
+                stepHBoxContainer.getChildren().add(turnIcon);
+                stepHBoxContainer.getChildren().add(textVBox);
+                stepHBoxContainer.setStyle("-fx-padding: 10px 40px");
+                stepHBoxContainer.setSpacing(40);
+                textDirectionContainer.getChildren().add(stepHBoxContainer);
+
+                bNode = sNode;
+            }
+        }
         LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
         if(edgePath.isEmpty()) System.out.println("empty list!!");
         else {
@@ -195,8 +256,10 @@ public class FloatingPathfindingPaneController {
         namesAndIDs = App.mapService.getLongNames();
         Set<String> strings = namesAndIDs.keySet();
 
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+        ArrayList<String> nodeNames = new ArrayList<>();
+
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList(nodeNames));
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(nodeNames));
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.equals("START")){
@@ -236,6 +299,10 @@ public class FloatingPathfindingPaneController {
                 App.mapInteractionModel.pathPreview = path;
                 App.mapInteractionModel.pathPreviewFlag.set(String.valueOf(Math.random()));
             }
+        });
+
+        App.mapInteractionModel.pathFlag.addListener(observable -> {
+            handleTestAddTextField();
         });
 
         startNodeField.requestFocus();
