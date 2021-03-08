@@ -8,10 +8,7 @@ import edu.wpi.u.App;
 import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.requests.Request;
 import edu.wpi.u.requests.SpecificRequest;
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Transition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +27,14 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public SpecificRequest request;
     public Parent expandedNode;
     public Parent collapsedNode;
+
+    private static int fact(int n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
 
 
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
@@ -52,59 +57,52 @@ public class RequestListItemContainerController extends AnchorPane implements In
     }
 
     public void switchToExpanded() {
-        this.getChildren().add(expandedNode);
-        final RequestListItemContainerController temp = this;
-        final Animation anim = new Transition() {
-            {
-                setCycleDuration(Duration.millis(250));
-            }
-            @Override
-            protected void interpolate(double frac) {
-                double prefHeight = 96.0 + (590.0-96.0)*frac;
-
-                temp.setPrefHeight(prefHeight);
-            }
-        };
-        anim.setOnFinished(event -> {
-                temp.getChildren().remove(collapsedNode);
-        });
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(150),collapsedNode);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(250),expandedNode);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-
-        fadeIn.play();
-        fadeOut.play();
-        anim.play();
-
+        //For duration question look at: https://material.io/design/motion/speed.html#controlling-speed
+        runAnimation(this,300,100,96,590,collapsedNode, expandedNode);
     }
     public void switchToCollapsed() {
-        this.getChildren().add(collapsedNode);
-        final RequestListItemContainerController temp = this;
+        runAnimation(this,250,80,590,96,expandedNode,collapsedNode);
+    }
+    public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){
+        //https://material.io/design/motion/the-motion-system.html#container-transform
+        //BASED ON "FADE THROUGH TRANSFORM"
         final Animation anim = new Transition() {
             {
-                setCycleDuration(Duration.millis(250));
+                setCycleDuration(Duration.millis(totalTimeMS));
+                setInterpolator(Interpolator.EASE_BOTH);
             }
             @Override
             protected void interpolate(double frac) {
-                double prefHeight = 590 - (590-96) *frac;
-                temp.setPrefHeight(prefHeight);
+                double prefHeight = startSizePx + (endSizePx-startSizePx) *frac;
+                anchor.setPrefHeight(prefHeight);
             }
         };
-        anim.setOnFinished(event -> {
-            temp.getChildren().remove(expandedNode);
-        });
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(150),expandedNode);
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(fadeOutTimeMS),outgoing);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(250),collapsedNode);
+        fadeOut.setInterpolator(Interpolator.EASE_IN);
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(totalTimeMS-fadeOutTimeMS),incoming);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
+        fadeIn.setInterpolator(Interpolator.EASE_BOTH);
 
-        fadeIn.play();
-        fadeOut.play();
+        PauseTransition pause = new PauseTransition(Duration.millis(1)); //TO AVOID FLASHING OF INCOMING
+
+        fadeOut.setOnFinished(event -> {
+            anchor.getChildren().clear();
+            incoming.setVisible(false);
+            anchor.getChildren().add(incoming);
+            fadeIn.playFromStart();
+            pause.play();
+        });
+
+
+        pause.setOnFinished(event -> {
+            incoming.setVisible(true);
+        });
+
         anim.play();
+        fadeOut.play();
     }
+
 }
