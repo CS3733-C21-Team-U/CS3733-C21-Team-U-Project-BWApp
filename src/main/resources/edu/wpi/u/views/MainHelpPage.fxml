@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -36,89 +38,119 @@
                      <children>
                         <VBox prefHeight="592.0" prefWidth="580.0">
                            <children>
-                              <JFXButton onAction="#handleLogInButton" prefHeight="137.0" prefWidth="607.0" styleClass="button-contained" text="Log in">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleLogInButton" prefHeight="137.0" prefWidth="607.0" styleClass="button-contained" text="Log in">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="SIGN_IN" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleTwoFactorAButton" prefHeight="148.0" prefWidth="601.0" styleClass="button-contained" text="Two Factor Authorization">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleTwoFactorAButton" prefHeight="148.0" prefWidth="601.0" styleClass="button-contained" text="Two Factor Authorization">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="POWER_OFF" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleForgotPasswordButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="Forgot Password">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleForgotPasswordButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="Forgot Password">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="QUESTION_CIRCLE" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handlePathFindingButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="PathFinding">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handlePathFindingButton" prefHeight="178.0" prefWidth="591.0" styleClass="button-contained" text="PathFinding">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="PAPER_PLANE" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleContactUsButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="Contact us">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleContactUsButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="Contact us">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="PHONE_SQUARE" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleSettingPageButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="SettingPage">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingPageButton" prefHeight="162.0" prefWidth="586.0" styleClass="button-contained" text="SettingPage">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="COGS" size="40" />
+                                 </graphic>
                               </JFXButton>
                            </children>
                         </VBox>
                         <VBox prefHeight="592.0" prefWidth="571.0">
                            <children>
-                              <JFXButton onAction="#handleAddUserButton" prefHeight="145.0" prefWidth="582.0" styleClass="button-contained" text="Add User">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleAddUserButton" prefHeight="145.0" prefWidth="582.0" styleClass="button-contained" text="Add User">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="USER_PLUS" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleEditUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="Edit User">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleEditUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="Edit User">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="USER_TIMES" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleViewUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="View User">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleViewUserButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="View User">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="USER" size="40" />
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#handleLoadAndSaveCSVButton" prefHeight="153.0" prefWidth="576.0" styleClass="button-contained" text="Load and Save CSV">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleLoadAndSaveCSVButton" prefHeight="56.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Load and Save CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="50.0" right="50.0" />
                                  </VBox.margin>
+                                 <graphic>
+                                    <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
+                                 </graphic>
                               </JFXButton>
                            </children>
                            <HBox.margin>
@@ -132,10 +164,16 @@
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets />
                </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </StackPane>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </VBox>
    </children>
    <stylesheets>
