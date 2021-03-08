@@ -33,27 +33,27 @@ public class ViewRequestListController {
 
         ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
         //TODO: Remove (for debug since line above doesn't return anything)
-        ArrayList<String> sampleArray = new ArrayList<String>();
-        sampleArray.add("UPARK0300G");
-        sampleArray.add("UPARK0150G");
+//        ArrayList<String> sampleArray = new ArrayList<String>();
+//        sampleArray.add("UPARK0300G");
+//        sampleArray.add("UPARK0150G");
 
-        MaintenanceRequest testRequest = new MaintenanceRequest();
-        Comment primaryComment = new Comment("Primary Comment","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
-        ArrayList<Comment> commentlist = new ArrayList<Comment>();
-        commentlist.add(primaryComment);
-        Request request1 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray,sampleArray,commentlist);
-        testRequest.setRequest(request1);
-        testRequest.setSpecificData(sampleArray);
-        listOfRequests.add(testRequest);
-
-        MaintenanceRequest testRequest2 = new MaintenanceRequest();
-        Comment primaryComment2 = new Comment("Seccond title for new request","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
-        ArrayList<Comment> commentlist2 = new ArrayList<Comment>();
-        commentlist2.add(primaryComment2);
-        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()),sampleArray, sampleArray,commentlist2);
-        testRequest2.setRequest(request2);
-        testRequest2.setSpecificData(sampleArray);
-        listOfRequests.add(testRequest2);
+//        MaintenanceRequest testRequest = new MaintenanceRequest();
+//        Comment primaryComment = new Comment("Primary Comment","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
+//        ArrayList<Comment> commentlist = new ArrayList<Comment>();
+//        commentlist.add(primaryComment);
+//        Request request1 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray,sampleArray,commentlist);
+//        testRequest.setRequest(request1);
+//        testRequest.setSpecificData(sampleArray);
+//        listOfRequests.add(testRequest);
+//
+//        MaintenanceRequest testRequest2 = new MaintenanceRequest();
+//        Comment primaryComment2 = new Comment("Seccond title for new request","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
+//        ArrayList<Comment> commentlist2 = new ArrayList<Comment>();
+//        commentlist2.add(primaryComment2);
+//        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()),sampleArray, sampleArray,commentlist2);
+//        testRequest2.setRequest(request2);
+//        testRequest2.setSpecificData(sampleArray);
+//        listOfRequests.add(testRequest2);
 
 //        MaintenanceRequest testRequest3 = new MaintenanceRequest();
 //        Comment primaryComment3 = new Comment("asdasdasda","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));

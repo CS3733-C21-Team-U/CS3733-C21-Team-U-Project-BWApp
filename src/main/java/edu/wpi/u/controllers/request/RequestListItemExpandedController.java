@@ -2,6 +2,7 @@ package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.CommentType;
@@ -39,6 +40,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label completeByLabel;
     @FXML public VBox commentsRoot;
     @FXML public VBox mainSpecialFieldVbox;
+    @FXML private JFXTextField commentField;
+
 
     AnchorPane mainMapPane = new AnchorPane();
 
@@ -127,8 +130,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void generateComments(){
-        for(int i = 0; i < this.parent.request.getGenericRequest().getComments().size(); i++){
-
+        for(int i = 1; i < this.parent.request.getGenericRequest().getComments().size(); i++){
+            commentsRoot.getChildren().clear();
             //This whole block just generates the comment block instead of loading from FXML
             Comment comment = this.parent.request.getGenericRequest().getComments().get(i);
             Region comExpandRegion = new Region();
@@ -165,7 +168,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         }
     }
 
-    public void handleCommentButton() {
+    public void addComment() {
+        Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
+        this.parent.request.getGenericRequest().addComment(newComment);
+        generateComments();
     }
 
     @FXML
