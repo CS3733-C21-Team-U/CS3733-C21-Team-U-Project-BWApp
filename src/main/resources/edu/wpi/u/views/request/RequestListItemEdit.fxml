@@ -57,10 +57,10 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
                         </HBox>
-                        <JFXTextField labelFloat="true" promptText="Title" />
-                        <JFXTextArea labelFloat="true" promptText="Description" />
-                        <JFXDatePicker promptText="Time Needed" />
-                        <JFXTimePicker promptText="Time Needed" />
+                        <JFXTextField fx:id="editTitleField" labelFloat="true" promptText="Title" />
+                        <JFXTextArea fx:id="editDescriptionField" labelFloat="true" promptText="Description" />
+                        <JFXDatePicker fx:id="editDateNeededField" promptText="Date Needed" />
+                        <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
                         <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
                            <children>
                               <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
@@ -89,7 +89,7 @@
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField labelFloat="true" promptText="Assignee">
+                                    <JFXTextField fx:id="editAssigneesField" labelFloat="true" promptText="Assignees">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -105,7 +105,7 @@
                                        </VBox.margin>
                                     </JFXButton>
                                  </children></VBox>
-                              <JFXListView />
+                              <JFXListView fx:id="editAssigneesListVIew" />
                            </children>
                            <VBox.margin>
                               <Insets top="100.0" />
@@ -115,7 +115,7 @@
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField labelFloat="true" promptText="Location" />
+                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations" />
                                     <JFXButton prefWidth="130.0" styleClass="button-contained" text="Add Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
@@ -128,7 +128,7 @@
                                     </JFXButton>
                                  </children>
                               </VBox>
-                              <JFXListView />
+                              <JFXListView fx:id="editLocationsListVIew" />
                            </children>
                         </HBox>
                      </children></VBox>
@@ -140,7 +140,7 @@
                   <Insets />
                </HBox.margin>
                <children>
-                  <VBox layoutY="534.0" prefHeight="590.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox fx:id="extraFieldsVBox" layoutY="534.0" prefHeight="590.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                         <HBox fx:id="pushDown21" alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="413.0">
