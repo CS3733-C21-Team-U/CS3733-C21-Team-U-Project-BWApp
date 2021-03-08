@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<AnchorPane prefWidth="450.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.FloatingPathfindingPaneController">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <VBox alignment="TOP_CENTER" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="73.0">
+                     <children>
+                        <SVGPath content="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z" />
+                        <SVGPath content="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </SVGPath>
+                        <SVGPath content="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9zM 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="308.0" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="startNodeField" onInputMethodTextChanged="#handleInputMethodChange" promptText="Enter starting point, or click on the map" />
+                        <JFXTextField fx:id="endNodeField" promptText="Choose destination..." />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="79.0" prefWidth="55.0">
+                     <children>
+                        <JFXButton contentDisplay="GRAPHIC_ONLY" mouseTransparent="true" onAction="#handleStartEndSwap" opacity="0.0" prefHeight="56.0" prefWidth="58.0">
+                           <graphic>
+                              <SVGPath content="M9.01 14H2v2h7.01v3L13 15l-3.99-4v3zm5.98-1v-3H22V8h-7.01V5L11 9l3.99 4z" rotate="90.0" scaleX="2.0" scaleY="2.0" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox fx:id="textDirectionContainer" alignment="CENTER" prefWidth="100.0" styleClass="headline-3">
+               <children>
+                  <Label text="Text Directions" />
+               </children>
+            </VBox>
+            <JFXButton minHeight="30.0" onAction="#handleTestAddTextField" styleClass="button-text" text="Test Add Text Step" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</AnchorPane>

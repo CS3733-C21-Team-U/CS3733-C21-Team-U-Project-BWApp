@@ -3,45 +3,36 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import javafx.animation.Interpolator;
+import edu.wpi.u.models.MapService;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.control.*;
+
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
+
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.function.BiPredicate;
+import java.util.HashMap;
+import java.util.Set;
 
-import static edu.wpi.u.users.StaffType.ADMIN;
+import static edu.wpi.u.users.Role.ADMIN;
 
 public class NewMainPageController {
 
@@ -62,6 +53,12 @@ public class NewMainPageController {
     public ToggleGroup group1;
     public JFXChipView chipView;
     public JFXChipView chipViewOnly;
+    public JFXListView listViewDemoNormal;
+    public GridPane listTestingPane;
+    public JFXListView listViewTesting;
+    public JFXListView list2;
+    public JFXButton expandButton;
+    public JFXButton collapseButton;
 
 
     AnchorPane rightServiceRequestPane;
@@ -72,7 +69,44 @@ public class NewMainPageController {
 
     public void initialize() throws IOException {
 
+//        validationFeild
+        TextField test = new TextField("test");
+//        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");
+        HashMap<String, String> namesAndIDs= MapService.md.getLongnames();
+        Set<String> strings = namesAndIDs.keySet();
+
+        AutoCompletionBinding<String> acb = TextFields.bindAutoCompletion(validationFeild , FXCollections.observableArrayList("Locaiton 1","getLongNames is Borken"));
+//        acb.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<String>>()
+//        {
+//
+//            @Override
+//            public void handle(AutoCompletionBinding.AutoCompletionEvent<String> event)
+//            {
+//                String valueFromAutoCompletion = event.getCompletion();
+//            }
+//        });
+
         App.themeSVG = themeIcon;
+
+        this.expandButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(true);
+        });
+        this.collapseButton.setOnMouseClicked((e) -> {
+            this.list2.expandedProperty().set(!list2.isExpanded());
+        });
+
+        for(int i = 0; i < 4; ++i) {
+            list2.getItems().add(new Label("ItemB " + i));
+            listViewTesting.getItems().add(new Label("Item " + i));
+        }
+
+        listViewTesting.getStyleClass().clear();
+//        list2.getStyleClass().clear();
+//        list2.getStyleClass().add("mylistview2");
+
+//        list2.expandedProperty().set(true);
+
+
 
         chipView.getChips().addAll("Start with one item");
         chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
@@ -80,7 +114,7 @@ public class NewMainPageController {
 
         chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
 
-        listViewDemo.setItems(listView);
+//        listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
@@ -184,7 +218,7 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLogin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
             }
         });
@@ -262,5 +296,12 @@ public class NewMainPageController {
         actions.add(button2);
         content.setActions(actions);
         dialog.show();
+    }
+    public void handleCollapseButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(true);
+    }
+
+    public void handleExpandButton(ActionEvent actionEvent) {
+//        this.list2.expandedProperty().set(false);
     }
 }

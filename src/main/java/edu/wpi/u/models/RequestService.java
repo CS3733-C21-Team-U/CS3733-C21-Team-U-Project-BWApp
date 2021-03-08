@@ -3,6 +3,8 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,14 +13,30 @@ public class RequestService {
 
 
   static RequestData rd = new RequestData();
-  ArrayList<IRequest> activeRequests = new ArrayList<>();
+  ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();
-    for (IRequest x : this.activeRequests){
+    for (SpecificRequest x : this.activeRequests){
 
       System.out.println("Req: "+ x.getGenericRequest().getRequestID());
     }
+  }
+
+  public ArrayList<String> getAssignees(String requestID){
+    return rd.getAssignees(requestID);
+  }
+
+  public ArrayList<String> getLocations(String requestID){
+    return rd.getLocations(requestID);
+  }
+
+  public void setAssignees(String requestID, ArrayList<String> assignees){
+    rd.updAssignees(requestID, assignees);
+  }
+
+  public void setLocations(String requestID, ArrayList<String> locations){
+    rd.updLocations(requestID, locations);
   }
 
   public void loadCSVFile(String path, String tableName){
@@ -31,24 +49,22 @@ public class RequestService {
     Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
   }
 
-  public void addRequest(IRequest result) {
+  public void addRequest(SpecificRequest result) {
     rd.addRequest(result);
     this.activeRequests.add(result);
   }
 
-  public void updateRequest(IRequest result) {
+  public void updateRequest(SpecificRequest result) {
     rd.updateRequest(result);
   }
 
-  public void resolveRequest(IRequest result) {
-    long time = System.currentTimeMillis();
-    Date now = new Date(time);
-    result.getGenericRequest().setDateCompleted(now);
+  public void resolveRequest(SpecificRequest result, Comment resolveComment) {
+    result.getGenericRequest().resolveRequest(resolveComment);
     this.activeRequests.remove(result);
-    rd.resolveRequest(result.getGenericRequest().getRequestID(), time);
+    rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
-  public ArrayList<IRequest> getRequests() {
+  public ArrayList<SpecificRequest> getRequests() {
       return this.activeRequests;
     }
 
