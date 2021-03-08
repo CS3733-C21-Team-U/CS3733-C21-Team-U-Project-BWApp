@@ -1,20 +1,23 @@
 package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MapInteractionModel {
 
 
-    private String currentAction = "NONE";
+    private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
+    public String previusEdgeID = "";
     private double Coords[] = new double[2];
     public SimpleStringProperty pathFlag = new SimpleStringProperty("");
     public SimpleStringProperty pathPreviewFlag = new SimpleStringProperty("");
@@ -22,27 +25,57 @@ public class MapInteractionModel {
     public ArrayList<Node> pathPreview = new ArrayList<>();
     private String building = "Faulkner";
     public SimpleStringProperty editFlag = new SimpleStringProperty("");
-    public AnchorPane selectedNodeContextBox;
+    public AnchorPane selectedContextBox;
     public AnchorPane selectedEdgeContextBox;
     public SimpleStringProperty mapImageResourcePathfinding = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public SimpleStringProperty mapImageResource = new SimpleStringProperty("/edu/wpi/u/views/Images/FaulknerCampus.png");
     public String floor = "G";
     public String floorPathfinding = "G";
-    public ArrayList<String> nodeIDList = new ArrayList<String>();
-    public ArrayList<String> edgeIDList = new ArrayList<String>();
+    public LinkedList<String> nodeIDList = new LinkedList<>();
+    public String deselectedNodeID = "";
+    public String toggledNodeID = "";
+    public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
+
+
+    public void addToNodeIdList(String nodeID){
+        if(!this.nodeIDList.contains(nodeID)){
+            this.nodeIDList.addFirst(nodeID);
+        }else {
+            this.nodeIDList.remove(nodeID);
+            this.toggledNodeID = nodeID;
+        }
+
+    }
+
+    public LinkedList<String> resetNodeIDList(){
+        String firstID = this.nodeIDList.getFirst();
+        this.nodeIDList.remove(firstID);
+        LinkedList<String> returnMe = this.nodeIDList;
+        this.nodeIDList = new LinkedList<>();
+        addToNodeIdList(firstID);
+        return returnMe;
+    }
+
+    public double avgSelectedCords(){
+        double xTotal = 0.0, yTotal = 0.0;
+        for (String nodeID: this.nodeIDList ) {
+            //todo finish
+        }
+        return 0.0;
+    }
 
     public String getPreviousPreviousNodeID() {
         return previousPreviousNodeID;
     }
 
     public void clearPreviousNodeID() {
-        this.previousNodeID = "";
+        this.deselectedNodeID = "";
     }
 
     public String getPreviousNodeID() {
-        return previousNodeID;
+        return deselectedNodeID;
     }
 
     public String getBuilding() {
@@ -71,9 +104,9 @@ public class MapInteractionModel {
 
     public void setNodeID(String nodeID) {
         if(!this.nodeID.get().equals(nodeID)) {
-            previousPreviousNodeID = previousNodeID;
-            previousNodeID = this.nodeID.get();
+            deselectedNodeID = this.nodeID.get();
             this.nodeID.set(nodeID);
+            addToNodeIdList(nodeID);
         }
     }
 
@@ -82,6 +115,7 @@ public class MapInteractionModel {
     }
 
     public void setEdgeID(String edgeID) {
+        this.previusEdgeID = this.edgeID;
         this.edgeID = edgeID;
     }
 

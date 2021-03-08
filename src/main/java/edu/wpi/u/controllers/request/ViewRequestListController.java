@@ -50,7 +50,7 @@ public class ViewRequestListController {
         Comment primaryComment2 = new Comment("Seccond title for new request","No description","Kohmei",CommentType.PRIMARY,new Timestamp(System.currentTimeMillis()));
         ArrayList<Comment> commentlist2 = new ArrayList<Comment>();
         commentlist2.add(primaryComment2);
-        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()), sampleArray, sampleArray,commentlist2);
+        Request request2 = new Request("RandomID", new Timestamp(System.currentTimeMillis()),sampleArray, sampleArray,commentlist2);
         testRequest2.setRequest(request2);
         testRequest2.setSpecificData(sampleArray);
         listOfRequests.add(testRequest2);
