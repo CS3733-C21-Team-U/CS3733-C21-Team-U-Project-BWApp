@@ -88,7 +88,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         creatorAndDateString += " - ";
         creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
         creatorAndDateLabel.setText(creatorAndDateString);
-        assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignee()));
+        assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
         completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
 
 //        //requestDetailSecurityLabel.setText(request);
