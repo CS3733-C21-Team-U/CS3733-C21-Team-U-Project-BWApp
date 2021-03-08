@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers.mapbuilder;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
@@ -37,6 +38,7 @@ public class MapBuilderBaseController {
 
     @FXML
     private JFXToggleNode selectButton, multiSelectButton, addNodeButton, addEdgeButton, alineButton;
+    public JFXButton redoButton,undoButton;
 
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
@@ -70,11 +72,13 @@ public class MapBuilderBaseController {
         map.toBack();
 
         //setup tooltips
-        selectButton.setTooltip(new Tooltip("Select"));
-        multiSelectButton.setTooltip(new Tooltip("Select Multiple"));
-        addNodeButton.setTooltip(new Tooltip("Add Node"));
-        addEdgeButton.setTooltip(new Tooltip("Add Edge"));
-        alineButton.setTooltip(new Tooltip("Aline Selected Nodes"));
+        selectButton.setTooltip(new Tooltip("Select Tool"));
+        multiSelectButton.setTooltip(new Tooltip("Multi-Select Tool"));
+        addNodeButton.setTooltip(new Tooltip("Add Node Tool"));
+        addEdgeButton.setTooltip(new Tooltip("Add Edge Tool"));
+        alineButton.setTooltip(new Tooltip("Align Selected Nodes Tool"));
+        redoButton.setTooltip(new Tooltip("Redo Edit"));
+        undoButton.setTooltip(new Tooltip("Undo Edit"));
         //handle converting converting clicks on the screen into map space
 
 
@@ -408,11 +412,14 @@ public class MapBuilderBaseController {
                 }else{
                     makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
                 }
-
-
                 break;
             case "ALINE":
-                //TODO add align logic
+                if(App.mapInteractionModel.aline.equals("XCOORD")){
+                    App.undoRedoService.updateNode(n.getNodeID(),App.mapInteractionModel.alineValue,n.getCords()[1],n.getNodeType(),n.getLongName(),n.getShortName());
+                }else if(App.mapInteractionModel.aline.equals("YCOORD")){
+                    App.undoRedoService.updateNode(n.getNodeID(),n.getCords()[0],App.mapInteractionModel.alineValue,n.getNodeType(),n.getLongName(),n.getShortName());
+                }
+
                 break;
         }
         if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
@@ -577,6 +584,7 @@ public class MapBuilderBaseController {
     }
 
     public void handleSelectButton() {
+        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
@@ -604,6 +612,7 @@ public class MapBuilderBaseController {
         if(!App.mapInteractionModel.getCurrentAction().equals("ALINE")){
             if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
                 alineFromMultiSelect();
+                App.mapInteractionModel.resetNodeIDList();
             }
             App.mapInteractionModel.setCurrentAction("ALINE");
         }else{
@@ -636,18 +645,23 @@ public class MapBuilderBaseController {
                 Node curNode = App.mapService.getNodeFromID(curNodeId);
                 App.undoRedoService.updateNode(curNodeId,avgX,curNode.getCords()[1],curNode.getNodeType(),curNode.getLongName(),curNode.getShortName());
             }
+            App.mapInteractionModel.aline = "XCOORD";
+            App.mapInteractionModel.alineValue = avgX;
         }else{
             //aline to y coord
             for(String curNodeId:App.mapInteractionModel.nodeIDList){
                 Node curNode = App.mapService.getNodeFromID(curNodeId);
                 App.undoRedoService.updateNode(curNodeId,curNode.getCords()[0],avgY,curNode.getNodeType(),curNode.getLongName(),curNode.getShortName());
             }
+            App.mapInteractionModel.aline = "YCOORD";
+            App.mapInteractionModel.alineValue = avgY;
         }
         App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
     }
 
 
     public void handleAddNodeButtonEDIT(){
+        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
@@ -663,6 +677,7 @@ public class MapBuilderBaseController {
     }
 
     public void handleAddEdgeButtonEDIT(){
+        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
