@@ -110,10 +110,10 @@ public class UserData extends Data{
      * @return Patient with that username already exists or Patient with that password already exists or Patient added
      */
     public String createPatient(Patient patient){
-        if (checkUsername(patient.getUserName()).equals("")){
+        if (!checkUsername(patient.getUserName()).equals("")){
             return "Patient with that username already exists";
         }
-        else if (checkPassword(patient.getPassword()).equals("")){
+        else if (!checkPassword(patient.getPassword()).equals("")){
             return "Patient with that password already exists";
         }
         else {

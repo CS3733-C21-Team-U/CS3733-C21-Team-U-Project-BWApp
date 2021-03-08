@@ -7,6 +7,7 @@ import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.InvalidEdgeException;
 import edu.wpi.u.models.*;
 import edu.wpi.u.requests.*;
+import edu.wpi.u.users.Appointment;
 import edu.wpi.u.users.Role;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,12 +28,7 @@ public class DatabaseTest {
     private static RequestService requestServiceTest = new RequestService(testURL);
     private static UserService userServiceTest = new UserService(testURL);
 
-//    private Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node2 = new Node("TESTNODE2", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node3 = new Node("TESTNODE3", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-//    private Node node4 = new Node("TESTNODE4", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-
-
+    /*
     public void main(String[] args) throws InvalidEdgeException {
         // Permissions for testing
         ArrayList<Role> roles = new ArrayList<>();
@@ -86,6 +82,10 @@ public class DatabaseTest {
         ArrayList<SpecificRequest> testRequests = requestServiceTest.getRd().loadActiveRequests();
 
     }
+
+    */
+
+    // Testing Maps
 
     @Test
     public void testNodeFromID() throws InvalidEdgeException {
@@ -200,10 +200,11 @@ public class DatabaseTest {
         roles.add(Role.ADMIN);
         mapServiceTest.addNodeWithID("NODETEST17", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST18", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST19", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addEdge("NODETEST17_NODETEST18", "NODETEST17", "NODETEST18", roles);
         mapServiceTest.addEdge("NODETEST18_NODETEST19", "NODETEST18", "NODETEST19", roles);
         mapServiceTest.deleteEdge("NODETEST17_NODETEST18");
-        assertEquals(mapServiceTest.getEdges().get(0),"NODETEST18_NODETEST19");
+        assertEquals(mapServiceTest.getEdges().get(0).getEdgeID(),"NODETEST18_NODETEST19");
     }
 
     @Test
@@ -211,7 +212,7 @@ public class DatabaseTest {
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST20", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST21", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
-        assertEquals(mapServiceTest.getNodes().get(0),"NODETEST20");
+        assertEquals(mapServiceTest.getNodes().get(0).getNodeID(),"NODETEST20"); // TODO: change, current when run alone
     }
 
     @Test
@@ -227,6 +228,7 @@ public class DatabaseTest {
         assertEquals(mapServiceTest.getEdges().get(1).getEdgeID(),"NODETEST23_NODETEST24");
     }
 
+    // Testing Requests
     @Test
     public void testAddRequest() {
         RequestService requestServiceTest = new RequestService(testURL);
@@ -324,35 +326,59 @@ public class DatabaseTest {
         assertEquals(requestServiceTest.getRequests(), testRequests);
     }
 
+    // Testing Users
     @Test
-    public void testSetPatients(){
+    public void testAddPatient() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
-        userServiceTest.
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST25", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.addPatient("Name1", "Name1Username", "Name1Pass", "Name1Email", Role.PATIENT, "Name1Phone", "NODETEST25", false, tempList, "ProviderName", "CurrentParking", "RecommendedParking");
+        assertEquals(userServiceTest.getPatients().get(0).getName(), "Name1");
     }
 
     @Test
-    public void testSetEmployees(){}
+    public void testAddLocationID() {
+        // TODO: Might delete, not necessary to check for in userService
+    } // TODO: wait to test
 
     @Test
-    public void testSetGuests(){}
+    public void testAddParkingLocation(){} // TODO: wait to test
 
     @Test
-    public void testSetUser(){}
+    public void testAddRecommendedParkingLocation(){} // TODO: wait to test
 
     @Test
-    public void testGetActiveUser(){}
+    public void testAddEmployee() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST26", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.addEmployee("Name2", "Name2Username", "Name2Pass", "Name2Email", Role.NURSE, "Name2Phone", "NODETEST26", false);
+        assertEquals(userServiceTest.getEmployees().get(0).getName(), "Name2");
+    }
 
     @Test
-    public void testgetPatients(){}
+    public void testAddGuest() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        Timestamp t = new Timestamp(1);
+        userServiceTest.addGuest("Name3", t, "For testing... ha ha, I'm tired",false);
+        assertEquals(userServiceTest.getGuests().get(0).getName(), "Name3");
+    }
 
     @Test
-    public void testGetEmployees(){}
-
-    @Test
-    public void testGetGuests(){}
-
-    @Test
-    public void testChangePhoneNumber(){}
+    public void testChangePhoneNumber() throws InvalidEdgeException { // TODO: Contains bug?
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST28", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.getPatients().clear();
+        userServiceTest.addPatient("Name5", "Name5Username", "Name5Pass", "Name5Email", Role.PATIENT, "Name5Phone", "NODETEST28", false, tempList, "ProviderName", "CurrentParking", "RecommendedParking");
+        //userServiceTest.setUser("Name5Username", "Name5Pass", "Patients");
+        //userServiceTest.changePhoneNumber(userServiceTest.getPatients().get(0).getUserID(), "Name5NewPhone","Patients");
+        //assertEquals(userServiceTest.getPatients().get(0).getPhoneNumber(), "Name5NewPhone");
+    }
 
     @Test
     public void testChangeEmail(){}
@@ -370,36 +396,32 @@ public class DatabaseTest {
     public void testCheckPhoneNumber(){}
 
     @Test
-    public void testGetPassword(){}
+    public void testDeleteEmployee() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        MapService mapServiceTest = new MapService(testURL);
+        userServiceTest.getEmployees().clear();
+        mapServiceTest.addNodeWithID("NODETEST40", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        ArrayList<Appointment> tempList = new ArrayList<>();
+        userServiceTest.addEmployee("Name8", "Name8Username", "Name8Pass", "Name8Email", Role.NURSE, "Name8Phone", "NODETEST40", false);
+        userServiceTest.deleteEmployee(userServiceTest.getEmployees().get(0).getUserID());
+        assertEquals(userServiceTest.getEmployees().size(), 0, 0);
+    }
 
     @Test
-    public void testAddPatient(){}
+    public void testDeleteGuest() throws InvalidEdgeException {
+        UserService userServiceTest = new UserService(testURL);
+        userServiceTest.getGuests().clear();
+        userServiceTest.addGuest("Name9", new Timestamp(0), "For testing purposes", false);
+        userServiceTest.deleteGuest(userServiceTest.getGuests().get(0).getGuestID());
+        assertEquals(userServiceTest.getGuests().size(), 0, 0);
+    }
 
     @Test
-    public void testAddLocationID(){}
+    public void testUpdateEmployee(){
+
+    }
 
     @Test
-    public void testAddParkingLocation(){}
-
-    @Test
-    public void testAddRecommendedParkingLocation(){}
-
-    @Test
-    public void testAddEmployee(){}
-
-    @Test
-    public void testAddGuest(){}
-
-    @Test
-    public void testDeleteEmployee(){}
-
-    @Test
-    public void testDeleteGuest(){}
-
-    @Test
-    public void testUpdateEmployee(){}
-
-    @Test
-    public void testupdateGuest(){}
+    public void testUpdateGuest(){}
 
 }
