@@ -56,7 +56,6 @@ public class ViewRequestListController {
         listOfRequests.add(testRequest2);
         //End Remove
 
-        App.lastClickedRequestNumber = 0;
         for (SpecificRequest request: listOfRequests) {
             sampleRequestItem.getChildren().add(new RequestListItemContainerController(request));
         }
