@@ -120,13 +120,9 @@ public class AddRequestController {
             String ID = Integer.toString(requestID);//make a random id
             //TODO : fix date bug
             Timestamp needed = Timestamp.from(makeDate2BCompleteDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            // String requestID,LinkedList<String> assignee, Date dateCreated, Date dateCompleted, String description, String title, LinkedList<String> location, String type, String creator) {
-            //TODO : FIX DATE BUG
             Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(), "KAAMIL", CommentType.PRIMARY, new Timestamp( needed.getTime() ));
             Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
-            result.setRequest(newRequest);
-            result.setSpecificData(specifics);
-            App.requestService.addRequest(result);
+            App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(specifics));
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));

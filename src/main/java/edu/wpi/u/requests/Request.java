@@ -26,7 +26,6 @@ public class Request {
         this.comments = comments;
     }
 
-
     public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee, String creator) {
         this.dateNeeded = needDate;
         getPrimaryComment().description = description;

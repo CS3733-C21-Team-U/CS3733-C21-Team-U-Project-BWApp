@@ -13,14 +13,16 @@ public abstract class SpecificRequest {
     public ArrayList<String> getSpecificData() {
         return specificFields;
     }
-    public void setSpecificData(ArrayList<String> l){
+    public SpecificRequest setSpecificData(ArrayList<String> l){
         this.specificFields = l;
+        return this;
     }
     public Request getGenericRequest() {
         return req;
     }
-    public void setRequest(Request r) {
+    public SpecificRequest setRequest(Request r) {
         this.req = r;
+        return this;
     }
     public void fillObject(Request r, ArrayList<String> l) {
         setRequest(r);
@@ -35,13 +37,13 @@ public abstract class SpecificRequest {
         return str;
     }
 
-    public void readStorageString(String specificFields){
+    public SpecificRequest readStorageString(String specificFields){
         ArrayList<String> result = new ArrayList<String>();
         for(int i = 0; i < getSpecificFields().length; i++){
             String str = specificFields.split("&")[i];
             str = str.split("%")[1];
             result.add(i, str);
         }
-        setSpecificData(result);
+        return setSpecificData(result);
     }
 }
