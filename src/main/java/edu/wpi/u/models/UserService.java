@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class UserService {
@@ -21,6 +22,8 @@ public class UserService {
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
+    //HashMap<String, String> easyValidate;
+
     public String typedUsername;
 
     User activeUser;
@@ -30,6 +33,7 @@ public class UserService {
         this.setEmployees();
         this.setGuests();
         this.setPatients();
+        //this.setEasyValidate();
     }
 
     public String getTypedUsername() {
@@ -288,7 +292,7 @@ public class UserService {
         String id = Integer.toString(patientID);
         // todo: check
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
-        System.out.println(ud.createPatient(patient));
+        ud.addPatient(patient);
         this.patients.add(patient);
     }
 
@@ -355,8 +359,10 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
+        //String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
-        ud.createEmployee(newEmployee);
+        System.out.println(ud.createEmployee(newEmployee));
+        ud.addEmployee(newEmployee);
         this.employees.add(newEmployee);
     }
 

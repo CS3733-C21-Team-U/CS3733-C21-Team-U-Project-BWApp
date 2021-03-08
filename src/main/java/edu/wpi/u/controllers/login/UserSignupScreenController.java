@@ -53,10 +53,14 @@ public class UserSignupScreenController {
         });
 
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator3.setMessage("Username Required");
         usernameTextField.getValidators().add(validator3);
         usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!App.userService.checkUsername(usernameTextField.getText()).equals("")){
+                validator3.setMessage("Username already taken");
+                usernameTextField.validate();
+            }
             if (!newVal) {
+                validator3.setMessage("Username Required");
                 usernameTextField.validate();
             }
         });
@@ -96,8 +100,6 @@ public class UserSignupScreenController {
                 providerNameTextField.validate();
             }
         });
-
-
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {

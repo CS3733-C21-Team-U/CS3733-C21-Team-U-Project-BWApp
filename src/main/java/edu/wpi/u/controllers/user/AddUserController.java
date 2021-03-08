@@ -94,13 +94,11 @@ public class AddUserController {
      * made into a user object to be added to the database
      */
     public void handleAddUser() throws UsernameNotFoundException, IOException {
-        LocalDate localDate = appointmentDatePicker.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        Date date = Date.from(instant);
         String userType = "";
         if(userEmployStatus.isSelected()){
             if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 // todo : are only employees ever going to be added this way ?
+                System.out.println("Unique username");
                 App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
@@ -111,19 +109,17 @@ public class AddUserController {
                 throw new UsernameNotFoundException();
             }
         }
-//        else{
-//            if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
-//                // TODO : Fix
-//                //App.userService.addGuest(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()),  phoneNumTextField.getText() , false);
-//                AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-//                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
-//                anchor.getChildren().clear();
-//                anchor.getChildren().add(root);
-//            }
-//            else{
-//                throw new UsernameNotFoundException();
-//            }
-//        }
+        else{
+            if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
+                AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
+                anchor.getChildren().clear();
+                anchor.getChildren().add(root);
+            }
+            else{
+                throw new UsernameNotFoundException();
+            }
+        }
     }
 
     public void handleCancel(ActionEvent actionEvent) throws IOException {

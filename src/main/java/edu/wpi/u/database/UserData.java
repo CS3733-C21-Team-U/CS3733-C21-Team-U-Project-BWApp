@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UserData extends Data{
@@ -71,6 +72,35 @@ public class UserData extends Data{
          printEmployees();
 */
 
+    }
+
+    /**
+     * Hashmap of password , usernames for easier verification
+     * @return the hashmap of all users passwords and usernames
+     */
+    public HashMap<String,String> setEasyValidate(){
+        HashMap<String, String> result = new HashMap<>();
+        String str = "select userName,password from Patients";
+        String str2 = "select userName,password from Employees";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            PreparedStatement ps2 = conn.prepareStatement(str2);
+            ResultSet rs = ps.executeQuery();
+            ResultSet rs2 = ps.executeQuery();
+            while (rs.next()){
+                result.put(rs.getString("password"), rs.getString("username"));
+            }
+            rs.close();
+            ps.close();
+            while (rs2.next()){
+                result.put(rs2.getString("password"), rs2.getString("username"));
+            }
+            rs2.close();
+            ps2.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -186,9 +216,6 @@ public class UserData extends Data{
     public String createEmployee(Employee employee){
         if (checkUsername(employee.getUserName()).equals("")){
             return "Employee with that username already exists";
-        }
-        else if (checkPassword(employee.getPassword()).equals("")){
-            return "Employee with that password already exists";
         }
         else {
             /*
@@ -661,7 +688,7 @@ public class UserData extends Data{
             else {
                 rs.close();
                 ps.close();
-                System.out.println("Not in employees");
+                //System.out.println("Not in employees");
                 String str2 = "select * from Patients where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,username);
@@ -672,7 +699,7 @@ public class UserData extends Data{
                     return "Patients";
                 }
                 else{
-                    System.out.println("Not in Patients");
+                    //System.out.println("Not in Patients");
                     rs2.close();
                     ps2.close();
                     return "";
@@ -1002,7 +1029,7 @@ public class UserData extends Data{
      * @param employee the object containing all of the information on the user
      */
     public void updEmployee(Employee employee){
-        String str = "update Employees set name=? and userName=? and password=? and email=? and type=? and deleted=? and phoneNumber=? where employeeID=?";
+        String str = "update Employees set name=? , userName=? , password=? , email=? , type=? , deleted=? , phoneNumber=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, employee.getName());
