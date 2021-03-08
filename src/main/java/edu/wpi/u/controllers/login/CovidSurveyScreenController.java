@@ -1,7 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
-import animatefx.animation.*;
+//import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
