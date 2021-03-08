@@ -96,7 +96,6 @@ public class MapBuilderBaseController {
         map.setOnMouseReleased(e -> {
             if(!clickedOnNodeFlag){
                 pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                App.mapInteractionModel.setNodeID("");
                 nodesAndEdges.getChildren().clear();
                 generateEdges(App.mapInteractionModel.floor);
                 generateNodes(App.mapInteractionModel.floor);
