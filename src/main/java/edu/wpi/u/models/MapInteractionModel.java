@@ -44,6 +44,7 @@ public class MapInteractionModel {
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){
             this.nodeIDList.addFirst(nodeID);
+            this.toggledNodeID = nodeID;
         }else {
             this.nodeIDList.remove(nodeID);
             this.toggledNodeID = nodeID;
@@ -52,11 +53,8 @@ public class MapInteractionModel {
     }
 
     public LinkedList<String> resetNodeIDList(){
-        String firstID = this.nodeIDList.getFirst();
-        this.nodeIDList.remove(firstID);
         LinkedList<String> returnMe = this.nodeIDList;
         this.nodeIDList = new LinkedList<>();
-        addToNodeIdList(firstID);
         return returnMe;
     }
 

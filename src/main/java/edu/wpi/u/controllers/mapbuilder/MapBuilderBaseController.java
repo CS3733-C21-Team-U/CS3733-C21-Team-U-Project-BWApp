@@ -49,7 +49,7 @@ public class MapBuilderBaseController {
     public GesturePane map = new GesturePane(pane);
     String selectedColor = "green";
 
-    boolean clickedOnNodeFlag = false;
+    boolean clickedOnSomethingFlag = false;
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
      * @throws IOException
@@ -94,17 +94,18 @@ public class MapBuilderBaseController {
             setMouseCoordinates(e);
         });
         map.setOnMouseReleased(e -> {
-            if(!clickedOnNodeFlag){
+            if(!clickedOnSomethingFlag){
                 pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
                 nodesAndEdges.getChildren().clear();
                 generateEdges(App.mapInteractionModel.floor);
                 generateNodes(App.mapInteractionModel.floor);
+                LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
             }else{
-                clickedOnNodeFlag = false;
+                clickedOnSomethingFlag = false;
             }
         });
         map.setOnMouseClicked(e -> {//mouse clicking listener -----------------------------------------------
-            clickedOnNodeFlag = false;
+            clickedOnSomethingFlag = false;
 //            if(findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()) != null){ //to prevent a null pointer when the previous node isn't being displayed
 //                findCircleFromNode(App.mapInteractionModel.getPreviousNodeID()).setFill(Paint.valueOf(errorColor));
 //            }//this makes sure any nodes that were previously clicked are changes back to the original red color
@@ -177,18 +178,13 @@ public class MapBuilderBaseController {
             curNode.setVisible(true);
             //setting mouse events for the drawn circle
             curNode.setOnMouseClicked(event -> {
-                try {
-                    System.out.println("CLICKED NODE (Line 177)");
-                    clickedOnNodeFlag = true;
-                    handleNodeClicked(n);
-                } catch (IOException  e) {
-                    e.printStackTrace();
-                }
+                System.out.println("CLICKED NODE (Line 177)");
+                clickedOnSomethingFlag = true;
             });
             curNode.setOnMouseDragged(event -> {
                 if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                     try {
-                        clickedOnNodeFlag = true;
+                        clickedOnSomethingFlag = true;
                         handleNodeDragged(curNode); // Set visual position (circle)
                     } catch (Exception e) {
                     e.printStackTrace();
@@ -198,7 +194,7 @@ public class MapBuilderBaseController {
             curNode.setOnMouseDragExited(event -> {
                 if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
                     try {
-                        clickedOnNodeFlag = true;
+                        clickedOnSomethingFlag = true;
                         handleNodeDragExit(App.mapService.getNodeFromID(curNode.getId()), curNode); // Set visual position (circle)
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -209,6 +205,11 @@ public class MapBuilderBaseController {
             //to make sure you can move the map
             curNode.setOnMouseReleased(event -> {
                 map.gestureEnabledProperty().set(true);
+                try {
+                    handleNodeClicked(n);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
                     //make the gesture pane
                 }
@@ -242,37 +243,38 @@ public class MapBuilderBaseController {
      */
     private void moveEdgesWithNode(Circle nodeOnMap){
         Node n = App.mapService.getNodeFromID(nodeOnMap.getId());
-        for (Edge e : n.getEdges()){
-            if(n.getNodeID().equals(e.getEndNode().getNodeID())){
-                //if the given node is end node of the edge
-                double xdiff = nodeOnMap.getCenterX()-e.getStartNode().getCords()[0];
-                double ydiff = nodeOnMap.getCenterY()-e.getStartNode().getCords()[1];
-                Line edgeOnMap = new Line();
-                for (javafx.scene.Node curMapNode: nodesAndEdges.getChildren() ) {
-                    if (curMapNode.getId().equals(e.getEdgeID())){
-                        edgeOnMap = (Line)curMapNode;
-                        break;
+        for (Edge e : n.getEdges()) {
+                if (n.getNodeID().equals(e.getEndNode().getNodeID())) {
+                    //if the given node is end node of the edge
+                    double xdiff = nodeOnMap.getCenterX() - e.getStartNode().getCords()[0];
+                    double ydiff = nodeOnMap.getCenterY() - e.getStartNode().getCords()[1];
+                    Line edgeOnMap = new Line();
+                    for (javafx.scene.Node curMapNode : nodesAndEdges.getChildren()) {
+                        if (curMapNode.getId().equals(e.getEdgeID())) {
+                            edgeOnMap = (Line) curMapNode;
+                            break;
+                        }
                     }
-                }
-                edgeOnMap.setEndX(xdiff);
-                edgeOnMap.setEndY(ydiff);
-            }else{
-                //if the given node is the start node of the edge
-                double xdiff = e.getEndNode().getCords()[0]-nodeOnMap.getCenterX();
-                double ydiff = e.getEndNode().getCords()[1]-nodeOnMap.getCenterY();
-                Line edgeOnMap = new Line();
-                for (javafx.scene.Node curMapNode: nodesAndEdges.getChildren() ) {
-                    if (curMapNode.getId().equals(e.getEdgeID())){
-                        edgeOnMap = (Line)curMapNode;
-                        break;
+                    edgeOnMap.setEndX(xdiff);
+                    edgeOnMap.setEndY(ydiff);
+                } else {
+                    //if the given node is the start node of the edge
+                    double xdiff = e.getEndNode().getCords()[0] - nodeOnMap.getCenterX();
+                    double ydiff = e.getEndNode().getCords()[1] - nodeOnMap.getCenterY();
+                    Line edgeOnMap = new Line();
+                    for (javafx.scene.Node curMapNode : nodesAndEdges.getChildren()) {
+                        if (curMapNode.getId().equals(e.getEdgeID())) {
+                            edgeOnMap = (Line) curMapNode;
+                            break;
+                        }
                     }
+                    edgeOnMap.setLayoutX(nodeOnMap.getCenterX());
+                    edgeOnMap.setLayoutY(nodeOnMap.getCenterY());
+                    edgeOnMap.setEndX(xdiff);
+                    edgeOnMap.setEndY(ydiff);
                 }
-                edgeOnMap.setLayoutX(nodeOnMap.getCenterX());
-                edgeOnMap.setLayoutY(nodeOnMap.getCenterY());
-                edgeOnMap.setEndX(xdiff);
-                edgeOnMap.setEndY(ydiff);
             }
-        }
+
     }
 
     /**
@@ -294,6 +296,10 @@ public class MapBuilderBaseController {
         edge.setStyle("-fx-stroke: -error");
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
+            clickedOnSomethingFlag = true;
+            System.out.println("Clicked on an Edge (Edge 300)");
+        });
+        edge.setOnMouseReleased(event -> {
             try {
                 handleEdgeClicked(ed);
             } catch (IOException e) {
@@ -329,6 +335,7 @@ public class MapBuilderBaseController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
+
         App.mapInteractionModel.setEdgeID(e.getEdgeID());
         switch (App.mapInteractionModel.getCurrentAction()){
             case "ADDEDGE":
@@ -344,27 +351,22 @@ public class MapBuilderBaseController {
                     previousCircle.setFill(Paint.valueOf(errorColor));
                 }
                 //find and set current edge to green
-                for(javafx.scene.Node n : nodesAndEdges.getChildren()){
-                    if(n.getId().equals(e.getEdgeID())){
-                        Line edge = (Line) n;
-                        edge.setStroke(Paint.valueOf("Green"));
-                    }
-                }
+                ((Line)nodesAndEdges.lookup( "#" + e.getEdgeID())).setStroke(Paint.valueOf(selectedColor));
+
                 //find the old edge and reset its color
-                for(javafx.scene.Node n : nodesAndEdges.getChildren()){
-                    if(n.getId().equals(App.mapInteractionModel.previusEdgeID)){
-                        Line edge = (Line) n;
-                        edge.setStroke(Paint.valueOf(errorColor));
-                    }
+                Line oldEdge = ((Line)nodesAndEdges.lookup( "#" + App.mapInteractionModel.previusEdgeID));
+                if (oldEdge != null){
+                    oldEdge.setStroke(Paint.valueOf(errorColor));
                 }
+
                 EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
                 EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
                 pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
                 pane.getChildren().add(EdgeContextAnchor);
                 App.mapInteractionModel.selectedContextBox = EdgeContextAnchor;
                 break;
         }
+        clickedOnSomethingFlag = true;
     }
 
     /**
@@ -374,7 +376,7 @@ public class MapBuilderBaseController {
      */
     String errorColor = "B00020";
     public void handleNodeClicked(Node n) throws IOException {
-        clickedOnNodeFlag = true;
+        clickedOnSomethingFlag = true;
         //find the old edge and reset its color
         for(javafx.scene.Node node : nodesAndEdges.getChildren()){
             if(node.getId().equals(App.mapInteractionModel.getEdgeID())){
@@ -389,13 +391,20 @@ public class MapBuilderBaseController {
                 App.mapInteractionModel.setNodeID(n.getNodeID());
                 // if its the first click treat it like it was a normal select (fall through)
                 if(App.mapInteractionModel.nodeIDList.size() > 1){
+                    //remove old context menu
                     pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-                    Circle drawnNode = findCircleFromNode(n.getNodeID());
-                    drawnNode.setFill(Paint.valueOf("green"));
+                    //reset a nodes color if it was toggled
                     Circle removedNode = findCircleFromNode(App.mapInteractionModel.toggledNodeID);
                     if(removedNode != null){
                         removedNode.setFill(Paint.valueOf(errorColor));
                     }
+                    //highlight all the selected nodes
+                    for (String node: App.mapInteractionModel.nodeIDList){
+                        Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
+                        drawnNode.setFill(Paint.valueOf(selectedColor));
+                    }
+                    Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + n.getNodeID());
+                    drawnNode.setFill(Paint.valueOf(selectedColor));
                     //spawn context menu
                     AnchorPane contextAnchor;
                     FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
@@ -408,19 +417,24 @@ public class MapBuilderBaseController {
                     break;
                 }
             case "SELECT":
-                //the above three lines are the hacky way of resetting nodes
                 App.mapInteractionModel.setNodeID(n.getNodeID());
-                App.mapInteractionModel.resetNodeIDList();
-//                FXMLLoader nodeContextMenu = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mapbuilder/ContextMenuNode.fxml"));
-//                AnchorPane contextAnchor;
-//                contextAnchor = nodeContextMenu.load();
-//
-//                contextAnchor.setLayoutX();
-//                contextAnchor.setLayoutY(curCircle.getLayoutY());
-//                pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
-//                pane.getChildren().add(contextAnchor);
-//                App.mapInteractionModel.selectedContextBox = contextAnchor;
+                //update the last node/edges clicked on
+                Circle lastCircle = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
+                lastCircle.setCenterX(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[0]);
+                lastCircle.setCenterY(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[1]);
+                moveEdgesWithNode(lastCircle);
+
+                //deal with the multi-select queue
+                if(!App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")) {
+                    LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
+                    for (String curNodeID : nodesToReset) {
+                        Circle drawnNode = findCircleFromNode(curNodeID);
+                        drawnNode.setFill(Paint.valueOf(errorColor));
+                    }
+                }
+                //deal with the current node clicked on
                 Circle curCircle = findCircleFromNode(n.getNodeID());
+                moveEdgesWithNode(curCircle);
                 makeContextMenu(n, curCircle.getCenterX(), curCircle.getCenterY());//The creation of the context menu for the node
                 Circle clickedCircle = findCircleFromNode(n.getNodeID());
                 clickedCircle.setFill(Paint.valueOf(selectedColor));
@@ -436,9 +450,18 @@ public class MapBuilderBaseController {
                 //remove old temp line
                 javafx.scene.Node oldTempEdge = findTempLine();
                 if(oldTempEdge != null){
-                    pane.getChildren().remove(oldTempEdge);
+                    nodesAndEdges.getChildren().remove(oldTempEdge);
                 }
+                //update the node that was clicked on
                 App.mapInteractionModel.setNodeID(n.getNodeID());
+                //set all nodes to be the red because the selected ones will be set to green next
+                for (javafx.scene.Node node : nodesAndEdges.getChildren() ) {
+                    if(node.getClass().getSimpleName().equals("Circle")){
+                        Circle circle1 = (Circle)node;
+                        circle1.setFill(Paint.valueOf(errorColor));
+                    }
+                }
+                //node selection logic
                 Circle c1 = findCircleFromNode(n.getNodeID());
                 Circle c2 = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
                 Line tempEdge = new Line();
@@ -453,7 +476,6 @@ public class MapBuilderBaseController {
                     // Create drawn Edge
                     double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
                     double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
-
                     double xdiff = 0;
                     double ydiff = 0;
                     xdiff = c2.getCenterX() - oldx;
@@ -471,12 +493,16 @@ public class MapBuilderBaseController {
                     tempEdge.setVisible(true);
                     nodesAndEdges.getChildren().add(tempEdge);
                     makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
-
                 }else{
                     makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
                 }
                 break;
             case "ALINE":
+                //highlight all the selected nodes
+                for (String node: App.mapInteractionModel.nodeIDList){
+                    Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
+                    drawnNode.setFill(Paint.valueOf(selectedColor));
+                }
                 if(App.mapInteractionModel.aline.equals("XCOORD")){
                     App.undoRedoService.updateNode(n.getNodeID(),App.mapInteractionModel.alineValue,n.getCords()[1],n.getNodeType(),n.getLongName(),n.getShortName());
                 }else if(App.mapInteractionModel.aline.equals("YCOORD")){
@@ -509,13 +535,7 @@ public class MapBuilderBaseController {
     }
 
     public javafx.scene.Node findTempLine(){
-        for(javafx.scene.Node n: nodesAndEdges.getChildren()){
-            if(n.getId().equals("tempedge")){
-                return n;
-            }
-        }
-        //if failed to find maybe on other floor
-        return null;
+        return nodesAndEdges.lookup("#tempedge");
     }
 
 
@@ -651,7 +671,6 @@ public class MapBuilderBaseController {
     }
 
     public void handleSelectButton() {
-        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
@@ -685,7 +704,6 @@ public class MapBuilderBaseController {
                     shake(alineButton);
                     multiSelectButton.setSelected(true);
                 }
-                App.mapInteractionModel.resetNodeIDList();
             }else{
                 shake(alineButton);
                 selectButton.setSelected(true);
@@ -755,7 +773,6 @@ public class MapBuilderBaseController {
 
 
     public void handleAddNodeButtonEDIT(){
-        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
@@ -771,7 +788,6 @@ public class MapBuilderBaseController {
     }
 
     public void handleAddEdgeButtonEDIT(){
-        App.mapInteractionModel.resetNodeIDList();
         LinkedList<String> nodesToReset = App.mapInteractionModel.resetNodeIDList();
         for(String curNodeID : nodesToReset){
             Circle drawnNode = findCircleFromNode(curNodeID);
