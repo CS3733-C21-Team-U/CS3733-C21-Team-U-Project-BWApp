@@ -81,9 +81,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
         node.setFitWidth(430);
         node.setPreserveRatio(true);
-        mainMapPane.getChildren().add(node);
+        //mainMapPane.getChildren().add(node);
         //node.toFront();
-        miniMap = new GesturePane(mainMapPane);
+        miniMap = new GesturePane(node);
         mainMapPane.setMinSize(300, 300);
         mainMapPane.setPrefWidth(300);
         mainMapPane.setPrefHeight(300);
@@ -132,46 +132,16 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public void generateComments(){
         for(int i = 1; i < this.parent.request.getGenericRequest().getComments().size(); i++){
             commentsRoot.getChildren().clear();
-            //This whole block just generates the comment block instead of loading from FXML
-            Comment comment = this.parent.request.getGenericRequest().getComments().get(i);
-            Region comExpandRegion = new Region();
-            HBox.setHgrow(comExpandRegion,Priority.ALWAYS);
-            Label comTypeLabel = new Label(comment.getType().toString());
-            comTypeLabel.getStyleClass().add("headline-3");
-            Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
-            comTimeLabel.getStyleClass().add("caption");
-            HBox typeDateHBox = new HBox();
-            typeDateHBox.getChildren().add(comTypeLabel);
-            typeDateHBox.getChildren().add(comExpandRegion);
-            typeDateHBox.getChildren().add(comTimeLabel);
-            Label comTitleLabel = new Label(comment.getAuthor());
-            comTitleLabel.getStyleClass().add("subtitle");
-            Label comDescLabel = new Label(comment.getDescription());
-            SVGPath iconSVG = new SVGPath();
-            iconSVG.setContent("M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z");
-            VBox textVBox = new VBox();
-            HBox.setHgrow(textVBox,Priority.ALWAYS);
-            textVBox.getChildren().add(typeDateHBox);
-            textVBox.getChildren().add(comTitleLabel);
-            textVBox.getChildren().add(comDescLabel);
-            JFXButton iconButton = new JFXButton();
-            iconButton.getStyleClass().add("fab-mini");
-            iconButton.setGraphic(iconSVG);
-            iconButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            iconButton.setMouseTransparent(true);
-            HBox mainHBox = new HBox();
-            HBox.setMargin(iconButton,new Insets(10,10,10,10));
-            HBox.setMargin(textVBox,new Insets(10,10,10,10));
-            mainHBox.getChildren().add(iconButton);
-            mainHBox.getChildren().add(textVBox);
-            commentsRoot.getChildren().add(mainHBox);
+            generateCommentHelper(i);
         }
     }
 
     public void addComment() {
+        System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
         Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
         this.parent.request.getGenericRequest().addComment(newComment);
-        generateComments();
+        generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
+        System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
     }
 
     @FXML
@@ -230,22 +200,39 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         }
     }
 
-//    private void setSpecifics(){
-//        switch(currentSpecificRequest.getType()) {
-//            case("Maintenance") :
-//                requestDetailMaintenancePane.setVisible(true);
-//                break;
-//            case("Laundry") :
-//                requestDetailLaundryPane.setVisible(true);
-//                //add stuff
-//                break;
-//            case("Security"):
-//                requestDetailSecurityPane.setVisible(true);
-//                //add stuff
-//                break;
-//            default:
-//                System.out.println("lmao you screwed up");
-//        }
-//    }
-
+    private void generateCommentHelper(int i){
+        //This whole block just generates the comment block instead of loading from FXML
+        Comment comment = this.parent.request.getGenericRequest().getComments().get(i);
+        Region comExpandRegion = new Region();
+        HBox.setHgrow(comExpandRegion,Priority.ALWAYS);
+        Label comTypeLabel = new Label(comment.getType().toString());
+        comTypeLabel.getStyleClass().add("headline-3");
+        Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
+        comTimeLabel.getStyleClass().add("caption");
+        HBox typeDateHBox = new HBox();
+        typeDateHBox.getChildren().add(comTypeLabel);
+        typeDateHBox.getChildren().add(comExpandRegion);
+        typeDateHBox.getChildren().add(comTimeLabel);
+        Label comTitleLabel = new Label(comment.getAuthor());
+        comTitleLabel.getStyleClass().add("subtitle");
+        Label comDescLabel = new Label(comment.getDescription());
+        SVGPath iconSVG = new SVGPath();
+        iconSVG.setContent("M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z");
+        VBox textVBox = new VBox();
+        HBox.setHgrow(textVBox,Priority.ALWAYS);
+        textVBox.getChildren().add(typeDateHBox);
+        textVBox.getChildren().add(comTitleLabel);
+        textVBox.getChildren().add(comDescLabel);
+        JFXButton iconButton = new JFXButton();
+        iconButton.getStyleClass().add("fab-mini");
+        iconButton.setGraphic(iconSVG);
+        iconButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        iconButton.setMouseTransparent(true);
+        HBox mainHBox = new HBox();
+        HBox.setMargin(iconButton,new Insets(10,10,10,10));
+        HBox.setMargin(textVBox,new Insets(10,10,10,10));
+        mainHBox.getChildren().add(iconButton);
+        mainHBox.getChildren().add(textVBox);
+        commentsRoot.getChildren().add(mainHBox);
+    }
 }
