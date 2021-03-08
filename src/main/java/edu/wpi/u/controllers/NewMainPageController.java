@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers;
 
+import animatefx.animation.Bounce;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
@@ -69,6 +70,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+
 
 //        validationFeild
         TextField test = new TextField("test");

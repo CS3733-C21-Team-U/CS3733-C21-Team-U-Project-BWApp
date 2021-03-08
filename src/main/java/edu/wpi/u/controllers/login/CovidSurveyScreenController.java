@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
+import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
@@ -39,6 +40,7 @@ public class CovidSurveyScreenController {
      */
 
     public void handleCovidSurveyFill() throws IOException {
+
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
