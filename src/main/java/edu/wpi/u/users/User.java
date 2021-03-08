@@ -20,7 +20,7 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-    protected String locationNodeID; // TODO MOVE
+   // protected String locationNodeID; // TODO MOVE
 
     protected StringProperty userIDfx;
     protected StringProperty namefx;
@@ -30,11 +30,11 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected StringProperty phoneNumberfx;
     protected StringProperty emailfx;
     protected BooleanProperty deletedfx;
-    protected StringProperty locationNodeIDfx;
+    //protected StringProperty locationNodeIDfx;
 
     public User(){}
 
-    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -43,10 +43,10 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.locationNodeID = locationNodeID;
+        //this.locationNodeID = locationNodeID;
     }
 
-    public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx, StringProperty locationNodeIDfx) {
+    public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx) {
         this.userIDfx = userIDfx;
         this.namefx = namefx;
         this.userNamefx = userNamefx;
@@ -55,7 +55,7 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.phoneNumberfx = phoneNumberfx;
         this.emailfx = emailfx;
         this.deletedfx = deletedfx;
-        this.locationNodeIDfx = locationNodeIDfx;
+        //this.locationNodeIDfx = locationNodeIDfx;
     }
 
     public String getUserIDfx() {
@@ -154,18 +154,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deletedfx.set(deletedfx);
     }
 
-    public String getLocationNodeIDfx() {
-        return locationNodeIDfx.get();
-    }
-
-    public StringProperty locationNodeIDfxProperty() {
-        return locationNodeIDfx;
-    }
-
-    public void setLocationNodeIDfx(String locationNodeIDfx) {
-        this.locationNodeIDfx.set(locationNodeIDfx);
-    }
-
     /**
      * This function will be called by UserService to update the ArrayList of Users / the active user
      * @param name the name
@@ -181,14 +169,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-    }
-
-    public String getLocationNodeID() {
-        return locationNodeID;
-    }
-
-    public void setLocationNodeID(String locationNodeID) {
-        this.locationNodeID = locationNodeID;
     }
 
     public String getUserID() {

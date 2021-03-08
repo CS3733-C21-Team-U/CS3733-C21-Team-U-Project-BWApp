@@ -83,6 +83,11 @@
                         <Insets left="290.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
+                  <JFXButton fx:id="submitSkipButton" onAction="#handleSkip" prefWidth="313.0" styleClass="button-outlined" text="Skip">
+                     <VBox.margin>
+                        <Insets left="290.0" />
+                     </VBox.margin>
+                  </JFXButton>
                   <JFXButton layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
                      <VBox.margin>
                         <Insets left="290.0" top="5.0" />

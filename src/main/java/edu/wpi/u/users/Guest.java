@@ -33,6 +33,88 @@ public class Guest extends User{
         this.deleted = deleted;
     }
 
+    public Guest (StringProperty guestIDfx, StringProperty namefx, StringProperty typefx, LongProperty visitDatefx, StringProperty visitReasonfx){
+        this.guestIDfx = guestIDfx;
+        this.namefx = namefx;
+        this.typefx = typefx;
+        this.visitDatefx = visitDatefx;
+        this.visitReasonfx = visitReasonfx;
+    }
+
+    @Override
+    public Role getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(Role type) {
+        this.type = type;
+    }
+
+    public String getGuestIDfx() {
+        return guestIDfx.get();
+    }
+
+    public StringProperty guestIDfxProperty() {
+        return guestIDfx;
+    }
+
+    public void setGuestIDfx(String guestIDfx) {
+        this.guestIDfx.set(guestIDfx);
+    }
+
+    @Override
+    public String getNamefx() {
+        return namefx.get();
+    }
+
+    @Override
+    public StringProperty namefxProperty() {
+        return namefx;
+    }
+
+    public void setNamefx(String namefx) {
+        this.namefx.set(namefx);
+    }
+
+    @Override
+    public String getTypefx() {
+        return typefx.get();
+    }
+
+    @Override
+    public StringProperty typefxProperty() {
+        return typefx;
+    }
+
+    public void setTypefx(String typefx) {
+        this.typefx.set(typefx);
+    }
+
+    public long getVisitDatefx() {
+        return visitDatefx.get();
+    }
+
+    public LongProperty visitDatefxProperty() {
+        return visitDatefx;
+    }
+
+    public void setVisitDatefx(long visitDatefx) {
+        this.visitDatefx.set(visitDatefx);
+    }
+
+    public String getVisitReasonfx() {
+        return visitReasonfx.get();
+    }
+
+    public StringProperty visitReasonfxProperty() {
+        return visitReasonfx;
+    }
+
+    public void setVisitReasonfx(String visitReasonfx) {
+        this.visitReasonfx.set(visitReasonfx);
+    }
+
     public void editGuest(String name, Timestamp visitDate, String visitReason, boolean deleted) {
         this.name = name;
         this.visitDate = visitDate;

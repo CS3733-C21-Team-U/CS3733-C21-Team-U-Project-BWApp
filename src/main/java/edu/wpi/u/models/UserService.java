@@ -101,6 +101,14 @@ public class UserService {
     }
 
     /**
+     * Sets the patient based on an id
+     * @param patientID patient id
+     */
+    public void setPatient(String patientID){
+        this.activeUser = ud.setPatient(patientID);
+    }
+
+    /**
      * This function if for debugging purposes and assumes the Employee in already in the database
      * Sets the active user to a employee
      * @param username username of employee
@@ -272,18 +280,18 @@ public class UserService {
      * @param email the email
      * @param role the role
      * @param phonenumber the phonenumber
-     * @param locationNodeID the node id of location
      * @param deleted whether or not they're deleted
      * @param appointments list of appointments
      * @param providerName insurance provider name
      * @param parkingLocation parking location most recent visit
      * @param recommendedParkingLocation recommended parking location for next visit
      */
-    public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
+    public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
         Random rand = new Random();
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
-        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
+        // todo: check
+        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
         System.out.println(ud.createPatient(patient));
         this.patients.add(patient);
     }
@@ -347,11 +355,11 @@ public class UserService {
      * @param phoneNumber the phonenumber
      * @param email the email
      */
-    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted){
+    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, locationNodeID, deleted);
+        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
         ud.createEmployee(newEmployee);
         this.employees.add(newEmployee);
     }
@@ -450,7 +458,7 @@ public class UserService {
     public String updatePatient(Patient patient){
         for (Patient p : this.patients){
             if (p.getUserID().equals(patient.getUserID())){
-                p.editPatient(patient.getName(),patient.getUserName(),patient.getPassword(),patient.getEmail(),patient.getType(),patient.getPhoneNumber(), p.getLocationNodeID());
+                p.editPatient(patient.getName(),patient.getUserName(),patient.getPassword(),patient.getEmail(),patient.getType(),patient.getPhoneNumber());
                 ud.updPatient(p);
                 return "";
             }

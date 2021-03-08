@@ -141,7 +141,7 @@ public class ModifyUserController {
             boolean deleted
              */
             // todo : fix this to add a locationNodeID field in fxml
-            App.userService.updateEmployee(new Employee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(),"UDEPT00301", false));
+            App.userService.updateEmployee(new Employee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false));
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));

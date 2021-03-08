@@ -26,9 +26,6 @@ public class CovidSurveyScreenController {
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
     // if requirements are not met, the user should be sent to another page that directs them to seek help or go home.
     // Will throw an error if any of the check boxes are not completed.
-    /**
-
-     */
 
     public void handleCovidSurveyFill() throws IOException {
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
@@ -60,7 +57,7 @@ public class CovidSurveyScreenController {
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setPatient("debug", "debug");
+        App.userService.setPatient("debug");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

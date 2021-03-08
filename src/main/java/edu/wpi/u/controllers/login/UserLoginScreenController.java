@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
+import java.nio.file.AccessDeniedException;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,10 +42,10 @@ public class UserLoginScreenController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
-    //public JFXButton loginButton2;
     @FXML public Label errorLabel;
     @FXML public JFXButton debugLoginAdminButton;
-    public JFXButton debugLoginGuestButton;
+    @FXML public JFXButton debugLoginGuestButton;
+    @FXML public JFXButton submitSkipButton;
 
     public void initialize() throws IOException {
 
@@ -114,12 +115,9 @@ public class UserLoginScreenController {
         App.userService.setUser(username, password, App.userService.checkPassword(password));
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
-        // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password).equals("")) {
-                    // TODO : Send code
-
                     try {
                         Pattern pattern = Pattern.compile("^\\d{10}$");
                         Matcher matcher = pattern.matcher(phonenumber);
@@ -211,6 +209,30 @@ public class UserLoginScreenController {
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleSkip(ActionEvent actionEvent) throws IOException {
+        String username = userNameTextField.getText();
+        String password = passWordField.getText();
+        try{
+            if (!App.userService.checkUsername(username).equals("")) {
+                if (!App.userService.checkPassword(password).equals("")) {
+                    App.userService.setUser(username, password, App.userService.checkPassword(password));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    App.getPrimaryStage().getScene().setRoot(root);
+                }
+                else {
+                    throw new PasswordNotFoundException();
+                }
+            }
+            else {
+                throw new AccountNameNotFoundException();
+            }
+        }catch (AccountNameNotFoundException | PasswordNotFoundException e){
+            errorLabel.setText("Username or Password is Invalid");
+            e.printStackTrace();
+        }
+
     }
 }
 
