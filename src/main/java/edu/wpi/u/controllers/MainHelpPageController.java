@@ -68,7 +68,7 @@ public class MainHelpPageController {
         anchor.getChildren().add(root);
     }
 
-    public void handleLogInButton(ActionEvent actionEvent) {
+    public void handleLogInButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log in Help Page");
         Text text1 = new Text("How to use log in:");
@@ -101,7 +101,7 @@ public class MainHelpPageController {
 
     }
 
-    public void handleTwoFactorAButton(ActionEvent actionEvent) {
+    public void handleTwoFactorAButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Two Factor Authorization Help Page");
         Text text1 = new Text("How to use Two Factor Authorization:");
@@ -133,7 +133,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleForgotPasswordButton(ActionEvent actionEvent) {
+    public void handleForgotPasswordButton(ActionEvent actionEvent)throws IOException  {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Forgot Password Help Page");
         Text text1 = new Text("How to use forgot password:");
@@ -165,7 +165,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handlePathFindingButton(ActionEvent actionEvent) {
+    public void handlePathFindingButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("PathFinding Help Page");
         Text text1 = new Text("How to use PathFinding: ");
@@ -199,7 +199,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleSettingPageButton(ActionEvent actionEvent) {
+    public void handleSettingPageButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Setting Help Page");
         Text text1 = new Text("How to use Setting Page:");
@@ -233,7 +233,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleAddUserButton(ActionEvent actionEvent) {
+    public void handleAddUserButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Add User Help Page");
         Text text1 = new Text("How to add user:");
@@ -265,7 +265,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleEditUserButton(ActionEvent actionEvent) {
+    public void handleEditUserButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Edit User Help Page");
         Text text1 = new Text("How to Edit User");
@@ -297,7 +297,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleViewUserButton(ActionEvent actionEvent) {
+    public void handleViewUserButton(ActionEvent actionEvent) throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("View User Help Page");
         Text text1 = new Text("How to View User");
@@ -329,7 +329,7 @@ public class MainHelpPageController {
         dialog.show();
     }
 
-    public void handleLoadAndSaveCSVButton(ActionEvent actionEvent) {
+    public void handleLoadAndSaveCSVButton(ActionEvent actionEvent)throws IOException  {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Load And Save CSV Help Page");
         Text text1 = new Text("How to Load and Save CSV:");

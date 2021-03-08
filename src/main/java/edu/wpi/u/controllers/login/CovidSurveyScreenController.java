@@ -3,14 +3,21 @@ package edu.wpi.u.controllers.login;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CovidSurveyScreenController {
 
@@ -21,6 +28,7 @@ public class CovidSurveyScreenController {
     public JFXCheckBox Q5CheckBox;
     public JFXButton submitSurveyButton;
     public Label errorLabel;
+    public StackPane newStackPane;
 
 
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
@@ -70,5 +78,37 @@ public class CovidSurveyScreenController {
         App.userService.getActiveUser().setType(Role.ADMIN);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleHelpPage(ActionEvent actionEvent)throws IOException  {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Help Page");
+        Text text = new Text("If you have any questions, Please contact us 888-888-8888.If there is an emergency situation, Please call 911");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.setBody(text);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button1 = new JFXButton("Cancel");
+        //JFXButton button2 = new JFXButton("Proceed to Help Page");
+        button1.setOnAction(event -> dialog.close());
+        /*button2.setOnAction(event -> {
+            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+            dialog.close();
+
+            });*/
+        button1.getStyleClass().add("button-text");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button1);
+        content.setActions(actions);
+        dialog.show();
     }
 }

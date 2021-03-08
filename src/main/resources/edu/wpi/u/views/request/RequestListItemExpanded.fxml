@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -92,7 +92,7 @@
                         </Label>
                         <ScrollPane hbarPolicy="NEVER" prefHeight="458.0" prefWidth="430.0">
                            <content>
-                              <VBox fx:id="commentsRoot" prefWidth="430.0">
+                              <VBox fx:id="commentsRoot2" prefWidth="430.0">
                                  <children>
                                     <HBox prefWidth="200.0">
                                        <children>
