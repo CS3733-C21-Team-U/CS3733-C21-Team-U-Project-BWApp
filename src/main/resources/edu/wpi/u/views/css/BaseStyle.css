@@ -220,6 +220,15 @@
     -fx-border-width: 1px;
     -fx-border-color: derive(-onBackground, 99%);
 }
+
+.jfx-toggle-node > SVGPath{
+    -fx-fill: -onBackround;
+}
+
+.jfx-toggle-node:selected > SVGPath{
+    -fx-fill: -onPrimary;
+}
+
 .jfx-toggle-node:selected{
     -fx-text-fill: -onPrimary;
 }
