@@ -255,7 +255,10 @@
                   </Tab>
                   <Tab fx:id="adminTab11" closable="false" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <fx:include source="user/ViewGuestList.fxml" />
+                           </children></AnchorPane>
                      </content>
                      <graphic>
                         <Group>

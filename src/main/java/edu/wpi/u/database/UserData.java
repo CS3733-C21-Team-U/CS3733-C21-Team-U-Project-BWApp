@@ -21,7 +21,7 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-//        dropGuests(); // TODO : Stop dropping values for demos
+        //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
         //addEmployee(new Employee("debug", "debug", "debug", "debug", "debug", Role.DOCTOR, "debug", "UDEPT00101", false));
@@ -445,7 +445,11 @@ public class UserData extends Data{
                 String guestId = rs.getString("guestID");
                 Timestamp visitDate = rs.getTimestamp("visitDate");
                 String visitReason = rs.getString("visitReason");
+                System.out.println(new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false));
                 return new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false);
+            }
+            else { // No Guest in system (new guest)
+
             }
         }catch (Exception e){
             e.printStackTrace();

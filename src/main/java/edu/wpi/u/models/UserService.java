@@ -22,6 +22,7 @@ public class UserService {
     ArrayList<Patient> patients = new ArrayList<>();
 
     User activeUser;
+    Guest activeGuest;
 
     public UserService() {
         this.setEmployees();
@@ -58,8 +59,19 @@ public class UserService {
      * @param name name of guest
      */
     public void setGuest(String name){
-       this.activeUser = ud.setGuest(name);
+        this.activeGuest = ud.setGuest(name);
+        this.activeUser = ud.setGuest(name);
+        System.out.println("Guest in us" + ud.setGuest(name));
     }
+
+    public Guest getActiveGuest() {
+        return activeGuest;
+    }
+
+    public void setActiveGuest(Guest activeGuest) {
+        this.activeGuest = activeGuest;
+    }
+
     /**
      * This function if for debugging purposes and assumes the Patient in already in the database
      * Sets the active user to a patient
@@ -93,6 +105,7 @@ public class UserService {
             this.activeUser = ud.setPatient(username, password);
         }
         else {
+            this.activeGuest = ud.setGuest(username);
             this.activeUser = ud.setGuest(username);
         }
     }

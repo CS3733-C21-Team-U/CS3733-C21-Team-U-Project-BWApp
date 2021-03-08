@@ -251,7 +251,7 @@ public class RequestData extends Data{
      * @param specificRequest the request to add
      */
     public void addRequest(SpecificRequest specificRequest) { // TODO: Add to interface IRequest instead
-        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?)";
+        String str = "insert into Requests (requestID, type, dateNeeded, specificData) values (?,?,?,?,?)";
         try{
             Request req = specificRequest.getGenericRequest();
             PreparedStatement ps = conn.prepareStatement(str);
@@ -259,6 +259,7 @@ public class RequestData extends Data{
             ps.setString(2, specificRequest.getType());
             ps.setTimestamp(3,req.getDateNeeded());
             ps.setString(4,specificRequest.specificsStorageString());
+            ps.setBoolean(5, false);
             ps.execute();
             for(Comment comment : req.getComments()){
                 addCommentToRequest(req.getRequestID(), comment);
