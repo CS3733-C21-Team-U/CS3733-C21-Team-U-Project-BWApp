@@ -43,7 +43,7 @@ public class UserSignupScreenController {
 
         // todo : fix
         RegexValidator validator2 = new RegexValidator();
-        validator2.setRegexPattern("^(\\\\d{3}[- .]?){2}\\\\d{4}$");
+        validator2.setRegexPattern("/^\\d{10}$/");
         validator2.setMessage("Phone number is invalid");
         phonenumberTextField.getValidators().add(validator2);
         phonenumberTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
@@ -52,7 +52,52 @@ public class UserSignupScreenController {
             }
         });
 
-        // todo
+        RequiredFieldValidator validator3 = new RequiredFieldValidator();
+        validator3.setMessage("Username Required");
+        usernameTextField.getValidators().add(validator3);
+        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                usernameTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator4 = new RequiredFieldValidator();
+        validator4.setMessage("Name Required");
+        fullNameTextField.getValidators().add(validator4);
+        fullNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                fullNameTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator5 = new RequiredFieldValidator();
+        validator5.setMessage("Password Required");
+        passwordTextField.getValidators().add(validator5);
+        passwordTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                passwordTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator6 = new RequiredFieldValidator();
+        validator6.setMessage("Confirm password");
+        confirmTextField.getValidators().add(validator6);
+        confirmTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                confirmTextField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator7 = new RequiredFieldValidator();
+        validator7.setMessage("Provider name Required");
+        providerNameTextField.getValidators().add(validator7);
+        providerNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                providerNameTextField.validate();
+            }
+        });
+
+
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
