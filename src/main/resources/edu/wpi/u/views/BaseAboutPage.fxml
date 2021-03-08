@@ -66,7 +66,7 @@
                                              <children>
                                                 <ImageView fitHeight="185.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@Images/Wilson%20Wong.jpg" />
+                                                      <Image url="@Images/WilsonWong.jpg" />
                                                    </image>
                                                 </ImageView>
                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="302.0" styleClass="headline-3" text="CS3733-C21 Software Engineering Professor Wilson Wong" textAlignment="CENTER" wrapText="true" />
@@ -76,7 +76,7 @@
                                              <children>
                                                 <ImageView fitHeight="185.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@Images/Andrew%20Bonaventura.jpg" />
+                                                      <Image url="@Images/AndrewBonaventura.jpg" />
                                                    </image>
                                                 </ImageView>
                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="194.0" styleClass="headline-3" text="Team Coach Andrew Bonaventura" textAlignment="CENTER" wrapText="true" />

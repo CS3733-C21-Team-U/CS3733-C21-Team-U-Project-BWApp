@@ -47,67 +47,67 @@ public class AboutController {
      * Shows Kohmei Kadoya
      * Author Lily
      */
-    public void showKohmeiKadoya() { showIMG("/edu/wpi/u/views/Images/Kohmei Kadoya.jpeg");}
+    public void showKohmeiKadoya() { showIMG("/edu/wpi/u/views/Images/KohmeiKadoya.jpeg");}
 
     /**
      * Shows Neville Ingram
      * Author Lily
      */
-    public void showNevilleIngram() { showIMG("/edu/wpi/u/views/Images/Neville Ingram.jpg");}
+    public void showNevilleIngram() { showIMG("/edu/wpi/u/views/Images/NevilleIngram.jpg");}
 
     /**
      * Shows Kaamil Lokhandwala
      * Author Lily
      */
-    public void showKaamilLokhandwala() { showIMG("/edu/wpi/u/views/Images/Kaamil Lokhandwala.jpg");}
+    public void showKaamilLokhandwala() { showIMG("/edu/wpi/u/views/Images/KaamilLokhandwala.jpg");}
 
     /**
      * Shows Charlie Kittler
      * Author Lily
      */
-    public void showCharlieKittler() { showIMG("/edu/wpi/u/views/Images/Charlie Kittler.png");}
+    public void showCharlieKittler() { showIMG("/edu/wpi/u/views/Images/CharlieKittler.png");}
 
     /**
      * Shows Lily Durkin
      * Author Lily
      */
-    public void showLilyDurkin() { showIMG("/edu/wpi/u/views/Images/Lily Durkin.jpg");}
+    public void showLilyDurkin() { showIMG("/edu/wpi/u/views/Images/LilyDurkin.jpg");}
 
     /**
      * Shows Tyler Sanderville
      * Author Lily
      */
-    public void showTylerSanderville() { showIMG("/edu/wpi/u/views/Images/Tyler Sanderville.jpeg");}
+    public void showTylerSanderville() { showIMG("/edu/wpi/u/views/Images/TylerSanderville.jpeg");}
 
     /**
      * Shows Jacob Bernard
      * Author Lily
      */
-    public void showJacobBernard() { showIMG("/edu/wpi/u/views/Images/Jacob Bernard.jpg");}
+    public void showJacobBernard() { showIMG("/edu/wpi/u/views/Images/JacobBernard.jpg");}
 
     /**
      * Nick Gao
      * Author Lily
      */
-    public void showNickGao() { showIMG("/edu/wpi/u/views/Images/Nick Gao.jpg");}
+    public void showNickGao() { showIMG("/edu/wpi/u/views/Images/NickGao.jpg");}
 
     /**
      * Shows Will Burke
      * Author Lily
      */
-    public void showWillBurke() { showIMG("/edu/wpi/u/views/Images/Will Burke.jpg");}
+    public void showWillBurke() { showIMG("/edu/wpi/u/views/Images/WillBurke.jpg");}
 
     /**
      * Shows Michael Geary
      * Author Lily
      */
-    public void showMichaelGeary() { showIMG("/edu/wpi/u/views/Images/Michael Geary.jpg");}
+    public void showMichaelGeary() { showIMG("/edu/wpi/u/views/Images/MichaelGeary.jpg");}
 
     /**
      * Shows Ola Jackson
      * Author Lily
      */
-    public void showOlaJackson() { showIMG("/edu/wpi/u/views/Images/Olajumoke Jackson.jpg");}
+    public void showOlaJackson() { showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");}
 
     /**
      * Brings AboutPage back to Pathfinding.
