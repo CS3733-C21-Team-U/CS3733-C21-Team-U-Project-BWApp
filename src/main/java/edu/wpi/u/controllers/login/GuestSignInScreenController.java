@@ -27,7 +27,7 @@ public class GuestSignInScreenController {
         Timestamp t = new Timestamp(System.currentTimeMillis());
         App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
         App.userService.setGuest(nameGuestTextField.getText());
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/NewMainPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
