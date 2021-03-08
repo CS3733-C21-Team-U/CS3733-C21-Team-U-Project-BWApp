@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.PathFindingHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.adminhelp.LoadAndSaveCSVHelpPage">
    <children>
-      <VBox alignment="TOP_RIGHT" layoutX="40.0" layoutY="40.0" prefHeight="68.0" prefWidth="1415.0">
+      <VBox alignment="TOP_RIGHT" layoutX="30.0" layoutY="30.0" prefHeight="68.0" prefWidth="1415.0">
          <children>
             <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
                <graphic>
