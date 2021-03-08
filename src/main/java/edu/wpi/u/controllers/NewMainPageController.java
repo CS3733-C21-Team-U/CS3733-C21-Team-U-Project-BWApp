@@ -68,6 +68,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.throwDialogHerePane = newMainPageStackPane;
 
 //        validationFeild
         TextField test = new TextField("test");
