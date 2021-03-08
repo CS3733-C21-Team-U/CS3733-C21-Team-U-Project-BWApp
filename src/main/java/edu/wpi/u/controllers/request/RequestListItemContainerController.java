@@ -28,15 +28,6 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public Parent expandedNode;
     public Parent collapsedNode;
 
-    private static int fact(int n) {
-        int fact = 1;
-        for (int i = 1; i <= n; i++) {
-            fact *= i;
-        }
-        return fact;
-    }
-
-
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
         this.request = request; //MUST BE FIRST!!!
 
