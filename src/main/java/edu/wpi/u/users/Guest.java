@@ -1,33 +1,76 @@
 package edu.wpi.u.users;
 
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Guest extends User{
-    protected Date appointmentDate;
-    protected String appointmentTime;
-    //TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
-    //TODO: Link to radiology and blood
-    //guestID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phonenumber varchar(100), deleted boolean, appointmentDate date, primary key(guestID))";
-    public Guest(String guestID, String name, String userName, String password, String email, StaffType type,String phoneNumber, Date appointmentDate, boolean deleted){
-        super(guestID, name,userName,password,email,type,phoneNumber, deleted);
-        this.appointmentDate = appointmentDate;
+    private String guestID;
+    private String name;
+    private Role type;
+    private Timestamp visitDate;
+    private String visitReason;
+    private boolean deleted;
+    //TODO : Maybe add a visitTime field for guest coming to hospital?
+    //TODO : Maybe make Guest only have a phone number for account and use 2fa // maybe not need to store in db
+    public Guest() {}
+
+    public Guest(String guestID, String name, Role type, Timestamp visitDate, String visitReason, boolean deleted) {
+        this.guestID = guestID;
+        this.name = name;
+        this.type = type;
+        this.visitDate = visitDate;
+        this.visitReason = visitReason;
+        this.deleted = deleted;
     }
 
-    public static void main(String[] args) {
-        //Guest g = new Guest("testg","testg","testg","testg",StaffType.PATIENT,true,new Date(800), "1919");
+    public void editGuest(String name, Timestamp visitDate, String visitReason, boolean deleted) {
+        this.name = name;
+        this.visitDate = visitDate;
+        this.visitReason = visitReason;
+        this.deleted = deleted;
     }
 
-    public void editGuest(String name, String userName, String password, String email, StaffType type, String phoneNumber, Date appointmentDate, boolean deleted) {
-        super.editUser(name, userName, password, email, type, phoneNumber, deleted);
-        this.appointmentDate = appointmentDate;
+    public String getGuestID() {
+        return guestID;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public void setGuestID(String guestID) {
+        this.guestID = guestID;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Timestamp getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(Timestamp visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public String getVisitReason() {
+        return visitReason;
+    }
+
+    public void setVisitReason(String visitReason) {
+        this.visitReason = visitReason;
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

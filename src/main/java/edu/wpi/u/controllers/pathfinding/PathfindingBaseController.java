@@ -7,6 +7,9 @@ import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.algorithms.getEdgesTest;
 import edu.wpi.u.controllers.mapbuilder.ContextMenuNodeController;
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -14,14 +17,17 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class PathfindingBaseController {
 
@@ -43,6 +49,10 @@ public class PathfindingBaseController {
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
+    Group pathPreviewGroup = new Group();
+    Group pathBorder = new Group();
+    Group pathFill = new Group();
+    Group pathArrow = new Group();
 
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
@@ -57,7 +67,10 @@ public class PathfindingBaseController {
         node.setPreserveRatio(true);
         pane.getChildren().add(node);
         pane.getChildren().add(edgeNodeGroup);
-        edgeNodeGroup.toFront();
+        pane.getChildren().add(pathPreviewGroup);
+        pane.getChildren().add(pathBorder);
+        pane.getChildren().add(pathFill);
+        pane.getChildren().add(pathArrow);
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -98,9 +111,9 @@ public class PathfindingBaseController {
                     contextAnchor.setLayoutX(App.mapInteractionModel.getCoords()[0]);
                     contextAnchor.setLayoutY(App.mapInteractionModel.getCoords()[1]);
                     pane.getChildren().remove(App.mapInteractionModel.selectedEdgeContextBox);
-                    pane.getChildren().remove(App.mapInteractionModel.selectedNodeContextBox);
+                    pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
                     pane.getChildren().add(contextAnchor);
-                    App.mapInteractionModel.selectedNodeContextBox = contextAnchor;
+                    App.mapInteractionModel.selectedContextBox = contextAnchor;
                 }else{
 
                 }
@@ -135,7 +148,7 @@ public class PathfindingBaseController {
         });
 
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
             String floorStart = App.mapInteractionModel.path.get(0).getFloor();
             String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size()-1).getFloor();
             switch (floorStart){
@@ -164,11 +177,15 @@ public class PathfindingBaseController {
                     handleFloor5Button();
                     break;
             }
-            generateEdges(floorStart);
+            generateEdges(App.mapInteractionModel.floorPathfinding);
             generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
-
+        App.mapInteractionModel.pathPreviewFlag.addListener((observable, oldValue, newValue)  ->{
+            pathPreviewGroup.getChildren().clear();
+            generatePathPreview(App.mapInteractionModel.floorPathfinding);
+            setMapItemsOrder();
+        });
 
     } // End of initialize
 
@@ -188,24 +205,38 @@ public class PathfindingBaseController {
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
-                    App.mapInteractionModel.pathThingy = !App.mapInteractionModel.pathThingy;
                     handleNodeClicked(n);
                 } catch (IOException  e) {
                     e.printStackTrace();
                 }
             });
-//            node1.setOnMouseEntered(event -> {
-//                    if(App.mapInteractionModel.pathThingy) {
-//                        try {
-//                            handleNodeClicked(n);
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//            });
+
+            node1.setOnMouseEntered(event -> {
+                App.mapInteractionModel.nodeIDForHover.setValue(n.getNodeID());
+            });
         edgeNodeGroup.getChildren().add(node1);
-        node1.toFront();
     }
+
+    /**
+     * sets the proper order for generated objects on the map
+     * @author Charles Kittler (cvkittler)
+     */
+    private void setMapItemsOrder(){
+        pathPreviewGroup.toFront();
+        edgeNodeGroup.toFront();
+        pathBorder.toFront();
+        pathFill.toFront();
+        pathArrow.toFront();
+    }
+
+    private void clearMapItems(){
+        edgeNodeGroup.getChildren().clear();
+        pathPreviewGroup.getChildren().clear();
+        pathBorder.getChildren().clear();
+        pathFill.getChildren().clear();
+        pathArrow.getChildren().clear();
+    }
+
 
 
     /**
@@ -216,14 +247,13 @@ public class PathfindingBaseController {
     public void generateNodes(String floor){
         App.mapService.getNodes().stream().forEach(n -> {
             try {
-                if(n.getFloor().equals(floor)){
+                if(n.getFloor().equals(floor) && !n.getNodeType().equals("WALK") && !n.getNodeType().equals("HALL")){
                     placeNodesHelper(n);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-        edgeNodeGroup.toFront();
     }
 
 
@@ -232,55 +262,121 @@ public class PathfindingBaseController {
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
-    public void placeEdgesHelper(Edge ed){
+    String outlineColor = "ffbfbfff";
+    String fillColor = "e86060ff";
+    public void placeEdgesHelper(Edge ed, boolean forward){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
-        Line edge = new Line();
-        edge.setLayoutX(ed.getStartNode().getCords()[0]);
-        edge.setStartX(0);
-        edge.setLayoutY(ed.getStartNode().getCords()[1]);
-        edge.setStartY(0);
-        edge.setEndX(xdiff);
-        edge.setEndY(ydiff);
-        edge.setId(ed.getEdgeID());
-        edge.setStrokeWidth(7);
-        edge.toFront();
-        edge.setStyle("-fx-stroke: -error");
-        edge.setVisible(true);
-        edge.setOnMouseClicked(event -> {
-            try {
-                handleEdgeClicked(ed);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        edgeNodeGroup.getChildren().add(edge);
+        Line fill = new Line(), backround = new Line();
+        backround.setLayoutX(ed.getStartNode().getCords()[0]);
+        backround.setStartX(0);
+        backround.setLayoutY(ed.getStartNode().getCords()[1]);
+        backround.setStartY(0);
+        backround.setEndX(xdiff);
+        backround.setEndY(ydiff);
+        backround.setId(ed.getEdgeID()+"_back");
+        backround.setStrokeWidth(20);
+        backround.setStroke(Paint.valueOf(outlineColor));
+        backround.setVisible(true);
+        backround.setStrokeLineCap(StrokeLineCap.ROUND);
+        pathBorder.getChildren().add(backround);
+        fill.setLayoutX(ed.getStartNode().getCords()[0]);
+        fill.setStartX(0);
+        fill.setLayoutY(ed.getStartNode().getCords()[1]);
+        fill.setStartY(0);
+        fill.setEndX(xdiff);
+        fill.setEndY(ydiff);
+        fill.setId(ed.getEdgeID()+"_fill");
+        fill.setStrokeWidth(10);
+        fill.setStroke(Paint.valueOf(fillColor));
+        fill.setVisible(true);
+        fill.setStrokeLineCap(StrokeLineCap.ROUND);
+        fill.getStrokeDashArray().addAll(1d, 20d);
+        pathFill.getChildren().add(fill);
+        start(fill, forward);
     }
 
+    public void start(Line fill, boolean forward) {
 
-
-    public void generateEdges(String floor){
-        getEdgesTest.EdgesFollowed(App.mapInteractionModel.path).stream().forEach(e ->{
-        try {
-            if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
-                placeEdgesHelper(e);
-
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        final double maxOffset = fill.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+        Timeline timeline = new Timeline();
+        if(forward) {
+            timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(fill.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.millis(2000), new KeyValue(fill.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
+        }else{
+            timeline = new Timeline(
+                    new KeyFrame(Duration.millis(2000), new KeyValue(fill.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.ZERO, new KeyValue(fill.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)));
         }
-        });
-        edgeNodeGroup.toFront();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
-
 
 
     /**
-     * Function called when and edge is clicked on. This brings up the context menu.
-     * @param e - Edge that is clicked on
-     * @throws IOException
+     * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
+     * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
-    public void handleEdgeClicked(Edge e) throws IOException {
+    public void placePathPreview(Edge ed){
+        double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
+        double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
+        Line previewEdge = new Line();
+        previewEdge.setLayoutX(ed.getStartNode().getCords()[0]);
+        previewEdge.setStartX(0);
+        previewEdge.setLayoutY(ed.getStartNode().getCords()[1]);
+        previewEdge.setStartY(0);
+        previewEdge.setEndX(xdiff);
+        previewEdge.setEndY(ydiff);
+        previewEdge.setId(ed.getEdgeID() + "_preview");
+        previewEdge.setStrokeWidth(7);
+        previewEdge.setStroke(Paint.valueOf("green"));
+        previewEdge.setVisible(true);
+        pathPreviewGroup.getChildren().add(previewEdge);
+    }
+
+    public void generateEdges(String floor){
+        LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
+        for(int i = 0;  i < edgePath.size(); i++){
+            if(i != edgePath.size() - 1){
+                if(edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i + 1).getEndNode())){
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), true);
+                    }
+                }else{
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), false);
+                    }
+                }
+            }else{
+                if(edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getStartNode()) || edgePath.get(i).getStartNode().equals(edgePath.get(i - 1).getEndNode())){
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), false);
+                    }
+                }else{
+                    if(floor.equals(edgePath.get(i).getStartNode().getFloor()) && floor.equals(edgePath.get(i).getEndNode().getFloor())){
+                        placeEdgesHelper(edgePath.get(i), true);
+                    }
+                }
+            }
+
+        }
+
+        setMapItemsOrder();
+    }
+
+    public void generatePathPreview(String floor){
+        getEdgesTest.EdgesFollowed(App.mapInteractionModel.pathPreview).stream().forEach(e ->{
+            try {
+                if(e.getStartNode().getFloor().equals(floor) && e.getEndNode().getFloor().equals(floor)){
+                    placePathPreview(e);
+
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        setMapItemsOrder();
     }
 
 
@@ -294,16 +390,6 @@ public class PathfindingBaseController {
             System.out.println("You clicked on a node");
             App.mapInteractionModel.setNodeID(n.getNodeID());
     }
-    @FXML
-    public void handleUndoButton() throws Exception{
-        App.undoRedoService.undo();
-    }
-
-    @FXML
-    public void handleRedoButton() throws Exception{
-        App.undoRedoService.redo();
-    }
-
 
     /**
      * This is a helper function for the floor buttons.
@@ -323,12 +409,12 @@ public class PathfindingBaseController {
      */
     public void handleFloorGButton(){
         if(!App.mapInteractionModel.floorPathfinding.equals("G")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "G";
             loadNewMapAndGenerateHelper("G", "/edu/wpi/u/views/Images/FaulknerCampus.png");
             node.setFitWidth(2987);
             generateEdges("G");
-            edgeNodeGroup.toFront();
-
+            setMapItemsOrder();
         }else{
             floorG.setSelected(true);
         }
@@ -340,10 +426,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor1Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("1")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "1";
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             generateEdges("1");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor1.setSelected(true);
         }
@@ -355,10 +442,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor2Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("2")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "2";
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             generateEdges("2");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor2.setSelected(true);
         }
@@ -370,10 +458,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor3Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("3")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "3";
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             generateEdges("3");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor3.setSelected(true);
         }
@@ -385,10 +474,11 @@ public class PathfindingBaseController {
      */
     public void handleFloor4Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("4")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "4";
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             generateEdges("4");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor4.setSelected(true);
         }
@@ -400,22 +490,13 @@ public class PathfindingBaseController {
      */
     public void handleFloor5Button(){
         if(!App.mapInteractionModel.floorPathfinding.equals("5")) {
-            edgeNodeGroup.getChildren().clear();
+            clearMapItems();
+            App.mapInteractionModel.floorPathfinding = "5";
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             generateEdges("5");
-            edgeNodeGroup.toFront();
+            setMapItemsOrder();
         }else{
             floor5.setSelected(true);
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

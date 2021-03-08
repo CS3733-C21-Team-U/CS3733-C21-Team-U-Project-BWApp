@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class ForgotPasswordScreenController {
+
     public JFXTextField resetPasswordTextField;
     public JFXButton resetButton;
     public JFXCheckBox employeeCheckBox;
@@ -39,20 +40,20 @@ public class ForgotPasswordScreenController {
         });
     }
 
+    // todo : autofill user fields and only allow editing of password field !!! <--
     public void handleResetButton(ActionEvent actionEvent) throws IOException, AccountNameNotFoundException {
         String username = usernameTextField.getText();
         String userType;
         if (employeeCheckBox.isSelected()) {
             userType = "Employees";
         } else {
-            userType = "Guests";
+            userType = "Patients";
         }
-        System.out.println("Username in controller: " + username);
         System.out.println(App.userService.checkUsername(username).equals(""));
         if (!App.userService.checkUsername(username).equals("")) {
             App.userService.changePassword(username, resetPasswordTextField.getText(), userType);
-            //System.out.println(App.userService.getPassword(usernameTextField.getText(), userType));
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+            // todo make it so when they successfully reset, it takes them to
             App.getPrimaryStage().getScene().setRoot(root);
         } else {
             throw new AccountNameNotFoundException();

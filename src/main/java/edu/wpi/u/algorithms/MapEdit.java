@@ -2,7 +2,7 @@ package edu.wpi.u.algorithms;
 
 import edu.wpi.u.App;
 import edu.wpi.u.exceptions.InvalidEdgeException;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -126,7 +126,7 @@ public class MapEdit {
      * @param end_node
      * @throws InvalidEdgeException
      */
-    public void addEdge(String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
+    public void addEdge(String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
         try{
             this.type = "EDGE";
             this.edit = EditTypes.ADD;
@@ -154,7 +154,7 @@ public class MapEdit {
      * updates the permissions of an edge and stores the old version
      * @param permissions
      */
-    public void updateEdge(ArrayList<StaffType> permissions){
+    public void updateEdge(ArrayList<Role> permissions){
         try{
             this.type = "EDGE";
             this.edit = EditTypes.UPDATE;

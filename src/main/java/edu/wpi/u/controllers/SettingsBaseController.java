@@ -7,8 +7,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
+import edu.wpi.u.users.Role;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
-import static edu.wpi.u.users.StaffType.*;
+import static edu.wpi.u.users.Role.*;
 
 public class SettingsBaseController {
 
@@ -56,11 +56,11 @@ public class SettingsBaseController {
 
     public void initialize() throws IOException, FilePathNotFoundException {
 
-        if(App.userService.getActiveUser().getType() ==  ADMIN){
+        if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
             onlyAdmin.setStyle("-fx-opacity: 1");
             onlyAdmin.setDisable(false);
         }
-        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+        else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
             onlyAdmin.setStyle("-fx-opacity: 0");
             onlyAdmin.setDisable(true);
         }
