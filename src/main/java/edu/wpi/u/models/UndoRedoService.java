@@ -3,7 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.MapEdit;
 import edu.wpi.u.exceptions.InvalidEdgeException;
-import edu.wpi.u.users.StaffType;
+import edu.wpi.u.users.Role;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -86,7 +86,7 @@ public class UndoRedoService {
      * @param permissions
      * @throws InvalidEdgeException
      */
-    public void addEdge(String start_node, String end_node, ArrayList<StaffType> permissions) throws InvalidEdgeException {
+    public void addEdge(String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
         MapEdit thisEdit = new MapEdit();
         thisEdit.addEdge(start_node,end_node,permissions);
         if(curIndex < edits.size() - 1){
@@ -122,7 +122,7 @@ public class UndoRedoService {
      * @param edgeID
      * @param permissions
      */
-    public void updateEdge(String edgeID, ArrayList<StaffType> permissions){
+    public void updateEdge(String edgeID, ArrayList<Role> permissions){
         MapEdit thisEdit = new MapEdit(edgeID);
         thisEdit.updateEdge(permissions);
         if(curIndex < edits.size() - 1){

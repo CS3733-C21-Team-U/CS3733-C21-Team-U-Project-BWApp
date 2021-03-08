@@ -2,15 +2,38 @@ package edu.wpi.u.users;
 
 public class Employee extends User{
 
-    //employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), deleted boolean
+    // TODO : Add employee specific fields
+    /*
+    ADMINS are employees
+    Radiology doctor
+    Janitor
+    Security guard
+    Nurse
+    etc
+     */
 
-    public Employee(String employeeID, String name, String userName, String password, String email,StaffType type, String phoneNumber,boolean deleted){
-        super(employeeID, name,userName,password,email,type, phoneNumber, deleted);
-        // String userID, String name, String accountName, String password, StaffType type, boolean deleted, String phoneNumber
+    public Employee() {
+
+    }
+/*
+    String userID,
+    String name,
+    String accountName,
+    String password,
+    String email,
+    Role type,
+    String phoneNumber,
+    String locationNodeID,
+    boolean deleted) {
+
+ */
+    public Employee(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
+        super(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted);
     }
 
-    public static void main(String[] args) {
-        //Employee e = new Employee("test","test","test","test",StaffType.ADMIN,true,true, "1919");
+    @Override
+    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted) {
+        super.editUser(name, userName, password, email, type, phoneNumber, deleted);
     }
 
     //TODO: Override editUser()

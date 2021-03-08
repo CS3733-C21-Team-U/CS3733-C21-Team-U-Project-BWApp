@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class ForgotPasswordScreenController {
+
     public JFXTextField resetPasswordTextField;
     public JFXButton resetButton;
     public JFXCheckBox employeeCheckBox;

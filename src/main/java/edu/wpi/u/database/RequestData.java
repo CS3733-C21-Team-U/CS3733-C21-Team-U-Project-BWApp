@@ -3,10 +3,10 @@ package edu.wpi.u.database;
 import edu.wpi.u.requests.*;
 //import edu.wpi.u.requests.Request;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -14,8 +14,7 @@ public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-        System.out.println("# of request items: " + getNumTableItems("Requests"));
-        //System.out.println("# of maintenance items: " + getNumTableItems("Maintenance"));
+
         //readCSV("Requests.csv", "Requests");
        // readCSV("Locations.csv", "Locations");
       //  readCSV("Assignments.csv", "Assignments");
@@ -35,7 +34,7 @@ public class RequestData extends Data{
     }
 
 
-    public void updateRequest(SpecificRequest obj){
+    public void updateRequest(SpecificRequest obj){//TODO: UPDATE PRIMARY COMMENT INSTEAD OF REQUEST FIELDS
         Request request= obj.getGenericRequest();
         //requestID, dateCreated, dateCompleted, description, title, type
        // System.out.println("Can anyone even hear me??????????????????????????????????");
@@ -46,6 +45,10 @@ public class RequestData extends Data{
         //this.updLocations(request.getRequestID(), request.getLocation());
        // this.updAssignees(request.getRequestID(), request.getAssignee());
         updateField("Requests", "requestID", request.getRequestID(), "specificData", obj.specificsStorageString());
+
+        Comment c = new Comment("Update", "Update Description goes here", "Kaamil", CommentType.UPDATE, new Timestamp(System.currentTimeMillis()));
+        request.addComment(c);//TODO: Find a place to make and compile Update comment in order to make detailed comments
+        addCommenttoRequest(request.getRequestID(), c);
     }
 
    /* public void updateRequest(Request request){ //
@@ -120,7 +123,7 @@ public class RequestData extends Data{
                 String title = rs.getString("title");
                 String type = rs.getString("type");
                 String specificData = rs.getString("specificData");
-                LinkedList<String> locations = new LinkedList<String>();
+                ArrayList<String> locations = new ArrayList<String>();
 //                try { // TODO : UNCOMMENT AND FIX
 //                    String str2 = "select * from Locations where requestID=?";
 //                    PreparedStatement ps2= conn.prepareStatement(str2);
@@ -134,7 +137,7 @@ public class RequestData extends Data{
 //                catch (Exception e){
 //                    e.printStackTrace();
 //                }
-                LinkedList<String> assignees = new LinkedList<String>();
+                ArrayList<String> assignees = new ArrayList<String>();
 //                try {
 //                    String str3 = "select * from Assignments where requestID=?";
 //                    PreparedStatement ps3 = conn.prepareStatement(str3);
@@ -148,10 +151,23 @@ public class RequestData extends Data{
 //                catch (Exception e){
 //                    e.printStackTrace();
 //                }
-
+                ArrayList<Comment> comments = new ArrayList<Comment>();
+                try {
+                    String str4 = "select * from Comments where requestID=? order by created DESC";
+                    PreparedStatement ps4 = conn.prepareStatement(str4);
+                    ps4.setString(1,id);
+                    ResultSet rs4 = ps4.executeQuery();
+                    while (rs4.next()){
+                        comments.add(new Comment(rs4.getString("title"), rs4.getString("description"), rs4.getString("author"), CommentType.valueOf(rs4.getString("type")), rs4.getTimestamp("created")));
+                    }
+                    rs4.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 RequestFactory rf = new RequestFactory();
                 SpecificRequest result = rf.makeRequest(type);
-                Request r = new Request(id,assignees, created,needed,desc,title,locations,type, "Test creator");
+                Request r = new Request(id, new Timestamp(created.getTime()), locations, assignees, comments);
                 result.readStorageString(specificData);
                 result.setRequest(r);
                 results.add(result);
@@ -190,6 +206,9 @@ public class RequestData extends Data{
             for(String assignmentID : req.getAssignee()){
                 addAssignee(assignmentID, req.getRequestID());
             }
+            for(Comment c : req.getComments()){
+                addCommenttoRequest(req.getRequestID(), c);
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -223,6 +242,34 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param requestID - the request taken in
+     * @param c - the comment that will be connected with it using Comments table
+     */
+//requestID , title , description, author, type, created timestamp;
+    public void addCommenttoRequest(String requestID, Comment c){
+        String str = "insert into Comments(requestID, title, description, author, type, created) values (?,?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,c.getTitle());
+            ps.setString(3,c.getDescription());
+            ps.setString(4,c.getDescription());
+            ps.setString(5,c.getType().toString());
+            ps.setTimestamp(6,c.getTimestamp());
+            ps.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     *
+     * @param requestID
+     * @param time
+     */
     public void resolveRequest(String requestID, long time) { // TODO: Add resolve comment
         String str = "update Requests set dateCompleted=? where requestID=?";
         try {

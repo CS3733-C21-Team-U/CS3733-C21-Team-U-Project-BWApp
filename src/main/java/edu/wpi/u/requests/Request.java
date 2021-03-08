@@ -1,109 +1,135 @@
 package edu.wpi.u.requests;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Date;
 
 public class Request {
     private String requestID;
-    private Date dateCreated;
+    private Timestamp dateNeeded;
+    private ArrayList<String> location;
+    private ArrayList<String> assignee;
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
 
-    public Date getDateNeeded() {
-        return dateNeeded;
-    }
-    public void setDateNeeded(Date d) {
-        this.dateNeeded = d;
-    }
-
-    private Date dateNeeded;
-    private Date dateCompleted;
-    private String description;
-    private String title;
-    private LinkedList<String> location;
-    private LinkedList<String> assignee;
-    private String creator;
-    private LinkedList<String> comments;
-
-    public Request(String requestID,LinkedList<String> assignee, Date dateCreated, Date dateNeeded, String description, String title, LinkedList<String> location, String type, String creator) {
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, Comment comment) {
         this.requestID = requestID;
-        this.assignee = assignee;
-        this.dateCreated = dateCreated;
         this.dateNeeded = dateNeeded;
-        this.description = description;
-        this.title = title;
-        this.location = location;
-        this.creator = creator;
-    }
-    public void resolveRequest() {} //TODO: Belongs in request?
-    public void editRequest(Date endDate, String description, String title, LinkedList<String> location, String type, LinkedList<String> assignee, String creator) {
-        this.dateCompleted = endDate;
-        this.description = description;
-        this.title = title;
         this.location = location;
         this.assignee = assignee;
-        this.creator = creator;
+        this.comments.add(comment);
+    }
+
+    public Request(String requestID, Timestamp dateNeeded, ArrayList<String> location, ArrayList<String> assignee, ArrayList<Comment> comments) {
+        this.requestID = requestID;
+        this.dateNeeded = dateNeeded;
+        this.location = location;
+        this.assignee = assignee;
+        this.comments = comments;
+    }
+
+
+    public void editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee, String creator) {
+        this.dateNeeded = needDate;
+        getPrimaryComment().description = description;
+        getPrimaryComment().title = title;
+        this.location = location;
+        this.assignee = assignee;
+        getPrimaryComment().author = creator;
     }
     public String getRequestID() {
         return requestID;
     }
-    public Date getDateCreated() {
-        return dateCreated;
+    public Timestamp getDateCreated() {
+        return getPrimaryComment().timestamp;
     }
-    public Date getDateCompleted() {
-        return dateCompleted;
+    public String getCreator() {
+        return getPrimaryComment().author;
+    }
+    public Timestamp getDateNeeded() {
+        return dateNeeded;
+    }
+    public void setDateNeeded(Timestamp d) {
+        this.dateNeeded = d;
+    }
+    public Timestamp getDateCompleted() {
+        if(isResolved()){
+            return comments.get(comments.size()-1).timestamp;
+        }
+        else{
+            return null;
+        }
     }
     public String getDescription() {
-        return description;
+        return getPrimaryComment().description;
     }
     public String getTitle() {
-        return title;
+        return getPrimaryComment().title;
     }
-    public LinkedList<String> getLocation() {
+    public ArrayList<String> getLocation() {
         return location;
     }
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-    public void setDateCompleted(Date dateCompleted) {
-        this.dateCompleted = dateCompleted;
+    public void setDateCreated(Timestamp dateCreated) {
+        getPrimaryComment().timestamp = dateCreated;
     }
     public void setDescription(String description) {
-        this.description = description;
+        getPrimaryComment().description = description;
     }
     public void setTitle(String title) {
-        this.title = title;
+        getPrimaryComment().title = title;
     }
-    public void setLocation(LinkedList<String> location) {
+    public void setLocation(ArrayList<String> location) {
         this.location = location;
     }
-    public LinkedList<String> getAssignee() {return assignee;}
-    public void setAssignee(LinkedList<String> assignee) {
+    public ArrayList<String> getAssignee() {return assignee;}
+    public void setAssignee(ArrayList<String> assignee) {
         this.assignee = assignee;
     }
-    public String getCreator() {
-        return creator;
-    }
-    public void setCreator(String creator) {
-        this.creator = creator;
+
+    public void resolveRequest(Comment c) {
+        addComment(c);
+        c.type = CommentType.RESOLVE;
     }
 
-    public String displayAssignees() {
-        String aAssignee = this.assignee.getFirst();
-        int numAssigned = this.assignee.size();
-        String out = "Assigned: " + aAssignee + " + " + numAssigned + " others";
-        return out;
+    public boolean isResolved(){
+        if(comments.size() == 0){return false;}
+        return comments.get(comments.size() - 1).type == CommentType.RESOLVE;
     }
 
-    public String displayLocation() {
-        String aLocation = this.location.getFirst();
-        int numAssigned = this.location.size();
-        String out = "Assigned: " + aLocation + " + " + numAssigned + " others";
-        return out;
+    public void addComment(Comment c) { this.comments.add(c); }
+
+    public ArrayList<Comment> getComments() { return this.comments; }
+
+    public void setComments(ArrayList<Comment> comments) { this.comments = comments; }
+
+    public Comment getPrimaryComment() {
+        if(this.comments != null && this.comments.size() != 0) {
+            return this.comments.get(0);
+        }else{
+            System.out.println("Request is missing primary comment!");
+            return null;
+        }
     }
 
-    public void addComment(String c) { this.comments.add(c); }
+
+    /*
+    * Comment:
+    * Title
+    *
+    * Description
+    *
+    * By who, date
+    *
+    * */
+
+
+    //UPDATE: title, description
+    //title chnaged from "booty" to "Charlie"
+    //description chnaged from "booty" to "Charlie"
+    private String updateRecord(String fieldName, String oldVal, String newVal){
+        String str;
+        str = fieldName + " changed from " + oldVal + " to " + newVal;
+        return str;
+    }
 }

@@ -40,10 +40,9 @@ public class RequestService {
     rd.updateRequest(result);
   }
 
-  public void resolveRequest(SpecificRequest result) {
+  public void resolveRequest(SpecificRequest result, Comment resolveComment) {
     long time = System.currentTimeMillis();
-    Date now = new Date(time);
-    result.getGenericRequest().setDateCompleted(now);
+    result.getGenericRequest().resolveRequest(resolveComment);
     this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(), time);
   }
