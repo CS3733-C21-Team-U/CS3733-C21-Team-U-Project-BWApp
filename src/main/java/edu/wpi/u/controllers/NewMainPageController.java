@@ -1,6 +1,6 @@
 package edu.wpi.u.controllers;
 
-import animatefx.animation.Bounce;
+//import animatefx.animation.Bounce;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
