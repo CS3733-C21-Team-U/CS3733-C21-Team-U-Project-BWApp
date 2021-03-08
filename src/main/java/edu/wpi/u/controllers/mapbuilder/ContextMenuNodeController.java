@@ -67,7 +67,7 @@ public class ContextMenuNodeController {
         list.add("Walkway");//WALK
 
         if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-            doneButton.setText("Stop adding");
+            doneButton.setText("Cancel");
         } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT") && App.mapInteractionModel.nodeIDList.size() > 1){
             longNameText.setDisable(true);
             shortNameText.setDisable(true);
@@ -126,18 +126,21 @@ public class ContextMenuNodeController {
     public void handleSaveButton() throws InvalidEdgeException {
         if(App.mapInteractionModel.getCurrentAction().equals("SELECT")) {
 
-            if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getValue().equals("")){
+            if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getSelectionModel().isEmpty()){
                 Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
                 App.undoRedoService.updateNode(thisNode.getNodeID(), App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
             }else{
                 if(longNameText.getText().equals("")){
                     longNameErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(longNameText);
                 }
                 if(shortNameText.getText().equals("")){
                     shortNameErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(shortNameText);
                 }
-                if(nodeTypeDrop.getValue().equals("")){
+                if(nodeTypeDrop.getSelectionModel().isEmpty()){
                     nodeTypeErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(nodeTypeDrop);
                 }
                 return;
             }
@@ -146,9 +149,26 @@ public class ContextMenuNodeController {
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
 
         } else if(App.mapInteractionModel.getCurrentAction().equals("ADDNODE")){
-            App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(),longNameText.getText(), shortNameText.getText());
-            App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
-            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
+
+            if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getSelectionModel().isEmpty()) {
+                App.undoRedoService.addNode(App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1], App.mapInteractionModel.getFloor(), App.mapInteractionModel.getBuilding(), getNodeType(), longNameText.getText(), shortNameText.getText());
+                App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
+                ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
+            }else{
+                if(longNameText.getText().equals("")){
+                    longNameErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(longNameText);
+                }
+                if(shortNameText.getText().equals("")){
+                    shortNameErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(shortNameText);
+                }
+                if(nodeTypeDrop.getSelectionModel().isEmpty()){
+                    nodeTypeErrorLabel.setVisible(true);
+                    MapBuilderBaseController.shake(nodeTypeDrop);
+                }
+                return;
+            }
         } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
             for(String curNodeID : App.mapInteractionModel.nodeIDList){
                 Node curNode = App.mapService.getNodeFromID(curNodeID);
@@ -195,8 +215,6 @@ public class ContextMenuNodeController {
     @FXML
     public void handleDeleteButton() {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
-            App.mapInteractionModel.setCurrentAction("NONE");
-            ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         } else if(App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
             for(String curNodeID : App.mapInteractionModel.nodeIDList){
                 App.undoRedoService.deleteNode(curNodeID);

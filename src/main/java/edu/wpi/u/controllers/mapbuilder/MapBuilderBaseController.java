@@ -40,7 +40,7 @@ public class MapBuilderBaseController {
     public JFXToggleNode toggle6;
 
     @FXML
-    private JFXToggleNode selectButton, multiSelectButton, addNodeButton, addEdgeButton, alineButton;
+    public JFXToggleNode selectButton, multiSelectButton, addNodeButton, addEdgeButton, alineButton;
     public JFXButton redoButton,undoButton;
 
     AnchorPane pane = new AnchorPane();
@@ -48,6 +48,7 @@ public class MapBuilderBaseController {
     Group nodesAndEdges = new Group();
     public GesturePane map = new GesturePane(pane);
     String selectedColor = "green";
+    String errorColor = "B00020";
 
     boolean clickedOnSomethingFlag = false;
     /**
@@ -116,7 +117,7 @@ public class MapBuilderBaseController {
             setMouseCoordinates(e);//this sets the mouse coordinates
             // Trying add node context menu
             try {
-                if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE")) {
+                if (App.mapInteractionModel.getCurrentAction().equals("ADDNODE") && !clickedOnSomethingFlag) {
                     Node n = new Node();//just an empty node to make the context menu appear correctly
                     makeContextMenu(n, App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1] );
                 }else{
@@ -178,11 +179,11 @@ public class MapBuilderBaseController {
             curNode.setVisible(true);
             //setting mouse events for the drawn circle
             curNode.setOnMouseClicked(event -> {
-                System.out.println("CLICKED NODE (Line 177)");
+                System.out.println("CLICKED NODE (Line 182)");
                 clickedOnSomethingFlag = true;
             });
             curNode.setOnMouseDragged(event -> {
-                if(!App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
+                if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
                     try {
                         clickedOnSomethingFlag = true;
                         handleNodeDragged(curNode); // Set visual position (circle)
@@ -374,7 +375,6 @@ public class MapBuilderBaseController {
      * @param n - Node that is clicked on
      * @throws IOException
      */
-    String errorColor = "B00020";
     public void handleNodeClicked(Node n) throws IOException {
         clickedOnSomethingFlag = true;
         //find the old edge and reset its color
@@ -384,6 +384,7 @@ public class MapBuilderBaseController {
                 edge.setStroke(Paint.valueOf(errorColor));
             }
         }
+
         App.mapInteractionModel.setCoords(new double[]{n.getCords()[0], n.getCords()[1]});
 
         switch (App.mapInteractionModel.getCurrentAction()){
@@ -544,12 +545,18 @@ public class MapBuilderBaseController {
      * @param node1 -
      */
     public void handleNodeDragged(Circle node1) {
-            map.gestureEnabledProperty().set(false); // Disabling map zoom
+            // Disabling map zoom and remove context menus
+            map.gestureEnabledProperty().set(false);
             pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
+            //set last dragged node and edges to their saved value
+            Circle lastNode = (Circle) nodesAndEdges.lookup("#"+ App.mapInteractionModel.toggledNodeID);
+            Node node2 = App.mapService.getNodeFromID(App.mapInteractionModel.toggledNodeID);
+            lastNode.setCenterX(node2.getCords()[0]);
+            lastNode.setCenterY(node2.getCords()[1]);
+            moveEdgesWithNode(lastNode);
             // Update coordinates of node
             node1.setCenterX(App.mapInteractionModel.getCoords()[0]);
             node1.setCenterY(App.mapInteractionModel.getCoords()[1]);
-
             moveEdgesWithNode(node1);
     }
 
@@ -565,10 +572,24 @@ public class MapBuilderBaseController {
     @FXML
     public void handleUndoButton() throws Exception{
         App.undoRedoService.undo();
+        //highlight all the selected nodes
+        for (String node: App.mapInteractionModel.nodeIDList){
+            Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
+            if(drawnNode != null){
+                drawnNode.setFill(Paint.valueOf(selectedColor));
+            }
+        }
     }
 
     public void handleRedoButton() throws Exception{
         App.undoRedoService.redo();
+        //highlight all the selected nodes
+        for (String node: App.mapInteractionModel.nodeIDList){
+            Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
+            if(drawnNode != null){
+                drawnNode.setFill(Paint.valueOf(selectedColor));
+            }
+        }
     }
 
 
@@ -684,7 +705,15 @@ public class MapBuilderBaseController {
         }
     }
 
+
     public void handleMultiSelectButton() {
+        //highlight all the selected nodes
+        for (String node: App.mapInteractionModel.nodeIDList){
+            Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
+            if(drawnNode != null){
+                drawnNode.setFill(Paint.valueOf(selectedColor));
+            }
+        }
         pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         if(!App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")){
             App.mapInteractionModel.setCurrentAction("MULTISELECT");
@@ -714,7 +743,12 @@ public class MapBuilderBaseController {
         }
     }
 
-    public void shake(javafx.scene.Node node){
+    /**
+     * animates a shake on the javaFX node passed in
+     * @author Charles Kittler (cvkittler)
+     * @param node the object to shake
+     */
+    public static void shake(javafx.scene.Node node){
         Timeline animation = new Timeline(
                 new KeyFrame(Duration.millis(0), new KeyValue(node.translateXProperty(), 0, Interpolator.LINEAR)),
                 new KeyFrame(Duration.millis(100), new KeyValue(node.translateXProperty(), -10, Interpolator.LINEAR)),
@@ -732,6 +766,12 @@ public class MapBuilderBaseController {
         animation.play();
     }
 
+    /**
+     * gets the selected nodes from map interaction model
+     * computes the average x and y variance and depending on which is smaller
+     * it sets all the selected nodes to average cord with the smaller variance
+     * @author Charles Kittler (cvkittler)
+     */
     public void alineFromMultiSelect(){
         double totalX = 0.0, totalY = 0.0;
         for ( String curNodeId:App.mapInteractionModel.nodeIDList){
