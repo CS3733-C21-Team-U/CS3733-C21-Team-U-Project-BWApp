@@ -469,6 +469,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edge_id);
     String endNodeId = edge.getEndNode().getNodeID();
     this.deleteEdge(edge_id);
+    edge_id = start_node + "_" + endNodeId;
     this.addEdge(edge_id, start_node,endNodeId, edge.getUserPermissions());
   }
 
@@ -482,6 +483,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edge_id);
     String startNodeId = edge.getStartNode().getNodeID();
     this.deleteEdge(edge_id);
+    edge_id = startNodeId + "_" + end_node;
     this.addEdge(edge_id, startNodeId,end_node, edge.getUserPermissions());
   }
 

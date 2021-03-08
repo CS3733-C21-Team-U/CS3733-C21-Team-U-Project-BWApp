@@ -126,31 +126,102 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testUpdateNode(){}
+    public void testUpdateNode() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST5", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.updateNode("NODETEST5", 5, 5,"WALK","testy", "testywesty");
+        assertEquals(mapServiceTest.getNodeFromID("NODETEST5").getCords()[0],5,0);
+    }
 
     @Test
-    public void testDeleteNode(){}
+    public void testDeleteNode() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST6", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        assertEquals(mapServiceTest.deleteNode("NODETEST6"), new ArrayList<Edge>());
+    }
 
     @Test
-    public void testAddEdge(){}
+    public void testAddEdge() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST7", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST8", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST7_NODETEST8", "NODETEST7", "NODETEST8", roles);
+        assertEquals(mapServiceTest.getEdgeFromID("NODETEST7_NODETEST8").getEdgeID(),"NODETEST7_NODETEST8");
+    }
 
     @Test
-    public void testUpdateEdgePermissions(){}
+    public void testUpdateEdgePermissions() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST9", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST10", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST9_NODETEST10", "NODETEST9", "NODETEST10", roles);
+        roles.remove(Role.ADMIN);
+        roles.add(Role.MAINTENANCE);
+        mapServiceTest.updateEdgePermissions("NODETEST9_NODETEST10", roles);
+        assertEquals(mapServiceTest.getEdgeFromID("NODETEST9_NODETEST10").getUserPermissions().get(0),Role.MAINTENANCE);
+    }
 
     @Test
-    public void testUpdateStartEdge(){}
+    public void testUpdateStartEdge() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST11", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST12", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST13", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST11_NODETEST12", "NODETEST11", "NODETEST12", roles);
+        mapServiceTest.updateStartEdge("NODETEST11_NODETEST12", "NODETEST13");
+        assertEquals(mapServiceTest.getEdgeFromID("NODETEST13_NODETEST12").getEdgeID(), "NODETEST13_NODETEST12");
+    }
 
     @Test
-    public void testUpdateEndEdge(){}
+    public void testUpdateEndEdge() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST14", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST15", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST16", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST14_NODETEST15", "NODETEST14", "NODETEST15", roles);
+        mapServiceTest.updateEndEdge("NODETEST14_NODETEST15", "NODETEST16");
+        assertEquals(mapServiceTest.getEdgeFromID("NODETEST14_NODETEST16").getEdgeID(), "NODETEST14_NODETEST16");
+    }
 
     @Test
-    public void testDeleteEdge(){}
+    public void testDeleteEdge() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST17", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST18", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST17_NODETEST18", "NODETEST17", "NODETEST18", roles);
+        mapServiceTest.addEdge("NODETEST18_NODETEST19", "NODETEST18", "NODETEST19", roles);
+        mapServiceTest.deleteEdge("NODETEST17_NODETEST18");
+        assertEquals(mapServiceTest.getEdges().get(0),"NODETEST18_NODETEST19");
+    }
 
     @Test
-    public void testGetNodes(){}
+    public void testGetNodes() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        mapServiceTest.addNodeWithID("NODETEST20", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST21", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        assertEquals(mapServiceTest.getNodes().get(0),"NODETEST20");
+    }
 
     @Test
-    public void testGetEdges(){}
+    public void testGetEdges() throws InvalidEdgeException {
+        MapService mapServiceTest = new MapService(testURL);
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.ADMIN);
+        mapServiceTest.addNodeWithID("NODETEST22", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST23", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addEdge("NODETEST22_NODETEST23", "NODETEST22", "NODETEST23", roles);
+        assertEquals(mapServiceTest.getEdges().get(0),"NODETEST22_NODETEST23");
+    }
 
 
 
