@@ -911,7 +911,7 @@ public class UserData extends Data{
      * @param patient the patient
      */
     public void updPatient(Patient patient){
-        String str = "update Patients set name=? and userName=? and password=? and email=? and type=? and phonenumber=? and deleted=? and providerName=? and parkingLocation=? and recommendedParkingLocation=? where patientID=?";
+        String str = "update Patients set name=?,userName=? , password=? , email=? , type=? , phonenumber=? , locationNodeID=?, deleted=? , providerName=? , parkingLocation=? , recommendedParkingLocation=? where patientID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,patient.getName());
@@ -920,10 +920,12 @@ public class UserData extends Data{
             ps.setString(4,patient.getEmail());
             ps.setString(5,String.valueOf(patient.getType()));
             ps.setString(6,patient.getPhoneNumber());
-            ps.setBoolean(7,patient.isDeleted());
-            ps.setString(8,patient.getProviderName());
-            ps.setString(9,patient.getParkingLocation());
-            ps.setString(10,patient.getUserID());
+            ps.setString(7,patient.getLocationNodeID());
+            ps.setBoolean(8,patient.isDeleted());
+            ps.setString(9,patient.getProviderName());
+            ps.setString(10,patient.getParkingLocation());
+            ps.setString(11,patient.getRecommendedParkingLocation());
+            ps.setString(12,patient.getUserID());
             ps.execute();
             ps.close();
         }catch (Exception e){

@@ -111,10 +111,7 @@ public class UserLoginScreenController {
 //        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
-        System.out.println("Username : " + username + " Password: " + password);
         App.userService.setUser(username, password, App.userService.checkPassword(password));
-        //System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
-        System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
         // TODO : Extract out to helper
@@ -189,6 +186,7 @@ public class UserLoginScreenController {
 
 //Throws exceptions if username or password not found
         public void handleForgotPassword() throws IOException {
+            App.userService.setTypedUsername(userNameTextField.getText());
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }

@@ -21,6 +21,8 @@ public class UserService {
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
+    public String typedUsername;
+
     User activeUser;
     Guest activeGuest;
 
@@ -28,6 +30,14 @@ public class UserService {
         this.setEmployees();
         this.setGuests();
         this.setPatients();
+    }
+
+    public String getTypedUsername() {
+        return typedUsername;
+    }
+
+    public void setTypedUsername(String typedUsername) {
+        this.typedUsername = typedUsername;
     }
 
     public ObservableList<User> getUsers(){
@@ -116,6 +126,20 @@ public class UserService {
      */
     public User getActiveUser() {
         return this.activeUser;
+    }
+
+    /**
+     * Get a patient from an id
+     * @param patientID patient id
+     * @return the patient object
+     */
+    public Patient getPatient(String patientID){
+        for (Patient p: this.patients){
+            if (p.getUserID().equals(patientID)){
+                return p;
+            }
+        }
+        return new Patient();
     }
 
     /**
@@ -375,25 +399,18 @@ public class UserService {
 
     /**
      * Updates the list of employees and calls database
-     * @param employeeID the id
-     * @param name the name
-     * @param userName the username
-     * @param password the password
-     * @param email the email
-     * @param type the type (Stafftype)
-     * @param phoneNumber the phonenumber
-     * @param deleted whether or not the user is deleted
+     * @param employee the updated employee
      * @return "" on success and the id on failure
      */
-    public String updateEmployee(String employeeID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
+    public String updateEmployee(Employee employee){
         for(Employee e : this.employees){
-            if(e.getUserID().equals(employeeID)){
-                e.editUser(name, userName ,password,email,type, phoneNumber, deleted);
+            if(e.getUserID().equals(employee.getUserID())){
+                e.editUser(employee.getName(), employee.getUserName() ,employee.getPassword(),employee.getEmail(),employee.getType(), employee.getPhoneNumber(), employee.isDeleted());
                 ud.updEmployee(e);
                 return "";
             }
         }
-        return employeeID;
+        return employee.getUserID();
     }
 
     /**
@@ -414,5 +431,21 @@ public class UserService {
             }
         }
         return guestID;
+    }
+
+    /**
+     * Updates the list of patients and calls database
+     * @param patient the updated patient
+     * @return "" on success, the patientID on failure
+     */
+    public String updatePatient(Patient patient){
+        for (Patient p : this.patients){
+            if (p.getUserID().equals(patient.getUserID())){
+                p.editPatient(patient.getName(),patient.getUserName(),patient.getPassword(),patient.getEmail(),patient.getType(),patient.getPhoneNumber(), p.getLocationNodeID());
+                ud.updPatient(p);
+                return "";
+            }
+        }
+        return patient.getUserID();
     }
 }

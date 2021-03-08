@@ -47,9 +47,14 @@ public class Patient extends User{
         super(userIDfx, namefx, userNamefx, passwordfx, typefx, phoneNumberfx, emailfx, deletedfx, locationNodeIDfx);
     }
 
-    @Override
-    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted) {
-        super.editUser(name, userName, password, email, type, phoneNumber, deleted);
+    public void editPatient(String name, String userName, String password, String email, Role type, String phoneNumber, String locationNodeID) {
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.type = type;
+        this.phoneNumber = phoneNumber;
+        this.locationNodeID = locationNodeID;
     }
 
     public ArrayList<Appointment> getAppointments() {

@@ -36,6 +36,22 @@ public class ViewUserListController {
 
     public void initialize() throws IOException {
 
+        ObservableList<User> users2 = FXCollections.observableArrayList();
+        for (User u : App.userService.getUsers()){ // excludes Guests
+            if (u.getType() == Role.PATIENT){
+                users2.add(new Patient(new SimpleStringProperty(u.getUserID())
+                        , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
+                        , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
+                        , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted()), new SimpleStringProperty(u.getLocationNodeID())));
+            }
+            else {
+                users2.add(new Employee(new SimpleStringProperty(u.getUserID())
+                        , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
+                        , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
+                        , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted()), new SimpleStringProperty(u.getLocationNodeID())));
+            }
+        }
+
         JFXTreeTableColumn<User, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
         treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
             if (treeTableColumnName.validateValue(param)){
@@ -49,11 +65,31 @@ public class ViewUserListController {
 
         treeTableColumnName.setCellFactory((TreeTableColumn<User,String> param) -> new GenericEditableTreeTableCell<>(
                 new TextFieldEditorBuilder()));
-        treeTableColumnName.setOnEditCommit((CellEditEvent<User,String> t) -> t.getTreeTableView()
-                .getTreeItem(t.getTreeTablePosition().getRow())
-                .getValue()
-                .namefxProperty()
-                .set(t.getNewValue()));
+        treeTableColumnName.setOnEditCommit((CellEditEvent<User,String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition().getRow())
+                    .getValue()
+                    .namefxProperty()
+                    .set(t.getNewValue());
+            if (t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getTypefx().equals(String.valueOf(Role.PATIENT))){
+                for (Patient p : App.userService.getPatients()){
+                    // todo : add checking the password too for more accuracy on the user
+                    if (p.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        p.setName(t.getNewValue());
+                        System.out.println(t.getNewValue());
+                        App.userService.updatePatient(p);
+                    }
+                }
+            }
+            else {
+                for (Employee e: App.userService.getEmployees()){
+                    if (e.getUserName().equals(t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getUserNamefx())){
+                        e.setName(t.getNewValue());
+                        App.userService.updateEmployee(e);
+                    }
+                }
+            }
+        });
 
         JFXTreeTableColumn<User, String> treeTableColumnUserName = new JFXTreeTableColumn<>("Username");
         treeTableColumnUserName.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
@@ -172,21 +208,7 @@ public class ViewUserListController {
                 .locationNodeIDfxProperty()
                 .set(t.getNewValue()));
 
-        ObservableList<User> users2 = FXCollections.observableArrayList();
-        for (User u : App.userService.getUsers()){ // excludes Guests
-            if (u.getType() == Role.PATIENT){
-                users2.add(new Patient(new SimpleStringProperty(u.getUserID())
-                        , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
-                        , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
-                        , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted()), new SimpleStringProperty(u.getLocationNodeID())));
-            }
-            else {
-                users2.add(new Employee(new SimpleStringProperty(u.getUserID())
-                        , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
-                        , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
-                        , new SimpleStringProperty(u.getEmail()), new SimpleBooleanProperty(u.isDeleted()), new SimpleStringProperty(u.getLocationNodeID())));
-            }
-        }
+
         final TreeItem<User> root = new RecursiveTreeItem<>(users2, RecursiveTreeObject::getChildren);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
