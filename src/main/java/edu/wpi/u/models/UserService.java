@@ -83,14 +83,6 @@ public class UserService {
     }
 
     /**
-     * Sets the active guest
-     * @param activeGuest the guest object
-     */
-    public void setActiveGuest(Guest activeGuest) {
-        this.activeGuest = activeGuest;
-    }
-
-    /**
      * This function if for debugging purposes and assumes the Patient in already in the database
      * Sets the active user to a patient
      * @param username username of patient

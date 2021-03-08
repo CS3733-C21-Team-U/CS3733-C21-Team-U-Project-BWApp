@@ -34,7 +34,6 @@ public class ViewUserListController {
     Employee myEmployee;
     @FXML private JFXTreeTableView<User> treeTableView = new JFXTreeTableView<>();
 
-
     public void initialize() throws IOException {
         if(!App.userService.getActiveUser().getType().equals(Role.ADMIN)){
             editSelectedButton.setStyle("-fx-opacity: 0");

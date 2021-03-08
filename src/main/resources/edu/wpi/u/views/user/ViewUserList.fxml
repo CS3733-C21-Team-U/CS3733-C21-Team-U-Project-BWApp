@@ -38,7 +38,6 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
                   <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
-                  <JFXButton fx:id="editSelectedButton" disable="true" onAction="#handleEditUserList" styleClass="button-contained" text="Edit Selected User" />
                </children>
             </HBox>
             <JFXTreeTableView fx:id="treeTableView" />
