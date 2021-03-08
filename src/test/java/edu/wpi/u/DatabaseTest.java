@@ -219,8 +219,10 @@ public class DatabaseTest {
         roles.add(Role.ADMIN);
         mapServiceTest.addNodeWithID("NODETEST22", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST23", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
+        mapServiceTest.addNodeWithID("NODETEST24", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addEdge("NODETEST22_NODETEST23", "NODETEST22", "NODETEST23", roles);
-        assertEquals(mapServiceTest.getEdges().get(0),"NODETEST22_NODETEST23");
+        mapServiceTest.addEdge("NODETEST23_NODETEST24", "NODETEST23", "NODETEST24", roles);
+        assertEquals(mapServiceTest.getEdges().get(1).getEdgeID(),"NODETEST23_NODETEST24");
     }
 
 
