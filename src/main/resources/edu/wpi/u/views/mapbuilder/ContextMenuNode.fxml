@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,11 +16,12 @@
          <children>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <JFXTextField fx:id="longNameText" labelFloat="true" prefWidth="110.0" promptText="Long Name">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </JFXTextField>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <JFXTextField fx:id="longNameText" labelFloat="true" prefWidth="110.0" promptText="Long Name" />
+                        <Label fx:id="longNameErrorLabel" text="Required Field" />
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -27,11 +29,12 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <JFXTextField fx:id="shortNameText" labelFloat="true" prefWidth="110.0" promptText="Short Name">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </JFXTextField>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <JFXTextField fx:id="shortNameText" labelFloat="true" prefWidth="110.0" promptText="Short Name" />
+                        <Label fx:id="shortNameErrorLabel" text="Required Field" />
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -39,7 +42,12 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <JFXComboBox fx:id="nodeTypeDrop" labelFloat="true" minWidth="110.0" prefWidth="110.0" promptText="Node Type" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <JFXComboBox fx:id="nodeTypeDrop" labelFloat="true" minWidth="110.0" prefWidth="110.0" promptText="Node Type" />
+                        <Label fx:id="nodeTypeErrorLabel" text="Required Field" />
+                     </children>
+                  </VBox>
                </children>
                <padding>
                   <Insets top="15.0" />

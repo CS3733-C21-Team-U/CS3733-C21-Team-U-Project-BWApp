@@ -10,6 +10,7 @@ import edu.wpi.u.exceptions.InvalidEdgeException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.util.*;
@@ -25,40 +26,28 @@ public class ContextMenuNodeController {
     JFXComboBox nodeTypeDrop;
     @FXML
     JFXButton doneButton;
-
-
+    @FXML
+    Label longNameErrorLabel, shortNameErrorLabel,nodeTypeErrorLabel;
     /**
      * To be run when save button in node context menu is pressed. Needs to check if a node can be saved, then saves a node.
      */
     @FXML
     public void initialize(){
-        // Client side error handling for long name
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Input Required");
-        longNameText.getValidators().add(validator);
-        longNameText.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                longNameText.validate();
-            }
-        });
-        // Client side error handling for short name
-        validator.setMessage("Input Required");
-        shortNameText.getValidators().add(validator);
-        shortNameText.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                shortNameText.validate();
-            }
-        });
-        // Client side error handling for dropdown menu
-        validator.setMessage("Input Required");
-        nodeTypeDrop.getValidators().add(validator);
-        nodeTypeDrop.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                nodeTypeDrop.validate();
-            }
+        longNameErrorLabel.setVisible(false);
+        shortNameErrorLabel.setVisible(false);
+        nodeTypeErrorLabel.setVisible(false);
+
+        longNameText.focusedProperty().addListener(observable -> {
+            longNameErrorLabel.setVisible(false);
         });
 
+        shortNameText.focusedProperty().addListener(observable -> {
+            shortNameErrorLabel.setVisible(false);
+        });
 
+        nodeTypeDrop.focusedProperty().addListener(observable -> {
+            nodeTypeErrorLabel.setVisible(false);
+        });
 
         Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
         ArrayList<String> nodeAList = new ArrayList<String>();
@@ -140,6 +129,17 @@ public class ContextMenuNodeController {
             if(!longNameText.getText().equals("") && !shortNameText.getText().equals("") && !nodeTypeDrop.getValue().equals("")){
                 Node thisNode = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID());
                 App.undoRedoService.updateNode(thisNode.getNodeID(), App.mapInteractionModel.getCoords()[0], App.mapInteractionModel.getCoords()[1],getNodeType(), longNameText.getText(), shortNameText.getText());
+            }else{
+                if(longNameText.getText().equals("")){
+                    longNameErrorLabel.setVisible(true);
+                }
+                if(shortNameText.getText().equals("")){
+                    shortNameErrorLabel.setVisible(true);
+                }
+                if(nodeTypeDrop.getValue().equals("")){
+                    nodeTypeErrorLabel.setVisible(true);
+                }
+                return;
             }
 
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
