@@ -118,6 +118,10 @@ public class UserService {
         this.activeUser = ud.setEmployee(username,password);
     }
 
+    public void setEmployee(String employeeID){
+        this.activeUser = ud.setEmployee(employeeID);
+    }
+
     /**
      * Sets the active user of the application
      * @param username username of the user

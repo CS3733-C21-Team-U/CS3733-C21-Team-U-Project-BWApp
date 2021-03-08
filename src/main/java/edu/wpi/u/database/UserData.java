@@ -34,7 +34,7 @@ public class UserData extends Data{
         String visitReason,
         boolean deleted)
          */
-        //addGuest(new Guest("testID", "Joe jo", Role.GUEST, new Timestamp(System.currentTimeMillis()), "This is a reason for visit", false));
+        //addGuest(new Guest("testDebug", "debug", Role.GUEST, new Timestamp(System.currentTimeMillis()), "This is a reason for visit", false));
         /*
         String guestID,
         String name,

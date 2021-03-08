@@ -63,7 +63,7 @@ public class CovidSurveyScreenController {
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setEmployee("debug", "debug");
+        App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
