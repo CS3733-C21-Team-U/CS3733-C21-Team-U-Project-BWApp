@@ -91,7 +91,7 @@ public class TextualDirections {
      * @param //curNode
      * @param //nextNode
      * @return
-     *//*
+     */
     private static String textualSwitchFloors(Node curNode, Node nextNode) {
         String direction = "";
         if (nextNode.getNodeType().equals("ELEV") && !curNode.getNodeType().equals("ELEV")) { //first option
@@ -108,7 +108,7 @@ public class TextualDirections {
             //not used
         }
         return direction;
-    }*/
+    }
 
     /**
      * logic for choosing description when turning
@@ -118,21 +118,29 @@ public class TextualDirections {
         String ans;
 
         if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
-            ans = "Take a slight right at ";
+            //ans = "Take a slight right at ";
+            ans = " turn right";
         } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
-            ans = "Take a right turn at ";
+            //ans = "Take a right turn at ";
+            ans = " turn right";
         } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
-            ans = "Take a sharp right turn at ";
+            //ans = "Take a sharp right turn at ";
+            ans = " turn right";
         } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
-            ans = "Turn around at ";
+            //ans = "Turn around at ";
+            ans = " turn around";
         } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
-            ans = "Take a sharp left turn at ";
+            //ans = "Take a sharp left turn at ";
+            ans = " turn left";
         } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
-            ans = "Take a left turn at ";
+            //ans = "Take a left turn at ";
+            ans = " turn left";;
         } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
-            ans = "Take a slight left turn at ";
+            //ans = "Take a slight left turn at ";
+            ans = " turn left";
         } else {
-            ans = "Continue straight at ";
+            //ans = "Continue straight at ";
+            ans = "continue straight";
         }
         return ans;
     }

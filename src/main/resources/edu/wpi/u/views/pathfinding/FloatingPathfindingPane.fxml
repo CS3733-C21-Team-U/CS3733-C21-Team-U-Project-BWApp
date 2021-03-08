@@ -71,7 +71,6 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <JFXButton minHeight="30.0" onAction="#handleTestAddTextField" styleClass="button-text" text="Test Add Text Step" />
          </children>
       </VBox>
    </children>
