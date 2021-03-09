@@ -55,14 +55,14 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXTextField fx:id="userNameTextField1" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
+                  <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="15.0" />
                      </VBox.margin>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="passWordField1" labelFloat="true" prefHeight="25.0" prefWidth="1508.0" promptText="Enter Password">
+                  <JFXPasswordField fx:id="passWordField" labelFloat="true" prefHeight="25.0" prefWidth="1508.0" promptText="Enter Password">
                      <VBox.margin>
-                        <Insets left="10.0" right="10.0" top="25.0" />
+                        <Insets left="10.0" right="10.0" top="30.0" />
                      </VBox.margin>
                   </JFXPasswordField>
                   <JFXProgressBar fx:id="progressBar" prefHeight="11.0" prefWidth="281.0" style="-fx-opacity: 0;">
@@ -73,15 +73,18 @@
                   <Label fx:id="errorLabel1" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
                   <JFXButton onAction="#handleLogin" prefHeight="25.0" prefWidth="290.0" styleClass="button-contained" text="Login">
                      <VBox.margin>
-                        <Insets />
+                        <Insets left="10.0" right="10.0" />
                      </VBox.margin>
                   </JFXButton>
                   <HBox maxWidth="300.0" prefHeight="32.0" prefWidth="225.0">
                      <children>
-                        <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefHeight="25.0" prefWidth="150.0" styleClass="button-outlined" text="Login Without 2FA" />
+                        <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefHeight="25.0" prefWidth="150.0" styleClass="button-outlined" text="Login W/ Out 2FA">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></JFXButton>
                         <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefHeight="25.0" prefWidth="150.0" styleClass="button-text" text="Forgot Password">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="5.0" right="10.0" />
                            </HBox.margin>
                         </JFXButton>
                      </children>
@@ -89,10 +92,13 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <JFXButton fx:id="returnButton1" onAction="#handleReturn" prefHeight="25.0" prefWidth="300.0" styleClass="button-contained" text="Return to Desktop App" />
-                  <JFXButton fx:id="debugButton1" onAction="#handleDebugLogin" prefHeight="25.0" prefWidth="303.0" styleClass="button-outlined" text="Debug Login">
+                  <JFXButton fx:id="returnButton" onAction="#handleReturn" prefHeight="25.0" prefWidth="300.0" styleClass="button-contained" text="Return to Desktop App">
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin></JFXButton>
+                  <JFXButton fx:id="debugButton" onAction="#handleDebugLogin" prefHeight="25.0" prefWidth="303.0" styleClass="button-outlined" text="Debug Login">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>

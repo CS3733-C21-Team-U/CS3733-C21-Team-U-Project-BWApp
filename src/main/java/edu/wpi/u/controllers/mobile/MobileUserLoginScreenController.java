@@ -229,6 +229,12 @@ public class MobileUserLoginScreenController {
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+
+    public void handleLonginWithNo2FA(ActionEvent actionEvent) {
+    }
+
+    public void handleForgotPassword(ActionEvent actionEvent) {
+    }
 }
 
 
