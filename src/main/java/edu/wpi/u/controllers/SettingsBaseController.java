@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
@@ -54,17 +55,33 @@ public class SettingsBaseController {
     @FXML public JFXRadioButton bFSRadioButton;
     @FXML public JFXComboBox<String> tableNameOptions;
     @FXML public Group onlyAdmin;
+    @FXML public Label passwordsDontMatchLabel, wrongPasswordLable;
+    @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
 
     public void initialize() throws IOException, FilePathNotFoundException {
+        passwordsDontMatchLabel.setVisible(false);
+        wrongPasswordLable.setVisible(false);
 
-            if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
-                onlyAdmin.setStyle("-fx-opacity: 1");
-                onlyAdmin.setDisable(false);
-            }
-            else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
-                onlyAdmin.setStyle("-fx-opacity: 0");
-                onlyAdmin.setDisable(true);
-            }
+        oldPasswordFeild.focusedProperty().addListener(e->{
+            wrongPasswordLable.setVisible(false);
+        });
+
+        newPasswordFeild1.focusedProperty().addListener(e->{
+            passwordsDontMatchLabel.setVisible(false);
+        });
+
+        newPasswordFeild2.focusedProperty().addListener(e->{
+            passwordsDontMatchLabel.setVisible(false);
+        });
+
+        if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
+            onlyAdmin.setStyle("-fx-opacity: 1");
+            onlyAdmin.setDisable(false);
+        }
+        else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
+            onlyAdmin.setStyle("-fx-opacity: 0");
+            onlyAdmin.setDisable(true);
+        }
 
 
         tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges"));
@@ -78,24 +95,28 @@ public class SettingsBaseController {
                 filePathTextField.validate();
             }
         });
-        // TODO: ADD REGEX FUNCTIONALITY TO THIS
-        RequiredFieldValidator validator2 = new RequiredFieldValidator();
-        validator.setMessage("Email Required");
+
+        RegexValidator validator2 = new RegexValidator();
+        validator2.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        validator2.setMessage("Email is invalid");
         emailAddressTextField.getValidators().add(validator2);
         emailAddressTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
                 emailAddressTextField.validate();
             }
         });
+
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator.setMessage("Phone # Required");
-        phoneNumTextField.getValidators().add(validator2);
+        validator3.setMessage("Phone # Required");
+        phoneNumTextField.getValidators().add(validator3);
         phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
                 emailAddressTextField.validate();
             }
         });
+
         if (!(App.userService.getActiveUser().getType() == ADMIN)) {
             adminText.setStyle("-fx-opacity: 0");
             subtitleText.setStyle("-fx-opacity: 0");
@@ -112,17 +133,6 @@ public class SettingsBaseController {
 
         }
 
-
-    }
-
-    //most of these functions are just place holders, so I dont
-    //have anything to add for stubs / javadocs
-    //will need help writing these.
-    public void handlePathMode1() {
-
-    }
-
-    public void handlePathMode2() {
 
     }
 
@@ -147,8 +157,6 @@ public class SettingsBaseController {
 
         return csv.getPath();
 
-        // App.db.readCSV(csv.getPath(), tableNameTextFIeld.getText() );
-
     }
 
     public void handleContactChange() {
@@ -172,14 +180,6 @@ public class SettingsBaseController {
         App.mapService.loadCSVFile(filePathTextField.getText(), tableNameOptions.getValue());
     }
 
-    /*public void handleSetTheme1(ActionEvent actionEvent) {
-        //Light Theme
-    }*/
-
-    /*public void handleSetTheme2(ActionEvent actionEvent) {
-        //Dark Theme
-    }*/
-
 
     public void handleAStar(ActionEvent actionEvent) {
         App.pathfindingAlgorithm = "ASTAR";
@@ -197,13 +197,8 @@ public class SettingsBaseController {
     public void handleSaveCSV(ActionEvent actionEvent) {
         Database.getDB().saveCSV(filePathTextField.getText(),tableNameOptions.getValue(),"Anything I want");
     }
+
+    public void handleUpdatePassword() {
+            //if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+    }
 }
-
-    /*public void handleSetTheme1(ActionEvent actionEvent) {
-        //Light Theme
-    }*/
-
-    /*public void handleSetTheme2(ActionEvent actionEvent) {
-        //Dark Theme
-    }*/
-
