@@ -265,14 +265,15 @@ public class UserService {
     public String checkPassword(String password) {
         return ud.checkPassword(password);
     }
-//    /**
-//     * Validates the phone number of a given username
-//     * @param username the username to be validated
-//     * @return the phonenumber of the username
-//     */
-//    public String checkPhoneNumber(String username) {
-//        return ud.checkPhoneNumber(username);
-//    }
+
+    /**
+     * Validates the phone number of a given username
+     * @param username the username to be validated
+     * @return the phonenumber of the username
+     */
+    public String getPhoneNumberFromUserName(String username) {
+        return ud.getPhoneNumberFromUserName(username);
+    }
 
     /**
      * Checks a phonenumber

@@ -191,8 +191,10 @@ public class AddUserController {
         }
     }
 
-    public void handleCancel(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ViewUserList.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+    public void handleCancel() throws IOException {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
