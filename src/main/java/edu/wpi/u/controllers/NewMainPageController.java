@@ -236,9 +236,10 @@ public class NewMainPageController {
     }
 
     public void handleChangeTab() {
-        App.mapInteractionModel.setCurrentAction("NONE");
-        App.mapInteractionModel.clearPreviousNodeID();
-        App.mapInteractionModel.setNodeID(" ");
+        App.mapInteractionModel.setCurrentAction("SELECT");
+        App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
+//        App.mapInteractionModel.clearPreviousNodeID();
+//        App.mapInteractionModel.setNodeID(" ");
     }
 
 
