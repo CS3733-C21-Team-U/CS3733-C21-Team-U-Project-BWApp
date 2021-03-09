@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
+import edu.wpi.u.users.Role;
 import io.netty.handler.codec.http.HttpHeaders;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
