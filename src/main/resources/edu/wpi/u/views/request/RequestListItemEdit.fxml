@@ -101,7 +101,7 @@
                                        </VBox.margin>
                                     </JFXButton>
                                  </children></VBox>
-                              <JFXListView fx:id="editAssigneesListVIew" styleClass="mylistview2" />
+                              <JFXListView fx:id="editAssigneesListView" />
                            </children>
                            <VBox.margin>
                               <Insets top="100.0" />
@@ -124,7 +124,7 @@
                                     </JFXButton>
                                  </children>
                               </VBox>
-                              <JFXListView fx:id="editLocationsListVIew" />
+                              <JFXListView fx:id="editLocationsListView" />
                            </children>
                         </HBox>
                      </children></VBox>

@@ -41,9 +41,13 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXTimePicker editTimeNeededField;
 
     public JFXTextField editAssigneesField;
-    public JFXListView<String> editAssigneesListView = new JFXListView<String>();
+
+    @FXML
+    public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
     public JFXTextField editLocationsField;
-    public JFXListView<String> editLocationsListView = new JFXListView<String>();
+
+    @FXML
+    public JFXListView<String> editLocationsListView;// = new JFXListView<String>();
 
     public VBox extraFieldsVBox;
     private JFXTextField[] specificTextFields;
@@ -67,29 +71,16 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
         editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
+        //makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
         specificTextFields = generateSpecificFields();
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         /* adding items to the list view */
-        editAssigneesListView.getItems().add("First Item");
-        editAssigneesListView.getItems().add("Second Item");
-        editAssigneesListView.getItems().add("Third Item");
-        editAssigneesListView.getItems().add("Fourth Item");
-        editAssigneesListView.getItems().add("Fifth Item");
         /*making list view horizontal*/
-        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
-        /* creating horizontal box to add item objects */
-        //HBox hbox = new HBox(listViewReference);
+//        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
+//        /* creating horizontal box to add item objects */
+//        HBox hbox = new HBox(editAssigneesListView);
 
-
-                ArrayList<String> list = new ArrayList<>();
-        list.add("Hi");
-        list.add("Hi");
-        list.add("Hi");
-        list.add("Hi");
-        ObservableList<String> lists = FXCollections.observableList(list);
-        editAssigneesListView.getItems().addAll(lists);
 
 
 
