@@ -55,35 +55,32 @@ public class FloatingPathfindingPaneController {
 
 
         textDirectionContainer.getChildren().clear();
-
         LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
-        if(edgePath.isEmpty()) System.out.println("empty list!!");
+
+        if(edgePath.isEmpty());
         else {
-            double currentAngle = 0, prevAngle = 0;
 
             Node bNode = null;
             Node eNode = path.get(0);
-            int distanceAggregate = 0;
+            Node lastTurnNode = null;
             int index = 0;
-            double angleDifferance = 0;
+
             for(Edge e : edgePath) {
                 index++;
-                String iconID = "";
-                int eDist = (int) Math.round(e.getWeight()/3); //3 being pixels for foot, see TextualDirections.java
-                distanceAggregate =+ eDist;
-
-                String angleDescription = "";
-
+                String iconID;
+                String angleDescription;
+                double angleDifferance;
+                int dist = (int) Math.round(e.getWeight()/3); //3 being pixels for foot, see TextualDirections.java
                 Node sNode = eNode;
                 if (sNode == e.getStartNode())  eNode = e.getEndNode();
                 else eNode = e.getStartNode(); //makes sure start and end nodes are actually what we want
 
                 //Finds angle for path
-                if(bNode == null) {
+                if(bNode == null) { //1st path exception
                     angleDescription = "";
                     iconID = "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z";
-                }
-                else {
+                    angleDifferance = 0;
+                } else {
                     double angle = TextualDirections.getAngle(sNode, eNode);
                     double previousAngle = TextualDirections.getAngle(bNode, sNode);
                     angleDifferance = angle - previousAngle;
@@ -95,51 +92,61 @@ public class FloatingPathfindingPaneController {
                     iconID = TextualDirections.findTextualIconID(angleDifferance);
                 }
 
-                Label turnText;
-
+                String turnText;
 
                 if(sNode.getNodeType().equals("ELEV") || eNode.getNodeType().equals("ELEV"))  {
-                    turnText = new Label("Elevator");
+                    turnText = "Elevator";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M10,18v-4h1 " +
                             "v-2.5c0-1.1-0.9-2-2-2H8c-1.1,0-2,0.9-2,2V14h1v4H10z M8.5,8.5c0.69,0,1.25-0.56,1.25-1.25S9.19,6,8.5,6S7.25,6.56,7.25,7.25 S7.81,8.5,8.5,8.5z M18,11l-2.5-4L13,11H18z M13,13l2.5,4l2.5-4H13z";
                 }
                 else if(sNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("STAI"))  {
-                    turnText = new Label("Stairs");
+                    turnText = "Stairs";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M18,6h-4.42 v3.33H11v3.33H8.42V16H6v2h4.42v-3.33H13v-3.33h2.58V8H18V6z";
                 }
 
-                else turnText = new Label(index + ") Continue straight for " + distanceAggregate + " feet, than " + angleDescription); //TODO: add tailored directions here
+                HBox stepHBoxContainer;
 
-                turnText.getStyleClass().add("subtitle");
-                turnText.setWrapText(true);
-                Label distanceText = new Label("Continue straight for " + distanceAggregate + " feet");// TODO: add distance to walk after
-                //distanceText.getStyleClass().add("caption");
-                SVGPath turnIcon = new SVGPath();
-                turnIcon.setStyle("-fx-padding: 20px");
-                turnIcon.setContent(iconID);
-                VBox textVBox = new VBox();
-                textVBox.getChildren().add(turnText);
-                //textVBox.getChildren().add(distanceText);
-                HBox stepHBoxContainer = new HBox();
-                stepHBoxContainer.setAlignment(Pos.CENTER_LEFT);
-                stepHBoxContainer.getChildren().add(turnIcon);
-                stepHBoxContainer.getChildren().add(textVBox);
-                stepHBoxContainer.setStyle("-fx-padding: 10px 40px");
-                stepHBoxContainer.setSpacing(40);
-
-                if(sNode.getNodeType().equals("ELEV") && eNode.getNodeType().equals("ELEV")) {;}
-                else if(sNode.getNodeType().equals("STAI") && eNode.getNodeType().equals("STAI")) {;}
-
-                else if((sNode.getNodeType().equals("WALK") || eNode.getNodeType().equals("WALK")) && (angleDifferance < 22.5 || angleDifferance > 337.5)) {
-
-                    System.out.println("walky");
+                if(eNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("ELEV")) {
+                    if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) { } else {
+                        stepHBoxContainer = createDirectionBox("Step into staircase/ elevator", iconID);
+                        textDirectionContainer.getChildren().add(stepHBoxContainer);
+                    }
                 }
-                else if((sNode.getNodeType().equals("HALL") || eNode.getNodeType().equals("HALL")) && (angleDifferance < 22.5 || angleDifferance > 337.5)) {
-                    System.out.println("hally");
-                }
-                else {
+
+                else if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) {
+                    stepHBoxContainer = createDirectionBox("Step off staircase/ elevator at floor " + eNode.getFloor(), iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    distanceAggregate = 0;
+                    lastTurnNode = eNode;
+                }
+
+
+                else if(angleDifferance > 22.5 && angleDifferance < 337.5) { //if turn is found on current node
+                    if(lastTurnNode != null) {
+                        if(distAggregate(lastTurnNode, eNode) == 0) { } else {
+                        stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, sNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
+                        textDirectionContainer.getChildren().add(stepHBoxContainer);
+                        }
+                    }
+                    stepHBoxContainer = createDirectionBox(angleDescription + " onto " + sNode.getLongName(), iconID);
+                    textDirectionContainer.getChildren().add(stepHBoxContainer);
+                    index++;
+                    lastTurnNode = sNode;
+                }
+
+
+                else if(bNode == null) {
+                    stepHBoxContainer = createDirectionBox("Begin by travelling " + dist + " feet from " + sNode.getLongName(), iconID);
+                    textDirectionContainer.getChildren().add(stepHBoxContainer);
+                }
+
+                else if((sNode.getNodeType().equals("HALL") && eNode.getNodeType().equals("HALL"))) {/*Hallway*/ }
+
+                else {
+                    if(distAggregate(lastTurnNode, eNode) == 0) { } else {
+                        stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
+                        textDirectionContainer.getChildren().add(stepHBoxContainer);
+                        //lastTurnNode = eNode;
+                    }
                 }
 
                 bNode = sNode;
@@ -150,6 +157,37 @@ public class FloatingPathfindingPaneController {
     /**
      * sets flag for what field is being filled to END
      */
+
+    public HBox createDirectionBox(String text, String iconID) {
+        Label turnText = new Label(text);
+        turnText.getStyleClass().add("subtitle");
+        turnText.setWrapText(true);
+        //Label distanceText = new Label(text);// TODO: add distance to walk after
+        //distanceText.getStyleClass().add("caption");
+
+        SVGPath turnIcon = new SVGPath();
+        turnIcon.setStyle("-fx-padding: 20px");
+        turnIcon.setContent(iconID);
+        VBox textVBox = new VBox();
+        textVBox.getChildren().add(turnText);
+        //textVBox.getChildren().add(distanceText);
+        HBox stepHBoxContainer = new HBox();
+        stepHBoxContainer.setAlignment(Pos.CENTER_LEFT);
+        stepHBoxContainer.getChildren().add(turnIcon);
+        stepHBoxContainer.getChildren().add(textVBox);
+        stepHBoxContainer.setStyle("-fx-padding: 10px 40px");
+        stepHBoxContainer.setSpacing(40);
+        return stepHBoxContainer;
+    }
+
+    public int distAggregate(Node refNode, Node endNode) {
+        double[][] nodeLocation = {refNode.getCords(), endNode.getCords()};
+        double dx = Math.abs(nodeLocation[0][0] - nodeLocation[1][0]);
+        double dy = Math.abs(nodeLocation[0][1] - nodeLocation[1][1]);
+        // calculate the distance then
+        // return the distance (weight)
+        return (int) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))/3;
+    }
 
 
     public void endNodeButtonHandler(){
@@ -266,7 +304,7 @@ public class FloatingPathfindingPaneController {
         });
 
         App.mapInteractionModel.pathFlag.addListener(observable -> {
-            handleTestAddTextField();
+                handleTestAddTextField();
         });
 
         startNodeField.requestFocus();
