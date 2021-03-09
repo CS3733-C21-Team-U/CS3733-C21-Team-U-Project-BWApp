@@ -36,7 +36,7 @@
                <VBox.margin>
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin></JFXTextField>
-            <JFXComboBox fx:id="userTypeComboBox" prefHeight="23.0" prefWidth="475.0" promptText="Enter User Type">
+            <JFXComboBox fx:id="userTypeComboBox" focusColor="#c9cdd7" prefHeight="23.0" prefWidth="475.0" promptText="Enter User Type">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXComboBox>

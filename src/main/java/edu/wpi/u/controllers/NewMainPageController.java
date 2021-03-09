@@ -1,5 +1,7 @@
 package edu.wpi.u.controllers;
 
+//import animatefx.animation.Bounce;
+
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
@@ -20,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
@@ -69,6 +72,7 @@ public class NewMainPageController {
 
     public void initialize() throws IOException {
         App.throwDialogHerePane = newMainPageStackPane;
+
 
 //        validationFeild
         TextField test = new TextField("test");
@@ -262,6 +266,7 @@ public class NewMainPageController {
 //            chipView.getChips().addAll(currently);
 //        }
     }
+
 
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);

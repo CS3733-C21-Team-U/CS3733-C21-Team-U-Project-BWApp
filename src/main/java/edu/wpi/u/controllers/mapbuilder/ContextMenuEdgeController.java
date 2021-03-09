@@ -10,6 +10,7 @@ import edu.wpi.u.users.Role;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -21,17 +22,15 @@ public class ContextMenuEdgeController {
     JFXComboBox edgeComboBox;
     @FXML
     JFXButton deleteButton;
+    @FXML
+    Label permissionErrorLabel;
 
     @FXML
     public void initialize() {
-        // Client side error handling for combo box
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Input Required");
-        edgeComboBox.getValidators().add(validator);
-        edgeComboBox.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                edgeComboBox.validate();
-            }
+        permissionErrorLabel.setVisible(false);
+
+        edgeComboBox.focusedProperty().addListener(observable -> {
+            permissionErrorLabel.setVisible(false);
         });
 
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -39,8 +38,10 @@ public class ContextMenuEdgeController {
         list.add("All Employees");
         list.add("Everyone");
         if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
-            deleteButton.setText("Stop adding");
-        }else {
+            deleteButton.setText("Cancel");
+        }else if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
+            edgeComboBox.setValue("Everyone");
+        } else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
             if(thisEdge.getUserPermissions().get(0).equals(Role.DEFAULT)){
                 edgeComboBox.setValue("Everyone");
@@ -49,7 +50,6 @@ public class ContextMenuEdgeController {
             }else{
                 edgeComboBox.setValue("Admin only");
             }
-
         }
 
         edgeComboBox.setItems(list);
@@ -61,7 +61,7 @@ public class ContextMenuEdgeController {
     @FXML
     public void handleSaveButton() throws InvalidEdgeException {
 
-        if(!edgeComboBox.getValue().equals("")){
+        if(!edgeComboBox.getSelectionModel().isEmpty()){
             ArrayList<Role> userTypes = new ArrayList<>();
             userTypes.add(getEdgePermissionType());
             if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
@@ -77,6 +77,9 @@ public class ContextMenuEdgeController {
             userTypes.clear();
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
+        }else {
+            permissionErrorLabel.setVisible(true);
+            MapBuilderBaseController.shake(edgeComboBox);
         }
 
     }
@@ -87,8 +90,10 @@ public class ContextMenuEdgeController {
                 return Role.ADMIN;
             case "All Employees":
                 return Role.DOCTOR;
-            default:
+            case "Everyone":
                 return Role.DEFAULT;
+            default:
+                return null;
         }
 
     }
@@ -96,7 +101,7 @@ public class ContextMenuEdgeController {
     @FXML
     public void handleDeleteButton() {
         if (App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")) {
-            App.mapInteractionModel.setCurrentAction("NONE");
+            App.mapInteractionModel.setCurrentAction("ADDEDGE");
         }else {
             App.undoRedoService.deleteEdge(App.mapInteractionModel.getEdgeID());
         }

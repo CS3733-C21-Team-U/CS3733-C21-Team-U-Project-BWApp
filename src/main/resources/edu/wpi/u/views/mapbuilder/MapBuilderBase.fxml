@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXNodesList?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController">
    <children>
-    <AnchorPane fx:id="mainAnchorPane" layoutX="-6.0" layoutY="4.0" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -backgroundAlt;" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="4.0">
+    <AnchorPane fx:id="mainAnchorPane" layoutX="27.0" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1700.0" style="-fx-background-color: -backgroundAlt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <children>
@@ -45,94 +43,55 @@
                   <JFXToggleNode fx:id="toggle1" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                </children>
             </VBox>
-            <HBox alignment="CENTER" disable="true" layoutX="1432.0" layoutY="14.0" prefHeight="56.0" prefWidth="196.0" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <HBox spacing="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleUndoButton" styleClass="fab-mini" text="Button">
+                  <JFXButton fx:id="redoButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUndoButton" prefHeight="56.0" prefWidth="56.0" styleClass="fab-default" text="undo">
                      <graphic>
-                        <SVGPath content="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" styleClass="on-primary" />
+                        <SVGPath content="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#handleRedoButton" styleClass="fab-mini">
+                  <JFXButton fx:id="undoButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" maxHeight="56.0" maxWidth="56.0" minHeight="56.0" minWidth="56.0" onAction="#handleRedoButton" prefHeight="56.0" prefWidth="56.0" styleClass="fab-default" text="redo">
                      <graphic>
-                        <SVGPath content="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" styleClass="on-primary" />
+                        <SVGPath content="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
                      </graphic>
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets right="40.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXNodesList alignment="TOP_CENTER">
+                  <VBox alignment="TOP_RIGHT">
                      <children>
-                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" styleClass="fab-default">
+                        <JFXToggleNode fx:id="selectButton" contentDisplay="GRAPHIC_ONLY" onAction="#handleSelectButton" onMouseClicked="#handleSelectButton" selected="true" styleClass="floor-toggle" text="select">
                            <graphic>
-                              <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="on-primary" />
+                              <SVGPath content="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" scaleX="1.5" scaleY="1.5" />
                            </graphic>
-                        </JFXButton>
-                        <HBox alignment="CENTER" prefHeight="70.0">
-                           <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" styleClass="headline-3" text="Click on the map to add node" />
-                              <JFXToggleNode contentDisplay="GRAPHIC_ONLY" onAction="#handleAddNodeButtonEDIT" style="-fx-border-width: 0px;" styleClass="fab-default" text="add Node">
-                                 <graphic>
-                                    <SVGPath content="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z" styleClass="on-primary" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="mapAction" />
-                                 </toggleGroup>
-                              </JFXToggleNode>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" style="-fx-opacity: 0;" styleClass="headline-3" text="Click on the map to add node" textFill="TRANSPARENT" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0">
-                           <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" styleClass="headline-3" text="Click two nodes to add edge" />
-                              <JFXToggleNode contentDisplay="GRAPHIC_ONLY" onAction="#handleAddEdgeButtonEDIT" style="-fx-border-width: 0px;" styleClass="fab-default" text="add edge" toggleGroup="$mapAction">
-                                 <graphic>
-                                    <SVGPath content="M19.5 9.5c-1.03 0-1.9.62-2.29 1.5h-2.92c-.39-.88-1.26-1.5-2.29-1.5s-1.9.62-2.29 1.5H6.79c-.39-.88-1.26-1.5-2.29-1.5C3.12 9.5 2 10.62 2 12s1.12 2.5 2.5 2.5c1.03 0 1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5s1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z" styleClass="on-primary" />
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </JFXToggleNode>
-                              <Label alignment="TOP_RIGHT" prefHeight="16.0" style="-fx-opacity: 0;" styleClass="headline-3" text="Click two nodes to add edge" textFill="TRANSPARENT" />
-                           </children>
-                        </HBox>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tools" />
+                           </toggleGroup>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="multiSelectButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleMultiSelectButton" onMouseClicked="#handleMultiSelectButton" styleClass="floor-toggle" text="multi-select" toggleGroup="$tools">
+                           <graphic>
+                              <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM 16.1,6 C 14.939,6 14,6.9390001 14,8.1000002 14,9.6750003 16.1,12 16.1,12 16.1,12 18.199999,9.6750003 18.199999,8.1000002 18.199999,6.9390001 17.260999,6 16.1,6 Z m -1.500001,2.1000002 c 0,-0.8280001 0.672,-1.5000001 1.500001,-1.5000001 0.828,0 1.5,0.672 1.5,1.5000001 0,0.8640002 -0.864001,2.1569998 -1.5,2.9640008 -0.624,-0.801 -1.500001,-2.1090012 -1.500001,-2.9640008 zM 8.0999998,6 C 6.939,6 6,6.939 6,8.1 6,9.6750001 8.0999998,12 8.0999998,12 8.0999998,12 10.2,9.6750001 10.2,8.1 10.2,6.939 9.261,6 8.0999998,6 Z M 9.6,8.1 c 0,0.8640002 -0.8640005,2.157 -1.5000002,2.964001 m 0,0 C 7.4759999,10.263001 6.6,8.9549997 6.6,8.1 6.6,7.272 7.272,6.6000001 8.0999998,6.6000001 8.9280002,6.6000001 9.6,7.272 9.6,8.1M 12.1,12 C 10.938999,12 10,12.939 10,14.100001 10,15.675 12.1,18 12.1,18 c 0,0 2.1,-2.325 2.1,-3.899999 C 14.2,12.939 13.261001,12 12.1,12 Z m -1.500001,2.100001 C 10.599999,13.272 11.272,12.6 12.1,12.6 c 0.828,0 1.5,0.672 1.5,1.500001 0,0.864 -0.864,2.157 -1.5,2.964 -0.624,-0.801 -1.500001,-2.109001 -1.500001,-2.964 z" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="addNodeButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleAddNodeButtonEDIT" styleClass="floor-toggle" text="addNode" toggleGroup="$tools">
+                           <graphic>
+                              <SVGPath content="M20 1v3h3v2h-3v3h-2V6h-3V4h3V1h2zm-8 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1-9.94v2.02A6.53 6.53 0 0 0 12 5c-3.35 0-6 2.57-6 6.2 0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.79 6-9.14V11h2v.2c0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 6.22 7.8 3 12 3c.34 0 .67.02 1 .06z" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="addEdgeButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleAddEdgeButtonEDIT" styleClass="floor-toggle" text="addEdge" toggleGroup="$tools">
+                           <graphic>
+                              <SVGPath content="M19.5 9.5c-1.03 0-1.9.62-2.29 1.5h-2.92c-.39-.88-1.26-1.5-2.29-1.5s-1.9.62-2.29 1.5H6.79c-.39-.88-1.26-1.5-2.29-1.5C3.12 9.5 2 10.62 2 12s1.12 2.5 2.5 2.5c1.03 0 1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5s1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5zM22,5v2h-3v3h-2V7h-3V5h3V2h2v3H22z" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="alineButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="66.0" onAction="#handleAlineButton" styleClass="floor-toggle" text="aline" toggleGroup="$tools">
+                           <graphic>
+                              <SVGPath content="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </JFXToggleNode>
                      </children>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </JFXNodesList>
+                  </VBox>
                </children>
             </HBox>
-            <VBox AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <children>
-                  <JFXToggleNode fx:id="selectButton" contentDisplay="GRAPHIC_ONLY" onAction="#handleSelectButton" onMouseClicked="#handleSelectButton" selected="true" text="select">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="tools" />
-                     </toggleGroup>
-                     <graphic>
-                        <SVGPath content="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
-                     </graphic>
-                  </JFXToggleNode>
-                  <JFXToggleNode fx:id="multiSelectButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleMultiSelectButton" onMouseClicked="#handleMultiSelectButton" text="multi-select" toggleGroup="$tools">
-                     <graphic>
-                        <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM 16.1,6 C 14.939,6 14,6.9390001 14,8.1000002 14,9.6750003 16.1,12 16.1,12 16.1,12 18.199999,9.6750003 18.199999,8.1000002 18.199999,6.9390001 17.260999,6 16.1,6 Z m -1.500001,2.1000002 c 0,-0.8280001 0.672,-1.5000001 1.500001,-1.5000001 0.828,0 1.5,0.672 1.5,1.5000001 0,0.8640002 -0.864001,2.1569998 -1.5,2.9640008 -0.624,-0.801 -1.500001,-2.1090012 -1.500001,-2.9640008 zM 8.0999998,6 C 6.939,6 6,6.939 6,8.1 6,9.6750001 8.0999998,12 8.0999998,12 8.0999998,12 10.2,9.6750001 10.2,8.1 10.2,6.939 9.261,6 8.0999998,6 Z M 9.6,8.1 c 0,0.8640002 -0.8640005,2.157 -1.5000002,2.964001 m 0,0 C 7.4759999,10.263001 6.6,8.9549997 6.6,8.1 6.6,7.272 7.272,6.6000001 8.0999998,6.6000001 8.9280002,6.6000001 9.6,7.272 9.6,8.1M 12.1,12 C 10.938999,12 10,12.939 10,14.100001 10,15.675 12.1,18 12.1,18 c 0,0 2.1,-2.325 2.1,-3.899999 C 14.2,12.939 13.261001,12 12.1,12 Z m -1.500001,2.100001 C 10.599999,13.272 11.272,12.6 12.1,12.6 c 0.828,0 1.5,0.672 1.5,1.500001 0,0.864 -0.864,2.157 -1.5,2.964 -0.624,-0.801 -1.500001,-2.109001 -1.500001,-2.964 z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
-                     </graphic></JFXToggleNode>
-                  <JFXToggleNode fx:id="addNodeButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleAddNodeButtonEDIT" text="addNode" toggleGroup="$tools">
-                     <graphic>
-                        <SVGPath content="M20 1v3h3v2h-3v3h-2V6h-3V4h3V1h2zm-8 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1-9.94v2.02A6.53 6.53 0 0 0 12 5c-3.35 0-6 2.57-6 6.2 0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.79 6-9.14V11h2v.2c0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 6.22 7.8 3 12 3c.34 0 .67.02 1 .06z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
-                     </graphic></JFXToggleNode>
-                  <JFXToggleNode fx:id="addEdgeButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#handleAddEdgeButtonEDIT" text="addEdge" toggleGroup="$tools">
-                     <graphic>
-                        <SVGPath content="M19.5 9.5c-1.03 0-1.9.62-2.29 1.5h-2.92c-.39-.88-1.26-1.5-2.29-1.5s-1.9.62-2.29 1.5H6.79c-.39-.88-1.26-1.5-2.29-1.5C3.12 9.5 2 10.62 2 12s1.12 2.5 2.5 2.5c1.03 0 1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5s1.9-.62 2.29-1.5h2.92c.39.88 1.26 1.5 2.29 1.5 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5zM22,5v2h-3v3h-2V7h-3V5h3V2h2v3H22z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
-                     </graphic></JFXToggleNode>
-                  <JFXToggleNode fx:id="alineButton" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="66.0" onAction="#handleAlineButton" text="aline" toggleGroup="$tools">
-                     <graphic>
-                        <SVGPath content="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" scaleX="1.5" scaleY="1.5" styleClass="on-background" />
-                     </graphic></JFXToggleNode>
-               </children>
-            </VBox>
          </children>
       </AnchorPane>
    </children>
