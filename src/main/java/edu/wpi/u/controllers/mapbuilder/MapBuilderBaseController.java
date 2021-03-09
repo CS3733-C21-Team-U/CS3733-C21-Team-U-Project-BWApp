@@ -173,7 +173,7 @@ public class MapBuilderBaseController {
             Circle curNode = new Circle();
             curNode.setCenterX(n.getCords()[0]);
             curNode.setCenterY(n.getCords()[1]);
-            curNode.setRadius(7.0);
+            curNode.setRadius(9);
             curNode.setId(n.getNodeID());
             curNode.setStyle("-fx-fill: -error");
             curNode.setVisible(true);
@@ -575,6 +575,7 @@ public class MapBuilderBaseController {
     @FXML
     public void handleUndoButton() throws Exception{
         App.undoRedoService.undo();
+        pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
@@ -586,6 +587,7 @@ public class MapBuilderBaseController {
 
     public void handleRedoButton() throws Exception{
         App.undoRedoService.redo();
+        pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
