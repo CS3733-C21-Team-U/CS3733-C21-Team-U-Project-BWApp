@@ -221,6 +221,9 @@ public class MobileUserLoginScreenController {
 //    }
 
     public void handleReturn(ActionEvent actionEvent) throws IOException {
+        App.getPrimaryStage().setFullScreen(true);
+        App.getPrimaryStage().setWidth(1920);
+        App.getPrimaryStage().setHeight(1080);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
