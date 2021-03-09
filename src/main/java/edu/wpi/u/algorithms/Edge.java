@@ -10,9 +10,9 @@ public class Edge {
   private Node endNode;
   private double weight;
   private boolean walkable = true;
-  private ArrayList<Role> permission;
+  private Role permission;
 
-  public Edge(String _edgeID, Node _startNode, Node _endNode, ArrayList<Role> permissions) {
+  public Edge(String _edgeID, Node _startNode, Node _endNode, Role permissions) {
     this.edgeID = _edgeID;
     this.startNode = _startNode;
     this.endNode = _endNode;
@@ -24,14 +24,7 @@ public class Edge {
     _endNode.addEdge(this);
     _startNode.addAdjNode(_endNode);
     _endNode.addAdjNode(_startNode);
-    this.permission = new ArrayList<>();
-    if (permissions.isEmpty()){
-      this.permission.add(Role.DEFAULT);
-    }
-    else
-    {
-      this.permission.add(permissions.get(0));
-    }
+    this.permission = permissions;
 
   }
 
@@ -69,7 +62,7 @@ public class Edge {
    * returns the array list of permissions
    * @return
    */
-  public ArrayList<Role> getUserPermissions(){
+  public Role getUserPermissions(){
     return this.permission;
   }
 
@@ -93,7 +86,7 @@ public class Edge {
     return this.walkable;
   }
 
-  public void setUserPermission(ArrayList<Role> permissions) {
+  public void setUserPermission(Role permissions) {
     this.permission = permissions;
   }
 }

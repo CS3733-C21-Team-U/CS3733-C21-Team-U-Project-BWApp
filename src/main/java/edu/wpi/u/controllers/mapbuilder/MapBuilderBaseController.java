@@ -474,31 +474,33 @@ public class MapBuilderBaseController {
                 c1.setFill(Paint.valueOf(selectedColor));
 
                 //if the previse node is on the current floor if yes draw edge
-                if(App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getFloor().equals(App.mapInteractionModel.floor)) {
-                    c2.toFront();
-                    c2.setFill(Paint.valueOf(selectedColor));
-                    // Create drawn Edge
-                    double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
-                    double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
-                    double xdiff = 0;
-                    double ydiff = 0;
-                    xdiff = c2.getCenterX() - oldx;
-                    ydiff = c2.getCenterY() - oldy;
-                    tempEdge.setLayoutX(c1.getCenterX());
-                    tempEdge.setStartX(0);
-                    tempEdge.setLayoutY(c1.getCenterY());
-                    tempEdge.setStartY(0);
-                    tempEdge.setEndX(xdiff);
-                    tempEdge.setEndY(ydiff);
-                    tempEdge.setId("tempedge");
-                    tempEdge.setStrokeWidth(3.0);
-                    tempEdge.toFront();
-                    tempEdge.setStroke(Paint.valueOf(selectedColor));
-                    tempEdge.setVisible(true);
-                    nodesAndEdges.getChildren().add(tempEdge);
-                    makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
-                }else{
-                    makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
+                if(App.mapInteractionModel.getPreviousNodeID() != null) {
+                    if (App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getFloor().equals(App.mapInteractionModel.floor)) {
+                        c2.toFront();
+                        c2.setFill(Paint.valueOf(selectedColor));
+                        // Create drawn Edge
+                        double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
+                        double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
+                        double xdiff = 0;
+                        double ydiff = 0;
+                        xdiff = c2.getCenterX() - oldx;
+                        ydiff = c2.getCenterY() - oldy;
+                        tempEdge.setLayoutX(c1.getCenterX());
+                        tempEdge.setStartX(0);
+                        tempEdge.setLayoutY(c1.getCenterY());
+                        tempEdge.setStartY(0);
+                        tempEdge.setEndX(xdiff);
+                        tempEdge.setEndY(ydiff);
+                        tempEdge.setId("tempedge");
+                        tempEdge.setStrokeWidth(3.0);
+                        tempEdge.toFront();
+                        tempEdge.setStroke(Paint.valueOf(selectedColor));
+                        tempEdge.setVisible(true);
+                        nodesAndEdges.getChildren().add(tempEdge);
+                        makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
+                    } else {
+                        makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
+                    }
                 }
                 break;
             case "ALINE":
