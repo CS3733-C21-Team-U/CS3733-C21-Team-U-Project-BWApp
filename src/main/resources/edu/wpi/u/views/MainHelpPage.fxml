@@ -132,16 +132,27 @@
                                     <SVGPath content="M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18zM19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" scaleX="4.0" scaleY="4.0" style="-fx-fill: -onPrimary;" translateY="-5.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleLoadAndSaveCSVButton" prefHeight="85.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Load and Save CSV">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleAboutPage" prefHeight="85.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Load and Save CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets left="50.0" right="50.0" />
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
                                  </VBox.margin>
                                  <graphic>
                                     <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                  </graphic>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#handleAboutPage" prefHeight="85.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="About Us">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <graphic>
+                                    <SVGPath content="M13.25,16.74c0,0.69-0.53,1.26-1.25,1.26c-0.7,0-1.26-0.56-1.26-1.26c0-0.71,0.56-1.25,1.26-1.25 C12.71,15.49,13.25,16.04,13.25,16.74z M11.99,6c-1.77,0-2.98,1.15-3.43,2.49l1.64,0.69c0.22-0.67,0.74-1.48,1.8-1.48 c1.62,0,1.94,1.52,1.37,2.33c-0.54,0.77-1.47,1.29-1.96,2.16c-0.39,0.69-0.31,1.49-0.31,1.98h1.82c0-0.93,0.07-1.12,0.22-1.41 c0.39-0.72,1.11-1.06,1.87-2.17c0.68-1,0.42-2.36-0.02-3.08C14.48,6.67,13.47,6,11.99,6z M19,5H5v14h14V5 M19,3c1.1,0,2,0.9,2,2v14 c0,1.1-0.9,2-2,2H5c-1.1,0-2-0.9-2-2V5c0-1.1,0.9-2,2-2H19L19,3z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" />
+                                 </VBox.margin>
                               </JFXButton>
                            </children>
                            <HBox.margin>
