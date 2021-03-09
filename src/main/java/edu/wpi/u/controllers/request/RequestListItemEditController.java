@@ -3,7 +3,6 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,13 +10,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -26,11 +20,11 @@ import lombok.SneakyThrows;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -55,8 +49,8 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     public VBox extraFieldsVBox;
     private JFXTextField[] specificTextFields;
-
-
+    HashMap<String, String> longNamestoID;
+    Set<String> existingAssignee;
 
 
     public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
@@ -75,10 +69,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         locationValidator.setMessage("Valid Employee Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        ArrayList<String> assingneeList = new ArrayList<String>(App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , assingneeList);
-        Set<String> strings = App.mapService.getLongNames().keySet();
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
+        longNamestoID = App.mapService.getLongNames();
+        existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
+        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
 
 
 //        parent.request.
@@ -88,7 +82,13 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
         editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
+        //load in name as opposed to Node Ids
+        ArrayList<String> locationNames = new ArrayList<>();
+        for(String s: parent.request.getGenericRequest().getLocations()){
+            locationNames.add(App.mapService.getNodeFromID(s).getLongName());
+        }
+
+        makeListView( locationNames, editLocationsListView);
         specificTextFields = generateSpecificFields();
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
@@ -109,7 +109,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
      * Pull from fields, and run update request
      */
     public void handleSaveButton(){
-        ArrayList<String> locationsToAdd = new ArrayList<>(editLocationsListView.getItems());
+        ArrayList<String> locationsToAdd = new ArrayList<String>();
+        for(String s :editLocationsListView.getItems()){
+            locationsToAdd.add(longNamestoID.get(s));
+        }
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
 
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
@@ -195,13 +198,12 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
 
     public void makeListView(ArrayList<String> list, JFXListView<String> res){
-
         ObservableList<String> something = FXCollections.observableList(list);
         res.setItems(something);
     }
 
     public void addAssignee(){
-        if(editAssigneesField.getText().equals("")){
+        if(editAssigneesField.getText().equals("") || !existingAssignee.contains(editAssigneesField.getText())){
             editAssigneesField.validate();
         }else {
             editAssigneesListView.getItems().add(editAssigneesField.getText());
@@ -214,7 +216,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     }
 
     public void addLocation() {
-        if (editLocationsField.getText().equals("")) {
+        if (editLocationsField.getText().equals("") || !longNamestoID.keySet().contains(editLocationsField.getText())) {
             editLocationsField.validate();
         } else {
             try{
