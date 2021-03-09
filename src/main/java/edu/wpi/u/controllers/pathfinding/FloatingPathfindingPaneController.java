@@ -63,10 +63,8 @@ public class FloatingPathfindingPaneController {
             Node bNode = null;
             Node eNode = path.get(0);
             Node lastTurnNode = null;
-            int index = 0;
 
             for(Edge e : edgePath) {
-                index++;
                 String iconID;
                 String angleDescription;
                 double angleDifferance;
@@ -127,7 +125,6 @@ public class FloatingPathfindingPaneController {
                     }
                     stepHBoxContainer = createDirectionBox(angleDescription + " onto " + sNode.getLongName(), iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    index++;
                     lastTurnNode = sNode;
                 }
 
