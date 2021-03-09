@@ -224,7 +224,7 @@ public class MobileUserLoginScreenController {
         App.getPrimaryStage().setFullScreen(true);
         App.getPrimaryStage().setWidth(1920);
         App.getPrimaryStage().setHeight(1080);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
