@@ -78,7 +78,7 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </HBox>
-                  <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
+                  <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefWidth="313.0" styleClass="button-outlined" text="Login Without 2FA">
                      <VBox.margin>
                         <Insets left="290.0" top="5.0" />
                      </VBox.margin>

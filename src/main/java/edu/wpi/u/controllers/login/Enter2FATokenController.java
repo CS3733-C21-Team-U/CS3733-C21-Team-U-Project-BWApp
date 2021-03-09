@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import io.netty.handler.codec.http.HttpHeaders;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +23,19 @@ public class Enter2FATokenController {
     @FXML public JFXProgressBar progressBar;
     @FXML public JFXButton enterAppButton;
 
+    SimpleBooleanProperty valid = new SimpleBooleanProperty(false);
+    public void initialize(){
+        valid.addListener(e -> {
+            try {
+                handleAppEntry();
+            } catch (IOException ioException) {
+                valid.set(!valid.get());
+            }
+        });
+    }
 
-    public void handleTokenSubmit(ActionEvent actionEvent) {
+
+    public void handleTokenSubmit() {
         progressBar.setStyle("-fx-opacity: 1");
         String token = tokenTextFIeld.getText();
         String phoneNumber = App.userService.getActiveUser().getPhoneNumber();
@@ -57,6 +69,7 @@ public class Enter2FATokenController {
 //                            System.out.println(y.contains("pending"));
                             if (y.contains("approved")){
                                 enterAppButton.setStyle("-fx-opacity: 1");
+                                valid.set(!valid.get());
                             }
                             else {
                                 //TODO : Display invalid entry
@@ -86,7 +99,7 @@ public class Enter2FATokenController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleAppEntry(ActionEvent actionEvent) throws IOException {
+    public void handleAppEntry() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
