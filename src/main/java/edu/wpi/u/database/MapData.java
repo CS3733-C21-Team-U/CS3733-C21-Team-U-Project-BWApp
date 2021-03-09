@@ -180,7 +180,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
-            String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
+            String str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
             ps.setString(2, start_node_id);
@@ -240,7 +240,7 @@ public class MapData extends Data{
 
     public int delEdgeByNodes(String start_node_id, String end_node_id){
         try {
-            String str = "delete from Edges where startID=?, endID=?";
+            String str = "delete from Edges where startID=? and endID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, start_node_id);
             ps.setString(2, end_node_id);
