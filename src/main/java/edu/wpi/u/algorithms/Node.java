@@ -154,11 +154,17 @@ public class Node {
     for (Edge e : this.edges) {
         if (e.getEndNode().equals(n) || e.getStartNode().equals(n)) {
           if (e.getEndNode().equals(this) || e.getStartNode().equals(this)) {
-            if(e.getUserPermissions().contains(Role.DOCTOR) && !App.userService.getActiveUser().equals((String.valueOf(Role.PATIENT)))){
-              return true;
-            }else if(e.getUserPermissions().contains(Role.ADMIN) && App.userService.getActiveUser().equals((String.valueOf(Role.ADMIN)))){
-              return true;
-            }else if(e.getUserPermissions().contains(Role.DEFAULT)){
+            if (App.userService.getActiveUser() != null) {
+              if (e.getUserPermissions().equals(Role.DOCTOR) && (!App.userService.getActiveUser().getType().equals(Role.PATIENT))) {
+                return true;
+              } else if (e.getUserPermissions().equals(Role.ADMIN) && App.userService.getActiveUser().getType().equals(Role.ADMIN)) {
+                return true;
+              } else if (e.getUserPermissions().equals(Role.DEFAULT)) {
+                return true;
+              } else {
+                return false;
+              }
+            }else if (e.getUserPermissions().equals(Role.DEFAULT)) {
               return true;
             }else{
               return false;

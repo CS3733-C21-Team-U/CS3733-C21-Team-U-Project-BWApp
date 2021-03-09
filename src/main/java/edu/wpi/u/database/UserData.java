@@ -288,6 +288,26 @@ public class UserData extends Data{
     }
 
     /**
+     * Gets a hashmap of employees based on a certain type
+     * @param type the type
+     * @return the hashmap of employee names
+     */
+    public HashMap<String, String> getEmployeeNamesByType(String type){
+        HashMap<String,String> result = new HashMap<>();
+        String str = "select employeeID,name from Employees where type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.put(rs.getString("employeeID"), rs.getString("name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
      * Gets list of employees from database
      * @return list of employees
      */
@@ -464,6 +484,11 @@ public class UserData extends Data{
         return new Employee();
     }
 
+    /**
+     * Sets an employee based on and id
+     * @param employeeID employee id
+     * @return the employee
+     */
     public Employee setEmployee(String employeeID){
         String str = "select * from Employees where employeeID=?";
         try{

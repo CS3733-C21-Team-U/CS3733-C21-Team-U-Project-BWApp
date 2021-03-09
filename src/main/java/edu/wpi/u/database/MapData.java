@@ -180,7 +180,6 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
-            System.out.println("Edges are being added to the Database");
             String str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
@@ -241,7 +240,7 @@ public class MapData extends Data{
 
     public int delEdgeByNodes(String start_node_id, String end_node_id){
         try {
-            String str = "delete from Edges where startID=?, endID=?";
+            String str = "delete from Edges where startID=? and endID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, start_node_id);
             ps.setString(2, end_node_id);
@@ -287,7 +286,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                ArrayList<Role> perms = this.getUserTypes(id);
+                Role perms = this.getUserTypes(id);
                  mm.addEdge(id,start,end, perms);
             }
             rs2.close();
@@ -344,19 +343,22 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @return Arraylist of Strings, representing types of users with permission
      */
-    public ArrayList<Role> getUserTypes(String edgeID) {
-        ArrayList<Role> userTypes = new ArrayList<>();
+    public Role getUserTypes(String edgeID) {
+        Role userTypes = null;
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                userTypes.add(Role.valueOf(rs.getString("userType")));
+                userTypes=(Role.valueOf(rs.getString("userType")));
             }
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(userTypes == null){
+            userTypes = Role.DEFAULT;
         }
         return userTypes;
     }
@@ -367,16 +369,15 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @param permissions - new permission to be added
      */
-    public void updatePermissions(String edgeID, ArrayList<Role> permissions){
+    public void updatePermissions(String edgeID, Role permissions){
         try {
             String str = "delete from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,edgeID);
             ps.execute();
             // Add function
-            for(Role user: permissions){
-                addPermission(edgeID, user);
-            }
+            addPermission(edgeID, permissions);
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to update permissions.");
