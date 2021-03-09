@@ -22,7 +22,7 @@ public class MapManager {
    * @param _startNodeID
    * @param _endNodeID
    */
-  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, ArrayList<Role> permissions) {
+  public void addEdge(String _edgeID, String _startNodeID, String _endNodeID, Role permissions) {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _endNode = this.allNodes.get(_endNodeID);
     if(_startNode == null || _endNode == null){
@@ -487,7 +487,7 @@ public class MapManager {
     this.addEdge(edge_id, startNodeId,end_node, edge.getUserPermissions());
   }
 
-  public void updateUserPermissions(String edgeID, ArrayList<Role> permissions){
+  public void updateUserPermissions(String edgeID, Role permissions){
     Edge edge = this.allEdges.get(edgeID);
     edge.setUserPermission(permissions);
   }

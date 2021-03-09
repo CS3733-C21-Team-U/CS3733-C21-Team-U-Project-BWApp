@@ -112,7 +112,7 @@ public class AddRequestController {
 
             //make components of specifc request,  then set them
             Comment primaryComment = new Comment(makeTitleField.getText(), makeDescriptionField.getText(),
-                    "KAAMIL", CommentType.PRIMARY, Timestamp.valueOf(makeDate2BCompleteDatePicker.getValue().atStartOfDay()));
+                    App.userService.getActiveUser().getName(), CommentType.PRIMARY, Timestamp.valueOf(makeDate2BCompleteDatePicker.getValue().atStartOfDay()));
             Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(specifics));
 

@@ -8,17 +8,29 @@ import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyCombination;
+
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.prettytime.PrettyTime;
+
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class App extends Application {
@@ -32,7 +44,8 @@ public class App extends Application {
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   public static boolean isEdtingGuest;
-    private static Stage primaryStage;
+  private static Stage primaryStage;
+  public static StackPane throwDialogHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
@@ -70,6 +83,8 @@ public class App extends Application {
 
   public static PrettyTime p = new PrettyTime();
 
+  public static String test = "hello there";
+  public static Parent base;
 
   public App(){
     System.out.println("App constructor");
@@ -84,11 +99,10 @@ public class App extends Application {
   }
 
   @Override
-  public void init() {
+  public void init()  {
     System.out.println("Starting Up");
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
-
 
 
 
@@ -105,7 +119,7 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
 
     mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
@@ -125,8 +139,9 @@ public class App extends Application {
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
+    App.primaryStage.setFullScreenExitHint("");
+    App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     App.primaryStage.show();
-
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");

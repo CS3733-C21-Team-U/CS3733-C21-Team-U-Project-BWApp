@@ -1,13 +1,10 @@
 package edu.wpi.u.controllers.request;
 
-import animatefx.animation.FadeInDown;
-import animatefx.animation.FadeOut;
-import animatefx.animation.FadeOutDown;
-import animatefx.animation.FadeOutDownBig;
 import edu.wpi.u.App;
 import edu.wpi.u.controllers.NewMainPageController;
 import edu.wpi.u.requests.Request;
 import edu.wpi.u.requests.SpecificRequest;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +24,8 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public SpecificRequest request;
     public Parent expandedNode;
     public Parent collapsedNode;
+    public Parent editNode;
+    public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
         this.request = request; //MUST BE FIRST!!!
@@ -35,9 +34,12 @@ public class RequestListItemContainerController extends AnchorPane implements In
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
+        //"this" is both an anchor pane and controller
+        //https://github.com/CS3733-C21-Team-U/CS3733-C21-Team-U-Project-BWApp/pull/226
 
         expandedNode = new RequestListItemExpandedController(this);
         collapsedNode = new RequestListItemCollapsedController(this);
+        editNode = new RequestListItemEditController(this);
 
         this.getChildren().add(collapsedNode);
 
@@ -50,10 +52,20 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public void switchToExpanded() {
         //For duration question look at: https://material.io/design/motion/speed.html#controlling-speed
         runAnimation(this,300,100,96,590,collapsedNode, expandedNode);
+
     }
     public void switchToCollapsed() {
         runAnimation(this,250,80,590,96,expandedNode,collapsedNode);
     }
+
+    public void switchToEdit() {
+        runAnimation(this,250,80,590,590,expandedNode,editNode);
+    }
+
+    public void switchFromEditToExpanded() {
+        runAnimation(this,250,80,590,590, editNode, expandedNode);
+    }
+
     public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){
         //https://material.io/design/motion/the-motion-system.html#container-transform
         //BASED ON "FADE THROUGH TRANSFORM"
@@ -95,5 +107,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
         anim.play();
         fadeOut.play();
     }
+
+
 
 }

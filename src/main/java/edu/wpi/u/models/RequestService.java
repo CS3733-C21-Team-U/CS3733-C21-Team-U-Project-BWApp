@@ -75,6 +75,11 @@ public class RequestService {
     rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
+  public void addComment(SpecificRequest specificRequest, Comment comment){
+    specificRequest.getGenericRequest().addComment(comment);
+    rd.addCommentToRequest(specificRequest.getGenericRequest().getRequestID(), comment);
+  }
+
   public ArrayList<SpecificRequest> getRequests() {
       return this.activeRequests;
     }

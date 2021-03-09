@@ -5,8 +5,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -22,7 +20,6 @@
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1675.0" spacing="100.0">
                <children>
                   <Label styleClass="headline-2" text="View Users" />
-                  <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -38,14 +35,11 @@
                   </Label>
                </children>
             </HBox>
-            <JFXButton fx:id="editSelectedButton1" onAction="#handleEditGuestList" styleClass="button-contained" text="Edit Selected Guest">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin></JFXButton>
-            <JFXButton fx:id="editSelectedButton" onAction="#handleEditEmpList" styleClass="button-contained" text="Edit Selected Empolyeee">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin></JFXButton>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
+               </children>
+            </HBox>
             <JFXTreeTableView fx:id="treeTableView" />
          </children>
       </VBox>

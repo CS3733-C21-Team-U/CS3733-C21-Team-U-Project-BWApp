@@ -1,7 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
-import animatefx.animation.*;
+//import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
@@ -35,9 +35,6 @@ public class CovidSurveyScreenController {
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
     // if requirements are not met, the user should be sent to another page that directs them to seek help or go home.
     // Will throw an error if any of the check boxes are not completed.
-    /**
-
-     */
 
     public void handleCovidSurveyFill() throws IOException {
 
@@ -65,21 +62,29 @@ public class CovidSurveyScreenController {
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        Object obj = fxmlLoader.load();
+        Object myController = fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setPatient("debug", "debug");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.userService.setPatient("debug");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setEmployee("debug", "debug");
+        App.userService.setEmployee("debug");
+        System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        // todo : fixes the loading issue but won't go to new main page
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleHelpPage(ActionEvent actionEvent)throws IOException  {

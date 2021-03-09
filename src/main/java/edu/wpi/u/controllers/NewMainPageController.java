@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers;
 
-import animatefx.animation.Bounce;
+//import animatefx.animation.Bounce;
+
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
@@ -16,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import javafx.scene.input.KeyEvent;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -32,7 +32,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+
 
 import static edu.wpi.u.users.Role.ADMIN;
 
@@ -61,6 +63,8 @@ public class NewMainPageController {
     public JFXListView list2;
     public JFXButton expandButton;
     public JFXButton collapseButton;
+    public Tab HelpMainPageTab;
+    public Tab AdminHelpMainPageTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -70,6 +74,7 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.throwDialogHerePane = newMainPageStackPane;
 
 
 //        validationFeild
@@ -137,45 +142,26 @@ public class NewMainPageController {
             adminTab1.setDisable(false);
             adminTab2.setStyle("-fx-opacity: 1");
             adminTab2.setDisable(false);
+            HelpMainPageTab.setDisable(true);
+            HelpMainPageTab.setStyle("-fx-opacity: 0");
+            AdminHelpMainPageTab.setDisable(false);
+            AdminHelpMainPageTab.setStyle("-fx-opacity: 1");
         }
         else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
             adminTab1.setStyle("-fx-opacity: 0");
             adminTab1.setDisable(true);
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
+            HelpMainPageTab.setDisable(false);
+            HelpMainPageTab.setStyle("-fx-opacity: 1");
+            AdminHelpMainPageTab.setDisable(true);
+            AdminHelpMainPageTab.setStyle("-fx-opacity: 0");
         }
-
-//        chipView.getChips().addListener((new ListChangeListener<String>(){
-//
-//            @Override
-//            public void onChanged(Change<? extends String> c) {
-//                System.out.println("In onChange for newMainPage");
-//                ObservableList<String> currently = chipView.getChips();
-//                ObservableList<String> options = chipView.getSuggestions();
-//
-//                for(int i = 0; i < currently.size(); i++){
-//                    boolean isValid = false;
-//                    for(String option : options){
-//                        if(option.equals(currently.get(i))){
-//                            isValid = true;
-//                        }
-//                    }
-//                    if(!isValid){
-//                        currently.remove(i);
-//                        i--;
-//                    }
-//                }
-//
-//                chipView.getChips().clear();
-//                chipView.getChips().addAll(currently);
-//            }
-//        }));
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
         App.getInstance().switchTheme();
     }
-
 
     public void handleExit() throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -221,8 +207,17 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-                App.getPrimaryStage().getScene().setRoot(root);
+
+                /*
+                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyApp.fxml"));
+                 Object obj = fxmlLoader.load();
+                 Object myController = fxmlLoader.getController();
+                 */
+                //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+                Object obj = fxmlLoader.load();
+                Object myController = fxmlLoader.getController();
+                App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }
         });
         button1.getStyleClass().add("button-text");
@@ -235,71 +230,37 @@ public class NewMainPageController {
     }
 
     public void handleChangeTab() {
-        App.mapInteractionModel.setCurrentAction("NONE");
-        App.mapInteractionModel.clearPreviousNodeID();
-        App.mapInteractionModel.setNodeID(" ");
+        App.mapInteractionModel.setCurrentAction("SELECT");
+        App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
+        App.mapInteractionModel.reloadPathfinding.set(!App.mapInteractionModel.reloadPathfinding.get());
+//        App.mapInteractionModel.clearPreviousNodeID();
+//        App.mapInteractionModel.setNodeID(" ");
     }
 
+//    public void onChipEnter(KeyEvent keyEvent) {
+//////        System.out.println("In function");
+////        if(keyEvent.getCode() == KeyCode.ENTER){
+////            ObservableList<String> currently = chipView.getChips();
+////            ObservableList<String> options = chipView.getSuggestions();
+////
+////            for(int i = 0; i < currently.size(); i++){
+////                boolean isValid = false;
+////                for(String option : options){
+////                    if(option.equals(currently.get(i))){
+////                        isValid = true;
+////                    }
+////                }
+////                if(!isValid){
+////                    currently.remove(i);
+////                    i--;
+////                }
+////            }
+////
+////            chipView.getChips().clear();
+////            chipView.getChips().addAll(currently);
+////        }
+//    }
 
-    public void onChipEnter(KeyEvent keyEvent) {
-////        System.out.println("In function");
-//        if(keyEvent.getCode() == KeyCode.ENTER){
-//            ObservableList<String> currently = chipView.getChips();
-//            ObservableList<String> options = chipView.getSuggestions();
-//
-//            for(int i = 0; i < currently.size(); i++){
-//                boolean isValid = false;
-//                for(String option : options){
-//                    if(option.equals(currently.get(i))){
-//                        isValid = true;
-//                    }
-//                }
-//                if(!isValid){
-//                    currently.remove(i);
-//                    i--;
-//                }
-//            }
-//
-//            chipView.getChips().clear();
-//            chipView.getChips().addAll(currently);
-//        }
-    }
-
-    public void handleHelpPageButton(ActionEvent actionEvent) {
-
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Help Page");
-        Text text = new Text("This is the Main page.If there is an emergency situation, Please call 911");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.setBody(text);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button1 = new JFXButton("Cancel");
-        JFXButton button2 = new JFXButton("Proceed to Help Page");
-        button1.setOnAction(event -> dialog.close());
-            button2.setOnAction(event -> {
-                AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                anchor.getChildren().clear();
-                anchor.getChildren().add(root);
-                dialog.close();
-            });
-
-
-        button1.getStyleClass().add("button-text");
-        button2.getStyleClass().add("button-contained");
-        ArrayList<Node> actions = new ArrayList<>();
-        actions.add(button1);
-        actions.add(button2);
-        content.setActions(actions);
-        dialog.show();
-    }
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);
     }
@@ -307,4 +268,8 @@ public class NewMainPageController {
     public void handleExpandButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(false);
     }
+
+    public void onChipEnter(KeyEvent keyEvent) {
+    }
 }
+
