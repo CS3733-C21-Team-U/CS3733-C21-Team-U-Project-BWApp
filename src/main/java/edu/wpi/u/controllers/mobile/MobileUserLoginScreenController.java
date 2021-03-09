@@ -46,6 +46,11 @@ public class MobileUserLoginScreenController {
     @FXML public JFXButton debugLoginAdminButton;
     public JFXButton debugLoginGuestButton;
 
+    //TODO
+    //THIS PAGE WILL READ A USER DB VALUE BOOLEAN THAT SAYS WHETHER THEY HAVE COMPLETED A COVID SURVEY REQUEST
+    // IF YES, THEY WILL BE TAKEN TO THE PATHFINDING PAGE
+    //IF NO, THEY WILL BE TAKEN TO THE COVIDSURVEY PAGE
+
     public void initialize() throws IOException {
 
         App.getPrimaryStage().setFullScreen(false);
@@ -202,13 +207,27 @@ public class MobileUserLoginScreenController {
 //        App.getPrimaryStage().getScene().setRoot(root);
 //    }
 
-    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("admin", "admin", "Employees");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-    }
+
+
+//    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
+//        if (//user Covid Status approved = true){
+//        App.userService.setUser("admin", "admin", "Employees");
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileEnter2FATokenScreen.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//        }
+//        App.userService.setUser("admin", "admin", "Employees");
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//    }
+
+
+
+
+
 //
 //    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
 //        App.userService.setUser("patient", "patient", "Guests");

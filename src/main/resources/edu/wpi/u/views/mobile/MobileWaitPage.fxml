@@ -26,7 +26,7 @@
             </ImageView>
             <VBox prefHeight="723.0" prefWidth="424.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane prefHeight="214.0" prefWidth="354.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                  <Pane prefHeight="264.0" prefWidth="364.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                      <VBox.margin>
                         <Insets bottom="75.0" left="30.0" right="30.0" top="235.0" />
                      </VBox.margin>
@@ -55,7 +55,8 @@
                                     <Insets right="25.0" top="25.0" />
                                  </VBox.margin>
                               </Label>
-                              <JFXButton fx:id="pathFindButton" disable="true" onAction="#handlePathFInd" opacity="0.0" text="Go to PathFinding!" />
+                              <JFXButton buttonType="RAISED" onAction="#handleReturnLogin" styleClass="bigButtonOutline" text="Return to Login" />
+                              <JFXButton fx:id="pathFindButton" buttonType="RAISED" disable="true" onAction="#handlePathFInd" opacity="0.0" styleClass="bigButton" text="Go to PathFinding!" />
                               <JFXButton fx:id="debugButton" onAction="#handleDebug" prefHeight="25.0" prefWidth="351.0" text="Naw Dawg, Lemme see Tyler's yeeyee ass pathfinding pages">
                                  <VBox.margin>
                                     <Insets left="-25.0" />
