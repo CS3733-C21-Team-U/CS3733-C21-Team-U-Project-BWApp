@@ -130,9 +130,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void generateComments(){
+        commentsRoot.getChildren().clear();
         for(int i = 1; i < this.parent.request.getGenericRequest().getComments().size(); i++){
-            commentsRoot.getChildren().clear();
             generateCommentHelper(i);
+            System.out.println("I am running" + i + "times");
         }
     }
 
