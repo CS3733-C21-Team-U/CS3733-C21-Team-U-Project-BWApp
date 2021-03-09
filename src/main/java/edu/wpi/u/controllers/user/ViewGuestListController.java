@@ -56,17 +56,18 @@ public class ViewGuestListController {
         treeTableColumnName.setPrefWidth(100);
         treeTableColumnName.setEditable(false);
 
-        JFXTreeTableColumn<User, Long> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
-        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,Long> param) ->{
+        JFXTreeTableColumn<User, String> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
+        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
             if (treeTableColumnVisitDate.validateValue(param)){
-                SimpleObjectProperty<Date> d = new SimpleObjectProperty<>();
-                return param.getValue().getValue().visitDatefxProperty().asObject(); // todo : date format
+                Date d = new Date(param.getValue().getValue().visitDatefxProperty().get());
+                String temp = d.toString() + " (" + App.p.format(d) + ")";
+                return new SimpleStringProperty(temp);
             }
             else {
                 return treeTableColumnVisitDate.getComputedValue(param);
             }
         });
-        treeTableColumnVisitDate.setPrefWidth(150);
+        treeTableColumnVisitDate.setPrefWidth(280);
         treeTableColumnVisitDate.setEditable(false);
 
         JFXTreeTableColumn<User, String> treeTableColumnVisitReason = new JFXTreeTableColumn<>("Visit reason");

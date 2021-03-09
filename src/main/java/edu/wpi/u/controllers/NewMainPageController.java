@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import javafx.scene.input.KeyEvent;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static edu.wpi.u.users.Role.ADMIN;
@@ -69,8 +69,6 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
-
-
 //        validationFeild
         TextField test = new TextField("test");
 //        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");
@@ -143,38 +141,11 @@ public class NewMainPageController {
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
         }
-
-//        chipView.getChips().addListener((new ListChangeListener<String>(){
-//
-//            @Override
-//            public void onChanged(Change<? extends String> c) {
-//                System.out.println("In onChange for newMainPage");
-//                ObservableList<String> currently = chipView.getChips();
-//                ObservableList<String> options = chipView.getSuggestions();
-//
-//                for(int i = 0; i < currently.size(); i++){
-//                    boolean isValid = false;
-//                    for(String option : options){
-//                        if(option.equals(currently.get(i))){
-//                            isValid = true;
-//                        }
-//                    }
-//                    if(!isValid){
-//                        currently.remove(i);
-//                        i--;
-//                    }
-//                }
-//
-//                chipView.getChips().clear();
-//                chipView.getChips().addAll(currently);
-//            }
-//        }));
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
         App.getInstance().switchTheme();
     }
-
 
     public void handleExit() throws IOException {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -220,8 +191,17 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-                App.getPrimaryStage().getScene().setRoot(root);
+
+                /*
+                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyApp.fxml"));
+                 Object obj = fxmlLoader.load();
+                 Object myController = fxmlLoader.getController();
+                 */
+                //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                Object obj = fxmlLoader.load();
+                Object myController = fxmlLoader.getController();
+                App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }
         });
         button1.getStyleClass().add("button-text");
@@ -239,30 +219,29 @@ public class NewMainPageController {
         App.mapInteractionModel.setNodeID(" ");
     }
 
-
-    public void onChipEnter(KeyEvent keyEvent) {
-////        System.out.println("In function");
-//        if(keyEvent.getCode() == KeyCode.ENTER){
-//            ObservableList<String> currently = chipView.getChips();
-//            ObservableList<String> options = chipView.getSuggestions();
-//
-//            for(int i = 0; i < currently.size(); i++){
-//                boolean isValid = false;
-//                for(String option : options){
-//                    if(option.equals(currently.get(i))){
-//                        isValid = true;
-//                    }
-//                }
-//                if(!isValid){
-//                    currently.remove(i);
-//                    i--;
-//                }
-//            }
-//
-//            chipView.getChips().clear();
-//            chipView.getChips().addAll(currently);
-//        }
-    }
+//    public void onChipEnter(KeyEvent keyEvent) {
+//////        System.out.println("In function");
+////        if(keyEvent.getCode() == KeyCode.ENTER){
+////            ObservableList<String> currently = chipView.getChips();
+////            ObservableList<String> options = chipView.getSuggestions();
+////
+////            for(int i = 0; i < currently.size(); i++){
+////                boolean isValid = false;
+////                for(String option : options){
+////                    if(option.equals(currently.get(i))){
+////                        isValid = true;
+////                    }
+////                }
+////                if(!isValid){
+////                    currently.remove(i);
+////                    i--;
+////                }
+////            }
+////
+////            chipView.getChips().clear();
+////            chipView.getChips().addAll(currently);
+////        }
+//    }
 
     public void handleHelpPageButton(ActionEvent actionEvent) {
 
@@ -299,11 +278,15 @@ public class NewMainPageController {
         content.setActions(actions);
         dialog.show();
     }
+
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);
     }
 
     public void handleExpandButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(false);
+    }
+
+    public void onChipEnter(KeyEvent keyEvent) {
     }
 }

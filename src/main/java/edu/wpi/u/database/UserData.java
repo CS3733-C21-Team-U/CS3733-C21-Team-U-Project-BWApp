@@ -25,7 +25,7 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
-        addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "debug", false));
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "debug", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
         String guestID,
@@ -287,6 +287,21 @@ public class UserData extends Data{
         return results;
     }
 
+    public ArrayList<String> getEmployeeNamesByType(String type){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select name from Employees where type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     /**
      * Gets list of employees from database
      * @return list of employees
@@ -464,6 +479,11 @@ public class UserData extends Data{
         return new Employee();
     }
 
+    /**
+     * Sets an employee based on and id
+     * @param employeeID employee id
+     * @return the employee
+     */
     public Employee setEmployee(String employeeID){
         String str = "select * from Employees where employeeID=?";
         try{
