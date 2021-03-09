@@ -59,7 +59,7 @@
                         <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
                         <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
                            <children>
-                              <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
+                              <JFXButton styleClass="button-contained" text="SAVE (NOT WORKING)" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -79,9 +79,9 @@
             </Separator>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="30.0" prefHeight="560.0" prefWidth="430.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="30.0" prefHeight="560.0" prefWidth="430.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
@@ -90,12 +90,12 @@
                                           <Insets />
                                        </VBox.margin>
                                     </JFXTextField>
-                                    <JFXButton onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                    <JFXButton prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
+                                    <JFXButton prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -107,17 +107,17 @@
                               <Insets top="100.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" prefHeight="200.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations" />
-                                    <JFXButton onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
+                                    <JFXButton prefWidth="130.0" styleClass="button-contained" text="Add Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
+                                    <JFXButton prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -142,7 +142,7 @@
                         <HBox fx:id="pushDown21" alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="413.0">
                            <children>
                               <Region prefHeight="36.0" prefWidth="24.0" />
-                              <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCancelButton" styleClass="button-text" text="Cancel" />
+                              <JFXButton layoutX="78.0" layoutY="10.0" styleClass="button-text" text="Cancel" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />

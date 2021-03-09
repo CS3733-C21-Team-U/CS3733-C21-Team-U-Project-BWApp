@@ -80,11 +80,10 @@ public class CovidSurveyScreenController {
         App.userService.setEmployee("debug");
         System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
-        // todo : fixes the loading issue but won't go to new main page
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleHelpPage(ActionEvent actionEvent)throws IOException  {

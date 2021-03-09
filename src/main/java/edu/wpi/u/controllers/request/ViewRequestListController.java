@@ -1,9 +1,12 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +24,9 @@ public class ViewRequestListController {
 
 
     public VBox sampleRequestItem;
+    public JFXComboBox<String> typeOption;
+    public JFXComboBox<String> assignOption;
+    public JFXComboBox<String> resolveOption;
 
     /**
      *Gets each request and attaches it to a NewRequestItem
@@ -29,9 +35,17 @@ public class ViewRequestListController {
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
 
-
-
         ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
+
+        typeOption.getItems().addAll(
+                "All", "Maintenance", "Laundry", "Security", "Sanitation", "Computer", "Medical",
+                "AudioVisual", "Religious", "Language", "Gift", "Floral");
+
+        assignOption.getItems().addAll(
+                "All", "Assigned to You", "Unassigned");
+        resolveOption.getItems().addAll(
+                "All", "Active", "Resolved");
+
         //TODO: Remove (for debug since line above doesn't return anything)
         /*
         ArrayList<String> sampleArray = new ArrayList<String>();
@@ -167,4 +181,18 @@ case "Computer":
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
+
+    /**
+     * ComboBox functions below
+     */
+    public void onTypeFilter(){
+        App.requestService.requestType.set(typeOption.getSelectionModel().getSelectedItem());
+    }
+    public void onResolveFilter(){
+        App.requestService.resolveStatus.set(resolveOption.getSelectionModel().getSelectedItem());
+    }
+    public void onAssignFilter(){
+        App.requestService.assignedStatus.set(assignOption.getSelectionModel().getSelectedItem());
+    }
+
 }
