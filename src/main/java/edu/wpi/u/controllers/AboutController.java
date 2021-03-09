@@ -45,7 +45,17 @@ public class AboutController {
      * Defaults the image after mouse leaves the label to the hospital logo
      * Author Lily
      */
-    public void hideIMG() { showIMG("/edu/wpi/u/views/Images/brigham-health-logo-600x200.png");}
+    public void hideIMG() {
+        showIMG("/edu/wpi/u/views/Images/brigham-health-logo-600x200.png");
+        aboutDescriptionLabel.setText("We would like to give a special thank you to" +
+                " Brigham and Women's Hospitalm, and their representative Andrew Shinn," +
+                " for making this project possible with their cooperation, time, and" +
+                " input. We would also like to thank Worcester Polytechnic Institute," +
+                " and specifically the Department of Computer Science, for making this" +
+                " course possible. Additionally, we would like to thank Professor" +
+                " Wilson Wong for advising this class, as well as our team coach Andew" +
+                " Bonaventura for providing guidance throughout this course to our team.");
+    }
 
     /**
      * Shows Kohmei Kadoya
@@ -66,22 +76,41 @@ public class AboutController {
     public void showKaamilLokhandwala() { showIMG("/edu/wpi/u/views/Images/KaamilLokhandwala.jpg");}
 
     /**
-     * Shows Charlie Kittler
+     * Shows Charlie Kittler's picture and a short bio
      * Author Lily
      */
-    public void showCharlieKittler() { showIMG("/edu/wpi/u/views/Images/CharlieKittler.png");}
+    public void showCharlieKittler() {
+        showIMG("/edu/wpi/u/views/Images/CharlieKittler.png");
+        aboutDescriptionLabel.setText("Charles Kittler, one of our Assisntant Leads," +
+                " is a Robotics Engineering and Computer Science major from Natick, MA." +
+                " One fun fact about Charles is that he enjoys rock climbing.");
+    }
 
     /**
-     * Shows Lily Durkin
+     * Shows Lily Durkin's picture and a short bio
      * Author Lily
      */
-    public void showLilyDurkin() { showIMG("/edu/wpi/u/views/Images/LilyDurkin.jpg");}
+    public void showLilyDurkin() {
+        showIMG("/edu/wpi/u/views/Images/LilyDurkin.jpg");
+        aboutDescriptionLabel.setText("Lily Durkin, our Documentation Analyst, is a" +
+                " Robotics Engineering major from Lowell, MA. She enjoys sketching, and" +
+                " has chosen to pursue her depth in Art.");
+    }
 
     /**
-     * Shows Tyler Sanderville
+     * Shows Tyler Sanderville's picture and a short bio
      * Author Lily
      */
-    public void showTylerSanderville() { showIMG("/edu/wpi/u/views/Images/TylerSanderville.jpeg");}
+    public void showTylerSanderville() {
+        showIMG("/edu/wpi/u/views/Images/TylerSanderville.jpeg");
+        aboutDescriptionLabel.setText("Tyler Sanderville, our product owner, is a" +
+                " Robotics Engineering major. He hails from the far west, being birthed"
+                + " in Albuqerque, New Mexico and living all across the likes, ranging" +
+                " from the sun belt to northern California. He enjoys mountain biking," +
+                " cooking, strumming guitar, and gaming when the moment is right." +
+                "Fun fact: Tyler currently ranks in the global top 300 for the video" +
+                " game 'Super Hexagon'");
+    }
 
     /**
      * Shows Jacob Bernard
@@ -114,13 +143,18 @@ public class AboutController {
     public void showOlaJackson() { showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");}
 
     /**
-     * Brings AboutPage back to Help.
+     * Brings AboutPage back to Help Page.
      * @throws Exception
      * Author Lily
      */
     @FXML public void handleBackToMainPageButton() throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

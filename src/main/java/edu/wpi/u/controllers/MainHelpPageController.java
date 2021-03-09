@@ -373,10 +373,15 @@ public class MainHelpPageController {
      * Takes users from the help page to the about us page
      * @throws Exception
      */
-    @FXML public void handleAboutPage() throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/BaseAboutPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    @FXML public void handleAboutPage() throws Exception {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/BaseAboutPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
