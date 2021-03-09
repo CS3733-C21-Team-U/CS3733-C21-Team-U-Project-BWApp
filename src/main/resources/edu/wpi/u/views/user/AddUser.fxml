@@ -8,7 +8,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.user.AddUserController">
@@ -20,7 +19,7 @@
                <children>
                   <JFXTextField fx:id="usernameTextField" labelFloat="true" prefWidth="188.0" promptText="Enter Username">
                      <VBox.margin>
-                        <Insets right="1200.0" top="15.0" />
+                        <Insets right="1200.0" top="30.0" />
                      </VBox.margin>
                   </JFXTextField>
                   <Label fx:id="userNameErrorLabel" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" style="-fx-text-fill: -error;" text="Username already in use" />
@@ -30,17 +29,29 @@
                <VBox.margin>
                   <Insets right="1200.0" top="10.0" />
                </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="emailTextField" labelFloat="true" promptText="Enter Email">
-               <VBox.margin>
-                  <Insets right="1200.0" top="30.0" />
-               </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone #">
-               <VBox.margin>
-                  <Insets right="1200.0" top="30.0" />
-               </VBox.margin></JFXTextField>
+            <VBox>
+               <children>
+                  <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone #">
+                     <VBox.margin>
+                        <Insets right="1200.0" top="30.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="phoneNumberUsedLable" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Phone number already in use" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <JFXTextField fx:id="emailTextField" labelFloat="true" promptText="Enter Email">
+                     <VBox.margin>
+                        <Insets right="1200.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="emailUsedLable" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Email already used" />
+               </children>
+            </VBox>
             <JFXTextField fx:id="passwordTextField" labelFloat="true" promptText="Enter User Password">
                <VBox.margin>
-                  <Insets right="1200.0" top="30.0" />
+                  <Insets right="1200.0" top="10.0" />
                </VBox.margin></JFXTextField>
             <JFXComboBox fx:id="userTypeComboBox" focusColor="#c9cdd7" prefHeight="23.0" prefWidth="475.0" promptText="Enter User Type">
                <VBox.margin>
@@ -51,16 +62,6 @@
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXDatePicker fx:id="appointmentDatePicker" disable="true" overLay="true" prefHeight="23.0" prefWidth="475.0" promptText="Enter Appt Time" visible="false">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </JFXDatePicker>
-            <HBox>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </HBox>
             <JFXButton fx:id="addUserButton" buttonType="RAISED" onAction="#handleAddUser" prefWidth="475.0" styleClass="button-contained" text="Add User">
                <VBox.margin>
                   <Insets top="15.0" />
@@ -69,6 +70,11 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXButton>
+            <JFXDatePicker fx:id="appointmentDatePicker" disable="true" overLay="true" prefHeight="23.0" prefWidth="475.0" promptText="Enter Appt Time" visible="false">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </JFXDatePicker>
             <JFXCheckBox fx:id="userEmployStatus" text="Employee?" visible="false" />
          </children>
       </VBox>

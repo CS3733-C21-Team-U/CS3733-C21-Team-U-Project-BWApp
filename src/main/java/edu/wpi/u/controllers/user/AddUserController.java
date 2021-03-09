@@ -145,7 +145,7 @@ public class AddUserController {
         } else if(nameTextField.getText().equals("")){
             nameTextField.validate();
         } else if(emailTextField.getText().equals("")){
-            nameTextField.validate();
+            emailTextField.validate();
         } else if(phoneNumTextField.getText().equals("")){
             phoneNumTextField.validate();
         } else if(passwordTextField.getText().equals("")){
@@ -153,9 +153,9 @@ public class AddUserController {
         } else if(userTypeComboBox.getValue() == null){
             userTypeComboBox.validate();
         } else if(!userTypeComboBox.getValue().toString().equals(PATIENT.toString())){
-            if(){
+            if(App.userService.checkEmail(emailTextField.getText())){
                 emailUsedLable.setVisible(true);
-            }else if (){
+            }else if (App.userService.checkPhoneNumber(phoneNumTextField.getText())){
                 phoneNumberUsedLable.setVisible(true);
             }else if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 // todo : are only employees ever going to be added this way ?
@@ -173,6 +173,10 @@ public class AddUserController {
         } else{
             if(providerName.getText().equals("")){
                 providerName.validate();
+            } else if(App.userService.checkEmail(emailTextField.getText())){
+                emailUsedLable.setVisible(true);
+            } else if (App.userService.checkPhoneNumber(phoneNumTextField.getText())){
+                phoneNumberUsedLable.setVisible(true);
             } else if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 App.userService.addPatient(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false, new ArrayList<Appointment>(), providerName.getText(), null, null);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
