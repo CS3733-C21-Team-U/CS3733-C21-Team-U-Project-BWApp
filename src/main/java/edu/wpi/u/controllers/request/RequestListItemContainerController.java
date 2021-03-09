@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.request;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.Request;
 import edu.wpi.u.requests.SpecificRequest;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,6 +20,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public Parent expandedNode;
     public Parent collapsedNode;
     public Parent editNode;
+    public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
 
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
@@ -46,6 +48,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public void switchToExpanded() {
         this.getChildren().clear();
         this.getChildren().add(expandedNode);
+
     }
     public void switchToCollapsed() {
         this.getChildren().clear();

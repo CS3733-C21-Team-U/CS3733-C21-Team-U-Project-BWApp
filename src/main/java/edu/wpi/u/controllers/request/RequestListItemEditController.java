@@ -81,7 +81,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         App.requestService.updateRequest( parent.request);
 
 
-
+        this.parent.needUpdate.set(!this.parent.needUpdate.get());
         this.parent.switchToExpanded();
         //SCENE Switch
 //        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();

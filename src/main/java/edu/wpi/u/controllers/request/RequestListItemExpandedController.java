@@ -8,6 +8,7 @@ import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.CommentType;
 import edu.wpi.u.requests.SpecificRequest;
 import edu.wpi.u.requests.Request;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,7 +42,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML public VBox commentsRoot;
     @FXML public VBox mainSpecialFieldVbox;
     @FXML private JFXTextField commentField;
-
+    //for update
 
     AnchorPane mainMapPane = new AnchorPane();
 
@@ -76,6 +77,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         loader.load();
     }
 
+
     @FXML
     public void initialize(URL location, ResourceBundle resources){
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
@@ -94,6 +96,23 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         miniMap.centreOn(new Point2D(170, 90));
         miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
         mapViewRoot.getChildren().add(miniMap);
+
+
+        //add Listener
+        parent.needUpdate.addListener((o,oldVal,newVal) -> {
+            titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
+            descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
+            String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
+            creatorAndDateString += " - ";
+            creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
+            creatorAndDateLabel.setText(creatorAndDateString);
+            assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
+            completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
+//        //requestDetailSecurityLabel.setText(request);
+//        setSpecifics();
+            generateSpecificFields();
+            generateComments();
+        });
 
         titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
         descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
@@ -114,6 +133,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     //TODO : Replace with function written in NER Controller, based on current IREQUEST
     //I re-did this here, IDK what the above comment is - Kohmei
     public void generateSpecificFields(){
+        mainSpecialFieldVbox.getChildren().clear();
         for(int i = 0; i < this.parent.request.getSpecificFields().length; i++) {
             Region region = new Region();
             region.setPrefHeight(14);
