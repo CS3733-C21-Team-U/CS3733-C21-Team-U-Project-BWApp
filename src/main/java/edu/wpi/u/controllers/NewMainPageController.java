@@ -200,7 +200,7 @@ public class NewMainPageController {
                  Object myController = fxmlLoader.getController();
                  */
                 //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 Object obj = fxmlLoader.load();
                 Object myController = fxmlLoader.getController();
                 App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());

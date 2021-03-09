@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
@@ -148,6 +149,19 @@
                </BorderPane.margin>
             </AnchorPane>
          </left>
+         <bottom>
+            <HBox prefHeight="35.0" prefWidth="756.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton onAction="#handleSkipToGuestButton" styleClass="button-contained" text="LOG IN AS GUEST" />
+                  <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
+                  <JFXButton layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
+                  <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
    <stylesheets>
