@@ -384,4 +384,20 @@ public class MainHelpPageController {
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
+
+    /**
+     * Takes users from the help page to the COVID info page
+     * @throws Exception
+     */
+    @FXML public void handleCovidInfoPage() throws Exception {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/CovidInfoPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
 }
