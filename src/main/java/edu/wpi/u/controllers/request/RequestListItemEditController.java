@@ -75,7 +75,8 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         locationValidator.setMessage("Valid Employee Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
+        ArrayList<String> assingneeList = new ArrayList<String>(App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
+        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , assingneeList);
         Set<String> strings = App.mapService.getLongNames().keySet();
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
 
