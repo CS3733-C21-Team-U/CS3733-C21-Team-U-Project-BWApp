@@ -33,23 +33,15 @@ public class ContextMenuEdgeController {
             permissionErrorLabel.setVisible(false);
         });
 
-        // Client side error handling for combo box
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Input Required");
-        edgeComboBox.getValidators().add(validator);
-        edgeComboBox.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                edgeComboBox.validate();
-            }
-        });
-
         ObservableList<String> list = FXCollections.observableArrayList();
         list.add("Admin only");
         list.add("All Employees");
         list.add("Everyone");
         if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             deleteButton.setText("Cancel");
-        }else {
+        }else if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
+            edgeComboBox.setValue("Everyone");
+        } else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
             if(thisEdge.getUserPermissions().get(0).equals(Role.DEFAULT)){
                 edgeComboBox.setValue("Everyone");
@@ -58,7 +50,6 @@ public class ContextMenuEdgeController {
             }else{
                 edgeComboBox.setValue("Admin only");
             }
-
         }
 
         edgeComboBox.setItems(list);
