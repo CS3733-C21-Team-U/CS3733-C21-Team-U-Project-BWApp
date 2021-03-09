@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
 import static edu.wpi.u.users.Role.ADMIN;
 
 public class NewMainPageController {
@@ -62,6 +63,8 @@ public class NewMainPageController {
     public JFXListView list2;
     public JFXButton expandButton;
     public JFXButton collapseButton;
+    public Tab HelpMainPageTab;
+    public Tab AdminHelpMainPageTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -136,12 +139,20 @@ public class NewMainPageController {
             adminTab1.setDisable(false);
             adminTab2.setStyle("-fx-opacity: 1");
             adminTab2.setDisable(false);
+            HelpMainPageTab.setDisable(true);
+            HelpMainPageTab.setStyle("-fx-opacity: 0");
+            AdminHelpMainPageTab.setDisable(false);
+            AdminHelpMainPageTab.setStyle("-fx-opacity: 1");
         }
         else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
             adminTab1.setStyle("-fx-opacity: 0");
             adminTab1.setDisable(true);
             adminTab2.setStyle("-fx-opacity: 0");
             adminTab2.setDisable(true);
+            HelpMainPageTab.setDisable(false);
+            HelpMainPageTab.setStyle("-fx-opacity: 1");
+            AdminHelpMainPageTab.setDisable(true);
+            AdminHelpMainPageTab.setStyle("-fx-opacity: 0");
         }
     }
 
