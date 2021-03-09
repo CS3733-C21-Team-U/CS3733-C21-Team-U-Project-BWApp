@@ -105,7 +105,6 @@ public class UserLoginScreenController {
     public void handleLogin() throws IOException {
         System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
-        // TODO : Ability to skip the 2fa
 //        Scene scene = new Scene(root);
 //        App.getPrimaryStage().setScene(scene);
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));

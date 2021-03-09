@@ -25,7 +25,7 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
-        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "debug", false));
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "9148394600", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
         String guestID,
@@ -133,6 +133,9 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Prints out the patient ids of all patients
+     */
     public void printPatients(){
         String str = "select * from Patients";
         try {
@@ -140,7 +143,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             System.out.println("===Patients===");
             while (rs.next()){
-                System.out.println("Patients username: " + rs.getString("patientID"));
+                System.out.println("Patients id: " + rs.getString("patientID"));
             }
             rs.close();
             ps.close();
@@ -160,7 +163,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             System.out.println("===Employees===");
             while (rs.next()){
-                System.out.println("Employee ID: " + rs.getString("userName"));
+                System.out.println("Employee userName: " + rs.getString("userName"));
             }
             rs.close();
             ps.close();

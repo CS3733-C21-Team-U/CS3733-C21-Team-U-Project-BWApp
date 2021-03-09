@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class UserSignupScreenController {
 
@@ -41,7 +42,7 @@ public class UserSignupScreenController {
             }
         });
 
-        // todo : fix, maybe because text is a String?
+        // todo : fix
         RegexValidator validator2 = new RegexValidator();
         validator2.setRegexPattern("/^\\d{10}$/");
         validator2.setMessage("Phone number is invalid");
