@@ -270,7 +270,8 @@ public class MapData extends Data{
                 String shortName = rset.getString("shortName");
                 mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
                 String key = nodeType + floor;
-                int index = Integer.valueOf(id.substring(5,7));
+                String stringIndex = id.substring(5,8);
+                int index = Integer.valueOf(stringIndex);
                 if(!App.mapService.currentIDNumber.containsKey(key)){
                     App.mapService.currentIDNumber.put(key, index);
                 }else if(App.mapService.currentIDNumber.get(key) < index){

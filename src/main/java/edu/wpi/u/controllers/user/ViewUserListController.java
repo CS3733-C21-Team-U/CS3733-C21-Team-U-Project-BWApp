@@ -7,7 +7,9 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
+
 import edu.wpi.u.App;
 import edu.wpi.u.users.*;
 import javafx.beans.property.SimpleBooleanProperty;
