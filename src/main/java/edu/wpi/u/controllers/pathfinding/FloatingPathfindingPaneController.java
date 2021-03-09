@@ -165,7 +165,7 @@ public class FloatingPathfindingPaneController {
         Set<String> strings = namesAndIDs.keySet();
 
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , strings);
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(strings));
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , strings);
 
 
 //        String test = namesAndIDs.get(startNodeField.getText());

@@ -407,11 +407,11 @@
 }
 
 .jfx-list-view .list-cell:even {
-    -fx-background-color: #8c8c8c;
+    -fx-background-color: #e0e0e0;
     -fx-text-fill: black;
 }
 .jfx-list-view .list-cell:odd {
-    -fx-background-color: #e0e0e0;
+    -fx-background-color: #ffffff;
     -fx-text-fill: black;
 }
 
@@ -419,7 +419,7 @@
     -fx-background-insets: 0;
     -jfx-cell-horizontal-margin: 0.0;
     -jfx-cell-vertical-margin: 5.0;
-    -jfx-vertical-gap: 10;
+    -jfx-vertical-gap: 0;
     -jfx-expanded: true;
     -fx-pref-width: 200;
 }

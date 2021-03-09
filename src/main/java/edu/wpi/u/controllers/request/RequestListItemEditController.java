@@ -1,6 +1,7 @@
 package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +23,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import javax.swing.event.ChangeListener;
 import java.io.IOException;
@@ -54,6 +57,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
 
 
+
     public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent; //THIS SHOULD ALWAYS BE FIRST
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
@@ -64,6 +68,14 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
+        assigneeValidator.setMessage("Valid Employee Required");
+        RequiredFieldValidator locationValidator = new RequiredFieldValidator();
+        locationValidator.setMessage("Valid Employee Required");
+        editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
+        editLocationsField.getValidators().add(locationValidator);
+        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , App.userService.getEmployeeIDByType(parent.request.getType()).keySet());
+
 //        parent.request.
         //Set Existing values for fields
         editTitleField.setText( parent.request.getGenericRequest().getTitle());
@@ -98,7 +110,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(editDateNeededField.getValue().atStartOfDay()),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
-        App.requestService.updateRequest( parent.request);
+        App.requestService.updateRequest(parent.request);
 
 
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
@@ -184,23 +196,38 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     }
 
     public void addAssignee(){
-        editAssigneesListView.getItems().add(editAssigneesField.getText());
-        editAssigneesField.setText("");
-       // System.out.println("YOOOOOOOOOOOO");
+        if(editAssigneesField.getText().equals("")){
+            editAssigneesField.validate();
+        }else {
+            editAssigneesListView.getItems().add(editAssigneesField.getText());
+            editAssigneesField.setText("");
+        }
     }
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
     }
 
-    public void addLocation(){
-        editLocationsListView.getItems().add(editLocationsField.getText());
-        editLocationsField.setText("");
-        // System.out.println("YOOOOOOOOOOOO");
+    public void addLocation() {
+        if (editLocationsField.getText().equals("")) {
+            editAssigneesField.validate();
+        } else {
+            editLocationsListView.getItems().add(editLocationsField.getText());
+            editLocationsField.setText("");
+        }
     }
-    public void deleteLocation(){
-        editLocationsListView.getItems().remove(editLocationsField.getText());
-        editLocationsField.setText("");
-    }
+        public void deleteLocation(){
+            editLocationsListView.getItems().remove(editLocationsField.getText());
+            editLocationsField.setText("");
+
+        }
+
+    /*
+    App.mapService.getLongNames(string NodeID);
+
+
+
+
+     */
 
 }
