@@ -78,25 +78,16 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
-                           <VBox.margin>
-                              <Insets left="290.0" top="5.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="submitSkipButton" onAction="#handleSkip" prefWidth="313.0" styleClass="button-outlined" text="Skip">
-                           <VBox.margin>
-                              <Insets left="290.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                        <JFXButton onAction="#handleBackButton" prefWidth="313.0" styleClass="button-outlined" text="Back">
-                           <VBox.margin>
-                              <Insets left="290.0" top="5.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                     </children>
-                  </VBox>
+                  <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
+                     <VBox.margin>
+                        <Insets left="290.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
+                     <VBox.margin>
+                        <Insets left="290.0" top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
                     </children>
                     <HBox.margin>
                         <Insets />
