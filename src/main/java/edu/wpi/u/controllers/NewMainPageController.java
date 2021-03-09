@@ -74,6 +74,9 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.throwDialogHerePane = newMainPageStackPane;
+
+
 //        validationFeild
         TextField test = new TextField("test");
 //        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");

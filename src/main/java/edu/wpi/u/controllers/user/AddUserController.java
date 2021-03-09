@@ -5,17 +5,20 @@ import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.exceptions.UsernameNotFoundException;
+import edu.wpi.u.users.Appointment;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -23,7 +26,7 @@ import static edu.wpi.u.users.Role.*;
 
 public class AddUserController {
 
-    @FXML public JFXTextField usernameTextField;
+    @FXML public JFXTextField usernameTextField,providerName;
     @FXML public JFXTextField nameTextField;
     @FXML public JFXTextField phoneNumTextField;
     @FXML public JFXTextField passwordTextField;
@@ -33,9 +36,52 @@ public class AddUserController {
     @FXML public JFXDatePicker appointmentDatePicker;
     @FXML public JFXTextField emailTextField;
     @FXML public JFXButton cancelButton;
+    @FXML public Label userNameErrorLabel,emailUsedLable, phoneNumberUsedLable;
 
     public void initialize() throws IOException {
-        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString(), DEFAULT.toString() );
+        userNameErrorLabel.setVisible(false);
+        emailUsedLable.setVisible(false);
+        phoneNumberUsedLable.setVisible(false);
+
+        usernameTextField.focusedProperty().addListener(e -> {
+            userNameErrorLabel.setVisible(false);
+        });
+
+        emailTextField.focusedProperty().addListener(e -> {
+            emailUsedLable.setVisible(false);
+        });
+
+        phoneNumberUsedLable.focusedProperty().addListener(e -> {
+            phoneNumberUsedLable.setVisible(false);
+        });
+
+        userTypeComboBox.focusedProperty().addListener(e -> {
+            if(userTypeComboBox.getValue().toString().equals(PATIENT.toString())){
+                providerName.setVisible(true);
+            } else {
+                providerName.setVisible(false);
+            }
+        });
+
+        userTypeComboBox.getItems().addAll(DOCTOR.toString(), PATIENT.toString(), ADMIN.toString(), MAINTENANCE.toString(), NURSE.toString(), SECURITY_GUARD.toString(), TECHNICAL_SUPPORT.toString(), TRANSLATORS.toString());
+
+        RequiredFieldValidator validator0 = new RequiredFieldValidator();
+        validator0.setMessage("Provider Required");
+        providerName.getValidators().add(validator0);
+        providerName.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                providerName.validate();
+            }
+        });
+
+        RequiredFieldValidator validator1 = new RequiredFieldValidator();
+        validator1.setMessage("Username Required");
+        usernameTextField.getValidators().add(validator1);
+        usernameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                usernameTextField.validate();
+            }
+        });
 
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator2.setMessage("Name Required");
@@ -94,9 +140,24 @@ public class AddUserController {
      * made into a user object to be added to the database
      */
     public void handleAddUser() throws UsernameNotFoundException, IOException {
-        String userType = "";
-        if(userEmployStatus.isSelected()){
-            if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
+        if(usernameTextField.getText().equals("")){
+            usernameTextField.validate();
+        } else if(nameTextField.getText().equals("")){
+            nameTextField.validate();
+        } else if(emailTextField.getText().equals("")){
+            nameTextField.validate();
+        } else if(phoneNumTextField.getText().equals("")){
+            phoneNumTextField.validate();
+        } else if(passwordTextField.getText().equals("")){
+            passwordTextField.validate();
+        } else if(userTypeComboBox.getValue() == null){
+            userTypeComboBox.validate();
+        } else if(!userTypeComboBox.getValue().toString().equals(PATIENT.toString())){
+            if(){
+                emailUsedLable.setVisible(true);
+            }else if (){
+                phoneNumberUsedLable.setVisible(true);
+            }else if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 // todo : are only employees ever going to be added this way ?
                 System.out.println("Unique username");
                 App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
@@ -106,17 +167,21 @@ public class AddUserController {
                 anchor.getChildren().add(root);
             }
             else{
+                userNameErrorLabel.setVisible(true);
                 throw new UsernameNotFoundException();
             }
-        }
-        else{
-            if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
+        } else{
+            if(providerName.getText().equals("")){
+                providerName.validate();
+            } else if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
+                App.userService.addPatient(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false, new ArrayList<Appointment>(), providerName.getText(), null, null);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();
                 anchor.getChildren().add(root);
             }
             else{
+                userNameErrorLabel.setVisible(true);
                 throw new UsernameNotFoundException();
             }
         }

@@ -25,7 +25,7 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
-        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "debug", false));
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.ADMIN, "debug", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
         String guestID,
@@ -294,12 +294,13 @@ public class UserData extends Data{
      */
     public HashMap<String, String> getEmployeeNamesByType(String type){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select employeeID,name from Employees where type=?";
+        String str = "select userName,name from Employees where type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,type);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                result.put(rs.getString("employeeID"), rs.getString("name"));
+                result.put(rs.getString("username"), rs.getString("name"));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1153,4 +1154,6 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
+
+
 }

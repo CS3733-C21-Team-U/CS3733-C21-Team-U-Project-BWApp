@@ -55,7 +55,6 @@ public class FloatingPathfindingPaneController {
 
 
     public void handleTestAddTextField(ActionEvent actionEvent) {
-
         Label turnText = new Label("Turn left at the corner of the MRI room");
         turnText.getStyleClass().add("subtitle");
         Label distanceText = new Label("Continue straight for 15 meters");
@@ -166,7 +165,7 @@ public class FloatingPathfindingPaneController {
         Set<String> strings = namesAndIDs.keySet();
 
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , strings);
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(strings));
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , strings);
 
 
 //        String test = namesAndIDs.get(startNodeField.getText());
