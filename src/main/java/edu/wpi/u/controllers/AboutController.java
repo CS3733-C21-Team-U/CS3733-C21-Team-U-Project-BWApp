@@ -43,6 +43,7 @@ public class AboutController {
 
     /**
      * Defaults the image after mouse leaves the label to the hospital logo
+     * and the text to a thank you blurb
      * Author Lily
      */
     public void hideIMG() {
@@ -58,22 +59,32 @@ public class AboutController {
     }
 
     /**
-     * Shows Kohmei Kadoya
+     * Shows Kohmei Kadoya's picture
      * Author Lily
      */
-    public void showKohmeiKadoya() { showIMG("/edu/wpi/u/views/Images/KohmeiKadoya.jpeg");}
+    public void showKohmeiKadoya() {
+        showIMG("/edu/wpi/u/views/Images/KohmeiKadoya.jpeg");
+    }
 
     /**
-     * Shows Neville Ingram
+     * Shows Neville Ingram's picture and a short bio
      * Author Lily
      */
-    public void showNevilleIngram() { showIMG("/edu/wpi/u/views/Images/NevilleIngram.jpg");}
+    public void showNevilleIngram() {
+        showIMG("/edu/wpi/u/views/Images/NevilleIngram.jpg");
+        aboutDescriptionLabel.setText("Neville Ingram, one of our Assistant Leads," +
+                " is a Mathematical Sciences and Computer Science major" +
+                " from New Rochelle, New York." +
+                " In his free time he likes to go hiking and play video games.");
+    }
 
     /**
-     * Shows Kaamil Lokhandwala
+     * Shows Kaamil Lokhandwala's picture
      * Author Lily
      */
-    public void showKaamilLokhandwala() { showIMG("/edu/wpi/u/views/Images/KaamilLokhandwala.jpg");}
+    public void showKaamilLokhandwala() {
+        showIMG("/edu/wpi/u/views/Images/KaamilLokhandwala.jpg");
+    }
 
     /**
      * Shows Charlie Kittler's picture and a short bio
@@ -113,34 +124,44 @@ public class AboutController {
     }
 
     /**
-     * Shows Jacob Bernard
+     * Shows Jacob Bernard's picture
      * Author Lily
      */
-    public void showJacobBernard() { showIMG("/edu/wpi/u/views/Images/JacobBernard.jpg");}
+    public void showJacobBernard() {
+        showIMG("/edu/wpi/u/views/Images/JacobBernard.jpg");
+    }
 
     /**
-     * Nick Gao
+     * Nick Gao's picture
      * Author Lily
      */
-    public void showNickGao() { showIMG("/edu/wpi/u/views/Images/NickGao.jpg");}
+    public void showNickGao() {
+        showIMG("/edu/wpi/u/views/Images/NickGao.jpg");
+    }
 
     /**
-     * Shows Will Burke
+     * Shows Will Burke's picture
      * Author Lily
      */
-    public void showWillBurke() { showIMG("/edu/wpi/u/views/Images/WillBurke.jpg");}
+    public void showWillBurke() {
+        showIMG("/edu/wpi/u/views/Images/WillBurke.jpg");
+    }
 
     /**
-     * Shows Michael Geary
+     * Shows Michael Geary's picture
      * Author Lily
      */
-    public void showMichaelGeary() { showIMG("/edu/wpi/u/views/Images/MichaelGeary.jpg");}
+    public void showMichaelGeary() {
+        showIMG("/edu/wpi/u/views/Images/MichaelGeary.jpg");
+    }
 
     /**
-     * Shows Ola Jackson
+     * Shows Ola Jackson's picture
      * Author Lily
      */
-    public void showOlaJackson() { showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");}
+    public void showOlaJackson() {
+        showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");
+    }
 
     /**
      * Brings AboutPage back to Help Page.
