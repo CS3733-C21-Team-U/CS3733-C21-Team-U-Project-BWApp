@@ -42,12 +42,17 @@ public class UserLoginScreenController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
-    @FXML public Label errorLabel;
+    @FXML public Label errorLabel, wrongPasswordLabel;
     @FXML public JFXButton debugLoginAdminButton;
     @FXML public JFXButton debugLoginGuestButton;
     @FXML public JFXButton submitSkipButton;
 
     public void initialize() throws IOException {
+        wrongPasswordLabel.setVisible(false);
+
+        passWordField.focusedProperty().addListener(e->{
+           wrongPasswordLabel.setVisible(false);
+        });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -181,7 +186,11 @@ public class UserLoginScreenController {
             if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText()));
                 handleSubmit();
+            }else{
+                wrongPasswordLabel.setVisible(true);
             }
+        }else{
+            wrongPasswordLabel.setVisible(true);
         }
     }
 
@@ -251,7 +260,11 @@ public class UserLoginScreenController {
                     e.printStackTrace();
                 }
                 App.getPrimaryStage().getScene().setRoot(root);
+            }else{
+                wrongPasswordLabel.setVisible(true);
             }
+        }else{
+            wrongPasswordLabel.setVisible(true);
         }
     }
 }
