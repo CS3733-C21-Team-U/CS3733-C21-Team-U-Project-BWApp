@@ -209,20 +209,20 @@ public class MobileUserLoginScreenController {
 
 
 
-//    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
+    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
 //        if (//user Covid Status approved = true){
 //        App.userService.setUser("admin", "admin", "Employees");
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileEnter2FATokenScreen.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
 //        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-//        }
-//        App.userService.setUser("admin", "admin", "Employees");
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-//    }
+       // }
+        App.userService.setUser("admin", "admin", "Employees");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
 
 
 
