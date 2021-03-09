@@ -43,8 +43,10 @@ public class MobileCovidSurveyController {
     public void handleCovidSurveyFill() throws IOException {
 
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
-            App.getPrimaryStage().getScene().setRoot(root);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             covidRisk = "None";
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
