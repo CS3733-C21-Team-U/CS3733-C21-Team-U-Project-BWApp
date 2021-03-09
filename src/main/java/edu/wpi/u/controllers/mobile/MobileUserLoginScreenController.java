@@ -231,7 +231,19 @@ public class MobileUserLoginScreenController {
     }
 
     public void handleLonginWithNo2FA(ActionEvent actionEvent) {
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MobileCovidSurvey.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                App.getPrimaryStage().getScene().setRoot(root);
+            }
+        }
     }
+
 
     public void handleForgotPassword(ActionEvent actionEvent) {
     }
