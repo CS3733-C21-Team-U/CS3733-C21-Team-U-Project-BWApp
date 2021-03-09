@@ -314,7 +314,6 @@ public class MapService {
     }
   }
 
-
   /**
    * runs A* on the model and gets a linked list of the path
    * returns an empty list if there is no path to be found TODO make no path found an error

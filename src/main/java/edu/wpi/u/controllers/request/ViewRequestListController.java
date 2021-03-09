@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -21,6 +22,8 @@ public class ViewRequestListController {
 
 
     public VBox sampleRequestItem;
+    @FXML public VBox newRequestVBox;
+    ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
 
     /**
      *Gets each request and attaches it to a NewRequestItem
@@ -28,10 +31,14 @@ public class ViewRequestListController {
      */
     public void initialize() throws IOException {
         System.out.println("In Init for View Request");
+        App.newReqVBox = newRequestVBox;
+
+        App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
+            newRequestVBox = App.newReqVBox;
+        });
 
 
 
-        ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
         //TODO: Remove (for debug since line above doesn't return anything)
         /*
         ArrayList<String> sampleArray = new ArrayList<String>();
@@ -67,7 +74,7 @@ public class ViewRequestListController {
         End Remove*/
 
         for (SpecificRequest request: listOfRequests) {
-            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request));
+            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, "false"));
         }
         /*
         for (int i = 0; i < listOfRequests.size(); i++) {
@@ -162,9 +169,7 @@ case "Computer":
      * @throws Exception
      */
     @FXML public void handleNewRequestButton() throws Exception {
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ButtonPageForNewRequest.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
     }
 }

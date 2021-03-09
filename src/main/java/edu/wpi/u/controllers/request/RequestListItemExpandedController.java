@@ -102,7 +102,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mapViewRoot.setMinSize(457,300);
         mapViewRoot.toFront();
         locationGroup.toFront();
-        loadLocationsOnMap("G", locationGroup);
+        //loadLocationsOnMap("G", locationGroup);
 
 
 

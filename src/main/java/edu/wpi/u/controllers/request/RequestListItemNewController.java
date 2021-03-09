@@ -24,13 +24,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class RequestListItemEditController extends AnchorPane implements Initializable {
+public class RequestListItemNewController extends AnchorPane {
 
     public RequestListItemContainerController parent;
     public Region pushDown1;
@@ -55,56 +54,55 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     Set<String> existingAssignee;
 
 
-    public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
-        this.parent = parent; //THIS SHOULD ALWAYS BE FIRST
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
+    public RequestListItemNewController() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemNew.fxml"));
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
-        assigneeValidator.setMessage("Valid Assignee Required");
-        RequiredFieldValidator locationValidator = new RequiredFieldValidator();
-        locationValidator.setMessage("Valid Location Required");
-        editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
-        editLocationsField.getValidators().add(locationValidator);
-        ArrayList<String> assingneeList = new ArrayList<String>(App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , assingneeList);
-        Set<String> strings = App.mapService.getLongNames().keySet();
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
-
-
-        //Set Existing values for fields
-        editTitleField.setText( parent.request.getGenericRequest().getTitle());
-        editDescriptionField.setText( parent.request.getGenericRequest().getDescription());
-        editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
-        editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
-        makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        //load in name as opposed to Node Ids
-        ArrayList<String> locationNames = new ArrayList<>();
-        for(String s: parent.request.getGenericRequest().getLocations()){
-            locationNames.add(App.mapService.getNodeFromID(s).getLongName());
-        }
-
-        makeListView( locationNames, editLocationsListView);
-        specificTextFields = generateSpecificFields();
-
-        editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
-        editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
-
-        /* adding items to the list view */
-        /*making list view horizontal*/
-//        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
-//        /* creating horizontal box to add item objects */
-//        HBox hbox = new HBox(editAssigneesListView);
-
-
-
-
-    }
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//        RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
+//        assigneeValidator.setMessage("Valid Assignee Required");
+//        RequiredFieldValidator locationValidator = new RequiredFieldValidator();
+//        locationValidator.setMessage("Valid Location Required");
+//        editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
+//        editLocationsField.getValidators().add(locationValidator);
+//        ArrayList<String> assingneeList = new ArrayList<String>(App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
+//        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , assingneeList);
+//        Set<String> strings = App.mapService.getLongNames().keySet();
+//        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
+//
+//
+//        //Set Existing values for fields
+//        editTitleField.setText( parent.request.getGenericRequest().getTitle());
+//        editDescriptionField.setText( parent.request.getGenericRequest().getDescription());
+//        editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
+//        editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+//        makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
+//        //load in name as opposed to Node Ids
+//        ArrayList<String> locationNames = new ArrayList<>();
+//        for(String s: parent.request.getGenericRequest().getLocations()){
+//            locationNames.add(App.mapService.getNodeFromID(s).getLongName());
+//        }
+//
+//        makeListView( locationNames, editLocationsListView);
+//        specificTextFields = generateSpecificFields();
+//
+//        editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
+//        editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
+//
+//        /* adding items to the list view */
+//        /*making list view horizontal*/
+////        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
+////        /* creating horizontal box to add item objects */
+////        HBox hbox = new HBox(editAssigneesListView);
+//
+//
+//
+//
+//    }
 
     /**
      * Pull from fields, and run update request

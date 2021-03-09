@@ -9,6 +9,7 @@ import edu.wpi.u.users.Guest;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,8 @@ public class App extends Application {
   public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
+  public static VBox newReqVBox;
+  public static SimpleBooleanProperty VBoxChanged = new SimpleBooleanProperty(true);
 
   public static SVGPath themeSVG;
 

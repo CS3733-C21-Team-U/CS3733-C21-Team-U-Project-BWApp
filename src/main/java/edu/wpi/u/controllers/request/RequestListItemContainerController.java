@@ -25,9 +25,10 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public Parent expandedNode;
     public Parent collapsedNode;
     public Parent editNode;
+    public Parent newNode;
     public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
-    public RequestListItemContainerController(SpecificRequest request) throws IOException {
+    public RequestListItemContainerController(SpecificRequest request, String newRequestStuff) throws IOException {
         this.request = request; //MUST BE FIRST!!!
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemContainer.fxml"));
@@ -37,11 +38,13 @@ public class RequestListItemContainerController extends AnchorPane implements In
         //"this" is both an anchor pane and controller
         //https://github.com/CS3733-C21-Team-U/CS3733-C21-Team-U-Project-BWApp/pull/226
 
-        expandedNode = new RequestListItemExpandedController(this);
-        collapsedNode = new RequestListItemCollapsedController(this);
-        editNode = new RequestListItemEditController(this);
 
-        this.getChildren().add(collapsedNode);
+
+            expandedNode = new RequestListItemExpandedController(this);
+            collapsedNode = new RequestListItemCollapsedController(this);
+            editNode = new RequestListItemEditController(this);
+            this.getChildren().add(collapsedNode);
+
 
     }
 
