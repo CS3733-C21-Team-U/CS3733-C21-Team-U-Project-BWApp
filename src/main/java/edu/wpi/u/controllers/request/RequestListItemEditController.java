@@ -23,6 +23,8 @@ import org.controlsfx.control.textfield.TextFields;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -116,18 +118,14 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
 
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
-                Timestamp.valueOf(editDateNeededField.getValue().atStartOfDay()),
+                Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
         App.requestService.updateRequest(parent.request);
 
 
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
         this.parent.switchFromEditToExpanded();
-        //SCENE Switch
-//        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
-//        anchor.getChildren().clear();
-//        anchor.getChildren().add(root);
+
     }
     public void handleCancelButton(){
             JFXDialogLayout content = new JFXDialogLayout();

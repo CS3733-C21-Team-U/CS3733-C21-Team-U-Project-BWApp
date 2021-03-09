@@ -36,7 +36,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </SVGPath>
-                              <Label fx:id="titleLabel" prefWidth="382.0" text="Edit Request" wrapText="true">
+                              <Label fx:id="titleLabel" prefWidth="382.0" text="Add Request" wrapText="true">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -79,7 +79,7 @@
             </Separator>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="-72.0" prefHeight="550.0" prefWidth="430.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="30.0" prefHeight="560.0" prefWidth="430.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
                         <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
                            <children>
