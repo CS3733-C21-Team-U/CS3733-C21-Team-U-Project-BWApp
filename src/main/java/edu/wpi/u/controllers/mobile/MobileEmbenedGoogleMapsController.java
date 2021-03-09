@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MobileEmbenedGoogleMapsController {
     public WebView googleMapsEmbedded;
-    public JFXButton nextButton;
+    public JFXButton nextButton1;
     String URL = "https://www.google.com/maps/embed/v1/directions" +
             "?key=AIzaSyCttPdnsrVIlOvwMDTAbnaPbC1HtmGfcMs" +
             "&origin=42.27371483220032,-71.8086443997036"+
@@ -21,12 +21,20 @@ public class MobileEmbenedGoogleMapsController {
         googleMapsEmbedded.getEngine().loadContent("<iframe width='412' height='687' src='" + URL + "' />");
     }
 
-    public void handleNext(ActionEvent actionEvent) throws IOException {
+    public void handleNext1(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+
+    public void handleReturn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
+
 
 
     //42.3016707215711, -71.1274086336297

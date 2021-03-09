@@ -28,8 +28,8 @@ import java.util.Set;
 
 public class MobileFloatingPathfindingPaneController {
     public VBox textDirectionContainer;
-    public JFXTextField endNodeField;
-    public JFXTextField startNodeField;
+   @FXML public JFXTextField endNodeField;
+   @FXML public JFXTextField startNodeField;
     public Rectangle startFieldFlair;
     public Rectangle endFieldFlair;
     @FXML
@@ -45,8 +45,8 @@ public class MobileFloatingPathfindingPaneController {
     String textualDirectionsMegaString = "";
     HashMap<String, String> namesAndIDs;
 
-    public String parkingSpace = startNodeField.getText();
-    public String destination = endNodeField.getText();
+    public String parkingSpace;
+    public String destination;
 
 
     public void handleTestAddTextField(ActionEvent actionEvent) {
@@ -99,6 +99,8 @@ public class MobileFloatingPathfindingPaneController {
             }
         });
 
+        destination = endNodeField.getText();
+        parkingSpace = startNodeField.getText();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

@@ -3,16 +3,21 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
-
 
 <AnchorPane maxHeight="712.0" maxWidth="412.0" prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileEmbenedGoogleMapsController">
    <children>
       <VBox prefHeight="712.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <WebView fx:id="googleMapsEmbedded" maxHeight="712.0" maxWidth="412.0" prefHeight="712.0" prefWidth="412.0" />
-            <JFXButton fx:id="nextButton" onAction="#handleNext" styleClass="button-contained" text="Next" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="nextButton1" onAction="#handleNext1" styleClass="button-contained" text="Next" />
+                  <JFXButton fx:id="returnButton" onAction="#handleReturn" styleClass="button-contained" text="Return to Login" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

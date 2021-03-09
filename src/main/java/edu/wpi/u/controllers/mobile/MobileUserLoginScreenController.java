@@ -48,6 +48,10 @@ public class MobileUserLoginScreenController {
 
     public void initialize() throws IOException {
 
+        App.getPrimaryStage().setFullScreen(false);
+        App.getPrimaryStage().setWidth(412);
+        App.getPrimaryStage().setHeight(712);
+
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
         userNameTextField.getValidators().add(validator);
@@ -187,32 +191,40 @@ public class MobileUserLoginScreenController {
 
 
 
-    //Throws exceptions if username or password not found
-    public void handleForgotPassword() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
-
-    public void handleSubmit() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
+//    //Throws exceptions if username or password not found
+//    public void handleForgotPassword() throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
+//
+//    public void handleSubmit() throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
 
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+//
+//    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
+//        App.userService.setUser("patient", "patient", "Guests");
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
 
-    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("patient", "patient", "Guests");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
+//    public void handleBackButton(ActionEvent actionEvent) throws IOException {
+//
+//    }
 
-    public void handleBackButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+    public void handleReturn(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 }
 

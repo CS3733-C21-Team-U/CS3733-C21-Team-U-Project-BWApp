@@ -503,6 +503,10 @@ public class MobilePathFindingBaseController {
         }
     }
 
-    public void handleNext(ActionEvent actionEvent) {
+    public void handleBack(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 }

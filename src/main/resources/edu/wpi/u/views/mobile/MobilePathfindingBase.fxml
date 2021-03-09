@@ -30,7 +30,7 @@
                                              <children>
                                                 <VBox prefHeight="189.0" prefWidth="400.0">
                                                    <children>
-                                                      <fx:include source="../pathfinding/FloatingPathfindingPane.fxml" />
+                                                      <fx:include source="MobileFloatingPathfindingPane.fxml" />
                                                    </children>
                                                 </VBox>
                                              </children></AnchorPane>
@@ -84,7 +84,7 @@
                         <JFXToggleNode fx:id="floorG" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                     </children>
                 </VBox>
-            <JFXButton fx:id="nextButton" layoutX="192.0" layoutY="644.0" onAction="#handleNext" text="Next" />
+            <JFXButton fx:id="backButton" layoutX="192.0" layoutY="644.0" onAction="#handleBack" styleClass="button-contained" text="Go back" />
             </children>
         </AnchorPane>
     </children>

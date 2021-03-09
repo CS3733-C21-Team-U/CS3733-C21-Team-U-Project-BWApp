@@ -12,6 +12,7 @@
          <children>
             <Label text="Please Wait a moment as we process your information" />
             <JFXButton fx:id="pathFindButton" disable="true" onAction="#handlePathFInd" opacity="0.0" text="Go to PathFinding!" />
+            <JFXButton fx:id="debugButton" onAction="#handleDebug" text="Naw Dawg, Lemme see Tyler's yeeyee ass pathfinding pages" />
          </children>
       </VBox>
    </children>
