@@ -112,10 +112,8 @@ public class FloatingPathfindingPaneController {
                 HBox stepHBoxContainer;
 
                 if(eNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("ELEV")) {
-                    if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) { } else {
-                        stepHBoxContainer = createDirectionBox("Step into staircase/ elevator", iconID);
-                        textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    }
+                    stepHBoxContainer = createDirectionBox("Step into staircase/ elevator", iconID);
+                    textDirectionContainer.getChildren().add(stepHBoxContainer);
                 }
 
                 else if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) {
@@ -124,13 +122,13 @@ public class FloatingPathfindingPaneController {
                     lastTurnNode = eNode;
                 }
 
+                else if(sNode.getNodeType().equals("ELEV") && eNode.getNodeType().equals("ELEV")) { /*Elevator-To-Elevator connection*/}
+                else if(sNode.getNodeType().equals("STAI") && eNode.getNodeType().equals("STAI")) { /*Stair-To-Stair connection*/}
 
                 else if(angleDifferance > 22.5 && angleDifferance < 337.5) { //if turn is found on current node
                     if(lastTurnNode != null) {
-                        if(distAggregate(lastTurnNode, eNode) == 0) { } else {
                         stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, sNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
-                        }
                     }
                     stepHBoxContainer = createDirectionBox(angleDescription + " onto " + sNode.getLongName(), iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
@@ -147,11 +145,9 @@ public class FloatingPathfindingPaneController {
                 else if((sNode.getNodeType().equals("HALL") && eNode.getNodeType().equals("HALL"))) {/*Hallway*/ }
 
                 else {
-                    if(distAggregate(lastTurnNode, eNode) == 0) { } else {
-                        stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
-                        textDirectionContainer.getChildren().add(stepHBoxContainer);
-                        //lastTurnNode = eNode;
-                    }
+                    stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
+                    textDirectionContainer.getChildren().add(stepHBoxContainer);
+                    //lastTurnNode = eNode;
                 }
 
                 bNode = sNode;

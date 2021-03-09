@@ -119,25 +119,25 @@ public class TextualDirections {
 
         if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
             //ans = "Take a slight right at ";
-            ans = "Turn right";
+            ans = "Turn slightly right";
         } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
             //ans = "Take a right turn at ";
             ans = "Turn right";
         } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
             //ans = "Take a sharp right turn at ";
-            ans = "Turn right";
+            ans = "Take a sharp right";
         } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
             //ans = "Turn around at ";
             ans = "Turn around";
         } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
             //ans = "Take a sharp left turn at ";
-            ans = "Turn left";
+            ans = "Take a sharp left";
         } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
             //ans = "Take a left turn at ";
             ans = "Turn left";;
         } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
             //ans = "Take a slight left turn at ";
-            ans = "Turn left";
+            ans = "Turn slightly left";
         } else {
             //ans = "Continue straight at ";
             ans = "Continue straight";
