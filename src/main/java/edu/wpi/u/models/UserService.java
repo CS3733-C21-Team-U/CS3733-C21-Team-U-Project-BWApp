@@ -271,9 +271,23 @@ public class UserService {
      * @param username the username to be validated
      * @return the phonenumber of the username
      */
-    public String checkPhoneNumber(String username) {
-        return ud.checkPhoneNumber(username);
+    public String getPhoneNumberFromUserName(String username) {
+        return ud.getPhoneNumberFromUserName(username);
     }
+
+    /**
+     * Checks a phonenumber
+     * @param phonenumber the phonenumber
+     * @return true if the number exists
+     */
+    public boolean checkPhoneNumber (String phonenumber) {return ud.checkPhonenumber(phonenumber);}
+
+    /**
+     * Checks a email
+     * @param email the email
+     * @return true if the number exists
+     */
+    public boolean checkEmail(String email) { return ud.checkEmail(email);}
 
     /**
      *  Gets the password of the user

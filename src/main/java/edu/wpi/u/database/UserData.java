@@ -752,7 +752,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-               return "Employees";
+                return "Employees";
             }
             else {
                 String str2 = "select * from Patients where phoneNumber=?";
@@ -761,6 +761,40 @@ public class UserData extends Data{
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     return "Patients";
+                }
+                else{
+                    return "";
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * Checks if the database has the phone number matched with the given username
+     * @param userName username
+     * @return the phone number of the user or "" if the username doesn't exist
+     */
+    public String getPhoneNumberFromUserName(String userName){
+        String str = "select * from Employees where userName=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,userName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                ps.close();
+               return rs.getString("phoneNumber");
+            }
+            else {
+                String str2 = "select * from Patients where phoneNumber=?";
+                PreparedStatement ps2 = conn.prepareStatement(str2);
+                ps2.setString(1,userName);
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
+                    return rs.getString("phoneNumber");
                 }
                 else{
                     return "";
@@ -812,6 +846,68 @@ public class UserData extends Data{
             e.printStackTrace();
             return "";
         }
+    }
+
+    /**
+     * Checks to see if a email exists
+     * @param email the number to check
+     * @return true if the email exists
+     */
+    public boolean checkEmail(String email){
+        String str = "select * from Employees where email=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where email=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,email);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Checks to see if a phonenumber exists
+     * @param phonenumber the number to check
+     * @return true if the phonenumber exists
+     */
+    public boolean checkPhonenumber(String phonenumber){
+        String str = "select * from Employees where phoneNumber=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,phonenumber);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where phoneNumber=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,phonenumber);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
