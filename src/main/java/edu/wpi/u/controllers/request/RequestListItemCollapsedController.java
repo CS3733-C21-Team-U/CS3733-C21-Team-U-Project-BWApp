@@ -51,10 +51,18 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
         requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
         requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
+
+        parent.needUpdate.addListener((o,oldVal,newVal) -> {
+            requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
+            requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
+            requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
+            requestItemRequestTypeLabel.setText(parent.request.getType());
+        });
     }
 
     public void handleShowDetailButton(ActionEvent actionEvent) throws IOException {

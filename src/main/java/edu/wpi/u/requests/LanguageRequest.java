@@ -1,5 +1,7 @@
 package edu.wpi.u.requests;
 
+import edu.wpi.u.users.Role;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -15,5 +17,8 @@ public class LanguageRequest extends SpecificRequest {
     public String[] getSpecificFields() {
         String[] res = new String[]{"language", "numInterpreters"};
         return res;
+    }
+    public String getRelevantRole(){
+        return String.valueOf(Role.TRANSLATORS);
     }
 }

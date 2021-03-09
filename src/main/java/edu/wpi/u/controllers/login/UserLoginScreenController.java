@@ -178,6 +178,11 @@ public class UserLoginScreenController {
             errorLabel.setText("Username or Password is Invalid");
             e.printStackTrace();
         }
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+                handleSubmit();
+            }
+        }
     }
 
 
@@ -233,6 +238,20 @@ public class UserLoginScreenController {
             e.printStackTrace();
         }
 
+    }
+
+    public void handleLonginWithNo2FA(){
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                App.getPrimaryStage().getScene().setRoot(root);
+            }
+        }
     }
 }
 

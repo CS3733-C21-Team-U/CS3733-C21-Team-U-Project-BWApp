@@ -44,7 +44,8 @@ public class App extends Application {
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   public static boolean isEdtingGuest;
-    private static Stage primaryStage;
+  private static Stage primaryStage;
+  public static StackPane throwDialogHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
@@ -118,10 +119,10 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
 
-//    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-//    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -141,7 +142,6 @@ public class App extends Application {
     App.primaryStage.setFullScreenExitHint("");
     App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     App.primaryStage.show();
-
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
         System.out.println("Escape button pressed, exiting");

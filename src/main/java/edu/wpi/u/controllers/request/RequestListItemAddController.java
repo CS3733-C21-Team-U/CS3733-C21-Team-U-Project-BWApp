@@ -1,6 +1,9 @@
 package edu.wpi.u.controllers.request;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXChipView;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
 import javafx.event.ActionEvent;
@@ -8,18 +11,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
-public class AddRequestController {
-
-
+public class RequestListItemAddController {
     public JFXTextField makeTitleField;
     public JFXTextArea makeDescriptionField;
     public JFXDatePicker makeDate2BCompleteDatePicker;
@@ -32,15 +33,20 @@ public class AddRequestController {
     private SpecificRequest currSpecificRequest;
     private JFXTextField[] specificTextFields;
 
-    public boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+
+
+
+    @FXML
+    public void initialize() throws IOException {
+        String type = App.newNodeType;
+        currSpecificRequest = new RequestFactory().makeRequest(type);
+        specificTextFields = generateSpecificFields();
     }
 
+    /**
+     * Creates fields based on request type
+     * @return JFXTextField[], one for each needed field, labeled correctly
+     */
     public JFXTextField[] generateSpecificFields() {
 
         specificTitle.setText(currSpecificRequest.getType() + " Fields");
@@ -62,27 +68,9 @@ public class AddRequestController {
         return ans;
     }
 
-    @FXML
-    public void initialize() throws IOException {
-        String type = App.newNodeType;
-        currSpecificRequest = new RequestFactory().makeRequest(type);
-
-        //TODO: redo so it does not use a switch statement
-        specificTextFields = generateSpecificFields();
-
-//        RequiredFieldValidator validator = new RequiredFieldValidator();
-//        validator.setMessage("Integer Required");
-//        madeMaintenanceFieldMachineUsed.getValidators().add(validator);
-//        madeMaintenanceFieldPriority.focusedProperty().addListener((o, oldVal, newVal) -> {
-//            if (!(isInteger(newVal.toString()))) {
-//                madeMaintenanceFieldPriority.validate();
-//            }
-//        });
-
-    }
 
     /**
-     * This returns the needed array list.
+     * This returns the needed array list from JFXTextField[]
      * @return
      */
     public ArrayList<String> requestSpecificItems() {
