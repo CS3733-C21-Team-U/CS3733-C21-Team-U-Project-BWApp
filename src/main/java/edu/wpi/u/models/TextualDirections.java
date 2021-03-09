@@ -1,8 +1,10 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TextualDirections {
 
@@ -64,7 +66,35 @@ public class TextualDirections {
      */
     private static String nodesToTextDirection(Node curNode, Node nextNode, Node previousNode) {
         String direction = "";
-        if (nextNode.getNodeType().equals("ELEV") && !curNode.getNodeType().equals("ELEV")) {
+        String curType = curNode.getNodeType();
+        String nextType = nextNode.getNodeType();
+
+        if(nextNode.getNodeType().equals("ELEV") || curNode.getNodeType().equals("ELEV")
+        || nextNode.getNodeType().equals("STAI") || curNode.getNodeType().equals("STAI")) {
+            //return textualSwitchFloors(curNode, nextNode);
+            return "switch floor directions not working";
+        }
+        else if(previousNode != curNode) {
+//            double angle = getAngle(curNode, nextNode);
+//            double previousAngle = getAngle(previousNode, curNode);
+//            double angleDifferance = angle - previousAngle;
+//
+//            return textualAngleDescription(curNode,nextNode, angleDifferance);
+            return "turn at x angle";
+        }
+        //If at first node
+        else return "Go to the starting location and walk " + calcDistance(curNode, nextNode) + "ft";
+    }
+
+/*    *//**
+     * logic for choosing description when switching floors
+     * @param //curNode
+     * @param //nextNode
+     * @return
+     */
+    private static String textualSwitchFloors(Node curNode, Node nextNode) {
+        String direction = "";
+        if (nextNode.getNodeType().equals("ELEV") && !curNode.getNodeType().equals("ELEV")) { //first option
             direction = "Take the elevator";
         }else if(nextNode.getNodeType().equals("STAI") && !curNode.getNodeType().equals("STAI")){
             direction = "Take the stairs";
@@ -73,40 +103,70 @@ public class TextualDirections {
         }else if(curNode.getNodeType().equals("STAI") && !nextNode.getNodeType().equals("STAI")){
             direction = "Stop at floor " + nextNode.getFloor();
         } else if (curNode.getNodeType().equals("ELEV") && nextNode.getNodeType().equals("ELEV")){
-
+            //not used
         }else if (curNode.getNodeType().equals("STAI") && nextNode.getNodeType().equals("STAI")){
-
-        }else {
-            double angle = getAngle(curNode, nextNode);
-            if (previousNode != curNode) {
-                double previousAngle = getAngle(previousNode, curNode);
-                double angleDifferance = angle - previousAngle;
-                if (angleDifferance < 0) {
-                    angleDifferance = 180 + (180 - Math.abs(angleDifferance));
-                }
-                if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
-                    direction = "Take a slight right turn and continue straight for ";
-                } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
-                    direction = "Take a right turn and continue straight for ";
-                } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
-                    direction = "Take a sharp right turn and continue straight for ";
-                } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
-                    direction = "Turn around continue straight for ";
-                } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
-                    direction = "Take a sharp left turn and continue straight for ";
-                } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
-                    direction = "Take a left turn and continue straight for ";
-                } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
-                    direction = "Take a slight left turn and continue straight for ";
-                } else {
-                    direction = "Continue straight for ";
-                }
-                direction = direction + calcDistance(curNode, nextNode) + "ft";
-            } else {
-                direction = "Go to the starting location and walk " + calcDistance(curNode, nextNode) + "ft";
-            }
+            //not used
         }
         return direction;
+    }
+
+    /**
+     * logic for choosing description when turning
+     * @return
+     */
+    public static String textualAngleDescription(double angleDifferance) {
+        String ans;
+
+        if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
+            //ans = "Take a slight right at ";
+            ans = "Turn slightly right";
+        } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
+            //ans = "Take a right turn at ";
+            ans = "Turn right";
+        } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
+            //ans = "Take a sharp right turn at ";
+            ans = "Take a sharp right";
+        } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
+            //ans = "Turn around at ";
+            ans = "Turn around";
+        } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
+            //ans = "Take a sharp left turn at ";
+            ans = "Take a sharp left";
+        } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
+            //ans = "Take a left turn at ";
+            ans = "Turn left";;
+        } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
+            //ans = "Take a slight left turn at ";
+            ans = "Turn slightly left";
+        } else {
+            //ans = "Continue straight at ";
+            ans = "Continue straight";
+        }
+        return ans;
+    }
+
+    public static String findTextualIconID(double angleDifferance) {
+        String ans;
+
+        if (angleDifferance >= 22.5 && angleDifferance < 67.5) {
+            ans = "Take a slight right at ";
+
+        } else if (angleDifferance >= 67.5 && angleDifferance < 112.5) {
+            ans = "M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z";
+        } else if (angleDifferance >= 112.5 && angleDifferance < 157.5) {
+            ans = "M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z";
+        } else if (angleDifferance >= 157.5 && angleDifferance < 202.5) {
+            ans = "M19,15l-1.41-1.41L13,18.17V2H11v16.17l-4.59-4.59L5,15l7,7L19,15z";
+        } else if (angleDifferance >= 202.5 && angleDifferance < 247.5) {
+            ans = "M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z";
+        } else if (angleDifferance >= 247.5 && angleDifferance < 292.5) {
+            ans = "M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z";
+        } else if (angleDifferance >= 292.5 && angleDifferance < 337.5) {
+            ans = "M5,15h2V8.41L18.59,20L20,18.59L8.41,7H15V5H5V15z";
+        } else {
+            ans = "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z";
+        }
+        return ans;
     }
 
     /**
@@ -115,7 +175,7 @@ public class TextualDirections {
      * @param end   the end node
      * @return the edge
      */
-    private static double getAngle(Node start, Node end){
+    public static double getAngle(Node start, Node end){
         double dX = end.getCords()[0] - start.getCords()[0];
         double dY = end.getCords()[1] - start.getCords()[1];
 
@@ -126,6 +186,7 @@ public class TextualDirections {
 //        }
         return angleInDegrees;
     }
+
 
     /**
      * takes in two nodes and returns the distance between them in feet
