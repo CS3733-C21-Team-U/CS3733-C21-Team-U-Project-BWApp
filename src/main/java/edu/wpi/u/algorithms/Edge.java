@@ -16,6 +16,9 @@ public class Edge {
     this.edgeID = _edgeID;
     this.startNode = _startNode;
     this.endNode = _endNode;
+    if(startNode == null || endNode == null){
+      System.out.println("Nothing");
+    }
     this.weight = calcWeight(_startNode, _endNode);
     _startNode.addEdge(this); // links this edge to beginning node
     _endNode.addEdge(this);
