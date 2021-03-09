@@ -17,13 +17,10 @@
          <children>
             <HBox alignment="CENTER" prefHeight="89.0" prefWidth="1700.0">
                <children>
-                  <Pane prefHeight="78.0" prefWidth="280.0" style="-fx-background-color: white; -fx-background-radius: 7;">
+                  <Pane prefHeight="78.0" prefWidth="280.0">
                      <children>
                         <Label layoutX="16.0" layoutY="1.0" styleClass="headline-1" text="About Us" />
                      </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
                   </Pane>
                </children>
             </HBox>
