@@ -3,7 +3,10 @@ package edu.wpi.u.users;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.algorithms.Node;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.StringProperty;
+
+import java.sql.Timestamp;
 
 /*
 Users table
@@ -20,7 +23,7 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-    protected String locationNodeID; // TODO MOVE
+   // protected String locationNodeID; // TODO MOVE
 
     protected StringProperty userIDfx;
     protected StringProperty namefx;
@@ -30,11 +33,21 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected StringProperty phoneNumberfx;
     protected StringProperty emailfx;
     protected BooleanProperty deletedfx;
-    protected StringProperty locationNodeIDfx;
+    //protected StringProperty locationNodeIDfx;
+
+    private String guestID;
+    private String guestName;
+    private Timestamp visitDate;
+    private String visitReason;
+
+    protected StringProperty guestIDfx;
+    protected StringProperty guestNamefx;;
+    protected LongProperty visitDatefx;
+    protected StringProperty visitReasonfx;
 
     public User(){}
 
-    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted) {
+    public User(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted) {
         this.userID = userID;
         this.name = name;
         this.userName = accountName;
@@ -43,10 +56,10 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.locationNodeID = locationNodeID;
+        //this.locationNodeID = locationNodeID;
     }
 
-    public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx, StringProperty locationNodeIDfx) {
+    public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx) {
         this.userIDfx = userIDfx;
         this.namefx = namefx;
         this.userNamefx = userNamefx;
@@ -55,7 +68,53 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.phoneNumberfx = phoneNumberfx;
         this.emailfx = emailfx;
         this.deletedfx = deletedfx;
-        this.locationNodeIDfx = locationNodeIDfx;
+        //this.locationNodeIDfx = locationNodeIDfx;
+    }
+
+    public User(String guestID, String guestName, Timestamp visitDate, String visitReason) {
+        this.guestID = guestID;
+        this.guestName = guestName;
+        this.visitDate = visitDate;
+        this.visitReason = visitReason;
+    }
+
+    /**
+     * Poor workaround for JFX Tree table guest view
+     * todo : change this
+     * @param guestIDfx guest id for jfx
+     * @param namefx name for jfx
+     * @param visitDatefx visit date for jfx
+     * @param visitReasonfx visit reason for jfx
+     */
+    public User (StringProperty guestIDfx, StringProperty namefx, LongProperty visitDatefx, StringProperty visitReasonfx){
+        this.guestIDfx = guestIDfx;
+        this.namefx = namefx;
+        this.visitDatefx = visitDatefx;
+        this.visitReasonfx = visitReasonfx;
+    }
+
+    public StringProperty guestIDfxProperty() {
+        return guestIDfx;
+    }
+
+    public LongProperty visitDatefxProperty() {
+        return visitDatefx;
+    }
+
+    public StringProperty visitReasonfxProperty() {
+        return visitReasonfx;
+    }
+
+    public String getGuestID() {
+        return guestID;
+    }
+
+    public Timestamp getVisitDate() {
+        return visitDate;
+    }
+
+    public String getVisitReason() {
+        return visitReason;
     }
 
     public String getUserIDfx() {
@@ -66,20 +125,8 @@ public abstract class User extends RecursiveTreeObject<User> {
         return userIDfx;
     }
 
-    public void setUserIDfx(String userIDfx) {
-        this.userIDfx.set(userIDfx);
-    }
-
-    public String getNamefx() {
-        return namefx.get();
-    }
-
     public StringProperty namefxProperty() {
         return namefx;
-    }
-
-    public void setNamefx(String namefx) {
-        this.namefx.set(namefx);
     }
 
     public String getUserNamefx() {
@@ -90,20 +137,8 @@ public abstract class User extends RecursiveTreeObject<User> {
         return userNamefx;
     }
 
-    public void setUserNamefx(String userNamefx) {
-        this.userNamefx.set(userNamefx);
-    }
-
-    public String getPasswordfx() {
-        return passwordfx.get();
-    }
-
     public StringProperty passwordfxProperty() {
         return passwordfx;
-    }
-
-    public void setPasswordfx(String passwordfx) {
-        this.passwordfx.set(passwordfx);
     }
 
     public String getTypefx() {
@@ -114,56 +149,12 @@ public abstract class User extends RecursiveTreeObject<User> {
         return typefx;
     }
 
-    public void setTypefx(String typefx) {
-        this.typefx.set(typefx);
-    }
-
-    public String getPhoneNumberfx() {
-        return phoneNumberfx.get();
-    }
-
     public StringProperty phoneNumberfxProperty() {
         return phoneNumberfx;
     }
 
-    public void setPhoneNumberfx(String phoneNumberfx) {
-        this.phoneNumberfx.set(phoneNumberfx);
-    }
-
-    public String getEmailfx() {
-        return emailfx.get();
-    }
-
     public StringProperty emailfxProperty() {
         return emailfx;
-    }
-
-    public void setEmailfx(String emailfx) {
-        this.emailfx.set(emailfx);
-    }
-
-    public boolean isDeletedfx() {
-        return deletedfx.get();
-    }
-
-    public BooleanProperty deletedfxProperty() {
-        return deletedfx;
-    }
-
-    public void setDeletedfx(boolean deletedfx) {
-        this.deletedfx.set(deletedfx);
-    }
-
-    public String getLocationNodeIDfx() {
-        return locationNodeIDfx.get();
-    }
-
-    public StringProperty locationNodeIDfxProperty() {
-        return locationNodeIDfx;
-    }
-
-    public void setLocationNodeIDfx(String locationNodeIDfx) {
-        this.locationNodeIDfx.set(locationNodeIDfx);
     }
 
     /**
@@ -181,14 +172,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-    }
-
-    public String getLocationNodeID() {
-        return locationNodeID;
-    }
-
-    public void setLocationNodeID(String locationNodeID) {
-        this.locationNodeID = locationNodeID;
     }
 
     public String getUserID() {

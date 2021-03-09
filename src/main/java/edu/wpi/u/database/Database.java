@@ -110,7 +110,7 @@ public class Database {
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
-                String tbl6 = "create table Locations(locationID varchar(50) not null, request varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl6 = "create table Locations(locationID varchar(50) not null, request varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key (locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
                 // TODO : Change from arrayList to String

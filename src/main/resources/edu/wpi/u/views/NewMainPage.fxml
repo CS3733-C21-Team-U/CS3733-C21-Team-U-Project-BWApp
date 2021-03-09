@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXChipView?>
@@ -48,7 +49,6 @@
                         <Region prefHeight="80.0" prefWidth="290.0" />
                         <Label style="-fx-font-size: 30; -fx-text-fill: -onPrimary;" text="Brigham and Women's Hospital" />
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <JFXButton onAction="#handleHelpPageButton" styleClass="button-contained" text="Help Page" textFill="#bca2a2" />
 
                         <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#handleThemeSwitch" prefHeight="61.0" prefWidth="64.0" styleClass="top-bar-button">
                            <graphic>
@@ -284,7 +284,10 @@
                   </Tab>
                   <Tab fx:id="adminTab11" closable="false" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <fx:include source="user/ViewGuestList.fxml" />
+                           </children></AnchorPane>
                      </content>
                      <graphic>
                         <Group>

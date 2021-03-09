@@ -8,15 +8,12 @@ import java.util.LinkedList;
 
 public class Patient extends User{
     protected ArrayList<Appointment> appointments = new ArrayList<>();
-    protected String locationNodeID;
+    //protected String locationNodeID;
     protected String providerName;
     protected String parkingLocation;
     protected String recommendedParkingLocation;
-    /*TODO: provider name, appointment date/time, recommended self park location, way to save where they park their vehicle
-    //TODO: Link to radiology and blood
-    //TODO: Override editUser()
-
-    // Patient table -> Appointment Table <- Employee table
+    /*
+    Patient table -> Appointment Table <- Employee table
      */
     public Patient() {
     }
@@ -35,21 +32,26 @@ public class Patient extends User{
     String parkingLocation,
     String recommendedParkingLocation) {
  */
-    public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
-        super(userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted);
+    public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
+        super(userID, name, accountName, password, email, type, phoneNumber, deleted);
         this.appointments = appointments;
         this.providerName = providerName;
         this.parkingLocation = parkingLocation;
         this.recommendedParkingLocation = recommendedParkingLocation;
     }
 
-    public Patient(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx, StringProperty locationNodeIDfx) {
-        super(userIDfx, namefx, userNamefx, passwordfx, typefx, phoneNumberfx, emailfx, deletedfx, locationNodeIDfx);
+    public Patient(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx) {
+        super(userIDfx, namefx, userNamefx, passwordfx, typefx, phoneNumberfx, emailfx, deletedfx);
     }
 
-    @Override
-    public void editUser(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted) {
-        super.editUser(name, userName, password, email, type, phoneNumber, deleted);
+    public void editPatient(String name, String userName, String password, String email, Role type, String phoneNumber) {
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.type = type;
+        this.phoneNumber = phoneNumber;
+        //this.locationNodeID = locationNodeID;
     }
 
     public ArrayList<Appointment> getAppointments() {
