@@ -112,7 +112,6 @@
     -fx-text-fill: #D34336;
 }
 
-
 /*** Table stuff ****/
 
 .table-view:focused{
@@ -473,6 +472,22 @@
 
 .dialogue{
     -fx-background-color: -backgroundAlt;
+}
+
+.bigButton{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-font-size: 17;
+}
+
+.bigButtonOutline{
+    -fx-background-color: -background;
+    -fx-text-fill: -primary;
+    -fx-font-size: 17;
+}
+
+.bigButtonOutline > .jfx-rippler{
+    -jfx-rippler-fill: -primary;
 }
 
 
