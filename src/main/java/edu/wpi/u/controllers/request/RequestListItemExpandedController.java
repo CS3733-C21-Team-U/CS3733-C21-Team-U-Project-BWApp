@@ -175,7 +175,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         commentsRoot.getChildren().clear();
         for(int i = this.parent.request.getGenericRequest().getComments().size()-1; i >= 1; i--){
             generateCommentHelper(i);
-            System.out.println("I am running" + i + "times");
         }
     }
 
