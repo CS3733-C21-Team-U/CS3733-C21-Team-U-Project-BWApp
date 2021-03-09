@@ -108,8 +108,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
             creatorAndDateLabel.setText(creatorAndDateString);
             assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
             completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
-//        //requestDetailSecurityLabel.setText(request);
-//        setSpecifics();
             generateSpecificFields();
             generateComments();
         });
@@ -122,8 +120,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         creatorAndDateLabel.setText(creatorAndDateString);
         assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
         completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
-//        //requestDetailSecurityLabel.setText(request);
-//        setSpecifics();
         generateSpecificFields();
         generateComments();
         //loadLocationsOnMap("G", mainMapPane);
@@ -151,18 +147,18 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void generateComments(){
         commentsRoot.getChildren().clear();
-        for(int i = 1; i < this.parent.request.getGenericRequest().getComments().size(); i++){
+        for(int i = this.parent.request.getGenericRequest().getComments().size()-1; i >= 1; i--){
             generateCommentHelper(i);
             System.out.println("I am running" + i + "times");
         }
     }
 
     public void addComment() {
-        System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
+      //  System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
         Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
-        this.parent.request.getGenericRequest().addComment(newComment);
+        App.requestService.addComment(this.parent.request, newComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
-        System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
+        //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
     }
 
     @FXML
