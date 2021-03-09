@@ -146,7 +146,6 @@ public class PathfindingBaseController {
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
         });
-
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
             clearMapItems();
             String floorStart = App.mapInteractionModel.path.get(0).getFloor();
