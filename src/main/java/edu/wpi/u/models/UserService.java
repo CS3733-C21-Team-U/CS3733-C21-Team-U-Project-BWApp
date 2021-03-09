@@ -171,7 +171,12 @@ public class UserService {
         return patients;
     }
 
-    public ArrayList<String> getEmployeeIDByType(String type){
+    /**
+     * Gets a hashmap of employees based on a certain type
+     * @param type the type
+     * @return the hashmap of employee names
+     */
+    public HashMap<String, String> getEmployeeIDByType(String type){
         return ud.getEmployeeNamesByType(type);
     }
 

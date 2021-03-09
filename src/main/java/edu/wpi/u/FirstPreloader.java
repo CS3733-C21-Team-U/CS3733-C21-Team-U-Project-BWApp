@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import edu.wpi.u.controllers.NewMainPageController;
+import edu.wpi.u.users.Role;
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,24 +29,14 @@ public class FirstPreloader extends Preloader {
          */
 
         //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/NewMainPage.fxml"));
-
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getClassLoader().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.setLocation(fxml);
-        fxmlLoader.load();
-        fxmlLoader.getController();
-
-//        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-//        fxmlLoader2.load();
-//        fxmlLoader2.getController();
-//
-//        FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/NewMainPage.fxml"));
-//        fxmlLoader3.load();
-//        fxmlLoader3.getController();
-//
-//        FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-//        fxmlLoader4.load();
-//        fxmlLoader4.getController();
-
+//        App.userService.setEmployee("debug");
+//        System.out.println(App.userService.getActiveUser().getName());
+//        App.userService.getActiveUser().setType(Role.ADMIN);
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+////        fxmlLoader.setLocation(fxml);
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.base = fxmlLoader.getRoot();
         this.stage = stage;
         stage.setScene(createPreloaderScene());
         stage.show();

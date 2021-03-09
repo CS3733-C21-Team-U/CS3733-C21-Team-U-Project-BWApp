@@ -80,6 +80,8 @@ public class App extends Application {
 
   public static PrettyTime p = new PrettyTime();
 
+  public static String test = "hello there";
+  public static Parent base;
 
   public App(){
     System.out.println("App constructor");

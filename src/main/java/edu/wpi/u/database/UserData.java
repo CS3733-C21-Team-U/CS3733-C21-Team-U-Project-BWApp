@@ -287,14 +287,19 @@ public class UserData extends Data{
         return results;
     }
 
-    public ArrayList<String> getEmployeeNamesByType(String type){
-        ArrayList<String> result = new ArrayList<>();
-        String str = "select name from Employees where type=?";
+    /**
+     * Gets a hashmap of employees based on a certain type
+     * @param type the type
+     * @return the hashmap of employee names
+     */
+    public HashMap<String, String> getEmployeeNamesByType(String type){
+        HashMap<String,String> result = new HashMap<>();
+        String str = "select employeeID,name from Employees where type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                result.add(rs.getString("name"));
+                result.put(rs.getString("employeeID"), rs.getString("name"));
             }
         }catch (Exception e){
             e.printStackTrace();
