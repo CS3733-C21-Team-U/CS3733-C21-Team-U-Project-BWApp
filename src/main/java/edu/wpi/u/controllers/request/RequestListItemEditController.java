@@ -82,7 +82,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
 
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
-        this.parent.switchToExpanded();
+        this.parent.switchFromEditToExpanded();
         //SCENE Switch
 //        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));

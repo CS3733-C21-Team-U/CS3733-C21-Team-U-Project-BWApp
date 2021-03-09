@@ -34,7 +34,6 @@ public class App extends Application {
   public static boolean isEdtingGuest;
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
-  private static Stage primaryStage;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
