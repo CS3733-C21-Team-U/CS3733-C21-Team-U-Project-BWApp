@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.u.controllers.mobile.MobileCovidSurveyController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileCovidSurveyController">
+   <children>
+      <VBox prefHeight="712.0" prefWidth="412.0">
+         <children>
+            <HBox prefHeight="15.0" prefWidth="616.0">
+               <children>
+                  <JFXCheckBox fx:id="Q5CheckBox" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="17.0" prefWidth="616.0">
+               <children>
+                  <JFXCheckBox fx:id="Q1CheckBox" prefHeight="18.0" prefWidth="501.0" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="18.0" prefWidth="650.0">
+               <children>
+                  <JFXCheckBox fx:id="Q2CheckBox" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="616.0">
+               <children>
+                  <JFXCheckBox fx:id="Q3CheckBox" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="14.0" prefWidth="616.0">
+               <children>
+                  <JFXCheckBox fx:id="Q4CheckBox" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+               </children>
+            </HBox>
+            <JFXButton fx:id="submitSurveyButton" onAction="#handleCovidSurveyFill" prefHeight="25.0" prefWidth="496.0" styleClass="button-contained" text="Submit" />
+            <Label fx:id="errorLabel" styleClass="error-label" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

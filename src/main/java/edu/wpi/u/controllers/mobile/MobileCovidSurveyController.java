@@ -29,7 +29,7 @@ public class MobileCovidSurveyController {
     public JFXCheckBox Q5CheckBox;
     public JFXButton submitSurveyButton;
     public Label errorLabel;
-    public StackPane newStackPane;
+    //public StackPane newStackPane;
 
 
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
@@ -42,7 +42,7 @@ public class MobileCovidSurveyController {
     public void handleCovidSurveyFill() throws IOException {
 
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
@@ -57,60 +57,60 @@ public class MobileCovidSurveyController {
         }
     }
 
-    public void handleDebugButton(ActionEvent actionEvent) {
-        App.getPrimaryStage().setFullScreen(false);
-        App.getPrimaryStage().setWidth(1900);
-        App.getPrimaryStage().setHeight(1000);
-    }
+//    public void handleDebugButton(ActionEvent actionEvent) {
+//        App.getPrimaryStage().setFullScreen(false);
+//        App.getPrimaryStage().setWidth(1900);
+//        App.getPrimaryStage().setHeight(1000);
+//    }
 
-    public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setGuest("debug");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
+//    public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
+//        App.userService.setGuest("debug");
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
 
-    public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setPatient("debug", "debug");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
+//    public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
+//        App.userService.setPatient("debug", "debug");
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
 
-    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
-        App.userService.setEmployee("debug", "debug");
-        App.userService.getActiveUser().setType(Role.ADMIN);
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
+//    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
+//        App.userService.setEmployee("debug", "debug");
+//        App.userService.getActiveUser().setType(Role.ADMIN);
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+//    }
 
-    public void handleHelpPage(ActionEvent actionEvent)throws IOException  {
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Help Page");
-        Text text = new Text("If you have any questions, Please contact us 888-888-8888.If there is an emergency situation, Please call 911");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.setBody(text);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(newStackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button1 = new JFXButton("Cancel");
-        //JFXButton button2 = new JFXButton("Proceed to Help Page");
-        button1.setOnAction(event -> dialog.close());
-        /*button2.setOnAction(event -> {
-            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            anchor.getChildren().clear();
-            anchor.getChildren().add(root);
-            dialog.close();
-
-            });*/
-        button1.getStyleClass().add("button-text");
-        ArrayList<Node> actions = new ArrayList<>();
-        actions.add(button1);
-        content.setActions(actions);
-        dialog.show();
-    }
+//    public void handleHelpPage(ActionEvent actionEvent)throws IOException  {
+//        JFXDialogLayout content = new JFXDialogLayout();
+//        Label header = new Label("Help Page");
+//        Text text = new Text("If you have any questions, Please contact us 888-888-8888.If there is an emergency situation, Please call 911");
+//        header.getStyleClass().add("headline-2");
+//        content.setHeading(header);
+//        content.setBody(text);
+//        content.getStyleClass().add("dialogue");
+//        JFXDialog dialog = new JFXDialog(newStackPane, content, JFXDialog.DialogTransition.CENTER);
+//        JFXButton button1 = new JFXButton("Cancel");
+//        //JFXButton button2 = new JFXButton("Proceed to Help Page");
+//        button1.setOnAction(event -> dialog.close());
+//        /*button2.setOnAction(event -> {
+//            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+//            Parent root = null;
+//            try {
+//                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            anchor.getChildren().clear();
+//            anchor.getChildren().add(root);
+//            dialog.close();
+//
+//            });*/
+//        button1.getStyleClass().add("button-text");
+//        ArrayList<Node> actions = new ArrayList<>();
+//        actions.add(button1);
+//        content.setActions(actions);
+//        dialog.show();
+//    }
 }

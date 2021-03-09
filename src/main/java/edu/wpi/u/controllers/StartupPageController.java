@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
@@ -18,7 +18,9 @@ public class StartupPageController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleMobile(ActionEvent actionEvent) {
+    public void handleMobile(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleFirestick(ActionEvent actionEvent) {

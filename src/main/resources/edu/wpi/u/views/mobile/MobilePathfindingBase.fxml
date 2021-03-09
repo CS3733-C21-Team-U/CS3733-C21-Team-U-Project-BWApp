@@ -1,14 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.u.controllers.mobile.MobilePathFindingBaseController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="712.0" maxWidth="412.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="412.0" stylesheets="@../css/LightTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobilePathFindingBaseController">
+    <children>
+        <AnchorPane fx:id="mainAnchorPane" maxHeight="712.0" maxWidth="412.0" minHeight="0.0" minWidth="0.0" prefHeight="712.0" prefWidth="412.0" style="-fx-background-color: -backgroundAlt;">
+            <children>
+            <VBox prefHeight="200.0" prefWidth="412.0">
+               <children>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" prefHeight="255.0" prefWidth="412.0" text="Expand">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="410.0">
+                                 <children>
+                                    <ScrollPane prefHeight="218.0" prefWidth="412.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="412.0">
+                                             <children>
+                                                <VBox prefHeight="189.0" prefWidth="400.0">
+                                                   <children>
+                                                      <fx:include source="../pathfinding/FloatingPathfindingPane.fxml" />
+                                                   </children>
+                                                </VBox>
+                                             </children></AnchorPane>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+                <Button maxHeight="71.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="90.0" styleClass="map-btn" visible="false">
+                    <graphic>
+                        <SVGPath content="M 0,0 H 30 V 5 H 0 Z" styleClass="map-btn" />
+                    </graphic>
+                </Button>
+                <Button maxHeight="130.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="90.0" styleClass="map-btn" visible="false">
+                    <graphic>
+                        <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
+                    </graphic>
+                </Button>
+                <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                    <children>
+                        <JFXToggleNode fx:id="floor5" layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor5Button" styleClass="floor-toggle" text="5">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="Floor" />
+                            </toggleGroup>
+                  </JFXToggleNode>
+                        <JFXToggleNode fx:id="floor4" layoutX="10.0" layoutY="50.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor4Button" styleClass="floor-toggle" text="4" toggleGroup="$Floor">
+                            <VBox.margin>
+                                <Insets bottom="-2.0" />
+                            </VBox.margin>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="floor3" layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor3Button" styleClass="floor-toggle" text="3" toggleGroup="$Floor">
+                            <VBox.margin>
+                                <Insets bottom="-2.0" />
+                            </VBox.margin>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="floor2" layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor2Button" styleClass="floor-toggle" text="2" toggleGroup="$Floor">
+                            <VBox.margin>
+                                <Insets bottom="-2.0" />
+                            </VBox.margin>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="floor1" minHeight="70.0" minWidth="70.0" onAction="#handleFloor1Button" styleClass="floor-toggle" text="1" toggleGroup="$Floor">
+                            <VBox.margin>
+                                <Insets bottom="-2.0" />
+                            </VBox.margin>
+                        </JFXToggleNode>
+                        <JFXToggleNode fx:id="floorG" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
+                    </children>
+                </VBox>
+            <JFXButton fx:id="nextButton" layoutX="192.0" layoutY="644.0" onAction="#handleNext" text="Next" />
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

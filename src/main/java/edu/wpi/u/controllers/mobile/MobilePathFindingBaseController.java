@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers.mobile;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleNode;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Edge;
@@ -10,6 +11,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -42,6 +44,7 @@ public class MobilePathFindingBaseController {
     @FXML public JFXToggleNode floor3;
     @FXML public JFXToggleNode floor4;
     @FXML public JFXToggleNode floor5;
+    public JFXButton nextButton;
 
 
     AnchorPane rightServiceRequestPane;
@@ -76,10 +79,10 @@ public class MobilePathFindingBaseController {
         map.setMinScale(0.3);
         map.setMaxScale(2);
         map.centreOn(new Point2D(700, 4000));
-        map.zoomTo(0.5, map.targetPointAtViewportCentre());
+        map.zoomTo(0.1, map.targetPointAtViewportCentre());
 
-        map.setPrefWidth(1920);
-        map.setPrefHeight(1000);
+        map.setPrefWidth(412);
+        map.setPrefHeight(712);
         map.setFitMode(GesturePane.FitMode.UNBOUNDED);
         map.setScrollMode(GesturePane.ScrollMode.ZOOM);
 
@@ -498,5 +501,8 @@ public class MobilePathFindingBaseController {
         }else{
             floor5.setSelected(true);
         }
+    }
+
+    public void handleNext(ActionEvent actionEvent) {
     }
 }
