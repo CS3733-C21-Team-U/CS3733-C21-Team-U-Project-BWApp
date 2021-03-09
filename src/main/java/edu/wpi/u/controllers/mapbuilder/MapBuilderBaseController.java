@@ -710,6 +710,11 @@ public class MapBuilderBaseController {
 
 
     public void handleMultiSelectButton() {
+        //deselect the current selected node
+        Circle selectedCircle = (Circle) nodesAndEdges.lookup("#" + App.mapInteractionModel.nodeID);
+        if(selectedCircle != null) {
+            selectedCircle.setFill(Paint.valueOf(errorColor));
+        }
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);

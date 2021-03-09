@@ -107,8 +107,8 @@ public class App extends Application {
 
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
 
-    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+//    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+//    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
