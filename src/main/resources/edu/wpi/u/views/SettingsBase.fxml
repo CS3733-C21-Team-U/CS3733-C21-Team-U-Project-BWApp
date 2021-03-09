@@ -85,22 +85,23 @@
                   <VBox layoutX="-52.0" layoutY="21.0" prefHeight="200.0" prefWidth="450.0">
                      <children>
                         <Label fx:id="pathfindingText" styleClass="headline-3" text="Path Finding Modes" />
-                        <HBox prefHeight="36.0" prefWidth="1675.0">
+                        <HBox prefHeight="36.0" prefWidth="1675.0" spacing="20.0">
                            <children>
-                              <JFXRadioButton fx:id="aStarRadioButton" onAction="#handleAStar" prefHeight="15.0" prefWidth="103.0" selected="true" text="  A Star">
+                              <JFXRadioButton fx:id="aStarRadioButton" onAction="#handleAStar" prefHeight="55.0" prefWidth="100.0" selected="true" text="  A Star">
                                  <HBox.margin>
-                                    <Insets right="49.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <toggleGroup>
                                     <ToggleGroup fx:id="pathFindingMode" />
                                  </toggleGroup>
                               </JFXRadioButton>
-                              <JFXRadioButton fx:id="dFSRadioButton" onAction="#handleDepthFirst" prefHeight="15.0" prefWidth="103.0" text="  Depth First" toggleGroup="$pathFindingMode">
+                              <JFXRadioButton fx:id="dFSRadioButton" onAction="#handleDepthFirst" prefHeight="36.0" prefWidth="99.0" text="  Depth First" toggleGroup="$pathFindingMode">
                                  <HBox.margin>
-                                    <Insets right="49.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </JFXRadioButton>
-                              <JFXRadioButton fx:id="bFSRadioButton" onAction="#handleBreadthFirst" text="  Breadth First" toggleGroup="$pathFindingMode" />
+                              <JFXRadioButton fx:id="bFSRadioButton" onAction="#handleBreadthFirst" prefHeight="37.0" prefWidth="96.0" text="  Breadth First" textAlignment="CENTER" toggleGroup="$pathFindingMode" wrapText="true" />
+                              <JFXRadioButton onAction="#handleDijkstra" prefHeight="69.0" prefWidth="101.0" text="Dijsktra" toggleGroup="$pathFindingMode" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
