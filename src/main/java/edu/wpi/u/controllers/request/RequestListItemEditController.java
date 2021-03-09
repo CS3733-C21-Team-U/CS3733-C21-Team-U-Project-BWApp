@@ -32,6 +32,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class RequestListItemEditController extends AnchorPane implements Initializable {
 
@@ -74,7 +75,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         locationValidator.setMessage("Valid Employee Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , App.userService.getEmployeeIDByType(parent.request.getType()).keySet());
+        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet());
+        Set<String> strings = App.mapService.getLongNames().keySet();
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
+
 
 //        parent.request.
         //Set Existing values for fields
@@ -210,10 +214,15 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     public void addLocation() {
         if (editLocationsField.getText().equals("")) {
-            editAssigneesField.validate();
+            editLocationsField.validate();
         } else {
-            editLocationsListView.getItems().add(editLocationsField.getText());
-            editLocationsField.setText("");
+            try{
+                //App.mapService.get
+                editLocationsListView.getItems().add(editLocationsField.getText());
+                editLocationsField.setText("");
+            }catch(Exception e){
+
+            }
         }
     }
         public void deleteLocation(){
