@@ -281,6 +281,37 @@ public class Database {
         return false;
     }
 
+    public void dropAllValues(){
+        try {
+            String str;
+            Statement s = conn.createStatement();
+            str = "delete from Comments";
+            s.execute(str);
+            str = "delete from Permissions";
+            s.execute(str);
+            str = "delete from Locations";
+            s.execute(str);
+            str = "delete from Assignments";
+            s.execute(str);
+            str = "delete from Appointments";
+            s.execute(str);
+            str = "delete from Patients";
+            s.execute(str);
+            str = "delete from Guests";
+            s.execute(str);
+            str = "delete from Employees";
+            s.execute(str);
+            str = "delete from Requests";
+            s.execute(str);
+            str = "delete from Edges";
+            s.execute(str);
+            str = "delete from Nodes";
+            s.execute(str);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Drops a table or all if the tableName = "all"
      *
@@ -296,19 +327,27 @@ public class Database {
             str = "delete from " + tableName;
             s.execute(str);
             if (str.equals("all")){
-                str = "alter table Locations drop column requestID";
+                str = "delete from Comments";
                 s.execute(str);
-                str = "alter table Assignments drop column requestID";
-                s.execute(str);
-                str = "delete from Nodes";
-                s.execute(str);
-                str = "delete from Edges";
-                s.execute(str);
-                str = "delete from Requests";
+                str = "delete from Permissions";
                 s.execute(str);
                 str = "delete from Locations";
                 s.execute(str);
                 str = "delete from Assignments";
+                s.execute(str);
+                str = "delete from Appointments";
+                s.execute(str);
+                str = "delete from Patients";
+                s.execute(str);
+                str = "delete from Guests";
+                s.execute(str);
+                str = "delete from Employees";
+                s.execute(str);
+                str = "delete from Requests";
+                s.execute(str);
+                str = "delete from Edges";
+                s.execute(str);
+                str = "delete from Nodes";
                 s.execute(str);
 
             }
@@ -318,21 +357,33 @@ public class Database {
     }
 
     /**
-     * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
+     * Deletes all tables
      */
     public void deleteTables() {
         //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
-            String str = "drop table Nodes";
+            String str = "drop table Comments";
             s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Requests";
+            str = "drop table Permissions";
             s.execute(str);
             str = "drop table Locations";
             s.execute(str);
             str = "drop table Assignments";
+            s.execute(str);
+            str = "drop table Appointments";
+            s.execute(str);
+            str = "drop table Patients";
+            s.execute(str);
+            str = "drop table Guests";
+            s.execute(str);
+            str = "drop table Employees";
+            s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
+            str = "drop table Edges";
+            s.execute(str);
+            str = "drop table Nodes";
             s.execute(str);
 
         } catch (Exception e) {

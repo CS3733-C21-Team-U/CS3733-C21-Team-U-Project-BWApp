@@ -9,6 +9,7 @@ import edu.wpi.u.models.*;
 import edu.wpi.u.requests.*;
 import edu.wpi.u.users.Appointment;
 import edu.wpi.u.users.Role;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -94,6 +95,12 @@ public class DatabaseTest {
 
     */
 
+
+    @After
+    public void clearDB() {
+        dbTest.dropAllValues();
+    }
+
     /**
      * MapService Testing
      * Constraints:
@@ -148,8 +155,11 @@ public class DatabaseTest {
         mapServiceTest.updateNode("NODETEST5", 5, 5,"WALK","testy", "testywesty");
         assertEquals(mapServiceTest.getNodeFromID("NODETEST5").getCords()[0],5,0);
     }
+
     @Test
     public void testUpdateNode2() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST5B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.updateNode("NODETEST5B", 5, 5,"WALK","testy", "testywesty");
@@ -158,6 +168,8 @@ public class DatabaseTest {
 
     @Test
     public void testDeleteNode() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST6", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         assertEquals(mapServiceTest.deleteNode("NODETEST6"), new ArrayList<Edge>());
@@ -165,6 +177,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddEdge() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -176,6 +190,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddEdge2() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -187,6 +203,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateEdgePermissions() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -201,6 +219,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateStartEdge() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -214,6 +234,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateEndEdge() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -227,6 +249,8 @@ public class DatabaseTest {
 
     @Test
     public void testDeleteEdge() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -235,21 +259,23 @@ public class DatabaseTest {
         mapServiceTest.addNodeWithID("NODETEST19", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addEdge("NODETEST17_NODETEST18", "NODETEST17", "NODETEST18", roles);
         mapServiceTest.addEdge("NODETEST18_NODETEST19", "NODETEST18", "NODETEST19", roles);
-        mapServiceTest.deleteEdge("NODETEST17_NODETEST18");
-        assertEquals(mapServiceTest.getEdges().get(0).getEdgeID(),"NODETEST18_NODETEST19");
+        assertEquals(mapServiceTest.deleteEdge("NODETEST17_NODETEST18"),"");
     }
 
     @Test
     public void testGetNodes() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
-        mapServiceTest.getNodes().clear();
         mapServiceTest.addNodeWithID("NODETEST20", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
         mapServiceTest.addNodeWithID("NODETEST21", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
-        assertEquals(mapServiceTest.getNodes().get(1).getNodeID(),"NODETEST20");
+        assertEquals(mapServiceTest.getNodeFromID("NODETEST20").getNodeID(), "NODETEST20");
     }
 
     @Test
     public void testGetEdges() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         MapService mapServiceTest = new MapService(testURL);
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(Role.ADMIN);
@@ -265,8 +291,11 @@ public class DatabaseTest {
     /**
      * RequestService Testing
      */
+
     @Test
     public void testAddRequest() {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         RequestService requestServiceTest = new RequestService(testURL);
         Date testDate = new GregorianCalendar(2022, 1, 1).getTime();
         ArrayList<String> staffList = new ArrayList<String>();
@@ -287,6 +316,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateRequest() {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         RequestService requestServiceTest = new RequestService(testURL);
         Date testDate = new GregorianCalendar(2022, 1, 1).getTime();
         ArrayList<String> staffList = new ArrayList<String>();
@@ -312,6 +343,8 @@ public class DatabaseTest {
 
     @Test
     public void testResolveRequest() {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         RequestService requestServiceTest = new RequestService(testURL);
         Date testDate = new GregorianCalendar(2022, 1, 1).getTime();
         ArrayList<String> staffList = new ArrayList<String>();
@@ -337,6 +370,8 @@ public class DatabaseTest {
 
     @Test
     public void testGetRequest() {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         RequestService requestServiceTest = new RequestService(testURL);
         Date testDate = new GregorianCalendar(2022, 1, 1).getTime();
         ArrayList<String> staffList = new ArrayList<String>();
@@ -370,8 +405,11 @@ public class DatabaseTest {
      * Only delete patients/users/guests that actually exist
      * After changing a password (ex: for a patient), you must use setPatients() in order for patients(UserService list) to be updated
      */
+
     @Test
-    public void testAddPatient() throws InvalidEdgeException { // Note: Fails if patient is created without a park node
+    public void testAddPatient() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST25", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -383,6 +421,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddLocationID() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST25A", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -398,6 +438,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddParkingLocation() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getPatients().clear();
@@ -413,6 +455,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddRecommendedParkingLocation() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getPatients().clear();
@@ -428,6 +472,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST26", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -438,6 +484,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddEmployee2() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST26B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -448,6 +496,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddGuest() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         ArrayList<Appointment> tempList = new ArrayList<>();
         Timestamp t = new Timestamp(1);
@@ -457,6 +507,8 @@ public class DatabaseTest {
 
     @Test
     public void testAddGuest2() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         ArrayList<Appointment> tempList = new ArrayList<>();
         Timestamp t = new Timestamp(1);
@@ -466,6 +518,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangePhoneNumberPatient() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST28", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -481,6 +535,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangePhoneNumberEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST28B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -495,6 +551,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangeEmailPatient() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST29", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -510,6 +568,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangeEmailEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST29B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -524,6 +584,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangePasswordPatient() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST30", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -539,6 +601,8 @@ public class DatabaseTest {
 
     @Test
     public void testChangePasswordEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         mapServiceTest.addNodeWithID("NODETEST30B", 1, 1, "1", "Faulkner", "WALK", "Long", "Short");
@@ -553,6 +617,8 @@ public class DatabaseTest {
 
     @Test
     public void testDeleteEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getEmployees().clear();
@@ -565,6 +631,8 @@ public class DatabaseTest {
 
     @Test
     public void testDeleteGuest() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         userServiceTest.getGuests().clear();
         userServiceTest.addGuest("Name9", new Timestamp(0), "For testing purposes", false);
@@ -575,6 +643,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateEmployee() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getEmployees().clear();
@@ -586,6 +656,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateEmployee2() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getEmployees().clear();
@@ -598,6 +670,8 @@ public class DatabaseTest {
 
     @Test
     public void testUpdateGuest() throws InvalidEdgeException {
+        Database.getDBTest().dropValues("all");
+        Database.getDBTest();
         UserService userServiceTest = new UserService(testURL);
         MapService mapServiceTest = new MapService(testURL);
         userServiceTest.getGuests().clear();
@@ -608,6 +682,7 @@ public class DatabaseTest {
         assertEquals(userServiceTest.getGuests().get(0).getName(),"Name10New");
     }
 
+    /*
     @Test
     public void testAddAppointments() throws InvalidEdgeException {
         UserService userServiceTest = new UserService(testURL);
@@ -637,5 +712,6 @@ public class DatabaseTest {
         assertEquals(userServiceTest.getPatients().get(0).getAppointments().get(0).getAppointmentType(), "Radiology");
 
     } // TODO: Reevaluate when appointments is talked about
+    */
 
 }

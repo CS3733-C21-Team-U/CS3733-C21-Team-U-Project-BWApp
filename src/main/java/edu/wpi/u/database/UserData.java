@@ -71,10 +71,6 @@ public class UserData extends Data{
      */
     public UserData(String testURL){
         testConnect(testURL);
-        dropGuests(); // TODO : Stop dropping values for demos
-        dropEmployee();
-        printGuest();
-        printEmployees();
     }
 
     /**
