@@ -106,7 +106,7 @@ public class Database {
                 PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
                 psAppointments.execute();
 
-                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, request varchar(50) references Requests, employeeID varchar(50) references Employees, primary key(assignmentID))";
+                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, request varchar(50) references Requests, employeeID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 

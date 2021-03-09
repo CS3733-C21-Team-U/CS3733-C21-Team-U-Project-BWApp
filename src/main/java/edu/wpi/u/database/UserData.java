@@ -25,7 +25,9 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+
         //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "9148394600", false));
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.ADMIN, "debug", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
         String guestID,
@@ -297,12 +299,13 @@ public class UserData extends Data{
      */
     public HashMap<String, String> getEmployeeNamesByType(String type){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select employeeID,name from Employees where type=?";
+        String str = "select userName,name from Employees where type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,type);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                result.put(rs.getString("employeeID"), rs.getString("name"));
+                result.put(rs.getString("username"), rs.getString("name"));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -754,7 +757,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 ps.close();
-               return "Employees";
+                return "Employees";
             }
             else {
                 String str2 = "select * from Patients where phoneNumber=?";
@@ -763,6 +766,39 @@ public class UserData extends Data{
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     return "Patients";
+                }
+                else{
+                    return "";
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * Checks if the database has the phone number matched with the given username
+     * @param userName username
+     * @return the phone number of the user or "" if the username doesn't exist
+     */
+    public String getPhoneNumberFromUserName(String userName){
+        String str = "select phoneNumber from Employees where userName=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,userName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("phoneNumber");
+            }
+            else {
+                String str2 = "select phoneNumber from Patients where userName=?";
+                PreparedStatement ps2 = conn.prepareStatement(str2);
+                ps2.setString(1,userName);
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
+                    return rs.getString("phoneNumber");
                 }
                 else{
                     return "";
@@ -814,6 +850,68 @@ public class UserData extends Data{
             e.printStackTrace();
             return "";
         }
+    }
+
+    /**
+     * Checks to see if a email exists
+     * @param email the number to check
+     * @return true if the email exists
+     */
+    public boolean checkEmail(String email){
+        String str = "select * from Employees where email=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where email=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,email);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Checks to see if a phonenumber exists
+     * @param phonenumber the number to check
+     * @return true if the phonenumber exists
+     */
+    public boolean checkPhonenumber(String phonenumber){
+        String str = "select * from Employees where phoneNumber=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,phonenumber);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where phoneNumber=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,phonenumber);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -1094,4 +1192,6 @@ public class UserData extends Data{
             e.printStackTrace();
         }
     }
+
+
 }

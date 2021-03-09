@@ -111,7 +111,6 @@ public class UserLoginScreenController {
 //        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
-        App.userService.setUser(username, password, App.userService.checkPassword(password));
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
         try {
@@ -179,6 +178,7 @@ public class UserLoginScreenController {
         }
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText()));
                 handleSubmit();
             }
         }
@@ -194,6 +194,7 @@ public class UserLoginScreenController {
         }
 
     public void handleSubmit() throws IOException {
+        App.loginFlag.set(!App.loginFlag.get());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
@@ -242,8 +243,10 @@ public class UserLoginScreenController {
     public void handleLonginWithNo2FA(){
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText()));
                 Parent root = null;
                 try {
+                    App.loginFlag.set(!App.loginFlag.get());
                     root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();

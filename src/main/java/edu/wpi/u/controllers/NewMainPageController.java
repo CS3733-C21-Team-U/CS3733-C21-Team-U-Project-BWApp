@@ -6,6 +6,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.models.MapService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
 import static edu.wpi.u.users.Role.ADMIN;
 
 public class NewMainPageController {
@@ -62,6 +65,8 @@ public class NewMainPageController {
     public JFXListView list2;
     public JFXButton expandButton;
     public JFXButton collapseButton;
+    public Tab HelpMainPageTab;
+    public Tab AdminHelpMainPageTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -71,6 +76,9 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        App.throwDialogHerePane = newMainPageStackPane;
+
+
 //        validationFeild
         TextField test = new TextField("test");
 //        test.bindAutoCompletion(comboBox.getJFXEditor(), "option1", "option2");
@@ -131,18 +139,27 @@ public class NewMainPageController {
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
 
-        if(App.userService.getActiveUser().getType() ==  ADMIN){
-            adminTab1.setStyle("-fx-opacity: 1");
-            adminTab1.setDisable(false);
-            adminTab2.setStyle("-fx-opacity: 1");
-            adminTab2.setDisable(false);
-        }
-        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
-            adminTab1.setStyle("-fx-opacity: 0");
-            adminTab1.setDisable(true);
-            adminTab2.setStyle("-fx-opacity: 0");
-            adminTab2.setDisable(true);
-        }
+            if(App.userService.getActiveUser().getType() ==  ADMIN){
+                adminTab1.setStyle("-fx-opacity: 1");
+                adminTab1.setDisable(false);
+                adminTab2.setStyle("-fx-opacity: 1");
+                adminTab2.setDisable(false);
+                HelpMainPageTab.setDisable(true);
+                HelpMainPageTab.setStyle("-fx-opacity: 0");
+                AdminHelpMainPageTab.setDisable(false);
+                AdminHelpMainPageTab.setStyle("-fx-opacity: 1");
+            }
+            else{
+                adminTab1.setStyle("-fx-opacity: 0");
+                adminTab1.setDisable(true);
+                adminTab2.setStyle("-fx-opacity: 0");
+                adminTab2.setDisable(true);
+                HelpMainPageTab.setDisable(false);
+                HelpMainPageTab.setStyle("-fx-opacity: 1");
+                AdminHelpMainPageTab.setDisable(true);
+                AdminHelpMainPageTab.setStyle("-fx-opacity: 0");
+            }
+
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
@@ -200,7 +217,7 @@ public class NewMainPageController {
                  Object myController = fxmlLoader.getController();
                  */
                 //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 Object obj = fxmlLoader.load();
                 Object myController = fxmlLoader.getController();
                 App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());

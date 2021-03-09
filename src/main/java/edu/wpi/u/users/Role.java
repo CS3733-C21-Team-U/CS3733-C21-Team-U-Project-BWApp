@@ -15,3 +15,4 @@ public enum Role {
 /*
 TODO : Rename to Role and add all hospital roles / guests
  */
+
