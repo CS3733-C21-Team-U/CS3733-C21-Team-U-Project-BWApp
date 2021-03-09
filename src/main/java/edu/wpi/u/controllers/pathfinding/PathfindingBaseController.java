@@ -185,6 +185,11 @@ public class PathfindingBaseController {
             generatePathPreview(App.mapInteractionModel.floorPathfinding);
             setMapItemsOrder();
         });
+        App.mapInteractionModel.reloadPathfinding.addListener(e -> {
+            clearMapItems();
+            generateNodes(App.mapInteractionModel.floor);
+        });
+
 
     } // End of initialize
 
