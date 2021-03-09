@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -45,6 +46,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     //for update
 
     AnchorPane mainMapPane = new AnchorPane();
+    Group locationGroup = new Group();
 
     //    public HBox HBoxToClone;
 //    public VBox specificFields;
@@ -80,22 +82,47 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     @FXML
     public void initialize(URL location, ResourceBundle resources){
+
         ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
         node.setFitWidth(430);
         node.setPreserveRatio(true);
-        //mainMapPane.getChildren().add(node);
-        //node.toFront();
-        miniMap = new GesturePane(node);
-        mainMapPane.setMinSize(300, 300);
-        mainMapPane.setPrefWidth(300);
-        mainMapPane.setPrefHeight(300);
-        mainMapPane.setStyle("-fx-background-color: #000000");
+        mainMapPane.getChildren().add(node);
+        mainMapPane.getChildren().add(locationGroup);
+        mainMapPane.setMinSize(457,275);
+        mainMapPane.toFront();
+        miniMap = new GesturePane(mainMapPane);
+        miniMap.setMinSize(457,285);
         miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
         miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
         miniMap.setPrefHeight(518);
         miniMap.centreOn(new Point2D(170, 90));
         miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
         mapViewRoot.getChildren().add(miniMap);
+        miniMap.toFront();
+        mapViewRoot.setMinSize(457,300);
+        mapViewRoot.toFront();
+        locationGroup.toFront();
+        loadLocationsOnMap("G", locationGroup);
+
+
+
+        //------------------------------------------------------------------------------------
+//        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
+//        node.setFitWidth(430);
+//        node.setPreserveRatio(true);
+//        //mainMapPane.getChildren().add(node);
+//        //node.toFront();
+//        miniMap = new GesturePane(node);
+//        mainMapPane.setMinSize(300, 300);
+//        mainMapPane.setPrefWidth(300);
+//        mainMapPane.setPrefHeight(300);
+//        mainMapPane.setStyle("-fx-background-color: #000000");
+//        miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
+//        miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
+//        miniMap.setPrefHeight(518);
+//        miniMap.centreOn(new Point2D(170, 90));
+//        miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
+//        mapViewRoot.getChildren().add(miniMap);
 
 
         //add Listener
@@ -122,7 +149,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
         generateSpecificFields();
         generateComments();
-        //loadLocationsOnMap("G", mainMapPane);
 
     }
 
@@ -159,6 +185,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         App.requestService.addComment(this.parent.request, newComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
+        commentField.setText("");
     }
 
     @FXML
@@ -200,7 +227,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
 
 
-    public void loadLocationsOnMap(String floor, AnchorPane pane){
+    public void loadLocationsOnMap(String floor, Group pane){
         ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
         for(String nodeIDLocation: locationNodeList){
             if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
@@ -212,7 +239,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 mapLocation.setRadius(30);
                 mapLocation.setStyle("-fx-fill: yellow");
                 mapLocation.toFront();
-                pane.getChildren().add(mapLocation);
+                locationGroup.getChildren().add(mapLocation);
             }
         }
     }
