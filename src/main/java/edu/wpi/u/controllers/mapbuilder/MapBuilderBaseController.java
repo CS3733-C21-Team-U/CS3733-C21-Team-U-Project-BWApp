@@ -421,9 +421,12 @@ public class MapBuilderBaseController {
                 App.mapInteractionModel.setNodeID(n.getNodeID());
                 //update the last node/edges clicked on
                 Circle lastCircle = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
-                lastCircle.setCenterX(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[0]);
-                lastCircle.setCenterY(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[1]);
-                moveEdgesWithNode(lastCircle);
+                if(lastCircle != null){
+                    lastCircle.setCenterX(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[0]);
+                    lastCircle.setCenterY(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[1]);
+                    moveEdgesWithNode(lastCircle);
+                }
+
 
                 //deal with the multi-select queue
                 if(!App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")) {
