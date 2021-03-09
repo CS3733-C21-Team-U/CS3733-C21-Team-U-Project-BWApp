@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,6 +15,7 @@ public class MapInteractionModel {
     private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
+    public SimpleBooleanProperty reloadPathfinding = new SimpleBooleanProperty(true);
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";

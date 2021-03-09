@@ -86,7 +86,7 @@ public class UndoRedoService {
      * @param permissions
      * @throws InvalidEdgeException
      */
-    public void addEdge(String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
+    public void addEdge(String start_node, String end_node, Role permissions) throws InvalidEdgeException {
         MapEdit thisEdit = new MapEdit();
         thisEdit.addEdge(start_node,end_node,permissions);
         if(curIndex < edits.size() - 1){
@@ -122,7 +122,7 @@ public class UndoRedoService {
      * @param edgeID
      * @param permissions
      */
-    public void updateEdge(String edgeID, ArrayList<Role> permissions){
+    public void updateEdge(String edgeID, Role permissions){
         MapEdit thisEdit = new MapEdit(edgeID);
         thisEdit.updateEdge(permissions);
         if(curIndex < edits.size() - 1){

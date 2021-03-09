@@ -45,12 +45,12 @@
                                 <Insets left="290.0" />
                             </VBox.margin>
                         </Label>
-                        <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
+                        <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
                             <VBox.margin>
                                 <Insets bottom="30.0" left="290.0" right="483.0" top="25.0" />
                             </VBox.margin>
                         </JFXTextField>
-                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" text="test">
+                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password">
                             <VBox.margin>
                                 <Insets bottom="20.0" left="290.0" right="483.0" />
                             </VBox.margin>
@@ -78,7 +78,7 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </HBox>
-                  <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
+                  <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefWidth="313.0" styleClass="button-outlined" text="Login Without 2FA">
                      <VBox.margin>
                         <Insets left="290.0" top="5.0" />
                      </VBox.margin>
