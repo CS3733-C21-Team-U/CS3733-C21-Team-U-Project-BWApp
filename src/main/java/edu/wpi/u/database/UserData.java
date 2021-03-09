@@ -814,6 +814,68 @@ public class UserData extends Data{
     }
 
     /**
+     * Checks to see if a email exists
+     * @param email the number to check
+     * @return true if the email exists
+     */
+    public boolean checkEmail(String email){
+        String str = "select * from Employees where email=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,email);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where email=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,email);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Checks to see if a phonenumber exists
+     * @param phonenumber the number to check
+     * @return true if the phonenumber exists
+     */
+    public boolean checkPhonenumber(String phonenumber){
+        String str = "select * from Employees where phoneNumber=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,phonenumber);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                String str2 = "select * from Patients where phoneNumber=?";
+                try{
+                    PreparedStatement ps2 = conn.prepareStatement(str2);
+                    ps2.setString(1,phonenumber);
+                    ResultSet rs2 = ps2.executeQuery();
+                    return rs2.next();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
      * Adds a location (nodeID) to the patient
      * @param patientID patient id
      * @param nodeID node id

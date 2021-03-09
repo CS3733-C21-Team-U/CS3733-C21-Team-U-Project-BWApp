@@ -265,15 +265,28 @@ public class UserService {
     public String checkPassword(String password) {
         return ud.checkPassword(password);
     }
+//    /**
+//     * Validates the phone number of a given username
+//     * @param username the username to be validated
+//     * @return the phonenumber of the username
+//     */
+//    public String checkPhoneNumber(String username) {
+//        return ud.checkPhoneNumber(username);
+//    }
 
     /**
-     * Validates the phone number of a given username
-     * @param username the username to be validated
-     * @return the phonenumber of the username
+     * Checks a phonenumber
+     * @param phonenumber the phonenumber
+     * @return true if the number exists
      */
-    public String checkPhoneNumber(String username) {
-        return ud.checkPhoneNumber(username);
-    }
+    public boolean checkPhoneNumber (String phonenumber) {return ud.checkPhonenumber(phonenumber);}
+
+    /**
+     * Checks a email
+     * @param email the email
+     * @return true if the number exists
+     */
+    public boolean checkEmail(String email) { return ud.checkEmail(email);}
 
     /**
      *  Gets the password of the user
