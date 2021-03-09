@@ -47,8 +47,9 @@ public class SelectUserScreenController {
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
+//        App.userService.setUser("patient", "patient", "Guests");
         System.out.println(App.userService.getActiveUser().getName());
-        App.userService.getActiveUser().setType(Role.ADMIN);
+        App.userService.getActiveUser().setType(Role.GUEST);
         // todo : fixes the loading issue but won't go to new main page
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
@@ -58,8 +59,9 @@ public class SelectUserScreenController {
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
+//        App.userService.setUser("patient", "patient", "Guests");
         System.out.println(App.userService.getActiveUser().getName());
-        App.userService.getActiveUser().setType(Role.ADMIN);
+        App.userService.getActiveUser().setType(Role.PATIENT);
         // todo : fixes the loading issue but won't go to new main page
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
