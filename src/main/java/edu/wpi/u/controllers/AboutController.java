@@ -59,11 +59,14 @@ public class AboutController {
     }
 
     /**
-     * Shows Kohmei Kadoya's picture
+     * Shows Kohmei Kadoya's picture and a short bio
      * Author Lily
      */
     public void showKohmeiKadoya() {
         showIMG("/edu/wpi/u/views/Images/KohmeiKadoya.jpeg");
+        aboutDescriptionLabel.setText("Hi! I’m KohmeI Kadoya a RBE major at WPI" +
+                " and the lead software engineer for team U. I come from Tokyo," +
+                " Japan and I enjoy back-country skiing and scuba diving");
     }
 
     /**

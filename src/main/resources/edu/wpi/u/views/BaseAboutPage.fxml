@@ -133,7 +133,7 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="74.0" prefWidth="807.0">
                                        <children>
-                                          <Label styleClass="headline-2" text="Team Ultraviolet Unicorns" />
+                                          <Label styleClass="headline-2" text="Meet Team Ultraviolet Unicorns" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="369.0" prefWidth="200.0">
