@@ -173,7 +173,7 @@ public class MapBuilderBaseController {
             Circle curNode = new Circle();
             curNode.setCenterX(n.getCords()[0]);
             curNode.setCenterY(n.getCords()[1]);
-            curNode.setRadius(7.0);
+            curNode.setRadius(9);
             curNode.setId(n.getNodeID());
             curNode.setStyle("-fx-fill: -error");
             curNode.setVisible(true);
@@ -421,9 +421,12 @@ public class MapBuilderBaseController {
                 App.mapInteractionModel.setNodeID(n.getNodeID());
                 //update the last node/edges clicked on
                 Circle lastCircle = findCircleFromNode(App.mapInteractionModel.deselectedNodeID);
-                lastCircle.setCenterX(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[0]);
-                lastCircle.setCenterY(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[1]);
-                moveEdgesWithNode(lastCircle);
+                if(lastCircle != null){
+                    lastCircle.setCenterX(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[0]);
+                    lastCircle.setCenterY(App.mapService.getNodeFromID(lastCircle.getId()).getCords()[1]);
+                    moveEdgesWithNode(lastCircle);
+                }
+
 
                 //deal with the multi-select queue
                 if(!App.mapInteractionModel.getCurrentAction().equals("MULTISELECT")) {
@@ -471,31 +474,33 @@ public class MapBuilderBaseController {
                 c1.setFill(Paint.valueOf(selectedColor));
 
                 //if the previse node is on the current floor if yes draw edge
-                if(App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getFloor().equals(App.mapInteractionModel.floor)) {
-                    c2.toFront();
-                    c2.setFill(Paint.valueOf(selectedColor));
-                    // Create drawn Edge
-                    double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
-                    double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
-                    double xdiff = 0;
-                    double ydiff = 0;
-                    xdiff = c2.getCenterX() - oldx;
-                    ydiff = c2.getCenterY() - oldy;
-                    tempEdge.setLayoutX(c1.getCenterX());
-                    tempEdge.setStartX(0);
-                    tempEdge.setLayoutY(c1.getCenterY());
-                    tempEdge.setStartY(0);
-                    tempEdge.setEndX(xdiff);
-                    tempEdge.setEndY(ydiff);
-                    tempEdge.setId("tempedge");
-                    tempEdge.setStrokeWidth(3.0);
-                    tempEdge.toFront();
-                    tempEdge.setStroke(Paint.valueOf(selectedColor));
-                    tempEdge.setVisible(true);
-                    nodesAndEdges.getChildren().add(tempEdge);
-                    makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
-                }else{
-                    makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
+                if(App.mapInteractionModel.getPreviousNodeID() != null) {
+                    if (App.mapService.getNodeFromID(App.mapInteractionModel.getPreviousNodeID()).getFloor().equals(App.mapInteractionModel.floor)) {
+                        c2.toFront();
+                        c2.setFill(Paint.valueOf(selectedColor));
+                        // Create drawn Edge
+                        double oldx = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[0];
+                        double oldy = App.mapService.getNodeFromID(App.mapInteractionModel.getNodeID()).getCords()[1];
+                        double xdiff = 0;
+                        double ydiff = 0;
+                        xdiff = c2.getCenterX() - oldx;
+                        ydiff = c2.getCenterY() - oldy;
+                        tempEdge.setLayoutX(c1.getCenterX());
+                        tempEdge.setStartX(0);
+                        tempEdge.setLayoutY(c1.getCenterY());
+                        tempEdge.setStartY(0);
+                        tempEdge.setEndX(xdiff);
+                        tempEdge.setEndY(ydiff);
+                        tempEdge.setId("tempedge");
+                        tempEdge.setStrokeWidth(3.0);
+                        tempEdge.toFront();
+                        tempEdge.setStroke(Paint.valueOf(selectedColor));
+                        tempEdge.setVisible(true);
+                        nodesAndEdges.getChildren().add(tempEdge);
+                        makeContextMenu(tempEdge, tempEdge.getLayoutX() + (xdiff / 2), tempEdge.getLayoutY() + (ydiff / 2));//Creation of the Edge context menu
+                    } else {
+                        makeContextMenu(tempEdge, c1.getCenterX(), c1.getCenterY());//Creation of the Edge context menu
+                    }
                 }
                 break;
             case "ALINE":
@@ -572,6 +577,7 @@ public class MapBuilderBaseController {
     @FXML
     public void handleUndoButton() throws Exception{
         App.undoRedoService.undo();
+        pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
@@ -583,6 +589,7 @@ public class MapBuilderBaseController {
 
     public void handleRedoButton() throws Exception{
         App.undoRedoService.redo();
+        pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);
@@ -707,6 +714,11 @@ public class MapBuilderBaseController {
 
 
     public void handleMultiSelectButton() {
+        //deselect the current selected node
+        Circle selectedCircle = (Circle) nodesAndEdges.lookup("#" + App.mapInteractionModel.nodeID);
+        if(selectedCircle != null) {
+            selectedCircle.setFill(Paint.valueOf(errorColor));
+        }
         //highlight all the selected nodes
         for (String node: App.mapInteractionModel.nodeIDList){
             Circle drawnNode = (Circle) nodesAndEdges.lookup("#" + node);

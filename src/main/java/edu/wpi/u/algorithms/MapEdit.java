@@ -40,7 +40,6 @@ public class MapEdit {
         System.out.println("MapEdit made but was the lame way");
     }
 
-
     /**
      * creates an edge and it gets added to the database
      * @param xCoord
@@ -126,7 +125,7 @@ public class MapEdit {
      * @param end_node
      * @throws InvalidEdgeException
      */
-    public void addEdge(String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
+    public void addEdge(String start_node, String end_node, Role permissions) throws InvalidEdgeException {
         try{
             this.type = "EDGE";
             this.edit = EditTypes.ADD;
@@ -154,7 +153,7 @@ public class MapEdit {
      * updates the permissions of an edge and stores the old version
      * @param permissions
      */
-    public void updateEdge(ArrayList<Role> permissions){
+    public void updateEdge(Role permissions){
         try{
             this.type = "EDGE";
             this.edit = EditTypes.UPDATE;

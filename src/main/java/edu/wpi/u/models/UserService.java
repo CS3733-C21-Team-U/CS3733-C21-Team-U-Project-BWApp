@@ -114,6 +114,10 @@ public class UserService {
         this.activeUser = ud.setEmployee(username,password);
     }
 
+    /**
+     * Sets the employee based on an id
+     * @param employeeID the id
+     */
     public void setEmployee(String employeeID){
         this.activeUser = ud.setEmployee(employeeID);
     }
@@ -165,6 +169,15 @@ public class UserService {
      */
     public ArrayList<Patient> getPatients(){
         return patients;
+    }
+
+    /**
+     * Gets a hashmap of employees based on a certain type
+     * @param type the type
+     * @return the hashmap of employee names
+     */
+    public HashMap<String, String> getEmployeeIDByType(String type){
+        return ud.getEmployeeNamesByType(type);
     }
 
     /**

@@ -199,7 +199,7 @@ public class MapService {
    * @throws InvalidEdgeException
    * TODO add Node ID checking
    */
-  public String addEdge(String edge_id, String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
+  public String addEdge(String edge_id, String start_node, String end_node, Role permissions) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
       md.updatePermissions(edge_id, permissions);
@@ -218,7 +218,7 @@ public class MapService {
    * @param edgeID
    * @param permissions
    */
-  public void updateEdgePermissions(String edgeID, ArrayList<Role> permissions){
+  public void updateEdgePermissions(String edgeID, Role permissions){
     md.updatePermissions(edgeID, permissions);
     mm.updateUserPermissions(edgeID, permissions);
   }
