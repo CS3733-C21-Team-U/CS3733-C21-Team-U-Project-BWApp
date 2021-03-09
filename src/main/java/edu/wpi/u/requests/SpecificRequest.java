@@ -38,6 +38,7 @@ public abstract class SpecificRequest {
 
     public abstract String[] getSpecificFields();
     public abstract String getType();
+    public abstract String getRelevantRole();
 
     public ArrayList<String> getSpecificData() {
         return specificFields;
@@ -74,4 +75,5 @@ public abstract class SpecificRequest {
         }
         return setSpecificData(result);
     }
+
 }
