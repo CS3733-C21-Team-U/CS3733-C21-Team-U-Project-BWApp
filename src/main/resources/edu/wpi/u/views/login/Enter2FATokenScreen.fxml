@@ -34,7 +34,7 @@
                      <VBox.margin>
                         <Insets left="290.0" />
                      </VBox.margin></Label>
-                    <JFXTextField fx:id="tokenTextFIeld" labelFloat="true" prefHeight="45.0" prefWidth="245.0" promptText="6 Digit Number" text="test">
+                    <JFXTextField fx:id="tokenTextFIeld" labelFloat="true" prefHeight="45.0" prefWidth="245.0" promptText="6 Digit Number">
                      <VBox.margin>
                         <Insets left="290.0" right="303.0" top="20.0" />
                      </VBox.margin></JFXTextField>

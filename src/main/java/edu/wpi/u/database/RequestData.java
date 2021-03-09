@@ -194,7 +194,13 @@ public class RequestData extends Data{
             ps.setString(1, requestID);
             ps.execute();
             for (String node : locations) {
-                addLocation(node,requestID);
+                try{
+                    addLocation(node,requestID);
+                }
+                catch (Exception e){
+                    System.out.println("Add Location Failed");
+                }
+
             }
             ps.close();
         }
@@ -270,7 +276,6 @@ public class RequestData extends Data{
             ps.setString(2, specificRequest.getType());
             ps.setTimestamp(3,req.getDateNeeded());
             ps.setString(4,specificRequest.specificsStorageString());
-            ps.setString(4,specificRequest.specificsStorageString());
             ps.setBoolean(5, false);
             ps.execute();
             for(Comment comment : req.getComments()){
@@ -289,7 +294,7 @@ public class RequestData extends Data{
      * @param requestID request id
      */
     public void addAssignee(String employeeID, String requestID){
-        String str = "insert into Assignments(assignmentID, request, userID) values (?,?,?)";
+        String str = "insert into Assignments(assignmentID, request, employeeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID+"_"+employeeID);
@@ -367,7 +372,7 @@ public class RequestData extends Data{
      * @param nodeID the node id
      */
     public void deleteLocation(String requestID, String nodeID){
-        String str = "delete * from Locations where request=? and nodeID=?";
+        String str = "delete from Locations where request=? and nodeID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
@@ -385,7 +390,7 @@ public class RequestData extends Data{
      * @param employeeID the user id
      */
     public void deleteAssignment(String requestID, String employeeID){
-        String str = "delete * from Assignments where request=? and userID=?";
+        String str = "delete from Assignments where request=? and employeeID=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);

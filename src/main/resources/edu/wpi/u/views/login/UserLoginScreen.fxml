@@ -18,11 +18,11 @@
     <children>
         <HBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <VBox prefWidth="1086.0">
+                <VBox alignment="TOP_CENTER" prefWidth="1086.0" spacing="30.0">
                     <children>
-                        <HBox prefHeight="107.0" prefWidth="1086.0">
+                        <HBox alignment="CENTER" prefHeight="107.0" prefWidth="1086.0">
                             <VBox.margin>
-                                <Insets top="270.0" />
+                                <Insets />
                             </VBox.margin>
                             <children>
                                 <ImageView fitHeight="120.0" fitWidth="115.0">
@@ -30,44 +30,41 @@
                                         <Image url="@../Images/logo.png" />
                                     </image>
                                     <HBox.margin>
-                                        <Insets bottom="10.0" left="290.0" />
+                                        <Insets />
                                     </HBox.margin>
                                 </ImageView>
-                                <Label styleClass="headline-2" text="Login Portal">
+                                <Label prefHeight="111.0" prefWidth="183.0" styleClass="headline-2" text="Login Portal">
                                     <HBox.margin>
                                         <Insets left="16.0" top="50.0" />
                                     </HBox.margin>
                                 </Label>
                             </children>
                         </HBox>
-                        <Label prefHeight="15.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System" textAlignment="CENTER">
+                        <Label prefHeight="31.0" prefWidth="329.0" text="Enter the Brigham and Women's Faulker Hospital's System - this needs to be on a full screen image and on a card view!" textAlignment="CENTER" wrapText="true">
                             <VBox.margin>
-                                <Insets left="290.0" />
+                                <Insets />
                             </VBox.margin>
                         </Label>
-                        <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username" text="test">
+                        <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
                             <VBox.margin>
-                                <Insets bottom="30.0" left="290.0" right="483.0" top="25.0" />
+                                <Insets />
                             </VBox.margin>
                         </JFXTextField>
-                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" text="test">
+                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password">
                             <VBox.margin>
-                                <Insets bottom="20.0" left="290.0" right="483.0" />
+                                <Insets />
                             </VBox.margin>
                         </JFXPasswordField>
-                  <JFXProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="313.0" style="-fx-opacity: 0;">
-                     <VBox.margin>
-                        <Insets bottom="3.0" left="290.0" />
-                     </VBox.margin>
-                  </JFXProgressBar>
+                  <HBox prefHeight="0.0" prefWidth="485.0">
+                     <children>
+                        <JFXProgressBar fx:id="progressBar" prefHeight="11.0" prefWidth="455.0" style="-fx-opacity: 0;" />
+                        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
+                     </children>
+                  </HBox>
+                          <JFXButton fx:id="loginButton" buttonType="RAISED" maxWidth="533.0" minHeight="15.0" onAction="#handleLogin" prefWidth="533.0" styleClass="button-contained" text="Login" />
                         <HBox prefHeight="41.0" prefWidth="1086.0">
                             <children>
-                                <JFXButton fx:id="loginButton" buttonType="RAISED" maxWidth="153.0" minHeight="15.0" onAction="#handleLogin" prefWidth="153.0" styleClass="button-contained" text="Login">
-                                    <HBox.margin>
-                                        <Insets left="290.0" />
-                                    </HBox.margin>
-                                </JFXButton>
-                        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
+                        <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefWidth="327.0" styleClass="button-outlined" text="Login Without 2FA" />
                                 <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
                                     <HBox.margin>
                                         <Insets left="5.0" />
@@ -78,19 +75,14 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </HBox>
-                  <JFXButton fx:id="submitButton" onAction="#handleSubmit" prefWidth="313.0" styleClass="button-outlined" text="Verify">
-                     <VBox.margin>
-                        <Insets left="290.0" top="5.0" />
-                     </VBox.margin>
-                  </JFXButton>
                   <JFXButton layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
                      <VBox.margin>
-                        <Insets left="290.0" top="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </JFXButton>
                     </children>
                     <HBox.margin>
-                        <Insets />
+                        <Insets left="300.0" right="300.0" top="200.0" />
                     </HBox.margin>
                 </VBox>
                 <StackPane prefHeight="150.0" prefWidth="200.0">

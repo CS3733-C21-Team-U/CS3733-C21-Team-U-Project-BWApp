@@ -16,6 +16,7 @@ import edu.wpi.u.App;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -66,7 +67,7 @@ public class SettingsBaseController {
         }
 
 
-        tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges","Requests","Employees","Guests","Assignments","Locations","Permissions","Maintenance","Laundry","Sanitation","AudioVisual","Floral","Medical","Religious","Computer","Security","Language","Gift"));
+        tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges"));
 
         // TODO: ADD REGEX FUNCTIONALITY TO THIS
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -167,6 +168,7 @@ public class SettingsBaseController {
     }
 
     public void handleCreateTable() {
+        App.mapService.loadStuff();
         App.mapService.loadCSVFile(filePathTextField.getText(), tableNameOptions.getValue());
     }
 
