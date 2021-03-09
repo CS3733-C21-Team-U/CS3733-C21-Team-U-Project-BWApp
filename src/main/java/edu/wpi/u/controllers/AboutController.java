@@ -72,10 +72,11 @@ public class AboutController {
      */
     public void showNevilleIngram() {
         showIMG("/edu/wpi/u/views/Images/NevilleIngram.jpg");
-        aboutDescriptionLabel.setText("Neville Ingram, one of our Assistant Leads," +
-                " is a Mathematical Sciences and Computer Science major" +
+        aboutDescriptionLabel.setText("My name is Neville Ingram, I'm of our" +
+                " Assistant Leads." +
+                " I'm a Mathematical Sciences and Computer Science major" +
                 " from New Rochelle, New York." +
-                " In his free time he likes to go hiking and play video games.");
+                " In my free time I like to go hiking and play video games.");
     }
 
     /**
@@ -103,9 +104,10 @@ public class AboutController {
      */
     public void showLilyDurkin() {
         showIMG("/edu/wpi/u/views/Images/LilyDurkin.jpg");
-        aboutDescriptionLabel.setText("Lily Durkin, our Documentation Analyst, is a" +
-                " Robotics Engineering major from Lowell, MA. She enjoys sketching, and" +
-                " has chosen to pursue her depth in Art.");
+        aboutDescriptionLabel.setText("Hi I'm Lily Durkin, and I'm our" +
+                " Documentation Analyst. I'm a Robotics Engineering major" +
+                " from Lowell, MA. I enjoy sketching, and I've even chosen to" +
+                " pursue my depth in Art.");
     }
 
     /**
@@ -140,11 +142,17 @@ public class AboutController {
     }
 
     /**
-     * Shows Will Burke's picture
+     * Shows Will Burke's picture and a short bio
      * Author Lily
      */
     public void showWillBurke() {
         showIMG("/edu/wpi/u/views/Images/WillBurke.jpg");
+        aboutDescriptionLabel.setText("My name is Will Burke, I'm a sophomore at" +
+                " WPI that studies Computer Science and Data Science and I've been" +
+                " a full-time software engineer, primarily working on" +
+                " backend-related functionality. Some things I really enjoy are" +
+                " using canva presentations, summers in my home-state of Rhode" +
+                " Island, and Ultimate Frisbee!");
     }
 
     /**
