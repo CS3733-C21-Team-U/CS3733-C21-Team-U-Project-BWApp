@@ -189,7 +189,7 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="1700.0">
                <children>
-                  <JFXButton onAction="#handleAboutCancel" styleClass="button-contained" text="Return to Pathfinding" />
+                  <JFXButton onAction="#handleBackToMainPageButton" styleClass="button-contained" text="Return to Help Page" />
                </children>
             </HBox>
          </children>

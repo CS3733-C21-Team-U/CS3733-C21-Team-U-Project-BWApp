@@ -368,4 +368,15 @@ public class MainHelpPageController {
         content.setActions(actions);
         dialog.show();
     }
+
+    /**
+     * Takes users from the help page to the about us page
+     * @throws Exception
+     */
+    @FXML public void handleAboutPage() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/BaseAboutPage.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
 }

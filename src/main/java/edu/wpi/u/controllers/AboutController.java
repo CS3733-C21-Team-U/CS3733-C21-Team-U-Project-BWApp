@@ -1,12 +1,16 @@
 package edu.wpi.u.controllers;
 
 import edu.wpi.u.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class AboutController {
 
@@ -110,12 +114,14 @@ public class AboutController {
     public void showOlaJackson() { showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");}
 
     /**
-     * Brings AboutPage back to Pathfinding.
+     * Brings AboutPage back to Help.
      * @throws Exception
      * Author Lily
      */
-    @FXML public void handleAboutCancel() throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+    @FXML public void handleBackToMainPageButton() throws IOException {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
