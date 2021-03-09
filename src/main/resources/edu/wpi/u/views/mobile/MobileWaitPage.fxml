@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileWaitPageController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="60.0" layoutY="28.0" prefHeight="712.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Please Wait a moment as we process your information" />
+            <JFXButton fx:id="pathFindButton" disable="true" onAction="#handlePathFInd" opacity="0.0" text="Go to PathFinding!" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

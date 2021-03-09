@@ -43,10 +43,6 @@ public class MobileCovidSurveyController {
     public void handleCovidSurveyFill() throws IOException {
 
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
-            fxmlLoader.load();
-            fxmlLoader.getController();
-            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             covidRisk = "None";
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
@@ -60,6 +56,10 @@ public class MobileCovidSurveyController {
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
             covidRisk = "High";
         }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileWaitPage.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
 //    public void handleDebugButton(ActionEvent actionEvent) {
