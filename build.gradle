@@ -46,6 +46,7 @@ dependencies {
 
     )
     compile group: 'org.asynchttpclient', name: 'async-http-client', version: '2.2.0'
+    compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '5.0.0.Final'
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.slf4j:jcl-over-slf4j:1.7.25'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.0.5'
