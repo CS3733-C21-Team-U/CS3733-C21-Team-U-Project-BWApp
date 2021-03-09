@@ -20,7 +20,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
@@ -36,12 +38,15 @@ public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
     public JFXTextField endNodeField;
     public JFXTextField startNodeField;
+    public AnchorPane mainAnchor;
+    public ScrollPane ScrollPanel;
+    public AnchorPane secondAnchor;
     @FXML
     Label endNode;
     @FXML
     Label startNode;
 
-
+//mainAnchor
     String targetNode = "START";//flag for
     String startNodeID = "", endNodeID = "";
     ArrayList<Node> path = new ArrayList<>();
@@ -59,6 +64,9 @@ public class FloatingPathfindingPaneController {
 
         if(edgePath.isEmpty());
         else {
+            double AnchorSize = Math.min(edgePath.size() * 50, 600);
+            mainAnchor.setPrefHeight(AnchorSize);
+
 
             Node bNode = null;
             Node eNode = path.get(0);
@@ -90,33 +98,35 @@ public class FloatingPathfindingPaneController {
                     iconID = TextualDirections.findTextualIconID(angleDifferance);
                 }
 
-                String turnText;
+                String moveIntoText = "";
+                String moveOutOfText = "";
 
                 if(sNode.getNodeType().equals("ELEV") || eNode.getNodeType().equals("ELEV"))  {
-                    turnText = "Elevator";
+                    moveIntoText = "Step into elevator";
+                    moveOutOfText = "Step out of elevator at floor";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M10,18v-4h1 " +
                             "v-2.5c0-1.1-0.9-2-2-2H8c-1.1,0-2,0.9-2,2V14h1v4H10z M8.5,8.5c0.69,0,1.25-0.56,1.25-1.25S9.19,6,8.5,6S7.25,6.56,7.25,7.25 S7.81,8.5,8.5,8.5z M18,11l-2.5-4L13,11H18z M13,13l2.5,4l2.5-4H13z";
                 }
                 else if(sNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("STAI"))  {
-                    turnText = "Stairs";
+                    moveIntoText = "Step into staircase";
+                    moveOutOfText = "Step out of staircase at floor ";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M18,6h-4.42 v3.33H11v3.33H8.42V16H6v2h4.42v-3.33H13v-3.33h2.58V8H18V6z";
                 }
 
                 HBox stepHBoxContainer;
 
                 if(eNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("ELEV")) {
-                    stepHBoxContainer = createDirectionBox("Step into staircase/ elevator", iconID);
+                    if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) { } else {
+                    stepHBoxContainer = createDirectionBox(moveIntoText, iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
-                }
+                }}
 
                 else if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) {
-                    stepHBoxContainer = createDirectionBox("Step off staircase/ elevator at floor " + eNode.getFloor(), iconID);
+                    if(eNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("ELEV")) { } else {
+                    stepHBoxContainer = createDirectionBox(moveOutOfText + eNode.getFloor(), iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                     lastTurnNode = eNode;
-                }
-
-                else if(sNode.getNodeType().equals("ELEV") && eNode.getNodeType().equals("ELEV")) { /*Elevator-To-Elevator connection*/}
-                else if(sNode.getNodeType().equals("STAI") && eNode.getNodeType().equals("STAI")) { /*Stair-To-Stair connection*/}
+                }}
 
                 else if(angleDifferance > 22.5 && angleDifferance < 337.5) { //if turn is found on current node
                     if(lastTurnNode != null) {
@@ -130,11 +140,13 @@ public class FloatingPathfindingPaneController {
 
 
                 else if(bNode == null) {
-                    stepHBoxContainer = createDirectionBox("Begin by travelling " + dist + " feet from " + sNode.getLongName(), iconID);
+                    stepHBoxContainer = createDirectionBox("Begin by travelling " + dist + " feet from " + sNode.getLongName(), "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+                            + "M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z");
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                 }
 
                 else if((sNode.getNodeType().equals("HALL") && eNode.getNodeType().equals("HALL"))) {/*Hallway*/ }
+                else if((sNode.getNodeType().equals("WALK") && eNode.getNodeType().equals("WALK"))) {/*Walkway*/ }
 
                 else {
                     stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
@@ -144,10 +156,13 @@ public class FloatingPathfindingPaneController {
 
                 bNode = sNode;
             }
+           HBox stepHBoxContainer = createDirectionBox("Arrived at " + path.get(path.size()-1).getLongName(), "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+                   + "M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z");
+            textDirectionContainer.getChildren().add(stepHBoxContainer);
         }
     }
 
-    /**
+    /** path.get(path.size()-1).getLongName()
      * sets flag for what field is being filled to END
      */
 
