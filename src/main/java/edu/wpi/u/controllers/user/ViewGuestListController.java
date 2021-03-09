@@ -3,14 +3,14 @@ package edu.wpi.u.controllers.user;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.App;
 import edu.wpi.u.users.*;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class ViewGuestListController {
     @FXML public JFXTreeTableView<User> treeTableView = new JFXTreeTableView<>();
@@ -56,10 +56,11 @@ public class ViewGuestListController {
         treeTableColumnName.setPrefWidth(100);
         treeTableColumnName.setEditable(false);
 
-        JFXTreeTableColumn<User, String> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
-        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+        JFXTreeTableColumn<User, Long> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
+        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,Long> param) ->{
             if (treeTableColumnVisitDate.validateValue(param)){
-                return param.getValue().getValue().visitDatefxProperty().asString(); // todo : date format
+                SimpleObjectProperty<Date> d = new SimpleObjectProperty<>();
+                return param.getValue().getValue().visitDatefxProperty().asObject(); // todo : date format
             }
             else {
                 return treeTableColumnVisitDate.getComputedValue(param);
