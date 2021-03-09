@@ -180,8 +180,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
-            System.out.println("Edges are being added to the Database");
-            String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
+            String str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
             ps.setString(2, start_node_id);
@@ -241,7 +240,7 @@ public class MapData extends Data{
 
     public int delEdgeByNodes(String start_node_id, String end_node_id){
         try {
-            String str = "delete from Edges where startID=?, endID=?";
+            String str = "delete from Edges where startID=? and endID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, start_node_id);
             ps.setString(2, end_node_id);
@@ -271,7 +270,8 @@ public class MapData extends Data{
                 String shortName = rset.getString("shortName");
                 mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
                 String key = nodeType + floor;
-                int index = Integer.valueOf(id.substring(5,7));
+                String stringIndex = id.substring(5,8);
+                int index = Integer.valueOf(stringIndex);
                 if(!App.mapService.currentIDNumber.containsKey(key)){
                     App.mapService.currentIDNumber.put(key, index);
                 }else if(App.mapService.currentIDNumber.get(key) < index){

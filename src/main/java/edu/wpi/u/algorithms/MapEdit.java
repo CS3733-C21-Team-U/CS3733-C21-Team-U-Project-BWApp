@@ -40,7 +40,6 @@ public class MapEdit {
         System.out.println("MapEdit made but was the lame way");
     }
 
-
     /**
      * creates an edge and it gets added to the database
      * @param xCoord

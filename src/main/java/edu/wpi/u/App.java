@@ -8,17 +8,29 @@ import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyCombination;
+
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.prettytime.PrettyTime;
+
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class App extends Application {
@@ -71,6 +83,8 @@ public class App extends Application {
 
   public static PrettyTime p = new PrettyTime();
 
+  public static String test = "hello there";
+  public static Parent base;
 
   public App(){
     System.out.println("App constructor");
@@ -85,11 +99,10 @@ public class App extends Application {
   }
 
   @Override
-  public void init() {
+  public void init()  {
     System.out.println("Starting Up");
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
-
 
 
 
@@ -108,8 +121,8 @@ public class App extends Application {
 
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/StartupPage.fxml"));
 
-    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+//    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+//    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -126,6 +139,8 @@ public class App extends Application {
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
     App.primaryStage.setFullScreen(true);
+    App.primaryStage.setFullScreenExitHint("");
+    App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     App.primaryStage.show();
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
       if (e.getCode() == KeyCode.ESCAPE) {
