@@ -54,7 +54,7 @@ public class FloatingPathfindingPaneController {
     String textualDirectionsMegaString = "";
     HashMap<String, String> namesAndIDs;
 
-
+    //HashMap<String, String>
 
     public void handleTestAddTextField() {
 
@@ -64,7 +64,7 @@ public class FloatingPathfindingPaneController {
 
         if(edgePath.isEmpty());
         else {
-            double AnchorSize = Math.min(edgePath.size() * 50, 600);
+            double AnchorSize = Math.min(edgePath.size() * 80, 830);
             mainAnchor.setPrefHeight(AnchorSize);
 
 
@@ -72,7 +72,7 @@ public class FloatingPathfindingPaneController {
             Node eNode = path.get(0);
             Node lastTurnNode = null;
 
-            for(Edge e : edgePath) {
+             for(Edge e : edgePath) {
                 String iconID;
                 String angleDescription;
                 double angleDifferance;
@@ -103,7 +103,7 @@ public class FloatingPathfindingPaneController {
 
                 if(sNode.getNodeType().equals("ELEV") || eNode.getNodeType().equals("ELEV"))  {
                     moveIntoText = "Step into elevator";
-                    moveOutOfText = "Step out of elevator at floor";
+                    moveOutOfText = "Step out of elevator at floor ";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M10,18v-4h1 " +
                             "v-2.5c0-1.1-0.9-2-2-2H8c-1.1,0-2,0.9-2,2V14h1v4H10z M8.5,8.5c0.69,0,1.25-0.56,1.25-1.25S9.19,6,8.5,6S7.25,6.56,7.25,7.25 S7.81,8.5,8.5,8.5z M18,11l-2.5-4L13,11H18z M13,13l2.5,4l2.5-4H13z";
                 }
@@ -128,15 +128,29 @@ public class FloatingPathfindingPaneController {
                     lastTurnNode = eNode;
                 }}
 
+                else if(eNode.getLongName().equals("Admitting")) {
+                    if(sNode.getLongName().equals("Admitting")) {}
+                    else { stepHBoxContainer = createDirectionBox("Go Through Admitting", "");
+                    textDirectionContainer.getChildren().add(stepHBoxContainer);
+                    }}
+
+                //else if(sNode.getLongName().equals("Admitting") || bNode.getLongName().equals("Admitting")) { }
+
                 else if(angleDifferance > 22.5 && angleDifferance < 337.5) { //if turn is found on current node
-                    if(lastTurnNode != null) {
+                    if(lastTurnNode != null && !(sNode.getLongName().equals("Admitting")) && !(eNode.getLongName().equals("Admitting"))) {
                         stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, sNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
                     }
-                    stepHBoxContainer = createDirectionBox(angleDescription + " onto " + sNode.getLongName(), iconID);
+                    String walking;
+                    if(sNode.getNodeType().equals("HALL")) walking = "hallway";
+                    else if(sNode.getNodeType().equals("WALK")) walking = "walkway";
+                    else walking = sNode.getLongName();
+
+                    if(sNode.getLongName().equals("Admitting")) {}
+                    else {stepHBoxContainer = createDirectionBox(angleDescription + " down " + walking, iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                     lastTurnNode = sNode;
-                }
+                }}
 
 
                 else if(bNode == null) {
@@ -149,10 +163,11 @@ public class FloatingPathfindingPaneController {
                 else if((sNode.getNodeType().equals("WALK") && eNode.getNodeType().equals("WALK"))) {/*Walkway*/ }
 
                 else {
+                    if(!(sNode.getLongName().equals("Admitting")) && !(eNode.getLongName().equals("Admitting"))) {
                     stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                     //lastTurnNode = eNode;
-                }
+                }}
 
                 bNode = sNode;
             }
