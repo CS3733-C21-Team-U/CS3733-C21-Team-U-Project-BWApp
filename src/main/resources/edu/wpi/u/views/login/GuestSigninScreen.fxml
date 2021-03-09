@@ -46,8 +46,8 @@
                         </ImageView>
                         <Label styleClass="headline-2" text="Guest Sign In" />
                         <Region prefHeight="29.0" prefWidth="360.0" />
-                        <JFXTextField labelFloat="true" promptText="Name" />
-                        <JFXTextArea labelFloat="true" prefHeight="100.0" prefWidth="360.0" promptText="Reason for Visit" />
+                        <JFXTextField fx:id="nameGuestTextField" labelFloat="true" promptText="Name" />
+                        <JFXTextArea fx:id="visitReasonTextField" labelFloat="true" prefHeight="100.0" prefWidth="360.0" promptText="Reason for Visit" />
                         <Region prefHeight="21.0" prefWidth="360.0" />
                         <JFXButton onAction="#handleSignInButton" styleClass="button-contained" text="SIGN IN" />
                         <Region prefHeight="0.0" prefWidth="360.0" VBox.vgrow="ALWAYS" />

@@ -11,7 +11,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserSignupScreenController">
@@ -36,18 +35,16 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </opaqueInsets>
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Region prefHeight="0.0" prefWidth="360.0" />
                         <Label styleClass="headline-2" text="Sign Up" />
-                        <Region prefHeight="13.0" prefWidth="360.0" />
                         <JFXTextField fx:id="fullNameTextField" labelFloat="true" promptText="Full Name" />
                         <JFXTextField fx:id="usernameTextField" labelFloat="true" promptText="Username" />
                         <JFXTextField fx:id="phonenumberTextField" labelFloat="true" layoutX="30.0" layoutY="386.0" promptText="Phone Number" />
                         <JFXTextField fx:id="emailTextField" labelFloat="true" layoutX="30.0" layoutY="498.0" promptText="Email" />
+                        <JFXTextField fx:id="providerNameTextField" labelFloat="true" promptText="Provider Name" />
                         <JFXPasswordField fx:id="passwordTextField" labelFloat="true" promptText="Password" />
                         <JFXPasswordField fx:id="confirmTextField" labelFloat="true" promptText="Password Confirm" />
-                        <Region prefHeight="0.0" prefWidth="360.0" />
                         <JFXButton onAction="#handleSignUpButton" styleClass="button-contained" text="SIGN UP" />
                         <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
                      </children>

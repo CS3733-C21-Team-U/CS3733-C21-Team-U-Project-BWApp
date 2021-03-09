@@ -20,6 +20,7 @@ public class ForgotPasswordScreenController {
     public JFXTextField usernameTextField;
 
     public void initialize() throws IOException {
+        usernameTextField.setText(App.userService.getTypedUsername());
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -43,16 +44,13 @@ public class ForgotPasswordScreenController {
     public void handleResetButton(ActionEvent actionEvent) throws IOException, AccountNameNotFoundException {
         String username = usernameTextField.getText();
         String userType;
-        if (employeeCheckBox.isSelected()) {
+        if (employeeCheckBox.isSelected()) { // todo : change
             userType = "Employees";
         } else {
-            userType = "Guests";
+            userType = "Patients";
         }
-        System.out.println("Username in controller: " + username);
-        System.out.println(App.userService.checkUsername(username).equals(""));
-        if (!App.userService.checkUsername(username).equals("")) {
+        if (!App.userService.checkUsername(username).equals("")) { // equals "" means not found
             App.userService.changePassword(username, resetPasswordTextField.getText(), userType);
-            //System.out.println(App.userService.getPassword(usernameTextField.getText(), userType));
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         } else {

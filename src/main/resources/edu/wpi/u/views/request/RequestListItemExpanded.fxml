@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -23,9 +22,6 @@
       <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
    </stylesheets>
-   <effect>
-      <DropShadow />
-   </effect>
    <children>
       <HBox prefHeight="405.0" prefWidth="1330.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -92,7 +88,7 @@
                         </Label>
                         <ScrollPane hbarPolicy="NEVER" prefHeight="458.0" prefWidth="430.0">
                            <content>
-                              <VBox fx:id="commentsRoot" prefWidth="430.0">
+                              <VBox fx:id="commentsRoot2" prefWidth="430.0">
                                  <children>
                                     <HBox prefWidth="200.0">
                                        <children>

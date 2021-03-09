@@ -13,7 +13,9 @@ import edu.wpi.u.models.MapService;
 import edu.wpi.u.models.TextualDirections;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -36,13 +39,15 @@ public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
     public JFXTextField endNodeField;
     public JFXTextField startNodeField;
+    public Rectangle startFieldFlair;
+    public Rectangle endFieldFlair;
     @FXML
     Label endNode;
     @FXML
     Label startNode;
 
 
-    String targetNode = "START";//flag for
+    SimpleStringProperty targetNode = new SimpleStringProperty("START");//flag for
     String startNodeID = "", endNodeID = "";
     ArrayList<Node> path = new ArrayList<>();
     ArrayList<String> textualDirectionsStrings = new ArrayList<>();
@@ -191,7 +196,7 @@ public class FloatingPathfindingPaneController {
 
 
     public void endNodeButtonHandler(){
-        targetNode = "END";
+        targetNode.set("END");
     }
 
     /**
@@ -199,15 +204,27 @@ public class FloatingPathfindingPaneController {
      */
     @FXML
     public void startNodeButtonHandler(){
-        targetNode = "START";
+        targetNode.set("START");
     }
 
     public void initialize(){
+
+        targetNode.addListener((observable, oldVal, newVal) ->{
+            if(newVal.equals("START")){
+                startFieldFlair.setVisible(true);
+                endFieldFlair.setVisible(false);
+            }else{
+                startFieldFlair.setVisible(false);
+                endFieldFlair.setVisible(true);
+            }
+        });
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 startNodeField.requestFocus();
             }
+
         });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -218,13 +235,13 @@ public class FloatingPathfindingPaneController {
                 endNodeField.validate();
             }else{ //Focus gain
                 System.out.println("Trag: END");
-                targetNode = "END";
+                targetNode.set("END");
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             endNodeField.requestFocus();
-            targetNode = "END";
+            targetNode.set("END");
             if(namesAndIDs.get(newValue) != null){
                 App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
             }else{
@@ -238,12 +255,12 @@ public class FloatingPathfindingPaneController {
                 startNodeField.validate();
             }else{ //Focus gain
                 System.out.println("Trag: START");
-                targetNode = "START";
+                targetNode.set("START");
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
-            targetNode = "START";
+            targetNode.set("START");
             startNodeField.requestFocus();
             if(namesAndIDs.get(newValue) != null){
                 App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
@@ -264,10 +281,10 @@ public class FloatingPathfindingPaneController {
         AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(nodeNames));
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
-            if(targetNode.equals("START")){
+            if(targetNode.getValue().equals("START")){
                 startNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
-            } else if(targetNode.equals("END")){
+            } else if(targetNode.get().equals("END")){
                 endNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
 //                endNodeField.requestFocus();
@@ -314,14 +331,16 @@ public class FloatingPathfindingPaneController {
         });
     }
 
+
+
     public void handleStartEndSwap(ActionEvent actionEvent) {
         String tempStorage = startNodeField.getText();
-        String originalTarget = targetNode;
-        targetNode = "START";
+        String originalTarget = targetNode.get();
+        targetNode.set("START");
         startNodeField.setText(endNodeField.getText());
-        targetNode = "END";
+        targetNode.set("END");
         endNodeField.setText(tempStorage);
-        targetNode = originalTarget;
+        targetNode.set(originalTarget);
     }
 
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) {

@@ -1,13 +1,17 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.UserData;
 import edu.wpi.u.users.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class UserService {
@@ -18,11 +22,34 @@ public class UserService {
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
+    //HashMap<String, String> easyValidate;
+
+    public String typedUsername;
+
     User activeUser;
+    Guest activeGuest;
 
     public UserService() {
         this.setEmployees();
         this.setGuests();
+        this.setPatients();
+        //this.setEasyValidate();
+    }
+
+    public String getTypedUsername() {
+        return typedUsername;
+    }
+
+    public void setTypedUsername(String typedUsername) {
+        this.typedUsername = typedUsername;
+    }
+
+    public ObservableList<User> getUsers(){
+        ObservableList<User> result = FXCollections.observableArrayList();
+        result.addAll(ud.getEmployees());
+        result.addAll(ud.getPatients());
+        result.addAll(ud.getGuests());
+        return result;
     }
 
     /**
@@ -41,6 +68,57 @@ public class UserService {
     public void setGuests() {this.guests = ud.getGuests();}
 
     /**
+     * This function if for debugging purposes and assumes the Guest in already in the database
+     * Sets the active user to a guest
+     * @param name name of guest
+     */
+    public void setGuest(String name){
+        this.activeGuest = ud.setGuest(name);
+        this.activeUser = ud.setGuest(name);
+        System.out.println("Guest in us" + ud.setGuest(name));
+    }
+
+    /**
+     * Returns the active Guest object
+     * @return guest object
+     */
+    public Guest getActiveGuest() {
+        return activeGuest;
+    }
+
+    /**
+     * This function if for debugging purposes and assumes the Patient in already in the database
+     * Sets the active user to a patient
+     * @param username username of patient
+     * @param password password of patient
+     */
+    public void setPatient(String username, String password){
+        this.activeUser = ud.setPatient(username,password);
+    }
+
+    /**
+     * Sets the patient based on an id
+     * @param patientID patient id
+     */
+    public void setPatient(String patientID){
+        this.activeUser = ud.setPatient(patientID);
+    }
+
+    /**
+     * This function if for debugging purposes and assumes the Employee in already in the database
+     * Sets the active user to a employee
+     * @param username username of employee
+     * @param password password of employee
+     */
+    public void setEmployee(String username, String password){
+        this.activeUser = ud.setEmployee(username,password);
+    }
+
+    public void setEmployee(String employeeID){
+        this.activeUser = ud.setEmployee(employeeID);
+    }
+
+    /**
      * Sets the active user of the application
      * @param username username of the user
      * @param password password of the user
@@ -54,6 +132,7 @@ public class UserService {
             this.activeUser = ud.setPatient(username, password);
         }
         else {
+            this.activeGuest = ud.setGuest(username);
             this.activeUser = ud.setGuest(username);
         }
     }
@@ -64,6 +143,20 @@ public class UserService {
      */
     public User getActiveUser() {
         return this.activeUser;
+    }
+
+    /**
+     * Get a patient from an id
+     * @param patientID patient id
+     * @return the patient object
+     */
+    public Patient getPatient(String patientID){
+        for (Patient p: this.patients){
+            if (p.getUserID().equals(patientID)){
+                return p;
+            }
+        }
+        return new Patient();
     }
 
     /**
@@ -149,7 +242,6 @@ public class UserService {
      * @param username the username to be validated
      */
     public String checkUsername(String username) {
-        System.out.println("Value of check username: " + ud.checkUsername(username));
         return ud.checkUsername(username);
     }
 
@@ -188,30 +280,67 @@ public class UserService {
      * @param email the email
      * @param role the role
      * @param phonenumber the phonenumber
-     * @param locationNodeID the node id of location
      * @param deleted whether or not they're deleted
      * @param appointments list of appointments
      * @param providerName insurance provider name
      * @param parkingLocation parking location most recent visit
      * @param recommendedParkingLocation recommended parking location for next visit
      */
-    public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, String locationNodeID, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
+    public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
         Random rand = new Random();
         int patientID = rand.nextInt();
         String id = Integer.toString(patientID);
-        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,locationNodeID,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
-        ud.createPatient(patient);
+        // todo: check
+        Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
+        ud.addPatient(patient);
         this.patients.add(patient);
     }
 
+    /**
+     * Adds a list of appointments
+     * @param appointments the list of appointments
+     */
+    public void addAppointments(ArrayList<Appointment> appointments){
+        ud.addAppointments(appointments);
+    }
+
+    /**
+     * Adds a singular appointment
+     * @param appointment the appointment
+     */
+    public void addAppointment(Appointment appointment){
+        Random rand = new Random();
+        int appointmentID = rand.nextInt();
+        String id = Integer.toString(appointmentID);
+        //String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType
+        Appointment appointment1 = new Appointment(id, appointment.getPatientID(), appointment.getEmployeeID(), appointment.getAppointmentDate(), appointment.getAppointmentType());
+        ud.addAppointment(appointment1);
+    }
+
+    //TODO : CALL THESE NEXT THREE FUNCTIONS AS AN ADMIN/DOCTOR TO UPDATE LOCATIONS
+    /**
+     * Add a location (nodeID) to a patient
+     * @param patientID patient ID
+     * @param locationID node ID
+     */
     public void addLocationID(String patientID, String locationID){
         ud.addLocationID(patientID, locationID);
     }
 
+    /**
+     * Add a parking location to a patient
+     * @param patientID patient id
+     * @param parkingLocation parking location
+     */
     public void addParkingLocation(String patientID, String parkingLocation){
         ud.addPatientParkingLocation(patientID, parkingLocation);
     }
 
+    /**
+     * Add a recommended parking location to a patient
+     * @param patientID patient id
+     * @param recommendedParkingLocation recommended parking location
+     */
     public void addRecommendedParkingLocation(String patientID, String recommendedParkingLocation){
         ud.addPatientRecommendedParkingLocation(patientID, recommendedParkingLocation);
     }
@@ -226,12 +355,14 @@ public class UserService {
      * @param phoneNumber the phonenumber
      * @param email the email
      */
-    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, String locationNodeID, boolean deleted){
+    public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, locationNodeID, deleted);
-        ud.createEmployee(newEmployee);
+        //String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted
+        Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
+        System.out.println(ud.createEmployee(newEmployee));
+        ud.addEmployee(newEmployee);
         this.employees.add(newEmployee);
     }
 
@@ -244,7 +375,7 @@ public class UserService {
         Random rand = new Random();
         int employeeID = rand.nextInt();
         String id = Integer.toString(employeeID);
-        Guest newGuest = new Guest(id, name, visitDate, visitReason, deleted);
+        Guest newGuest = new Guest(id, name, Role.GUEST, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);
         this.guests.add(newGuest);
     }
@@ -287,25 +418,18 @@ public class UserService {
 
     /**
      * Updates the list of employees and calls database
-     * @param employeeID the id
-     * @param name the name
-     * @param userName the username
-     * @param password the password
-     * @param email the email
-     * @param type the type (Stafftype)
-     * @param phoneNumber the phonenumber
-     * @param deleted whether or not the user is deleted
+     * @param employee the updated employee
      * @return "" on success and the id on failure
      */
-    public String updateEmployee(String employeeID, String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
+    public String updateEmployee(Employee employee){
         for(Employee e : this.employees){
-            if(e.getUserID().equals(employeeID)){
-                e.editUser(name, userName ,password,email,type, phoneNumber, deleted);
+            if(e.getUserID().equals(employee.getUserID())){
+                e.editUser(employee.getName(), employee.getUserName() ,employee.getPassword(),employee.getEmail(),employee.getType(), employee.getPhoneNumber(), employee.isDeleted());
                 ud.updEmployee(e);
                 return "";
             }
         }
-        return employeeID;
+        return employee.getUserID();
     }
 
     /**
@@ -326,5 +450,21 @@ public class UserService {
             }
         }
         return guestID;
+    }
+
+    /**
+     * Updates the list of patients and calls database
+     * @param patient the updated patient
+     * @return "" on success, the patientID on failure
+     */
+    public String updatePatient(Patient patient){
+        for (Patient p : this.patients){
+            if (p.getUserID().equals(patient.getUserID())){
+                p.editPatient(patient.getName(),patient.getUserName(),patient.getPassword(),patient.getEmail(),patient.getType(),patient.getPhoneNumber());
+                ud.updPatient(p);
+                return "";
+            }
+        }
+        return patient.getUserID();
     }
 }

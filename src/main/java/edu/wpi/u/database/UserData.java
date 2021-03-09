@@ -3,6 +3,11 @@ package edu.wpi.u.database;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.users.*;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,16 +15,92 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class UserData extends Data{
 
     public UserData (){
         connect();
-        dropGuests(); // TODO : Stop dropping values for demos
-        dropEmployee();
-        printGuest();
-        printEmployees();
+        //dropGuests(); // TODO : Stop dropping values for demos
+//        dropEmployee();
+        //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "debug", false));
+        //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
+        /*
+        String guestID,
+        String name,
+        Role type,
+        Timestamp visitDate,
+        String visitReason,
+        boolean deleted)
+         */
+        //addGuest(new Guest("testDebug", "debug", Role.GUEST, new Timestamp(System.currentTimeMillis()), "This is a reason for visit", false));
+        /*
+        String guestID,
+        String name,
+        Timestamp visitDate,
+        String visitReason,
+        boolean deleted
+
+        String userID,
+        String name,
+        String accountName,
+        String password,
+        String email,
+        Role type,
+        String phoneNumber,
+        String locationNodeID,
+        boolean deleted,
+        ArrayList<Appointment> appointments,
+        String providerName,
+        String parkingLocation,
+        String recommendedParkingLocation
+
+
+         StringProperty userIDfx,
+         StringProperty namefx,
+         StringProperty userNamefx,
+         StringProperty passwordfx,
+         StringProperty typefx,
+         StringProperty phoneNumberfx,
+         StringProperty emailfx,
+         BooleanProperty deletedfx,
+         StringProperty locationNodeIDfx) {
+         printPatients();
+         printGuest();
+         printEmployees();
+*/
+
+    }
+
+    /**
+     * Hashmap of password , usernames for easier verification
+     * @return the hashmap of all users passwords and usernames
+     */
+    public HashMap<String,String> setEasyValidate(){
+        HashMap<String, String> result = new HashMap<>();
+        String str = "select userName,password from Patients";
+        String str2 = "select userName,password from Employees";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            PreparedStatement ps2 = conn.prepareStatement(str2);
+            ResultSet rs = ps.executeQuery();
+            ResultSet rs2 = ps.executeQuery();
+            while (rs.next()){
+                result.put(rs.getString("password"), rs.getString("username"));
+            }
+            rs.close();
+            ps.close();
+            while (rs2.next()){
+                result.put(rs2.getString("password"), rs2.getString("username"));
+            }
+            rs2.close();
+            ps2.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
@@ -46,6 +127,23 @@ public class UserData extends Data{
                 PreparedStatement ps = conn.prepareStatement(str);
                 ps.execute();
                 ps.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void printPatients(){
+        String str = "select * from Patients";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("===Patients===");
+            while (rs.next()){
+                System.out.println("Patients username: " + rs.getString("patientID"));
+            }
+            rs.close();
+            ps.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -98,10 +196,10 @@ public class UserData extends Data{
      * @return Patient with that username already exists or Patient with that password already exists or Patient added
      */
     public String createPatient(Patient patient){
-        if (checkUsername(patient.getUserName()).equals("")){
+        if (checkUsername(patient.getUserName()).equals("Patients")){
             return "Patient with that username already exists";
         }
-        else if (checkPassword(patient.getPassword()).equals("")){
+        else if (checkPassword(patient.getPassword()).equals("Patients")){
             return "Patient with that password already exists";
         }
         else {
@@ -118,9 +216,6 @@ public class UserData extends Data{
     public String createEmployee(Employee employee){
         if (checkUsername(employee.getUserName()).equals("")){
             return "Employee with that username already exists";
-        }
-        else if (checkPassword(employee.getPassword()).equals("")){
-            return "Employee with that password already exists";
         }
         else {
             /*
@@ -171,6 +266,7 @@ public class UserData extends Data{
             ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                // todo : check
                 results.add(new Patient(
                         rs.getString("patientID"),
                         rs.getString("name"),
@@ -179,7 +275,6 @@ public class UserData extends Data{
                         rs.getString("email"),
                         Role.valueOf(rs.getString("type")),
                         rs.getString("phonenumber"),
-                        rs.getString("parkingLocation"),
                         rs.getBoolean("deleted"),
                         getPatientAppointments(rs.getString("patientID")),
                         rs.getString("providerName"),
@@ -211,7 +306,7 @@ public class UserData extends Data{
                         rs.getString("email"),
                         Role.valueOf(rs.getString("type")),
                         rs.getString("phoneNumber"),
-                        rs.getString("locationNodeID"),
+                        //rs.getString("locationNodeID"),
                         rs.getBoolean("deleted")));
             }
         }catch (Exception e){
@@ -232,7 +327,7 @@ public class UserData extends Data{
             ps.setBoolean(1,false);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
+                results.add(new Guest(rs.getString("guestID"), rs.getString("name"),  Role.GUEST, rs.getTimestamp("visitDate"), rs.getString("visitReason"), false)); // TODO : FIX
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -359,10 +454,32 @@ public class UserData extends Data{
                 String email = rs.getString("email");
                 String role = rs.getString("type");
                 String phonenumber = rs.getString("phonenumber");
-                String locationNodeID = rs.getString("locationNodeID");
+                //String locationNodeID = rs.getString("locationNodeID");
                 // TODO : Where to put rs.close and ps.close ?
-                return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber, locationNodeID, false);
+                return new Employee(employeeID,name,username,password, email, Role.valueOf(role),phonenumber, false);
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new Employee();
+    }
+
+    public Employee setEmployee(String employeeID){
+        String str = "select * from Employees where employeeID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,employeeID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                String name = rs.getString("name");
+                String username = rs.getString("userName");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String role = rs.getString("type");
+                String phonenumber = rs.getString("phonenumber");
+                return new Employee(employeeID, name,username,password,email,Role.valueOf(role), phonenumber, false);
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -385,7 +502,11 @@ public class UserData extends Data{
                 String guestId = rs.getString("guestID");
                 Timestamp visitDate = rs.getTimestamp("visitDate");
                 String visitReason = rs.getString("visitReason");
-                return new Guest(guestId,name, visitDate, visitReason, false);
+                System.out.println(new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false));
+                return new Guest(guestId,name,Role.GUEST, visitDate, visitReason, false);
+            }
+            else { // No Guest in system (new guest)
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -412,13 +533,47 @@ public class UserData extends Data{
                 Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role
                 String phonenumber = rs.getString("phonenumber");
                 String email = rs.getString("email");
-                String nodeID = rs.getString("location");
+                //String nodeID = rs.getString("location");
                 boolean deleted = rs.getBoolean("deleted");
                 ArrayList<Appointment> appointments = getPatientAppointments(patientID);
                 String providerName = rs.getString("providerName");
                 String parkingLocation = rs.getString("parkingLocation");
                 String recommendedParkingLocation = rs.getString("recommendedParkingLocation");
-                return new Patient(patientID, name, username, password, email, role, phonenumber, nodeID, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
+                // todo : check
+                return new Patient(patientID, name, username, password, email, role, phonenumber, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new Patient();
+    }
+
+    /**
+     * Sets the patient by an id
+     * @param patientID the id of the patient
+     * @return the patient object
+     */
+    public Patient setPatient(String patientID){
+        String str = "select * from Patients where patientID=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,patientID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                String name = rs.getString("name");
+                String username = rs.getString("userName");
+                String password = rs.getString("password");
+                Role role = Role.valueOf(rs.getString("type"));
+                String phonenumber = rs.getString("phonenumber");
+                String email = rs.getString("email");
+                //String nodeID = rs.getString("location");
+                boolean deleted = rs.getBoolean("deleted");
+                ArrayList<Appointment> appointments = getPatientAppointments(patientID);
+                String providerName = rs.getString("providerName");
+                String parkingLocation = rs.getString("parkingLocation");
+                String recommendedParkingLocation = rs.getString("recommendedParkingLocation");
+                // todo : check
+                return new Patient(patientID, name, username, password, email, role, phonenumber, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -439,10 +594,11 @@ public class UserData extends Data{
             ps.setString(1, patientID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                String appointmentID = rs.getString("appointmentID");
                 String appointmentType = rs.getString("appointmentType");
                 Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String employeeID = rs.getString("employeeID");
-                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -463,10 +619,11 @@ public class UserData extends Data{
             ps.setString(1, employeeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                String appointmentID = rs.getString("appointmentID");
                 String appointmentType = rs.getString("appointmentType");
                 Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
                 String patientID = rs.getString("patientID");
-                results.add(new Appointment(patientID, employeeID, appointmentDate, appointmentType));
+                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -531,7 +688,7 @@ public class UserData extends Data{
             else {
                 rs.close();
                 ps.close();
-                System.out.println("Not in employees");
+                //System.out.println("Not in employees");
                 String str2 = "select * from Patients where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,username);
@@ -542,7 +699,7 @@ public class UserData extends Data{
                     return "Patients";
                 }
                 else{
-                    System.out.println("Not in Patients");
+                    //System.out.println("Not in Patients");
                     rs2.close();
                     ps2.close();
                     return "";
@@ -691,17 +848,19 @@ public class UserData extends Data{
         String str = "insert into Patients (patientID, name, userName, password, email, type, phonenumber, deleted, providerName, parkingLocation, recommendedParkingLocation) values (?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,patient.getUserID());
-            ps.setString(2,patient.getName());
-            ps.setString(3,patient.getUserName());
-            ps.setString(4,patient.getPassword());
-            ps.setString(5,patient.getEmail());
-            ps.setString(6,String.valueOf(patient.getType()));
-            ps.setString(7,patient.getPhoneNumber());
-            ps.setBoolean(7,false);
-            ps.setString(8,patient.getProviderName());
-            ps.setString(9,patient.getParkingLocation());
-            ps.setString(10,patient.getRecommendedParkingLocation());
+            addAppointments(patient.getAppointments());
+            ps.setString(1,patient.getUserID()); // id
+            ps.setString(2,patient.getName()); // name
+            ps.setString(3,patient.getUserName()); // username
+            ps.setString(4,patient.getPassword()); //password
+            ps.setString(5,patient.getEmail()); //email
+            ps.setString(6,String.valueOf(patient.getType())); // role/type
+            ps.setString(7,patient.getPhoneNumber()); // phonenumer
+            //ps.setString(8,patient.getLocationNodeID()); //location
+            ps.setBoolean(8,false); // deleted
+            ps.setString(9,patient.getProviderName()); // provider name
+            ps.setString(10,patient.getParkingLocation()); // park location
+            ps.setString(11,patient.getRecommendedParkingLocation()); // recommended park location
             ps.execute();
             ps.close();
         }catch (Exception e){
@@ -710,11 +869,43 @@ public class UserData extends Data{
     }
 
     /**
+     * Adds a single appointment
+     * @param appointment the appointment
+     */
+    public void addAppointment(Appointment appointment){
+        String str = "insert into Appointments (appointmentID, appointmentDate, appointmentType, patientID, employeeID) values (?,?,?,?,?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,appointment.getAppointmentID());
+            ps.setTimestamp(2,appointment.getAppointmentDate());
+            ps.setString(3,appointment.getAppointmentType());
+            ps.setString(4,appointment.getPatientID());
+            ps.setString(5,appointment.getEmployeeID());
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Used to add a list of appointments
+     * @param appointments list of appointments
+     */
+    public void addAppointments(ArrayList<Appointment> appointments){
+        for (Appointment appointment: appointments){
+            if (appointment != null){
+                addAppointment(appointment);
+            }
+        }
+    }
+
+    /**
      * Adds a user to the table Users
      * @param employee the object containing all the information on the user
      */
     public void addEmployee(Employee employee){
-        String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, locationNodeID, deleted) values (?,?,?,?,?,?,?,?,?)";
+        String str = "insert into Employees (employeeID, name, userName, password, email, type, phoneNumber, deleted) values (?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,employee.getUserID());
@@ -724,8 +915,8 @@ public class UserData extends Data{
             ps.setString(5,employee.getEmail());
             ps.setString(6,String.valueOf(employee.getType()));// StaffType.valueOf(string) to get ENUM type
             ps.setString(7,employee.getPhoneNumber());
-            ps.setString(8,employee.getLocationNodeID());
-            ps.setBoolean(9,false);
+            //ps.setString(8,employee.getLocationNodeID());
+            ps.setBoolean(8,false);
             ps.execute();
             ps.close();
         }
@@ -742,7 +933,7 @@ public class UserData extends Data{
         String str = "insert into Guests (guestID, name, visitDate, visitReason, deleted) values (?,?,?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,guest.getUserID());
+            ps.setString(1,guest.getGuestID());
             ps.setString(2,guest.getName());
             ps.setTimestamp(3, guest.getVisitDate());
             ps.setString(4, guest.getVisitReason());
@@ -811,7 +1002,7 @@ public class UserData extends Data{
      * @param patient the patient
      */
     public void updPatient(Patient patient){
-        String str = "update Patients set name=? and userName=? and password=? and email=? and type=? and phonenumber=? and deleted=? and providerName=? and parkingLocation=? and recommendedParkingLocation=? where patientID=?";
+        String str = "update Patients set name=?,userName=? , password=? , email=? , type=? , phonenumber=? , deleted=? , providerName=? , parkingLocation=? , recommendedParkingLocation=? where patientID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,patient.getName());
@@ -820,10 +1011,12 @@ public class UserData extends Data{
             ps.setString(4,patient.getEmail());
             ps.setString(5,String.valueOf(patient.getType()));
             ps.setString(6,patient.getPhoneNumber());
+            //ps.setString(7,patient.getLocationNodeID());
             ps.setBoolean(7,patient.isDeleted());
             ps.setString(8,patient.getProviderName());
             ps.setString(9,patient.getParkingLocation());
-            ps.setString(10,patient.getUserID());
+            ps.setString(10,patient.getRecommendedParkingLocation());
+            ps.setString(11,patient.getUserID());
             ps.execute();
             ps.close();
         }catch (Exception e){
@@ -836,7 +1029,7 @@ public class UserData extends Data{
      * @param employee the object containing all of the information on the user
      */
     public void updEmployee(Employee employee){
-        String str = "update Employees set name=? and userName=? and password=? and email=? and type=? and deleted=? and phoneNumber=? where employeeID=?";
+        String str = "update Employees set name=? , userName=? , password=? , email=? , type=? , deleted=? , phoneNumber=? where employeeID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, employee.getName());
