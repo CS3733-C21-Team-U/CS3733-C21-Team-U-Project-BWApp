@@ -29,6 +29,7 @@ public class MobileCovidSurveyController {
     public JFXCheckBox Q5CheckBox;
     public JFXButton submitSurveyButton;
     public Label errorLabel;
+    public String covidRisk;
     //public StackPane newStackPane;
 
 
@@ -44,6 +45,7 @@ public class MobileCovidSurveyController {
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
+            covidRisk = "None";
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
                     "Please call our office at 508-831-5520 between the hours of 9:00am and 4:30pm. \n" +
@@ -54,6 +56,7 @@ public class MobileCovidSurveyController {
                     "For more information on how to take care of yourself: CDC COVID Care Resource. \n" +
                     "\n" +
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
+            covidRisk = "High";
         }
     }
 

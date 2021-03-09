@@ -8,28 +8,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileCovidSurveyController">
    <children>
       <VBox prefHeight="712.0" prefWidth="412.0">
          <children>
-            <HBox prefHeight="15.0" prefWidth="616.0">
+            <HBox prefHeight="36.0" prefWidth="412.0">
                <children>
-                  <JFXCheckBox fx:id="Q5CheckBox" text=" ">
+                  <JFXCheckBox fx:id="Q1CheckBox" prefHeight="18.0" prefWidth="9.0" text=" ">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </JFXCheckBox>
+                  <Label alignment="TOP_LEFT" prefHeight="92.0" prefWidth="383.0" text="I have had a symptomatic COVID-19 test or I have recieved positive test result for COVID- 19 in the last 14 days." wrapText="true" />
                </children>
-            </HBox>
-            <HBox prefHeight="17.0" prefWidth="616.0">
-               <children>
-                  <JFXCheckBox fx:id="Q1CheckBox" prefHeight="18.0" prefWidth="501.0" text=" ">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </JFXCheckBox>
-               </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="15.0" />
+               </VBox.margin>
             </HBox>
             <HBox prefHeight="18.0" prefWidth="650.0">
                <children>
@@ -38,25 +32,50 @@
                         <Insets />
                      </HBox.margin>
                   </JFXCheckBox>
+                  <Label text="I am experiencing COVID-19 like symptoms." />
                </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="15.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="15.0" prefWidth="616.0">
+            <HBox prefHeight="35.0" prefWidth="412.0">
                <children>
                   <JFXCheckBox fx:id="Q3CheckBox" text=" ">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </JFXCheckBox>
+                  <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="383.0" text="I have been in close contact with someone diagnosed with COVID-19 in the last 14 days." wrapText="true" />
                </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="15.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="14.0" prefWidth="616.0">
+            <HBox prefHeight="37.0" prefWidth="412.0">
                <children>
                   <JFXCheckBox fx:id="Q4CheckBox" text=" ">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </JFXCheckBox>
+                  <Label text="I have been asked to self-isolate or quarantine by a doctor or local public health official in the last 14 days." wrapText="true" />
                </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="616.0">
+               <children>
+                  <JFXCheckBox fx:id="Q5CheckBox" text=" ">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXCheckBox>
+                  <Label text="I feel good (No COVID/ No Symptoms)" />
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="15.0" />
+               </VBox.margin>
             </HBox>
             <JFXButton fx:id="submitSurveyButton" onAction="#handleCovidSurveyFill" prefHeight="25.0" prefWidth="496.0" styleClass="button-contained" text="Submit" />
             <Label fx:id="errorLabel" styleClass="error-label" />
