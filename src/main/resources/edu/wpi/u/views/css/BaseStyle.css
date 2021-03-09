@@ -352,6 +352,7 @@
 /* The main scrollbar **track** CSS class  */
 .mylistview .scroll-bar:horizontal .track,
 .mylistview .scroll-bar:vertical .track {
+    -fx-text-fill: black;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
@@ -361,6 +362,7 @@
 /* The increment and decrement button CSS class of scrollbar */
 .mylistview .scroll-bar:horizontal .increment-button,
 .mylistview .scroll-bar:horizontal .decrement-button {
+    -fx-text-fill: black;
     -fx-background-color: transparent;
     -fx-background-radius: 0em;
     -fx-padding: 0 0 10 0;
@@ -370,6 +372,7 @@
 
 .mylistview .scroll-bar:vertical .increment-button,
 .mylistview .scroll-bar:vertical .decrement-button {
+    -fx-text-fill: black;
     -fx-background-color: transparent;
     -fx-background-radius: 0em;
     -fx-padding: 0 10 0 0;
@@ -378,6 +381,7 @@
 
 .mylistview .scroll-bar .increment-arrow,
 .mylistview .scroll-bar .decrement-arrow {
+    -fx-text-fill: black;
     -fx-shape: " ";
     -fx-padding: 0;
 }
@@ -385,24 +389,29 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
 .mylistview .scroll-bar:horizontal .thumb,
 .mylistview .scroll-bar:vertical .thumb {
+    -fx-text-fill: black;
     -fx-background-color: derive(black, 90%);
     -fx-background-insets: 2, 0, 0;
     -fx-background-radius: 2em;
 }
 
 .mylistview2{
+    -fx-text-fill: black;
     -fx-background-color: blue;
 }
 
 .mylistview2 {
     -fx-background-color: #232323;
+    -fx-text-fill: black;
 }
 
 .mylistview2 .list-cell:hover {
+    -fx-text-fill: black;
     -fx-background-color: #434343;
 }
 
 .mylistview2 .list-cell:selected {
+    -fx-text-fill: black;
     -fx-background-color: white;
 }
 
@@ -425,6 +434,7 @@
 }
 
 .jfx-list-view {
+    -fx-text-fill: black;
     -fx-background-insets: 0;
     -jfx-cell-horizontal-margin: 0.0;
     -jfx-cell-vertical-margin: 5.0;

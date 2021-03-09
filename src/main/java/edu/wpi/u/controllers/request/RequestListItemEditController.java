@@ -2,6 +2,7 @@ package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.*;
 import edu.wpi.u.App;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +10,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
 
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -64,6 +69,28 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
         makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
         specificTextFields = generateSpecificFields();
+
+        editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
+        /* adding items to the list view */
+        editAssigneesListView.getItems().add("First Item");
+        editAssigneesListView.getItems().add("Second Item");
+        editAssigneesListView.getItems().add("Third Item");
+        editAssigneesListView.getItems().add("Fourth Item");
+        editAssigneesListView.getItems().add("Fifth Item");
+        /*making list view horizontal*/
+        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
+        /* creating horizontal box to add item objects */
+        //HBox hbox = new HBox(listViewReference);
+
+
+                ArrayList<String> list = new ArrayList<>();
+        list.add("Hi");
+        list.add("Hi");
+        list.add("Hi");
+        list.add("Hi");
+        ObservableList<String> lists = FXCollections.observableList(list);
+        editAssigneesListView.getItems().addAll(lists);
+
 
 
     }
@@ -163,5 +190,21 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         res.setItems(something);
     }
 
+    public void addAssignee(){
+        //editAssigneesListView.getItems().add(editAssigneesField.getText());
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Hi");
+        list.add("Hi");
+        list.add("Hi");
+        list.add("Hi");
+        ObservableList<String> lists = FXCollections.observableList(list);
+        editAssigneesListView.getItems().addAll(lists);
+        //editAssigneesField.setText("");
+        System.out.println("YOOOOOOOOOOOO");
+    }
+    public void deleteAssignee(){
+        editAssigneesListView.getItems().remove(editAssigneesField.getText());
+        editAssigneesField.setText("");
+    }
 
 }

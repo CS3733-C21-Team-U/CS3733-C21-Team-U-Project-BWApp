@@ -90,18 +90,18 @@
                                           <Insets />
                                        </VBox.margin>
                                     </JFXTextField>
-                                    <JFXButton prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                    <JFXButton onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
+                                    <JFXButton onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
                                  </children></VBox>
-                              <JFXListView fx:id="editAssigneesListVIew" />
+                              <JFXListView fx:id="editAssigneesListVIew" styleClass="mylistview2" />
                            </children>
                            <VBox.margin>
                               <Insets top="100.0" />
