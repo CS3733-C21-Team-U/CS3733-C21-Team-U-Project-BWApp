@@ -42,12 +42,17 @@ public class UserLoginScreenController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
-    @FXML public Label errorLabel;
+    @FXML public Label errorLabel, wrongPasswordLabel;
     @FXML public JFXButton debugLoginAdminButton;
     @FXML public JFXButton debugLoginGuestButton;
     @FXML public JFXButton submitSkipButton;
 
     public void initialize() throws IOException {
+        wrongPasswordLabel.setVisible(false);
+
+        passWordField.focusedProperty().addListener(e->{
+           wrongPasswordLabel.setVisible(false);
+        });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -105,7 +110,6 @@ public class UserLoginScreenController {
     public void handleLogin() throws IOException {
         System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
-        // TODO : Ability to skip the 2fa
 //        Scene scene = new Scene(root);
 //        App.getPrimaryStage().setScene(scene);
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
@@ -181,7 +185,11 @@ public class UserLoginScreenController {
             if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText()));
                 handleSubmit();
+            }else{
+                wrongPasswordLabel.setVisible(true);
             }
+        }else{
+            wrongPasswordLabel.setVisible(true);
         }
     }
 
@@ -195,6 +203,7 @@ public class UserLoginScreenController {
         }
 
     public void handleSubmit() throws IOException {
+        App.loginFlag.set(!App.loginFlag.get());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
@@ -246,12 +255,17 @@ public class UserLoginScreenController {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText()));
                 Parent root = null;
                 try {
+                    App.loginFlag.set(!App.loginFlag.get());
                     root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 App.getPrimaryStage().getScene().setRoot(root);
+            }else{
+                wrongPasswordLabel.setVisible(true);
             }
+        }else{
+            wrongPasswordLabel.setVisible(true);
         }
     }
 }

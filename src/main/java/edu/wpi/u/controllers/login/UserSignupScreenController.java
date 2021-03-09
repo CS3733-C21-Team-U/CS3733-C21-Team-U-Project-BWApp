@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class UserSignupScreenController {
 
@@ -129,11 +130,22 @@ public class UserSignupScreenController {
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleSignUpButton(ActionEvent actionEvent) throws IOException {
+        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), false,new ArrayList<Appointment>(),providerNameTextField.getText(),null,null);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
         if(fullNameTextField.getText().equals("")){
             fullNameTextField.validate();
         } else if(usernameTextField.getText().equals("")){

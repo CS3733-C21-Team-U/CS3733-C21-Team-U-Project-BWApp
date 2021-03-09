@@ -57,14 +57,14 @@ public class SettingsBaseController {
 
     public void initialize() throws IOException, FilePathNotFoundException {
 
-        if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
-            onlyAdmin.setStyle("-fx-opacity: 1");
-            onlyAdmin.setDisable(false);
-        }
-        else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
-            onlyAdmin.setStyle("-fx-opacity: 0");
-            onlyAdmin.setDisable(true);
-        }
+            if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
+                onlyAdmin.setStyle("-fx-opacity: 1");
+                onlyAdmin.setDisable(false);
+            }
+            else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
+                onlyAdmin.setStyle("-fx-opacity: 0");
+                onlyAdmin.setDisable(true);
+            }
 
 
         tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges"));
@@ -96,8 +96,6 @@ public class SettingsBaseController {
                 emailAddressTextField.validate();
             }
         });
-
-
         if (!(App.userService.getActiveUser().getType() == ADMIN)) {
             adminText.setStyle("-fx-opacity: 0");
             subtitleText.setStyle("-fx-opacity: 0");
@@ -113,6 +111,8 @@ public class SettingsBaseController {
             loadCSVButton.setDisable(true);
 
         }
+
+
     }
 
     //most of these functions are just place holders, so I dont
