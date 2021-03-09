@@ -40,8 +40,6 @@ public class ContextMenuEdgeController {
         if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             deleteButton.setText("Cancel");
             edgeComboBox.setValue("Everyone");
-        } else if(App.mapInteractionModel.getCurrentAction().equals("SELECT")){
-            edgeComboBox.setValue("Everyone");
         } else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
             if(thisEdge.getUserPermissions().equals(Role.DEFAULT)){

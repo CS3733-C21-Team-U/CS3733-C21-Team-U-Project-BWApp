@@ -71,42 +71,51 @@ public class ForgotPasswordScreenController {
                     URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ phonenumber + "&channel=sms");
                     URL url = uri.toURL(); // make GET request
                     AsyncHttpClient client = Dsl.asyncHttpClient();
-                    Future<Integer> whenStatusCode = client.prepareGet(url.toString())
-                            .execute(new AsyncHandler<Integer>() {
-                                private Integer status;
-                                @Override
-                                public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
-                                    status = responseStatus.getStatusCode();
-                                    System.out.println("At status code");
-                                    return State.CONTINUE;
-                                }
-                                @Override
-                                public State onHeadersReceived(HttpHeaders headers) throws Exception {
-                                    System.out.println("At headers code");
-                                    return State.CONTINUE;
-                                }
-                                @Override
-                                public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
-                                    byte[] b = bodyPart.getBodyPartBytes();
-                                    String y = new String(b);
-                                    System.out.println(y.contains("pending"));
-                                    if (y.contains("pending")){
-                                        // TODO : Set alignment
-                                    }
-                                    sentCode = true;
-                                    validationCodeFeild.setDisable(false);
-                                    return State.CONTINUE;
-                                }
-
-                                @Override
-                                public Integer onCompleted() throws Exception {
-                                    return status;
-                                }
-                                @Override
-                                public void onThrowable(Throwable t) {
-                                    t.printStackTrace();
-                                }
-                            });
+                    Future<Response> whenResponse = client.prepareGet(url.toString()).execute();
+                    Response response = whenResponse.get();
+                    String resString = response.getResponseBody();
+                    if(resString.contains("pending")){
+                        resetButton.setText("Verify");
+                        validationCodeFeild.setDisable(false);
+                        sentCode = true;
+                    }
+//                    Future<Integer> whenStatusCode = client.prepareGet(url.toString())
+//                            .execute(new AsyncHandler<Integer>() {
+//                                private Integer status;
+//                                @Override
+//                                public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
+//                                    status = responseStatus.getStatusCode();
+//                                    System.out.println("At status code");
+//                                    return State.CONTINUE;
+//                                }
+//                                @Override
+//                                public State onHeadersReceived(HttpHeaders headers) throws Exception {
+//                                    System.out.println("At headers code");
+//                                    return State.CONTINUE;
+//                                }
+//                                @Override
+//                                public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
+//                                    byte[] b = bodyPart.getBodyPartBytes();
+//                                    String y = new String(b);
+//                                    System.out.println(y.contains("pending"));
+//                                    if (y.contains("pending")){
+//                                        // TODO : Set alignment
+//                                    }
+//                                    sentCode = true;
+//                                    validationCodeFeild.setDisable(false);
+//                                    resetButton.setText("Verify Code");
+//                                    return State.CONTINUE;
+//                                }
+//
+//                                @Override
+//                                public Integer onCompleted() throws Exception {
+//                                    return status;
+//                                }
+//                                @Override
+//                                public void onThrowable(Throwable t) {
+//                                    t.printStackTrace();
+//                                }
+//                            });
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -115,21 +124,21 @@ public class ForgotPasswordScreenController {
             }
         } else if( sentCode && !correctCode) {
             String token = validationCodeFeild.getText();
-            String phoneNumber = App.userService.getActiveUser().getPhoneNumber();
+            String phoneNumber = App.userService.getPhoneNumberFromUserName(usernameTextField.getText());
             try {
                 System.out.println("Token " + token);
                 System.out.println("Phonenumber " + phoneNumber);
-                URI uri2 = new URI("https://bw-webapp.herokuapp.com/" + "verify?phonenumber=" + "+1" + phoneNumber + "&code=" + token);
+                URI uri2 = new URI("https://bw-webapp.herokuapp.com/" +"verify?phonenumber=" + "+1"+ phoneNumber + "&code=" + token);
                 URL url2 = uri2.toURL(); // make GET request
                 System.out.println("URL: " + url2.toString());
                 AsyncHttpClient client = Dsl.asyncHttpClient();
                 Future<Response> whenResponse = client.prepareGet(url2.toString()).execute();
                 Response response = whenResponse.get();
                 String resString = response.getResponseBody();
-                System.out.println(resString);
-                if (resString.contains("approved")) {
-                    resetPasswordTextField.setDisable(false);
+                if(resString.contains("approved")){
                     correctCode = true;
+                    resetPasswordTextField.setDisable(false);
+                    resetButton.setText("Set Password");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

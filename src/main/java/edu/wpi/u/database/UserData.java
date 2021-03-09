@@ -779,17 +779,16 @@ public class UserData extends Data{
      * @return the phone number of the user or "" if the username doesn't exist
      */
     public String getPhoneNumberFromUserName(String userName){
-        String str = "select * from Employees where userName=?";
+        String str = "select phoneNumber from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,userName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                ps.close();
-               return rs.getString("phoneNumber");
+                return rs.getString("phoneNumber");
             }
             else {
-                String str2 = "select * from Patients where phoneNumber=?";
+                String str2 = "select phoneNumber from Patients where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,userName);
                 ResultSet rs2 = ps2.executeQuery();
