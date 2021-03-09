@@ -191,7 +191,7 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab>
+                  <Tab fx:id="HelpMainPageTab">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -219,11 +219,30 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab closable="false" disable="true" style="-fx-opacity: 0;">
+                  <Tab fx:id="AdminHelpMainPageTab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <fx:include source="AdminMainHelpPage.fxml" />
+                           </children>
+                        </AnchorPane>
+                     </content>
                      <graphic>
                         <Group>
                            <children>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="24.0" />
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4zM11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Admin Help">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
                            </children>
                         </Group>
                      </graphic>
