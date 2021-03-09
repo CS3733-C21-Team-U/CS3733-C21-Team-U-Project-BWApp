@@ -16,9 +16,9 @@ public class RequestService {
   static RequestData rd = new RequestData();
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
-  public SimpleStringProperty requestType;//all request types
-  public SimpleStringProperty resolveStatus;//resolved, active, both
-  public SimpleStringProperty assignedStatus;//assignedToYou, unAssigned, all
+  public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
+  public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
+  public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
 
   public RequestService() {
     this.activeRequests = rd.loadActiveRequests();

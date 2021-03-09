@@ -40,7 +40,6 @@ public class ViewRequestListController {
         typeOption.getItems().addAll(
                 "All", "Maintenance", "Laundry", "Security", "Sanitation", "Computer", "Medical",
                 "AudioVisual", "Religious", "Language", "Gift", "Floral");
-
         assignOption.getItems().addAll(
                 "All", "Assigned to You", "Unassigned");
         resolveOption.getItems().addAll(
