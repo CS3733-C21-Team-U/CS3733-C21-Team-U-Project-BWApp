@@ -71,10 +71,12 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
         editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        //makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
+        makeListView( parent.request.getGenericRequest().getLocations(), editLocationsListView);
         specificTextFields = generateSpecificFields();
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
+        editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
+
         /* adding items to the list view */
         /*making list view horizontal*/
 //        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
@@ -182,20 +184,23 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     }
 
     public void addAssignee(){
-        //editAssigneesListView.getItems().add(editAssigneesField.getText());
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("Hi");
-        list.add("Hi");
-        list.add("Hi");
-        list.add("Hi");
-        ObservableList<String> lists = FXCollections.observableList(list);
-        editAssigneesListView.getItems().addAll(lists);
-        //editAssigneesField.setText("");
-        System.out.println("YOOOOOOOOOOOO");
+        editAssigneesListView.getItems().add(editAssigneesField.getText());
+        editAssigneesField.setText("");
+       // System.out.println("YOOOOOOOOOOOO");
     }
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
+    }
+
+    public void addLocation(){
+        editLocationsListView.getItems().add(editLocationsField.getText());
+        editLocationsField.setText("");
+        // System.out.println("YOOOOOOOOOOOO");
+    }
+    public void deleteLocation(){
+        editLocationsListView.getItems().remove(editLocationsField.getText());
+        editLocationsField.setText("");
     }
 
 }
