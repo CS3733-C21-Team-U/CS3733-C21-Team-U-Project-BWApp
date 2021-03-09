@@ -25,6 +25,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public Parent expandedNode;
     public Parent collapsedNode;
     public Parent editNode;
+    public Parent hiddenNode;
     public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
@@ -40,6 +41,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
         expandedNode = new RequestListItemExpandedController(this);
         collapsedNode = new RequestListItemCollapsedController(this);
         editNode = new RequestListItemEditController(this);
+        hiddenNode = new RequestListItemHiddenController(this);
 
         this.getChildren().add(collapsedNode);
 
@@ -64,6 +66,17 @@ public class RequestListItemContainerController extends AnchorPane implements In
 
     public void switchFromEditToExpanded() {
         runAnimation(this,250,80,590,590, editNode, expandedNode);
+    }
+
+    public void switchGoneToCollapsed() {
+        System.out.println("Testing gone to collapes");
+        runAnimation(this,200,60,0,96, hiddenNode, collapsedNode);
+
+    }
+
+    public void switchCollapsedToGone() {
+        System.out.println("Testing collapse to gpme");
+        runAnimation(this,150,60,96,-20, collapsedNode, hiddenNode);
     }
 
     public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){
@@ -107,7 +120,5 @@ public class RequestListItemContainerController extends AnchorPane implements In
         anim.play();
         fadeOut.play();
     }
-
-
 
 }

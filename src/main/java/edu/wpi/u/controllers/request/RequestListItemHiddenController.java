@@ -1,24 +1,19 @@
 package edu.wpi.u.controllers.request;
 
-import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.SpecificRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.SVGPath;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RequestListItemCollapsedController extends AnchorPane implements Initializable {
+public class RequestListItemHiddenController extends AnchorPane implements Initializable {
 
     public RequestListItemContainerController parent;
 
@@ -42,7 +37,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public AnchorPane requestItemRoot;
 //    @FXML public SVGPath requestIcon;
 
-    public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
+    public RequestListItemHiddenController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemCollapsed.fxml"));
         loader.setController(this);
