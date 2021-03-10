@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -21,11 +22,15 @@ import java.util.ResourceBundle;
 
 public class RequestListItemContainerController extends AnchorPane implements Initializable{
 
+    public VBox masterList;
     public SpecificRequest request;
     public Parent expandedNode;
     public Parent collapsedNode;
     public Parent editNode;
+    public Parent hiddenNode;
+    public Parent newNode;
     public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
+
 
     public static String AudioVisualIcon = "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z";
     public static String ComputerIcon = "M3 6h18V4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v-2H3V6zm10 6H9v1.78c-.61.55-1 1.33-1 2.22s.39 1.67 1 2.22V20h4v-1.78c.61-.55 1-1.34 1-2.22s-.39-1.67-1-2.22V12zm-2 5.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM22 8h-6c-.5 0-1 .5-1 1v10c0 .5.5 1 1 1h6c.5 0 1-.5 1-1V9c0-.5-.5-1-1-1zm-1 10h-4v-8h4v8z";
@@ -84,8 +89,9 @@ public class RequestListItemContainerController extends AnchorPane implements In
         }
     }
 
-    public RequestListItemContainerController(SpecificRequest request) throws IOException {
+    public RequestListItemContainerController(SpecificRequest request, VBox sampleRequestItem) throws IOException {
         this.request = request; //MUST BE FIRST!!!
+        this.masterList = sampleRequestItem;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemContainer.fxml"));
         loader.setController(this);
@@ -97,6 +103,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
         expandedNode = new RequestListItemExpandedController(this);
         collapsedNode = new RequestListItemCollapsedController(this);
         editNode = new RequestListItemEditController(this);
+        hiddenNode = new RequestListItemHiddenController(this);
 
         this.getChildren().add(collapsedNode);
 
@@ -121,6 +128,16 @@ public class RequestListItemContainerController extends AnchorPane implements In
 
     public void switchFromEditToExpanded() {
         runAnimation(this,250,80,590,590, editNode, expandedNode);
+    }
+
+    public void switchGoneToCollapsed() {
+        System.out.println("Testing gone to collapes");
+        this.masterList.getChildren().add(this);
+    }
+
+    public void switchCollapsedToGone() {
+        System.out.println("Testing collapse to gpme");
+        this.masterList.getChildren().remove(this);
     }
 
     public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){

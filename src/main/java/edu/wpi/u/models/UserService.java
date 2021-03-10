@@ -260,7 +260,9 @@ public class UserService {
      * @param type Employees or Patients (table name)
      */
     public void changePassword(String username, String newPassword, String type){
-        this.getActiveUser().setPassword(newPassword);
+        if(this.getActiveUser() != null){
+            this.getActiveUser().setPassword(newPassword);
+        }
         ud.changePassword(username,newPassword, type);
     }
 
@@ -329,7 +331,7 @@ public class UserService {
      */
     public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
         Random rand = new Random();
-        int patientID = rand.nextInt();
+        int patientID = Math.abs(rand.nextInt());
         String id = Integer.toString(patientID);
         // todo: check
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
@@ -398,7 +400,7 @@ public class UserService {
      */
     public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
-        int employeeID = rand.nextInt();
+        int employeeID = Math.abs(rand.nextInt());
         String id = Integer.toString(employeeID);
         //String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
@@ -413,7 +415,7 @@ public class UserService {
      */
     public void addGuest(String name, Timestamp visitDate, String visitReason, boolean deleted){
         Random rand = new Random();
-        int employeeID = rand.nextInt();
+        int employeeID = Math.abs(rand.nextInt());
         String id = Integer.toString(employeeID);
         Guest newGuest = new Guest(id, name, Role.GUEST, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);

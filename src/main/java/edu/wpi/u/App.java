@@ -1,6 +1,8 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
+import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
+import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -11,6 +13,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.WritableFloatValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -44,7 +47,9 @@ public class App extends Application {
   public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
+  public static SimpleBooleanProperty requestRedrawFlag = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
+  public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
 
@@ -59,10 +64,14 @@ public class App extends Application {
   public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
+  public static VBox newReqVBox;
+  public static SimpleBooleanProperty VBoxChanged = new SimpleBooleanProperty(true);
 
   public static SVGPath themeSVG;
 
   public static String newNodeType;
+
+  public static SimpleBooleanProperty mobileUpdateDestinationField = new SimpleBooleanProperty(false);
 
 
   public static String lastSelectedNode;

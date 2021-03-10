@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileWaitPageController">
+   <children>
+      <AnchorPane layoutY="-9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="424.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <stylesheets>
+            <URL value="@../css/BaseStyle.css" />
+            <URL value="@../css/LightTheme.css" />
+         </stylesheets>
+         <children>
+            <ImageView fitHeight="743.0" fitWidth="1105.0" layoutX="-200.0" opacity="0.52" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-350.0">
+               <image>
+                  <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="723.0" prefWidth="424.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Pane prefHeight="264.0" prefWidth="364.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                     <VBox.margin>
+                        <Insets bottom="75.0" left="30.0" right="30.0" top="235.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="216.0" prefWidth="354.0">
+                           <children>
+                              <HBox maxWidth="325.0" prefHeight="120.0" prefWidth="325.0">
+                                 <children>
+                                    <ImageView fitHeight="120.0" fitWidth="115.0">
+                                       <image>
+                                          <Image url="@../Images/logo.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="111.0" prefWidth="183.0" styleClass="headline-3" text="Wait a Moment!">
+                                       <HBox.margin>
+                                          <Insets left="-9.0" top="50.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label text="Please Wait a moment as we process your information.">
+                                 <VBox.margin>
+                                    <Insets right="25.0" top="25.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXButton buttonType="RAISED" onAction="#handleReturnLogin" styleClass="bigButtonOutline" text="Return to Login" />
+                              <JFXButton fx:id="pathFindButton" buttonType="RAISED" disable="true" onAction="#handlePathFInd" opacity="0.0" styleClass="bigButton" text="Go to PathFinding!" />
+                              <JFXButton fx:id="debugButton" onAction="#handleDebug" prefHeight="25.0" prefWidth="351.0">
+                                 <VBox.margin>
+                                    <Insets left="-25.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

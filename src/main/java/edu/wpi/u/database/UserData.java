@@ -175,7 +175,7 @@ public class UserData extends Data{
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
      */
     public String createEmployee(Employee employee){
-        if (checkUsername(employee.getUserName()).equals("Employees")){
+        if (checkUsername(employee.getUserName()).equals("Employees")){ // TODO: Will Check
             return "Employee with that username already exists";
         }
         else {
@@ -255,10 +255,11 @@ public class UserData extends Data{
      */
     public HashMap<String, String> getEmployeeNamesByType(String type){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select userName,name from Employees where type=?";
+        String str = "select userName,name from Employees where type=? or type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,type);
+            ps.setString(2,"ADMIN");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.put(rs.getString("username"), rs.getString("name"));
@@ -790,7 +791,7 @@ public class UserData extends Data{
                 String str2 = "select * from Patients where password=? and userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,password);
-                ps.setString(2,userName);
+                ps2.setString(2,userName);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();

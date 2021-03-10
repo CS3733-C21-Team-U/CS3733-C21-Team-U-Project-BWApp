@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutY="-7.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
@@ -33,7 +33,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How to Use Two Factor Authorization" wrappingWidth="688.15234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Two Factor Authorization" textAlignment="CENTER" wrappingWidth="688.15234375">
                <font>
                   <Font name="Serif Bold" size="41.0" />
                </font>
@@ -45,7 +45,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1.In order to ensure more security while using the app, there is an option to authenticate your account while logging in&#10;&#10;&#10;2.Simply click the ‘login’ button and a code will be sent to the phone number associated with your account&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-2" text="In order to ensure more security while using the app, there is an option to authenticate your account while logging in.&#10;&#10;Simply click the ‘login’ button and a code will be sent to the phone number associated with your account.&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;&#10;" wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
@@ -54,28 +54,15 @@
                   </VBox>
                   <VBox prefHeight="684.0" prefWidth="929.0">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="249.0">
+                        <ImageView fitHeight="607.0" fitWidth="642.0">
                            <image>
-                              <Image url="@../Images/desktoploginhelp.png" />
+                              <Image url="@../Images/2factor.png" />
                            </image>
                            <VBox.margin>
-                              <Insets bottom="50.0" left="200.0" />
+                              <Insets bottom="50.0" />
                            </VBox.margin>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="402.0" fitWidth="318.0">
-                           <image>
-                              <Image url="@../Images/loginloginhelp.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="200.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 4,5,6" translateX="325.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
                            <font>
                               <Font size="17.0" />
                            </font>

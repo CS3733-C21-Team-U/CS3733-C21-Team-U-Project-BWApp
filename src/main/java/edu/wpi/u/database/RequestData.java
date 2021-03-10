@@ -123,10 +123,12 @@ public class RequestData extends Data{
      */
     public ArrayList<Comment> getComments(String requestID){
         ArrayList<Comment> result = new ArrayList<>();
+        result.add(getPrimaryComment(requestID));
         try {
-            String str = "select * from Comments where request=? order by created DESC";
+            String str = "select * from Comments where request=? and type!=? order by created DESC";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
+            ps.setString(2,"PRIMARY");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.add(new Comment(rs.getString("title"), rs.getString("description"), rs.getString("author"), CommentType.valueOf(rs.getString("type")), rs.getTimestamp("created")));
@@ -138,6 +140,27 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Gets the primary comment given a requestid
+     * @param requestID the request id
+     * @return the comment object
+     */
+    public Comment getPrimaryComment(String requestID){
+        String str = "select * from Comments where request=? and type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,"PRIMARY");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return new Comment(rs.getString("title"),rs.getString("description"), rs.getString("author"),CommentType.valueOf(rs.getString("type")), rs.getTimestamp("created"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -240,7 +263,7 @@ public class RequestData extends Data{
      */
     public ArrayList<SpecificRequest> loadActiveRequests(){ // TODO: refactor for IRequest
         ArrayList<SpecificRequest> results = new ArrayList<>();
-        String requestQuery = "select * from Requests where resolved=false";
+        String requestQuery = "select * from Requests";
         try{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();

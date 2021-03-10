@@ -47,8 +47,8 @@ public class MapBuilderBaseController {
     ImageView node = new ImageView();
     Group nodesAndEdges = new Group();
     public GesturePane map = new GesturePane(pane);
-    String selectedColor = "green";
-    String errorColor = "B00020";
+    String selectedColor = "6200ee";
+    String errorColor = "8862bf";
 
     boolean clickedOnSomethingFlag = false;
     /**
@@ -175,7 +175,8 @@ public class MapBuilderBaseController {
             curNode.setCenterY(n.getCords()[1]);
             curNode.setRadius(9);
             curNode.setId(n.getNodeID());
-            curNode.setStyle("-fx-fill: -error");
+            curNode.setStroke(Paint.valueOf(errorColor));
+            curNode.setFill(Paint.valueOf(errorColor));
             curNode.setVisible(true);
             //setting mouse events for the drawn circle
             curNode.setOnMouseClicked(event -> {
@@ -294,7 +295,7 @@ public class MapBuilderBaseController {
         edge.setEndY(ydiff);
         edge.setId(ed.getEdgeID());
         edge.setStrokeWidth(7);
-        edge.setStyle("-fx-stroke: -error");
+        edge.setStroke(Paint.valueOf(errorColor));
         edge.setVisible(true);
         edge.setOnMouseClicked(event -> {
             clickedOnSomethingFlag = true;

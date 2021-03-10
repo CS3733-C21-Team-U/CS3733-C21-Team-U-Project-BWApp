@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ public class RequestService {
 
   public static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
+
+  public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
+  public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
+  public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
 
   public RequestService() {
     rd  = new RequestData();
@@ -72,7 +77,7 @@ public class RequestService {
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {
     result.getGenericRequest().resolveRequest(resolveComment);
-    this.activeRequests.remove(result);
+    //this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
