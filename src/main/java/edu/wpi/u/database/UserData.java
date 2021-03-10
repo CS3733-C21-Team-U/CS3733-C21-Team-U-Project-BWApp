@@ -25,6 +25,8 @@ public class UserData extends Data{
         //dropGuests(); // TODO : Stop dropping values for demos
 //        dropEmployee();
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+
+        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "9148394600", false));
         //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.ADMIN, "debug", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
@@ -133,6 +135,9 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Prints out the patient ids of all patients
+     */
     public void printPatients(){
         String str = "select * from Patients";
         try {
@@ -140,7 +145,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             System.out.println("===Patients===");
             while (rs.next()){
-                System.out.println("Patients username: " + rs.getString("patientID"));
+                System.out.println("Patients id: " + rs.getString("patientID"));
             }
             rs.close();
             ps.close();
@@ -160,7 +165,7 @@ public class UserData extends Data{
             ResultSet rs = ps.executeQuery();
             System.out.println("===Employees===");
             while (rs.next()){
-                System.out.println("Employee ID: " + rs.getString("userName"));
+                System.out.println("Employee userName: " + rs.getString("userName"));
             }
             rs.close();
             ps.close();
@@ -199,7 +204,7 @@ public class UserData extends Data{
         if (checkUsername(patient.getUserName()).equals("Patients")){
             return "Patient with that username already exists";
         }
-        else if (checkPassword(patient.getPassword()).equals("Patients")){
+        else if (checkPassword(patient.getPassword(), patient.getUserName()).equals("Patients")){
             return "Patient with that password already exists";
         }
         else {
@@ -779,17 +784,16 @@ public class UserData extends Data{
      * @return the phone number of the user or "" if the username doesn't exist
      */
     public String getPhoneNumberFromUserName(String userName){
-        String str = "select * from Employees where userName=?";
+        String str = "select phoneNumber from Employees where userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,userName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                ps.close();
-               return rs.getString("phoneNumber");
+                return rs.getString("phoneNumber");
             }
             else {
-                String str2 = "select * from Patients where phoneNumber=?";
+                String str2 = "select phoneNumber from Patients where userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,userName);
                 ResultSet rs2 = ps2.executeQuery();
@@ -810,13 +814,15 @@ public class UserData extends Data{
     /**
      * Checks to see if the password is valid
      * @param password the password to be checked
+     * @peram userName the user who's password is being checked
      * @return Employees or Patients (table name) or "" for not found
      */
-    public String checkPassword(String password){
-        String str = "select * from Employees where password=?";
+    public String checkPassword(String password, String userName){
+        String str = "select * from Employees where password=? and userName=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,password);
+            ps.setString(2,userName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 return "Employees";
@@ -825,9 +831,10 @@ public class UserData extends Data{
                 rs.close();
                 ps.close();
                 System.out.println("Not in employees");
-                String str2 = "select * from Patients where password=?";
+                String str2 = "select * from Patients where password=? and userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,password);
+                ps.setString(2,userName);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();

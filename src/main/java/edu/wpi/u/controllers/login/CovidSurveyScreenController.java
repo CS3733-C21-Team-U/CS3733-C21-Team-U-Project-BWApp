@@ -62,7 +62,8 @@ public class CovidSurveyScreenController {
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        App.userService.getActiveUser().setType(Role.GUEST);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         Object obj = fxmlLoader.load();
         Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
@@ -70,9 +71,10 @@ public class CovidSurveyScreenController {
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
+        App.userService.getActiveUser().setType(Role.PATIENT);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        Object obj = fxmlLoader.load();
+        Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
@@ -80,11 +82,10 @@ public class CovidSurveyScreenController {
         App.userService.setEmployee("debug");
         System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
-        // todo : fixes the loading issue but won't go to new main page
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        Object obj = fxmlLoader.load();
+        Object myController = fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleHelpPage(ActionEvent actionEvent)throws IOException  {

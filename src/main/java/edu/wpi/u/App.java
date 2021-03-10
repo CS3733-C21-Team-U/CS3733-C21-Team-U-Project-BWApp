@@ -9,6 +9,7 @@ import edu.wpi.u.users.Guest;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,6 +86,7 @@ public class App extends Application {
 
   public static String test = "hello there";
   public static Parent base;
+  public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
 
   public App(){
     System.out.println("App constructor");
