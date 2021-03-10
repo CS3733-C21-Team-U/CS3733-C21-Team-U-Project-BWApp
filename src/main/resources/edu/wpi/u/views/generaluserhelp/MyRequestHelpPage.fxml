@@ -54,7 +54,7 @@
                   </VBox>
                   <VBox prefHeight="684.0" prefWidth="929.0">
                      <children>
-                        <ImageView fitHeight="167.0" fitWidth="200.0" translateX="220.0">
+                        <ImageView fitHeight="153.0" fitWidth="191.0" translateX="220.0">
                            <image>
                               <Image url="@../Images/my%20request.png" />
                            </image>
@@ -67,10 +67,10 @@
                               <Font size="17.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="-30.0" />
+                              <Insets bottom="-40.0" />
                            </VBox.margin>
                         </Text>
-                        <ImageView fitHeight="300.0" fitWidth="740.0">
+                        <ImageView fitHeight="292.0" fitWidth="726.0">
                            <image>
                               <Image url="@../Images/add%20request.png" />
                            </image>
@@ -80,10 +80,13 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="178.0" fitWidth="748.0">
+                        <ImageView fitHeight="201.0" fitWidth="937.0">
                            <image>
                               <Image url="@../Images/view%20+add%20request.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets left="-30.0" right="-30.0" />
+                           </VBox.margin>
                         </ImageView>
                         <Text layoutX="90.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 3" translateX="330.0">
                            <font>
