@@ -18,12 +18,18 @@ public class AdminMainHelpController {
     @FXML
     public StackPane newMainPageStackPane;
     @FXML public Text weAreHereToHelpTitle;
+    @FXML public JFXButton LogInHelpButton;
+    @FXML public JFXButton TwoFactorAHelpButton;
+    @FXML public JFXButton ForgotPassHelpButton;
     @FXML public JFXButton ContactUsHelpButton;
     @FXML public JFXButton SettingHelpButton;
     @FXML public JFXButton AddUserHelpButton;
     @FXML public JFXButton EditUserHelpButton;
     @FXML public JFXButton ViewUserHelpButton;
+    @FXML public JFXButton LoadAndSaveCSVButton;
     @FXML public JFXButton PathFindingHelpButton;
+    @FXML public JFXButton CovidHelpButton;
+    @FXML public JFXButton AboutHelpButton;
 
 
 

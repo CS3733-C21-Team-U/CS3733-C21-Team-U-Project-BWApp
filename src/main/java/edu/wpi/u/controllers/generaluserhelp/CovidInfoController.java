@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import static edu.wpi.u.users.Role.ADMIN;
 
-public class ContactUsHelpController {
-    public void handleBackToMainPageButton(ActionEvent actionEvent) throws IOException {
+public class CovidInfoController {
+    public void handleBackToMainPageButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         if(App.userService.getActiveUser().getType() ==  ADMIN){
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AdminMainHelpPage.fxml"));

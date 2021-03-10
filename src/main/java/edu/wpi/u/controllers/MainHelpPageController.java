@@ -38,6 +38,10 @@ public class MainHelpPageController {
     @FXML public JFXButton PathFindingHelpButton;
     @FXML public JFXButton GuestListHelpButton;
     @FXML public JFXButton MyRequestHelpButton;
+    @FXML public JFXButton CovidHelpButton;
+    @FXML public JFXButton AboutHelpButton;
+
+
 
 
     public void handleContactUsButton(ActionEvent actionEvent) throws IOException{
@@ -119,7 +123,6 @@ public class MainHelpPageController {
 
     }
 
-
     public void handleGuestListPageButton(ActionEvent actionEvent) {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = null;
@@ -143,4 +146,6 @@ public class MainHelpPageController {
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }
+
+
 }
