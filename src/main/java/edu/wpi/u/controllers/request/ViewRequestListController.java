@@ -43,7 +43,7 @@ public class ViewRequestListController {
         sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
             @Override
             public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
-                if(c.getList().size() == 1){//New list after filtering is emppty
+                if(c.getList().size() == 2){//New list after filtering is emppty
                     System.out.println("Request list is empty");
                     noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     noItemsGraphic.setVisible(true);
