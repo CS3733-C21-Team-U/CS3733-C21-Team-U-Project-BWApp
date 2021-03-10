@@ -106,7 +106,6 @@ public class UserLoginScreenController {
         });
     }
 
-
     public void handleLogin() throws IOException {
         System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
@@ -191,10 +190,7 @@ public class UserLoginScreenController {
         }
     }
 
-
-
-//Throws exceptions if username or password not found
-        public void handleForgotPassword() throws IOException {
+    public void handleForgotPassword() throws IOException {
             App.userService.setTypedUsername(userNameTextField.getText());
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
