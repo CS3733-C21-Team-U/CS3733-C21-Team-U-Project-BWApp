@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.user;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
@@ -128,7 +129,19 @@ public class ModifyUserController {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         if(!App.isEdtingGuest){
-            App.userService.updateEmployee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+            /*
+            String userID,
+            String name,
+            String accountName,
+            String password,
+            String email,
+            Role type,
+            String phoneNumber,
+            String locationNodeID,
+            boolean deleted
+             */
+            // todo : fix this to add a locationNodeID field in fxml
+            App.userService.updateEmployee(new Employee(App.selectedEmployee.getUserID(), nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false));
 
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));

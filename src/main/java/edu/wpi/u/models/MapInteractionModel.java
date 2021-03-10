@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,6 +15,7 @@ public class MapInteractionModel {
     private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
+    public SimpleBooleanProperty reloadPathfinding = new SimpleBooleanProperty(true);
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
@@ -37,11 +39,14 @@ public class MapInteractionModel {
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
     public boolean pathThingy = false;
+    public String aline = "";
+    public double alineValue;
 
 
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){
             this.nodeIDList.addFirst(nodeID);
+            this.toggledNodeID = nodeID;
         }else {
             this.nodeIDList.remove(nodeID);
             this.toggledNodeID = nodeID;
@@ -50,11 +55,8 @@ public class MapInteractionModel {
     }
 
     public LinkedList<String> resetNodeIDList(){
-        String firstID = this.nodeIDList.getFirst();
-        this.nodeIDList.remove(firstID);
         LinkedList<String> returnMe = this.nodeIDList;
         this.nodeIDList = new LinkedList<>();
-        addToNodeIdList(firstID);
         return returnMe;
     }
 

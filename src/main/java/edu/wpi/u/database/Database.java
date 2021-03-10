@@ -81,7 +81,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(500),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null ,  type varchar(50), dateNeeded timestamp, specificData varchar(250), resolved boolean, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -102,15 +102,15 @@ public class Database {
 
                 //TODO : MOVE INTO ASSIGNMENTS
                 String tblAppointments =
-                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
+                        "create table Appointments(appointmentID varchar(50) not null , appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
                 psAppointments.execute();
 
-                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
+                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, request varchar(50) references Requests, employeeID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
-                String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl6 = "create table Locations(locationID varchar(50) not null, request varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key (locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
                 // TODO : Change from arrayList to String
@@ -118,7 +118,7 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
 
-                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
+                String commentstbl = "create table Comments(request varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
