@@ -834,7 +834,7 @@ public class UserData extends Data{
                 String str2 = "select * from Patients where password=? and userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,password);
-                ps.setString(2,userName);
+                ps2.setString(2,userName);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();

@@ -528,8 +528,4 @@
          </center>
       </BorderPane>
    </children>
-   <stylesheets>
-      <URL value="@css/BaseStyle.css" />
-      <URL value="@css/LightTheme.css" />
-   </stylesheets>
 </StackPane>

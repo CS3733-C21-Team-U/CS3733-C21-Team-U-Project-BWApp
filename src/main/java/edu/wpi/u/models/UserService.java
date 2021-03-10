@@ -246,7 +246,9 @@ public class UserService {
      * @param type Employees or Patients (table name)
      */
     public void changePassword(String username, String newPassword, String type){
-        this.getActiveUser().setPassword(newPassword);
+        if(this.getActiveUser() != null){
+            this.getActiveUser().setPassword(newPassword);
+        }
         ud.changePassword(username,newPassword, type);
     }
 
