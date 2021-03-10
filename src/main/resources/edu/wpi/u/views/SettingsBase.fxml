@@ -35,14 +35,24 @@
                         <Insets />
                      </VBox.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </JFXButton>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="errorUpdateContactLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="Please Fill in a Phone Number or Email">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="contactInfoLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="Sucssfully Updated" />
+                        <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                   <VBox>
                      <children>
-                        <JFXTextField fx:id="oldPasswordFeild" labelFloat="true" prefWidth="372.0" promptText=" Old Password">
+                        <JFXTextField fx:id="oldPasswordFeild" labelFloat="true" prefWidth="372.0" promptText="Old Password">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -67,6 +77,11 @@
                            </VBox.margin>
                         </JFXTextField>
                         <Label fx:id="passwordsDontMatchLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Incorrect password">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="succsessfulLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="Sucssesful">
                            <VBox.margin>
                               <Insets bottom="-20.0" />
                            </VBox.margin>

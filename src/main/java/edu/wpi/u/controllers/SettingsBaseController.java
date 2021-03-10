@@ -55,23 +55,39 @@ public class SettingsBaseController {
     @FXML public JFXRadioButton bFSRadioButton;
     @FXML public JFXComboBox<String> tableNameOptions;
     @FXML public Group onlyAdmin;
-    @FXML public Label passwordsDontMatchLabel, wrongPasswordLable;
+    @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
         wrongPasswordLable.setVisible(false);
+        succsessfulLabel.setVisible(false);
+        contactInfoLabel.setVisible(false);
+        errorUpdateContactLabel.setVisible(false);
+
+        phoneNumTextField.focusedProperty().addListener(e->{
+            contactInfoLabel.setVisible(false);
+            errorUpdateContactLabel.setVisible(false);
+        });
+
+        emailAddressTextField.focusedProperty().addListener(e->{
+            contactInfoLabel.setVisible(false);
+            errorUpdateContactLabel.setVisible(false);
+        });
 
         oldPasswordFeild.focusedProperty().addListener(e->{
             wrongPasswordLable.setVisible(false);
+            succsessfulLabel.setVisible(false);
         });
 
         newPasswordFeild1.focusedProperty().addListener(e->{
             passwordsDontMatchLabel.setVisible(false);
+            succsessfulLabel.setVisible(false);
         });
 
         newPasswordFeild2.focusedProperty().addListener(e->{
             passwordsDontMatchLabel.setVisible(false);
+            succsessfulLabel.setVisible(false);
         });
 
         if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
@@ -93,27 +109,6 @@ public class SettingsBaseController {
         filePathTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
                 filePathTextField.validate();
-            }
-        });
-
-        RegexValidator validator2 = new RegexValidator();
-        validator2.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        validator2.setMessage("Email is invalid");
-        emailAddressTextField.getValidators().add(validator2);
-        emailAddressTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                emailAddressTextField.validate();
-            }
-        });
-
-        // TODO: ADD REGEX FUNCTIONALITY TO THIS
-        RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator3.setMessage("Phone # Required");
-        phoneNumTextField.getValidators().add(validator3);
-        phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                emailAddressTextField.validate();
             }
         });
 
@@ -160,19 +155,35 @@ public class SettingsBaseController {
     }
 
     public void handleContactChange() {
-        String userType = "";
-        if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
-                App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
-                App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
-                App.userService.getActiveUser().getType() == TRANSLATORS) {
-            userType = "Employees";
-        } else {
-            userType = "Guests";
+        if(phoneNumTextField.getText().equals("") && emailAddressTextField.getText().equals("")){
+            errorUpdateContactLabel.setVisible(true);
+        }else {
+            if(!phoneNumTextField.getText().equals("")){
+                String userType = "";
+                if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
+                        App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
+                        App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
+                        App.userService.getActiveUser().getType() == TRANSLATORS) {
+                    userType = "Employees";
+                } else {
+                    userType = "Guests";
+                }
+                App.userService.changePhoneNumber(App.userService.getActiveUser().getUserID(), phoneNumTextField.getText(), userType);
+            }
+            if(!emailAddressTextField.getText().equals("")){
+                String userType = "";
+                if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
+                        App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
+                        App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
+                        App.userService.getActiveUser().getType() == TRANSLATORS) {
+                    userType = "Employees";
+                } else {
+                    userType = "Guests";
+                }
+                App.userService.changeEmail(App.userService.getActiveUser().getUserID(), emailAddressTextField.getText(), userType);
+            }
         }
-        System.out.println(App.userService.getActiveUser().getUserID());
-        System.out.println(emailAddressTextField.getText());
-        System.out.println(userType);
-        App.userService.changeEmail(App.userService.getActiveUser().getUserID(), emailAddressTextField.getText(), userType);
+
     }
 
     public void handleCreateTable() {
@@ -199,6 +210,19 @@ public class SettingsBaseController {
     }
 
     public void handleUpdatePassword() {
-            //if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+            if (!App.userService.checkPassword(oldPasswordFeild.getText(),App.userService.getActiveUser().getUserName()).equals("")) {
+                if(!newPasswordFeild1.getText().equals(newPasswordFeild2.getText())){
+                    passwordsDontMatchLabel.setVisible(true);
+                }else {
+                    App.userService.changePassword(App.userService.getActiveUser().getUserName(),newPasswordFeild1.getText(),App.userService.checkPassword(oldPasswordFeild.getText(),App.userService.getActiveUser().getUserName()));
+                    oldPasswordFeild.setText("");
+                    newPasswordFeild1.setText("");
+                    newPasswordFeild2.setText("");
+
+                    succsessfulLabel.setVisible(true);
+                }
+            }else{
+                wrongPasswordLable.setVisible(true);
+            }
     }
 }
