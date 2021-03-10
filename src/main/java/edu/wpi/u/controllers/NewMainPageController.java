@@ -39,6 +39,7 @@ import java.util.Set;
 
 
 import static edu.wpi.u.users.Role.ADMIN;
+import static edu.wpi.u.users.Role.GUEST;
 
 public class NewMainPageController {
 
@@ -68,6 +69,7 @@ public class NewMainPageController {
     public JFXButton collapseButton;
     public Tab HelpMainPageTab;
     public Tab AdminHelpMainPageTab;
+    public Tab settingsTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -163,6 +165,14 @@ public class NewMainPageController {
                 HelpMainPageTab.setStyle("-fx-opacity: 1");
                 AdminHelpMainPageTab.setDisable(true);
                 AdminHelpMainPageTab.setStyle("-fx-opacity: 0");
+            }
+
+            if(App.userService.getActiveUser().getType() == GUEST){
+                settingsTab.setStyle("-fx-opacity: 0");
+                settingsTab.setDisable(true);
+            }else{
+                settingsTab.setStyle("-fx-opacity: 1");
+                settingsTab.setDisable(false);
             }
 
     }
