@@ -1,6 +1,8 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
+import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
+import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -11,6 +13,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.WritableFloatValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,6 +49,7 @@ public class App extends Application {
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   public static SimpleBooleanProperty requestRedrawFlag = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
+  public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
 
@@ -66,6 +70,8 @@ public class App extends Application {
   public static SVGPath themeSVG;
 
   public static String newNodeType;
+
+  public static SimpleBooleanProperty mobileUpdateDestinationField = new SimpleBooleanProperty(false);
 
 
   public static String lastSelectedNode;

@@ -65,7 +65,7 @@ public class RequestService {
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {
     result.getGenericRequest().resolveRequest(resolveComment);
-    this.activeRequests.remove(result);
+    //this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 

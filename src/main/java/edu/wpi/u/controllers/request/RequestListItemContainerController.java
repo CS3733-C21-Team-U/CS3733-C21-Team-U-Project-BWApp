@@ -89,7 +89,6 @@ public class RequestListItemContainerController extends AnchorPane implements In
         }
     }
 
- //MUST BE FIRST!!!
     public RequestListItemContainerController(SpecificRequest request, VBox sampleRequestItem) throws IOException {
         this.request = request; //MUST BE FIRST!!!
         this.masterList = sampleRequestItem;

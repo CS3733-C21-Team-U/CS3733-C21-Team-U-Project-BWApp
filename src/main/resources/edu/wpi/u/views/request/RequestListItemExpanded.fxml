@@ -103,7 +103,12 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </JFXTextField>
-                              <JFXButton onAction="#addComment" styleClass="button-contained" text="Submit Update" />
+                              <JFXButton onAction="#addComment" styleClass="button-contained" text="Comment" />
+                              <JFXButton onAction="#resolve" styleClass="button-outlined" text="Resolve">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" />

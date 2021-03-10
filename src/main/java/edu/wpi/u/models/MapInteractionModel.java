@@ -12,6 +12,7 @@ import java.util.LinkedList;
 public class MapInteractionModel {
 
 
+    public boolean highRisk = false;
     private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");

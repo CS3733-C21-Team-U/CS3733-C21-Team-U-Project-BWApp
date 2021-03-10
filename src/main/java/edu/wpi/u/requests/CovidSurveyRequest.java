@@ -5,7 +5,7 @@ import edu.wpi.u.users.Role;
 public class CovidSurveyRequest extends SpecificRequest{
     @Override
     public String[] getSpecificFields() {
-        String[] res = new String[]{"riskLevel", "entranceNodeID"};
+        String[] res = new String[]{"riskLevel"};
         return res;
     }
 

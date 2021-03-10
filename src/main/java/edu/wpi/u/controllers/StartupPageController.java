@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
@@ -18,7 +18,11 @@ public class StartupPageController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleMobile(ActionEvent actionEvent) {
+    public void handleMobile(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleFirestick(ActionEvent actionEvent) {

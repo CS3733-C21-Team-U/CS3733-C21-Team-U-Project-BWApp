@@ -141,11 +141,15 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             String ID = Integer.toString(requestID);//make a random id
 
             //make components of specifc request,  then set them
-            Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
-                    App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+        Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
+            App.userService.getActiveUser().getUserName(), CommentType.PRIMARY);
 
-            Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
-                    locationsToAdd, assigneesToAdd, primaryComment);
+        Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
+            locationsToAdd, assigneesToAdd, primaryComment);
+
+//        App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
+//        App.newReqVBox.getChildren().clear();
+//        App.VBoxChanged.set(!App.VBoxChanged.get());
 
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
             App.newReqVBox.getChildren().clear();
@@ -161,6 +165,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             editTimeNeededField.validate();
         }
     }
+
 
     private boolean checkSpecialFields(ArrayList<String> input){
         for(String s: input){

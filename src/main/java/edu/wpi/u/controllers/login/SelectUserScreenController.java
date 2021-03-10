@@ -71,6 +71,13 @@ public class SelectUserScreenController {
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+
+    public void handleMobile() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
 }
 
 

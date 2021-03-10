@@ -39,8 +39,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
-    @FXML public SVGPath requestIcon;
     @FXML public AnchorPane requestItemRoot;
+//    @FXML public SVGPath requestIcon;
+    @FXML public SVGPath requestIcon;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
