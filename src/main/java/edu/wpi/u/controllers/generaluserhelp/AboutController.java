@@ -51,12 +51,12 @@ public class AboutController {
     public void hideIMG() {
         showIMG("/edu/wpi/u/views/Images/brigham-health-logo-600x200.png");
         aboutDescriptionLabel.setText("We would like to give a special thank you to" +
-                " Brigham and Women's Hospitalm, and their representative Andrew Shinn," +
+                " Brigham and Women's Hospital, and their representative Andrew Shinn," +
                 " for making this project possible with their cooperation, time, and" +
                 " input. We would also like to thank Worcester Polytechnic Institute," +
                 " and specifically the Department of Computer Science, for making this" +
                 " course possible. Additionally, we would like to thank Professor" +
-                " Wilson Wong for advising this class, as well as our team coach Andew" +
+                " Wilson Wong for advising this class, as well as our team coach Andrew" +
                 " Bonaventura for providing guidance throughout this course to our team.");
     }
 
@@ -101,7 +101,7 @@ public class AboutController {
      */
     public void showCharlieKittler() {
         showIMG("/edu/wpi/u/views/Images/CharlieKittler.png");
-        aboutDescriptionLabel.setText("I'm Charles Kittler, one of our Assisntant Leads," +
+        aboutDescriptionLabel.setText("I'm Charles Kittler, one of our Assistant Leads," +
                 " and I'm a Robotics Engineering and Computer Science major from Natick, MA." +
                 " One fun fact about me is that I enjoy rock climbing.");
     }
@@ -126,7 +126,7 @@ public class AboutController {
         showIMG("/edu/wpi/u/views/Images/TylerSanderville.jpeg");
         aboutDescriptionLabel.setText("Hi I'm Tyler Sanderville, our product owner, and" +
                 " I'm a Robotics Engineering major. I hail from the far west, being birthed"
-                + " in Albuqerque, New Mexico and living all across the likes, ranging" +
+                + " in Albuquerque, New Mexico and living all across the likes, ranging" +
                 " from the sun belt to northern California. I enjoy mountain biking," +
                 " cooking, strumming guitar, and gaming when the moment is right." +
                 "Fun fact: I'm currently ranking in the global top 300 for the video" +
@@ -151,7 +151,7 @@ public class AboutController {
         showIMG("/edu/wpi/u/views/Images/NickGao.jpg");
         aboutDescriptionLabel.setText("Hi I'm Tianyang (Nick) Gao, the Scrum Master" +
                 " for Team U. I'm a RBE/ME and I'm from Zhejiang, China. I like" +
-                " viedeo games, traveling, and music");
+                " video games, traveling, and music");
     }
 
     /**
