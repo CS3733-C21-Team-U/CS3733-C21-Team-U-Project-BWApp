@@ -37,7 +37,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </SVGPath>
-                              <Label fx:id="titleLabel" prefWidth="382.0" text="Edit Request" wrapText="true">
+                              <Label fx:id="titleLabel" prefWidth="382.0" text="New Request" wrapText="true">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -56,11 +56,11 @@
                         </HBox>
                         <JFXTextField fx:id="editTitleField" labelFloat="true" promptText="Title" />
                         <JFXTextArea fx:id="editDescriptionField" labelFloat="true" promptText="Description" />
-                        <JFXDatePicker fx:id="editDateNeededField" promptText="Date Needed" />
+                        <JFXDatePicker fx:id="editDateNeededField" editable="false" promptText="Date Needed" />
                         <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
                         <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
                            <children>
-                              <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
+                              <JFXButton onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
