@@ -57,27 +57,27 @@ public class UserSignupScreenController {
             duplicatePasswordLabel.setVisible(false);
         });
 
-//        RegexValidator validator = new RegexValidator();
-//        validator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
-//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-//        validator.setMessage("Email is invalid");
-//        emailTextField.getValidators().add(validator);
-//        emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-//            if (!newVal) {
-//                emailTextField.validate();
-//            }
-//        });
-
-        // todo : fix
-        RegexValidator validator2 = new RegexValidator();
-        validator2.setRegexPattern("/^\\d{10}$/");
-        validator2.setMessage("Phone number is invalid");
-        phonenumberTextField.getValidators().add(validator2);
-        phonenumberTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+        RegexValidator validator = new RegexValidator();
+        validator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        validator.setMessage("Email is invalid");
+        emailTextField.getValidators().add(validator);
+        emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
             if (!newVal) {
-                phonenumberTextField.validate();
+                emailTextField.validate();
             }
         });
+
+        // todo : fix
+//        RegexValidator validator2 = new RegexValidator();
+//        validator2.setRegexPattern("/^\\d{10}$/");
+//        validator2.setMessage("Phone number is invalid");
+//        phonenumberTextField.getValidators().add(validator2);
+//        phonenumberTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+//            if (!newVal) {
+//                phonenumberTextField.validate();
+//            }
+//        });
 
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
         usernameTextField.getValidators().add(validator3);
