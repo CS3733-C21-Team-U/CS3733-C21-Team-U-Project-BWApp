@@ -141,7 +141,7 @@
                               </VBox>
                               <VBox prefHeight="592.0" prefWidth="394.0">
                                  <children>
-                                    <JFXButton fx:id="SettingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingPageButton" prefHeight="103.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Setting">
+                                    <JFXButton fx:id="SettingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingPageButton" prefHeight="103.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Settings">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
