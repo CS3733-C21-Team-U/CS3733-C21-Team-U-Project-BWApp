@@ -6,11 +6,14 @@ import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -22,7 +25,7 @@ import java.util.Date;
 
 public class ViewRequestListController {
 
-
+    public AnchorPane noItemsGraphic;
     public VBox sampleRequestItem;
     public JFXComboBox<String> typeOption;
     public JFXComboBox<String> assignOption;
@@ -33,6 +36,22 @@ public class ViewRequestListController {
      * @throws IOException
      */
     public void initialize() throws IOException {
+
+        sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
+            @Override
+            public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
+                if(c.getList().size() == 1){//New list after filtering is emppty
+                    System.out.println("Request list is empty");
+                    noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    noItemsGraphic.setVisible(true);
+                }else{
+                    noItemsGraphic.setPrefHeight(0);
+                    noItemsGraphic.setVisible(false);
+                }
+            }
+
+        });
+
         System.out.println("In Init for View Request");
 
         ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
@@ -80,7 +99,7 @@ public class ViewRequestListController {
         End Remove*/
 
         for (SpecificRequest request: listOfRequests) {
-            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request));
+            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, sampleRequestItem));
         }
         /*
         for (int i = 0; i < listOfRequests.size(); i++) {

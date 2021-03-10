@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class RequestListItemContainerController extends AnchorPane implements Initializable{
 
+    public VBox masterList;
     public SpecificRequest request;
     public Parent expandedNode;
     public Parent collapsedNode;
@@ -28,8 +30,9 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public Parent hiddenNode;
     public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
-    public RequestListItemContainerController(SpecificRequest request) throws IOException {
+    public RequestListItemContainerController(SpecificRequest request, VBox sampleRequestItem) throws IOException {
         this.request = request; //MUST BE FIRST!!!
+        this.masterList = sampleRequestItem;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemContainer.fxml"));
         loader.setController(this);
@@ -70,13 +73,12 @@ public class RequestListItemContainerController extends AnchorPane implements In
 
     public void switchGoneToCollapsed() {
         System.out.println("Testing gone to collapes");
-        runAnimation(this,200,60,0,96, hiddenNode, collapsedNode);
-
+        this.masterList.getChildren().add(this);
     }
 
     public void switchCollapsedToGone() {
         System.out.println("Testing collapse to gpme");
-        runAnimation(this,150,60,96,-20, collapsedNode, hiddenNode);
+        this.masterList.getChildren().remove(this);
     }
 
     public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){
