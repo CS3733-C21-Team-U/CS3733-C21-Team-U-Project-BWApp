@@ -28,6 +28,8 @@ public class AdminMainHelpController {
     @FXML public JFXButton ViewUserHelpButton;
     @FXML public JFXButton LoadAndSaveCSVButton;
     @FXML public JFXButton PathFindingHelpButton;
+    @FXML public JFXButton CovidHelpButton;
+    @FXML public JFXButton AboutHelpButton;
 
 
 
@@ -123,5 +125,53 @@ public class AdminMainHelpController {
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
+    }
+
+    public void handleMapBuilderButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/MapBuilderHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
+
+    public void handleUserManagerButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/UserManagerHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
+
+    public void handleAboutUsButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/AboutPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
+
+    public void handleCovid19UserButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/CovidInfoPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
