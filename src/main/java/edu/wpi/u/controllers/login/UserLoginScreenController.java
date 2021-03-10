@@ -115,6 +115,19 @@ public class UserLoginScreenController {
 //        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
+
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
+                handleSubmit();
+            }else{
+                wrongPasswordLabel.setVisible(true);
+            }
+        }else{
+            wrongPasswordLabel.setVisible(true);
+        }
+
+
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
         try {
@@ -178,16 +191,7 @@ public class UserLoginScreenController {
             errorLabel.setText("Username or Password is Invalid");
             e.printStackTrace();
         }
-        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
-            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
-                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
-                handleSubmit();
-            }else{
-                wrongPasswordLabel.setVisible(true);
-            }
-        }else{
-            wrongPasswordLabel.setVisible(true);
-        }
+
     }
 
     public void handleForgotPassword() throws IOException {
