@@ -144,7 +144,7 @@ public class Database {
                 ps7.execute();
                 // TODO : REQUEST WILL HAVE PARKING LOCATION
                 String tblPatient =
-                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50) references Nodes, recommendedParkingLocation varchar(100), primary key(patientID))";
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50), recommendedParkingLocation varchar(100), primary key(patientID))";
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
