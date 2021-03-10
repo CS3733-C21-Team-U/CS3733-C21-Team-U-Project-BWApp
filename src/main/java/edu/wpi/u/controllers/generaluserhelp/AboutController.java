@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
+import static edu.wpi.u.users.Role.ADMIN;
+
 public class AboutController {
 
     @FXML ImageView aboutImage;
@@ -88,6 +90,9 @@ public class AboutController {
      */
     public void showKaamilLokhandwala() {
         showIMG("/edu/wpi/u/views/Images/KaamilLokhandwala.jpg");
+        aboutDescriptionLabel.setText("Hey all, I'm Kaamil Lokhandwala, an Assistant Lead Dev of Team U," +
+                " a CS and IMGD double major. I'm from the far town of Andover, a whopping 40 minutes away" +
+                " if you're speeding. I enjoy music and art, and finding how to connect them with technology.");
     }
 
     /**
@@ -96,9 +101,9 @@ public class AboutController {
      */
     public void showCharlieKittler() {
         showIMG("/edu/wpi/u/views/Images/CharlieKittler.png");
-        aboutDescriptionLabel.setText("Charles Kittler, one of our Assisntant Leads," +
-                " is a Robotics Engineering and Computer Science major from Natick, MA." +
-                " One fun fact about Charles is that he enjoys rock climbing.");
+        aboutDescriptionLabel.setText("I'm Charles Kittler, one of our Assisntant Leads," +
+                " and I'm a Robotics Engineering and Computer Science major from Natick, MA." +
+                " One fun fact about me is that I enjoy rock climbing.");
     }
 
     /**
@@ -119,12 +124,12 @@ public class AboutController {
      */
     public void showTylerSanderville() {
         showIMG("/edu/wpi/u/views/Images/TylerSanderville.jpeg");
-        aboutDescriptionLabel.setText("Tyler Sanderville, our product owner, is a" +
-                " Robotics Engineering major. He hails from the far west, being birthed"
+        aboutDescriptionLabel.setText("Hi I'm Tyler Sanderville, our product owner, and" +
+                " I'm a Robotics Engineering major. I hail from the far west, being birthed"
                 + " in Albuqerque, New Mexico and living all across the likes, ranging" +
-                " from the sun belt to northern California. He enjoys mountain biking," +
+                " from the sun belt to northern California. I enjoy mountain biking," +
                 " cooking, strumming guitar, and gaming when the moment is right." +
-                "Fun fact: Tyler currently ranks in the global top 300 for the video" +
+                "Fun fact: I'm currently ranking in the global top 300 for the video" +
                 " game 'Super Hexagon'");
     }
 
@@ -144,6 +149,9 @@ public class AboutController {
      */
     public void showNickGao() {
         showIMG("/edu/wpi/u/views/Images/NickGao.jpg");
+        aboutDescriptionLabel.setText("Hi I'm Tianyang (Nick) Gao, the Scrum Master" +
+                " for Team U. I'm a RBE/ME and I'm from Zhejiang, China. I like" +
+                " viedeo games, traveling, and music");
     }
 
     /**
@@ -161,11 +169,15 @@ public class AboutController {
     }
 
     /**
-     * Shows Michael Geary's picture
+     * Shows Michael Geary's picture and a short bio
      * Author Lily
      */
     public void showMichaelGeary() {
         showIMG("/edu/wpi/u/views/Images/MichaelGeary.jpg");
+        aboutDescriptionLabel.setText("My name is Michael Geary and I'm a sophomore Computer Science major" +
+                " who works as an Algorithms Specialist on Team U. I come from" +
+                " Liverpool, New York, and I'm involved in multiple music" +
+                " organizations on campus. I also enjoy spending time with my brothers in LCA.");
     }
 
     /**
@@ -174,6 +186,10 @@ public class AboutController {
      */
     public void showOlaJackson() {
         showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");
+        aboutDescriptionLabel.setText("My name is Olajumoke JAckson and I'm a" +
+                " Full-Time Database Engineer for Team U. I'm a Data Science major from" +
+                " Providence, RI. My favorite books are After Dark by Haruki Murakami," +
+                " Atlas Shrugged by Ayn Rand, and Snow Flower and the Secret Fan by Lisa See.");
     }
 
     /**
@@ -183,13 +199,15 @@ public class AboutController {
      */
     @FXML public void handleBackToMainPageButton() throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(App.userService.getActiveUser().getType() ==  ADMIN){
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AdminMainHelpPage.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
         }
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        }
     }
 }

@@ -39,7 +39,7 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="1700.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="592.0" prefWidth="580.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="592.0" prefWidth="580.0" spacing="50.0">
                                  <children>
                                     <JFXButton fx:id="PathFindingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handlePathFindingButton" prefHeight="178.0" prefWidth="591.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="PathFinding">
                                        <font>
@@ -52,7 +52,7 @@
                                           <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="ContactUsHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleContactUsButton" prefHeight="96.0" prefWidth="480.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Contact us">
+                                    <JFXButton fx:id="ContactUsHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleContactUsButton" prefHeight="178.0" prefWidth="591.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Contact us">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -92,7 +92,7 @@
                                     </JFXButton>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="592.0" prefWidth="571.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="592.0" prefWidth="571.0" spacing="50.0">
                                  <children>
                                     <JFXButton fx:id="AddUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleAddUserButton" prefHeight="70.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Add User">
                                        <font>
