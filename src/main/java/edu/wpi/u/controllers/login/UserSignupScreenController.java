@@ -57,16 +57,16 @@ public class UserSignupScreenController {
             duplicatePasswordLabel.setVisible(false);
         });
 
-        RegexValidator validator = new RegexValidator();
-        validator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        validator.setMessage("Email is invalid");
-        emailTextField.getValidators().add(validator);
-        emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                emailTextField.validate();
-            }
-        });
+//        RegexValidator validator = new RegexValidator();
+//        validator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+//        validator.setMessage("Email is invalid");
+//        emailTextField.getValidators().add(validator);
+//        emailTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+//            if (!newVal) {
+//                emailTextField.validate();
+//            }
+//        });
 
         // todo : fix
         RegexValidator validator2 = new RegexValidator();
