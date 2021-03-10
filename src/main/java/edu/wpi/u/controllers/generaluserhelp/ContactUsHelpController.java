@@ -23,6 +23,5 @@ public class ContactUsHelpController {
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
         }
-
     }
 }
