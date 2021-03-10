@@ -57,7 +57,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton styleClass="button-outlined" text="Cancel" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+            <JFXButton onAction="#handleCancelButton" styleClass="button-outlined" text="Cancel" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
             <JFXButton maxHeight="-Infinity" onAction="#handleNewMaintenanceRequest" prefWidth="120.0" text="Maintenance" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button-contained" />
