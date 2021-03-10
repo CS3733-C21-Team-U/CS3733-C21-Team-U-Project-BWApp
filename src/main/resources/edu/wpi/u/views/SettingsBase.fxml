@@ -18,19 +18,83 @@
          <children>
             <Label styleClass="headline-2" text="Settings Page" />
             <HBox prefHeight="21.0" prefWidth="600.0" />
-            <Label text="Change Contact Info">
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin></Label>
-            <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone Number" text="test">
-               <VBox.margin>
-                  <Insets right="1267.0" />
-               </VBox.margin></JFXTextField>
-            <JFXTextField fx:id="emailAddressTextField" labelFloat="true" prefWidth="372.0" promptText="Enter E-mail address" text="test">
-               <VBox.margin>
-                  <Insets bottom="15.0" right="1267.0" top="30.0" />
-               </VBox.margin></JFXTextField>
-            <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change" />
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="408.0" spacing="30.0">
+               <children>
+                  <Label text="Change Contact Info">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="phoneNumTextField" labelFloat="true" promptText="Enter Phone Number">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="emailAddressTextField" labelFloat="true" prefWidth="372.0" promptText="Enter E-mail address">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="errorUpdateContactLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Please Fill in a Phone Number or Email">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="contactInfoLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="Sucssfully Updated" />
+                        <JFXButton fx:id="contactChangeButton" buttonType="RAISED" onAction="#handleContactChange" prefWidth="408.0" styleClass="button-contained" text="Apply Contact Change">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <JFXTextField fx:id="oldPasswordFeild" labelFloat="true" prefWidth="372.0" promptText="Old Password">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <Label fx:id="wrongPasswordLable" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Incorrect password">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <JFXTextField fx:id="newPasswordFeild1" labelFloat="true" prefWidth="372.0" promptText="New Password">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <VBox layoutX="10.0" layoutY="222.0">
+                     <children>
+                        <JFXTextField fx:id="newPasswordFeild2" labelFloat="true" prefWidth="372.0" promptText="Confirm New Password">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <Label fx:id="passwordsDontMatchLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" style="-fx-text-fill: -error;" text="Incorrect password">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="succsessfulLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" text="Sucssesful">
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <JFXButton buttonType="RAISED" onAction="#handleUpdatePassword" prefWidth="408.0" styleClass="button-contained" text="Update Password">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
             <Label fx:id="adminText" styleClass="headline-2" text="Admin">
                <VBox.margin>
                   <Insets top="25.0" />
@@ -50,7 +114,7 @@
                <children>
                   <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="38.0" prefWidth="414.0" styleClass="button-outlined" text="Choose CSV">
                      <HBox.margin>
-                        <Insets top="15.0" />
+                        <Insets top="20.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
@@ -63,10 +127,13 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
                <children>
-                  <JFXComboBox fx:id="tableNameOptions" labelFloat="true" prefHeight="23.0" prefWidth="415.0" promptText="Select Table Name" />
+                  <JFXComboBox fx:id="tableNameOptions" labelFloat="true" prefHeight="23.0" prefWidth="415.0" promptText="Select Table Name">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></JFXComboBox>
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="452.0" prefHeight="36.0" prefWidth="1675.0">
+            <HBox layoutX="10.0" layoutY="452.0" prefHeight="36.0">
                <children>
                   <JFXButton buttonType="RAISED" onAction="#handleSaveCSV" prefHeight="33.0" prefWidth="194.0" styleClass="button-contained" text="Save to Current Data to CSV">
                      <HBox.margin>
@@ -79,39 +146,46 @@
                      </HBox.margin>
                   </JFXButton>
                </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </HBox>
             <Group fx:id="onlyAdmin">
+               <VBox.margin>
+                  <Insets left="-5.0" />
+               </VBox.margin>
                <children>
-                  <VBox layoutX="-52.0" layoutY="21.0" prefHeight="200.0" prefWidth="450.0">
+                  <VBox prefHeight="60.0" prefWidth="450.0">
                      <children>
                         <Label fx:id="pathfindingText" styleClass="headline-3" text="Path Finding Modes" />
-                        <HBox prefHeight="36.0" prefWidth="1675.0">
+                        <HBox prefHeight="36.0" prefWidth="1675.0" spacing="20.0">
                            <children>
-                              <JFXRadioButton fx:id="aStarRadioButton" onAction="#handleAStar" prefHeight="15.0" prefWidth="103.0" selected="true" text="  A Star">
+                              <JFXRadioButton fx:id="aStarRadioButton" onAction="#handleAStar" prefHeight="55.0" prefWidth="100.0" selected="true" text="  A Star">
                                  <HBox.margin>
-                                    <Insets right="49.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <toggleGroup>
                                     <ToggleGroup fx:id="pathFindingMode" />
                                  </toggleGroup>
                               </JFXRadioButton>
-                              <JFXRadioButton fx:id="dFSRadioButton" onAction="#handleDepthFirst" prefHeight="15.0" prefWidth="103.0" text="  Depth First" toggleGroup="$pathFindingMode">
+                              <JFXRadioButton fx:id="dFSRadioButton" onAction="#handleDepthFirst" prefHeight="36.0" prefWidth="99.0" text="  Depth First" toggleGroup="$pathFindingMode">
                                  <HBox.margin>
-                                    <Insets right="49.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </JFXRadioButton>
-                              <JFXRadioButton fx:id="bFSRadioButton" onAction="#handleBreadthFirst" text="  Breadth First" toggleGroup="$pathFindingMode" />
+                              <JFXRadioButton fx:id="bFSRadioButton" onAction="#handleBreadthFirst" prefHeight="37.0" prefWidth="96.0" text="  Breadth First" textAlignment="CENTER" toggleGroup="$pathFindingMode" wrapText="true" />
+                              <JFXRadioButton onAction="#handleDijkstra" prefHeight="69.0" prefWidth="101.0" text="Dijsktra" toggleGroup="$pathFindingMode" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
                      </children>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
                   </VBox>
                </children>
-               <VBox.margin>
-                  <Insets left="-5.0" />
-               </VBox.margin>
             </Group>
          </children>
       </VBox>

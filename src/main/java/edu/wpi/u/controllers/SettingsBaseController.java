@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
@@ -54,8 +55,40 @@ public class SettingsBaseController {
     @FXML public JFXRadioButton bFSRadioButton;
     @FXML public JFXComboBox<String> tableNameOptions;
     @FXML public Group onlyAdmin;
+    @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
+    @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
 
     public void initialize() throws IOException, FilePathNotFoundException {
+        passwordsDontMatchLabel.setVisible(false);
+        wrongPasswordLable.setVisible(false);
+        succsessfulLabel.setVisible(false);
+        contactInfoLabel.setVisible(false);
+        errorUpdateContactLabel.setVisible(false);
+
+        phoneNumTextField.focusedProperty().addListener(e->{
+            contactInfoLabel.setVisible(false);
+            errorUpdateContactLabel.setVisible(false);
+        });
+
+        emailAddressTextField.focusedProperty().addListener(e->{
+            contactInfoLabel.setVisible(false);
+            errorUpdateContactLabel.setVisible(false);
+        });
+
+        oldPasswordFeild.focusedProperty().addListener(e->{
+            wrongPasswordLable.setVisible(false);
+            succsessfulLabel.setVisible(false);
+        });
+
+        newPasswordFeild1.focusedProperty().addListener(e->{
+            passwordsDontMatchLabel.setVisible(false);
+            succsessfulLabel.setVisible(false);
+        });
+
+        newPasswordFeild2.focusedProperty().addListener(e->{
+            passwordsDontMatchLabel.setVisible(false);
+            succsessfulLabel.setVisible(false);
+        });
 
         if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
             onlyAdmin.setStyle("-fx-opacity: 1");
@@ -78,25 +111,6 @@ public class SettingsBaseController {
                 filePathTextField.validate();
             }
         });
-        // TODO: ADD REGEX FUNCTIONALITY TO THIS
-        RequiredFieldValidator validator2 = new RequiredFieldValidator();
-        validator.setMessage("Email Required");
-        emailAddressTextField.getValidators().add(validator2);
-        emailAddressTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                emailAddressTextField.validate();
-            }
-        });
-        // TODO: ADD REGEX FUNCTIONALITY TO THIS
-        RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator.setMessage("Phone # Required");
-        phoneNumTextField.getValidators().add(validator2);
-        phoneNumTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                emailAddressTextField.validate();
-            }
-        });
-
 
         if (!(App.userService.getActiveUser().getType() == ADMIN)) {
             adminText.setStyle("-fx-opacity: 0");
@@ -113,16 +127,7 @@ public class SettingsBaseController {
             loadCSVButton.setDisable(true);
 
         }
-    }
 
-    //most of these functions are just place holders, so I dont
-    //have anything to add for stubs / javadocs
-    //will need help writing these.
-    public void handlePathMode1() {
-
-    }
-
-    public void handlePathMode2() {
 
     }
 
@@ -147,38 +152,44 @@ public class SettingsBaseController {
 
         return csv.getPath();
 
-        // App.db.readCSV(csv.getPath(), tableNameTextFIeld.getText() );
-
     }
 
     public void handleContactChange() {
-        String userType = "";
-        if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
-                App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
-                App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
-                App.userService.getActiveUser().getType() == TRANSLATORS) {
-            userType = "Employees";
-        } else {
-            userType = "Guests";
+        if(phoneNumTextField.getText().equals("") && emailAddressTextField.getText().equals("")){
+            errorUpdateContactLabel.setVisible(true);
+        }else {
+            if(!phoneNumTextField.getText().equals("")){
+                String userType = "";
+                if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
+                        App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
+                        App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
+                        App.userService.getActiveUser().getType() == TRANSLATORS) {
+                    userType = "Employees";
+                } else {
+                    userType = "Guests";
+                }
+                App.userService.changePhoneNumber(App.userService.getActiveUser().getUserID(), phoneNumTextField.getText(), userType);
+            }
+            if(!emailAddressTextField.getText().equals("")){
+                String userType = "";
+                if (App.userService.getActiveUser().getType() == DOCTOR || App.userService.getActiveUser().getType() == ADMIN ||
+                        App.userService.getActiveUser().getType() == MAINTENANCE || App.userService.getActiveUser().getType() == NURSE ||
+                        App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
+                        App.userService.getActiveUser().getType() == TRANSLATORS) {
+                    userType = "Employees";
+                } else {
+                    userType = "Guests";
+                }
+                App.userService.changeEmail(App.userService.getActiveUser().getUserID(), emailAddressTextField.getText(), userType);
+            }
         }
-        System.out.println(App.userService.getActiveUser().getUserID());
-        System.out.println(emailAddressTextField.getText());
-        System.out.println(userType);
-        App.userService.changeEmail(App.userService.getActiveUser().getUserID(), emailAddressTextField.getText(), userType);
+
     }
 
     public void handleCreateTable() {
         App.mapService.loadStuff();
         App.mapService.loadCSVFile(filePathTextField.getText(), tableNameOptions.getValue());
     }
-
-    /*public void handleSetTheme1(ActionEvent actionEvent) {
-        //Light Theme
-    }*/
-
-    /*public void handleSetTheme2(ActionEvent actionEvent) {
-        //Dark Theme
-    }*/
 
 
     public void handleAStar(ActionEvent actionEvent) {
@@ -189,21 +200,29 @@ public class SettingsBaseController {
         App.pathfindingAlgorithm = "DFS";
     }
 
-    public void handleBreadthFirst(ActionEvent actionEvent) {
-        App.pathfindingAlgorithm = "BFS";
-    }
+    public void handleBreadthFirst(ActionEvent actionEvent) { App.pathfindingAlgorithm = "BFS"; }
+
+    public void handleDijkstra(ActionEvent actionEvent) { App.pathfindingAlgorithm = "DIJKSTRA"; }
 
 
     public void handleSaveCSV(ActionEvent actionEvent) {
         Database.getDB().saveCSV(filePathTextField.getText(),tableNameOptions.getValue(),"Anything I want");
     }
+
+    public void handleUpdatePassword() {
+            if (!App.userService.checkPassword(oldPasswordFeild.getText(),App.userService.getActiveUser().getUserName()).equals("")) {
+                if(!newPasswordFeild1.getText().equals(newPasswordFeild2.getText())){
+                    passwordsDontMatchLabel.setVisible(true);
+                }else {
+                    App.userService.changePassword(App.userService.getActiveUser().getUserName(),newPasswordFeild1.getText(),App.userService.checkPassword(oldPasswordFeild.getText(),App.userService.getActiveUser().getUserName()));
+                    oldPasswordFeild.setText("");
+                    newPasswordFeild1.setText("");
+                    newPasswordFeild2.setText("");
+
+                    succsessfulLabel.setVisible(true);
+                }
+            }else{
+                wrongPasswordLable.setVisible(true);
+            }
+    }
 }
-
-    /*public void handleSetTheme1(ActionEvent actionEvent) {
-        //Light Theme
-    }*/
-
-    /*public void handleSetTheme2(ActionEvent actionEvent) {
-        //Dark Theme
-    }*/
-

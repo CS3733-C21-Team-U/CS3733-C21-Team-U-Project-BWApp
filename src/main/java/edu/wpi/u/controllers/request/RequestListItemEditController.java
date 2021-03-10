@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.SVGPath;
 import lombok.SneakyThrows;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -49,6 +50,9 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     @FXML
     public JFXListView<String> editLocationsListView;// = new JFXListView<String>();
 
+    @FXML
+    public SVGPath typeIconSVG;
+
     public VBox extraFieldsVBox;
     private JFXTextField[] specificTextFields;
     HashMap<String, String> longNamestoID;
@@ -79,6 +83,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
 
         //Set Existing values for fields
+        typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
         editTitleField.setText( parent.request.getGenericRequest().getTitle());
         editDescriptionField.setText( parent.request.getGenericRequest().getDescription());
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
