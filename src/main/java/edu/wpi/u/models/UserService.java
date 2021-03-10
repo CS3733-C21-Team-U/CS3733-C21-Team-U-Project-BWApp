@@ -276,8 +276,8 @@ public class UserService {
      * Validates a password
      * @param password the password to be validated
      */
-    public String checkPassword(String password) {
-        return ud.checkPassword(password);
+    public String checkPassword(String password, String userName) {
+        return ud.checkPassword(password, userName);
     }
 
     /**

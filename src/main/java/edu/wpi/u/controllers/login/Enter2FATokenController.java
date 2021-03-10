@@ -43,7 +43,6 @@ public class Enter2FATokenController {
             Future<Response> whenResponse = client.prepareGet(url2.toString()).execute();
             Response response = whenResponse.get();
             String resString = response.getResponseBody();
-            System.out.println(resString);
             if(resString.contains("approved")){
                 handleAppEntry();
             }
