@@ -124,7 +124,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
             //make components of specifc request,  then set them
         Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
-            App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+            App.userService.getActiveUser().getUserName(), CommentType.PRIMARY);
 
         Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
             locationsToAdd, assigneesToAdd, primaryComment);

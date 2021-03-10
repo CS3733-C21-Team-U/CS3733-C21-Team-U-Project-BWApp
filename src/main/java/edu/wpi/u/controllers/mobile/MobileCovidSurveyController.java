@@ -68,8 +68,11 @@ public class MobileCovidSurveyController {
         String ID = Integer.toString(requestID);//make a random id
 
         //make components of specifc request,  then set them
+
+
+
         Comment primaryComment = new Comment("COVID Survey Incoming", (App.userService.getActiveUser().getName() + "is making a request to enter the hospital. Their covid risk is " + covidRisk),
-                App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+                App.userService.getActiveUser().getUserName(), CommentType.PRIMARY);
         Timestamp t = new Timestamp(System.currentTimeMillis());
 
         ArrayList<String>sdofijds = new ArrayList<>();
@@ -81,8 +84,14 @@ public class MobileCovidSurveyController {
 
         ArrayList<String>sdofijds3 = new ArrayList<>();
         sdofijds3.add(covidRisk);
+        SpecificRequest send = new RequestFactory().makeRequest("CovidSurvey").setRequest(newRequest).setSpecificData(sdofijds3);
+        if(!App.requestService.getRequests().contains(send)){
+            App.requestService.addRequest(send);
+        }
+        else{
+            System.out.println("Request already sent, processing");
+        }
 
-        App.requestService.addRequest(new RequestFactory().makeRequest("CovidSurvey").setRequest(newRequest).setSpecificData(sdofijds3));
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileWaitPage.fxml"));
         fxmlLoader.load();

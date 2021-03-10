@@ -18,9 +18,7 @@ public class MobileWaitPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //check if man is  good
-        if(searchRequests()){
-            enablePathFinding();
-        }
+
 
     }
 
@@ -50,18 +48,7 @@ public class MobileWaitPageController implements Initializable {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public boolean searchRequests(){
-        for(SpecificRequest r : App.requestService.getRequests()){
-            if(r.getGenericRequest().getCreator() != null){
-                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType() == "CovidSurvey" && r.getGenericRequest().isResolved()){
-                    return true;
-                }
-            }
 
-        }
-        return false;
-    }
 
 
 }
