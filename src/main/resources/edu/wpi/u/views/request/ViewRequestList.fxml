@@ -74,9 +74,9 @@
          <right>
             <AnchorPane prefHeight="900.0" prefWidth="290.0" style="-fx-background-color: lighjtgrey;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="878.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox prefHeight="878.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="250.0" style="-fx-background-color: -background; -fx-background-radius: 20;">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="250.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 20;">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="286.0" prefWidth="250.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
