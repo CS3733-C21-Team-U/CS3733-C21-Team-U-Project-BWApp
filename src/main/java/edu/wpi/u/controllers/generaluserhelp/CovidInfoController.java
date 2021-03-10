@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers;
+package edu.wpi.u.controllers.generaluserhelp;
 
 import edu.wpi.u.App;
 import javafx.event.ActionEvent;
