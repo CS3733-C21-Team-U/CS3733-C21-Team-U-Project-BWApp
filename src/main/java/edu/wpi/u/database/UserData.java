@@ -512,7 +512,6 @@ public class UserData extends Data{
             ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                // TODO: Will check this in tables
                 String patientID = rs.getString("patientID");
                 String name = rs.getString("name");
                 Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role

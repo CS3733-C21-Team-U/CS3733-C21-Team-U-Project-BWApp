@@ -402,8 +402,7 @@ public class UserService {
         String id = Integer.toString(employeeID);
         //String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
-        System.out.println(ud.createEmployee(newEmployee));
-        ud.addEmployee(newEmployee);
+        ud.createEmployee(newEmployee); // Fixed: was trying to add the employee in the print statement, and call to addEmployee
         this.employees.add(newEmployee);
     }
 

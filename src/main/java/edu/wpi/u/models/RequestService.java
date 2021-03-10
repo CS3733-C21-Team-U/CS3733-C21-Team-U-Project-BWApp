@@ -67,6 +67,7 @@ public class RequestService {
 
   public void updateRequest(SpecificRequest result) {
     rd.updateRequest(result);
+    this.activeRequests = rd.loadActiveRequests();
   }
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {

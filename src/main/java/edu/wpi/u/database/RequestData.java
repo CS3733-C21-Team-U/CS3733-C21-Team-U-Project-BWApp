@@ -6,6 +6,7 @@ import edu.wpi.u.requests.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class RequestData extends Data{
 
@@ -313,10 +314,11 @@ public class RequestData extends Data{
      * @param requestID the request id
      */
     public void addLocation(String nodeID, String requestID){
+        Random rand = new Random();
         String str = "insert into Locations(locationID, request, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID+"_"+nodeID);
+            ps.setString(1,"" + rand.nextInt(100000));
             ps.setString(2,requestID);
             ps.setString(3,nodeID);
             ps.execute();
