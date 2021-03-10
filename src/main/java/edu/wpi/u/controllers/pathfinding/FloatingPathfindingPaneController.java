@@ -53,8 +53,6 @@ public class FloatingPathfindingPaneController {
 
 
     SimpleStringProperty targetNode = new SimpleStringProperty("START");//flag for
-//mainAnchor
-    String targetNode = "START";//flag for
     String startNodeID = "", endNodeID = "";
     ArrayList<Node> path = new ArrayList<>();
     ArrayList<String> textualDirectionsStrings = new ArrayList<>();
@@ -69,8 +67,7 @@ public class FloatingPathfindingPaneController {
         textDirectionContainer.getChildren().clear();
         LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
 
-        if(edgePath.isEmpty());
-        else {
+        if(!edgePath.isEmpty()){
             double AnchorSize = Math.min(edgePath.size() * 80, 830);
             mainAnchor.setPrefHeight(AnchorSize);
 
@@ -191,6 +188,30 @@ public class FloatingPathfindingPaneController {
                    + "M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z");
             textDirectionContainer.getChildren().add(stepHBoxContainer);
         }
+    }
+
+    /**
+     * returns the long name of the closest non hallway or walkway node
+     * @param givenNode the node to check for
+     * @return long name
+     */
+    private String getContextLocation(Node givenNode){
+        LinkedList<Node> adjNodes = givenNode.whatAreAdjNodes();
+        LinkedList<Node> adjNodesTrimmed = new LinkedList<>();
+        for(Node curNode: adjNodes){
+            if(!curNode.getNodeType().equals("WALK") || !curNode.getNodeType().equals("HALL")){
+                adjNodesTrimmed.add(curNode);
+            }
+        }
+        int curMinDistance = Integer.MAX_VALUE;
+        String closestNode = "";
+        for(Node curNode :adjNodesTrimmed){
+            if(distAggregate(curNode,givenNode) < curMinDistance){
+                curMinDistance = distAggregate(curNode,givenNode);
+                closestNode = curNode.getLongName();
+            }
+        }
+        return closestNode;
     }
 
     /** path.get(path.size()-1).getLongName()
@@ -359,10 +380,6 @@ public class FloatingPathfindingPaneController {
         });
 
         startNodeField.requestFocus();
-
-        App.mapInteractionModel.pathFlag.addListener(observable -> {
-            handleTestAddTextField();
-        });
     }
 
     public void handleStartEndSwap(ActionEvent actionEvent) {
