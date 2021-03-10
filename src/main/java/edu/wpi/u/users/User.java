@@ -1,7 +1,6 @@
 package edu.wpi.u.users;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.u.algorithms.Node;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.StringProperty;

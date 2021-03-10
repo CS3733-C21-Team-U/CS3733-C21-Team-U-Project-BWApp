@@ -114,6 +114,10 @@ public class UserService {
         this.activeUser = ud.setEmployee(username,password);
     }
 
+    /**
+     * Sets the employee based on an id
+     * @param employeeID the id
+     */
     public void setEmployee(String employeeID){
         this.activeUser = ud.setEmployee(employeeID);
     }
@@ -165,6 +169,15 @@ public class UserService {
      */
     public ArrayList<Patient> getPatients(){
         return patients;
+    }
+
+    /**
+     * Gets a hashmap of employees based on a certain type
+     * @param type the type
+     * @return the hashmap of employee names
+     */
+    public HashMap<String, String> getEmployeeIDByType(String type){
+        return ud.getEmployeeNamesByType(type);
     }
 
     /**
@@ -249,8 +262,8 @@ public class UserService {
      * Validates a password
      * @param password the password to be validated
      */
-    public String checkPassword(String password) {
-        return ud.checkPassword(password);
+    public String checkPassword(String password, String userName) {
+        return ud.checkPassword(password, userName);
     }
 
     /**
@@ -258,9 +271,23 @@ public class UserService {
      * @param username the username to be validated
      * @return the phonenumber of the username
      */
-    public String checkPhoneNumber(String username) {
-        return ud.checkPhoneNumber(username);
+    public String getPhoneNumberFromUserName(String username) {
+        return ud.getPhoneNumberFromUserName(username);
     }
+
+    /**
+     * Checks a phonenumber
+     * @param phonenumber the phonenumber
+     * @return true if the number exists
+     */
+    public boolean checkPhoneNumber (String phonenumber) {return ud.checkPhonenumber(phonenumber);}
+
+    /**
+     * Checks a email
+     * @param email the email
+     * @return true if the number exists
+     */
+    public boolean checkEmail(String email) { return ud.checkEmail(email);}
 
     /**
      *  Gets the password of the user
@@ -467,4 +494,5 @@ public class UserService {
         }
         return patient.getUserID();
     }
+
 }

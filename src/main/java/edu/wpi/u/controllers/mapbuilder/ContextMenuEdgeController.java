@@ -33,32 +33,22 @@ public class ContextMenuEdgeController {
             permissionErrorLabel.setVisible(false);
         });
 
-        // Client side error handling for combo box
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("Input Required");
-        edgeComboBox.getValidators().add(validator);
-        edgeComboBox.focusedProperty().addListener((o, oldVal, newVal)-> {
-            if(!newVal){
-                edgeComboBox.validate();
-            }
-        });
-
         ObservableList<String> list = FXCollections.observableArrayList();
         list.add("Admin only");
         list.add("All Employees");
         list.add("Everyone");
         if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
             deleteButton.setText("Cancel");
-        }else {
+            edgeComboBox.setValue("Everyone");
+        } else {
             Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-            if(thisEdge.getUserPermissions().get(0).equals(Role.DEFAULT)){
+            if(thisEdge.getUserPermissions().equals(Role.DEFAULT)){
                 edgeComboBox.setValue("Everyone");
-            } else if(thisEdge.getUserPermissions().get(0).equals(Role.DOCTOR)){
+            } else if(thisEdge.getUserPermissions().equals(Role.DOCTOR)){
                 edgeComboBox.setValue("All Employees");
             }else{
                 edgeComboBox.setValue("Admin only");
             }
-
         }
 
         edgeComboBox.setItems(list);
@@ -71,19 +61,14 @@ public class ContextMenuEdgeController {
     public void handleSaveButton() throws InvalidEdgeException {
 
         if(!edgeComboBox.getSelectionModel().isEmpty()){
-            ArrayList<Role> userTypes = new ArrayList<>();
-            userTypes.add(getEdgePermissionType());
             if(App.mapInteractionModel.getCurrentAction().equals("NONE")) {
                 Edge thisEdge = App.mapService.getEdgeFromID(App.mapInteractionModel.getEdgeID());
-                ArrayList<Role> perms = new ArrayList<>();
-                perms.add(getEdgePermissionType());
-                App.undoRedoService.updateEdge(thisEdge.getEdgeID(), perms);
+                App.undoRedoService.updateEdge(thisEdge.getEdgeID(), getEdgePermissionType());
             } else if(App.mapInteractionModel.getCurrentAction().equals("ADDEDGE")){
-                App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),userTypes);
+                App.undoRedoService.addEdge(App.mapInteractionModel.getPreviousNodeID(), App.mapInteractionModel.getNodeID(),getEdgePermissionType());
                 App.mapInteractionModel.setEdgeID("");
                 App.mapInteractionModel.clearPreviousNodeID();
             }
-            userTypes.clear();
             App.mapInteractionModel.editFlag.set(String.valueOf(Math.random()));
             ((Pane) App.mapInteractionModel.selectedContextBox.getParent()).getChildren().remove(App.mapInteractionModel.selectedContextBox);
         }else {

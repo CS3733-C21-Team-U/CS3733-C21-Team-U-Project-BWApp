@@ -294,13 +294,16 @@ public class FloatingPathfindingPaneController {
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
-            endNodeField.requestFocus();
-            targetNode.set("END");
-            if(namesAndIDs.get(newValue) != null){
-                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
-            }else{
-                System.out.println("No valid node ID for this end input");
+            System.out.println("Current Selected Tab " + App.tabPaneRoot.getSelectionModel().getSelectedIndex());
+            if(App.tabPaneRoot.getSelectionModel().getSelectedIndex() == 0){
+                System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
+                endNodeField.requestFocus();
+                targetNode.set("END");
+                if(namesAndIDs.get(newValue) != null){
+                    App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+                }else{
+                    System.out.println("No valid node ID for this end input");
+                }
             }
         });
 
@@ -314,21 +317,29 @@ public class FloatingPathfindingPaneController {
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
-            targetNode.set("START");
-            startNodeField.requestFocus();
-            if(namesAndIDs.get(newValue) != null){
-                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
-                if(endNodeField.getText().equals("")){
-                    endNodeField.requestFocus();
+            if(App.tabPaneRoot.getSelectionModel().getSelectedIndex() == 0) {
+                System.out.println("Trag: START - StartNodeField input " + newValue + " which has nodeID " + namesAndIDs.get(newValue));
+                targetNode.set("START");
+                startNodeField.requestFocus();
+                if (namesAndIDs.get(newValue) != null) {
+                    App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+                    if (endNodeField.getText().equals("")) {
+                        endNodeField.requestFocus();
+                    }
+                } else {
+                    System.out.println("No valid node ID for this start input");
                 }
-            }else{
-                System.out.println("No valid node ID for this start input");
             }
         });
 
         namesAndIDs = App.mapService.getLongNames();
         Set<String> strings = namesAndIDs.keySet();
+
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , strings);
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , strings);
+
+
+//        String test = namesAndIDs.get(startNodeField.getText());
 
         ArrayList<String> nodeNames = new ArrayList<>();
 
