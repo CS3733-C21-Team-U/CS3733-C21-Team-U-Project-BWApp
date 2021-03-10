@@ -512,6 +512,5 @@ public class MobilePathFindingBaseController {
 
     public void handleNext(ActionEvent actionEvent) {
         App.mobileFloatingPathfindingPaneController.setDestination();
-        //DB call to save parking space
     }
 }

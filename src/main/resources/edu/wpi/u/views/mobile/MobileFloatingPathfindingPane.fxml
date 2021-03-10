@@ -4,20 +4,19 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="120.0" prefWidth="378.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
-   <effect>
-      <DropShadow />
-   </effect>
+<AnchorPane fx:id="mainAnchor" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
    <children>
-      <VBox alignment="TOP_CENTER" layoutY="1.0" maxHeight="325.0" prefHeight="178.0" prefWidth="378.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="450.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -45,9 +44,6 @@
                               <JFXTextField fx:id="endNodeField" promptText="Choose destination..." HBox.hgrow="ALWAYS" />
                               <Rectangle fx:id="endFieldFlair" fill="DODGERBLUE" height="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: -primary;" visible="false" width="3.0" HBox.hgrow="NEVER" />
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="-20.0" />
-                           </VBox.margin>
                         </HBox>
                      </children>
                      <HBox.margin>
@@ -71,17 +67,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <VBox fx:id="textDirectionContainer" alignment="CENTER" prefWidth="100.0" styleClass="headline-3">
-               <children>
-                  <Label text="Text Directions" />
-               </children>
-            </VBox>
-            <JFXButton minHeight="30.0" onAction="#handleTestAddTextField" styleClass="button-text" text="Test Add Text Step" />
          </children>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@../css/BaseStyle.css" />
-      <URL value="@../css/LightTheme.css" />
-   </stylesheets>
 </AnchorPane>
