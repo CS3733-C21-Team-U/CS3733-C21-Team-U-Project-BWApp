@@ -1,13 +1,19 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import javax.swing.event.ChangeListener;
@@ -20,8 +26,11 @@ import java.util.Date;
 
 public class ViewRequestListController {
 
-
+    public AnchorPane noItemsGraphic;
     public VBox sampleRequestItem;
+    public JFXComboBox<String> typeOption;
+    public JFXComboBox<String> assignOption;
+    public JFXComboBox<String> resolveOption;
     @FXML public VBox newRequestVBox;
     ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
 
@@ -30,8 +39,34 @@ public class ViewRequestListController {
      * @throws IOException
      */
     public void initialize() throws IOException {
+
+        sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
+            @Override
+            public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
+                if(c.getList().size() == 1){//New list after filtering is emppty
+                    System.out.println("Request list is empty");
+                    noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    noItemsGraphic.setVisible(true);
+                }else{
+                    noItemsGraphic.setPrefHeight(0);
+                    noItemsGraphic.setVisible(false);
+                }
+            }
+
+        });
+
         System.out.println("In Init for View Request");
         App.newReqVBox = newRequestVBox;
+
+        ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
+
+        typeOption.getItems().addAll(
+                "All", "Maintenance", "Laundry", "Security", "Sanitation", "Computer", "Medical",
+                "AudioVisual", "Religious", "Language", "Gift", "Floral");
+        assignOption.getItems().addAll(
+                "All", "Assigned to You", "Unassigned");
+        resolveOption.getItems().addAll(
+                "All", "Active", "Resolved");
 
         App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
             newRequestVBox = App.newReqVBox;
@@ -74,7 +109,7 @@ public class ViewRequestListController {
         End Remove*/
 
         for (SpecificRequest request: listOfRequests) {
-            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, "false"));
+            sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, sampleRequestItem));
         }
         /*
         for (int i = 0; i < listOfRequests.size(); i++) {
@@ -172,4 +207,18 @@ case "Computer":
         newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
         App.VBoxChanged.set(!App.VBoxChanged.get());
     }
+
+    /**
+     * ComboBox functions below
+     */
+    public void onTypeFilter(){
+        App.requestService.requestType.set(typeOption.getSelectionModel().getSelectedItem());
+    }
+    public void onResolveFilter(){
+        App.requestService.resolveStatus.set(resolveOption.getSelectionModel().getSelectedItem());
+    }
+    public void onAssignFilter(){
+        App.requestService.assignedStatus.set(assignOption.getSelectionModel().getSelectedItem());
+    }
+
 }

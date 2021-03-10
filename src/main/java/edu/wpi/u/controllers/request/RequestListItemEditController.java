@@ -39,7 +39,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXTextArea editDescriptionField;
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
-
     public JFXTextField editAssigneesField;
 
     @FXML
