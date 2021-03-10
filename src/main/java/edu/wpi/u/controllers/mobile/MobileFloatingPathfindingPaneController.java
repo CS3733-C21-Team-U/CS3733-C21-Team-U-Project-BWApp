@@ -236,7 +236,8 @@ public class MobileFloatingPathfindingPaneController {
 
     public void setDestination(){
       //  destination = call upon a DB function depending on COVID survey result.
-        endNodeField.setText(destination);
+        destination = parkingSpace;
+        startNodeField.setText(destination);
     }
 }
 

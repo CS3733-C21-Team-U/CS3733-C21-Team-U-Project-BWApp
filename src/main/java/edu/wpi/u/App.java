@@ -1,6 +1,8 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
+import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
+import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -50,6 +52,7 @@ public class App extends Application {
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
+  public static MobileFloatingPathfindingPaneController mobileFloatingPathfindingPaneController = new MobileFloatingPathfindingPaneController();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();

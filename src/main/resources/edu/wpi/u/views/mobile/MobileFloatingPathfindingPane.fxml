@@ -12,12 +12,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefWidth="450.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
+<AnchorPane prefHeight="120.0" prefWidth="378.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
    <effect>
       <DropShadow />
    </effect>
    <children>
-      <VBox alignment="TOP_CENTER" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutY="1.0" maxHeight="325.0" prefHeight="178.0" prefWidth="378.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -45,6 +45,9 @@
                               <JFXTextField fx:id="endNodeField" promptText="Choose destination..." HBox.hgrow="ALWAYS" />
                               <Rectangle fx:id="endFieldFlair" fill="DODGERBLUE" height="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: -primary;" visible="false" width="3.0" HBox.hgrow="NEVER" />
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="-20.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                      <HBox.margin>

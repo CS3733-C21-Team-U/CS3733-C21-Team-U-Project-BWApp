@@ -509,4 +509,9 @@ public class MobilePathFindingBaseController {
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+
+    public void handleNext(ActionEvent actionEvent) {
+        App.mobileFloatingPathfindingPaneController.setDestination();
+        //DB call to save parking space
+    }
 }

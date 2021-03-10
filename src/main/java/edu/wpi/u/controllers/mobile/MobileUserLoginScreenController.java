@@ -121,7 +121,7 @@ public class MobileUserLoginScreenController {
         String username = userNameTextField.getText();
         String password = passWordField.getText();
         System.out.println("Username : " + username + " Password: " + password);
-        App.userService.setUser(username, password, App.userService.checkPassword(password));
+        App.userService.setUser(username, password, App.userService.checkPassword(password, username));
         //System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
         System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
@@ -129,7 +129,7 @@ public class MobileUserLoginScreenController {
         // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
-                if (!App.userService.checkPassword(password).equals("")) {
+                if (!App.userService.checkPassword(password, username).equals("")) {
                     // TODO : Send code
 
                     try {
@@ -251,7 +251,7 @@ public class MobileUserLoginScreenController {
 
     public void handleLonginWithNo2FA(ActionEvent actionEvent) {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
-            if (!App.userService.checkPassword(passWordField.getText()).equals("")) {
+            if (!App.userService.checkPassword(userNameTextField.getText(), passWordField.getText()).equals("")) {
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MobileCovidSurvey.fxml"));
