@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -41,49 +39,16 @@
                   <Insets bottom="50.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
+            <HBox alignment="TOP_CENTER" prefHeight="714.0" prefWidth="1582.0">
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
                         </TextArea>
                      </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="200.0" fitWidth="249.0">
-                           <image>
-                              <Image url="@../Images/desktoploginhelp.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="50.0" left="200.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="402.0" fitWidth="318.0">
-                           <image>
-                              <Image url="@../Images/loginloginhelp.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="200.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 4,5,6" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
                   </VBox>
                </children>
                <padding>
