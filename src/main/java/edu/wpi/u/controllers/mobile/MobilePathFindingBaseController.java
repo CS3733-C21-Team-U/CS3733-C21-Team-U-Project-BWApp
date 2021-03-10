@@ -204,7 +204,7 @@ public class MobilePathFindingBaseController {
         node1.setRadius(7.0);
 
         node1.setId(n.getNodeID());
-        node1.setStyle("-fx-fill: -error");
+        node1.setStyle("-fx-fill: #6200ee");
         node1.setVisible(true);
         node1.setOnMousePressed(event -> {
             try {
@@ -265,8 +265,8 @@ public class MobilePathFindingBaseController {
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
-    String outlineColor = "ffbfbfff";
-    String fillColor = "e86060ff";
+    String outlineColor = "b187ed";
+    String fillColor = "fffff5";
     public void placeEdgesHelper(Edge ed, boolean forward){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
@@ -333,7 +333,7 @@ public class MobilePathFindingBaseController {
         previewEdge.setEndY(ydiff);
         previewEdge.setId(ed.getEdgeID() + "_preview");
         previewEdge.setStrokeWidth(7);
-        previewEdge.setStroke(Paint.valueOf("green"));
+        previewEdge.setStroke(Paint.valueOf("644491"));
         previewEdge.setVisible(true);
         pathPreviewGroup.getChildren().add(previewEdge);
     }
