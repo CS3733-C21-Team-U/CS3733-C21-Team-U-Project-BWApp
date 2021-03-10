@@ -201,11 +201,13 @@ public class MobileUserLoginScreenController {
                 System.out.println( r.getType());
                 System.out.println(r.getGenericRequest().isResolved());
                 if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType() == "CovidSurvey" && r.getGenericRequest().isResolved()){
+                        r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
+                    if(r.getSpecificData().get(0).equals("High")){
+                        App.mapInteractionModel.highRisk = true;
+                    }
                     return true;
                 }
             }
-
         }
         return false;
     }

@@ -27,7 +27,7 @@ public class UserData extends Data{
         //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
 
         //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "9148394600", false));
-        addEmployee(new Employee("debugID", "debugNAME", "bob", "12345", "debug@g.com", Role.ADMIN, "debug", false));
+        //addEmployee(new Employee("debugID", "debugNAME", "bob", "12345", "debug@g.com", Role.ADMIN, "debug", false));
         //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
         /*
         String guestID,
@@ -559,7 +559,7 @@ public class UserData extends Data{
             ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                String patientID = rs.getString("userID");
+                String patientID = rs.getString("patientID");
                 String name = rs.getString("name");
                 Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role
                 String phonenumber = rs.getString("phonenumber");

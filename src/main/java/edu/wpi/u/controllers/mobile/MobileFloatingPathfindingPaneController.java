@@ -287,6 +287,15 @@ public class MobileFloatingPathfindingPaneController {
     }
 
     public void initialize(){
+        targetNode.set("END");
+        App.mapInteractionModel.setNodeID("UEXIT0020G");
+        if(App.mapInteractionModel.highRisk){
+
+        }
+        else{
+            targetNode.set("END");
+            App.mapInteractionModel.setNodeID("UEXIT0010G");
+        }
 
         App.mobileUpdateDestinationField.addListener((o,oldVal,newVal) ->{
             endNodeField.setText(parkingSpace);
