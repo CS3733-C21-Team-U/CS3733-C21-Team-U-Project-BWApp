@@ -45,7 +45,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1. On the Side Bar, click User Manager&#10;&#10;2. Clicking the add user button on the user manager screen will bring up a form that can be completed to add a user (maybe description of each field here)&#10;&#10;3.After you added, you should be able to see it at the same User Manager page&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1. On the Side Bar, click User Manager&#10;&#10;2. Clicking the add user button on the user manager screen will bring up a form that can be completed to add a user (maybe description of each field here)&#10;&#10;3.After you added, you should be able to see it at the same User Manager page&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;&#10;" wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
@@ -62,7 +62,7 @@
                               <Insets bottom="50.0" />
                            </VBox.margin>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -72,7 +72,7 @@
                               <Image url="@../Images/Adduserhelp.png" />
                            </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2" translateX="325.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure2" translateX="325.0">
                            <font>
                               <Font size="17.0" />
                            </font>

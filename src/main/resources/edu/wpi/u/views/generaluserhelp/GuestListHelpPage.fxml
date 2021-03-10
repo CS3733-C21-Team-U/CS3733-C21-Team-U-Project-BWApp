@@ -46,7 +46,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1. If you have forgotten your password or would like to change it, on the log in screen you may click ‘forgot password’ and a screen will prompt you to enter a new one&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1. For administrators, this shows a list of any guests that have been registered in the system by accessing the application and hospital.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
@@ -55,12 +55,12 @@
                   </VBox>
                   <VBox prefHeight="684.0" prefWidth="929.0">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="249.0">
+                        <ImageView fitHeight="233.0" fitWidth="175.0" translateX="270.0">
                            <image>
-                              <Image url="@../Images/desktoploginhelp.png" />
+                              <Image url="@../Images/guestlist.png" />
                            </image>
                            <VBox.margin>
-                              <Insets bottom="50.0" left="200.0" />
+                              <Insets bottom="50.0" />
                            </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
@@ -68,13 +68,10 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="402.0" fitWidth="318.0">
+                        <ImageView fitHeight="416.0" fitWidth="729.0">
                            <image>
-                              <Image url="@../Images/loginloginhelp.png" />
+                              <Image url="@../Images/guestlistfull.png" />
                            </image>
-                           <VBox.margin>
-                              <Insets left="200.0" />
-                           </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 4,5,6" translateX="325.0">
                            <font>
