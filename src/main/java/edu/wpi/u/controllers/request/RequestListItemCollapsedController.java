@@ -39,7 +39,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
-//    @FXML public SVGPath requestIcon;
+    @FXML public SVGPath requestIcon;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
@@ -51,7 +51,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        requestIcon.setContent(parent.getIcon(parent.request.getType()));
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
         requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
         requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
