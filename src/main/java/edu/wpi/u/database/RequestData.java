@@ -239,7 +239,7 @@ public class RequestData extends Data{
      */
     public ArrayList<SpecificRequest> loadActiveRequests(){ // TODO: refactor for IRequest
         ArrayList<SpecificRequest> results = new ArrayList<>();
-        String requestQuery = "select * from Requests where resolved=false";
+        String requestQuery = "select * from Requests";
         try{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();
