@@ -36,9 +36,12 @@ public class ViewUserListController {
     @FXML private JFXTreeTableView<User> treeTableView = new JFXTreeTableView<>();
 
     public void initialize() throws IOException {
-        if(!App.userService.getActiveUser().getType().equals(Role.ADMIN)) {
-            addUserButton.setStyle("-fx-opacity: 0");
-        }
+
+            if(!App.userService.getActiveUser().getType().equals(Role.ADMIN)) {
+                addUserButton.setStyle("-fx-opacity: 0");
+            }
+
+
         /*
         Patient - > show your doctor & relevant people to service requests you have submitted
         Admin - > show everyone

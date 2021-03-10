@@ -26,6 +26,10 @@ public class RequestFactory {
                 return new LanguageRequest();
             case "Gift":
                 return new GiftRequest();
+            case "Food":
+                return new FoodRequest();
+            case "CovidSurvey":
+                return new CovidSurveyRequest();
             default:
                 System.out.println("Type does not exist!");
 

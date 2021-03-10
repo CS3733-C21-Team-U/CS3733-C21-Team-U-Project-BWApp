@@ -88,6 +88,7 @@ public class App extends Application {
 
   public static String test = "hello there";
   public static Parent base;
+  public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
 
   public App(){
     System.out.println("App constructor");

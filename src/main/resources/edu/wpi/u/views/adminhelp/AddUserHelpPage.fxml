@@ -1,19 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.adminhelp.AddUserHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_RIGHT" layoutX="40.0" layoutY="40.0" prefHeight="68.0" prefWidth="1415.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-               <graphic>
-                  <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-               </graphic>
-            </JFXButton>
+            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+               <children>
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                     <graphic>
+                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2zM19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2zM19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2zM19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" scaleX="2.0" scaleY="2.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </SVGPath>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How to Use Add User " wrappingWidth="393.15234375">
+               <font>
+                  <Font name="Serif Bold" size="41.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="714.0" prefWidth="1582.0">
+               <children>
+                  <VBox prefHeight="711.0" prefWidth="657.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1. If you have forgotten your password or would like to change it, on the log in screen you may click ‘forgot password’ and a screen will prompt you to enter a new one&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                           <font>
+                              <Font name="HoloLens MDL2 Assets" size="25.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="684.0" prefWidth="929.0">
+                     <children>
+                        <ImageView fitHeight="200.0" fitWidth="249.0">
+                           <image>
+                              <Image url="@../Images/desktoploginhelp.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="50.0" left="200.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="402.0" fitWidth="318.0">
+                           <image>
+                              <Image url="@../Images/loginloginhelp.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="200.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 4,5,6" translateX="325.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
    </children>

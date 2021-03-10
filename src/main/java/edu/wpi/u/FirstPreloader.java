@@ -29,14 +29,14 @@ public class FirstPreloader extends Preloader {
          */
 
         //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/NewMainPage.fxml"));
-        App.userService.setEmployee("debug");
-        System.out.println(App.userService.getActiveUser().getName());
-        App.userService.getActiveUser().setType(Role.ADMIN);
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.setLocation(fxml);
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.base = fxmlLoader.getRoot();
+//        App.userService.setEmployee("debug");
+//        System.out.println(App.userService.getActiveUser().getName());
+        //App.userService.getActiveUser().setType(Role.ADMIN);
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+////        fxmlLoader.setLocation(fxml);
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.base = fxmlLoader.getRoot();
         this.stage = stage;
         stage.setScene(createPreloaderScene());
         stage.show();
