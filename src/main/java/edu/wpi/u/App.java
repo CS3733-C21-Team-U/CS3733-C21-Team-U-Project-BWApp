@@ -13,6 +13,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.WritableFloatValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -47,12 +48,12 @@ public class App extends Application {
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   public static boolean isEdtingGuest;
+  public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
-  public static MobileFloatingPathfindingPaneController mobileFloatingPathfindingPaneController = new MobileFloatingPathfindingPaneController();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
@@ -68,6 +69,8 @@ public class App extends Application {
   public static SVGPath themeSVG;
 
   public static String newNodeType;
+
+  public static SimpleBooleanProperty mobileUpdateDestinationField = new SimpleBooleanProperty(false);
 
 
   public static String lastSelectedNode;

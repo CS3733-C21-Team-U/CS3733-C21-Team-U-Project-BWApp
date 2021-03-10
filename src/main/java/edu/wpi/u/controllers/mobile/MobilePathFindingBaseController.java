@@ -511,6 +511,10 @@ public class MobilePathFindingBaseController {
     }
 
     public void handleNext(ActionEvent actionEvent) {
-        App.mobileFloatingPathfindingPaneController.setDestination();
+        App.mobileUpdateDestinationField.setValue(!App.mobileUpdateDestinationField.getValue());
+    }
+
+    public void handleSaveParking(ActionEvent actionEvent) {
+        App.mobileUpdateParkingSpot.setValue(!App.mobileUpdateParkingSpot.getValue());
     }
 }

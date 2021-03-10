@@ -15,7 +15,7 @@
             <WebView fx:id="googleMapsEmbedded" maxHeight="712.0" maxWidth="412.0" prefHeight="712.0" prefWidth="412.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="returnButton" onAction="#handleReturn" prefHeight="50.0" prefWidth="172.0" styleClass="bigButton" text="Return to Login" />
+                  <JFXButton fx:id="returnButton" onAction="#handleReturn" prefHeight="50.0" prefWidth="172.0" styleClass="bigButtonOutline" text="Log out" />
                   <JFXButton fx:id="nextButton1" onAction="#handleNext1" prefHeight="52.0" prefWidth="172.0" styleClass="bigButton" text="Next">
                      <HBox.margin>
                         <Insets left="68.0" />

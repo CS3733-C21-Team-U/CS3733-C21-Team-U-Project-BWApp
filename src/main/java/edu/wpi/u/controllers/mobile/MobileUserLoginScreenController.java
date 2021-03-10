@@ -55,7 +55,7 @@ public class MobileUserLoginScreenController {
 
         App.getPrimaryStage().setFullScreen(false);
         App.getPrimaryStage().setWidth(412);
-        App.getPrimaryStage().setHeight(712);
+        App.getPrimaryStage().setHeight(732);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -110,91 +110,6 @@ public class MobileUserLoginScreenController {
     }
 
 
-    public void handleLogin() throws IOException {
-        System.out.println("HERE");
-        progressBar.setStyle("-fx-opacity: 1");
-        // TODO : Ability to skip the 2fa
-//        Scene scene = new Scene(root);
-//        App.getPrimaryStage().setScene(scene);
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-        String username = userNameTextField.getText();
-        String password = passWordField.getText();
-        System.out.println("Username : " + username + " Password: " + password);
-        App.userService.setUser(username, password, App.userService.checkPassword(password, username));
-        //System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
-        System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
-        String phonenumber = App.userService.getActiveUser().getPhoneNumber();
-
-        // TODO : Extract out to helper
-        try {
-            if (!App.userService.checkUsername(username).equals("")) {
-                if (!App.userService.checkPassword(password, username).equals("")) {
-                    // TODO : Send code
-
-                    try {
-                        Pattern pattern = Pattern.compile("^\\d{10}$");
-                        Matcher matcher = pattern.matcher(phonenumber);
-                        if (!matcher.matches()){
-                            errorLabel.setText("Phonenumber associated with account is invalid");
-                            throw new PhoneNumberNotFoundException("Phone number is not valid");
-                        }
-                        URI uri = new URI("https://bw-webapp.herokuapp.com/" +"login?phonenumber=" + "+1"+ phonenumber + "&channel=sms");
-                        URL url = uri.toURL(); // make GET request
-                        AsyncHttpClient client = Dsl.asyncHttpClient();
-                        Future<Integer> whenStatusCode = client.prepareGet(url.toString())
-                                .execute(new AsyncHandler<Integer>() {
-                                    private Integer status;
-                                    @Override
-                                    public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
-                                        status = responseStatus.getStatusCode();
-                                        System.out.println("At status code");
-                                        return State.CONTINUE;
-                                    }
-                                    @Override
-                                    public State onHeadersReceived(HttpHeaders headers) throws Exception {
-                                        System.out.println("At headers code");
-                                        return State.CONTINUE;
-                                    }
-                                    @Override
-                                    public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
-                                        byte[] b = bodyPart.getBodyPartBytes();
-                                        String y = new String(b);
-                                        System.out.println(y.contains("pending"));
-                                        if (y.contains("pending")){
-                                            progressBar.setStyle("-fx-opacity: 0");
-                                            submitButton.setStyle("-fx-opacity: 1");
-                                            // TODO : Set alignment
-                                        }
-                                        return State.CONTINUE;
-                                    }
-
-                                    @Override
-                                    public Integer onCompleted() throws Exception {
-                                        return status;
-                                    }
-                                    @Override
-                                    public void onThrowable(Throwable t) {
-                                        t.printStackTrace();
-                                    }
-                                });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    throw new PasswordNotFoundException();
-                }
-            } else {
-                throw new AccountNameNotFoundException();
-            }
-        } catch (AccountNameNotFoundException | PasswordNotFoundException e) {
-            progressBar.setStyle("-fx-opacity: 0");
-            errorLabel.setText("Username or Password is Invalid");
-            e.printStackTrace();
-        }
-    }
-
-
 
 //    //Throws exceptions if username or password not found
 //    public void handleForgotPassword() throws IOException {
@@ -218,7 +133,7 @@ public class MobileUserLoginScreenController {
 //        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
        // }
         App.userService.setUser("admin", "admin", "Employees");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
@@ -249,22 +164,16 @@ public class MobileUserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleLonginWithNo2FA(ActionEvent actionEvent) throws IOException {
+    public void handleLonginWithNo2FA(ActionEvent actionEvent) {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
-            if (!App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
                 Parent root = null;
-                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkUsername(userNameTextField.getText()));
-//              //  try {
-//                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MobileCovidSurvey.fxml"));
-//                    App.getPrimaryStage().getScene().setRoot(root);
-//               // } catch (IOException e) {
-//                //    e.printStackTrace();
-//               // }
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
-                fxmlLoader.load();
-                fxmlLoader.getController();
-                App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                App.getPrimaryStage().getScene().setRoot(root);
             }
         }
     }
