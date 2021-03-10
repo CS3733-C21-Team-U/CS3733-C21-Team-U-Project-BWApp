@@ -186,7 +186,7 @@ public class AboutController {
      */
     public void showOlaJackson() {
         showIMG("/edu/wpi/u/views/Images/OlajumokeJackson.jpg");
-        aboutDescriptionLabel.setText("My name is Olajumoke JAckson and I'm a" +
+        aboutDescriptionLabel.setText("My name is Olajumoke Jackson and I'm a" +
                 " Full-Time Database Engineer for Team U. I'm a Data Science major from" +
                 " Providence, RI. My favorite books are After Dark by Haruki Murakami," +
                 " Atlas Shrugged by Ayn Rand, and Snow Flower and the Secret Fan by Lisa See.");
