@@ -287,15 +287,6 @@ public class MobileFloatingPathfindingPaneController {
     }
 
     public void initialize(){
-        targetNode.set("END");
-        App.mapInteractionModel.setNodeID("UEXIT0020G");
-        if(App.mapInteractionModel.highRisk){
-
-        }
-        else{
-            targetNode.set("END");
-            App.mapInteractionModel.setNodeID("UEXIT0010G");
-        }
 
         App.mobileUpdateDestinationField.addListener((o,oldVal,newVal) ->{
             endNodeField.setText(parkingSpace);
@@ -381,8 +372,10 @@ public class MobileFloatingPathfindingPaneController {
                 startNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 startNodeID = newValue;
             } else if(targetNode.get().equals("END")){
-                endNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
                 endNodeID = newValue;
+                Node testNode = App.mapService.getNodeFromID(newValue);
+                String longName = testNode.getLongName();
+                endNodeField.setText(longName);
 //                endNodeField.requestFocus();
             }
 
@@ -421,6 +414,15 @@ public class MobileFloatingPathfindingPaneController {
         });
 
         startNodeField.requestFocus();
+
+        if(App.mapInteractionModel.highRisk){
+            targetNode.set("END");
+            App.mapInteractionModel.setNodeID("UEXIT0020G");
+        }
+        else{
+            targetNode.set("END");
+            App.mapInteractionModel.setNodeID("UEXIT0010G");
+        }
     }
 
     public void handleStartEndSwap(ActionEvent actionEvent) {
