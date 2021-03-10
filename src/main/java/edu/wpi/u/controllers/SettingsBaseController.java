@@ -187,9 +187,9 @@ public class SettingsBaseController {
         App.pathfindingAlgorithm = "DFS";
     }
 
-    public void handleBreadthFirst(ActionEvent actionEvent) {
-        App.pathfindingAlgorithm = "BFS";
-    }
+    public void handleBreadthFirst(ActionEvent actionEvent) { App.pathfindingAlgorithm = "BFS"; }
+
+    public void handleDijkstra(ActionEvent actionEvent) { App.pathfindingAlgorithm = "DIJKSTRA"; }
 
 
     public void handleSaveCSV(ActionEvent actionEvent) {

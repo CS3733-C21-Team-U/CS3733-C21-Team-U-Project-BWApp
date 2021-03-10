@@ -172,13 +172,6 @@ public class MapManager {
    * @return the path as an Linked List of nodes
    * @throws PathNotFoundException if there is no path between the two nodes or if any other error occurs
    */
-  /**
-   * runs A* and returns a linked list path of the result
-   * @param _startNodeID
-   * @param _goalNodeID
-   * @return
-   * @throws PathNotFoundException
-   */
   public LinkedList<Node> runAStar(String _startNodeID, String _goalNodeID) throws PathNotFoundException {
     Node _startNode = this.allNodes.get(_startNodeID);
     Node _goalNode = this.allNodes.get(_goalNodeID);
@@ -249,6 +242,82 @@ public class MapManager {
     return returnMe;
   }
 
+  /**
+   * Runs a Dijkstra search to find a path between the two nodes specified, always taking cheapest node possible
+   * @param _startNodeID String of node Id for the start node already confirmed valid
+   * @param _goalNodeID String of node Id for the end node already confirmed valid
+   * @return the path as an Linked List of nodes
+   * @throws PathNotFoundException if there is no path between the two nodes or if any other error occurs
+   */
+  public LinkedList<Node> runDijkstra(String _startNodeID, String _goalNodeID) throws PathNotFoundException {
+    Node _startNode = this.allNodes.get(_startNodeID);
+    Node _goalNode = this.allNodes.get(_goalNodeID);
+    if(_startNode == _goalNode){
+      PathNotFoundException invalidNodes = new PathNotFoundException();
+      invalidNodes.description = "Please select two different Nodes!";
+      throw invalidNodes;
+    }
+
+    Set<Node> reachableNodes = new HashSet<>(); // record the reachable but unvisited nodes
+    reachableNodes.add(_startNode); // add the start node to the seen nodes
+    HashMap<Node, Node> cameFrom =
+            new HashMap<>(); // record what node leads to which for shortest path
+    HashMap<Node, Double> cost =
+            new HashMap<>(); // record the cost to get to each node from the start node
+    HashMap<Node, Double> priority =
+            new HashMap<>(); // priority the cost + euclidean distance to the goal
+
+    // setup the start node in the data
+    cost.put(_startNode, 0.0);
+    priority.put(_startNode, 0.0);
+    cameFrom.put(_startNode, _startNode);
+
+    // create the variable used in A*
+    Node current = _startNode;
+
+    // while there is reachable nodes loop
+    while (!reachableNodes.isEmpty()) {
+      // get the next node
+      current = getNextNode(reachableNodes, priority);
+
+      if (current == _goalNode) {
+        // found the end
+        break;
+      }
+      // iterate through the linked list of adjacent nodes
+      for (Node adjNode : current.getAdjNodes()) {
+        // calculate the cost to get to get from the start to the adjacent node
+        double nextNodeCost = cost.get(current);
+        // if the adjacent node has not been seen yet add it
+        if (!cost.containsKey(adjNode)) {
+          cost.put(adjNode, nextNodeCost);
+          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
+          reachableNodes.add(adjNode);
+          cameFrom.put(adjNode, current);
+        }
+        // if the cost to get to the adjacent node is less update its cost and add it back to the
+        // reachable nodes
+        else if (cost.get(adjNode) > nextNodeCost) { // this has to be in the else if because cost.containsKey can return
+          // NULL
+          cost.put(adjNode, nextNodeCost);
+          priority.put(adjNode, nextNodeCost + distBetweenNodes(adjNode, _goalNode));
+          reachableNodes.add(adjNode);
+          cameFrom.put(adjNode, current);
+        }
+      }
+    } // end of while
+    LinkedList<Node> returnMe = new LinkedList<>();
+    // print out the path if there is one
+    if (cameFrom.containsKey(_goalNode)) { // if exited with a path
+      while (current != _startNode) {
+        returnMe.addFirst(current);
+        current = cameFrom.get(current);
+      }
+      returnMe.addFirst(_startNode);
+    }
+
+    return returnMe;
+  }
   /**
    * Runs a DEPTH FIRST search to find a path between the two nodes specified
    * @param _startNodeID String of node Id for the start node already confirmed valid
