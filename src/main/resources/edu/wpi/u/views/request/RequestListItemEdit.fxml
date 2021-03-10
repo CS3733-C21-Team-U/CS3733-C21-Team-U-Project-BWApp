@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+   <children>
+      <HBox prefHeight="590.0" prefWidth="1330.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="590.0" prefWidth="443.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="430.0" style="-fx-background-color: -primary;">
+                           <children>
+                              <SVGPath fx:id="typeIconSVG" content="M21.67,18.17l-5.3-5.3h-0.99l-2.54,2.54v0.99l5.3,5.3c0.39,0.39,1.02,0.39,1.41,0l2.12-2.12 C22.06,19.2,22.06,18.56,21.67,18.17z M18.84,19.59l-4.24-4.24l0.71-0.71l4.24,4.24L18.84,19.59zM17.34,10.19l1.41-1.41l2.12,2.12c1.17-1.17,1.17-3.07,0-4.24l-3.54-3.54l-1.41,1.41V1.71L15.22,1l-3.54,3.54l0.71,0.71 h2.83l-1.41,1.41l1.06,1.06l-2.89,2.89L7.85,6.48V5.06L4.83,2.04L2,4.87l3.03,3.03h1.41l4.13,4.13l-0.85,0.85H7.6l-5.3,5.3 c-0.39,0.39-0.39,1.02,0,1.41l2.12,2.12c0.39,0.39,1.02,0.39,1.41,0l5.3-5.3v-2.12l5.15-5.15L17.34,10.19z M9.36,15.34 l-4.24,4.24l-0.71-0.71l4.24-4.24l0,0L9.36,15.34L9.36,15.34z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </SVGPath>
+                              <Label fx:id="titleLabel" prefWidth="382.0" text="Edit Request" wrapText="true">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <styleClass>
+                                    <String fx:value="headline-2" />
+                                    <String fx:value="white-text" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="-20.0" right="-21.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
+                        <JFXTextField fx:id="editTitleField" labelFloat="true" promptText="Title" />
+                        <JFXTextArea fx:id="editDescriptionField" labelFloat="true" promptText="Description" />
+                        <JFXDatePicker fx:id="editDateNeededField" promptText="Date Needed" />
+                        <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
+                        <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
+                           <children>
+                              <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="517.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Separator>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="-72.0" prefHeight="550.0" prefWidth="430.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXTextField fx:id="editAssigneesField" labelFloat="true" promptText="Assignees">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </JFXTextField>
+                                    <JFXButton onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                    <JFXButton onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                 </children></VBox>
+                              <JFXListView fx:id="editAssigneesListView" styleClass="mylistview" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="100.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations" />
+                                    <JFXButton onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                    <JFXButton onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                              <JFXListView fx:id="editLocationsListView" />
+                           </children>
+                        </HBox>
+                     </children></VBox>
+               </children>
+            </AnchorPane>
+            <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="517.0" />
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                  <VBox fx:id="extraFieldsVBox" layoutY="534.0" prefHeight="590.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <HBox fx:id="pushDown21" alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="413.0">
+                           <children>
+                              <Region prefHeight="36.0" prefWidth="24.0" />
+                              <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCancelButton" styleClass="button-text" text="Cancel" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Separator layoutX="354.0" layoutY="575.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</fx:root>

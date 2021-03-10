@@ -1,4 +1,6 @@
 package edu.wpi.u.requests;
+import edu.wpi.u.App;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ public abstract class SpecificRequest {
             }
         }
 
-        Comment updateComment = new Comment("UPDATE", updateDescription, "CurrentUser", CommentType.UPDATE);
+        Comment updateComment = new Comment("UPDATE", updateDescription, App.userService.getActiveUser().getName(), CommentType.UPDATE);
         req.addComment(updateComment);
         setSpecificData(specifics);
     }
@@ -36,6 +38,7 @@ public abstract class SpecificRequest {
 
     public abstract String[] getSpecificFields();
     public abstract String getType();
+    public abstract String getRelevantRole();
 
     public ArrayList<String> getSpecificData() {
         return specificFields;
@@ -72,4 +75,5 @@ public abstract class SpecificRequest {
         }
         return setSpecificData(result);
     }
+
 }

@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
+import edu.wpi.u.users.Role;
 import io.netty.handler.codec.http.HttpHeaders;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import org.asynchttpclient.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Future;
 
 public class Enter2FATokenController {
@@ -22,9 +25,12 @@ public class Enter2FATokenController {
     @FXML public JFXProgressBar progressBar;
     @FXML public JFXButton enterAppButton;
 
+    SimpleBooleanProperty valid = new SimpleBooleanProperty(false);
+    public void initialize(){
 
-    public void handleTokenSubmit(ActionEvent actionEvent) {
-        progressBar.setStyle("-fx-opacity: 1");
+    }
+
+    public void handleTokenSubmit() {
         String token = tokenTextFIeld.getText();
         String phoneNumber = App.userService.getActiveUser().getPhoneNumber();
         try {
@@ -34,48 +40,16 @@ public class Enter2FATokenController {
             URL url2 = uri2.toURL(); // make GET request
             System.out.println("URL: " + url2.toString());
             AsyncHttpClient client = Dsl.asyncHttpClient();
-            Future<Integer> whenStatusCode = client.prepareGet(url2.toString())
-                    .execute(new AsyncHandler<Integer>() {
-                        private Integer status;
-                        @Override
-                        public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
-                            status = responseStatus.getStatusCode();
-                            System.out.println("At status code in verify");
-                            return State.CONTINUE;
-                        }
-                        @Override
-                        public State onHeadersReceived(HttpHeaders headers) throws Exception {
-                            System.out.println("At headers code in verify");
-                            return State.CONTINUE;
-                        }
-                        @Override
-                        public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
-                            byte[] b = bodyPart.getBodyPartBytes();
-                            String y = new String(b);
-                            //System.out.println(y);
-//                            System.out.println(y.contains("approved"));
-//                            System.out.println(y.contains("pending"));
-                            if (y.contains("approved")){
-                                enterAppButton.setStyle("-fx-opacity: 1");
-                            }
-                            else {
-                                //TODO : Display invalid entry
-                            }
-                            return State.CONTINUE;
-                        }
-                        @Override
-                        public Integer onCompleted() throws Exception {
-                            return status;
-                        }
-
-                        @Override
-                        public void onThrowable(Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
+            Future<Response> whenResponse = client.prepareGet(url2.toString()).execute();
+            Response response = whenResponse.get();
+            String resString = response.getResponseBody();
+            if(resString.contains("approved")){
+                handleAppEntry();
+            }
     } catch (Exception e) {
         e.printStackTrace();
     }
+
     }
 
     public void handleForgotPassword(ActionEvent actionEvent) {
@@ -86,7 +60,7 @@ public class Enter2FATokenController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleAppEntry(ActionEvent actionEvent) throws IOException {
+    public void handleAppEntry() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }

@@ -194,7 +194,13 @@ public class RequestData extends Data{
             ps.setString(1, requestID);
             ps.execute();
             for (String node : locations) {
-                addLocation(node,requestID);
+                try{
+                    addLocation(node,requestID);
+                }
+                catch (Exception e){
+                    System.out.println("Add Location Failed");
+                }
+
             }
             ps.close();
         }

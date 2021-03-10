@@ -8,11 +8,20 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
+import static edu.wpi.u.users.Role.ADMIN;
+
 public class PathFindingHelpController {
     public void handleBackToMainPageButton(ActionEvent actionEvent) throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        if(App.userService.getActiveUser().getType() ==  ADMIN){
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AdminMainHelpPage.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        }
+        else if(!(App.userService.getActiveUser().getType() ==  ADMIN)){
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
+            anchor.getChildren().clear();
+            anchor.getChildren().add(root);
+        }
     }
 }

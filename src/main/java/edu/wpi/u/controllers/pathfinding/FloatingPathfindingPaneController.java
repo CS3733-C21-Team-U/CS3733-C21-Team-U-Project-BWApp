@@ -5,9 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import edu.wpi.u.algorithms.Edge;
 import edu.wpi.u.algorithms.Node;
-import edu.wpi.u.algorithms.getEdgesTest;
 import edu.wpi.u.exceptions.PathNotFoundException;
 import edu.wpi.u.models.MapService;
 import edu.wpi.u.models.TextualDirections;
@@ -32,8 +30,9 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Set;
+
+
 
 public class FloatingPathfindingPaneController {
     public VBox textDirectionContainer;
@@ -55,137 +54,29 @@ public class FloatingPathfindingPaneController {
     HashMap<String, String> namesAndIDs;
 
 
-
-    public void handleTestAddTextField() {
-
-
-        textDirectionContainer.getChildren().clear();
-        LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
-
-        if(edgePath.isEmpty());
-        else {
-
-            Node bNode = null;
-            Node eNode = path.get(0);
-            Node lastTurnNode = null;
-
-            for(Edge e : edgePath) {
-                String iconID;
-                String angleDescription;
-                double angleDifferance;
-                int dist = (int) Math.round(e.getWeight()/3); //3 being pixels for foot, see TextualDirections.java
-                Node sNode = eNode;
-                if (sNode == e.getStartNode())  eNode = e.getEndNode();
-                else eNode = e.getStartNode(); //makes sure start and end nodes are actually what we want
-
-                //Finds angle for path
-                if(bNode == null) { //1st path exception
-                    angleDescription = "";
-                    iconID = "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z";
-                    angleDifferance = 0;
-                } else {
-                    double angle = TextualDirections.getAngle(sNode, eNode);
-                    double previousAngle = TextualDirections.getAngle(bNode, sNode);
-                    angleDifferance = angle - previousAngle;
-
-                    if (angleDifferance < 0) {
-                        angleDifferance = 180 + (180 - Math.abs(angleDifferance));
-                    }
-                    angleDescription = TextualDirections.textualAngleDescription(angleDifferance);
-                    iconID = TextualDirections.findTextualIconID(angleDifferance);
-                }
-
-                String turnText;
-
-                if(sNode.getNodeType().equals("ELEV") || eNode.getNodeType().equals("ELEV"))  {
-                    turnText = "Elevator";
-                    iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M10,18v-4h1 " +
-                            "v-2.5c0-1.1-0.9-2-2-2H8c-1.1,0-2,0.9-2,2V14h1v4H10z M8.5,8.5c0.69,0,1.25-0.56,1.25-1.25S9.19,6,8.5,6S7.25,6.56,7.25,7.25 S7.81,8.5,8.5,8.5z M18,11l-2.5-4L13,11H18z M13,13l2.5,4l2.5-4H13z";
-                }
-                else if(sNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("STAI"))  {
-                    turnText = "Stairs";
-                    iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M18,6h-4.42 v3.33H11v3.33H8.42V16H6v2h4.42v-3.33H13v-3.33h2.58V8H18V6z";
-                }
-
-                HBox stepHBoxContainer;
-
-                if(eNode.getNodeType().equals("STAI") || eNode.getNodeType().equals("ELEV")) {
-                    stepHBoxContainer = createDirectionBox("Step into staircase/ elevator", iconID);
-                    textDirectionContainer.getChildren().add(stepHBoxContainer);
-                }
-
-                else if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) {
-                    stepHBoxContainer = createDirectionBox("Step off staircase/ elevator at floor " + eNode.getFloor(), iconID);
-                    textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    lastTurnNode = eNode;
-                }
-
-                else if(sNode.getNodeType().equals("ELEV") && eNode.getNodeType().equals("ELEV")) { /*Elevator-To-Elevator connection*/}
-                else if(sNode.getNodeType().equals("STAI") && eNode.getNodeType().equals("STAI")) { /*Stair-To-Stair connection*/}
-
-                else if(angleDifferance > 22.5 && angleDifferance < 337.5) { //if turn is found on current node
-                    if(lastTurnNode != null) {
-                        stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, sNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
-                        textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    }
-                    stepHBoxContainer = createDirectionBox(angleDescription + " onto " + sNode.getLongName(), iconID);
-                    textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    lastTurnNode = sNode;
-                }
-
-
-                else if(bNode == null) {
-                    stepHBoxContainer = createDirectionBox("Begin by travelling " + dist + " feet from " + sNode.getLongName(), iconID);
-                    textDirectionContainer.getChildren().add(stepHBoxContainer);
-                }
-
-                else if((sNode.getNodeType().equals("HALL") && eNode.getNodeType().equals("HALL"))) {/*Hallway*/ }
-
-                else {
-                    stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
-                    textDirectionContainer.getChildren().add(stepHBoxContainer);
-                    //lastTurnNode = eNode;
-                }
-
-                bNode = sNode;
-            }
-        }
-    }
-
-    /**
-     * sets flag for what field is being filled to END
-     */
-
-    public HBox createDirectionBox(String text, String iconID) {
-        Label turnText = new Label(text);
+    public void handleTestAddTextField(ActionEvent actionEvent) {
+        Label turnText = new Label("Turn left at the corner of the MRI room");
         turnText.getStyleClass().add("subtitle");
-        turnText.setWrapText(true);
-        //Label distanceText = new Label(text);// TODO: add distance to walk after
-        //distanceText.getStyleClass().add("caption");
-
+        Label distanceText = new Label("Continue straight for 15 meters");
+        distanceText.getStyleClass().add("caption");
         SVGPath turnIcon = new SVGPath();
         turnIcon.setStyle("-fx-padding: 20px");
-        turnIcon.setContent(iconID);
+        turnIcon.setContent("M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z");
         VBox textVBox = new VBox();
         textVBox.getChildren().add(turnText);
-        //textVBox.getChildren().add(distanceText);
+        textVBox.getChildren().add(distanceText);
         HBox stepHBoxContainer = new HBox();
         stepHBoxContainer.setAlignment(Pos.CENTER_LEFT);
         stepHBoxContainer.getChildren().add(turnIcon);
         stepHBoxContainer.getChildren().add(textVBox);
         stepHBoxContainer.setStyle("-fx-padding: 10px 40px");
         stepHBoxContainer.setSpacing(40);
-        return stepHBoxContainer;
+        textDirectionContainer.getChildren().add(stepHBoxContainer);
     }
 
-    public int distAggregate(Node refNode, Node endNode) {
-        double[][] nodeLocation = {refNode.getCords(), endNode.getCords()};
-        double dx = Math.abs(nodeLocation[0][0] - nodeLocation[1][0]);
-        double dy = Math.abs(nodeLocation[0][1] - nodeLocation[1][1]);
-        // calculate the distance then
-        // return the distance (weight)
-        return (int) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))/3;
-    }
+    /**
+     * sets flag for what field is being filled to END
+     */
 
 
     public void endNodeButtonHandler(){
@@ -232,13 +123,16 @@ public class FloatingPathfindingPaneController {
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
-            endNodeField.requestFocus();
-            targetNode.set("END");
-            if(namesAndIDs.get(newValue) != null){
-                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
-            }else{
-                System.out.println("No valid node ID for this end input");
+            System.out.println("Current Selected Tab " + App.tabPaneRoot.getSelectionModel().getSelectedIndex());
+            if(App.tabPaneRoot.getSelectionModel().getSelectedIndex() == 0){
+                System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
+                endNodeField.requestFocus();
+                targetNode.set("END");
+                if(namesAndIDs.get(newValue) != null){
+                    App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+                }else{
+                    System.out.println("No valid node ID for this end input");
+                }
             }
         });
 
@@ -252,26 +146,32 @@ public class FloatingPathfindingPaneController {
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
-            targetNode.set("START");
-            startNodeField.requestFocus();
-            if(namesAndIDs.get(newValue) != null){
-                App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
-                if(endNodeField.getText().equals("")){
-                    endNodeField.requestFocus();
+            if(App.tabPaneRoot.getSelectionModel().getSelectedIndex() == 0) {
+                System.out.println("Trag: START - StartNodeField input " + newValue + " which has nodeID " + namesAndIDs.get(newValue));
+                targetNode.set("START");
+                startNodeField.requestFocus();
+                if (namesAndIDs.get(newValue) != null) {
+                    App.mapInteractionModel.setNodeID((namesAndIDs.get(newValue)));
+                    if (endNodeField.getText().equals("")) {
+                        endNodeField.requestFocus();
+                    }
+                } else {
+                    System.out.println("No valid node ID for this start input");
                 }
-            }else{
-                System.out.println("No valid node ID for this start input");
             }
         });
 
         namesAndIDs = App.mapService.getLongNames();
         Set<String> strings = namesAndIDs.keySet();
 
-        ArrayList<String> nodeNames = new ArrayList<>();
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , strings);
+        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , strings);
 
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList(nodeNames));
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(nodeNames));
+
+//        String test = namesAndIDs.get(startNodeField.getText());
+
+
+
 
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.getValue().equals("START")){
@@ -313,15 +213,6 @@ public class FloatingPathfindingPaneController {
             }
         });
 
-        App.mapInteractionModel.pathFlag.addListener(observable -> {
-                handleTestAddTextField();
-        });
-
-        startNodeField.requestFocus();
-
-        App.mapInteractionModel.pathFlag.addListener(observable -> {
-            handleTestAddTextField();
-        });
     }
 
 

@@ -146,39 +146,40 @@ public class PathfindingBaseController {
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
         });
-
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
-            clearMapItems();
-            String floorStart = App.mapInteractionModel.path.get(0).getFloor();
-            String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size()-1).getFloor();
-            switch (floorStart){
-                case "G":
-                    floorG.setSelected(true);
-                    handleFloorGButton();
-                    break;
-                case "1":
-                    floor1.setSelected(true);
-                    handleFloor1Button();
-                    break;
-                case "2":
-                    floor2.setSelected(true);
-                    handleFloor2Button();
-                    break;
-                case "3":
-                    floor3.setSelected(true);
-                    handleFloor3Button();
-                    break;
-                case "4":
-                    floor4.setSelected(true);
-                    handleFloor4Button();
-                    break;
-                case "5":
-                    floor5.setSelected(true);
-                    handleFloor5Button();
-                    break;
+            if(!App.mapInteractionModel.path.isEmpty()) {
+                clearMapItems();
+                String floorStart = App.mapInteractionModel.path.get(0).getFloor();
+                String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size() - 1).getFloor();
+                switch (floorStart) {
+                    case "G":
+                        floorG.setSelected(true);
+                        handleFloorGButton();
+                        break;
+                    case "1":
+                        floor1.setSelected(true);
+                        handleFloor1Button();
+                        break;
+                    case "2":
+                        floor2.setSelected(true);
+                        handleFloor2Button();
+                        break;
+                    case "3":
+                        floor3.setSelected(true);
+                        handleFloor3Button();
+                        break;
+                    case "4":
+                        floor4.setSelected(true);
+                        handleFloor4Button();
+                        break;
+                    case "5":
+                        floor5.setSelected(true);
+                        handleFloor5Button();
+                        break;
+                }
+                generateEdges(App.mapInteractionModel.floorPathfinding);
+                generateNodes(App.mapInteractionModel.floorPathfinding);
             }
-            generateEdges(App.mapInteractionModel.floorPathfinding);
-            generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
         App.mapInteractionModel.pathPreviewFlag.addListener((observable, oldValue, newValue)  ->{
@@ -186,6 +187,11 @@ public class PathfindingBaseController {
             generatePathPreview(App.mapInteractionModel.floorPathfinding);
             setMapItemsOrder();
         });
+        App.mapInteractionModel.reloadPathfinding.addListener(e -> {
+            clearMapItems();
+            generateNodes(App.mapInteractionModel.floor);
+        });
+
 
     } // End of initialize
 
