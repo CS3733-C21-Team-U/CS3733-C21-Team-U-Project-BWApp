@@ -45,7 +45,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="Address:&#10;&#10;Contact Infor:&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If you can not log in, Please contact us 888-888-8888 or ask the IT department.&#10;" wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
