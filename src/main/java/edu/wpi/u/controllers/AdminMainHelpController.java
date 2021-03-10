@@ -155,7 +155,7 @@ public class AdminMainHelpController {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generalhelp/AboutPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/AboutPage.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
