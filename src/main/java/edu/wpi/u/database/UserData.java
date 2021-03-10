@@ -299,10 +299,11 @@ public class UserData extends Data{
      */
     public HashMap<String, String> getEmployeeNamesByType(String type){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select userName,name from Employees where type=?";
+        String str = "select userName,name from Employees where type=? or type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,type);
+            ps.setString(2,"ADMIN");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.put(rs.getString("username"), rs.getString("name"));
