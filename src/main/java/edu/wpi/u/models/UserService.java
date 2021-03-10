@@ -22,7 +22,7 @@ public class UserService {
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
-    //HashMap<String, String> easyValidate;
+    //HashMap<String, String> easyValidate; // todo : iteration 4?
 
     public String typedUsername;
 
