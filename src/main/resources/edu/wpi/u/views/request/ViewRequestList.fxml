@@ -23,7 +23,7 @@
          <top>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="1620.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label styleClass="headline-2" text="My Serivce Requests" />
+                  <Label styleClass="headline-2" text="My Service Requests" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <JFXButton onAction="#handleNewRequestButton" styleClass="button-contained" text="NEW REQUEST">
                      <graphic>
@@ -61,7 +61,7 @@
                                        </VBox.margin>
                                     </ImageView>
                                     <Label style="-fx-text-fill: -primary;" styleClass="headline-1" text="No Requests!" />
-                                    <Label styleClass="headline-3" text="Try clearning filters or creating a new request" />
+                                    <Label styleClass="headline-3" text="Try cleaning filters or creating a new request" />
                                  </children>
                               </VBox>
                            </children>
