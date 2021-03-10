@@ -79,7 +79,7 @@
                                     </VBox>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.rowIndex="1">
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleMobile" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.rowIndex="1">
                                  <graphic>
                                     <VBox alignment="BOTTOM_CENTER" prefHeight="124.0" prefWidth="170.0" spacing="10.0">
                                        <padding>
