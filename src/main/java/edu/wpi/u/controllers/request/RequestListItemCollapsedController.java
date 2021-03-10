@@ -40,6 +40,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
     @FXML public SVGPath requestIcon;
+    @FXML public AnchorPane requestItemRoot;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
@@ -63,10 +64,65 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
             requestItemRequestTypeLabel.setText(parent.request.getType());
         });
+
+        App.requestService.requestType.addListener((o, oldVal, newVal)->{
+            showOrNottoSHow();
+//           if(parent.request.getType().equals(App.requestService.requestType.getValue()) || App.requestService.requestType.getValue().equals("All")){
+//               appear();
+//               System.out.println("I am a"+parent.request.getType()+"not a "+ App.requestService.requestType + "APPEAR");
+//           }
+//           else{
+//               disappear();
+//               System.out.println("I am a"+parent.request.getType()+"not a"+App.requestService.requestType+"DISAPPEAR");
+//           }
+        });
+
+        App.requestService.assignedStatus.addListener((o, oldVal, newVal)->{
+           showOrNottoSHow();
+        });
+
+        App.requestService.resolveStatus.addListener((o, oldVal, newVal)->{
+            showOrNottoSHow();
+        });
+
+
+        //System.out.println("MYINFO: " +requestItemRoot.getPrefHeight()+" "+" "+requestItemRoot.getMaxHeight()+ requestItemRoot.isVisible()+ " " + requestItemRoot.getOpacity());
+
+
     }
 
     public void handleShowDetailButton(ActionEvent actionEvent) throws IOException {
         this.parent.switchToExpanded();
+    }
+
+    public void appear(){
+        parent.switchGoneToCollapsed();
+    }
+    public void disappear(){
+        parent.switchCollapsedToGone();
+    }
+
+    public void showOrNottoSHow(){
+        //for requests
+        boolean type = parent.request.getType().equals(App.requestService.requestType.getValue())
+                || App.requestService.requestType.getValue().equals("All");
+
+        boolean assignee = (App.requestService.assignedStatus.getValue().equals("Assigned to You")&&parent.request.getGenericRequest().getAssignees().contains(App.userService.getActiveUser().getUserName()))
+        || (App.requestService.assignedStatus.getValue().equals("Unassigned")&&(parent.request.getGenericRequest().getAssignees().size()==0))
+                || App.requestService.assignedStatus.getValue().equals("All");
+
+        boolean resolved = (App.requestService.resolveStatus.getValue().equals("Active")&&!parent.request.getGenericRequest().isResolved())
+                ||(App.requestService.resolveStatus.getValue().equals("Resolved")&&parent.request.getGenericRequest().isResolved())||(App.requestService.resolveStatus.getValue().equals("All"));
+
+            if(type && assignee && resolved){
+                appear();
+            }
+            else{
+                disappear();
+            }
+        //is my type = , OR is type all
+        //if all - show, if unassigned is assignees empty, if assigned does assignees contain my username or not?
+        //if resolved, am I resolved, if unresolved am I not resolved
     }
 
 //    //Listener here for the global drawerstare variable

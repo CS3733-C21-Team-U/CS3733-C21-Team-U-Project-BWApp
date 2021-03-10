@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,12 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.SVGPath;
 import lombok.SneakyThrows;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -25,13 +26,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
-public class RequestListItemEditController extends AnchorPane implements Initializable {
+public class RequestListItemNewController extends AnchorPane implements Initializable{
 
     public RequestListItemContainerController parent;
     public Region pushDown1;
@@ -40,6 +37,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXTextArea editDescriptionField;
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
+
     public JFXTextField editAssigneesField;
 
     @FXML
@@ -49,18 +47,16 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     @FXML
     public JFXListView<String> editLocationsListView;// = new JFXListView<String>();
 
-    @FXML
-    public SVGPath typeIconSVG;
-
     public VBox extraFieldsVBox;
     private JFXTextField[] specificTextFields;
     HashMap<String, String> longNamestoID;
     Set<String> existingAssignee;
 
+    SpecificRequest currSpecificRequest;
 
-    public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
-        this.parent = parent; //THIS SHOULD ALWAYS BE FIRST
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
+
+    public RequestListItemNewController() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemNew.fxml"));
         loader.setController(this);
         loader.setRoot(this);
         loader.load();
@@ -68,69 +64,113 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String type = App.newNodeType;
+        currSpecificRequest = new RequestFactory().makeRequest(type);
+        specificTextFields = generateSpecificFields();
+
         RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
         assigneeValidator.setMessage("Valid Assignee Required");
         RequiredFieldValidator locationValidator = new RequiredFieldValidator();
         locationValidator.setMessage("Valid Location Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
+        existingAssignee = App.userService.getEmployeeIDByType(currSpecificRequest.getRelevantRole()).keySet();
         AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
-        //longNamestoID = App.mapService.getLongNames(parent.request.getGenericRequest().);
         longNamestoID  = App.mapService.getLongNames();
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
 
+        RequiredFieldValidator validator1 = new RequiredFieldValidator();
+        validator1.setMessage("Title Required");
+        editTitleField.getValidators().add(validator1);
+        editTitleField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                editTitleField.validate();
+            }
+        });
 
-        //Set Existing values for fields
-        typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
-        editTitleField.setText( parent.request.getGenericRequest().getTitle());
-        editDescriptionField.setText( parent.request.getGenericRequest().getDescription());
-        editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
-        editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
-        makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        //load in name as opposed to Node Ids
-        ArrayList<String> locationNames = new ArrayList<>();
-        for(String s: parent.request.getGenericRequest().getLocations()){
-            locationNames.add(App.mapService.getNodeFromID(s).getLongName());
-        }
+        RequiredFieldValidator validator2 = new RequiredFieldValidator();
+        validator2.setMessage("Description Required");
+        editDescriptionField.getValidators().add(validator2);
+        editDescriptionField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                editDescriptionField.validate();
+            }
+        });
 
-        makeListView( locationNames, editLocationsListView);
-        specificTextFields = generateSpecificFields();
+        RequiredFieldValidator validator3 = new RequiredFieldValidator();
+        validator3.setMessage("Required Field");
+        editDateNeededField.getValidators().add(validator3);
+        editDateNeededField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                editDateNeededField.validate();
+            }
+        });
+
+        RequiredFieldValidator validator4 = new RequiredFieldValidator();
+        validator4.setMessage("Required Field");
+        editTimeNeededField.getValidators().add(validator4);
+        editTimeNeededField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                editTimeNeededField.validate();
+            }
+        });
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
 
-        /* adding items to the list view */
-        /*making list view horizontal*/
-//        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
-//        /* creating horizontal box to add item objects */
-//        HBox hbox = new HBox(editAssigneesListView);
-
-
-
-
     }
 
     /**
-     * Pull from fields, and run update request
+     * Pull from fields, and add request
      */
     public void handleSaveButton(){
-        ArrayList<String> locationsToAdd = new ArrayList<String>();
-        for(String s :editLocationsListView.getItems()){
-            locationsToAdd.add(longNamestoID.get(s));
+        if(!editTitleField.getText().equals("") &&
+            !editDescriptionField.getText().equals("") &&
+            editDateNeededField.getValue() != null &&
+            editTimeNeededField.getValue() != null &&
+            checkSpecialFields(requestSpecificItems())){
+            ArrayList<String> locationsToAdd = new ArrayList<String>();
+            for(String s :editLocationsListView.getItems()){
+                locationsToAdd.add(longNamestoID.get(s));
+            }
+            ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
+
+
+            Random rand = new Random();
+            int requestID = rand.nextInt();
+            String ID = Integer.toString(requestID);//make a random id
+
+            //make components of specifc request,  then set them
+            Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
+                    App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+
+            Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
+                    locationsToAdd, assigneesToAdd, primaryComment);
+
+            App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
+            App.newReqVBox.getChildren().clear();
+            App.VBoxChanged.set(!App.VBoxChanged.get());
+            App.requestRedrawFlag.set(!App.requestRedrawFlag.get());
+        }else if(editTitleField.getText().equals("")){
+            editTitleField.validate();
+        }else if(editDescriptionField.getText().equals("")){
+            editDescriptionField.validate();
+        }else if(editDateNeededField.getValue() != null){
+            editDateNeededField.validate();
+        }else if(editTimeNeededField.getValue() != null){
+            editTimeNeededField.validate();
         }
-        ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
-
-        parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
-                Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
-                locationsToAdd, assigneesToAdd, requestSpecificItems());
-        App.requestService.updateRequest(parent.request);
-
-
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-        this.parent.switchFromEditToExpanded();
-
     }
+
+    private boolean checkSpecialFields(ArrayList<String> input){
+        for(String s: input){
+            if(s.equals("")){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void handleCancelButton(){
             JFXDialogLayout content = new JFXDialogLayout();
             Label header = new Label("Exit without saving changes?");
@@ -151,7 +191,8 @@ public class RequestListItemEditController extends AnchorPane implements Initial
                 @Override
                 public void handle(ActionEvent event) {
                     dialog.close();
-                    parent.switchToCollapsed();
+                    App.newReqVBox.getChildren().clear();
+                    App.VBoxChanged.set(!App.VBoxChanged.get());
                 }
             });
             button1.getStyleClass().add("button-text");
@@ -166,27 +207,29 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXTextField[] generateSpecificFields() {
 
         //specificTitle.setText(currSpecificRequest.getType());
-        JFXTextField[] ans = new JFXTextField[ parent.request.getSpecificFields().length];
-        for(int i = 0; i <  parent.request.getSpecificFields().length; i++) {
-            HBox h = new HBox();
+        JFXTextField[] ans = new JFXTextField[ currSpecificRequest.getSpecificFields().length];
+        for(int i = 0; i <  currSpecificRequest.getSpecificFields().length; i++) {
 
             JFXTextField j = new JFXTextField();
-            j.setPromptText( parent.request.getSpecificFields()[i]);
+            j.setPromptText( currSpecificRequest.getSpecificFields()[i]);
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
             j.setStyle("-fx-font-size: 16px");
-            j.setText( parent.request.getSpecificData().get(i));
+           // j.setText( currSpecificRequest.getSpecificData().get(i));
 
             ans[i] = j;
-            extraFieldsVBox.getChildren().add(j);
+            extraFieldsVBox.getChildren().add(0,j);
+            Region r1 = new Region();
+            r1.setPrefHeight(25);
+            extraFieldsVBox.getChildren().add(0,r1);
         }
         return ans;
     }
 
 
     /**
-     * Take the get values from unique fields, put it in a linkedList
+     * Take the get values from unique fields, put it in a ArrayList
      * @return
      */
     public ArrayList<String> requestSpecificItems() {
@@ -218,7 +261,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     }
 
     public void addLocation() {
-        if (editLocationsField.getText().equals("") || !longNamestoID.keySet().contains(editLocationsField.getText())) {
+        if (editLocationsField.getText().equals("") || !longNamestoID.containsKey(editLocationsField.getText())) {
             editLocationsField.validate();
         } else {
             try{
@@ -236,11 +279,12 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
         }
 
+    /*
+    App.mapService.getLongNames(string NodeID);
 
 
 
 
-
-
+     */
 
 }
