@@ -270,17 +270,19 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void loadLocationsOnMap(String floor, AnchorPane pane){
         ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
-        for(String nodeIDLocation: locationNodeList){
-            if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
-                Circle mapLocation = new Circle();
-                mapLocation.setCenterX(200);
-                //(App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]
-                //App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]
-                mapLocation.setCenterX(200);
-                mapLocation.setRadius(300);
-                mapLocation.setStyle("-fx-fill: yellow");
-                mapLocation.toFront();
-                pane.getChildren().add(mapLocation);
+        if(!locationNodeList.isEmpty()) {
+            for (String nodeIDLocation : locationNodeList) {
+                if (App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
+                    Circle mapLocation = new Circle();
+                    mapLocation.setCenterX(200);
+                    //(App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]
+                    //App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]
+                    mapLocation.setCenterX(200);
+                    mapLocation.setRadius(300);
+                    mapLocation.setStyle("-fx-fill: yellow");
+                    mapLocation.toFront();
+                    pane.getChildren().add(mapLocation);
+                }
             }
         }
     }

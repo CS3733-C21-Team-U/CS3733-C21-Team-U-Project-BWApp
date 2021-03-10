@@ -83,8 +83,8 @@ public class CovidSurveyScreenController {
         System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        Object obj = fxmlLoader.load();
-        Object myController = fxmlLoader.getController();
+        fxmlLoader.load();
+        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 

@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -21,10 +22,12 @@ import java.util.ResourceBundle;
 
 public class RequestListItemContainerController extends AnchorPane implements Initializable{
 
+    public VBox masterList;
     public SpecificRequest request;
     public Parent expandedNode;
     public Parent collapsedNode;
     public Parent editNode;
+    public Parent hiddenNode;
     public Parent newNode;
     public SimpleBooleanProperty needUpdate = new SimpleBooleanProperty(true);
 
@@ -84,6 +87,9 @@ public class RequestListItemContainerController extends AnchorPane implements In
     }
 
     public RequestListItemContainerController(SpecificRequest request, String newRequestStuff) throws IOException {        this.request = request; //MUST BE FIRST!!!
+    public RequestListItemContainerController(SpecificRequest request, VBox sampleRequestItem) throws IOException {
+        this.request = request; //MUST BE FIRST!!!
+        this.masterList = sampleRequestItem;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemContainer.fxml"));
         loader.setController(this);
@@ -92,13 +98,12 @@ public class RequestListItemContainerController extends AnchorPane implements In
         //"this" is both an anchor pane and controller
         //https://github.com/CS3733-C21-Team-U/CS3733-C21-Team-U-Project-BWApp/pull/226
 
+        expandedNode = new RequestListItemExpandedController(this);
+        collapsedNode = new RequestListItemCollapsedController(this);
+        editNode = new RequestListItemEditController(this);
+        hiddenNode = new RequestListItemHiddenController(this);
 
-
-            expandedNode = new RequestListItemExpandedController(this);
-            collapsedNode = new RequestListItemCollapsedController(this);
-            editNode = new RequestListItemEditController(this);
-            this.getChildren().add(collapsedNode);
-
+        this.getChildren().add(collapsedNode);
 
     }
 
@@ -121,6 +126,16 @@ public class RequestListItemContainerController extends AnchorPane implements In
 
     public void switchFromEditToExpanded() {
         runAnimation(this,250,80,590,590, editNode, expandedNode);
+    }
+
+    public void switchGoneToCollapsed() {
+        System.out.println("Testing gone to collapes");
+        this.masterList.getChildren().add(this);
+    }
+
+    public void switchCollapsedToGone() {
+        System.out.println("Testing collapse to gpme");
+        this.masterList.getChildren().remove(this);
     }
 
     public void runAnimation(RequestListItemContainerController anchor, int totalTimeMS, int fadeOutTimeMS, int startSizePx, int endSizePx, Parent outgoing, Parent incoming){
