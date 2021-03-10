@@ -349,9 +349,6 @@ public class FloatingPathfindingPaneController {
 
         ArrayList<String> nodeNames = new ArrayList<>();
 
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(startNodeField , FXCollections.observableArrayList(nodeNames));
-        AutoCompletionBinding<String> autoFillEnd = TextFields.bindAutoCompletion(endNodeField , FXCollections.observableArrayList(nodeNames));
-
         App.mapInteractionModel.nodeID.addListener((observable, oldValue, newValue)  ->{
             if(targetNode.getValue().equals("START")){
                 startNodeField.setText(App.mapService.getNodeFromID(newValue).getLongName());
