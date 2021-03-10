@@ -52,6 +52,8 @@ public class MobileFloatingPathfindingPaneController {
     Label endNode;
     @FXML
     Label startNode;
+    @FXML
+
 
 
     SimpleStringProperty targetNode = new SimpleStringProperty("START");//flag for
@@ -286,6 +288,15 @@ public class MobileFloatingPathfindingPaneController {
 
     public void initialize(){
 
+        App.mobileUpdateDestinationField.addListener((o,oldVal,newVal) ->{
+            endNodeField.setText(parkingSpace);
+            startNodeField.setText("");
+        });
+
+        App.mobileUpdateParkingSpot.addListener((o,oldVal,newVal) ->{
+            parkingSpace = startNodeField.getText();
+        });
+
         targetNode.addListener((observable, oldVal, newVal) ->{
             if(newVal.equals("START")){
                 startFieldFlair.setVisible(true);
@@ -417,19 +428,8 @@ public class MobileFloatingPathfindingPaneController {
         System.out.println("Help!");
     }
 
-    public String getParkingSpace() {
-        parkingSpace = startNodeField.getText();
-        return parkingSpace;
-    }
 
 
-
-    public void setDestination(){
-        getParkingSpace();
-        destination = parkingSpace;
-        //  destination = call upon a DB function depending on COVID survey result.
-        startNodeField.setText(destination);
-    }
 }
 
 

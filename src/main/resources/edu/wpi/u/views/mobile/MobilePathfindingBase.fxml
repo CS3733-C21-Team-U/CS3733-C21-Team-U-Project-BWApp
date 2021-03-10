@@ -81,8 +81,9 @@
                         <JFXToggleNode fx:id="floorG" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                     </children>
                 </VBox>
-            <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="90.0" layoutY="636.0" onAction="#handleBack" prefHeight="56.0" prefWidth="87.0" styleClass="bigButton" text="Go back" />
-            <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="636.0" onAction="#handleNext" prefHeight="56.0" prefWidth="87.0" styleClass="bigButton" text="Next" />
+            <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="90.0" layoutY="636.0" onAction="#handleBack" prefHeight="56.0" prefWidth="87.0" styleClass="bigButtonOutline" text="Go back" />
+            <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="636.0" onAction="#handleNext" prefHeight="56.0" prefWidth="87.0" styleClass="bigButton" text="Load" />
+            <JFXButton buttonType="RAISED" layoutX="184.0" layoutY="636.0" onAction="#handleSaveParking" prefHeight="56.0" prefWidth="108.0" styleClass="bigButton" text="Save Spot" />
             </children>
         </AnchorPane>
     </children>
