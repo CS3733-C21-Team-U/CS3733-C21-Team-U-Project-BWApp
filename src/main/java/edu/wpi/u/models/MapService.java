@@ -309,6 +309,8 @@ public class MapService {
         return mm.runDFS(start_node_id,end_node_id);
       case "BFS":
         return mm.runBFS(start_node_id,end_node_id);
+      case "DIJKSTRA":
+        return new ArrayList<>(mm.runDijkstra(start_node_id,end_node_id));
       default:
         return new ArrayList<>();
     }
