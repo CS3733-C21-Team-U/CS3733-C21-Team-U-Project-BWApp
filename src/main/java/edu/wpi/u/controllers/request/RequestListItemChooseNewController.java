@@ -96,6 +96,11 @@ public class RequestListItemChooseNewController extends AnchorPane {
         App.VBoxChanged.set(!App.VBoxChanged.get());
     }
 
+    public void handleCancelButton() throws IOException {
+        App.newReqVBox.getChildren().clear();
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+
 
 
 
