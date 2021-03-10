@@ -50,7 +50,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
                         </HBox>
-                        <Label fx:id="descriptionLabel" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
+                        <Label fx:id="descriptionLabel" prefHeight="79.0" prefWidth="390.0" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin></Label>
