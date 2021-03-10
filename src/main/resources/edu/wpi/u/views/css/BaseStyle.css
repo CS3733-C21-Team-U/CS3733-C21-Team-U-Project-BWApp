@@ -290,8 +290,8 @@
 }
 
 .fab-mini{
-    -fx-background-color: -secondary;
-    -fx-text-fill: -onSecondary;
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
     -fx-min-width: 40px;
     -fx-min-height: 40px;
     -fx-pref-width: 40px;

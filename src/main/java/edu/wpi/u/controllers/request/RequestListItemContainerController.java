@@ -35,7 +35,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public static String LaundryIcon = "M18 2.01L6 2c-1.11 0-2 .89-2 2v16c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2V4c0-1.11-.89-1.99-2-1.99zM18 20H6L5.99 4H18v16z M 9,6 A 1,1 0 0 1 8,7 1,1 0 0 1 7,6 1,1 0 0 1 8,5 1,1 0 0 1 9,6 Z M 12,6 A 1,1 0 0 1 11,7 1,1 0 0 1 10,6 1,1 0 0 1 11,5 1,1 0 0 1 12,6 Z M12 19c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm2.36-7.36c1.3 1.3 1.3 3.42 0 4.72-1.3 1.3-3.42 1.3-4.72 0l4.72-4.72z";
     public static String MaintenanceIcon = "M21.67,18.17l-5.3-5.3h-0.99l-2.54,2.54v0.99l5.3,5.3c0.39,0.39,1.02,0.39,1.41,0l2.12-2.12 C22.06,19.2,22.06,18.56,21.67,18.17z M18.84,19.59l-4.24-4.24l0.71-0.71l4.24,4.24L18.84,19.59z M17.34,10.19l1.41-1.41l2.12,2.12c1.17-1.17,1.17-3.07,0-4.24l-3.54-3.54l-1.41,1.41V1.71L15.22,1l-3.54,3.54l0.71,0.71 h2.83l-1.41,1.41l1.06,1.06l-2.89,2.89L7.85,6.48V5.06L4.83,2.04L2,4.87l3.03,3.03h1.41l4.13,4.13l-0.85,0.85H7.6l-5.3,5.3 c-0.39,0.39-0.39,1.02,0,1.41l2.12,2.12c0.39,0.39,1.02,0.39,1.41,0l5.3-5.3v-2.12l5.15-5.15L17.34,10.19z M9.36,15.34 l-4.24,4.24l-0.71-0.71l4.24-4.24l0,0L9.36,15.34L9.36,15.34z";
     public static String MedicalIcon = "M10.5,15H8v-3h2.5V9.5h3V12H16v3h-2.5v2.5h-3V15z M19,8v11c0,1.1-0.9,2-2,2H7c-1.1,0-2-0.9-2-2V8c0-1.1,0.9-2,2-2h10 C18.1,6,19,6.9,19,8z M17,8H7v11h10V8z M18,3H6v2h12V3z";
-    public static String ReligousIcon = "M13,14h-2v-2h2V14z M18.1,16.56L17,14.79V21H7v-6.2l-1.1,1.76L4.2,15.5L12,3l7.8,12.5L18.1,16.56z M15,11.59l-3-4.8l-3,4.8 V19h2v-3h2v3h2V11.59z";
+    public static String ReligiousIcon = "M13,14h-2v-2h2V14z M18.1,16.56L17,14.79V21H7v-6.2l-1.1,1.76L4.2,15.5L12,3l7.8,12.5L18.1,16.56z M15,11.59l-3-4.8l-3,4.8 V19h2v-3h2v3h2V11.59z";
     public static String SanitationIcon = "M19.56,11.36L13,8.44V7c0-0.55-0.45-1-1-1l0,0c-0.55,0-1-0.45-1-1s0.45-1,1-1s1,0.45,1,1h2c0-1.84-1.66-3.3-3.56-2.95 C10.26,2.27,9.29,3.22,9.06,4.4C8.76,5.96,9.66,7.34,11,7.82v0.63l-6.56,2.92C3.56,11.75,3,12.62,3,13.57v0.01 C3,14.92,4.08,16,5.42,16H7v6h10v-6h1.58c1.34,0,2.42-1.08,2.42-2.42v-0.01C21,12.62,20.44,11.75,19.56,11.36z M15,20H9v-5h6V20z M18.58,14H17v-1H7v1H5.42c-0.46,0-0.58-0.65-0.17-0.81l6.75-3l6.75,3C19.17,13.38,19.03,14,18.58,14z";
     public static String SecurityIcon = "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z";
 
@@ -43,6 +43,43 @@ public class RequestListItemContainerController extends AnchorPane implements In
     public static String DEFAULTCommentIcon = "M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h2v2H7zm8 0h2v2h-2zm-4 0h2v2h-2z";
     public static String UPDATECommentIcon = "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z";
     public static String RESOLVECommentIcon = "M19.77 4.93l1.4 1.4L8.43 19.07l-5.6-5.6 1.4-1.4 4.2 4.2L19.77 4.93m0-2.83L8.43 13.44l-4.2-4.2L0 13.47l8.43 8.43L24 6.33 19.77 2.1z";
+
+    public static String getIcon(String keyWord){
+        switch (keyWord) {
+            case "AudioVisual":
+                return AudioVisualIcon;
+            case "Computer":
+                return ComputerIcon;
+            case "Floral":
+                return FloralIcon;
+            case "Gift":
+                return GiftIcon;
+            case "Language":
+                return LanguageIcon;
+            case "Laundry":
+                return LaundryIcon;
+            case "Maintenance":
+                return MaintenanceIcon;
+            case "Medical":
+                return MedicalIcon;
+            case "Religious":
+                return ReligiousIcon;
+            case "Sanitation":
+                return SanitationIcon;
+            case "Security":
+                return SecurityIcon;
+            case "PRIMARY":
+                return PRIMARYCommentIcon;
+            case "DEFAULT":
+                return DEFAULTCommentIcon;
+            case "UPDATE":
+                return UPDATECommentIcon;
+            case "RESOLVE":
+                return RESOLVECommentIcon;
+            default:
+                return "";
+        }
+    }
 
     public RequestListItemContainerController(SpecificRequest request) throws IOException {
         this.request = request; //MUST BE FIRST!!!
