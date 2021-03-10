@@ -232,12 +232,11 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
         }
 
-    /*
-    App.mapService.getLongNames(string NodeID);
 
 
 
 
-     */
+
+
 
 }

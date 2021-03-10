@@ -102,7 +102,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mapViewRoot.setMinSize(457,300);
         mapViewRoot.toFront();
         locationGroup.toFront();
-        //loadLocationsOnMap("G", locationGroup);
+        locationGroup.minHeight(300);
+        locationGroup.minWidth(300);
+        loadLocationsOnMap("G", mainMapPane);
 
 
 
@@ -226,7 +228,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
 
 
-    public void loadLocationsOnMap(String floor, Group pane){
+    public void loadLocationsOnMap(String floor, AnchorPane pane){
         ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
         for(String nodeIDLocation: locationNodeList){
             if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
@@ -235,10 +237,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 //(App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]
                 //App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]
                 mapLocation.setCenterX(200);
-                mapLocation.setRadius(30);
+                mapLocation.setRadius(300);
                 mapLocation.setStyle("-fx-fill: yellow");
                 mapLocation.toFront();
-                locationGroup.getChildren().add(mapLocation);
+                pane.getChildren().add(mapLocation);
             }
         }
     }
