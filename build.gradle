@@ -1,12 +1,13 @@
-buildscript {
-    repositories {
+buildscript{
+    repositories{
         jcenter()
     }
 
-    dependencies {
+    dependencies{
         classpath 'org.javafxports:jfxmobile-plugin:1.3.17'
     }
 }
+
 
 plugins {
     id 'application'
@@ -16,6 +17,8 @@ plugins {
     id "io.freefair.lombok" version "5.0.0-rc6"
 }
 
+apply plugin: 'org.javafxports.jfxmobile'
+
 mainClassName = 'edu.wpi.u.Main'
 
 repositories {
@@ -23,6 +26,12 @@ repositories {
     jcenter()
     maven {
         url 'https://apisite.crmyers.dev/maven'
+    }
+}
+
+jfxmobile {
+    android {
+        applicationPackage = 'org.javafxports.wpi.edu.u'
     }
 }
 

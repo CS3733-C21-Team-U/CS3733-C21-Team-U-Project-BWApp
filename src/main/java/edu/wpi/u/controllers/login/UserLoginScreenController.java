@@ -137,12 +137,10 @@ public class UserLoginScreenController {
                                     @Override
                                     public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
                                         status = responseStatus.getStatusCode();
-                                        System.out.println("At status code");
                                         return State.CONTINUE;
                                     }
                                     @Override
                                     public State onHeadersReceived(HttpHeaders headers) throws Exception {
-                                        System.out.println("At headers code");
                                         return State.CONTINUE;
                                     }
                                     @Override
