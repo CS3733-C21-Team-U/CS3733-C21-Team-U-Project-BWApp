@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.SVGPath?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px; -fx-border-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="430.0" style="-fx-background-color: -primary;">
+         <children>
+            <SVGPath fx:id="typeIconSVG" content="M21.67,18.17l-5.3-5.3h-0.99l-2.54,2.54v0.99l5.3,5.3c0.39,0.39,1.02,0.39,1.41,0l2.12-2.12 C22.06,19.2,22.06,18.56,21.67,18.17z M18.84,19.59l-4.24-4.24l0.71-0.71l4.24,4.24L18.84,19.59zM17.34,10.19l1.41-1.41l2.12,2.12c1.17-1.17,1.17-3.07,0-4.24l-3.54-3.54l-1.41,1.41V1.71L15.22,1l-3.54,3.54l0.71,0.71 h2.83l-1.41,1.41l1.06,1.06l-2.89,2.89L7.85,6.48V5.06L4.83,2.04L2,4.87l3.03,3.03h1.41l4.13,4.13l-0.85,0.85H7.6l-5.3,5.3 c-0.39,0.39-0.39,1.02,0,1.41l2.12,2.12c0.39,0.39,1.02,0.39,1.41,0l5.3-5.3v-2.12l5.15-5.15L17.34,10.19z M9.36,15.34 l-4.24,4.24l-0.71-0.71l4.24-4.24l0,0L9.36,15.34L9.36,15.34z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </SVGPath>
+            <Label fx:id="titleLabel" prefWidth="382.0" text="New Request" wrapText="true">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="headline-2" />
+                  <String fx:value="white-text" />
+               </styleClass>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <GridPane alignment="CENTER" prefHeight="590.0" prefWidth="1330.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXButton styleClass="button-outlined" text="Cancel" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+            <JFXButton maxHeight="-Infinity" onAction="#handleNewMaintenanceRequest" prefWidth="120.0" text="Maintenance" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxHeight="-Infinity" onAction="#handleNewComputerRequest" prefWidth="120.0" text="Computer" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewMedicineRequest" prefWidth="120.0" text="Medicine" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewGiftRequest" prefWidth="120.0" text="Gift" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewLaundryRequest" prefWidth="120.0" text="Laundry" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewFloralRequest" prefWidth="120.0" text="Floral" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewAudioVisualRequest" prefWidth="120.0" text="Audio-Visual" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewSanitationRequest" prefWidth="120.0" text="Sanitation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewSecurityRequest" prefWidth="120.0" text="Security" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewReligiousRequest" prefWidth="120.0" text="Religious" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewFoodRequest" prefWidth="120.0" text="Food" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton maxWidth="-Infinity" onAction="#handleNewLanguageRequest" prefWidth="120.0" text="Language" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <styleClass>
+                  <String fx:value="button-contained" />
+                  <String fx:value="secondary-color" />
+               </styleClass>
+            </JFXButton>
+         </children>
+      </GridPane>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</fx:root>

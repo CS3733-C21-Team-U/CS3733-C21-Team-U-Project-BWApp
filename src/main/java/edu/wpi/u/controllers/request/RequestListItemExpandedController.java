@@ -22,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import net.kurobako.gesturefx.GesturePane;
@@ -40,6 +41,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label creatorAndDateLabel;
     public Label assigneesLabel;
     public Label completeByLabel;
+
+
+    private String nodeID = "";
     @FXML public VBox commentsRoot;
     @FXML public VBox mainSpecialFieldVbox;
     @FXML private JFXTextField commentField;
@@ -103,6 +107,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mapViewRoot.setMinSize(457,300);
         mapViewRoot.toFront();
         locationGroup.toFront();
+        locationGroup.minHeight(300);
+        locationGroup.minWidth(300);
         loadLocationsOnMap("G", locationGroup);
 
 
@@ -270,15 +276,17 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
         for(String nodeIDLocation: locationNodeList){
             if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
-                Circle mapLocation = new Circle();
-                mapLocation.setCenterX(200);
-                //(App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]
-                //App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]
-                mapLocation.setCenterX(200);
-                mapLocation.setRadius(30);
-                mapLocation.setStyle("-fx-fill: yellow");
-                mapLocation.toFront();
-                locationGroup.getChildren().add(mapLocation);
+                miniMap.centreOn(new Point2D(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.05), ((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.05)));
+                SVGPath location = new SVGPath();
+                location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
+                location.setLayoutX(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.1439));
+                location.setLayoutY(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.1439));
+                location.setStyle("-fx-fill: -primary");
+                location.setScaleX(1.5);
+                location.setScaleY(1.5);
+                location.toFront();
+                pane.getChildren().add(location);
+                nodeID = nodeIDLocation;
             }
         }
     }
@@ -332,5 +340,14 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mainHBox.getChildren().add(iconButton);
         mainHBox.getChildren().add(textVBox);
         commentsRoot.getChildren().add(mainHBox);
+    }
+
+
+    public void handlePathfindToLocation(){
+        App.mapInteractionModel.mapTargetNode.set(!App.mapInteractionModel.mapTargetNode.get());
+        App.mapInteractionModel.setNodeID(nodeID);
+        App.tabPaneRoot.getSelectionModel().select(0);
+        App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
+
     }
 }

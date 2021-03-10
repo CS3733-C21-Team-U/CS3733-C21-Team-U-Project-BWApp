@@ -68,7 +68,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane fx:id="ScrollPanel" maxHeight="1.7976931348623157E308" prefWidth="200.0">
+            <ScrollPane fx:id="ScrollPanel" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefWidth="200.0" vbarPolicy="NEVER">
               <content>
                 <AnchorPane fx:id="secondAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
