@@ -87,7 +87,7 @@ public class ViewRequestListController {
     public void generateRequests() {
         for (SpecificRequest request: listOfRequests) {
             try {
-                sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, sampleRequestItem));
+                sampleRequestItem.getChildren().add(0, new RequestListItemContainerController(request, sampleRequestItem));
             } catch (IOException e) {
                 e.printStackTrace();
             }

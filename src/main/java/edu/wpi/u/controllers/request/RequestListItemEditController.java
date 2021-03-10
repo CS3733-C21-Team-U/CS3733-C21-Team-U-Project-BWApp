@@ -179,7 +179,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             j.setText( parent.request.getSpecificData().get(i));
 
             ans[i] = j;
-            extraFieldsVBox.getChildren().add(j);
+            Region r1 = new Region();
+            r1.setPrefHeight(25);
+            extraFieldsVBox.getChildren().add(0, r1);
+            extraFieldsVBox.getChildren().add(0, j);
         }
         return ans;
     }
