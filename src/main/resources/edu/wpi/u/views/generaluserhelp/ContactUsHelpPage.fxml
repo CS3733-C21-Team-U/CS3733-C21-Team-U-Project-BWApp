@@ -52,34 +52,16 @@
                         </TextArea>
                      </children>
                   </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
+                  <VBox alignment="CENTER" prefHeight="684.0" prefWidth="929.0">
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="249.0">
+                        <ImageView fitHeight="597.0" fitWidth="534.0">
                            <image>
-                              <Image url="@../Images/desktoploginhelp.png" />
+                              <Image url="@../Images/logo.png" />
                            </image>
                            <VBox.margin>
-                              <Insets bottom="50.0" left="200.0" />
+                              <Insets />
                            </VBox.margin>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="402.0" fitWidth="318.0">
-                           <image>
-                              <Image url="@../Images/loginloginhelp.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="200.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 4,5,6" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
                      </children>
                      <padding>
                         <Insets left="80.0" />
