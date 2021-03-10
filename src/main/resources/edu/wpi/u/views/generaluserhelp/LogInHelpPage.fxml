@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-16.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
@@ -33,7 +33,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How to Log In" wrappingWidth="262.15234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Log In" textAlignment="CENTER" wrappingWidth="262.15234375">
                <font>
                   <Font name="Serif Bold" size="41.0" />
                </font>
@@ -45,7 +45,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1.Choose your Device ----&gt;Desktop&#10;&#10;2.Fill the Covid-19 Survey&#10;&#10;3.Click Submit button&#10;&#10;4.Click Log in if you already have an account&#10;&#10;5.Click sign up if you need an account&#10;&#10;6.For visitors, please click Use as Guest. Fill your &#10;name and reason.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="645.0" styleClass="headline-2" text="1.Choose your Device ----&gt; Desktop&#10;&#10;2.Fill the Covid-19 Survey&#10;&#10;3.Click Submit button&#10;&#10;4.Click Log in if you already have an account&#10;&#10;5.Click sign up if you need an account&#10;&#10;6.For visitors, please click Use as Guest. Fill your &#10;name and reason." wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
