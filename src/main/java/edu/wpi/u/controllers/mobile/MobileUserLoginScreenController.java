@@ -249,16 +249,22 @@ public class MobileUserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleLonginWithNo2FA(ActionEvent actionEvent) {
+    public void handleLonginWithNo2FA(ActionEvent actionEvent) throws IOException {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
-            if (!App.userService.checkPassword(userNameTextField.getText(), passWordField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()).equals("")) {
                 Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MobileCovidSurvey.fxml"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                App.getPrimaryStage().getScene().setRoot(root);
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkUsername(userNameTextField.getText()));
+//              //  try {
+//                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MobileCovidSurvey.fxml"));
+//                    App.getPrimaryStage().getScene().setRoot(root);
+//               // } catch (IOException e) {
+//                //    e.printStackTrace();
+//               // }
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileCovidSurvey.fxml"));
+                fxmlLoader.load();
+                fxmlLoader.getController();
+                App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+
             }
         }
     }

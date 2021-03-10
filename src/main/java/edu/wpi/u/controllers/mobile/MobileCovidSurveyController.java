@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.*;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MobileCovidSurveyController {
 
@@ -56,6 +61,29 @@ public class MobileCovidSurveyController {
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
             covidRisk = "High";
         }
+
+        //Add request here
+        Random rand = new Random();
+        int requestID = rand.nextInt();
+        String ID = Integer.toString(requestID);//make a random id
+
+        //make components of specifc request,  then set them
+        Comment primaryComment = new Comment("COVID Survey Incoming", (App.userService.getActiveUser().getName() + "is making a request to enter the hospital. Their covid risk is " + covidRisk),
+                App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+
+        ArrayList<String>sdofijds = new ArrayList<>();
+        sdofijds.add("UEXIT0010G");
+        sdofijds.add("UEXIT0020G");
+
+        Request newRequest = new Request(ID, t,
+                sdofijds, new ArrayList<String>(), primaryComment);
+
+        ArrayList<String>sdofijds3 = new ArrayList<>();
+        sdofijds3.add(covidRisk);
+
+        App.requestService.addRequest(new RequestFactory().makeRequest("CovidSurvey").setRequest(newRequest).setSpecificData(sdofijds3));
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileWaitPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
