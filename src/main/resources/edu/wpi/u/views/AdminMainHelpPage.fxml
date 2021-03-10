@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminMainHelpController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0">
@@ -41,20 +40,31 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="1700.0">
                            <children>
-                              <VBox prefHeight="592.0" prefWidth="580.0">
+                              <VBox prefHeight="592.0" prefWidth="401.0">
                                  <children>
-                                    <JFXButton fx:id="PathFindingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handlePathFindingButton" prefHeight="178.0" prefWidth="591.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="PathFinding">
+                                    <JFXButton fx:id="PathFindingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handlePathFindingButton" prefHeight="106.0" prefWidth="360.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="PathFinding">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets bottom="50.0" left="50.0" right="50.0" />
+                                          <Insets left="50.0" right="50.0" />
                                        </VBox.margin>
                                        <graphic>
                                           <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="ContactUsHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleContactUsButton" prefHeight="96.0" prefWidth="480.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Contact us">
+                                    <JFXButton fx:id="MapBuilderHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="10.0" onAction="#handleMapBuilderButton" prefHeight="106.0" prefWidth="360.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Map Builder">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <graphic>
+                                          <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
+                                       </graphic>
+                                       <VBox.margin>
+                                          <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="ContactUsHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleContactUsButton" prefHeight="96.0" prefWidth="443.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Contact us">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -65,22 +75,11 @@
                                           <SVGPath content="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2zM12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="SettingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingPageButton" prefHeight="162.0" prefWidth="586.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="SettingPage">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="50.0" right="50.0" />
-                                       </VBox.margin>
-                                       <graphic>
-                                          <SVGPath content="M17.41,6.59L15,5.5l2.41-1.09L18.5,2l1.09,2.41L22,5.5l-2.41,1.09L18.5,9L17.41,6.59z M21.28,12.72L20.5,11l-0.78,1.72 L18,13.5l1.72,0.78L20.5,16l0.78-1.72L23,13.5L21.28,12.72z M16.24,14.37l1.94,1.47l-2.5,4.33l-2.24-0.94 c-0.2,0.13-0.42,0.26-0.64,0.37L12.5,22h-5l-0.3-2.41c-0.22-0.11-0.43-0.23-0.64-0.37l-2.24,0.94l-2.5-4.33l1.94-1.47 C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37l-1.94-1.47l2.5-4.33l2.24,0.94c0.2-0.13,0.42-0.26,0.64-0.37L7.5,6h5l0.3,2.41 c0.22,0.11,0.43,0.23,0.64,0.37l2.24-0.94l2.5,4.33l-1.94,1.47c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14 c0-1.66-1.34-3-3-3s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
-                                       </graphic>
-                                    </JFXButton>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="592.0" prefWidth="571.0">
+                              <VBox prefHeight="592.0" prefWidth="413.0">
                                  <children>
-                                    <JFXButton fx:id="AddUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleAddUserButton" prefHeight="70.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Add User">
+                                    <JFXButton fx:id="AddUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleAddUserButton" prefHeight="107.0" prefWidth="313.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Add User">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -91,7 +90,7 @@
                                           <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2zM19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="EditUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleEditUserButton" prefHeight="81.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Edit User">
+                                    <JFXButton fx:id="EditUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleEditUserButton" prefHeight="107.0" prefWidth="313.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Edit User">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -102,7 +101,7 @@
                                           <SVGPath content="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="ViewUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleViewUserButton" prefHeight="88.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="View User">
+                                    <JFXButton fx:id="ViewUserHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleViewUserButton" prefHeight="95.0" prefWidth="356.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="View User">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -113,21 +112,47 @@
                                           <SVGPath content="M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18zM19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" scaleX="4.0" scaleY="4.0" style="-fx-fill: -onPrimary;" translateY="-5.0" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="LoadAndSaveCSVButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleLoadAndSaveCSVButton" prefHeight="85.0" prefWidth="471.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Load and Save CSV">
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="592.0" prefWidth="394.0">
+                                 <children>
+                                    <JFXButton fx:id="SettingHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingPageButton" prefHeight="103.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Setting">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="50.0" right="50.0" />
+                                          <Insets bottom="50.0" left="50.0" right="50.0" />
+                                       </VBox.margin>
+                                       <graphic>
+                                          <SVGPath content="M17.41,6.59L15,5.5l2.41-1.09L18.5,2l1.09,2.41L22,5.5l-2.41,1.09L18.5,9L17.41,6.59z M21.28,12.72L20.5,11l-0.78,1.72 L18,13.5l1.72,0.78L20.5,16l0.78-1.72L23,13.5L21.28,12.72z M16.24,14.37l1.94,1.47l-2.5,4.33l-2.24-0.94 c-0.2,0.13-0.42,0.26-0.64,0.37L12.5,22h-5l-0.3-2.41c-0.22-0.11-0.43-0.23-0.64-0.37l-2.24,0.94l-2.5-4.33l1.94-1.47 C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37l-1.94-1.47l2.5-4.33l2.24,0.94c0.2-0.13,0.42-0.26,0.64-0.37L7.5,6h5l0.3,2.41 c0.22,0.11,0.43,0.23,0.64,0.37l2.24-0.94l2.5,4.33l-1.94,1.47c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14 c0-1.66-1.34-3-3-3s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="LoadAndSaveCSVHelpButton" buttonType="RAISED" contentDisplay="TOP" onAction="#handleLoadAndSaveCSVButton" prefHeight="110.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Load and Save CSV">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="50.0" left="50.0" right="50.0" />
                                        </VBox.margin>
                                        <graphic>
                                           <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
+                                    <JFXButton fx:id="UserManagerHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="123.0" onAction="#handleUserManagerButton" prefHeight="99.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="User Manager">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <graphic>
+                                          <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 ZM17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5zM18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
+                                       </graphic>
+                                       <VBox.margin>
+                                          <Insets left="50.0" right="50.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
                               </VBox>
                            </children>
                            <StackPane.margin>
@@ -154,4 +179,8 @@
          </stylesheets>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

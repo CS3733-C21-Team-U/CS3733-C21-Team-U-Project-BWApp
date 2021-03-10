@@ -28,6 +28,8 @@ public class AdminMainHelpController {
     @FXML public JFXButton ViewUserHelpButton;
     @FXML public JFXButton LoadAndSaveCSVButton;
     @FXML public JFXButton PathFindingHelpButton;
+    @FXML public JFXButton CovidHelpButton;
+    @FXML public JFXButton AboutHelpButton;
 
 
 
@@ -123,5 +125,29 @@ public class AdminMainHelpController {
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
+    }
+
+    public void handleMapBuilderButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/MapBuilderHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
+
+    public void handleUserManagerButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/UserManagerHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }
