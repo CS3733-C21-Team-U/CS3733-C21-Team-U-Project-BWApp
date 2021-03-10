@@ -71,7 +71,7 @@ public class MobileCovidSurveyController {
 
 
 
-        Comment primaryComment = new Comment("COVID Survey Incoming", (App.userService.getActiveUser().getName() + "is making a request to enter the hospital. Their covid risk is " + covidRisk),
+        Comment primaryComment = new Comment("COVID Survey Incoming", (App.userService.getActiveUser().getName() + " is making a request to enter the hospital. Their covid risk is " + covidRisk),
                 App.userService.getActiveUser().getUserName(), CommentType.PRIMARY);
         Timestamp t = new Timestamp(System.currentTimeMillis());
 
