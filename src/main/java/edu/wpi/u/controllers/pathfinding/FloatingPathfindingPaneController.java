@@ -154,13 +154,18 @@ public class FloatingPathfindingPaneController {
                         stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, sNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
                     }
-                    String walking;
-                    if(sNode.getNodeType().equals("HALL")) walking = "hallway";
-                    else if(sNode.getNodeType().equals("WALK")) walking = "walkway";
-                    else walking = sNode.getLongName();
+                    String walking = getContextLocation(sNode);
+//                    if(sNode.getNodeType().equals("HALL")) walking = "hallway";
+//                    else if(sNode.getNodeType().equals("WALK")) walking = "walkway";
+//                    else walking = sNode.getLongName();
 
                     if(sNode.getLongName().equals("Admitting")) {}
-                    else {stepHBoxContainer = createDirectionBox(angleDescription + " down " + walking, iconID);
+                    else if(walking.equals("")) {
+                        stepHBoxContainer = createDirectionBox(angleDescription, iconID);
+                        textDirectionContainer.getChildren().add(stepHBoxContainer);
+                        lastTurnNode = sNode;
+                    }
+                    else {stepHBoxContainer = createDirectionBox(angleDescription + " near " + walking, iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                     lastTurnNode = sNode;
                 }}
@@ -198,9 +203,22 @@ public class FloatingPathfindingPaneController {
     private String getContextLocation(Node givenNode){
         LinkedList<Node> adjNodes = givenNode.whatAreAdjNodes();
         LinkedList<Node> adjNodesTrimmed = new LinkedList<>();
+
+        LinkedList<Node> SecondLevel =  new LinkedList<>();
         for(Node curNode: adjNodes){
-            if(!curNode.getNodeType().equals("WALK") || !curNode.getNodeType().equals("HALL")){
+            if(!curNode.getNodeType().equals("WALK") && !curNode.getNodeType().equals("HALL")){
                 adjNodesTrimmed.add(curNode);
+            }
+        }
+        if(adjNodesTrimmed.isEmpty()) {
+            for(Node n : adjNodes) {
+                SecondLevel.addAll(n.whatAreAdjNodes());
+                SecondLevel.remove(givenNode);
+            }
+            for(Node curNode: SecondLevel){
+                if(!curNode.getNodeType().equals("WALK") && !curNode.getNodeType().equals("HALL")){
+                    adjNodesTrimmed.add(curNode);
+                }
             }
         }
         int curMinDistance = Integer.MAX_VALUE;
