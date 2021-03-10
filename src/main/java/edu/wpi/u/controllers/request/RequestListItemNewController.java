@@ -74,10 +74,10 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         locationValidator.setMessage("Valid Location Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        ArrayList<String> assingneeList = new ArrayList<String>(App.userService.getEmployeeIDByType(currSpecificRequest.getRelevantRole()).keySet());
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , assingneeList);
-        Set<String> strings = App.mapService.getLongNames().keySet();
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , strings);
+        existingAssignee = App.userService.getEmployeeIDByType(currSpecificRequest.getRelevantRole()).keySet();
+        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+        longNamestoID  = App.mapService.getLongNames();
+        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
 //
 //
 ////        //Set Existing values for fields
@@ -93,7 +93,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 ////        }
 ////
 ////        makeListView( locationNames, editLocationsListView);
-        specificTextFields = generateSpecificFields();
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
@@ -112,27 +111,27 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
      * Pull from fields, and add request
      */
     public void handleSaveButton(){
-//        ArrayList<String> locationsToAdd = new ArrayList<String>();
-//        for(String s :editLocationsListView.getItems()){
-//            locationsToAdd.add(longNamestoID.get(s));
-//        }
-//        ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
-//
-//
-//        Random rand = new Random();
-//        int requestID = rand.nextInt();
-//        String ID = Integer.toString(requestID);//make a random id
-//
-//            //make components of specifc request,  then set them
-//        Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
-//            App.userService.getActiveUser().getName(), CommentType.PRIMARY);
-//
-//        Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
-//            locationsToAdd, assigneesToAdd, primaryComment);
-//
-//        App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
-//        App.newReqVBox.getChildren().clear();
-//        App.VBoxChanged.set(!App.VBoxChanged.get());
+        ArrayList<String> locationsToAdd = new ArrayList<String>();
+        for(String s :editLocationsListView.getItems()){
+            locationsToAdd.add(longNamestoID.get(s));
+        }
+        ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
+
+
+        Random rand = new Random();
+        int requestID = rand.nextInt();
+        String ID = Integer.toString(requestID);//make a random id
+
+            //make components of specifc request,  then set them
+        Comment primaryComment = new Comment(editTitleField.getText(), editDescriptionField.getText(),
+            App.userService.getActiveUser().getName(), CommentType.PRIMARY);
+
+        Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
+            locationsToAdd, assigneesToAdd, primaryComment);
+
+        App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
+        App.newReqVBox.getChildren().clear();
+        App.VBoxChanged.set(!App.VBoxChanged.get());
 
     }
 

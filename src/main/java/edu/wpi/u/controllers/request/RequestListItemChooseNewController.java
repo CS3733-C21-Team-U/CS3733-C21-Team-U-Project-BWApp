@@ -24,54 +24,76 @@ public class RequestListItemChooseNewController extends AnchorPane {
 
 
     public void handleNewMaintenanceRequest() throws IOException {
+        App.newNodeType = "Maintenance";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewComputerRequest() throws IOException {
+        App.newNodeType = "Computer";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewMedicineRequest() throws IOException {
+        App.newNodeType = "Medicine";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewGiftRequest() throws IOException {
+        App.newNodeType = "Gift";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewLaundryRequest() throws IOException {
+        App.newNodeType = "Laundry";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewAudioVisualRequest() throws IOException {
+        App.newNodeType = "AudioVisual";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewFloralRequest() throws IOException {
+        App.newNodeType = "Floral";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewSanitationRequest() throws IOException {
+        App.newNodeType = "Sanitation";
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
+    public void handleNewSecurityRequest() throws IOException {
         App.newNodeType = "Security";
         App.newReqVBox.getChildren().clear();
         App.newReqVBox.getChildren().add(new RequestListItemNewController());
         App.VBoxChanged.set(!App.VBoxChanged.get());
     }
-    public void handleNewComputerRequest(){
-        App.newNodeType = "Computer";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewMedicineRequest(){
-        App.newNodeType = "Medicine";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewGiftRequest(){
-        App.newNodeType = "Gift";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewLaundryRequest(){
-        App.newNodeType = "Laundry";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewAudioVisualRequest(){
-        App.newNodeType = "AudioVisual";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewFloralRequest(){
-        App.newNodeType = "AudioVisual";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewSanitationRequest(){
-        App.newNodeType = "AudioVisual";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewSecurityRequest(){
-        App.newNodeType = "Security";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
-    }
-    public void handleNewReligiousRequest(){
+    public void handleNewReligiousRequest() throws IOException {
         App.newNodeType = "Religious";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
     }
-    public void handleNewFoodRequest(){
+    public void handleNewFoodRequest() throws IOException {
         App.newNodeType = "Food";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
     }
-    public void handleNewLanguageRequest(){
+    public void handleNewLanguageRequest() throws IOException {
         App.newNodeType = "Language";
-        this.parent.needUpdate.set(!this.parent.needUpdate.get());
+        App.newReqVBox.getChildren().clear();
+        App.newReqVBox.getChildren().add(new RequestListItemNewController());
+        App.VBoxChanged.set(!App.VBoxChanged.get());
     }
 
 
