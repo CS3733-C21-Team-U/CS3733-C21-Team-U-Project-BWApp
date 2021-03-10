@@ -18,15 +18,11 @@ public class AdminMainHelpController {
     @FXML
     public StackPane newMainPageStackPane;
     @FXML public Text weAreHereToHelpTitle;
-    @FXML public JFXButton LogInHelpButton;
-    @FXML public JFXButton TwoFactorAHelpButton;
-    @FXML public JFXButton ForgotPassHelpButton;
     @FXML public JFXButton ContactUsHelpButton;
     @FXML public JFXButton SettingHelpButton;
     @FXML public JFXButton AddUserHelpButton;
     @FXML public JFXButton EditUserHelpButton;
     @FXML public JFXButton ViewUserHelpButton;
-    @FXML public JFXButton LoadAndSaveCSVButton;
     @FXML public JFXButton PathFindingHelpButton;
 
 
@@ -123,5 +119,29 @@ public class AdminMainHelpController {
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
 
+    }
+
+    public void handleMapBuilderButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/MapBuilderHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
+
+    public void handleUserManagerButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/UserManagerHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }

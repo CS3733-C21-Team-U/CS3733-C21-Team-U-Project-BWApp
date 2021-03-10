@@ -53,7 +53,7 @@
                                           <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="MapBuilderHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="10.0" onAction="#handlePathFindingButton" prefHeight="106.0" prefWidth="360.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Map Manager">
+                                    <JFXButton fx:id="MapBuilderHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="10.0" onAction="#handleMapBuilderButton" prefHeight="106.0" prefWidth="360.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="Map Builder">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -141,7 +141,7 @@
                                           <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="UserManagerHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="123.0" onAction="#handleLoadAndSaveCSVButton" prefHeight="99.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="User Manager">
+                                    <JFXButton fx:id="UserManagerHelpButton" buttonType="RAISED" contentDisplay="TOP" layoutX="60.0" layoutY="123.0" onAction="#handleUserManagerButton" prefHeight="99.0" prefWidth="294.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="User Manager">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
