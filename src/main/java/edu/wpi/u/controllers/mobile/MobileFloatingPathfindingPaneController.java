@@ -228,6 +228,16 @@ public class MobileFloatingPathfindingPaneController {
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) {
         System.out.println("Help!");
     }
+
+    public String getParkingSpace() {
+        parkingSpace = startNodeField.getText();
+        return parkingSpace;
+    }
+
+    public void setDestination(){
+      //  destination = call upon a DB function depending on COVID survey result.
+        endNodeField.setText(destination);
+    }
 }
 
 
