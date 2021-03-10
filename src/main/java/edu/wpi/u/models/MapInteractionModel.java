@@ -38,9 +38,11 @@ public class MapInteractionModel {
     public String toggledNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
-    public boolean pathThingy = false;
+    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);
+    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);
     public String aline = "";
     public double alineValue;
+
 
 
     public void addToNodeIdList(String nodeID){
