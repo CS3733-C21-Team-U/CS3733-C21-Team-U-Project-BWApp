@@ -199,7 +199,7 @@ public class MapData extends Data{
         }
         return 1;
     }
-    
+
     public void loadGraph(MapManager mm){
         try{
             Statement ps = conn.createStatement();
