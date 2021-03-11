@@ -12,6 +12,3 @@ public enum Role {
     DEFAULT,
     GUEST,
 }
-/*
-TODO : Rename to Role and add all hospital roles / guests
- */

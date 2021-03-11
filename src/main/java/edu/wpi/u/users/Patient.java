@@ -14,7 +14,7 @@ public class Patient extends User{
 
     public Patient() {
     }
-    
+
     public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
         super(userID, name, accountName, password, email, type, phoneNumber, deleted);
         this.appointments = appointments;
