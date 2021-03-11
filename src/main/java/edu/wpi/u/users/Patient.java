@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Patient extends User{
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
+    protected ArrayList<Appointment> appointments = new ArrayList<>(); // todo : remove
     protected String providerName;
     protected String parkingLocation;
     protected String recommendedParkingLocation;

@@ -165,7 +165,7 @@ public abstract class User extends RecursiveTreeObject<User> {
     public String getUserID() {
         return userID;
     }
-    
+
     public String getName() {
         return name;
     }
