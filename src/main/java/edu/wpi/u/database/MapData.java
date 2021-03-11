@@ -81,21 +81,6 @@ public class MapData extends Data{
         return result;
     }
 
-    public int updFloor(String node_id, String new_floor_number) {
-        try {
-            String str = "update Nodes set floor=? where nodeID=?";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, new_floor_number);
-            ps.setString(2, node_id);
-            ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Failed to update floor #");
-            return 0;
-        }
-        return 1;
-    }
-
     public int updateNodeType(String node_id, String newNodeType) {
         try {
             String str = "update Nodes set nodeType=? where nodeID=?";
@@ -106,21 +91,6 @@ public class MapData extends Data{
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to update node type in the database");
-            return 0;
-        }
-        return 1;
-    }
-
-    public int updBuilding(String node_id, String new_building) {
-        try {
-            String str = "update Nodes set building=? where nodeID=?";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, new_building);
-            ps.setString(2, node_id);
-            ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Failed to update building");
             return 0;
         }
         return 1;
@@ -167,22 +137,6 @@ public class MapData extends Data{
             System.out.println("Failed to delete node");
             return 0;
         }
-        return 1;
-    }
-
-    public int delNodeCoord(int x, int y) {
-        try {
-            String str = "delete from Nodes where xcoord=? and ycoord=?";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDouble(1, x);
-            ps.setDouble(2, y);
-            ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Failed to delete node");
-            return 0;
-        }
-        System.out.println("Successful delete");
         return 1;
     }
 
@@ -245,23 +199,7 @@ public class MapData extends Data{
         }
         return 1;
     }
-
-    public int delEdgeByNodes(String start_node_id, String end_node_id){
-        try {
-            String str = "delete from Edges where startID=? and endID=?";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, start_node_id);
-            ps.setString(2, end_node_id);
-            ps.execute();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return 0;
-        }
-        return 1;
-    }
-
+    
     public void loadGraph(MapManager mm){
         try{
             Statement ps = conn.createStatement();
