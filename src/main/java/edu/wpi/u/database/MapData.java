@@ -15,6 +15,14 @@ public class MapData extends Data{
         getLongnames();
     }
 
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
+    public MapData(String testURL){
+        testConnect(testURL);
+    }
+
     public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
         try {
             String str =

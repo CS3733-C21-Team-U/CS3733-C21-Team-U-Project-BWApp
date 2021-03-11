@@ -55,11 +55,11 @@
                         </HBox>
                         <JFXTextField fx:id="editTitleField" labelFloat="true" promptText="Title" />
                         <JFXTextArea fx:id="editDescriptionField" labelFloat="true" promptText="Description" />
-                        <JFXDatePicker fx:id="editDateNeededField" promptText="Date Needed" />
+                        <JFXDatePicker fx:id="editDateNeededField" editable="false" promptText="Date Needed" />
                         <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
                         <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
                            <children>
-                              <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
+                              <JFXButton onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -81,21 +81,21 @@
                <children>
                   <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="-72.0" prefHeight="550.0" prefWidth="430.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" prefHeight="140.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <JFXTextField fx:id="editAssigneesField" labelFloat="true" promptText="Assignees">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="20.0" />
                                        </VBox.margin>
                                     </JFXTextField>
-                                    <JFXButton onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -107,17 +107,20 @@
                               <Insets top="100.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" prefHeight="140.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations" />
-                                    <JFXButton onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
+                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin></JFXTextField>
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>

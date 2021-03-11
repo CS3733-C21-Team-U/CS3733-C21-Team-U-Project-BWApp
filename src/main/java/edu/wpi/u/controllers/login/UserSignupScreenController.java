@@ -69,15 +69,15 @@ public class UserSignupScreenController {
         });
 
         // todo : fix
-        RegexValidator validator2 = new RegexValidator();
-        validator2.setRegexPattern("/^\\d{10}$/");
-        validator2.setMessage("Phone number is invalid");
-        phonenumberTextField.getValidators().add(validator2);
-        phonenumberTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                phonenumberTextField.validate();
-            }
-        });
+//        RegexValidator validator2 = new RegexValidator();
+//        validator2.setRegexPattern("/^\\d{10}$/");
+//        validator2.setMessage("Phone number is invalid");
+//        phonenumberTextField.getValidators().add(validator2);
+//        phonenumberTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
+//            if (!newVal) {
+//                phonenumberTextField.validate();
+//            }
+//        });
 
         RequiredFieldValidator validator3 = new RequiredFieldValidator();
         usernameTextField.getValidators().add(validator3);

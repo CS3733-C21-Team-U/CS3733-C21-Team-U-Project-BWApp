@@ -39,6 +39,7 @@ import java.util.Set;
 
 
 import static edu.wpi.u.users.Role.ADMIN;
+import static edu.wpi.u.users.Role.GUEST;
 
 public class NewMainPageController {
 
@@ -54,6 +55,7 @@ public class NewMainPageController {
 
     public Tab adminTab2;
     public Tab adminTab1;
+    public Tab adminTab3;
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
@@ -67,6 +69,7 @@ public class NewMainPageController {
     public JFXButton collapseButton;
     public Tab HelpMainPageTab;
     public Tab AdminHelpMainPageTab;
+    public Tab settingsTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -144,6 +147,8 @@ public class NewMainPageController {
                 adminTab1.setDisable(false);
                 adminTab2.setStyle("-fx-opacity: 1");
                 adminTab2.setDisable(false);
+                adminTab3.setStyle("-fx-opacity: 1");
+                adminTab3.setDisable(false);
                 HelpMainPageTab.setDisable(true);
                 HelpMainPageTab.setStyle("-fx-opacity: 0");
                 AdminHelpMainPageTab.setDisable(false);
@@ -154,10 +159,20 @@ public class NewMainPageController {
                 adminTab1.setDisable(true);
                 adminTab2.setStyle("-fx-opacity: 0");
                 adminTab2.setDisable(true);
+                adminTab3.setStyle("-fx-opacity: 0");
+                adminTab3.setDisable(true);
                 HelpMainPageTab.setDisable(false);
                 HelpMainPageTab.setStyle("-fx-opacity: 1");
                 AdminHelpMainPageTab.setDisable(true);
                 AdminHelpMainPageTab.setStyle("-fx-opacity: 0");
+            }
+
+            if(App.userService.getActiveUser().getType() == GUEST){
+                settingsTab.setStyle("-fx-opacity: 0");
+                settingsTab.setDisable(true);
+            }else{
+                settingsTab.setStyle("-fx-opacity: 1");
+                settingsTab.setDisable(false);
             }
 
     }

@@ -22,58 +22,14 @@ public class UserData extends Data{
 
     public UserData (){
         connect();
-        //dropGuests(); // TODO : Stop dropping values for demos
-//        dropEmployee();
-        //userID, name, accountName, password, email, type, phoneNumber, locationNodeID, deleted
+    }
 
-        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.DOCTOR, "9148394600", false));
-        //addEmployee(new Employee("debug", "debug", "bob", "12345", "debug", Role.ADMIN, "debug", false));
-        //addPatient(new Patient("debug","debug","debug","debug","debug", Role.PATIENT,"9998887777","UDEPT00101",false,new ArrayList<Appointment>(),"debug","UHALL00101", "debug"));
-        /*
-        String guestID,
-        String name,
-        Role type,
-        Timestamp visitDate,
-        String visitReason,
-        boolean deleted)
-         */
-        //addGuest(new Guest("testDebug", "debug", Role.GUEST, new Timestamp(System.currentTimeMillis()), "This is a reason for visit", false));
-        /*
-        String guestID,
-        String name,
-        Timestamp visitDate,
-        String visitReason,
-        boolean deleted
-
-        String userID,
-        String name,
-        String accountName,
-        String password,
-        String email,
-        Role type,
-        String phoneNumber,
-        String locationNodeID,
-        boolean deleted,
-        ArrayList<Appointment> appointments,
-        String providerName,
-        String parkingLocation,
-        String recommendedParkingLocation
-
-
-         StringProperty userIDfx,
-         StringProperty namefx,
-         StringProperty userNamefx,
-         StringProperty passwordfx,
-         StringProperty typefx,
-         StringProperty phoneNumberfx,
-         StringProperty emailfx,
-         BooleanProperty deletedfx,
-         StringProperty locationNodeIDfx) {
-         printPatients();
-         printGuest();
-         printEmployees();
-*/
-
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
+    public UserData(String testURL){
+        testConnect(testURL);
     }
 
     /**
@@ -219,7 +175,7 @@ public class UserData extends Data{
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
      */
     public String createEmployee(Employee employee){
-        if (checkUsername(employee.getUserName()).equals("")){
+        if (checkUsername(employee.getUserName()).equals("Employees")){ // TODO: Will Check
             return "Employee with that username already exists";
         }
         else {
@@ -299,10 +255,11 @@ public class UserData extends Data{
      */
     public HashMap<String, String> getEmployeeNamesByType(String type){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select userName,name from Employees where type=?";
+        String str = "select userName,name from Employees where type=? or type=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,type);
+            ps.setString(2,"ADMIN");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.put(rs.getString("username"), rs.getString("name"));
@@ -379,7 +336,7 @@ public class UserData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newPhoneNumber);
-            ps.setString(2, typeID);
+            ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -405,7 +362,7 @@ public class UserData extends Data{
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newEmail);
-            ps.setString(2, typeID);
+            ps.setString(2, userID);
             ps.executeUpdate();
             ps.close();
         }
@@ -559,7 +516,7 @@ public class UserData extends Data{
             ps.setString(2,password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                String patientID = rs.getString("userID");
+                String patientID = rs.getString("patientID");
                 String name = rs.getString("name");
                 Role role = Role.valueOf(rs.getString("type")); // TODO : Refactor type to role
                 String phonenumber = rs.getString("phonenumber");
@@ -834,7 +791,7 @@ public class UserData extends Data{
                 String str2 = "select * from Patients where password=? and userName=?";
                 PreparedStatement ps2 = conn.prepareStatement(str2);
                 ps2.setString(1,password);
-                ps.setString(2,userName);
+                ps2.setString(2,userName);
                 ResultSet rs2 = ps2.executeQuery();
                 if(rs2.next()){
                     rs2.close();
@@ -928,6 +885,8 @@ public class UserData extends Data{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, nodeID);
             ps.setString(2, patientID);
+            ps.executeUpdate();
+            ps.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1181,7 +1140,7 @@ public class UserData extends Data{
      * @param guest the object containing all of the information on the user
      */
     public void updGuest(Guest guest){
-        String str = "update Guests set name=? and visitDate=? and visitReason=? and deleted=? where guestID=?";
+        String str = "update Guests set name=?, visitDate=?, visitReason=?, deleted=? where guestID=?";
         try {
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, guest.getName());

@@ -1,20 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.adminhelp.ViewUserHelpPage">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_RIGHT" layoutX="20.0" layoutY="20.0" prefHeight="68.0" prefWidth="1415.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-               <graphic>
-                  <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-               </graphic>
-            </JFXButton>
+            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+               <children>
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                     <graphic>
+                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 ZM17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5zM18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z" scaleX="2.0" scaleY="2.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </SVGPath>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How to Use View User" wrappingWidth="475.15234375">
+               <font>
+                  <Font name="Serif Bold" size="41.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="714.0" prefWidth="1582.0">
+               <children>
+                  <VBox prefHeight="711.0" prefWidth="657.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" text="1.Click User Manager&#10;&#10;2. Shows a list of all users and all of their information, excluding Guests&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
+                           <font>
+                              <Font name="HoloLens MDL2 Assets" size="25.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="684.0" prefWidth="929.0">
+                     <children>
+                        <ImageView fitHeight="229.0" fitWidth="238.0" translateX="220.0">
+                           <image>
+                              <Image url="@../Images/usermanager.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="127.0" fitWidth="719.0">
+                           <image>
+                              <Image url="@../Images/edituser.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2" translateX="325.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
    </children>

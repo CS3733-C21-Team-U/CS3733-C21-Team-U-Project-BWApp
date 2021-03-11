@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,15 +13,30 @@ import java.util.Date;
 public class RequestService {
 
 
-  static RequestData rd = new RequestData();
+  public static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
+  public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
+  public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
+  public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
+
   public RequestService() {
+    rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
     for (SpecificRequest x : this.activeRequests){
 
       System.out.println("Req: "+ x.getGenericRequest().getRequestID());
     }
+  }
+
+  /**
+   * Second constructor for RS used to pass through a connection to second database
+   * Note: SHOULD BE SAME AS NO ARGS except for where instance of rd is created
+   * @param testURL
+   */
+  public RequestService(String testURL){
+    rd  = new RequestData(testURL);
+    this.activeRequests = rd.loadActiveRequests();
   }
 
   public ArrayList<String> getAssignees(String requestID){
@@ -56,11 +72,12 @@ public class RequestService {
 
   public void updateRequest(SpecificRequest result) {
     rd.updateRequest(result);
+    this.activeRequests = rd.loadActiveRequests();
   }
 
   public void resolveRequest(SpecificRequest result, Comment resolveComment) {
     result.getGenericRequest().resolveRequest(resolveComment);
-    this.activeRequests.remove(result);
+    //this.activeRequests.remove(result);
     rd.resolveRequest(result.getGenericRequest().getRequestID(),resolveComment);
   }
 
@@ -72,6 +89,10 @@ public class RequestService {
   public ArrayList<SpecificRequest> getRequests() {
       return this.activeRequests;
     }
+
+  public RequestData getRd(){
+    return this.rd;
+  }
 
 }
 

@@ -40,7 +40,7 @@
                   <JFXButton fx:id="addUserButton" onAction="#handleAddUserButton" styleClass="button-contained" text="Add User" />
                </children>
             </HBox>
-            <JFXTreeTableView fx:id="treeTableView" />
+            <JFXTreeTableView fx:id="treeTableView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" />
          </children>
       </VBox>
    </children>

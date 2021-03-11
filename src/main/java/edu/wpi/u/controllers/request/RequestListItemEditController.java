@@ -40,7 +40,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXTextArea editDescriptionField;
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
-
     public JFXTextField editAssigneesField;
 
     @FXML
@@ -70,18 +69,18 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
-        assigneeValidator.setMessage("Valid Employee Required");
+        assigneeValidator.setMessage("Valid Assignee Required");
         RequiredFieldValidator locationValidator = new RequiredFieldValidator();
-        locationValidator.setMessage("Valid Employee Required");
+        locationValidator.setMessage("Valid Location Required");
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
-        longNamestoID = App.mapService.getLongNames();
         existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
         AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+        //longNamestoID = App.mapService.getLongNames(parent.request.getGenericRequest().);
+        longNamestoID  = App.mapService.getLongNames();
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
 
 
-//        parent.request.
         //Set Existing values for fields
         typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
         editTitleField.setText( parent.request.getGenericRequest().getTitle());
@@ -180,7 +179,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             j.setText( parent.request.getSpecificData().get(i));
 
             ans[i] = j;
-            extraFieldsVBox.getChildren().add(j);
+            Region r1 = new Region();
+            r1.setPrefHeight(25);
+            extraFieldsVBox.getChildren().add(0, r1);
+            extraFieldsVBox.getChildren().add(0, j);
         }
         return ans;
     }
@@ -237,12 +239,11 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
         }
 
-    /*
-    App.mapService.getLongNames(string NodeID);
 
 
 
 
-     */
+
+
 
 }

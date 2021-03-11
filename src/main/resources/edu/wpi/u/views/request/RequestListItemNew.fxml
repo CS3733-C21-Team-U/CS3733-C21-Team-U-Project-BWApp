@@ -7,21 +7,17 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-color: white; -fx-background-radius: 7px;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.request.RequestListItemAddController">
-   <stylesheets>
-      <URL value="@../css/BaseStyle.css" />
-      <URL value="@../css/LightTheme.css" />
-   </stylesheets>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-radius: 7px; -fx-background-color: -backgroundAlt;" stylesheets="@../css/BaseStyle.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="590.0" prefWidth="1330.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,7 +32,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </SVGPath>
-                              <Label fx:id="titleLabel" prefWidth="382.0" text="Add Request" wrapText="true">
+                              <Label fx:id="titleLabel" prefWidth="382.0" text="New Request" wrapText="true">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
@@ -55,11 +51,11 @@
                         </HBox>
                         <JFXTextField fx:id="editTitleField" labelFloat="true" promptText="Title" />
                         <JFXTextArea fx:id="editDescriptionField" labelFloat="true" promptText="Description" />
-                        <JFXDatePicker fx:id="editDateNeededField" promptText="Date Needed" />
+                        <JFXDatePicker fx:id="editDateNeededField" editable="false" promptText="Date Needed" />
                         <JFXTimePicker fx:id="editTimeNeededField" promptText="Time Needed" />
                         <HBox fx:id="pushDown2" prefHeight="36.0" prefWidth="443.0">
                            <children>
-                              <JFXButton onAction="#handleSaveButton" styleClass="button-contained" text="SAVE (NOT WORKING)" />
+                              <JFXButton onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -79,23 +75,23 @@
             </Separator>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="30.0" prefHeight="560.0" prefWidth="430.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                  <VBox fx:id="commentsRoot" alignment="TOP_CENTER" layoutX="-109.0" layoutY="-72.0" prefHeight="550.0" prefWidth="430.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" prefHeight="140.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <JFXTextField fx:id="editAssigneesField" labelFloat="true" promptText="Assignees">
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets bottom="20.0" />
                                        </VBox.margin>
                                     </JFXTextField>
-                                    <JFXButton onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#deleteAssignee" prefWidth="130.0" styleClass="button-outlined" text="Delete Assignee">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -107,17 +103,20 @@
                               <Insets top="100.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0">
+                        <HBox maxWidth="-Infinity" prefHeight="140.0" prefWidth="400.0">
                            <children>
                               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations" />
-                                    <JFXButton onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
+                                    <JFXTextField fx:id="editLocationsField" labelFloat="true" promptText="Locations">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin></JFXTextField>
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
+                                    <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#deleteLocation" prefWidth="130.0" styleClass="button-outlined" text="Delete Location">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
@@ -156,4 +155,7 @@
       </HBox>
       <Separator layoutX="354.0" layoutY="575.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
+   <effect>
+      <DropShadow />
+   </effect>
 </fx:root>

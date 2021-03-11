@@ -16,20 +16,22 @@ import java.util.Random;
 
 public class UserService {
 
-    static UserData ud = new UserData();
+    static UserData ud;
 
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
-    //HashMap<String, String> easyValidate;
+    //HashMap<String, String> easyValidate; // todo : iteration 4?
 
     public String typedUsername;
 
     User activeUser;
     Guest activeGuest;
 
+    //TODO : Add getEmps, getGuests
     public UserService() {
+        ud = new UserData();
         this.setEmployees();
         this.setGuests();
         this.setPatients();
@@ -52,6 +54,18 @@ public class UserService {
         return result;
     }
 
+    /**
+     * Constructor that takes in a URL to create test database
+     * SHOULD BE SAME AS NO ARGS except where instance of ud is created
+     * @param testURL - URL of testDB passed down from testing class
+     */
+    public UserService(String testURL){
+        ud = new UserData(testURL);
+        this.setEmployees();
+        this.setGuests();
+    }
+
+    //public void addAuthyUser(String name,)
     /**
      * Sets the list of patients
      */
@@ -246,7 +260,9 @@ public class UserService {
      * @param type Employees or Patients (table name)
      */
     public void changePassword(String username, String newPassword, String type){
-        this.getActiveUser().setPassword(newPassword);
+        if(this.getActiveUser() != null){
+            this.getActiveUser().setPassword(newPassword);
+        }
         ud.changePassword(username,newPassword, type);
     }
 
@@ -315,7 +331,7 @@ public class UserService {
      */
     public void addPatient(String name, String userName, String password, String email, Role role, String phonenumber, boolean deleted, ArrayList<Appointment> appointments,String providerName, String parkingLocation,String recommendedParkingLocation){
         Random rand = new Random();
-        int patientID = rand.nextInt();
+        int patientID = Math.abs(rand.nextInt());
         String id = Integer.toString(patientID);
         // todo: check
         Patient patient = new Patient(id,name,userName,password,email,role,phonenumber,deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
@@ -384,12 +400,11 @@ public class UserService {
      */
     public void addEmployee(String name, String userName, String password, String email, Role type, String phoneNumber, boolean deleted){
         Random rand = new Random();
-        int employeeID = rand.nextInt();
+        int employeeID = Math.abs(rand.nextInt());
         String id = Integer.toString(employeeID);
         //String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted
         Employee newEmployee = new Employee(id,name,userName,password,email, type, phoneNumber, deleted);
-        System.out.println(ud.createEmployee(newEmployee));
-        ud.addEmployee(newEmployee);
+        ud.createEmployee(newEmployee); // Fixed: was trying to add the employee in the print statement, and call to addEmployee
         this.employees.add(newEmployee);
     }
 
@@ -400,7 +415,7 @@ public class UserService {
      */
     public void addGuest(String name, Timestamp visitDate, String visitReason, boolean deleted){
         Random rand = new Random();
-        int employeeID = rand.nextInt();
+        int employeeID = Math.abs(rand.nextInt());
         String id = Integer.toString(employeeID);
         Guest newGuest = new Guest(id, name, Role.GUEST, visitDate, visitReason, deleted);
         ud.addGuest(newGuest);
@@ -432,7 +447,7 @@ public class UserService {
      */
     public String deleteGuest(String guestID) {
         for (Guest g : this.guests) {
-            if (g.getUserID().equals(guestID)) {
+            if (g.getGuestID().equals(guestID)) {
                 this.guests.remove(g);
                 //this.users.remove(g);
                 ud.delGuest(g);
@@ -470,7 +485,7 @@ public class UserService {
      */
     public String updateGuest(String guestID, String name, Timestamp visitDate, String visitReason, boolean deleted){
         for(Guest g : this.guests){
-            if(g.getUserID().equals(guestID)){
+            if(g.getGuestID().equals(guestID)){
                 g.editGuest(name, visitDate, visitReason, deleted);
                 ud.updGuest(g);
                 return "";

@@ -127,12 +127,11 @@ public class AdminMainHelpController {
 
     }
 
-    public void handleCovidPageButton(ActionEvent actionEvent) throws IOException {
-
+    public void handleMapBuilderButton(ActionEvent actionEvent) {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/CovidInfoPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/MapBuilderHelpPage.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -140,8 +139,19 @@ public class AdminMainHelpController {
         anchor.getChildren().add(root);
     }
 
-    public void handleAboutPageButton(ActionEvent actionEvent)throws IOException  {
+    public void handleUserManagerButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/adminhelp/UserManagerHelpPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
+    }
 
+    public void handleAboutUsButton(ActionEvent actionEvent) {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = null;
         try {
@@ -151,6 +161,17 @@ public class AdminMainHelpController {
         }
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
+    }
 
+    public void handleCovid19UserButton(ActionEvent actionEvent) {
+        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/CovidInfoPage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().clear();
+        anchor.getChildren().add(root);
     }
 }

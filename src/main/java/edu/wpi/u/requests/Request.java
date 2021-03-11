@@ -119,7 +119,12 @@ public class Request {
 
     public boolean isResolved(){
         if(comments.size() == 0){return false;}
-        return comments.get(comments.size() - 1).type == CommentType.RESOLVE;
+        System.out.println(getTitle() +":"+comments.get(comments.size() - 1).type);
+        for(Comment s: comments){
+            if(s.type == CommentType.RESOLVE){return true;}
+        }
+        return false;
+        //return comments.get(comments.size() - 1).type == CommentType.RESOLVE;
     }
 
     public void addComment(Comment c) { this.comments.add(c); }

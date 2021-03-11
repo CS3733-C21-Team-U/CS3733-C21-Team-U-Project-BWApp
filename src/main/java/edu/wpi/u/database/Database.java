@@ -15,9 +15,15 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
+    // Url for live code
     private final static String url = "jdbc:derby:BWdb;create=true";
+    // Url for testing
+    private final static String testURL = "jdbc:derby:testDB;create=true";
+    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
+    /**
+     *  Constructor for database that is used for DB
+     */
     private Database() {
         driver();
         connect();
@@ -25,7 +31,20 @@ public class Database {
         createTables();
     }
 
-    //Bill Pugh solution
+    /**
+     * Constructor for database that is called in 2nd singleton to create a second DB for testing
+     * @param urlIn - URL of testing db, has to be defined in this file
+     */
+    public Database(String urlIn) {
+        driver();
+        connect(urlIn);
+        makeCSVDependant(false);
+        createTables();
+    }
+
+    /**
+     * Singleton class for live DB (BWDB)
+     */
     private static class SingletonHelper {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
@@ -33,11 +52,26 @@ public class Database {
 
     /**
      * Singleton helper to keep Database instance singular
-     *
      * @return the database class reference
      */
     public static Database getDB() {
         return SingletonHelper.db;
+    }
+
+    /**
+     * Single class for testing DB
+     */
+    private static class SingletonHelperTest {
+        //Nested class is referenced after getDB() is called
+        private static final Database dbStaging = new Database(testURL);
+    }
+
+    /**
+     * Singleton helped to keep Test DB instance singular
+     * @return the database class reference
+     */
+    public static Database getDBTest() {
+        return SingletonHelperTest.dbStaging;
     }
 
     /**
@@ -58,6 +92,20 @@ public class Database {
     public static void connect() {
         try {
             conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
+        } catch (Exception e) {
+            System.out.println("Connection failed");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates the connection to the database by passing in a url, mainly used for url of testing db
+     * @param urlIn - URL of database, used for url of testDB
+     */
+    public static void connect(String urlIn) {
+        try {
+            conn = DriverManager.getConnection(urlIn);
             conn.setAutoCommit(true);
         } catch (Exception e) {
             System.out.println("Connection failed");
@@ -233,6 +281,37 @@ public class Database {
         return false;
     }
 
+    public void dropAllValues(){
+        try {
+            String str;
+            Statement s = conn.createStatement();
+            str = "delete from Comments";
+            s.execute(str);
+            str = "delete from Permissions";
+            s.execute(str);
+            str = "delete from Locations";
+            s.execute(str);
+            str = "delete from Assignments";
+            s.execute(str);
+            str = "delete from Appointments";
+            s.execute(str);
+            str = "delete from Patients";
+            s.execute(str);
+            str = "delete from Guests";
+            s.execute(str);
+            str = "delete from Employees";
+            s.execute(str);
+            str = "delete from Requests";
+            s.execute(str);
+            str = "delete from Edges";
+            s.execute(str);
+            str = "delete from Nodes";
+            s.execute(str);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Drops a table or all if the tableName = "all"
      *
@@ -248,19 +327,27 @@ public class Database {
             str = "delete from " + tableName;
             s.execute(str);
             if (str.equals("all")){
-                str = "alter table Locations drop column requestID";
+                str = "delete from Comments";
                 s.execute(str);
-                str = "alter table Assignments drop column requestID";
-                s.execute(str);
-                str = "delete from Nodes";
-                s.execute(str);
-                str = "delete from Edges";
-                s.execute(str);
-                str = "delete from Requests";
+                str = "delete from Permissions";
                 s.execute(str);
                 str = "delete from Locations";
                 s.execute(str);
                 str = "delete from Assignments";
+                s.execute(str);
+                str = "delete from Appointments";
+                s.execute(str);
+                str = "delete from Patients";
+                s.execute(str);
+                str = "delete from Guests";
+                s.execute(str);
+                str = "delete from Employees";
+                s.execute(str);
+                str = "delete from Requests";
+                s.execute(str);
+                str = "delete from Edges";
+                s.execute(str);
+                str = "delete from Nodes";
                 s.execute(str);
 
             }
@@ -270,21 +357,33 @@ public class Database {
     }
 
     /**
-     * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
+     * Deletes all tables
      */
     public void deleteTables() {
         //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
-            String str = "drop table Nodes";
+            String str = "drop table Comments";
             s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Requests";
+            str = "drop table Permissions";
             s.execute(str);
             str = "drop table Locations";
             s.execute(str);
             str = "drop table Assignments";
+            s.execute(str);
+            str = "drop table Appointments";
+            s.execute(str);
+            str = "drop table Patients";
+            s.execute(str);
+            str = "drop table Guests";
+            s.execute(str);
+            str = "drop table Employees";
+            s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
+            str = "drop table Edges";
+            s.execute(str);
+            str = "drop table Nodes";
             s.execute(str);
 
         } catch (Exception e) {

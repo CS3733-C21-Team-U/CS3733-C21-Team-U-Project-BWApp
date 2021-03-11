@@ -6,60 +6,20 @@ import edu.wpi.u.requests.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class RequestData extends Data{
 
     public RequestData(){ // TODO: load csv's for Nodes, Requests, Assignees, and RANJoint
         connect();
-//        printTableItem("Requests", "title");
-//        LinkedList<String> l1 = new LinkedList<String>();
-//        l1.add("UPARK00101");
-//        LinkedList<String> s1 = new LinkedList<String>();
-//        s1.add("Mary");
-//        Date d = new Date(900);
-      //  addRequest(new Request("Maintenance456", s1, d,null, "It seems that the shower head on A4 is leaky","Leaky Shower", l1, "Maintenance", "Kaamil"));
     }
 
     /**
-     * Updates a request by using its ID
-     * @param specificRequest the new request object
+     * Constructor that is being used to connect to test DB
+     * @param testURL
      */
-    public void updateRequest(SpecificRequest specificRequest){
-        Request request= specificRequest.getGenericRequest();
-
-        String str = "update Requests set dateNeeded=? where requestID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setTimestamp(1, request.getDateNeeded());
-            ps.setString(2,request.getRequestID());
-            ps.execute();
-            ps.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
-        updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
-        updLocations(request.getRequestID(), request.getLocations());
-        updAssignees(request.getRequestID(), request.getAssignees());
-
-        String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(updComment);
-            ps.setString(1, request.getTitle());
-            ps.setString(2, request.getDescription());
-            ps.setString(3, request.getAuthor());
-            ps.setTimestamp(4, request.getDateCreated());
-            ps.setString(5, String.valueOf(CommentType.PRIMARY));
-            ps.setString(6, request.getRequestID());
-            ps.execute();
-            ps.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        //add the latest comment to the database
-        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
-        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
+    public RequestData(String testURL){
+        testConnect(testURL);
     }
 
     /**
@@ -115,16 +75,60 @@ public class RequestData extends Data{
     }
 
     /**
+     * Updates a request by using its ID
+     * @param specificRequest the new request object
+     */
+    public void updateRequest(SpecificRequest specificRequest) {
+        Request request = specificRequest.getGenericRequest();
+
+        String str = "update Requests set dateNeeded=? where requestID=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setTimestamp(1, request.getDateNeeded());
+            ps.setString(2, request.getRequestID());
+            ps.execute();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
+        updateField("Requests", "requestID", request.getRequestID(), "specificData", specificRequest.specificsStorageString());
+        updLocations(request.getRequestID(), request.getLocations());
+        updAssignees(request.getRequestID(), request.getAssignees());
+
+        String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(updComment);
+            ps.setString(1, request.getTitle());
+            ps.setString(2, request.getDescription());
+            ps.setString(3, request.getAuthor());
+            ps.setTimestamp(4, request.getDateCreated());
+            ps.setString(5, String.valueOf(CommentType.PRIMARY));
+            ps.setString(6, request.getRequestID());
+            ps.execute();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //add the latest comment to the database
+        System.out.println(request.getComments().get(request.getComments().size() - 1).getDescription());
+        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size() - 1));
+    }
+
+    /**
      * Returns a list of comments for a given request
      * @param requestID the request id
      * @return list of comments
      */
     public ArrayList<Comment> getComments(String requestID){
         ArrayList<Comment> result = new ArrayList<>();
+        result.add(getPrimaryComment(requestID));
         try {
-            String str = "select * from Comments where request=? order by created DESC";
+            String str = "select * from Comments where request=? and type!=? order by created DESC";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
+            ps.setString(2,"PRIMARY");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 result.add(new Comment(rs.getString("title"), rs.getString("description"), rs.getString("author"), CommentType.valueOf(rs.getString("type")), rs.getTimestamp("created")));
@@ -136,6 +140,27 @@ public class RequestData extends Data{
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Gets the primary comment given a requestid
+     * @param requestID the request id
+     * @return the comment object
+     */
+    public Comment getPrimaryComment(String requestID){
+        String str = "select * from Comments where request=? and type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,requestID);
+            ps.setString(2,"PRIMARY");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return new Comment(rs.getString("title"),rs.getString("description"), rs.getString("author"),CommentType.valueOf(rs.getString("type")), rs.getTimestamp("created"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -179,7 +204,6 @@ public class RequestData extends Data{
         }
         return result;
     }
-
     /**
      * Updates the list of locatioons for a given requestID
      * @param requestID the request id
@@ -239,7 +263,7 @@ public class RequestData extends Data{
      */
     public ArrayList<SpecificRequest> loadActiveRequests(){ // TODO: refactor for IRequest
         ArrayList<SpecificRequest> results = new ArrayList<>();
-        String requestQuery = "select * from Requests where resolved=false";
+        String requestQuery = "select * from Requests";
         try{
             PreparedStatement ps = conn.prepareStatement(requestQuery);
             ResultSet rs = ps.executeQuery();
@@ -313,10 +337,11 @@ public class RequestData extends Data{
      * @param requestID the request id
      */
     public void addLocation(String nodeID, String requestID){
+        Random rand = new Random();
         String str = "insert into Locations(locationID, request, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID+"_"+nodeID);
+            ps.setString(1,"" + rand.nextInt(100000));
             ps.setString(2,requestID);
             ps.setString(3,nodeID);
             ps.execute();

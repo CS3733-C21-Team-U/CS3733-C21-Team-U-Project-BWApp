@@ -155,11 +155,8 @@ public class FloatingPathfindingPaneController {
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
                     }
                     String walking = getContextLocation(sNode);
-//                    if(sNode.getNodeType().equals("HALL")) walking = "hallway";
-//                    else if(sNode.getNodeType().equals("WALK")) walking = "walkway";
-//                    else walking = sNode.getLongName();
 
-                    if(sNode.getLongName().equals("Admitting")) {}
+                    if(sNode.getLongName().equals("Admitting") || sNode.getLongName().equals("Atrium Main Lobby")) {}
                     else if(walking.equals("")) {
                         stepHBoxContainer = createDirectionBox(angleDescription, iconID);
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
@@ -180,8 +177,9 @@ public class FloatingPathfindingPaneController {
                 else if((sNode.getNodeType().equals("HALL") && eNode.getNodeType().equals("HALL"))) {/*Hallway*/ }
                 else if((sNode.getNodeType().equals("WALK") && eNode.getNodeType().equals("WALK"))) {/*Walkway*/ }
 
+
                 else {
-                    if(!(sNode.getLongName().equals("Admitting")) && !(eNode.getLongName().equals("Admitting")) && !(bNode.getLongName().equals("Admitting"))) {
+                    if(!(sNode.getLongName().equals("Admitting")) && !(eNode.getLongName().equals("Admitting")) && !(bNode.getLongName().equals("Admitting")) && distAggregate(lastTurnNode, eNode) != 0) {
                     stepHBoxContainer = createDirectionBox("Continue straight for " + distAggregate(lastTurnNode, eNode) + " feet", "M5,9l1.41,1.41L11,5.83V22H13V5.83l4.59,4.59L19,9l-7-7L5,9z");
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
                     //lastTurnNode = eNode;
@@ -198,6 +196,7 @@ public class FloatingPathfindingPaneController {
     /**
      * returns the long name of the closest non hallway or walkway node
      * @param givenNode the node to check for
+     *
      * @return long name
      */
     private String getContextLocation(Node givenNode){
@@ -290,6 +289,12 @@ public class FloatingPathfindingPaneController {
                 startFieldFlair.setVisible(false);
                 endFieldFlair.setVisible(true);
             }
+        });
+        App.mapInteractionModel.mapTargetNode.addListener((observable, oldVal, newVal) ->{
+                targetNode.set("END");
+        });
+        App.mapInteractionModel.mapTargetNode2.addListener((observable, oldVal, newVal) ->{
+            targetNode.set("START");
         });
 
         Platform.runLater(new Runnable() {
