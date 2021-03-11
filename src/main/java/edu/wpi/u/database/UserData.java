@@ -170,34 +170,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Returns the StaffType for a user
-     * @param userID users id
-     * @param type Employees or Guests (table name)
-     * @return the type of the user
-     */
-    public Role getPermissions(String userID, String type){
-        String id = "";
-        if (type.equals("Employees")){
-            id = "employeeID";
-        }
-        else if(type.equals("Guests")){
-            id = "guestID";
-        }
-        String str = "select from " + type + " where " + id +"=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return Role.valueOf(rs.getString("type"));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return Role.DEFAULT;
-    }
-
-    /**
      * Gets a list of patients from database
      * @return list of patients
      */
@@ -577,68 +549,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Retrieves a employees appointments
-     * @param employeeID the id of the employee
-     * @return list of Appointments
-     */
-    private ArrayList<Appointment> getEmployeeAppointments(String employeeID) {
-        ArrayList<Appointment> results = new ArrayList<>();
-        String str = "select * from Appointments where employeeID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, employeeID);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                String appointmentID = rs.getString("appointmentID");
-                String appointmentType = rs.getString("appointmentType");
-                Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
-                String patientID = rs.getString("patientID");
-                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    /**
-     * Function used to find a user in the database based on a userID, used to check if user account is valid
-     * @param userID the user id
-     * @return Employees or Patients (table name) or "" if not found
-     */
-    public String findUser(String userID) {
-        String str = "select * from Employees where employeeID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,userID);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                rs.close();
-                ps.close();
-                return "Employees";
-            }
-            else {
-                str = "select * from Guests where guestID=?";
-                ps = conn.prepareStatement(str);
-                ps.setString(1,userID);
-                rs = ps.executeQuery();
-                if (rs.next()){
-                    rs.close();
-                    ps.close();
-                    return "Guests";
-                }
-                else {
-                    return "";
-                }
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    /**
      * Checks if the database has the username
      * @param username username to be checked
      * @return Employees or Patients (table name) or "" if not found
@@ -678,40 +588,6 @@ public class UserData extends Data{
         }
         catch (Exception e){
             System.out.println("Checking username failed");
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * Checks if the database has the phone number matched with the given username
-     * @param phoneNumber phone number to be checked
-     * @return the phone number of the user or "" if the username doesn't exist
-     */
-    public String checkPhoneNumber(String phoneNumber){
-        String str = "select * from Employees where phoneNumber=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,phoneNumber);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                ps.close();
-                return "Employees";
-            }
-            else {
-                String str2 = "select * from Patients where phoneNumber=?";
-                PreparedStatement ps2 = conn.prepareStatement(str2);
-                ps2.setString(1,phoneNumber);
-                ResultSet rs2 = ps2.executeQuery();
-                if(rs2.next()){
-                    return "Patients";
-                }
-                else{
-                    return "";
-                }
-            }
-        }
-        catch (Exception e){
             e.printStackTrace();
             return "";
         }
