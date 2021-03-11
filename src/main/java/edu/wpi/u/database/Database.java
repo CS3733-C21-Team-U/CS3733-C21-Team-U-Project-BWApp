@@ -79,7 +79,7 @@ public class Database {
      */
     public static void driver() {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
         } catch (Exception e) {
             System.out.println("Driver registration failed");
             e.printStackTrace();
@@ -391,8 +391,6 @@ public class Database {
         }
     }
 
-    //TODO: Test
-
     /**
      * Saves all tables to respective CSV files (ie: Nodes table saved to Nodes.csv)
      */
@@ -422,11 +420,11 @@ public class Database {
         readCSV("OutsideMapEdges.csv", "Edges");
     }
 
-        /**
+    /**
          * Stops the database on app shutdown
          * TODO : Enable and test
          */
-        public void stop () {
+    public void stop () {
             try {
                 // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
             } catch (Exception e) {
