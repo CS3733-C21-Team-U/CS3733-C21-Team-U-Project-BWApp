@@ -152,24 +152,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Creates a new patient via createAccount portal
-     * @param patient the patient object created
-     * @return Patient with that username already exists or Patient with that password already exists or Patient added
-     */
-    public String createPatient(Patient patient){
-        if (checkUsername(patient.getUserName()).equals("Patients")){
-            return "Patient with that username already exists";
-        }
-        else if (checkPassword(patient.getPassword(), patient.getUserName()).equals("Patients")){
-            return "Patient with that password already exists";
-        }
-        else {
-            addPatient(patient);
-            return "Patient added";
-        }
-    }
-
-    /**
      * Creates a new employee via createAccount portal
      * @param employee the employee object created
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
