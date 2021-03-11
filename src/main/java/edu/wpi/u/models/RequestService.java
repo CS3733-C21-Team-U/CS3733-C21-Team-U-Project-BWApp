@@ -39,20 +39,8 @@ public class RequestService {
     this.activeRequests = rd.loadActiveRequests();
   }
 
-  public ArrayList<String> getAssignees(String requestID){
-    return rd.getAssignees(requestID);
-  }
-
   public ArrayList<String> getLocations(String requestID){
     return rd.getLocations(requestID);
-  }
-
-  public void setAssignees(String requestID, ArrayList<String> assignees){
-    rd.updAssignees(requestID, assignees);
-  }
-
-  public void setLocations(String requestID, ArrayList<String> locations){
-    rd.updLocations(requestID, locations);
   }
 
   public void loadCSVFile(String path, String tableName){
