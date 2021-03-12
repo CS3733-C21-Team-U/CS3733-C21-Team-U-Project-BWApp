@@ -1013,5 +1013,21 @@ public class UserData extends Data{
         }
     }
 
-
+    public ArrayList<String> getEmployeeEmailsByType(String type){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select email from Employees where type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,type);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("email"));
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

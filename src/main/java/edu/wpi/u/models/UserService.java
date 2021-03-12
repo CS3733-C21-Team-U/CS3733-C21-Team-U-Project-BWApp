@@ -449,4 +449,12 @@ public class UserService {
         return patient.getUserID();
     }
 
+    /**
+     * Gets a list of employee emails based on a type
+     * @param type all valid role types EXCLUDING DEFAULT
+     * @return the list of emails
+     */
+    public ArrayList<String> getEmployeeEmailByType(String type){
+        return ud.getEmployeeEmailsByType(type);
+    }
 }

@@ -1,7 +1,5 @@
 package edu.wpi.u.database;
 
-import edu.wpi.u.requests.CommentType;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,16 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
-/*
-Twillio covid screenings
- */
-
 public class Database {
     private static Connection conn = null;
     // Url for live code
     private final static String url = "jdbc:derby:BWdb;create=true";
     // Url for testing
-    private final static String testURL = "jdbc:derby:testDB;create=true";
+    private final static String testURL = "jdbc:derby://localhost:1527/BWdb;create=true";
     //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
     /**
@@ -79,7 +73,7 @@ public class Database {
      */
     public static void driver() {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (Exception e) {
             System.out.println("Driver registration failed");
             e.printStackTrace();
@@ -91,7 +85,7 @@ public class Database {
      */
     public static void connect() {
         try {
-            conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection(testURL);
             conn.setAutoCommit(true);
         } catch (Exception e) {
             System.out.println("Connection failed");
@@ -319,40 +313,39 @@ public class Database {
      */
     public void dropValues(String tableName) {
         try {
-            Statement s = conn.createStatement();
-            String str = "alter table Locations drop column requestID";
-            s.execute(str);
-            str = "alter table Assignments drop column requestID";
-            s.execute(str);
-            str = "delete from " + tableName;
-            s.execute(str);
-            if (str.equals("all")){
-                str = "delete from Comments";
-                s.execute(str);
-                str = "delete from Permissions";
-                s.execute(str);
-                str = "delete from Locations";
-                s.execute(str);
-                str = "delete from Assignments";
-                s.execute(str);
-                str = "delete from Appointments";
-                s.execute(str);
-                str = "delete from Patients";
-                s.execute(str);
-                str = "delete from Guests";
-                s.execute(str);
-                str = "delete from Employees";
-                s.execute(str);
-                str = "delete from Requests";
-                s.execute(str);
-                str = "delete from Edges";
-                s.execute(str);
-                str = "delete from Nodes";
-                s.execute(str);
-
-            }
-        } catch (SQLException throwables) {
-            //throwables.printStackTrace();
+//            Statement s = conn.createStatement();
+//            String str = "alter table Locations drop column requestID";
+//            s.execute(str);
+//            str = "alter table Assignments drop column requestID";
+//            s.execute(str);
+//            str = "delete from " + tableName;
+//            s.execute(str);
+//            if (str.equals("all")){
+//                str = "delete from Comments";
+//                s.execute(str);
+//                str = "delete from Permissions";
+//                s.execute(str);
+//                str = "delete from Locations";
+//                s.execute(str);
+//                str = "delete from Assignments";
+//                s.execute(str);
+//                str = "delete from Appointments";
+//                s.execute(str);
+//                str = "delete from Patients";
+//                s.execute(str);
+//                str = "delete from Guests";
+//                s.execute(str);
+//                str = "delete from Employees";
+//                s.execute(str);
+//                str = "delete from Requests";
+//                s.execute(str);
+//                str = "delete from Edges";
+//                s.execute(str);
+//                str = "delete from Nodes";
+//                s.execute(str);
+//            }
+        } catch (Exception e) {
+            //e.printStackTrace();
         }
     }
 
@@ -426,7 +419,7 @@ public class Database {
          */
     public void stop () {
             try {
-                // DriverManager.getConnection("jdbc:derby:BWdb;shutdown=true");
+                DriverManager.getConnection("jdbc:derby://localhost:1527/BWdb;shutdown=true");
             } catch (Exception e) {
                 e.printStackTrace();
             }
