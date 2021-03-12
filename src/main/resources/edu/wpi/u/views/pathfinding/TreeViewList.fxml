@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.TreeViewListController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="200.0">
+         <children>
+            <JFXTreeView fx:id="confTree" />
+            <JFXTreeView fx:id="deptTree" />
+            <JFXTreeView fx:id="elevTree" />
+            <JFXTreeView fx:id="exitTree" />
+            <JFXTreeView fx:id="foodTree" />
+            <JFXTreeView fx:id="kiosTree" />
+            <JFXTreeView fx:id="labsTree" />
+            <JFXTreeView fx:id="parkTree" />
+            <JFXTreeView fx:id="restTree" />
+            <JFXTreeView fx:id="servTree" />
+            <JFXTreeView fx:id="staiTree" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
