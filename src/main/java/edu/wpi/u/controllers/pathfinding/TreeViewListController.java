@@ -33,8 +33,24 @@ public class TreeViewListController {
     @FXML
     private TreeView staiTree;
 
-    // Need a button handler for each tree????
 
+    /**
+     * TODO:
+     *      1. Bring up the ui component when start or end node is pressed in scenebuilder
+     *          - there should be some boolean passed in that indicates start or end node
+     *          - Supposed to do this with someone
+     *      2. How to expand a tree on mousePressed - Is this built in?
+     *      3. How to collapse a tree on mousePressed - Is this also built in?
+     *      4. How to select locations (indicated by longName)
+     *          - Will use App.mapInteractionModel.setStartNode(String), and setEndNode
+     *          - Figure out how to apply some function when a location is pressed
+     *          - Need to know nodeID of whatever location is pressed
+     */
+
+
+    /**
+     * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
+     */
     @FXML
     public void initialize(){
         fillAllTrees();
