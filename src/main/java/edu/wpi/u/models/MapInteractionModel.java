@@ -39,8 +39,8 @@ public class MapInteractionModel {
     public String toggledNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
-    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);
-    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);
+    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);//for start node
+    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
     public String aline = "";
     public double alineValue;
 
@@ -132,7 +132,15 @@ public class MapInteractionModel {
         Coords = coords;
     }
 
+    public void setStartNode(String nodeID){
+        mapTargetNode.set(!mapTargetNode.get());
+        this.nodeID.set(nodeID);
+    }
 
+    public void setEndNode(String nodeID){
+        mapTargetNode2.set(!mapTargetNode2.get());
+        this.nodeID.set(nodeID);
+    }
 //    /**
 //     *  get node ID
 //     * @return
