@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.svg.SVGGlyph?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -14,31 +15,30 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminMainHelpController">
    <children>
+      <ImageView fitHeight="111.0" fitWidth="210.0" layoutX="10.0" layoutY="19.0" translateY="-15.0">
+         <image>
+            <Image url="@../../../../../../../../hos%20logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="300.0" fitWidth="1700.0" layoutX="10.0" layoutY="10.0" translateY="80.0">
+         <image>
+            <Image url="@Images/hospital2%20(1).jpg" />
+         </image>
+      </ImageView>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="322.0" layoutY="97.0" prefHeight="1000.0" prefWidth="1700.0" spacing="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="1700.0" spacing="75.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="1700.0">
-                     <children>
-                        <SVGGlyph prefHeight="172.0" prefWidth="1668.0" />
-                        <SVGGlyph>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </SVGGlyph>
-                     </children>
-                  </HBox>
-                  <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-1" text="We're here to help" wrappingWidth="474.240234375">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-3" text="More questions? Call 617-732-5500  " translateX="600.0" translateY="10.0" />
+                  <HBox prefHeight="100.0" prefWidth="1700.0" />
+                  <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -onPrimary;" styleClass="headline-1" text="We're here to help" wrappingWidth="474.240234375">
                      <font>
                         <Font size="49.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
                   </Text>
                   <StackPane fx:id="newMainPageStackPane" prefHeight="592.0" prefWidth="1057.0">
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="1700.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="568.0" prefWidth="1686.0">
                            <children>
                               <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="566.0" spacing="50.0">
                                  <children>
@@ -47,7 +47,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets top="30.0" />
                                        </VBox.margin>
                                        <graphic>
                                           <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" translateY="-10.0" />
@@ -95,7 +95,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets top="30.0" />
                                        </VBox.margin>
                                        <graphic>
                                           <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2zM19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" translateY="-10.0" />
@@ -146,7 +146,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets top="30.0" />
                                        </VBox.margin>
                                        <graphic>
                                           <SVGPath content="M17.41,6.59L15,5.5l2.41-1.09L18.5,2l1.09,2.41L22,5.5l-2.41,1.09L18.5,9L17.41,6.59z M21.28,12.72L20.5,11l-0.78,1.72 L18,13.5l1.72,0.78L20.5,16l0.78-1.72L23,13.5L21.28,12.72z M16.24,14.37l1.94,1.47l-2.5,4.33l-2.24-0.94 c-0.2,0.13-0.42,0.26-0.64,0.37L12.5,22h-5l-0.3-2.41c-0.22-0.11-0.43-0.23-0.64-0.37l-2.24,0.94l-2.5-4.33l1.94-1.47 C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37l-1.94-1.47l2.5-4.33l2.24,0.94c0.2-0.13,0.42-0.26,0.64-0.37L7.5,6h5l0.3,2.41 c0.22,0.11,0.43,0.23,0.64,0.37l2.24-0.94l2.5,4.33l-1.94,1.47c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14 c0-1.66-1.34-3-3-3s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" translateY="-10.0" />
@@ -180,6 +180,9 @@
                            <StackPane.margin>
                               <Insets />
                            </StackPane.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </HBox>
                      </children>
                      <VBox.margin>
@@ -188,6 +191,9 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <padding>
+                        <Insets top="100.0" />
+                     </padding>
                   </StackPane>
                </children>
                <opaqueInsets>
@@ -197,4 +203,8 @@
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@css/LightTheme.css" />
+      <URL value="@css/BaseStyle.css" />
+   </stylesheets>
 </AnchorPane>

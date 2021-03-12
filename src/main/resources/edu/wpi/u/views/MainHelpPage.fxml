@@ -15,20 +15,20 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainHelpPageController">
    <children>
-      <ImageView fitHeight="100.0" fitWidth="190.0">
+      <ImageView fitHeight="106.0" fitWidth="199.0" layoutY="28.0" translateY="-20.0">
          <image>
             <Image url="@../../../../../../../../hos%20logo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="350.0" fitWidth="1700.0" translateY="80.0">
+      <ImageView fitHeight="350.0" fitWidth="1700.0" translateY="90.0">
          <image>
             <Image url="@Images/hospital2%20(1).jpg" />
          </image>
       </ImageView>
       <VBox alignment="TOP_CENTER" layoutY="6.0" prefHeight="1000.0" prefWidth="1700.0" spacing="100.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-3" text="Weclome to our Help Center!" translateX="700.0" translateY="240.0" />
-            <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -onPrimary;" styleClass="headline-1" text="We're here to help" translateY="-100.0" wrappingWidth="474.240234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-3" text="More questions? Call 617-732-5500  " translateX="600.0" translateY="-190.0" />
+            <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -onPrimary;" styleClass="headline-1" text="We're here to help" translateY="-135.0" wrappingWidth="474.240234375">
                <font>
                   <Font size="49.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <StackPane fx:id="newMainPageStackPane" prefHeight="592.0" prefWidth="1057.0">
+            <StackPane fx:id="newMainPageStackPane" prefHeight="592.0" prefWidth="1057.0" translateY="-15.0">
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="492.0" prefWidth="1700.0">
                      <children>
