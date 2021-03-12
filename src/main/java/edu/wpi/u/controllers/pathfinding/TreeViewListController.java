@@ -63,15 +63,14 @@ public class TreeViewListController {
 
     /**
      * TODO:
-     *      1. Bring up the ui component when start or end node text input thing is pressed in pathfinding
+     *      1. (Do last)Bring up the ui component when start or end node text input thing is pressed in pathfinding
      *          - there should be some boolean passed in that indicates start or end node
      *          - Supposed to do this with someone or have them do it
-     *      2. How to expand a tree on mousePressed - Is this built in? - DONE
-     *      3. How to collapse a tree on mousePressed - Is this also built in? - DONE
-     *      4. How to select locations (indicated by longName)
+     *      2. How to select locations (indicated by longName)
      *          - Will use App.mapInteractionModel.setStartNode(String), and setEndNode
      *          - Figure out how to apply some function when a location is pressed
      *          - Need to know nodeID of whatever location is pressed
+     *      3. Test UI component in app by replacing the starting fxml file
      */
 
 
