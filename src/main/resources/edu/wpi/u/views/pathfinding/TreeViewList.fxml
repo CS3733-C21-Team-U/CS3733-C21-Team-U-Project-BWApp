@@ -9,17 +9,17 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="200.0">
          <children>
-            <JFXTreeView fx:id="confTree" />
-            <JFXTreeView fx:id="deptTree" />
-            <JFXTreeView fx:id="elevTree" />
-            <JFXTreeView fx:id="exitTree" />
-            <JFXTreeView fx:id="foodTree" />
-            <JFXTreeView fx:id="kiosTree" />
-            <JFXTreeView fx:id="labsTree" />
-            <JFXTreeView fx:id="parkTree" />
-            <JFXTreeView fx:id="restTree" />
-            <JFXTreeView fx:id="servTree" />
-            <JFXTreeView fx:id="staiTree" />
+            <JFXTreeView fx:id="confTree" onMouseClicked="#handleConfClicked" />
+            <JFXTreeView fx:id="deptTree" onMouseClicked="#handleDeptClicked" />
+            <JFXTreeView fx:id="elevTree" onMouseClicked="#handleElevClicked" />
+            <JFXTreeView fx:id="exitTree" onMouseClicked="#handleExitClicked" />
+            <JFXTreeView fx:id="foodTree" onMouseClicked="#handleFoodClicked" />
+            <JFXTreeView fx:id="kiosTree" onMouseClicked="#handleKiosClicked" />
+            <JFXTreeView fx:id="labsTree" onMouseClicked="#handleLabsClicked" />
+            <JFXTreeView fx:id="parkTree" onMouseClicked="#handleParkClicked" />
+            <JFXTreeView fx:id="restTree" onMouseClicked="#handleRestClicked" />
+            <JFXTreeView fx:id="servTree" onMouseClicked="#handleServClicked" />
+            <JFXTreeView fx:id="staiTree" onMouseClicked="#handleStaiClicked" />
          </children>
       </VBox>
    </children>
