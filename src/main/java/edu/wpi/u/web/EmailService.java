@@ -8,17 +8,16 @@ import org.simplejavamail.mailer.MailerBuilder;
 
 public class EmailService {
 
-
     private static Dotenv dotenv = Dotenv.load();
     public static void main(String[] args) {
         //sendMail("nev.ingram30@gmail.com","The return of testy westy");
     }
-    public static void sendMail(String to, String body){
+    public static void sendMail(String to, String body){ // todo : take in a SpecificRequest
         Email email = EmailBuilder.startingBlank()
-                .from("Brigham & Women's Service Request Notfier", "cs3733teamu@gmail.com")
+                .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
                 .to("", to)
-                .withSubject("New Service Request")
-                .withPlainText(body)
+                .withSubject("New Service Request") // todo : replace with type
+                .withPlainText(body) // todo : formatting for more request options
                 .buildEmail();
         MailerBuilder
                 .withSMTPServer("smtp.gmail.com", 25, "cs3733teamu@gmail.com", dotenv.get("EMAIL_PASSWORD"))
