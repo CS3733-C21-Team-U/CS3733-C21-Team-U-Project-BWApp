@@ -39,8 +39,8 @@ public class MapInteractionModel {
     public String toggledNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
-    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);
-    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);
+    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);//for start node
+    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
     public String aline = "";
     public double alineValue;
 
@@ -132,52 +132,13 @@ public class MapInteractionModel {
         Coords = coords;
     }
 
+    public void setStartNode(String nodeID){
+        mapTargetNode.set(!mapTargetNode.get());
+        this.nodeID.set(nodeID);
+    }
 
-//    /**
-//     *  get node ID
-//     * @return
-//     */
-//    public String getNodeID() {
-//        return nodeID;
-//    }
-//
-//    /**
-//     * set node ID
-//     * @param nodeID
-//     */
-//    public void setNodeID(String nodeID) {
-//        this.nodeID = nodeID;
-//    }
-//
-//    /**
-//     * get edge ID
-//     * @return
-//     */
-//    public String getEdgeID() {
-//        return edgeID;
-//    }
-//
-//    /**
-//     * set Edge ID
-//     * @param edgeID
-//     */
-//    public void setEdgeID(String edgeID) {
-//        this.edgeID = edgeID;
-//    }
-//
-//    /**
-//     * get coordinates in the format [x,y]
-//     * @return
-//     */
-//    public double[] getCoords() {
-//        return Coords;
-//    }
-//
-//    /**
-//     * set coordinates in the format [x,y]
-//     * @param coords
-//     */
-//    public void setCoords(double[] coords) {
-//        Coords = coords;
-//    }
+    public void setEndNode(String nodeID){
+        mapTargetNode2.set(!mapTargetNode2.get());
+        this.nodeID.set(nodeID);
+    }
 }
