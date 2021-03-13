@@ -35,7 +35,6 @@ public class UserService {
         this.setEmployees();
         this.setGuests();
         this.setPatients();
-        //this.setEasyValidate();
     }
 
     public String getTypedUsername() {
@@ -456,5 +455,19 @@ public class UserService {
      */
     public ArrayList<String> getEmployeeEmailByType(String type){
         return ud.getEmployeeEmailsByType(type);
+    }
+
+    /**
+     * Returns the email associated with the given userName
+     * @param userName the userName
+     * @return the email or "" if no email found/username doesnt exist
+     */
+    public String getEmail(String userName){
+        for (Employee e : this.employees){
+            if (e.getUserName().equals(userName)){
+                return e.getEmail();
+            }
+        }
+        return "";
     }
 }

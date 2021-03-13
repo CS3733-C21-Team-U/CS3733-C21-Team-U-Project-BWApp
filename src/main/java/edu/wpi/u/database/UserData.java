@@ -1013,6 +1013,11 @@ public class UserData extends Data{
         }
     }
 
+    /**
+     * Returns a list of employee Emails based on a type of employee
+     * @param type the type, ie: DOCTOR
+     * @return the list of emails
+     */
     public ArrayList<String> getEmployeeEmailsByType(String type){
         ArrayList<String> result = new ArrayList<>();
         String str = "select email from Employees where type=?";
