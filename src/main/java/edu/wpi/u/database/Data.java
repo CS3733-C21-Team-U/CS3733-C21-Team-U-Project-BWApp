@@ -23,8 +23,13 @@ public abstract class Data {
         try {
             conn = DriverManager.getConnection(testUrl);
         } catch (Exception e) {
-            System.out.println("Connection failed");
-            e.printStackTrace();
+            try {
+                conn = DriverManager.getConnection(url);
+            }catch (Exception d){
+                d.printStackTrace();
+                System.out.println("Connection failed");
+                e.printStackTrace();
+            }
         }
     }
 

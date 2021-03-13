@@ -75,8 +75,13 @@ public class Database {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (Exception e) {
-            System.out.println("Driver registration failed");
-            e.printStackTrace();
+            try{
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            }catch (Exception d){{
+                d.printStackTrace();
+                e.printStackTrace();
+                System.out.println("Driver registration failed");
+            }}
         }
     }
 
