@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,10 +23,7 @@
       </AnchorPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
-            <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="345.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
-               <effect>
-                  <DropShadow height="20.0" radius="9.5" width="20.0" />
-               </effect>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="580.0" BorderPane.alignment="CENTER">
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </opaqueInsets>
@@ -35,12 +31,23 @@
                   <Insets left="300.0" />
                </BorderPane.margin>
                <children>
-                  <ImageView fitHeight="821.0" fitWidth="393.0" layoutX="2.0" layoutY="-102.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-20.0">
-                     <image>
-                        <Image url="@../Images/phoneFrame.png" />
-                     </image>
-                  </ImageView>
-                  <fx:include source="MobileUserLoginScreen.fxml" />
+                  <StackPane prefHeight="629.0" prefWidth="367.0">
+                     <children>
+                        <ImageView fitHeight="711.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/phoneFrame.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </ImageView>
+                        <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="300.0">
+                           <children>
+                              <fx:include source="MobileUserLoginScreen.fxml" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
                </children>
             </AnchorPane>
          </left>
