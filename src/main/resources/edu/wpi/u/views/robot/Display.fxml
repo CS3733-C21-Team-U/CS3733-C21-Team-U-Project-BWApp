@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.DisplayController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Celsius" />
+            <TextField fx:id="celsiusLabel" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+            <Label text="Fahrenheit" />
+            <TextField fx:id="fahrenheitLabel" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

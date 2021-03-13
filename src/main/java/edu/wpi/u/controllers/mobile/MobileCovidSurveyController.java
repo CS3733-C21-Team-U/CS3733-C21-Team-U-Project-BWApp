@@ -96,7 +96,8 @@ public class MobileCovidSurveyController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileWaitPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
 //    public void handleDebugButton(ActionEvent actionEvent) {

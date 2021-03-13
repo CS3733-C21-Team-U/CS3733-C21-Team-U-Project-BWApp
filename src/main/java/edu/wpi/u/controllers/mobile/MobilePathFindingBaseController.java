@@ -507,7 +507,8 @@ public class MobilePathFindingBaseController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
     public void handleNext(ActionEvent actionEvent) {
