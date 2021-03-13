@@ -48,27 +48,25 @@
                      </padding>
                       <children>
                         <VBox fx:id="newRequestVBox" prefWidth="100.0" />
-                        <VBox fx:id="sampleRequestItem" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                        <AnchorPane fx:id="noItemsGraphic" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1290.0">
                            <children>
-                              <AnchorPane fx:id="noItemsGraphic" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1290.0">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <ImageView fitHeight="312.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Images/undraw_empty_xct9.png" />
-                                             </image>
-                                             <VBox.margin>
-                                                <Insets right="10.0" />
-                                             </VBox.margin>
-                                          </ImageView>
-                                          <Label style="-fx-text-fill: -primary;" styleClass="headline-1" text="No Requests!" />
-                                          <Label styleClass="headline-3" text="Try cleaning filters or creating a new request" />
-                                       </children>
-                                    </VBox>
+                                    <ImageView fitHeight="312.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/undraw_empty_xct9.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label style="-fx-text-fill: -primary;" styleClass="headline-1" text="No Requests!" />
+                                    <Label styleClass="headline-3" text="Try cleaning filters or creating a new request" />
                                  </children>
-                              </AnchorPane>
+                              </VBox>
                            </children>
+                        </AnchorPane>
+                        <VBox fx:id="sampleRequestItem" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>

@@ -47,7 +47,8 @@ public class App extends Application {
   public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
   public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
   public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
-  public static SimpleBooleanProperty requestRedrawFlag = new SimpleBooleanProperty(false);
+  // DO NOT CALL THIS UNLESS ADDING NEW REQUEST
+  public static SimpleBooleanProperty addNewRequestToList = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
   private static Stage primaryStage;

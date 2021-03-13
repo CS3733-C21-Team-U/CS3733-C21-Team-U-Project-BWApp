@@ -12,10 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
@@ -147,10 +145,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
-
-            App.newReqVBox.getChildren().clear();
-            App.VBoxChanged.set(!App.VBoxChanged.get());
-            App.requestRedrawFlag.set(!App.requestRedrawFlag.get());
+            App.addNewRequestToList.set(!App.addNewRequestToList.get());
 
         }else if(editTitleField.getText().equals("")){
             editTitleField.validate();
