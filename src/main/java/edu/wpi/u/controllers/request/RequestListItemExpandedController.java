@@ -389,8 +389,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
 
     public void handlePathfindToLocation(){
-        App.mapInteractionModel.mapTargetNode.set(!App.mapInteractionModel.mapTargetNode.get());
-        App.mapInteractionModel.setNodeID(nodeID);
+        String nodeID = parent.request.getGenericRequest().getLocations().get(currentNode);
+        App.mapInteractionModel.setEndNode(nodeID);
+
         App.tabPaneRoot.getSelectionModel().select(0);
         App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
 
