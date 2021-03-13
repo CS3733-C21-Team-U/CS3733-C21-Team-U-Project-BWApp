@@ -30,9 +30,6 @@ import java.util.*;
 
 public class RequestListItemNewController extends AnchorPane implements Initializable{
 
-    public RequestListItemContainerController parent;
-    public Region pushDown1;
-
     public JFXTextField editTitleField;
     public JFXTextArea editDescriptionField;
     public JFXDatePicker editDateNeededField;
@@ -146,15 +143,15 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
         Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
             locationsToAdd, assigneesToAdd, primaryComment);
-
-//        App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
-//        App.newReqVBox.getChildren().clear();
-//        App.VBoxChanged.set(!App.VBoxChanged.get());
-
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
+
+            App.newReqVBox.getChildren().clear();
+            App.VBoxChanged.set(!App.VBoxChanged.get());
+
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
             App.requestRedrawFlag.set(!App.requestRedrawFlag.get());
+
         }else if(editTitleField.getText().equals("")){
             editTitleField.validate();
         }else if(editDescriptionField.getText().equals("")){

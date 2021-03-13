@@ -78,7 +78,9 @@ public class ViewRequestListController {
                 "All", "Active", "Resolved");
 
         App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
+            //newRequestVBox.getChildren().setAll(App.newReqVBox.getChildren());
             newRequestVBox = App.newReqVBox;
+            System.out.println("Listener in View Request Running");
         });
 
 
@@ -100,9 +102,12 @@ public class ViewRequestListController {
      */
     @FXML public void handleNewRequestButton() throws Exception {
         if(newRequestVBox.getChildren().size()<1) {
-        newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
-        App.VBoxChanged.set(!App.VBoxChanged.get());
-    }
+            newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
+
+            App.newReqVBox = newRequestVBox;
+
+            App.VBoxChanged.set(!App.VBoxChanged.get());
+        }
     }
 
     /**
