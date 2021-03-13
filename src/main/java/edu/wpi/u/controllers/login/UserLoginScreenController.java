@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
-import java.nio.file.AccessDeniedException;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -208,14 +207,16 @@ public class UserLoginScreenController {
 
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
+        App.isLoggedIn.set(true);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.getPrimaryStage().getScene().setRoot(App.base); // todo : this still makes it load???
     }
 
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("patient", "patient", "Guests");
+        App.userService.setUser("patient", "patient", "Patients");
+        App.isLoggedIn.set(true);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
@@ -230,7 +231,9 @@ public class UserLoginScreenController {
             if (!App.userService.checkUsername(username).equals("")) {
                 if (!App.userService.checkPassword(password,username).equals("")) {
                     App.userService.setUser(username, password, App.userService.checkPassword(password,username));
-                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    App.isLoggedIn.set(true);
+//                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    Parent root = App.base;
                     App.getPrimaryStage().getScene().setRoot(root);
                 }
                 else {
@@ -251,11 +254,13 @@ public class UserLoginScreenController {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
+                App.isLoggedIn.set(true);
                 Parent root = null;
                 try {
                     App.loginFlag.set(!App.loginFlag.get());
-                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                } catch (IOException e) {
+                    root = App.base;
+                    //root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 App.getPrimaryStage().getScene().setRoot(root);

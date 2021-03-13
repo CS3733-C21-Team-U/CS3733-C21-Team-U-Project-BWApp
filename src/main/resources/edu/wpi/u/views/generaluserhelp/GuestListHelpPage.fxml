@@ -46,7 +46,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="640.0" prefWidth="655.0" styleClass="headline-2" text="Tool shows a list of any guests that have been registered in the system by accessing the application and hospital.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
+                        <TextArea editable="false" prefHeight="640.0" prefWidth="655.0" styleClass="headline-3" text="Tool shows a list of any guests that have been registered in the system by accessing the application and hospital.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>

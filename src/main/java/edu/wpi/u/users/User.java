@@ -221,4 +221,8 @@ public abstract class User extends RecursiveTreeObject<User> {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 }

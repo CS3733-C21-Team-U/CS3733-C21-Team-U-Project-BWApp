@@ -25,14 +25,16 @@ public class MobileEmbenedGoogleMapsController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileCovidSurvey.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
     public void handleReturn(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
 

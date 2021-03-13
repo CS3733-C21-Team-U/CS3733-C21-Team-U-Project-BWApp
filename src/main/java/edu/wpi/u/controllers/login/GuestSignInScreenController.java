@@ -27,7 +27,8 @@ public class GuestSignInScreenController {
         App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
 //        System.out.println("Name to be added " + nameGuestTextField.getText());
         App.userService.setGuest(nameGuestTextField.getText());
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.isLoggedIn.set(true);
+        Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 

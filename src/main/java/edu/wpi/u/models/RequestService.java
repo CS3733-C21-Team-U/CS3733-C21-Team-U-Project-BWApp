@@ -13,7 +13,7 @@ import java.util.Date;
 public class RequestService {
 
 
-  public static RequestData rd;
+  static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types

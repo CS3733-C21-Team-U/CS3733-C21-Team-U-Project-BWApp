@@ -75,8 +75,12 @@ public class Database {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (Exception e) {
-            System.out.println("Driver registration failed");
-            e.printStackTrace();
+            try{
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            }catch (Exception d){{
+                d.printStackTrace();
+                System.out.println("Driver registration failed");
+            }}
         }
     }
 
@@ -88,7 +92,14 @@ public class Database {
             conn = DriverManager.getConnection(testURL);
             conn.setAutoCommit(true);
         } catch (Exception e) {
-            System.out.println("Connection failed");
+            try {
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                conn = DriverManager.getConnection(url);
+            }catch (Exception b){
+                System.out.println("Connection to embedded failed");
+                b.printStackTrace();
+            }
+            System.out.println("Connection to remote failed");
             e.printStackTrace();
         }
     }
@@ -202,7 +213,7 @@ public class Database {
         }
         catch (Exception e){
             System.out.println("Path: " + filePath);
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
