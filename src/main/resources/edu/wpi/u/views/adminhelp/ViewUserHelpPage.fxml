@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,9 +20,6 @@
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
                   <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -34,7 +31,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use View User" wrappingWidth="475.15234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use View User" wrappingWidth="345.15234375">
                <font>
                   <Font name="Serif Bold" size="41.0" />
                </font>
@@ -42,51 +39,30 @@
                   <Insets bottom="50.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
+            <HBox prefHeight="784.0" prefWidth="1283.0">
                <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
+                  <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="1.Click User Manager&#10;&#10;2. Shows a list of all users and all of their information, excluding Guests&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="229.0" fitWidth="238.0" translateX="220.0">
-                           <image>
-                              <Image url="@../Images/usermanager.png" />
-                           </image>
+                        <Label prefHeight="15.0" prefWidth="623.0" styleClass="headline-3" text="1. Selecting User Manager" wrapText="true">
                            <VBox.margin>
-                              <Insets bottom="50.0" />
+                              <Insets bottom="30.0" />
                            </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="127.0" fitWidth="719.0">
-                           <image>
-                              <Image url="@../Images/edituser.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
+                        </Label>
+                        <Label prefHeight="68.0" prefWidth="583.0" styleClass="headline-3" text="2.This page allows an Administrator to view all users in the application system. " wrapText="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="620.0" wrapText="true" />
+                        <Label layoutX="10.0" layoutY="64.0" prefHeight="92.0" prefWidth="583.0" styleClass="headline-3" text="3. In the red box, an administrator is able to find an exisiting user and view its ID, Name, Username, Password, Email, Role, and Phone Number " wrapText="true" />
                      </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
                   </VBox>
+                  <ImageView fitHeight="629.0" fitWidth="999.0" translateY="80.0">
+                     <image>
+                        <Image url="@../Images/edit%20user.png" />
+                     </image>
+                  </ImageView>
                </children>
-               <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
-               </padding>
             </HBox>
          </children>
       </VBox>

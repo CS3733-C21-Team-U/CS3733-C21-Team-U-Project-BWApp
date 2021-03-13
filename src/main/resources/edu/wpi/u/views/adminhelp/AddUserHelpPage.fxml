@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,7 +31,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Add User " wrappingWidth="393.15234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Add User " wrappingWidth="342.15234375">
                <font>
                   <Font name="Serif Bold" size="41.0" />
                </font>
@@ -39,51 +39,30 @@
                   <Insets bottom="50.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
+            <HBox prefHeight="784.0" prefWidth="1283.0">
                <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
+                  <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
-                        <TextArea editable="false" prefHeight="840.0" prefWidth="615.0" styleClass="headline-2" text="1. On the Side Bar, click User Manager&#10;&#10;2. Clicking the add user button on the user manager screen will bring up a form that can be completed to add a user (maybe description of each field here)&#10;&#10;3.After you added, you should be able to see it at the same User Manager page&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;&#10;" wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="229.0" fitWidth="209.0" translateX="230.0">
-                           <image>
-                              <Image url="@../Images/usermanager.png" />
-                           </image>
+                        <Label prefHeight="105.0" prefWidth="569.0" styleClass="headline-3" text="1. Selecting User Manager Tab will bring you to the View Users Page" wrapText="true">
                            <VBox.margin>
-                              <Insets bottom="50.0" />
+                              <Insets bottom="30.0" />
                            </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="175.0" fitWidth="218.0" translateX="240.0">
-                           <image>
-                              <Image url="@../Images/Adduserhelp.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
+                        </Label>
+                        <Label prefHeight="111.0" prefWidth="569.0" styleClass="headline-3" text="2. Selecting the add user button will bring the administrator to a page, allowing them to enter the fields for a new user and add them into the system." wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="470.0" wrapText="true" />
+                        <Label layoutX="10.0" layoutY="145.0" prefHeight="111.0" prefWidth="569.0" styleClass="headline-3" text="3. Making sure fill out all the fields." wrapText="true" />
                      </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
                   </VBox>
+                  <ImageView fitHeight="614.0" fitWidth="1013.0" translateY="50.0">
+                     <image>
+                        <Image url="@../Images/add%20user%20pic.png" />
+                     </image>
+                  </ImageView>
                </children>
-               <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
-               </padding>
             </HBox>
          </children>
       </VBox>
