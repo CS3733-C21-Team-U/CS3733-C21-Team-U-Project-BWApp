@@ -4,47 +4,40 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.twilio.twiml.voice.Sim;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.Comment;
+import edu.wpi.u.requests.SpecificRequest;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.Role;
 import edu.wpi.u.users.User;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ViewCovidResultsController {
-    @FXML public JFXTreeTableView<User> treeTableView = new JFXTreeTableView<>();
+    @FXML public JFXTreeTableView<SpecificRequest> treeTableView = new JFXTreeTableView<>();
 
     public void initialize() throws IOException {
 
-        ObservableList<User> users = FXCollections.observableArrayList();
-        for (User u : App.userService.getGuests()){
-            users.add(new Guest(new SimpleStringProperty(u.getGuestID()), new SimpleStringProperty(u.getName()),new SimpleStringProperty(String.valueOf(Role.GUEST)), new SimpleLongProperty(u.getVisitDate().getTime()), new SimpleStringProperty(u.getVisitReason())));
-        }
+        ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
+        requests.addAll(App.requestService.getRequests());
 
-        JFXTreeTableColumn<User, String> treeTableColumnID = new JFXTreeTableColumn<>("ID");
-        treeTableColumnID.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
-            if (treeTableColumnID.validateValue(param)){
-                return param.getValue().getValue().guestIDfxProperty();
-            }
-            else {
-                return treeTableColumnID.getComputedValue(param);
-            }
-        });
-        treeTableColumnID.setPrefWidth(100);
-        treeTableColumnID.setEditable(false);
-
-        JFXTreeTableColumn<User, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
-        treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+        JFXTreeTableColumn<SpecificRequest, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
+        treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnName.validateValue(param)){
-                return param.getValue().getValue().namefxProperty();
+                return new SimpleStringProperty(param.getValue().getValue().getGenericRequest().getAuthor());
             }
             else {
                 return treeTableColumnName.getComputedValue(param);
@@ -53,10 +46,10 @@ public class ViewCovidResultsController {
         treeTableColumnName.setPrefWidth(100);
         treeTableColumnName.setEditable(false);
 
-        JFXTreeTableColumn<User, String> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
-        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+        JFXTreeTableColumn<SpecificRequest, String> treeTableColumnVisitDate = new JFXTreeTableColumn<>("Visit date");
+        treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnVisitDate.validateValue(param)){
-                Date d = new Date(param.getValue().getValue().visitDatefxProperty().get());
+                Timestamp d = param.getValue().getValue().getGenericRequest().getDateCreated();
                 String temp = d.toString() + " (" + App.p.format(d) + ")";
                 return new SimpleStringProperty(temp);
             }
@@ -67,10 +60,10 @@ public class ViewCovidResultsController {
         treeTableColumnVisitDate.setPrefWidth(280);
         treeTableColumnVisitDate.setEditable(false);
 
-        JFXTreeTableColumn<User, String> treeTableColumnCovidRiskLevel = new JFXTreeTableColumn<>("COVID-19 Risk Level");
-        treeTableColumnCovidRiskLevel.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
+        JFXTreeTableColumn<SpecificRequest, String> treeTableColumnCovidRiskLevel = new JFXTreeTableColumn<>("COVID-19 Risk Level");
+        treeTableColumnCovidRiskLevel.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnCovidRiskLevel.validateValue(param)){
-                return param.getValue().getValue().visitReasonfxProperty();
+                return new SimpleStringProperty(param.getValue().getValue().getSpecificData().get(0));
             }
             else {
                 return treeTableColumnCovidRiskLevel.getComputedValue(param);
@@ -79,11 +72,23 @@ public class ViewCovidResultsController {
         treeTableColumnCovidRiskLevel.setPrefWidth(200);
         treeTableColumnCovidRiskLevel.setEditable(false);
 
+        JFXTreeTableColumn<SpecificRequest, String> treeTableColumnCovidTemp = new JFXTreeTableColumn<>("Body Temperature");
+        treeTableColumnCovidTemp.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
+            if (treeTableColumnCovidTemp.validateValue(param)){
+                return new SimpleStringProperty("Temp goes here");
+            }
+            else {
+                return treeTableColumnCovidTemp.getComputedValue(param);
+            }
+        });
+        treeTableColumnCovidTemp.setPrefWidth(200);
+        treeTableColumnCovidTemp.setEditable(false);
 
-        final TreeItem<User> root = new RecursiveTreeItem<>(users, RecursiveTreeObject::getChildren);
+
+        final TreeItem<SpecificRequest> root = new RecursiveTreeItem<>(requests, RecursiveTreeObject::getChildren);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
-        treeTableView.getColumns().setAll(treeTableColumnID, treeTableColumnName ,treeTableColumnVisitDate, treeTableColumnCovidRiskLevel);
+        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnCovidTemp);
     }
 
 }
