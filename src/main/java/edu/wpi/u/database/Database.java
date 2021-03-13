@@ -15,9 +15,15 @@ Twillio covid screenings
 
 public class Database {
     private static Connection conn = null;
-    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
+    // Url for live code
     private final static String url = "jdbc:derby:BWdb;create=true";
+    // Url for testing
+    private final static String testURL = "jdbc:derby:testDB;create=true";
+    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
+    /**
+     *  Constructor for database that is used for DB
+     */
     private Database() {
         driver();
         connect();
@@ -25,7 +31,20 @@ public class Database {
         createTables();
     }
 
-    //Bill Pugh solution
+    /**
+     * Constructor for database that is called in 2nd singleton to create a second DB for testing
+     * @param urlIn - URL of testing db, has to be defined in this file
+     */
+    public Database(String urlIn) {
+        driver();
+        connect(urlIn);
+        makeCSVDependant(false);
+        createTables();
+    }
+
+    /**
+     * Singleton class for live DB (BWDB)
+     */
     private static class SingletonHelper {
         //Nested class is referenced after getDB() is called
         private static final Database db = new Database();
@@ -33,11 +52,26 @@ public class Database {
 
     /**
      * Singleton helper to keep Database instance singular
-     *
      * @return the database class reference
      */
     public static Database getDB() {
         return SingletonHelper.db;
+    }
+
+    /**
+     * Single class for testing DB
+     */
+    private static class SingletonHelperTest {
+        //Nested class is referenced after getDB() is called
+        private static final Database dbStaging = new Database(testURL);
+    }
+
+    /**
+     * Singleton helped to keep Test DB instance singular
+     * @return the database class reference
+     */
+    public static Database getDBTest() {
+        return SingletonHelperTest.dbStaging;
     }
 
     /**
@@ -66,6 +100,20 @@ public class Database {
     }
 
     /**
+     * Creates the connection to the database by passing in a url, mainly used for url of testing db
+     * @param urlIn - URL of database, used for url of testDB
+     */
+    public static void connect(String urlIn) {
+        try {
+            conn = DriverManager.getConnection(urlIn);
+            conn.setAutoCommit(true);
+        } catch (Exception e) {
+            System.out.println("Connection failed");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Creates all of the tables in the database
      */
     public static void createTables() {
@@ -81,7 +129,7 @@ public class Database {
                 PreparedStatement ps2 = conn.prepareStatement(tbl2);
                 ps2.execute();
 
-                String tbl3 = "create table Requests (requestID varchar(50) not null , dateCreated date, dateCompleted date,description varchar(500),title varchar(100),type varchar(50), dateNeeded date, specificData varchar(250), primary key(requestID))";
+                String tbl3 = "create table Requests (requestID varchar(50) not null ,  type varchar(50), dateNeeded timestamp, specificData varchar(250), resolved boolean, primary key(requestID))";
                 PreparedStatement ps3 = conn.prepareStatement(tbl3);
                 ps3.execute();
 
@@ -96,21 +144,21 @@ public class Database {
                 ps7.execute();
                 // TODO : REQUEST WILL HAVE PARKING LOCATION
                 String tblPatient =
-                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50) references Nodes, recommendedParkingLocation varchar(100), primary key(patientID))";
+                        "create table Patients (patientID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, providerName varchar(50), parkingLocation varchar(50), recommendedParkingLocation varchar(100), primary key(patientID))";
                 PreparedStatement psPatient = conn.prepareStatement(tblPatient);
                 psPatient.execute();
 
                 //TODO : MOVE INTO ASSIGNMENTS
                 String tblAppointments =
-                        "create table Appointments(appointmentID varchar(50) not null, appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
+                        "create table Appointments(appointmentID varchar(50) not null , appointmentDate timestamp, appointmentType varchar(100), patientID varchar(50) references Patients, employeeID varchar(50) references Employees , primary key(appointmentID))";
                 PreparedStatement psAppointments = conn.prepareStatement(tblAppointments);
                 psAppointments.execute();
 
-                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, requestID varchar(50) references Requests, userID varchar(50) references Employees, primary key(assignmentID))";
+                String tbl5 = "create table Assignments(assignmentID varchar(50) not null, request varchar(50) references Requests, employeeID varchar(50), primary key(assignmentID))";
                 PreparedStatement ps5 = conn.prepareStatement(tbl5);
                 ps5.execute();
 
-                String tbl6 = "create table Locations(locationID varchar(50) not null, requestID varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key(locationID))";
+                String tbl6 = "create table Locations(locationID varchar(50) not null, request varchar(50) references Requests, nodeID varchar(50) references Nodes, primary key (locationID))";
                 PreparedStatement ps6 = conn.prepareStatement(tbl6);
                 ps6.execute();
                 // TODO : Change from arrayList to String
@@ -118,7 +166,7 @@ public class Database {
                 PreparedStatement psPerm = conn.prepareStatement(permissionsInit);
                 psPerm.execute();
 
-                String commentstbl = "create table Comments(requestID varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
+                String commentstbl = "create table Comments(request varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
@@ -237,6 +285,37 @@ public class Database {
         return false;
     }
 
+    public void dropAllValues(){
+        try {
+            String str;
+            Statement s = conn.createStatement();
+            str = "delete from Comments";
+            s.execute(str);
+            str = "delete from Permissions";
+            s.execute(str);
+            str = "delete from Locations";
+            s.execute(str);
+            str = "delete from Assignments";
+            s.execute(str);
+            str = "delete from Appointments";
+            s.execute(str);
+            str = "delete from Patients";
+            s.execute(str);
+            str = "delete from Guests";
+            s.execute(str);
+            str = "delete from Employees";
+            s.execute(str);
+            str = "delete from Requests";
+            s.execute(str);
+            str = "delete from Edges";
+            s.execute(str);
+            str = "delete from Nodes";
+            s.execute(str);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Drops a table or all if the tableName = "all"
      *
@@ -252,19 +331,27 @@ public class Database {
             str = "delete from " + tableName;
             s.execute(str);
             if (str.equals("all")){
-                str = "alter table Locations drop column requestID";
+                str = "delete from Comments";
                 s.execute(str);
-                str = "alter table Assignments drop column requestID";
-                s.execute(str);
-                str = "delete from Nodes";
-                s.execute(str);
-                str = "delete from Edges";
-                s.execute(str);
-                str = "delete from Requests";
+                str = "delete from Permissions";
                 s.execute(str);
                 str = "delete from Locations";
                 s.execute(str);
                 str = "delete from Assignments";
+                s.execute(str);
+                str = "delete from Appointments";
+                s.execute(str);
+                str = "delete from Patients";
+                s.execute(str);
+                str = "delete from Guests";
+                s.execute(str);
+                str = "delete from Employees";
+                s.execute(str);
+                str = "delete from Requests";
+                s.execute(str);
+                str = "delete from Edges";
+                s.execute(str);
+                str = "delete from Nodes";
                 s.execute(str);
 
             }
@@ -274,21 +361,33 @@ public class Database {
     }
 
     /**
-     * Deletes all tables TODO : Update to have newly created sprint 2&3 tables
+     * Deletes all tables
      */
     public void deleteTables() {
         //System.out.println("here2");
         try {
             Statement s = conn.createStatement();
-            String str = "drop table Nodes";
+            String str = "drop table Comments";
             s.execute(str);
-            str = "drop table Edges";
-            s.execute(str);
-            str = "drop table Requests";
+            str = "drop table Permissions";
             s.execute(str);
             str = "drop table Locations";
             s.execute(str);
             str = "drop table Assignments";
+            s.execute(str);
+            str = "drop table Appointments";
+            s.execute(str);
+            str = "drop table Patients";
+            s.execute(str);
+            str = "drop table Guests";
+            s.execute(str);
+            str = "drop table Employees";
+            s.execute(str);
+            str = "drop table Requests";
+            s.execute(str);
+            str = "drop table Edges";
+            s.execute(str);
+            str = "drop table Nodes";
             s.execute(str);
 
         } catch (Exception e) {

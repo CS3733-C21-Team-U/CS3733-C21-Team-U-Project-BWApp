@@ -12,6 +12,15 @@ import java.util.HashMap;
 public class MapData extends Data{
     public MapData(){
         connect();
+        getLongnames();
+    }
+
+    /**
+     * Constructor that is being used to connect to test DB
+     * @param testURL
+     */
+    public MapData(String testURL){
+        testConnect(testURL);
     }
 
     public int addNode(String node_id, double x, double y, String floor, String building, String node_type, String longname, String shortname) {
@@ -55,7 +64,7 @@ public class MapData extends Data{
 
     public HashMap<String, String> getLongnames(){
         HashMap<String,String> result = new HashMap<>();
-        String str = "select longName, nodeID from Nodes where nodeType !=? and nodeType !=?";
+        String str = "select longName,nodeID from Nodes where nodeType !=? and nodeType !=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, "HALL");
@@ -89,7 +98,7 @@ public class MapData extends Data{
 
     public int updateNodeType(String node_id, String newNodeType) {
         try {
-            String str = "update Nodes set node_type=? where nodeID=?";
+            String str = "update Nodes set nodeType=? where nodeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, newNodeType);
             ps.setString(2, node_id);
@@ -179,8 +188,7 @@ public class MapData extends Data{
 
     public int addEdge(String edge_id, String start_node_id, String end_node_id) {
         try {
-            System.out.println("Edges are being added to the Database");
-            String str = "insert into Edges (edgeId, startID, endID) values (?,?,?)";
+            String str = "insert into Edges (edgeID, startID, endID) values (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edge_id);
             ps.setString(2, start_node_id);
@@ -240,7 +248,7 @@ public class MapData extends Data{
 
     public int delEdgeByNodes(String start_node_id, String end_node_id){
         try {
-            String str = "delete from Edges where startID=?, endID=?";
+            String str = "delete from Edges where startID=? and endID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, start_node_id);
             ps.setString(2, end_node_id);
@@ -270,7 +278,8 @@ public class MapData extends Data{
                 String shortName = rset.getString("shortName");
                 mm.addNode(id,x,y,floor,building,nodeType,longName,shortName,"u");
                 String key = nodeType + floor;
-                int index = Integer.valueOf(id.substring(5,7));
+                String stringIndex = id.substring(5,8);
+                int index = Integer.valueOf(stringIndex);
                 if(!App.mapService.currentIDNumber.containsKey(key)){
                     App.mapService.currentIDNumber.put(key, index);
                 }else if(App.mapService.currentIDNumber.get(key) < index){
@@ -285,7 +294,7 @@ public class MapData extends Data{
                 String id = rs2.getString("edgeID");
                 String start = rs2.getString("startID");
                 String end = rs2.getString("endID");
-                ArrayList<Role> perms = this.getUserTypes(id);
+                Role perms = this.getUserTypes(id);
                  mm.addEdge(id,start,end, perms);
             }
             rs2.close();
@@ -342,19 +351,22 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @return Arraylist of Strings, representing types of users with permission
      */
-    public ArrayList<Role> getUserTypes(String edgeID) {
-        ArrayList<Role> userTypes = new ArrayList<>();
+    public Role getUserTypes(String edgeID) {
+        Role userTypes = null;
         try {
             String str = "select * from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1, edgeID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                userTypes.add(Role.valueOf(rs.getString("userType")));
+                userTypes=(Role.valueOf(rs.getString("userType")));
             }
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(userTypes == null){
+            userTypes = Role.DEFAULT;
         }
         return userTypes;
     }
@@ -365,16 +377,15 @@ public class MapData extends Data{
      * @param edgeID - Desired edge
      * @param permissions - new permission to be added
      */
-    public void updatePermissions(String edgeID, ArrayList<Role> permissions){
+    public void updatePermissions(String edgeID, Role permissions){
         try {
             String str = "delete from Permissions where edgeID=?";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,edgeID);
             ps.execute();
             // Add function
-            for(Role user: permissions){
-                addPermission(edgeID, user);
-            }
+            addPermission(edgeID, permissions);
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to update permissions.");

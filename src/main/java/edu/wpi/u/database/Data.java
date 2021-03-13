@@ -8,6 +8,7 @@ public abstract class Data {
     protected ResultSet rset;
     //protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
     protected String url = "jdbc:derby:BWdb";
+
     protected static Database db;
 
     public Data(){
@@ -25,6 +26,20 @@ public abstract class Data {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Creates the connection to the database with given URL (necessary for testing db)
+     * @param testURL
+     */
+    public void testConnect(String testURL) {
+        try {
+            conn = DriverManager.getConnection(testURL);
+        } catch (Exception e) {
+            System.out.println("Connection failed");
+            e.printStackTrace();
+        }
+    }
+
     public boolean updateField(String tableName, String idField, String id, String field, String val) {
         try {
             String str = "update "+tableName+" set "+field+"='"+val+"' where "+idField+"='"+id+"'";

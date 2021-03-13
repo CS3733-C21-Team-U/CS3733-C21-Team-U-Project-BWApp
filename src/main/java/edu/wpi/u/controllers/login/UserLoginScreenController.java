@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
+import java.nio.file.AccessDeniedException;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,12 +42,17 @@ public class UserLoginScreenController {
     @FXML
     public JFXProgressBar progressBar;
     @FXML public JFXButton submitButton;
-    //public JFXButton loginButton2;
-    @FXML public Label errorLabel;
+    @FXML public Label errorLabel, wrongPasswordLabel;
     @FXML public JFXButton debugLoginAdminButton;
-    public JFXButton debugLoginGuestButton;
+    @FXML public JFXButton debugLoginGuestButton;
+    @FXML public JFXButton submitSkipButton;
 
     public void initialize() throws IOException {
+        wrongPasswordLabel.setVisible(false);
+
+        passWordField.focusedProperty().addListener(e->{
+           wrongPasswordLabel.setVisible(false);
+        });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -100,29 +106,33 @@ public class UserLoginScreenController {
         });
     }
 
-
     public void handleLogin() throws IOException {
         System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
-        // TODO : Ability to skip the 2fa
 //        Scene scene = new Scene(root);
 //        App.getPrimaryStage().setScene(scene);
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
 //        App.getPrimaryStage().getScene().setRoot(root);
         String username = userNameTextField.getText();
         String password = passWordField.getText();
-        System.out.println("Username : " + username + " Password: " + password);
-        App.userService.setUser(username, password, App.userService.checkPassword(password));
-        //System.out.println("Phonenumber from user service: " + App.userService.getActiveUser().getPhoneNumber());
-        System.out.println("Phonenumber from get: " + App.userService.getActiveUser().getPhoneNumber());
+
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
+                handleSubmit();
+            }else{
+                wrongPasswordLabel.setVisible(true);
+            }
+        }else{
+            wrongPasswordLabel.setVisible(true);
+        }
+
+
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
-        // TODO : Extract out to helper
         try {
             if (!App.userService.checkUsername(username).equals("")) {
-                if (!App.userService.checkPassword(password).equals("")) {
-                    // TODO : Send code
-
+                if (!App.userService.checkPassword(password,username).equals("")) {
                     try {
                         Pattern pattern = Pattern.compile("^\\d{10}$");
                         Matcher matcher = pattern.matcher(phonenumber);
@@ -139,12 +149,10 @@ public class UserLoginScreenController {
                                     @Override
                                     public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
                                         status = responseStatus.getStatusCode();
-                                        System.out.println("At status code");
                                         return State.CONTINUE;
                                     }
                                     @Override
                                     public State onHeadersReceived(HttpHeaders headers) throws Exception {
-                                        System.out.println("At headers code");
                                         return State.CONTINUE;
                                     }
                                     @Override
@@ -183,17 +191,17 @@ public class UserLoginScreenController {
             errorLabel.setText("Username or Password is Invalid");
             e.printStackTrace();
         }
+
     }
 
-
-
-//Throws exceptions if username or password not found
-        public void handleForgotPassword() throws IOException {
+    public void handleForgotPassword() throws IOException {
+            App.userService.setTypedUsername(userNameTextField.getText());
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
             App.getPrimaryStage().getScene().setRoot(root);
         }
 
     public void handleSubmit() throws IOException {
+        App.loginFlag.set(!App.loginFlag.get());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
@@ -213,6 +221,50 @@ public class UserLoginScreenController {
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleSkip(ActionEvent actionEvent) throws IOException {
+        String username = userNameTextField.getText();
+        String password = passWordField.getText();
+        try{
+            if (!App.userService.checkUsername(username).equals("")) {
+                if (!App.userService.checkPassword(password,username).equals("")) {
+                    App.userService.setUser(username, password, App.userService.checkPassword(password,username));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    App.getPrimaryStage().getScene().setRoot(root);
+                }
+                else {
+                    throw new PasswordNotFoundException();
+                }
+            }
+            else {
+                throw new AccountNameNotFoundException();
+            }
+        }catch (AccountNameNotFoundException | PasswordNotFoundException e){
+            errorLabel.setText("Username or Password is Invalid");
+            e.printStackTrace();
+        }
+
+    }
+
+    public void handleLonginWithNo2FA(){
+        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
+                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
+                Parent root = null;
+                try {
+                    App.loginFlag.set(!App.loginFlag.get());
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                App.getPrimaryStage().getScene().setRoot(root);
+            }else{
+                wrongPasswordLabel.setVisible(true);
+            }
+        }else{
+            wrongPasswordLabel.setVisible(true);
+        }
     }
 }
 

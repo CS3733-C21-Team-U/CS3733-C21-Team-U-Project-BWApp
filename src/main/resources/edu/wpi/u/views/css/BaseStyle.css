@@ -112,7 +112,6 @@
     -fx-text-fill: #D34336;
 }
 
-
 /*** Table stuff ****/
 
 .table-view:focused{
@@ -291,8 +290,8 @@
 }
 
 .fab-mini{
-    -fx-background-color: -secondary;
-    -fx-text-fill: -onSecondary;
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
     -fx-min-width: 40px;
     -fx-min-height: 40px;
     -fx-pref-width: 40px;
@@ -407,11 +406,11 @@
 }
 
 .jfx-list-view .list-cell:even {
-    -fx-background-color: blue;
+    -fx-background-color: #e0e0e0;
     -fx-text-fill: black;
 }
 .jfx-list-view .list-cell:odd {
-    -fx-background-color: blue;
+    -fx-background-color: #ffffff;
     -fx-text-fill: black;
 }
 
@@ -419,7 +418,7 @@
     -fx-background-insets: 0;
     -jfx-cell-horizontal-margin: 0.0;
     -jfx-cell-vertical-margin: 5.0;
-    -jfx-vertical-gap: 10;
+    -jfx-vertical-gap: 0;
     -jfx-expanded: true;
     -fx-pref-width: 200;
 }
@@ -464,6 +463,22 @@
 
 .dialogue{
     -fx-background-color: -backgroundAlt;
+}
+
+.bigButton{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-font-size: 17;
+}
+
+.bigButtonOutline{
+    -fx-background-color: -background;
+    -fx-text-fill: -primary;
+    -fx-font-size: 17;
+}
+
+.bigButtonOutline > .jfx-rippler{
+    -jfx-rippler-fill: -primary;
 }
 
 

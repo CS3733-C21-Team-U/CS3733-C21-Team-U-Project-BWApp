@@ -26,8 +26,17 @@ public class MapService {
   public MapService() {
     md = new MapData();
   }
+
+  /**
+   * No args constructor used to pass through connection to test DB
+   * @param testURL
+   */
+  public MapService(String testURL){
+    md = new MapData(testURL);
+  }
+
   public void loadStuff(){
-    md.loadGraph(mm); //TODO: Can cause app to crash, this is ran before database initializes
+    md.loadGraph(App.mapService.mm); //TODO: Can cause app to crash, this is ran before database initializes
   }
 
   public HashMap<String, String> getLongNames(){
@@ -48,6 +57,7 @@ public class MapService {
    * @return
    */
   public Edge getEdgeFromID(String edgeId){ return mm.getEdgeFromID(edgeId);}
+
   /**
    * saves the currtent database to a csv
    * @param path
@@ -90,14 +100,7 @@ public class MapService {
     }
   }
 
-  public String  addNode (
-          double xCoord,
-          double yCoord,
-          String floor,
-          String building,
-          String nodeType,
-          String longName,
-          String shortName) throws InvalidEdgeException{
+  public String  addNode (double xCoord, double yCoord, String floor, String building, String nodeType, String longName, String shortName) throws InvalidEdgeException{
     try{
       int curIndex;
       if(!currentIDNumber.containsKey(nodeType + floor)){
@@ -129,15 +132,7 @@ public class MapService {
     }
   }
 
-  public void addNodeWithID(
-          String nodeID,
-          double xCoord,
-          double yCoord,
-          String floor,
-          String building,
-          String nodeType,
-          String longName,
-          String shortName) throws InvalidEdgeException{
+  public void addNodeWithID(String nodeID,double xCoord,double yCoord,String floor,String building,String nodeType,String longName,String shortName) throws InvalidEdgeException{
     try{
       md.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName);
       mm.addNode(nodeID, xCoord, yCoord, floor, building, nodeType, longName, shortName, "u");
@@ -199,7 +194,7 @@ public class MapService {
    * @throws InvalidEdgeException
    * TODO add Node ID checking
    */
-  public String addEdge(String edge_id, String start_node, String end_node, ArrayList<Role> permissions) throws InvalidEdgeException {
+  public String addEdge(String edge_id, String start_node, String end_node, Role permissions) throws InvalidEdgeException {
     if (md.isNode(start_node) && md.isNode(end_node)){
       md.addEdge(edge_id, start_node, end_node);
       md.updatePermissions(edge_id, permissions);
@@ -218,7 +213,7 @@ public class MapService {
    * @param edgeID
    * @param permissions
    */
-  public void updateEdgePermissions(String edgeID, ArrayList<Role> permissions){
+  public void updateEdgePermissions(String edgeID, Role permissions){
     md.updatePermissions(edgeID, permissions);
     mm.updateUserPermissions(edgeID, permissions);
   }
@@ -307,11 +302,12 @@ public class MapService {
         return mm.runDFS(start_node_id,end_node_id);
       case "BFS":
         return mm.runBFS(start_node_id,end_node_id);
+      case "DIJKSTRA":
+        return new ArrayList<>(mm.runDijkstra(start_node_id,end_node_id));
       default:
         return new ArrayList<>();
     }
   }
-
 
   /**
    * runs A* on the model and gets a linked list of the path

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
+         <children>
+            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+               <children>
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                     <graphic>
+                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </SVGPath>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Map Builder" wrappingWidth="449.15234375">
+               <font>
+                  <Font name="Serif Bold" size="41.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="714.0" prefWidth="1582.0">
+               <children>
+                  <VBox prefHeight="711.0" prefWidth="657.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="1.Screen for editing the map of nodes and edges&#10;In the top right is a list of tools, hover over them to see the tool name&#10;&#10;2.Clicking on a node allows you to move it across the screen to any location, to confirm the changes select ‘save’ after moving in the menu that will pop up&#10;&#10;3.Selecting multi add allows you to select multiple nodes and simultaneously delete them all or edit all of their permissions&#10;&#10;4.Selecting add node, allows you to add an edge at any location and give it a longname, shortname, and node type&#10;&#10;5.Selecting align will allow you to align multiple selected nodes &#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
+                           <font>
+                              <Font name="HoloLens MDL2 Assets" size="25.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="684.0" prefWidth="929.0">
+                     <children>
+                        <ImageView fitHeight="230.0" fitWidth="58.0" translateX="300.0">
+                           <image>
+                              <Image url="@../Images/sidebarmap.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="403.0" fitWidth="718.0">
+                           <image>
+                              <Image url="@../Images/User%20manager%20full.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 2" translateX="325.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</AnchorPane>

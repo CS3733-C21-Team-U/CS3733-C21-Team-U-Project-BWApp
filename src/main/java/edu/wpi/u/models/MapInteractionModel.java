@@ -2,6 +2,7 @@ package edu.wpi.u.models;
 
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.controllers.mapbuilder.MapBuilderBaseController;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.AnchorPane;
 
@@ -11,9 +12,11 @@ import java.util.LinkedList;
 public class MapInteractionModel {
 
 
+    public boolean highRisk = false;
     private String currentAction = "SELECT";
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
+    public SimpleBooleanProperty reloadPathfinding = new SimpleBooleanProperty(true);
     private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
@@ -36,12 +39,17 @@ public class MapInteractionModel {
     public String toggledNodeID = "";
     public ArrayList<String> edgeIDList = new ArrayList<>();
     public boolean clickedOnNode = false;
-    public boolean pathThingy = false;
+    public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);//for start node
+    public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
+    public String aline = "";
+    public double alineValue;
+
 
 
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){
             this.nodeIDList.addFirst(nodeID);
+            this.toggledNodeID = nodeID;
         }else {
             this.nodeIDList.remove(nodeID);
             this.toggledNodeID = nodeID;
@@ -50,11 +58,8 @@ public class MapInteractionModel {
     }
 
     public LinkedList<String> resetNodeIDList(){
-        String firstID = this.nodeIDList.getFirst();
-        this.nodeIDList.remove(firstID);
         LinkedList<String> returnMe = this.nodeIDList;
         this.nodeIDList = new LinkedList<>();
-        addToNodeIdList(firstID);
         return returnMe;
     }
 
@@ -127,52 +132,13 @@ public class MapInteractionModel {
         Coords = coords;
     }
 
+    public void setStartNode(String nodeID){
+        mapTargetNode.set(!mapTargetNode.get());
+        this.nodeID.set(nodeID);
+    }
 
-//    /**
-//     *  get node ID
-//     * @return
-//     */
-//    public String getNodeID() {
-//        return nodeID;
-//    }
-//
-//    /**
-//     * set node ID
-//     * @param nodeID
-//     */
-//    public void setNodeID(String nodeID) {
-//        this.nodeID = nodeID;
-//    }
-//
-//    /**
-//     * get edge ID
-//     * @return
-//     */
-//    public String getEdgeID() {
-//        return edgeID;
-//    }
-//
-//    /**
-//     * set Edge ID
-//     * @param edgeID
-//     */
-//    public void setEdgeID(String edgeID) {
-//        this.edgeID = edgeID;
-//    }
-//
-//    /**
-//     * get coordinates in the format [x,y]
-//     * @return
-//     */
-//    public double[] getCoords() {
-//        return Coords;
-//    }
-//
-//    /**
-//     * set coordinates in the format [x,y]
-//     * @param coords
-//     */
-//    public void setCoords(double[] coords) {
-//        Coords = coords;
-//    }
+    public void setEndNode(String nodeID){
+        mapTargetNode2.set(!mapTargetNode2.get());
+        this.nodeID.set(nodeID);
+    }
 }

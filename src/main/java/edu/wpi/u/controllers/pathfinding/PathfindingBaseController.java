@@ -59,6 +59,7 @@ public class PathfindingBaseController {
      * @throws IOException
      */
     public void initialize() throws Exception {
+        clearMapItems();
         floorG.setSelected(true);
         App.mapService.loadStuff();
         // Loading the map
@@ -146,39 +147,40 @@ public class PathfindingBaseController {
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
         });
-
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
-            clearMapItems();
-            String floorStart = App.mapInteractionModel.path.get(0).getFloor();
-            String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size()-1).getFloor();
-            switch (floorStart){
-                case "G":
-                    floorG.setSelected(true);
-                    handleFloorGButton();
-                    break;
-                case "1":
-                    floor1.setSelected(true);
-                    handleFloor1Button();
-                    break;
-                case "2":
-                    floor2.setSelected(true);
-                    handleFloor2Button();
-                    break;
-                case "3":
-                    floor3.setSelected(true);
-                    handleFloor3Button();
-                    break;
-                case "4":
-                    floor4.setSelected(true);
-                    handleFloor4Button();
-                    break;
-                case "5":
-                    floor5.setSelected(true);
-                    handleFloor5Button();
-                    break;
+            if(!App.mapInteractionModel.path.isEmpty()) {
+                clearMapItems();
+                String floorStart = App.mapInteractionModel.path.get(0).getFloor();
+                String floorEnd = App.mapInteractionModel.path.get(App.mapInteractionModel.path.size() - 1).getFloor();
+                switch (floorStart) {
+                    case "G":
+                        floorG.setSelected(true);
+                        handleFloorGButton();
+                        break;
+                    case "1":
+                        floor1.setSelected(true);
+                        handleFloor1Button();
+                        break;
+                    case "2":
+                        floor2.setSelected(true);
+                        handleFloor2Button();
+                        break;
+                    case "3":
+                        floor3.setSelected(true);
+                        handleFloor3Button();
+                        break;
+                    case "4":
+                        floor4.setSelected(true);
+                        handleFloor4Button();
+                        break;
+                    case "5":
+                        floor5.setSelected(true);
+                        handleFloor5Button();
+                        break;
+                }
+                generateEdges(App.mapInteractionModel.floorPathfinding);
+                generateNodes(App.mapInteractionModel.floorPathfinding);
             }
-            generateEdges(App.mapInteractionModel.floorPathfinding);
-            generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
         App.mapInteractionModel.pathPreviewFlag.addListener((observable, oldValue, newValue)  ->{
@@ -186,6 +188,11 @@ public class PathfindingBaseController {
             generatePathPreview(App.mapInteractionModel.floorPathfinding);
             setMapItemsOrder();
         });
+        App.mapInteractionModel.reloadPathfinding.addListener(e -> {
+            clearMapItems();
+            generateNodes(App.mapInteractionModel.floor);
+        });
+
 
     } // End of initialize
 
@@ -201,7 +208,7 @@ public class PathfindingBaseController {
             node1.setRadius(7.0);
 
             node1.setId(n.getNodeID());
-            node1.setStyle("-fx-fill: -error");
+            node1.setStyle("-fx-fill: #6200ee");
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
@@ -262,8 +269,9 @@ public class PathfindingBaseController {
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
-    String outlineColor = "ffbfbfff";
-    String fillColor = "e86060ff";
+
+    String outlineColor = "b187ed";
+    String fillColor = "fffff5";
     public void placeEdgesHelper(Edge ed, boolean forward){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
@@ -329,8 +337,9 @@ public class PathfindingBaseController {
         previewEdge.setEndX(xdiff);
         previewEdge.setEndY(ydiff);
         previewEdge.setId(ed.getEdgeID() + "_preview");
-        previewEdge.setStrokeWidth(7);
-        previewEdge.setStroke(Paint.valueOf("green"));
+        previewEdge.setStrokeWidth(10);
+        previewEdge.setStroke(Paint.valueOf("644491"));
+        previewEdge.setStrokeLineCap(StrokeLineCap.ROUND);
         previewEdge.setVisible(true);
         pathPreviewGroup.getChildren().add(previewEdge);
     }
