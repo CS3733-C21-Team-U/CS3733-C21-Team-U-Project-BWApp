@@ -47,7 +47,7 @@ public class MobileCovidSurveyController {
 
     public void handleCovidSurveyFill() throws IOException {
 
-        if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
+        if (!Q1CheckBox.isSelected() && !Q2CheckBox.isSelected() && !Q3CheckBox.isSelected() && !Q4CheckBox.isSelected() && Q5CheckBox.isSelected()){
             covidRisk = "None";
         }else{
             errorLabel.setText("We are sorry you are not feeling well or have been in contact with a COVID positive person. \n" +
