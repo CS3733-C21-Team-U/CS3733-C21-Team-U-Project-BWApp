@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,7 @@ import java.util.Date;
 public class ViewRequestListController {
 
     public AnchorPane noItemsGraphic;
+    public JFXButton newRequestButton;
     public VBox sampleRequestItem;
     public JFXComboBox<String> typeOption;
     public JFXComboBox<String> assignOption;
@@ -41,6 +44,8 @@ public class ViewRequestListController {
      * @throws IOException
      */
     public void initialize() throws IOException {
+
+        newRequestButton.setTooltip(new Tooltip("Add New Request"));
 
         sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
             @Override

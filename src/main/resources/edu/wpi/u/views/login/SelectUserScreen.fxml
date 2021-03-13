@@ -62,7 +62,7 @@
                               <Insets />
                            </VBox.margin>
                            <children>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleGuestButton" prefHeight="200.0" prefWidth="200.0" ripplerFill="WHITE" styleClass="bigButton" wrapText="true" GridPane.columnIndex="1">
+                              <JFXButton fx:id="guestBtn" buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleGuestButton" prefHeight="200.0" prefWidth="200.0" ripplerFill="WHITE" styleClass="bigButton" wrapText="true" GridPane.columnIndex="1">
                                  <graphic>
                                     <VBox alignment="CENTER" prefHeight="120.0" prefWidth="170.0" spacing="10.0">
                                        <padding>
@@ -79,7 +79,7 @@
                                     </VBox>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleMobile" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.rowIndex="1">
+                              <JFXButton fx:id="mobileBtn" buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleMobile" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.rowIndex="1">
                                  <graphic>
                                     <VBox alignment="BOTTOM_CENTER" prefHeight="124.0" prefWidth="170.0" spacing="10.0">
                                        <padding>
@@ -99,7 +99,7 @@
                                     </VBox>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleSignUpButton" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <JFXButton fx:id="signupBtn" buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleSignUpButton" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <graphic>
                                     <VBox alignment="CENTER" prefHeight="135.0" prefWidth="170.0" spacing="20.0">
                                        <padding>
@@ -119,7 +119,7 @@
                                     </VBox>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="200.0" layoutY="10.0" onAction="#handleLoginButton" prefHeight="200.0" prefWidth="200.0" ripplerFill="WHITE" styleClass="bigButton" wrapText="true">
+                              <JFXButton fx:id="loginBtn" buttonType="RAISED" contentDisplay="TOP" layoutX="200.0" layoutY="10.0" onAction="#handleLoginButton" prefHeight="200.0" prefWidth="200.0" ripplerFill="WHITE" styleClass="bigButton" wrapText="true">
                                  <graphic>
                                     <VBox alignment="CENTER" prefHeight="120.0" prefWidth="170.0" spacing="10.0">
                                        <padding>

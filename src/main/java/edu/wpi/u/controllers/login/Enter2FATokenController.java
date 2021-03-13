@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
-import edu.wpi.u.users.Role;
-import io.netty.handler.codec.http.HttpHeaders;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import org.asynchttpclient.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Future;
 
 public class Enter2FATokenController {

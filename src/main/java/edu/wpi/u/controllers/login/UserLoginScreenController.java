@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
-import java.nio.file.AccessDeniedException;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,10 +47,10 @@ public class UserLoginScreenController {
     @FXML public JFXButton submitSkipButton;
 
     public void initialize() throws IOException {
-        wrongPasswordLabel.setVisible(false);
+        //wrongPasswordLabel.setVisible(false);
 
         passWordField.focusedProperty().addListener(e->{
-           wrongPasswordLabel.setVisible(false);
+           //wrongPasswordLabel.setVisible(false);
         });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -108,7 +107,7 @@ public class UserLoginScreenController {
 
     public void handleLogin() throws IOException {
         System.out.println("HERE");
-        progressBar.setStyle("-fx-opacity: 1");
+        //progressBar.setStyle("-fx-opacity: 1");
 //        Scene scene = new Scene(root);
 //        App.getPrimaryStage().setScene(scene);
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));

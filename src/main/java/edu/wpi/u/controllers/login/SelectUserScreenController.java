@@ -1,20 +1,29 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Tooltip;
 
 import java.io.IOException;
 
 public class SelectUserScreenController {
 
+    public JFXButton loginBtn;
+    public JFXButton guestBtn;
+    public JFXButton mobileBtn;
+    public JFXButton signupBtn;
+
 
     public void initialize() throws IOException {
+        loginBtn.setTooltip(new Tooltip("Login"));
+        guestBtn.setTooltip(new Tooltip("Login as Guest"));
+        mobileBtn.setTooltip(new Tooltip("Mobile View"));
+        signupBtn.setTooltip(new Tooltip("Sign Up"));
 
     }
 
