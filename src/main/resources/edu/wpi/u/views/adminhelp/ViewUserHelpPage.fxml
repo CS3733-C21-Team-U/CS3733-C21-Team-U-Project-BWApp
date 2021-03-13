@@ -48,7 +48,7 @@
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Label>
-                        <Label prefHeight="68.0" prefWidth="583.0" styleClass="headline-3" text="2.This page allows an Administrator to view all users in the application system. " wrapText="true">
+                        <Label prefHeight="68.0" prefWidth="583.0" styleClass="headline-3" text="2. This page allows an Administrator to view all users in the application system. " wrapText="true">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,9 +20,6 @@
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
                   <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -42,67 +39,48 @@
                   <Insets bottom="50.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
+            <HBox prefHeight="784.0" prefWidth="1283.0">
                <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
+                  <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="Within My Requests, the user can click on the new request button in the top right to create a new service request, or select the show details button to view the details of an existing request.&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="153.0" fitWidth="191.0" translateX="220.0">
+                        <Label prefHeight="15.0" prefWidth="623.0" styleClass="headline-3" text="1. Selecting My Requests Tab" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="74.0" prefWidth="600.0" styleClass="headline-3" text="2. Add New Request:                                                                                   a. Clicking + New Request                                                                     b.Selecting a service type. Then, fill all the fields." wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="25.0" prefHeight="91.0" prefWidth="600.0" styleClass="headline-3" text="3. View Request:  After an administrator adding a request, he/she is allowed to see the location and the status of the request. The administrator can click 'show detail'  and 'collapse' to expand and close the detail view of the request. " wrapText="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="490.0" wrapText="true" />
+                        <Label layoutX="10.0" layoutY="150.0" prefHeight="78.0" prefWidth="600.0" styleClass="headline-3" text="4. Update Request:  An administrator is allowed to edit the request, add an comment to the request, and close the request by clicking 'resolve'" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="150.0" prefHeight="57.0" prefWidth="600.0" styleClass="headline-3" text="5. PathFinding: An administrator can click 'pathfinding'. A path to the reuqest's location will be displayed on the mini-map" wrapText="true" />
+                        <ImageView fitHeight="189.0" fitWidth="233.0" translateX="150.0">
                            <image>
                               <Image url="@../Images/my%20request.png" />
                            </image>
                            <VBox.margin>
-                              <Insets bottom="50.0" />
+                              <Insets top="50.0" />
                            </VBox.margin>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="-40.0" />
-                           </VBox.margin>
-                        </Text>
-                        <ImageView fitHeight="292.0" fitWidth="726.0">
-                           <image>
-                              <Image url="@../Images/add%20request.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="201.0" fitWidth="937.0">
-                           <image>
-                              <Image url="@../Images/view%20+add%20request.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="-30.0" right="-30.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text layoutX="90.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 3" translateX="330.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
                      </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
                   </VBox>
+                  <ImageView fitHeight="644.0" fitWidth="983.0">
+                     <image>
+                        <Image url="@../Images/addnewrequest.png" />
+                     </image>
+                  </ImageView>
                </children>
-               <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
-               </padding>
             </HBox>
          </children>
       </VBox>

@@ -70,7 +70,7 @@
                         </ImageView>
                      </children>
                   </VBox>
-                  <ImageView fitHeight="780.0" fitWidth="392.0" translateX="100.0">
+                  <ImageView fitHeight="780.0" fitWidth="392.0" translateX="230.0">
                      <image>
                         <Image url="@../Images/setting2.png" />
                      </image>

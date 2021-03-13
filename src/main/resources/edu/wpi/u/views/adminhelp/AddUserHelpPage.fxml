@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutX="6.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
@@ -43,21 +43,21 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
-                        <Label prefHeight="105.0" prefWidth="569.0" styleClass="headline-3" text="1. Selecting User Manager Tab will bring you to the View Users Page" wrapText="true">
+                        <Label prefHeight="105.0" prefWidth="603.0" styleClass="headline-3" text="1. Selecting User Manager Tab will bring you to the View Users Page" wrapText="true">
                            <VBox.margin>
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Label>
-                        <Label prefHeight="111.0" prefWidth="569.0" styleClass="headline-3" text="2. Selecting the add user button will bring the administrator to a page, allowing them to enter the fields for a new user and add them into the system." wrapText="true">
+                        <Label prefHeight="111.0" prefWidth="595.0" styleClass="headline-3" text="2. Selecting the add user button will bring the administrator to a page, allowing them to enter the fields for a new user and add them into the system." wrapText="true">
                            <VBox.margin>
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Label>
                         <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="470.0" wrapText="true" />
-                        <Label layoutX="10.0" layoutY="145.0" prefHeight="111.0" prefWidth="569.0" styleClass="headline-3" text="3. Making sure fill out all the fields." wrapText="true" />
+                        <Label layoutX="10.0" layoutY="145.0" prefHeight="111.0" prefWidth="602.0" styleClass="headline-3" text="3. Making sure fill out all the fields." wrapText="true" />
                      </children>
                   </VBox>
-                  <ImageView fitHeight="614.0" fitWidth="1013.0" translateY="50.0">
+                  <ImageView fitHeight="614.0" fitWidth="987.0" translateY="50.0">
                      <image>
                         <Image url="@../Images/add%20user%20pic.png" />
                      </image>
