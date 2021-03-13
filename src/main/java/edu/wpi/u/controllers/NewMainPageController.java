@@ -184,6 +184,7 @@ public class NewMainPageController {
     }
 
     public void handleExit() throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
@@ -208,6 +209,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");

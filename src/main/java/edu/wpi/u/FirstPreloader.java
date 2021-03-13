@@ -22,7 +22,6 @@ public class FirstPreloader extends Preloader {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.isLoggedIn.set(false);
         App.base = fxmlLoader.getRoot();
         this.stage = stage;
         stage.setScene(createPreloaderScene());

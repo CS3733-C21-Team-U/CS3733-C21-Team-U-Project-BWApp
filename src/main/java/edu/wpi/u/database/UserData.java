@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import soot.G;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -425,7 +426,9 @@ public class UserData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Employee();
+        Employee e = new Employee();
+        e.setUserID("Debug");
+        return e;
     }
 
     /**
@@ -453,7 +456,9 @@ public class UserData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Guest();
+        Guest g = new Guest();
+        g.setUserID("Debug");
+        return g;
     }
 
     /**
@@ -514,13 +519,14 @@ public class UserData extends Data{
                 String providerName = rs.getString("providerName");
                 String parkingLocation = rs.getString("parkingLocation");
                 String recommendedParkingLocation = rs.getString("recommendedParkingLocation");
-                // todo : check
                 return new Patient(patientID, name, username, password, email, role, phonenumber, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Patient();
+        Patient p = new Patient();
+        p.setUserID("Debug");
+        return p;
     }
 
     /**

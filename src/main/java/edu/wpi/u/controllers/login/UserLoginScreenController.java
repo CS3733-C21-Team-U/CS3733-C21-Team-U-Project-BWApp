@@ -208,19 +208,20 @@ public class UserLoginScreenController {
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
         App.isLoggedIn.set(true);
-        Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root); // todo : this still makes it load???
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(App.base); // todo : this still makes it load???
     }
 
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("patient", "patient", "Guests");
+        App.userService.setUser("patient", "patient", "Patients");
         App.isLoggedIn.set(true);
-        Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        System.out.println("===Patient is : " + App.userService.getActiveUser().getName() + "===");
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
-        Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 

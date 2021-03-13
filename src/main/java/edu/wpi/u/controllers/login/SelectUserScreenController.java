@@ -51,7 +51,7 @@ public class SelectUserScreenController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
@@ -60,7 +60,7 @@ public class SelectUserScreenController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
@@ -69,7 +69,7 @@ public class SelectUserScreenController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleMobile() throws IOException {
