@@ -215,7 +215,6 @@ public class UserLoginScreenController {
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("patient", "patient", "Patients");
         App.isLoggedIn.set(true);
-        System.out.println("===Patient is : " + App.userService.getActiveUser().getName() + "===");
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(App.base);
     }

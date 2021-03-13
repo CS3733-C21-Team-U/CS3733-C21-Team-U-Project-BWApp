@@ -59,7 +59,6 @@ public class SelectUserScreenController {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
         App.isLoggedIn.set(true);
-        System.out.println("Patient id : " + App.userService.getActiveUser().getUserID());
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
@@ -70,7 +69,6 @@ public class SelectUserScreenController {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-        System.out.println("Employee id : " + App.userService.getActiveUser().getUserID());
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
