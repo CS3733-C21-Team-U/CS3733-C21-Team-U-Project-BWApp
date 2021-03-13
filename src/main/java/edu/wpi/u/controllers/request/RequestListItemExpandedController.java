@@ -95,8 +95,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML
     public void initialize(URL location, ResourceBundle resources){
 
-
-
         mainMapPane.getChildren().add(locationGroup);
         mainMapPane.setMinSize(457,275);
         mainMapPane.toFront();
@@ -114,7 +112,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.toFront();
         locationGroup.minHeight(300);
         locationGroup.minWidth(300);
-        loadLocationsOnMap(0, locationGroup);
+        loadLocationsOnMap(0);
 
 
 
@@ -283,20 +281,15 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void nextLocation(){
-        //get the integer for what location we are lookign at and the floor associated with that node.
-        //loadLocationsOnMap(That floor we just got);
-        //
+        loadLocationsOnMap((currentNode++)%parent.request.getGenericRequest().getLocations().size());
 
     }
     public void previousLocation(){
-        //get the integer for what location we are lookign at and the floor associated with that node.
-        //loadLocationsOnMap(That floor we just got);
-        //
-
+        loadLocationsOnMap((currentNode--)%parent.request.getGenericRequest().getLocations().size());
     }
 
 
-    public void loadLocationsOnMap(int nodeNum, Group pane){
+    public void loadLocationsOnMap(int nodeNum){
         if(parent.request.getGenericRequest().getLocations().size() == 0){
             //No Locations graphic here
             return;
@@ -349,7 +342,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         location.setScaleX(1.5);
         location.setScaleY(1.5);
         location.toFront();
-        pane.getChildren().add(location);
+        locationGroup.getChildren().add(location);
         locationLabel.setText(node.getLongName());
     }
 
