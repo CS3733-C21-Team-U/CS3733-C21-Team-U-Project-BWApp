@@ -2,6 +2,8 @@ package edu.wpi.u.controllers.pathfinding;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,9 +75,20 @@ public class TreeViewListController implements Initializable {
      *      1. (Do last)Bring up the ui component when start or end node text input thing is pressed in pathfinding
      *          - there should be some boolean passed in that indicates start or end node
      *          - Supposed to do this with someone or have them do it
-     *      2. How to invoke initialize?
+     *      2. How to make the nodes actually clickable
      */
 
+    /**
+     * Scrum:
+     * 1. Talked to Ola about implementing covid dashboard, continue to try to implement TreeViewList
+     * First I had to test that initialize was actually working, but I just shouldnt have been bringing up the fxml from main
+     * I finished mostly everything with this, just need to figure out how to do something when a "node" is clicked
+     * This has been really annoying and tricky (See why)
+     * 2. I need to continue to figure this out, this is uncharted territory for me, help could be appreciated
+     * I also am going to continue to meet with Ola and collaborate to get the covid dashboard backend stuff done, and then help to finish it off
+     * 3. Challenges: Finishing these things in a somewhat timely manner, cuz honestly I don't know how long this on part gonna take,
+     * but I do know I have to study a LOT for an exam that's coming up, and I haven't gonna to it yet
+     */
 
     /**
      * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
@@ -125,15 +138,13 @@ public class TreeViewListController implements Initializable {
         // Currently displays long name for applicable nodes
         // Make it store the Node, but display longName?
         for(Node n: allNodes){
-            TreeItem temp = new TreeItem(n.getLongName());
+            TreeItem temp = new TreeItem(n.getNodeID());
+
             switch(n.getNodeType()){
                 case "CONF":
                     rootConf.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID()); // TODO: Need to close window?
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    confTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedNodeClick(temp));
+                    temp.setValue(App.mapService.getNodeFromID((String) temp.getValue()));
                     break;
                 case "DEPT":
                     rootDept.getChildren().add(temp);
@@ -152,12 +163,17 @@ public class TreeViewListController implements Initializable {
                     });
                     break;
                 case "EXIT":
-                    rootExit.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler() {
+                        @Override
+                        public void handle(Event event) {
+                            System.out.println("Exit CLICKED Treeview 160");
+                            if(isStartNode) {
+                                App.mapInteractionModel.setStartNode(n.getNodeID());
+                            } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                        }
                     });
+                    rootExit.getChildren().add(temp);
+                    System.out.println("Exit added Treeview 167");
                     break;
                 case "FOOD":
                     rootFood.getChildren().add(temp);
@@ -188,6 +204,7 @@ public class TreeViewListController implements Initializable {
                     temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         if(isStartNode) {
                             App.mapInteractionModel.setStartNode(n.getNodeID());
+                            System.out.println("START NODE SET");
                         } else App.mapInteractionModel.setEndNode(n.getNodeID());
                     });
                     break;
@@ -220,13 +237,17 @@ public class TreeViewListController implements Initializable {
 
     }
 
+    private void selectedNodeClick(TreeItem t){
+        System.out.println(t.getValue()); // temp.setValue(App.mapService.getNodeFromID((String) temp.getValue()));
+    }
+
+
 
     /**
      * Generalized method for expanding/collapsing, handles when the actual tree is pressed
      * Will be called with the treeType/nodeType as in input from the individual methods
      */
     private void expandAndCollapse(String treeType){
-        System.out.println("this works");
         switch(treeType){
             case "CONF":
                 if(confExpanded){
