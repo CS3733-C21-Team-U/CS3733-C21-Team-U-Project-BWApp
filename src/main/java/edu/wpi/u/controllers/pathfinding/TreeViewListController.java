@@ -2,9 +2,11 @@ package edu.wpi.u.controllers.pathfinding;
 
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -60,6 +62,8 @@ public class TreeViewListController {
     boolean servExpanded;
     boolean staiExpanded;
 
+    boolean isStartNode; // TODO: Talk about this
+
 
     /**
      * TODO:
@@ -79,8 +83,6 @@ public class TreeViewListController {
      */
     @FXML
     public void initialize(){
-        fillAllTrees();
-
         confExpanded = false;
         deptExpanded = false;
         elevExpanded = false;
@@ -92,6 +94,10 @@ public class TreeViewListController {
         restExpanded = false;
         servExpanded = false;
         staiExpanded = false;
+
+        isStartNode = true; // TODO: This should change depending on which search bar is clicked
+
+        fillAllTrees();
 
     }
 
@@ -119,9 +125,13 @@ public class TreeViewListController {
         // Currently displays long name for applicable nodes
         // Make it store the Node, but display longName?
         for(Node n: allNodes){
+            TreeItem temp = new TreeItem(n.getLongName());
             switch(n.getNodeType()){
                 case "CONF":
-                    rootConf.getChildren().add(new TreeItem(n.getLongName()));
+                    rootConf.getChildren().add(new TreeItem(temp));
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        // App.mapInteractionModel.setStartNode(n.getNodeID());
+                    });
                     break;
                 case "DEPT":
                     rootDept.getChildren().add(new TreeItem(n.getLongName()));
