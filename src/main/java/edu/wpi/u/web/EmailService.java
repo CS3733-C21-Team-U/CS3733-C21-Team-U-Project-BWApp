@@ -12,7 +12,7 @@ public class EmailService {
     public static void main(String[] args) {
         //sendMail("nev.ingram30@gmail.com","The return of testy westy");
     }
-    public static void sendMail(String to, String body){ // todo : take in a SpecificRequest
+    public void sendMail(String to, String body){ // todo : take in a SpecificRequest
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
                 .to("", to)
