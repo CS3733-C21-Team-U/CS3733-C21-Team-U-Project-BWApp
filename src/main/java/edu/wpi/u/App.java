@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
+import edu.wpi.u.database.CovidData;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -43,6 +44,7 @@ public class App extends Application {
   public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
+  public static CovidData covidData;
 
   public static SVGPath themeSVG;
 
