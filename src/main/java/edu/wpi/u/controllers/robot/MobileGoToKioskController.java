@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class MobileGoToKioskController {
     public void handleMoveToKioskButton() {
-        String fxmlLocation = "/edu/wpi/u/views/robot/KioskTemperatureScanner.fxml";
+        String fxmlLocation = "/edu/wpi/u/views/robot/KioskCovidSurvey.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
         try {
             fxmlLoader.load();
