@@ -122,6 +122,8 @@ public class Database {
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
+                String covidSurveyResult = "create table covidSurveyResult(positive int, negative int, dateOfResults date)";
+
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
