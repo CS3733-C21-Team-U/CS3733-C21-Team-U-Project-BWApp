@@ -42,10 +42,13 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label creatorAndDateLabel;
     public Label assigneesLabel;
     public Label completeByLabel;
+
+    //Map stuff
     ImageView imageNode;
-
-
+    public Label locationLabel;
     public int currentNode;
+    AnchorPane mainMapPane = new AnchorPane();
+    Group locationGroup = new Group();
 
 
     private String nodeID = "";
@@ -55,8 +58,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML public SVGPath typeIconSVG;
     //for update
 
-    AnchorPane mainMapPane = new AnchorPane();
-    Group locationGroup = new Group();
+
 
     //    public HBox HBoxToClone;
 //    public VBox specificFields;
@@ -112,7 +114,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.toFront();
         locationGroup.minHeight(300);
         locationGroup.minWidth(300);
-        loadLocationsOnMap("G", locationGroup);
+        loadLocationsOnMap(0, locationGroup);
 
 
 
@@ -163,8 +165,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     }
 
-    //TODO : Replace with function written in NER Controller, based on current IREQUEST
-    //I re-did this here, IDK what the above comment is - Kohmei
     public void generateSpecificFields(){
         mainSpecialFieldVbox.getChildren().clear();
         for(int i = 0; i < this.parent.request.getSpecificFields().length; i++) {
@@ -296,36 +296,56 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
 
-    public void loadLocationsOnMap(String floor, Group pane){
-        //reset the image to the new map
-        //make a switch statement based on the scale of the different maps.
-        double scale = 0.1439;
-
+    public void loadLocationsOnMap(int nodeNum, Group pane){
+        if(parent.request.getGenericRequest().getLocations().size() == 0){
+            //No Locations graphic here
+            return;
+        }
         //this sets the map image
         //add a switch case for each floor
-        imageNode = new ImageView("/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
+        Node node = App.mapService.getNodeFromID(parent.request.getGenericRequest().getLocations().get(nodeNum));
+        String floor = node.getFloor();
+        String resourceURL="";
+        double scale = 0.1439;//set this as well to match
+        switch (floor){
+            case "G":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerCampus.png";
+                break;
+            case "1":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor1Light.png";
+                break;
+            case "2":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor2Light.png";
+                break;
+            case "3":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor3Light.png";
+                break;
+            case "4":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor4Light.png";
+                break;
+            case "5":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor5Light.png";
+                break;
+        }
+
+        imageNode = new ImageView(resourceURL);
         imageNode.setFitWidth(430);
         imageNode.setPreserveRatio(true);
         mainMapPane.getChildren().add(imageNode);
         locationGroup.toFront();
 
 
-        ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
-        for(String nodeIDLocation: locationNodeList){
-            if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
-                miniMap.centreOn(new Point2D(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.05), ((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.05)));
-                SVGPath location = new SVGPath();
-                location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
-                location.setLayoutX(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*scale));
-                location.setLayoutY(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*scale));
-                location.setStyle("-fx-fill: -primary");
-                location.setScaleX(1.5);
-                location.setScaleY(1.5);
-                location.toFront();
-                pane.getChildren().add(location);
-                nodeID = nodeIDLocation;
-            }
-        }
+        miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
+        SVGPath location = new SVGPath();
+        location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
+        location.setLayoutX(((node.getCords()[0]-85)*scale));
+        location.setLayoutY(((node.getCords()[1]-185)*scale));
+        location.setStyle("-fx-fill: -primary");
+        location.setScaleX(1.5);
+        location.setScaleY(1.5);
+        location.toFront();
+        pane.getChildren().add(location);
+        locationLabel.setText(node.getLongName());
     }
 
     private void generateCommentHelper(int i){

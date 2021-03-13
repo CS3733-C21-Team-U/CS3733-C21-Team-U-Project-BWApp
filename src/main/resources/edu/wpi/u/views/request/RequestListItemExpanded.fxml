@@ -126,11 +126,11 @@
                         <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCollapseButton" styleClass="button-text" text="Collapse" />
                      </children>
                   </HBox>
-                  <HBox layoutX="128.0" layoutY="404.0" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" layoutX="-5.0" layoutY="486.0" prefHeight="36.0" prefWidth="440.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="490.0">
                      <children>
-                        <JFXButton />
+                        <JFXButton onAction="#previousLocation" text="Previous" />
                         <Label fx:id="locationLabel" text="Label" />
-                        <JFXButton />
+                        <JFXButton fx:id="nextLocation" text="Next" />
                      </children>
                   </HBox>
                </children>
