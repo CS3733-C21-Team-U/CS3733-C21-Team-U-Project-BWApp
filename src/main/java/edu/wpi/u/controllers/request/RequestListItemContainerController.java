@@ -93,6 +93,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
         this.request = request; //MUST BE FIRST!!!
         this.masterList = sampleRequestItem;
 
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/request/RequestListItemContainer.fxml"));
         loader.setController(this);
         loader.setRoot(this);
@@ -108,6 +109,7 @@ public class RequestListItemContainerController extends AnchorPane implements In
         this.getChildren().add(collapsedNode);
 
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

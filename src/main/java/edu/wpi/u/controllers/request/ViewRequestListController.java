@@ -45,8 +45,8 @@ public class ViewRequestListController {
         sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
             @Override
             public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
-                if(c.getList().size() == 2){//New list after filtering is emppty
-                    System.out.println("Request list is empty");
+                if(c.getList().size() < 2){//New list after filtering is emppty
+                    System.out.println("Request list is empty");//TODO Debug to fix the little request dude not showing up after making a new request
                     noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     noItemsGraphic.setVisible(true);
                 }else{

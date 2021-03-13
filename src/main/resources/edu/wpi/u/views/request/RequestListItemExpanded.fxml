@@ -126,6 +126,13 @@
                         <JFXButton layoutX="78.0" layoutY="10.0" onAction="#handleCollapseButton" styleClass="button-text" text="Collapse" />
                      </children>
                   </HBox>
+                  <HBox layoutX="128.0" layoutY="404.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton />
+                        <Label fx:id="locationLabel" text="Label" />
+                        <JFXButton />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>

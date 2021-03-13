@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.CommentType;
 import edu.wpi.u.requests.SpecificRequest;
@@ -41,6 +42,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label creatorAndDateLabel;
     public Label assigneesLabel;
     public Label completeByLabel;
+    ImageView imageNode;
+
+
+    public int currentNode;
 
 
     private String nodeID = "";
@@ -88,10 +93,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML
     public void initialize(URL location, ResourceBundle resources){
 
-        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
-        node.setFitWidth(430);
-        node.setPreserveRatio(true);
-        mainMapPane.getChildren().add(node);
+
+
         mainMapPane.getChildren().add(locationGroup);
         mainMapPane.setMinSize(457,275);
         mainMapPane.toFront();
@@ -279,17 +282,42 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         this.parent.switchToCollapsed();
     }
 
+    public void nextLocation(){
+        //get the integer for what location we are lookign at and the floor associated with that node.
+        //loadLocationsOnMap(That floor we just got);
+        //
+
+    }
+    public void previousLocation(){
+        //get the integer for what location we are lookign at and the floor associated with that node.
+        //loadLocationsOnMap(That floor we just got);
+        //
+
+    }
 
 
     public void loadLocationsOnMap(String floor, Group pane){
+        //reset the image to the new map
+        //make a switch statement based on the scale of the different maps.
+        double scale = 0.1439;
+
+        //this sets the map image
+        //add a switch case for each floor
+        imageNode = new ImageView("/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
+        imageNode.setFitWidth(430);
+        imageNode.setPreserveRatio(true);
+        mainMapPane.getChildren().add(imageNode);
+        locationGroup.toFront();
+
+
         ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
         for(String nodeIDLocation: locationNodeList){
             if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
                 miniMap.centreOn(new Point2D(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.05), ((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.05)));
                 SVGPath location = new SVGPath();
                 location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
-                location.setLayoutX(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.1439));
-                location.setLayoutY(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.1439));
+                location.setLayoutX(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*scale));
+                location.setLayoutY(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*scale));
                 location.setStyle("-fx-fill: -primary");
                 location.setScaleX(1.5);
                 location.setScaleY(1.5);
