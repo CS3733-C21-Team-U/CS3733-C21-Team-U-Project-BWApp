@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.login;
+package edu.wpi.u.controllers.mobile;
 
 
 import com.jfoenix.controls.JFXPasswordField;
@@ -6,37 +6,39 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SelectUserScreenController {
+public class MobileContainerController {
 
+    @FXML
+    public AnchorPane mobileRoot;
+
+    public static MobileContainerController mobile_instance = null;
+
+    public MobileContainerController(){
+        System.out.println("Mobile constructor");
+        mobile_instance = this;
+    }
+
+    public static MobileContainerController getInstance(){
+        if(mobile_instance == null){
+            mobile_instance = new MobileContainerController();
+        }
+        return mobile_instance;
+    }
+
+    public AnchorPane getMobileRoot() {
+        return mobileRoot;
+    }
 
     public void initialize() throws IOException {
 
-    }
-
-    public void handleLoginButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
-
-    public void handleGuestButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
-
-
-    public void handleBackButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
-    }
-
-    public void handleSignUpButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserSignupScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleDebugButton(ActionEvent actionEvent) {
@@ -72,12 +74,6 @@ public class SelectUserScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleMobile() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileContainer.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-    }
 }
 
 

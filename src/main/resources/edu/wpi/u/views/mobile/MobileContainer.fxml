@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileContainerController">
+   <children>
+      <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="1652.0" fitWidth="2668.0" layoutX="609.0" layoutY="-404.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <left>
+            <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets left="300.0" />
+               </BorderPane.margin>
+               <children>
+                  <fx:include source="MobileUserLoginScreen.fxml" />
+               </children>
+            </AnchorPane>
+         </left>
+         <bottom>
+            <HBox prefHeight="35.0" prefWidth="756.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton onAction="#handleSkipToGuestButton" styleClass="button-contained" text="LOG IN AS GUEST" />
+                  <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
+                  <JFXButton layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
+                  <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</StackPane>
