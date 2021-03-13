@@ -43,12 +43,14 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label assigneesLabel;
     public Label completeByLabel;
 
+
     //Map stuff
     ImageView imageNode;
     public Label locationLabel;
     public int currentNode;
     AnchorPane mainMapPane = new AnchorPane();
     Group locationGroup = new Group();
+    public HBox locationUI;
 
 
     private String nodeID = "";
@@ -56,30 +58,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML public VBox mainSpecialFieldVbox;
     @FXML private JFXTextField commentField;
     @FXML public SVGPath typeIconSVG;
-    //for update
 
-
-
-    //    public HBox HBoxToClone;
-//    public VBox specificFields;
-//    public VBox VBoxToAdd;
-//    public Label typeLabel;
-//    @FXML Label requestDetailTitleLabel;
-//    @FXML Label requestDetailCreatorLabel;
-//    @FXML Label requestDetailDescriptionLabel;
-//    @FXML JFXChipView requestDetailLocationChipView;
-//    @FXML JFXChipView requestDetailStaffChipView;
-//    @FXML Label requestDetailDateCreatedLabel;
-//    @FXML Label requestDetailDate2BCompleteLabel;
-//
-//    //Maintenance Requests Panes
-//    @FXML Label requestDetailSecurityLabel;
-//    @FXML ListView commentListView;
-//    @FXML StackPane requestDetailStack;
-//    @FXML Pane requestDetailSecurityPane;
-//    @FXML Pane requestDetailMaintenancePane;
-//    @FXML Pane requestDetailLaundryPane;
-//    SpecificRequest currentSpecificRequest;
     GesturePane miniMap;
 
 
@@ -281,15 +260,26 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void nextLocation(){
-        loadLocationsOnMap((currentNode++)%parent.request.getGenericRequest().getLocations().size());
+        System.out.println("Next Location from: "+ currentNode);
+        currentNode = (currentNode+1)%parent.request.getGenericRequest().getLocations().size();
+        System.out.println("Next Location : "+ currentNode);
+        loadLocationsOnMap(currentNode);
 
     }
     public void previousLocation(){
-        loadLocationsOnMap((currentNode--)%parent.request.getGenericRequest().getLocations().size());
+        System.out.println("Previous Location from: "+ currentNode);
+        currentNode = Math.floorMod(currentNode-1, parent.request.getGenericRequest().getLocations().size());
+        System.out.println("Previous Location: "+ currentNode);
+        loadLocationsOnMap(currentNode);
     }
 
 
     public void loadLocationsOnMap(int nodeNum){
+        //clear
+        mainMapPane.getChildren().clear();
+       locationGroup.getChildren().clear();
+        mainMapPane.getChildren().add(locationGroup);
+
         if(parent.request.getGenericRequest().getLocations().size() == 0){
             //No Locations graphic here
             return;
@@ -331,7 +321,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         imageNode.setPreserveRatio(true);
         mainMapPane.getChildren().add(imageNode);
         locationGroup.toFront();
-
+        locationUI.toFront();
 
         miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
         SVGPath location = new SVGPath();
