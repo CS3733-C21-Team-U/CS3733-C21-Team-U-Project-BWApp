@@ -4,13 +4,16 @@ import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class TreeViewListController {
+public class TreeViewListController implements Initializable {
 
     // Creating each tree
     @FXML
@@ -37,14 +40,14 @@ public class TreeViewListController {
     private TreeView staiTree;
 
     // Creating roots for each tree
-    TreeItem rootConf = new TreeItem("Conference");
+    TreeItem rootConf = new TreeItem("Conference Rooms");
     TreeItem rootDept = new TreeItem("Departments");
     TreeItem rootElev = new TreeItem("Elevators");
     TreeItem rootExit = new TreeItem("Exits");
     TreeItem rootFood = new TreeItem("Food Services");
     TreeItem rootKios = new TreeItem("Kiosks");
     TreeItem rootLabs = new TreeItem("Labs");
-    TreeItem rootPark = new TreeItem("Parking Options");
+    TreeItem rootPark = new TreeItem("Parking Spaces");
     TreeItem rootRest = new TreeItem("Restrooms");
     TreeItem rootServ = new TreeItem("Services");
     TreeItem rootStai = new TreeItem("Stairways");
@@ -70,11 +73,7 @@ public class TreeViewListController {
      *      1. (Do last)Bring up the ui component when start or end node text input thing is pressed in pathfinding
      *          - there should be some boolean passed in that indicates start or end node
      *          - Supposed to do this with someone or have them do it
-     *      2. How to select locations (indicated by longName)
-     *          - Will use App.mapInteractionModel.setStartNode(String), and setEndNode
-     *          - Figure out how to apply some function when a location is pressed
-     *          - Need to know nodeID of whatever location is pressed
-     *      3. Test UI component in app by replacing the starting fxml file
+     *      2. How to invoke initialize?
      */
 
 
@@ -82,7 +81,7 @@ public class TreeViewListController {
      * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
      */
     @FXML
-    public void initialize(){
+    public void initialize(URL url, ResourceBundle rb){
         confExpanded = false;
         deptExpanded = false;
         elevExpanded = false;
@@ -128,40 +127,92 @@ public class TreeViewListController {
             TreeItem temp = new TreeItem(n.getLongName());
             switch(n.getNodeType()){
                 case "CONF":
-                    rootConf.getChildren().add(new TreeItem(temp));
+                    rootConf.getChildren().add(temp);
                     temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        // App.mapInteractionModel.setStartNode(n.getNodeID());
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID()); // TODO: Need to close window?
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
                     });
                     break;
                 case "DEPT":
-                    rootDept.getChildren().add(new TreeItem(n.getLongName()));
+                    rootDept.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "ELEV":
-                    rootElev.getChildren().add(new TreeItem(n.getLongName()));
+                    rootElev.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "EXIT":
-                    rootExit.getChildren().add(new TreeItem(n.getLongName()));
+                    rootExit.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "FOOD":
-                    rootFood.getChildren().add(new TreeItem(n.getLongName()));
+                    rootFood.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "KIOS":
-                    rootKios.getChildren().add(new TreeItem(n.getLongName()));
+                    rootKios.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
-                case "LAB":
-                    rootLabs.getChildren().add(new TreeItem(n.getLongName()));
+                case "LAB": // Todo: make sure LAB is used, not LABS in most recent AllNodes files
+                    rootLabs.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "PARK":
-                    rootPark.getChildren().add(new TreeItem(n.getLongName()));
+                    rootPark.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "REST":
-                    rootRest.getChildren().add(new TreeItem(n.getLongName()));
+                    rootRest.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "SERV":
-                    rootServ.getChildren().add(new TreeItem(n.getLongName()));
+                    rootServ.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
                 case "STAI":
-                    rootStai.getChildren().add(new TreeItem(n.getLongName()));
+                    rootStai.getChildren().add(temp);
+                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        if(isStartNode) {
+                            App.mapInteractionModel.setStartNode(n.getNodeID());
+                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
+                    });
                     break;
             }
         }
@@ -170,7 +221,7 @@ public class TreeViewListController {
 
 
     /**
-     * Generalized method for expanding/collapsing
+     * Generalized method for expanding/collapsing, handles when the actual tree is pressed
      * Will be called with the treeType/nodeType as in input from the individual methods
      */
     private void expandAndCollapse(String treeType){
@@ -277,6 +328,9 @@ public class TreeViewListController {
         }
     }
 
+    /**
+     * The following methods use expandAndCollapse to handle the mouse clicks
+     */
     @FXML
     public void handleConfClicked(){
         expandAndCollapse("CONF");
