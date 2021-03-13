@@ -88,7 +88,14 @@ public class Database {
             conn = DriverManager.getConnection(testURL);
             conn.setAutoCommit(true);
         } catch (Exception e) {
-            System.out.println("Connection failed");
+            try {
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                conn = DriverManager.getConnection(url);
+            }catch (Exception b){
+                System.out.println("Connection to embedded failed");
+                b.printStackTrace();
+            }
+            System.out.println("Connection to remote failed");
             e.printStackTrace();
         }
     }

@@ -99,6 +99,8 @@ public class App extends Application {
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
 
+  public static boolean isLoaded = false;
+
   public App(){
     System.out.println("App constructor");
     app_instance = this;
