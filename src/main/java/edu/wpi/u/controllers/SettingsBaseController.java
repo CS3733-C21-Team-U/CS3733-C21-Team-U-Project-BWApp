@@ -88,6 +88,7 @@ public class SettingsBaseController {
             succsessfulLabel.setVisible(false);
         });
         App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Type in settings: " +App.userService.getActiveUser().getType());
             if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
                 onlyAdmin.setStyle("-fx-opacity: 1");
                 onlyAdmin.setDisable(false);

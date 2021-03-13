@@ -48,27 +48,32 @@ public class SelectUserScreenController {
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
+        App.isLoggedIn.set(true);
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
+        App.isLoggedIn.set(true);
+        System.out.println("Patient id : " + App.userService.getActiveUser().getUserID());
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
+        App.isLoggedIn.set(true);
+        System.out.println("Employee id : " + App.userService.getActiveUser().getUserID());
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
