@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-16.0" prefHeight="974.0" prefWidth="1582.0">
          <children>
@@ -45,7 +46,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="645.0" styleClass="headline-2" text="1.Choose your Device ----&gt; Desktop&#10;&#10;2.Fill the Covid-19 Survey&#10;&#10;3.Click Submit button&#10;&#10;4.Click Log in if you already have an account&#10;&#10;5.Click sign up if you need an account&#10;&#10;6.For visitors, please click Use as Guest. Fill your &#10;name and reason." wrapText="true">
+                        <TextArea editable="false" prefHeight="677.0" prefWidth="645.0" styleClass="headline-3" text="1.Choose your Device ----&gt; Desktop&#10;&#10;2.Fill the Covid-19 Survey&#10;&#10;3.Click Submit button&#10;&#10;4.Click Log in if you already have an account&#10;&#10;5.Click sign up if you need an account&#10;&#10;6.For visitors, please click Use as Guest. Fill your &#10;name and reason." wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
@@ -93,4 +94,8 @@
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

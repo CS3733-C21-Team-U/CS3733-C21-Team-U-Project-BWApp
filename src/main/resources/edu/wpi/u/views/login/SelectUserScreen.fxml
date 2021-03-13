@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -42,14 +41,20 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Region prefHeight="0.0" prefWidth="360.0" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/logo.png" />
-                           </image>
-                        </ImageView>
-                        <Label styleClass="headline-2" text="BWHealth" />
-                        <GridPane hgap="20.0" prefHeight="300.0" prefWidth="300.0" vgap="20.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="116.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/logo.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label styleClass="headline-1" text="BWHealth" />
+                           </children>
+                        </HBox>
+                        <GridPane hgap="20.0" prefHeight="447.0" prefWidth="360.0" vgap="20.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -57,6 +62,7 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <VBox.margin>
                               <Insets />
@@ -132,6 +138,27 @@
                                              </children>
                                           </Group>
                                           <Label style="-fx-text-fill: white;" text="LOG IN" />
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="10.0" layoutY="166.0" onAction="#handleKiosk" prefHeight="200.0" prefWidth="200.0" styleClass="bigButtonOutline" wrapText="true" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <VBox alignment="BOTTOM_CENTER" prefHeight="124.0" prefWidth="170.0" spacing="10.0">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <SVGPath content="M18.5 0h-14C3.12 0 2 1.12 2 2.5v19C2 22.88 3.12 24 4.5 24h14c1.38 0 2.5-1.12 2.5-2.5v-19C21 1.12 19.88 0 18.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z" scaleX="3.0" scaleY="3.0" style="-fx-fill: -primary;" />
+                                             </children>
+                                          </Group>
+                                          <Label alignment="CENTER" prefHeight="39.0" prefWidth="226.0" style="-fx-text-fill: -primary;" text="KIOSK VERSION" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets left="-10.0" right="-10.0" />
+                                             </VBox.margin>
+                                          </Label>
                                        </children>
                                     </VBox>
                                  </graphic>

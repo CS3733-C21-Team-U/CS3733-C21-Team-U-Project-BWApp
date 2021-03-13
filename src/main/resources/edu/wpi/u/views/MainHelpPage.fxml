@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.svg.SVGGlyph?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -14,19 +15,20 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.MainHelpPageController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="322.0" layoutY="97.0" prefHeight="1000.0" prefWidth="1700.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="100.0" fitWidth="190.0">
+         <image>
+            <Image url="@../../../../../../../../hos%20logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="1700.0" translateY="80.0">
+         <image>
+            <Image url="@Images/hospital2%20(1).jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutY="6.0" prefHeight="1000.0" prefWidth="1700.0" spacing="100.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="1700.0">
-               <children>
-                  <SVGGlyph prefHeight="172.0" prefWidth="1668.0" />
-                  <SVGGlyph>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </SVGGlyph>
-               </children>
-            </HBox>
-            <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-1" text="We're here to help" wrappingWidth="474.240234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-3" text="Weclome to our Help Center!" translateX="700.0" translateY="240.0" />
+            <Text fx:id="weAreHereToHelpTitle" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -onPrimary;" styleClass="headline-1" text="We're here to help" translateY="-100.0" wrappingWidth="474.240234375">
                <font>
                   <Font size="49.0" />
                </font>
@@ -172,6 +174,13 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <padding>
+            <Insets top="200.0" />
+         </padding>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@css/BaseStyle.css" />
+      <URL value="@css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>
