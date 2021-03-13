@@ -21,14 +21,14 @@ public class MobileEmbenedGoogleMapsController {
         googleMapsEmbedded.getEngine().loadContent("<iframe width='412' height='687' src='" + URL + "' />");
     }
 
-    public void handleNext1(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileCovidSurvey.fxml"));
+    public void handleNext1() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/robot/MobileGoToKiosk.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleReturn(ActionEvent actionEvent) throws IOException {
+    public void handleReturn() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
