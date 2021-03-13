@@ -87,7 +87,7 @@ public class ViewRequestListController {
     public void generateRequests() {
         for (SpecificRequest request: listOfRequests) {
             try {
-                sampleRequestItem.getChildren().add(0, new RequestListItemContainerController(request, sampleRequestItem));
+                sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, sampleRequestItem));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,8 +99,10 @@ public class ViewRequestListController {
      * @throws Exception
      */
     @FXML public void handleNewRequestButton() throws Exception {
+        if(newRequestVBox.getChildren().size()<1) {
         newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
         App.VBoxChanged.set(!App.VBoxChanged.get());
+    }
     }
 
     /**
