@@ -130,8 +130,8 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
 
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
 
     mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");

@@ -82,6 +82,7 @@ public class TreeViewListController implements Initializable {
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb){
+        //System.out.println("initialized");
         confExpanded = false;
         deptExpanded = false;
         elevExpanded = false;
@@ -225,6 +226,7 @@ public class TreeViewListController implements Initializable {
      * Will be called with the treeType/nodeType as in input from the individual methods
      */
     private void expandAndCollapse(String treeType){
+        System.out.println("this works");
         switch(treeType){
             case "CONF":
                 if(confExpanded){
