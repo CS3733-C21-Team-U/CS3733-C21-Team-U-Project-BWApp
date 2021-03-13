@@ -34,11 +34,8 @@ public class Enter2FATokenController {
         String token = tokenTextFIeld.getText();
         String phoneNumber = App.userService.getActiveUser().getPhoneNumber();
         try {
-            System.out.println("Token " + token);
-            System.out.println("Phonenumber " + phoneNumber);
             URI uri2 = new URI("https://bw-webapp.herokuapp.com/" +"verify?phonenumber=" + "+1"+ phoneNumber + "&code=" + token);
             URL url2 = uri2.toURL(); // make GET request
-            System.out.println("URL: " + url2.toString());
             AsyncHttpClient client = Dsl.asyncHttpClient();
             Future<Response> whenResponse = client.prepareGet(url2.toString()).execute();
             Response response = whenResponse.get();

@@ -56,6 +56,7 @@ public class NewMainPageController {
     public Tab adminTab2;
     public Tab adminTab1;
     public Tab adminTab3;
+    public Tab adminTab4;
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
@@ -149,6 +150,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(false);
                 adminTab3.setStyle("-fx-opacity: 1");
                 adminTab3.setDisable(false);
+                adminTab4.setStyle("-fx-opacity: 1");
+                adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
                 HelpMainPageTab.setStyle("-fx-opacity: 0");
                 AdminHelpMainPageTab.setDisable(false);
@@ -161,6 +164,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(true);
                 adminTab3.setStyle("-fx-opacity: 0");
                 adminTab3.setDisable(true);
+                adminTab4.setStyle("-fx-opacity: 0");
+                adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
                 HelpMainPageTab.setStyle("-fx-opacity: 1");
                 AdminHelpMainPageTab.setDisable(true);
