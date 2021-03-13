@@ -24,7 +24,7 @@
       </AnchorPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
-            <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="345.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0" />
                </effect>
@@ -35,12 +35,7 @@
                   <Insets left="300.0" />
                </BorderPane.margin>
                <children>
-                  <ImageView fitHeight="821.0" fitWidth="393.0" layoutX="2.0" layoutY="-102.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-20.0">
-                     <image>
-                        <Image url="@../Images/phoneFrame.png" />
-                     </image>
-                  </ImageView>
-                  <fx:include source="MobileUserLoginScreen.fxml" />
+                  <fx:include source="KioskSample.fxml" />
                </children>
             </AnchorPane>
          </left>

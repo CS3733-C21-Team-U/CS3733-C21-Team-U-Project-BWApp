@@ -184,7 +184,7 @@ public class MobileUserLoginScreenController {
                         e.printStackTrace();
                     }
                 }
-                MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+                MobileContainerController.getInstance().getMobileRoot().getChildren().remove(1);
                 MobileContainerController.getInstance().getMobileRoot().getChildren().add(root);
             }
         }

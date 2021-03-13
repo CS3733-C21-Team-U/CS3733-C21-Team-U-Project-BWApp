@@ -78,6 +78,13 @@ public class SelectUserScreenController {
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
+
+    public void handleKiosk() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/kiosk/KioskContainer.fxml"));
+        fxmlLoader.load();
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
 }
 
 

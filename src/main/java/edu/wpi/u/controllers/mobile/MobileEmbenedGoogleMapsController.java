@@ -25,7 +25,7 @@ public class MobileEmbenedGoogleMapsController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileCovidSurvey.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().remove(1);
         MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
@@ -33,7 +33,7 @@ public class MobileEmbenedGoogleMapsController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
-        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+        MobileContainerController.getInstance().getMobileRoot().getChildren().remove(1);
         MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
