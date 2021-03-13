@@ -313,18 +313,23 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 break;
             case "1":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor1Light.png";
+                scale = 0.1753;
                 break;
             case "2":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor2Light.png";
+                scale = 0.1753;//this is as correct as it can be, moving it down slightly would make it better
                 break;
             case "3":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor3Light.png";
+                scale = 0.1753;
                 break;
             case "4":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor4Light.png";
+                scale = 0.1753;
                 break;
             case "5":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor5Light.png";
+                scale = 0.1753;
                 break;
         }
 
