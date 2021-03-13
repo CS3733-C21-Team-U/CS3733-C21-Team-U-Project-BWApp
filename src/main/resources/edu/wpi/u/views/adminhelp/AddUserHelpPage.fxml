@@ -43,7 +43,7 @@
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="840.0" prefWidth="615.0" styleClass="headline-3" text="1. On the Side Bar, click User Manager&#10;&#10;2. Clicking the add user button on the user manager screen will bring up a form that can be completed to add a user (maybe description of each field here)&#10;&#10;3.After you added, you should be able to see it at the same User Manager page&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;&#10;" wrapText="true">
+                        <TextArea editable="false" prefHeight="840.0" prefWidth="615.0" styleClass="headline-2" text="1. On the Side Bar, click User Manager&#10;&#10;2. Clicking the add user button on the user manager screen will bring up a form that can be completed to add a user (maybe description of each field here)&#10;&#10;3.After you added, you should be able to see it at the same User Manager page&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;&#10;" wrapText="true">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="25.0" />
                            </font>
