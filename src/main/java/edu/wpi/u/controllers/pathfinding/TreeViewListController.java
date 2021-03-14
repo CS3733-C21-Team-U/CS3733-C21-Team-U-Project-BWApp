@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class TreeViewListController implements Initializable {
@@ -44,32 +45,33 @@ public class TreeViewListController implements Initializable {
     private TreeView staiTree;
 
     // Creating roots for each tree
-    TreeItem rootConf = new TreeItem("Conference Rooms");
-    TreeItem rootDept = new TreeItem("Departments");
-    TreeItem rootElev = new TreeItem("Elevators");
-    TreeItem rootExit = new TreeItem("Entrances and Exits");
-    TreeItem rootFood = new TreeItem("Food Services");
-    TreeItem rootKios = new TreeItem("Kiosks");
-    TreeItem rootLabs = new TreeItem("Labs");
-    TreeItem rootPark = new TreeItem("Parking Spaces");
-    TreeItem rootRest = new TreeItem("Restrooms");
-    TreeItem rootServ = new TreeItem("Services");
-    TreeItem rootStai = new TreeItem("Stairways");
+    private TreeItem rootConf = new TreeItem("Conference Rooms");
+    private TreeItem rootDept = new TreeItem("Departments");
+    private TreeItem rootElev = new TreeItem("Elevators");
+    private TreeItem rootExit = new TreeItem("Entrances and Exits");
+    private TreeItem rootFood = new TreeItem("Food Services");
+    private TreeItem rootKios = new TreeItem("Kiosks");
+    private TreeItem rootLabs = new TreeItem("Labs");
+    private TreeItem rootPark = new TreeItem("Parking Spaces");
+    private TreeItem rootRest = new TreeItem("Restrooms");
+    private TreeItem rootServ = new TreeItem("Services");
+    private TreeItem rootStai = new TreeItem("Stairways");
 
+    private boolean confExpanded;
+    private boolean deptExpanded;
+    private boolean elevExpanded;
+    private boolean exitExpanded;
+    private boolean foodExpanded;
+    private boolean kiosExpanded;
+    private boolean labsExpanded;
+    private boolean parkExpanded;
+    private boolean restExpanded;
+    private boolean servExpanded;
+    private boolean staiExpanded;
 
-    boolean confExpanded;
-    boolean deptExpanded;
-    boolean elevExpanded;
-    boolean exitExpanded;
-    boolean foodExpanded;
-    boolean kiosExpanded;
-    boolean labsExpanded;
-    boolean parkExpanded;
-    boolean restExpanded;
-    boolean servExpanded;
-    boolean staiExpanded;
+    private boolean isStartNode; // TODO: Talk about this
 
-    boolean isStartNode; // TODO: Talk about this
+    private HashMap<String,String> longToID;
 
 
     /**
@@ -100,32 +102,29 @@ public class TreeViewListController implements Initializable {
 
         isStartNode = true; // TODO: This should change depending on which search bar is clicked
 
+
+        longToID = new HashMap<>();
         fillAllTrees();
-        // Solution 1
-        /*
-        EventHandler<MouseEvent> mouseEventEventHandle = (MouseEvent mouseEvent) ->{
-            handleMouseClicked(mouseEvent);
-        };
-        confTree.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventEventHandle);
-         */
-        // Solution 2
-        confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue()));
-        deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue()));
-        elevTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)elevTree.getSelectionModel().getSelectedItem()).getValue()));
-        exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue()));
-        foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue()));
-        kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue()));
-        labsTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)labsTree.getSelectionModel().getSelectedItem()).getValue()));
-        parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue()));
-        restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue()));
-        servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue()));
-        staiTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)staiTree.getSelectionModel().getSelectedItem()).getValue()));
+
+        // A little bit janky solution that allows the TreeItems to be clickable because TreeItem.addEventHandler doesn't work
+        // Basically it adds a listener to each TreeItem in the tree, and when clicked it calls the method handleMouseClicked, which sets start/end node
+        confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue())));
+        deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue())));
+        elevTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)elevTree.getSelectionModel().getSelectedItem()).getValue())));
+        exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue())));
+        foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue())));
+        kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue())));
+        labsTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)labsTree.getSelectionModel().getSelectedItem()).getValue())));
+        parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue())));
+        restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue())));
+        servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue())));
+        staiTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)staiTree.getSelectionModel().getSelectedItem()).getValue())));
 
 
     }
 
     /**
-     * Fills all TreeViews with their respective Nodes... might not need to be called by this class?
+     * Fills all TreeViews with their respective Nodes
      */
     private void fillAllTrees(){
         // Creating easy access to list of full nodes
@@ -146,110 +145,72 @@ public class TreeViewListController implements Initializable {
 
         // Putting applicable nodes into trees
         // Currently displays long name for applicable nodes
-        // Make it store the Node, but display longName?
         for(Node n: allNodes){
-            TreeItem temp = new TreeItem(n.getNodeID());
-
+            TreeItem temp = new TreeItem(n.getLongName());
             switch(n.getNodeType()){
                 case "CONF":
                     rootConf.getChildren().add(temp);
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "DEPT":
                     rootDept.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "ELEV":
                     rootElev.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "EXIT":
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler() {
-                        @Override
-                        public void handle(Event event) {
-                            System.out.println("Exit CLICKED Treeview 160");
-                            if(isStartNode) {
-                                App.mapInteractionModel.setStartNode(n.getNodeID());
-                            } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                        }
-                    });
                     rootExit.getChildren().add(temp);
-                    System.out.println("Exit added Treeview 167");
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "FOOD":
                     rootFood.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "KIOS":
                     rootKios.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
-                case "LAB": // Todo: make sure LAB is used, not LABS in most recent AllNodes files
+                case "LAB":
                     rootLabs.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "PARK":
                     rootPark.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                            System.out.println("START NODE SET");
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "REST":
                     rootRest.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "SERV":
                     rootServ.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "STAI":
                     rootStai.getChildren().add(temp);
-                    temp.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        if(isStartNode) {
-                            App.mapInteractionModel.setStartNode(n.getNodeID());
-                        } else App.mapInteractionModel.setEndNode(n.getNodeID());
-                    });
+                    longToID.put(n.getLongName(),n.getNodeID());
                     break;
             }
         }
 
     }
 
+    /**
+     * Handles a mouse click on any TreeItem (including root sadly)
+     * Only uses values of nodes that actually exist in mapService as a result
+     * @param value
+     */
     private void handleMouseClicked(String value){
         if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) {
             if(isStartNode) {
                 System.out.println("Clicked " + value + " as new start value");
-            } else System.out.println("Clicked " + value + " as new end value");
+                App.mapInteractionModel.setStartNode(value);
+            } else {
+                System.out.println("Clicked " + value + " as new end value");
+                App.mapInteractionModel.setEndNode(value);
+            }
         }
         // TODO: Close TreeViewListController
     }
