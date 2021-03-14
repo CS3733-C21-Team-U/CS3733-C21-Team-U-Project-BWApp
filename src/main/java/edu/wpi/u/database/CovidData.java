@@ -131,7 +131,29 @@ public class CovidData extends Data{
         String lastWeekDate = (newLastWeekDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
-        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between" + sqlTodayDate + "and" + sqlLastWeekDate + ") and (symptomatic = true)";
+        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastWeekDate + "') and (symptomatic = true)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            rset.next();
+            return rset.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * Gets the number of symptomatic survey results from the past week
+     * @return int, the number of rows with symtomatic marked true
+     * Olajumoke
+     */
+    public int getWeeklySurveys(){
+        LocalDate newLastWeekDate = LocalDate.now().minusDays(7);
+        String lastWeekDate = newLastWeekDate.format(dtf);
+        final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
+        final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
+        String str = "select count(symptomatic) from covidSurveyResult where dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastWeekDate + "'";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
@@ -153,7 +175,29 @@ public class CovidData extends Data{
         String lastWeekDate = (newLastWeekDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
-        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between" + sqlTodayDate + "and" + sqlLastWeekDate + ") and (nonsymptomatic = true)";
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastWeekDate + "') and (nonsymptomatic = true)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rset = ps.executeQuery();
+            rset.next();
+            return rset.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * Gets the number of nonsymptomatic survey results from the past month
+     * @return int, the number of rows with nonsymtomatic marked true
+     * Olajumoke
+     */
+    public int getMonthlySurveys(){
+        LocalDate newLastMonthDate = LocalDate.now().minusMonths(1);
+        String lastMonthDate = (newLastMonthDate.format(dtf));
+        final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
+        final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastMonthDate + "')";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
@@ -175,7 +219,7 @@ public class CovidData extends Data{
         String lastMonthDate = (newLastMonthDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
-        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between" + sqlTodayDate + "and" + sqlLastMonthDate + ") and (nonsymptomatic = true)";
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastMonthDate + "') and (nonsymptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();
@@ -198,7 +242,7 @@ public class CovidData extends Data{
         String lastMonthDate = (newLastMonthDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
-        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between" + sqlTodayDate + "and" + sqlLastMonthDate + ") and (symptomatic = true)";
+        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between '" + sqlTodayDate + "' and '" + sqlLastMonthDate + "') and (symptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
             ResultSet rset = ps.executeQuery();

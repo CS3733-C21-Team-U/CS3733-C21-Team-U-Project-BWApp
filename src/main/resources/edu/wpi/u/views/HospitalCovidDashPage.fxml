@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.coviddashboard.HospitalCovidDashPageController">
    <children>
       <VBox layoutX="9.0" layoutY="1.0" prefHeight="696.0" prefWidth="941.0">
          <children>
@@ -69,9 +69,9 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton text="Return to Main Page" />
-                  <JFXButton text="State-wide Results" />
-                  <JFXButton text="Country-wide Results" />
+                  <JFXButton fx:id="returnToMainButton" text="Return to Main Page" />
+                  <JFXButton fx:id="stateResultsButton" text="State-wide Results" />
+                  <JFXButton fx:id="countryResultsButton" text="Country-wide Results" />
                </children>
             </HBox>
          </children>
