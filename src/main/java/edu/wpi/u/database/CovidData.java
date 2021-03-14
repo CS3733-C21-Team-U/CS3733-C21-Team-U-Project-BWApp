@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class CovidData extends Data{
+public class CovidData{
     Boolean result;
     // Wherever survey is: App.covidService.addSurveyResults(true, date);
 
