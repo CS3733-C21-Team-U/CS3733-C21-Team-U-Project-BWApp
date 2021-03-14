@@ -75,7 +75,10 @@ public class ViewCovidResultsController {
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnCovidTemp = new JFXTreeTableColumn<>("Body Temperature");
         treeTableColumnCovidTemp.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnCovidTemp.validateValue(param)){
-                return new SimpleStringProperty("Temp goes here");
+                if (param.getValue().getValue().getSpecificData().get(1).equals("Temperature Not Taken")){
+                    return new SimpleStringProperty("");
+                }
+                return new SimpleStringProperty(param.getValue().getValue().getSpecificData().get(1));
             }
             else {
                 return treeTableColumnCovidTemp.getComputedValue(param);
