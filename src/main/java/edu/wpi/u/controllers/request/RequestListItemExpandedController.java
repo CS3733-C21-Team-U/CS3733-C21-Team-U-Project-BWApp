@@ -333,7 +333,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         location.setScaleY(1.5);
         location.toFront();
         locationGroup.getChildren().add(location);
-        locationLabel.setText(node.getLongName());
+        locationLabel.setText("Floor " + node.getFloor() + ": " + node.getLongName());
     }
 
     private void generateCommentHelper(int i){

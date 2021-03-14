@@ -44,7 +44,7 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="1330.0" spacing="20.0">
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="20.0" left="5.0" right="20.0" top="20.0" />
                      </padding>
                       <children>
                         <VBox fx:id="newRequestVBox" prefWidth="100.0" />
