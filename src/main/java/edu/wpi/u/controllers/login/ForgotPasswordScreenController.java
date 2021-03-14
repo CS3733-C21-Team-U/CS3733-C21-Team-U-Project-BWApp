@@ -160,4 +160,9 @@ public class ForgotPasswordScreenController {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
+
+    public void handleGoBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
 }
