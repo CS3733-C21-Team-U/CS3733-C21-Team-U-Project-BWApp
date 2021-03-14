@@ -1,18 +1,34 @@
 package edu.wpi.u.controllers.login;
 
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
 public class SelectUserScreenController {
+    static double ii = 0;
+    public JFXButton skipToAdminButton;
+    ProgressIndicator pb = new ProgressIndicator();
 
+    private Scene createPreloaderScene() {
+        pb = new ProgressBar();
+        BorderPane p = new BorderPane();
+        p.setCenter(pb);
+        return new Scene(p, 300, 150);
+    }
 
     public void initialize() throws IOException {
 
@@ -69,10 +85,25 @@ public class SelectUserScreenController {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+//        App.getPrimaryStage().getScene().setRoot(App.base);
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            public Parent call() throws IOException, InterruptedException {
+                // simulate long-loading process:
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                return fxmlLoader.load();
+            }
+        };
+        loadTask.setOnSucceeded(event -> {
+            System.out.println("Finished task");
+            App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+        });
+        loadTask.setOnRunning(event -> {
+            App.getPrimaryStage().setScene(createPreloaderScene());
+            App.getPrimaryStage().show();
+        });
+        Thread thread = new Thread(loadTask);
+        thread.start();
     }
 
     public void handleMobile() throws IOException {

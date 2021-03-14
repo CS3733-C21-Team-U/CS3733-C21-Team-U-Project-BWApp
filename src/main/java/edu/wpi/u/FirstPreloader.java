@@ -1,11 +1,18 @@
 package edu.wpi.u;
 
+import edu.wpi.u.users.Role;
 import javafx.application.Preloader;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class FirstPreloader extends Preloader {
     ProgressBar bar;
@@ -19,26 +26,39 @@ public class FirstPreloader extends Preloader {
     }
 
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.base = fxmlLoader.getRoot();
-        this.stage = stage;
-        stage.setScene(createPreloaderScene());
-        stage.show();
+//        Task<Parent> loadTask = new Task<Parent>() {
+//            @Override
+//            public Parent call() throws IOException, InterruptedException {
+//                // simulate long-loading process:
+//                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//                fxmlLoader.load();
+//                return fxmlLoader.getRoot();
+//            }
+//        };
+//        loadTask.setOnSucceeded(event -> {
+//            App.base = loadTask.getValue();
+//        });
+//        loadTask.setOnRunning(event -> {
+//            this.stage = stage;
+//            stage.setScene(createPreloaderScene());
+//            stage.show();
+//        });
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.base = fxmlLoader.getRoot();
+
     }
 
-    @Override
-    public void handleProgressNotification(ProgressNotification pn) {
-        bar.setProgress(pn.getProgress());
-    }
-
-    @Override
-    public void handleStateChangeNotification(StateChangeNotification evt) {
-        if (evt.getType() == StateChangeNotification.Type.BEFORE_START) {
-            stage.hide();
-        }
-    }
-
-
+//    @Override
+//    public void handleProgressNotification(ProgressNotification pn) {
+//        bar.setProgress(pn.getProgress());
+//    }
+//
+//    @Override
+//    public void handleStateChangeNotification(StateChangeNotification evt) {
+//        if (evt.getType() == StateChangeNotification.Type.BEFORE_START) {
+//            stage.hide();
+//        }
+//    }
 }

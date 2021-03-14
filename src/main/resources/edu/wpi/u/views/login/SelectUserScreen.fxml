@@ -181,7 +181,7 @@
                <children>
                   <JFXButton onAction="#handleSkipToGuestButton" styleClass="button-contained" text="LOG IN AS GUEST" />
                   <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
-                  <JFXButton layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
+                  <JFXButton fx:id="skipToAdminButton" layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
                   <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
                </children>
                <BorderPane.margin>
