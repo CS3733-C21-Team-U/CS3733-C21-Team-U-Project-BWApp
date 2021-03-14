@@ -17,35 +17,28 @@ import java.io.IOException;
 import static edu.wpi.u.App.classLoader;
 
 public class FirstPreloader extends Preloader {
-    ProgressBar bar;
-    Stage stage;
-
-    private Scene createPreloaderScene() {
-        bar = new ProgressBar();
-        BorderPane p = new BorderPane();
-        p.setCenter(bar);
-        return new Scene(p, 300, 150);
-    }
-
     public void start(Stage stage) throws Exception {
 //        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
 //        App.base = fxmlLoader.getRoot();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        System.out.println("Location1: " +fxmlLoader.getLocation());
         fxmlLoader.setClassLoader(App.classLoader);
         fxmlLoader.load();
-    }
-
-    @Override
-    public void handleProgressNotification(ProgressNotification pn) {
-        bar.setProgress(pn.getProgress());
-    }
-
-    @Override
-    public void handleStateChangeNotification(StateChangeNotification evt) {
-        if (evt.getType() == StateChangeNotification.Type.BEFORE_START) {
-            stage.hide();
-        }
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/mobile/MobileContainer.fxml"));
+//        System.out.println("Location2: " +fxmlLoader.getLocation());
+//        fxmlLoader.load();
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/robot/KioskContainer.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/UserSignupScreen.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+//        fxmlLoader.load();
+//        System.out.println("Loading login screen");
+//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//        fxmlLoader.load();
     }
 }

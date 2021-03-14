@@ -1,11 +1,10 @@
 package edu.wpi.u;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class CachingClassLoader extends ClassLoader{
 
-    private final Map<String, Class> classes = new HashMap<>();
+    private final HashMap<String, Class> classes = new HashMap<>();
     private final ClassLoader parent;
 
     public CachingClassLoader(ClassLoader parent) {
@@ -34,6 +33,7 @@ public class CachingClassLoader extends ClassLoader{
      */
     @Override
     protected Class findClass(String className) {
+        //System.out.println("Loading : " + className);
         if (classes.containsKey(className)) {
             return classes.get(className);
         } else {

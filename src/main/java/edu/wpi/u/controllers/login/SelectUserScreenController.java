@@ -5,13 +5,24 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
 import edu.wpi.u.CachingClassLoader;
 import edu.wpi.u.users.Role;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -77,11 +88,29 @@ public class SelectUserScreenController {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.setClassLoader(App.classLoader);
-//        System.out.println("Loading in selectUserScreen");
-//        fxmlLoader.load();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot()); //todo : try to load with the App reference
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() {
+                //todo : try fix loading with the App reference
+                return fxmlLoader.getRoot();
+            }
+        };
+        loadTask.setOnSucceeded(event -> {
+            System.out.println("Loaded!");
+            App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+        });
+
+        loadTask.setOnRunning(event -> {
+            // todo : add spinner here
+            VBox box = new VBox();
+            ImageView imageView = new ImageView();
+            box.getChildren().add(imageView);
+            imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
+            App.getPrimaryStage().setScene(new Scene(box, 500, 500));// todo : put this on top of existing elements
+            App.getPrimaryStage().show(); // todo : correctly resize & center spinner
+        });
+        Thread t = new Thread(loadTask);
+        t.start();
     }
 
     public void handleMobile() throws IOException {
