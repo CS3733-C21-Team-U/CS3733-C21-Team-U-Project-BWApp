@@ -215,7 +215,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void resolve() {
         //  System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
-        Comment resolveComment = new Comment("Resolve", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
+        Comment resolveComment = new Comment("Resolve", commentField.getText(), App.userService.getActiveUser().getUserName(), CommentType.RESOLVE);
         App.requestService.resolveRequest(this.parent.request, resolveComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
