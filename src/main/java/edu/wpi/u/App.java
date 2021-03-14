@@ -3,6 +3,7 @@ package edu.wpi.u;
 import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
 import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
+import edu.wpi.u.database.CovidData;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -66,6 +67,7 @@ public class App extends Application {
   public static SVGPath pathFindingPath2;
   public static VBox newReqVBox;
   public static SimpleBooleanProperty VBoxChanged = new SimpleBooleanProperty(true);
+  public static CovidData covidData;
 
   public static SVGPath themeSVG;
 
@@ -130,7 +132,8 @@ public class App extends Application {
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
 
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
 
     mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");

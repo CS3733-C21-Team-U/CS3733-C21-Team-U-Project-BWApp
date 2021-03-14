@@ -23,9 +23,9 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXTextArea prefHeight="100.0" prefWidth="295.0" text="NUMBER" />
-                  <JFXTextArea prefHeight="100.0" prefWidth="323.0" text="NUMBER" />
-                  <JFXTextArea prefHeight="100.0" prefWidth="345.0" text="NUMBER" />
+                  <JFXTextArea fx:id="resultsWeekTextBox" prefHeight="100.0" prefWidth="295.0" text="NUMBER" />
+                  <JFXTextArea fx:id="positiveWeekTextBox" prefHeight="100.0" prefWidth="323.0" text="NUMBER" />
+                  <JFXTextArea fx:id="positiveWeekRatesTextBox" prefHeight="100.0" prefWidth="345.0" text="NUMBER" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="941.0">
@@ -37,15 +37,15 @@
             </HBox>
             <HBox prefHeight="123.0" prefWidth="941.0">
                <children>
-                  <JFXTextArea prefHeight="186.0" prefWidth="286.0" text="NUMBER" />
-                  <JFXTextArea prefHeight="186.0" prefWidth="316.0" text="NUMBER" />
-                  <JFXTextArea prefHeight="186.0" prefWidth="342.0" text="NUMBER" />
+                  <JFXTextArea fx:id="resultsMonthTextBox" prefHeight="186.0" prefWidth="286.0" text="NUMBER" />
+                  <JFXTextArea fx:id="positiveMonthTextBox" prefHeight="186.0" prefWidth="316.0" text="NUMBER" />
+                  <JFXTextArea fx:id="positiveMonthRatesTextBox" prefHeight="186.0" prefWidth="342.0" text="NUMBER" />
                </children>
             </HBox>
             <JFXTextArea prefHeight="33.0" prefWidth="941.0" text="Test Results Per Day" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <BarChart prefHeight="150.0" prefWidth="935.0" title="Positive" titleSide="LEFT">
+                  <BarChart fx:id="PositiveRateBarChart" prefHeight="150.0" prefWidth="935.0" title="Positive" titleSide="LEFT">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -57,7 +57,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <BarChart prefHeight="150.0" prefWidth="947.0" title="Negative" titleSide="LEFT">
+                  <BarChart fx:id="NegativeRateBarChart" prefHeight="150.0" prefWidth="947.0" title="Negative" titleSide="LEFT">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>

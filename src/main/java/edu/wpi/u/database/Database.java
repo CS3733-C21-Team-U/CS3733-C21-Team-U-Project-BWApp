@@ -170,7 +170,7 @@ public class Database {
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
-                String covidSurveyResult = "create table covidSurveyResult(id int always generated as identity , symptomatic boolean, nonsymptomatic boolean, dateOfResults date)";
+                String covidSurveyResult = "create table covidSurveyResult(id int generated always as identity , symptomatic boolean, nonsymptomatic boolean, dateOfResults date)";
                 PreparedStatement covidSurveyResultStatement = conn.prepareStatement(covidSurveyResult);
                 covidSurveyResultStatement.execute();
 
