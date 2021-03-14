@@ -1,33 +1,22 @@
-package edu.wpi.u.controllers.mobile;
+package edu.wpi.u.controllers.robot;
 
-
-import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.validation.RequiredFieldValidator;
-import edu.wpi.u.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
-import edu.wpi.u.exceptions.AccountNameNotFoundException;
-import edu.wpi.u.exceptions.PasswordNotFoundException;
-import edu.wpi.u.exceptions.PhoneNumberNotFoundException;
+import com.jfoenix.validation.RequiredFieldValidator;
+import edu.wpi.u.App;
+import edu.wpi.u.controllers.mobile.MobileContainerController;
 import edu.wpi.u.requests.SpecificRequest;
-import io.netty.handler.codec.http.HttpHeaders;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import org.asynchttpclient.*;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 
-import java.util.concurrent.Future;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class MobileUserLoginScreenController {
+public class KioskLoginController {
 
 
     // TODO: Properly rename JFX artifacts
@@ -47,16 +36,7 @@ public class MobileUserLoginScreenController {
     @FXML public JFXButton debugLoginAdminButton;
     public JFXButton debugLoginGuestButton;
 
-    //TODO
-    //THIS PAGE WILL READ A USER DB VALUE BOOLEAN THAT SAYS WHETHER THEY HAVE COMPLETED A COVID SURVEY REQUEST
-    // IF YES, THEY WILL BE TAKEN TO THE PATHFINDING PAGE
-    //IF NO, THEY WILL BE TAKEN TO THE COVIDSURVEY PAGE
-
     public void initialize() throws IOException {
-
-//        App.getPrimaryStage().setFullScreen(false);
-//        App.getPrimaryStage().setWidth(412);
-//        App.getPrimaryStage().setHeight(732);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -110,50 +90,13 @@ public class MobileUserLoginScreenController {
         });
     }
 
-
-
-//    //Throws exceptions if username or password not found
-//    public void handleForgotPassword() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-//
-//    public void handleSubmit() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-
-
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-//        if (//user Covid Status approved = true){
-//        App.userService.setUser("admin", "admin", "Employees");
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileEnter2FATokenScreen.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-       // }
         App.userService.setUser("admin", "admin", "Employees");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
-
-
-
-
-
-//
-//    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-//        App.userService.setUser("patient", "patient", "Guests");
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-//    public void handleBackButton(ActionEvent actionEvent) throws IOException {
-//
-//    }
 
     public void handleReturn(ActionEvent actionEvent) throws IOException {
         App.getPrimaryStage().setFullScreen(true);
@@ -179,13 +122,13 @@ public class MobileUserLoginScreenController {
                 }
                 else{
                     try {
-                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobileEmbenedGoogleMaps.fxml"));
+                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
-                MobileContainerController.getInstance().getMobileRoot().getChildren().add(root);
+                KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+                KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
             }
         }
     }
@@ -197,6 +140,9 @@ public class MobileUserLoginScreenController {
     public boolean searchRequests(){
         for(SpecificRequest r : App.requestService.getRequests()){
             if(r.getGenericRequest().getCreator() != null){
+                System.out.println(App.userService.getActiveUser().getUserName());
+                System.out.println( r.getType());
+                System.out.println(r.getGenericRequest().isResolved());
                 if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
                         r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
                     if(r.getSpecificData().get(0).equals("High")){
@@ -209,7 +155,3 @@ public class MobileUserLoginScreenController {
         return false;
     }
 }
-
-
-
-

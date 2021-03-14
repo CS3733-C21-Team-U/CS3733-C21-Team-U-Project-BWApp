@@ -1,14 +1,12 @@
 package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
+import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.CommentType;
 import edu.wpi.u.requests.SpecificRequest;
-import edu.wpi.u.requests.Request;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,19 +16,15 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RequestListItemExpandedController extends AnchorPane implements Initializable {
@@ -41,6 +35,16 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label creatorAndDateLabel;
     public Label assigneesLabel;
     public Label completeByLabel;
+    public AnchorPane noLocaitonGraphic;
+
+
+    //Map stuff
+    ImageView imageNode;
+    public Label locationLabel;
+    public int currentNode;
+    AnchorPane mainMapPane = new AnchorPane();
+    Group locationGroup = new Group();
+//    public BorderPane locationUI;
 
 
     private String nodeID = "";
@@ -48,31 +52,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML public VBox mainSpecialFieldVbox;
     @FXML private JFXTextField commentField;
     @FXML public SVGPath typeIconSVG;
-    //for update
 
-    AnchorPane mainMapPane = new AnchorPane();
-    Group locationGroup = new Group();
-
-    //    public HBox HBoxToClone;
-//    public VBox specificFields;
-//    public VBox VBoxToAdd;
-//    public Label typeLabel;
-//    @FXML Label requestDetailTitleLabel;
-//    @FXML Label requestDetailCreatorLabel;
-//    @FXML Label requestDetailDescriptionLabel;
-//    @FXML JFXChipView requestDetailLocationChipView;
-//    @FXML JFXChipView requestDetailStaffChipView;
-//    @FXML Label requestDetailDateCreatedLabel;
-//    @FXML Label requestDetailDate2BCompleteLabel;
-//
-//    //Maintenance Requests Panes
-//    @FXML Label requestDetailSecurityLabel;
-//    @FXML ListView commentListView;
-//    @FXML StackPane requestDetailStack;
-//    @FXML Pane requestDetailSecurityPane;
-//    @FXML Pane requestDetailMaintenancePane;
-//    @FXML Pane requestDetailLaundryPane;
-//    SpecificRequest currentSpecificRequest;
     GesturePane miniMap;
 
 
@@ -88,10 +68,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     @FXML
     public void initialize(URL location, ResourceBundle resources){
 
-        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
-        node.setFitWidth(430);
-        node.setPreserveRatio(true);
-        mainMapPane.getChildren().add(node);
         mainMapPane.getChildren().add(locationGroup);
         mainMapPane.setMinSize(457,275);
         mainMapPane.toFront();
@@ -109,7 +85,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.toFront();
         locationGroup.minHeight(300);
         locationGroup.minWidth(300);
-        loadLocationsOnMap("G", locationGroup);
+        loadLocationsOnMap(0);
 
 
 
@@ -138,10 +114,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
             descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
             String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
             creatorAndDateString += " - ";
-            creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
+            creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
             creatorAndDateLabel.setText(creatorAndDateString);
             assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-            completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
+            completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
             generateSpecificFields();
             generateComments();
         });
@@ -151,17 +127,15 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
         String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
         creatorAndDateString += " - ";
-        creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
+        creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
         creatorAndDateLabel.setText(creatorAndDateString);
         assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-        completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
+        completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
         generateSpecificFields();
         generateComments();
 
     }
 
-    //TODO : Replace with function written in NER Controller, based on current IREQUEST
-    //I re-did this here, IDK what the above comment is - Kohmei
     public void generateSpecificFields(){
         mainSpecialFieldVbox.getChildren().clear();
         for(int i = 0; i < this.parent.request.getSpecificFields().length; i++) {
@@ -194,7 +168,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         HBox.setHgrow(comExpandRegion,Priority.ALWAYS);
         Label comTypeLabel = new Label("Request Created");
         comTypeLabel.getStyleClass().add("headline-3");
-        Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
+        Label comTimeLabel = new Label(App.prettyTime.format(comment.getTimestamp()));
         comTimeLabel.getStyleClass().add("caption");
         HBox typeDateHBox = new HBox();
         typeDateHBox.getChildren().add(comTypeLabel);
@@ -235,7 +209,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void resolve() {
         //  System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
-        Comment resolveComment = new Comment("Resolve", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
+        Comment resolveComment = new Comment("Resolve", commentField.getText(), App.userService.getActiveUser().getUserName(), CommentType.RESOLVE);
         App.requestService.resolveRequest(this.parent.request, resolveComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
@@ -279,25 +253,96 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         this.parent.switchToCollapsed();
     }
 
+    public void nextLocation(){
+        System.out.println("Next Location from: "+ currentNode);
+        currentNode = (currentNode+1)%parent.request.getGenericRequest().getLocations().size();
+        System.out.println("Next Location : "+ currentNode);
+        loadLocationsOnMap(currentNode);
+
+    }
+    public void previousLocation(){
+        System.out.println("Previous Location from: "+ currentNode);
+        currentNode = Math.floorMod(currentNode-1, parent.request.getGenericRequest().getLocations().size());
+        System.out.println("Previous Location: "+ currentNode);
+        loadLocationsOnMap(currentNode);
+    }
 
 
-    public void loadLocationsOnMap(String floor, Group pane){
-        ArrayList<String> locationNodeList = this.parent.request.getGenericRequest().getLocations();
-        for(String nodeIDLocation: locationNodeList){
-            if(App.mapService.getNodeFromID(nodeIDLocation).getFloor().equals(floor)) {
-                miniMap.centreOn(new Point2D(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.05), ((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.05)));
-                SVGPath location = new SVGPath();
-                location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
-                location.setLayoutX(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[0]-85)*0.1439));
-                location.setLayoutY(((App.mapService.getNodeFromID(nodeIDLocation).getCords()[1]-185)*0.1439));
-                location.setStyle("-fx-fill: -primary");
-                location.setScaleX(1.5);
-                location.setScaleY(1.5);
-                location.toFront();
-                pane.getChildren().add(location);
-                nodeID = nodeIDLocation;
-            }
+    public void loadLocationsOnMap(int nodeNum){
+        //clear
+        mainMapPane.getChildren().clear();
+       locationGroup.getChildren().clear();
+        mainMapPane.getChildren().add(locationGroup);
+
+        if(parent.request.getGenericRequest().getLocations().size() == 0){
+            noLocaitonGraphic.setVisible(true);
+            noLocaitonGraphic.setMouseTransparent(false);
+            noLocaitonGraphic.toFront();
+            return;
+        }else{
+            noLocaitonGraphic.setVisible(false);
+            noLocaitonGraphic.setMouseTransparent(true);
+            noLocaitonGraphic.toFront();
         }
+        //this sets the map image
+        //add a switch case for each floor
+        Node node = App.mapService.getNodeFromID(parent.request.getGenericRequest().getLocations().get(nodeNum));
+        String floor = node.getFloor();
+        String resourceURL="";
+        double scale = 0.1439;//set this as well to match
+        switch (floor){
+            case "G":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerCampus.png";
+                break;
+            case "1":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor1Light.png";
+                scale = 0.1753;
+                break;
+            case "2":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor2Light.png";
+                scale = 0.1753;//this is as correct as it can be, moving it down slightly would make it better
+                break;
+            case "3":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor3Light.png";
+                scale = 0.1753;
+                break;
+            case "4":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor4Light.png";
+                scale = 0.1753;
+                break;
+            case "5":
+                resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor5Light.png";
+                scale = 0.1753;
+                break;
+        }
+
+        imageNode = new ImageView(resourceURL);
+        imageNode.setFitWidth(430);
+        imageNode.setPreserveRatio(true);
+        mainMapPane.getChildren().add(imageNode);
+        locationGroup.toFront();
+        miniMap.toBack();
+
+        miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
+        SVGPath location = new SVGPath();
+        location.setContent("M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z");
+//        location.setScaleX(0.7);
+//        location.setScaleY(0.7);
+        DropShadow ds = new DropShadow();
+//        ds.setRadius(5);
+//        ds.setSpread(5);
+        ds.setOffsetX(1);
+        ds.setOffsetY(1);
+        location.setEffect(ds);
+        location.setLayoutX(((node.getCords()[0]-85)*scale));
+        location.setLayoutY(((node.getCords()[1]-185)*scale));
+        location.setStyle("-fx-fill: -primary");
+//        location.setOpacity(0.8);
+//        location.setScaleX(1.5);
+//        location.setScaleY(1.5);
+        location.toFront();
+        locationGroup.getChildren().add(location);
+        locationLabel.setText("Floor " + node.getFloor() + ": " + node.getLongName());
     }
 
     private void generateCommentHelper(int i){
@@ -321,7 +366,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 break;
         }
         comTypeLabel.getStyleClass().add("headline-3");
-        Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
+        Label comTimeLabel = new Label(App.prettyTime.format(comment.getTimestamp()));
         comTimeLabel.getStyleClass().add("caption");
         HBox typeDateHBox = new HBox();
         typeDateHBox.getChildren().add(comTypeLabel);
@@ -353,8 +398,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
 
     public void handlePathfindToLocation(){
-        App.mapInteractionModel.mapTargetNode.set(!App.mapInteractionModel.mapTargetNode.get());
-        App.mapInteractionModel.setNodeID(nodeID);
+        String nodeID = parent.request.getGenericRequest().getLocations().get(currentNode);
+        App.mapInteractionModel.setEndNode(nodeID);
+
         App.tabPaneRoot.getSelectionModel().select(0);
         App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
 

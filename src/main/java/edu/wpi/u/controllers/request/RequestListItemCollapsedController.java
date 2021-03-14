@@ -1,18 +1,15 @@
 package edu.wpi.u.controllers.request;
 
-import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.SpecificRequest;
+import edu.wpi.u.algorithms.Node;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.SVGPath;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +36,8 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
+    @FXML public Label requestItemLocationLabel;
+
     @FXML public AnchorPane requestItemRoot;
 //    @FXML public SVGPath requestIcon;
     @FXML public SVGPath requestIcon;
@@ -55,13 +54,26 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     public void initialize(URL location, ResourceBundle resources) {
         requestIcon.setContent(parent.getIcon(parent.request.getType()));
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
-        requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
+        if(parent.request.getGenericRequest().getLocations().isEmpty()){
+            requestItemLocationLabel.setText("No Location");
+        }else{
+            Node node = App.mapService.getNodeFromID(parent.request.getGenericRequest().getLocations().get(0));
+            requestItemLocationLabel.setText(node.getLongName());
+        }
+        requestItemDate2BCompletedLabel.setText(App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded()));
         requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
 
         parent.needUpdate.addListener((o,oldVal,newVal) -> {
             requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
-            requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
+            if(parent.request.getGenericRequest().getLocations().isEmpty()){
+                requestItemLocationLabel.setText("No Location");
+            }else{
+                Node node = App.mapService.getNodeFromID(parent.request.getGenericRequest().getLocations().get(0));
+                requestItemLocationLabel.setText(node.getLongName());
+            }
+            requestItemLocationLabel.setText(parent.request.getGenericRequest().getLocations().isEmpty() ? "No Location" : parent.request.getGenericRequest().getLocations().get(0));
+            requestItemDate2BCompletedLabel.setText(App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded()));
             requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
             requestItemRequestTypeLabel.setText(parent.request.getType());
         });
@@ -121,9 +133,6 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             else{
                 disappear();
             }
-        //is my type = , OR is type all
-        //if all - show, if unassigned is assignees empty, if assigned does assignees contain my username or not?
-        //if resolved, am I resolved, if unresolved am I not resolved
     }
 
 //    //Listener here for the global drawerstare variable
