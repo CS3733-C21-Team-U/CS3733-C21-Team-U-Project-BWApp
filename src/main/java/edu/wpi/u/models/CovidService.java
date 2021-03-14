@@ -1,9 +1,10 @@
 package edu.wpi.u.models;
-import java.sql.Date;
-import java.time.LocalDate;
 
 import edu.wpi.u.database.CovidData;
-import edu.wpi.u.database.UserData;
+
+import java.math.RoundingMode;
+import java.sql.Date;
+import java.text.DecimalFormat;
 
 
 public class CovidService {
@@ -21,26 +22,36 @@ public class CovidService {
         cd.insertData(symptomatic);
     }
 
-    public void addDataPoint(boolean symptomatic, LocalDate date){cd.insertData(symptomatic,date);}
-
-    public int getSymptomatic(LocalDate targetDate){
+    public int getSymptomatic(Date targetDate){
         return cd.getNumSymptomaticFromDate(targetDate);
     }
 
-    public int getNonSymptomatic(LocalDate targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
+    public int getNonSymptomatic(Date targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
 
-    public int getDailySurveys(LocalDate targetDate){ return cd.getNumSurveysFromDate(targetDate);}
+    public int getDailySurveys(Date targetDate){ return cd.getNumSurveysFromDate(targetDate);}
 
     public int getWeeklySurveys(){ return cd.getWeeklySurveys();}
 
     public int getWeeklyPositiveSurveys() { return cd.getWeeklySymptomaticSurveys();}
 
-    public double getWeeklyPositiveRates() { return cd.getWeeklySymptomaticSurveys()/cd.getWeeklySurveys();}
+    public double getWeeklyPositiveRates() {
+        double weekNum = cd.getWeeklySurveys();
+        double posNum = cd.getWeeklySymptomaticSurveys();
+        DecimalFormat decform = new DecimalFormat("#.##");
+        decform.setRoundingMode(RoundingMode.CEILING);
+        return Double.parseDouble(decform.format(posNum/weekNum));
+    }
 
     public int getMonthlySurveys(){ return cd.getMonthlySurveys();}
 
     public int getMonthlyPositiveSurveys() { return cd.getMonthlySymptomaticSurveys();}
 
-    public int getMonthlyPositiveRates() { return cd.getMonthlySymptomaticSurveys()/cd.getMonthlySurveys();}
+    public double getMonthlyPositiveRates() {
+        double monthNum = cd.getMonthlySurveys();
+        double posNum = cd.getMonthlySymptomaticSurveys();
+        DecimalFormat decform = new DecimalFormat("#.##");
+        decform.setRoundingMode(RoundingMode.CEILING);
+        return Double.parseDouble(decform.format(posNum/monthNum));
+    }
 
 }
