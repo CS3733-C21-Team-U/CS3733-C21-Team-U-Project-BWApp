@@ -31,9 +31,9 @@ public class CovidData extends Data{
 
     public void insertData(boolean result){
         String str;
-        final java.sql.Date sqlDate = java.sql.Date.valueOf(todayDate);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(todayDate);
         str = "insert into covidSurveyResult(symptomatic, nonsymptomatic, dateOfResults) values ( ?, ?, ?)";
-        //System.out.println(todayDate);;
+
         if(result) {
             try{
                 PreparedStatement ps = conn.prepareStatement(str);

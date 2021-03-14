@@ -289,6 +289,8 @@ public class Database {
         try {
             String str;
             Statement s = conn.createStatement();
+            str = "delete from covidSurveyResult";
+            s.execute(str);
             str = "delete from Comments";
             s.execute(str);
             str = "delete from Permissions";
