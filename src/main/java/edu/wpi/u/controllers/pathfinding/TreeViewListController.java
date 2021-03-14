@@ -7,9 +7,11 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class TreeViewListController implements Initializable {
     TreeItem rootConf = new TreeItem("Conference Rooms");
     TreeItem rootDept = new TreeItem("Departments");
     TreeItem rootElev = new TreeItem("Elevators");
-    TreeItem rootExit = new TreeItem("Exits");
+    TreeItem rootExit = new TreeItem("Entrances and Exits");
     TreeItem rootFood = new TreeItem("Food Services");
     TreeItem rootKios = new TreeItem("Kiosks");
     TreeItem rootLabs = new TreeItem("Labs");
@@ -79,18 +81,6 @@ public class TreeViewListController implements Initializable {
      */
 
     /**
-     * Scrum:
-     * 1. Talked to Ola about implementing covid dashboard, continue to try to implement TreeViewList
-     * First I had to test that initialize was actually working, but I just shouldnt have been bringing up the fxml from main
-     * I finished mostly everything with this, just need to figure out how to do something when a "node" is clicked
-     * This has been really annoying and tricky (See why)
-     * 2. I need to continue to figure this out, this is uncharted territory for me, help could be appreciated
-     * I also am going to continue to meet with Ola and collaborate to get the covid dashboard backend stuff done, and then help to finish it off
-     * 3. Challenges: Finishing these things in a somewhat timely manner, cuz honestly I don't know how long this on part gonna take,
-     * but I do know I have to study a LOT for an exam that's coming up, and I haven't gonna to it yet
-     */
-
-    /**
      * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
      */
     @FXML
@@ -111,6 +101,26 @@ public class TreeViewListController implements Initializable {
         isStartNode = true; // TODO: This should change depending on which search bar is clicked
 
         fillAllTrees();
+        // Solution 1
+        /*
+        EventHandler<MouseEvent> mouseEventEventHandle = (MouseEvent mouseEvent) ->{
+            handleMouseClicked(mouseEvent);
+        };
+        confTree.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventEventHandle);
+         */
+        // Solution 2
+        confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue()));
+        deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue()));
+        elevTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)elevTree.getSelectionModel().getSelectedItem()).getValue()));
+        exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue()));
+        foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue()));
+        kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue()));
+        labsTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)labsTree.getSelectionModel().getSelectedItem()).getValue()));
+        parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue()));
+        restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue()));
+        servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue()));
+        staiTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked((String)((TreeItem)staiTree.getSelectionModel().getSelectedItem()).getValue()));
+
 
     }
 
@@ -143,8 +153,6 @@ public class TreeViewListController implements Initializable {
             switch(n.getNodeType()){
                 case "CONF":
                     rootConf.getChildren().add(temp);
-                    confTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedNodeClick(temp));
-                    temp.setValue(App.mapService.getNodeFromID((String) temp.getValue()));
                     break;
                 case "DEPT":
                     rootDept.getChildren().add(temp);
@@ -237,10 +245,14 @@ public class TreeViewListController implements Initializable {
 
     }
 
-    private void selectedNodeClick(TreeItem t){
-        System.out.println(t.getValue()); // temp.setValue(App.mapService.getNodeFromID((String) temp.getValue()));
+    private void handleMouseClicked(String value){
+        if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) {
+            if(isStartNode) {
+                System.out.println("Clicked " + value + " as new start value");
+            } else System.out.println("Clicked " + value + " as new end value");
+        }
+        // TODO: Close TreeViewListController
     }
-
 
 
     /**
