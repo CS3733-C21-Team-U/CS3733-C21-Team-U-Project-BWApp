@@ -84,6 +84,9 @@ public class SelectUserScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
+    public void handleExitButton(){
+        App.getInstance().exitApp();
+    }
     public void handleExitApp(){
         App.getInstance().exitApp();
     }

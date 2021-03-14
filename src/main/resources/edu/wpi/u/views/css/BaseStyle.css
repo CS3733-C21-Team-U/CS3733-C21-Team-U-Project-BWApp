@@ -481,6 +481,12 @@
     -jfx-rippler-fill: -primary;
 }
 
+.settingBlockContainer{
+    -fx-background-color: -backgroundAlt;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
 
 /* ----------- SECCONDARY COLORS -------------- */
 

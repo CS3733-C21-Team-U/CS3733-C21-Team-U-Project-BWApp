@@ -163,6 +163,23 @@
                                     </VBox>
                                  </graphic>
                               </JFXButton>
+                              <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="200.0" layoutY="10.0" onAction="#handleExitButton" prefHeight="200.0" prefWidth="200.0" ripplerFill="WHITE" styleClass="bigButton" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="120.0" prefWidth="170.0" spacing="10.0">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <SVGPath content="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z" scaleX="3.0" scaleY="3.0" styleClass="on-primary" />
+                                             </children>
+                                          </Group>
+                                          <Label style="-fx-text-fill: white;" text="EXIT APP" />
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </GridPane>
                      </children>
@@ -183,7 +200,7 @@
                   <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
                   <JFXButton layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
                   <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
-                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="47.0" prefWidth="204.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely)" />
+                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="47.0" prefWidth="575.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely) - New keybaord shortcut is (Control + Esc)" />
                </children>
                <BorderPane.margin>
                   <Insets />

@@ -1,0 +1,18 @@
+/*Base colors here------------------------*/
+
+.root{
+    -primary: #003da6;
+    -primaryVariant: #00348c;
+    -secondary: #5785d4;
+    -secondaryVairant: #8ca3d9;
+    -background: #FFFFFF;
+    -backgroundAlt: #f3f3f3;
+    -surface: #FFFFFF;
+    -error: #B00020;
+    -onPrimary: #FFFFFF;
+    -onSecondary: #000000;
+    -onBackground: #323232;
+    -onBackgroundAlt: #919191;
+    -onSurface: #000000;
+    -onError: #FFFFFF;
+}
