@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -16,73 +15,64 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserLoginScreenController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="1652.0" fitWidth="2668.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="1652.0" fitWidth="2668.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
+                  <Image url="@../Images/Brigham-Womens-TO-USE.jpg" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0">
-         <left>
-            <BorderPane prefHeight="1080.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-               <center>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
-                     <effect>
-                        <DropShadow height="20.0" radius="9.5" width="20.0" />
-                     </effect>
-                     <opaqueInsets>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </opaqueInsets>
+      <BorderPane prefHeight="1080.0" prefWidth="1000.0">
+         <center>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </opaqueInsets>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Region prefHeight="4.0" prefWidth="360.0" />
+                        <ImageView fitHeight="75.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Label styleClass="headline-2" text="User Sign In" />
+                        <Region prefHeight="29.0" prefWidth="360.0" />
+                        <JFXTextField fx:id="userNameTextField" labelFloat="true" promptText="Enter Username" />
+                        <Region prefHeight="11.0" prefWidth="360.0" />
+                        <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" />
+                        <Region prefHeight="21.0" prefWidth="360.0" />
+                        <JFXButton onAction="#handleLogin" styleClass="button-contained" text="SIGN IN" />
+                        <HBox alignment="CENTER" prefHeight="41.0" prefWidth="1086.0">
                            <children>
-                              <Region prefHeight="4.0" prefWidth="360.0" />
-                              <ImageView fitHeight="75.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Images/logo.png" />
-                                 </image>
-                              </ImageView>
-                              <Label styleClass="headline-2" text="User Sign In" />
-                              <Region prefHeight="29.0" prefWidth="360.0" />
-                              <JFXTextField fx:id="userNameTextField" labelFloat="true" promptText="Enter Username" />
-                              <Region prefHeight="11.0" prefWidth="360.0" />
-                              <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" />
-                              <Region prefHeight="21.0" prefWidth="360.0" />
-                              <JFXButton onAction="#handleLogin" styleClass="button-contained" text="SIGN IN" />
-                              <HBox alignment="CENTER" prefHeight="41.0" prefWidth="1086.0">
-                                 <children>
-                                    <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefHeight="27.0" prefWidth="157.0" styleClass="button-outlined" text="Login Without 2FA" />
-                                    <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                 </children>
-                              </HBox>
-                              <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
+                              <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefHeight="27.0" prefWidth="157.0" styleClass="button-outlined" text="Login Without 2FA" />
+                              <JFXButton fx:id="forgotPasswordButton" onAction="#handleForgotPassword" prefWidth="157.0" styleClass="button-text" text="Forgot Password">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
                            </children>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </VBox>
+                        </HBox>
+                        <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
                      </children>
-                  </AnchorPane>
-               </center>
-            </BorderPane>
-         </left>
-         <stylesheets>
-            <URL value="@../css/BaseStyle.css" />
-            <URL value="@../css/LightTheme.css" />
-         </stylesheets>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </StackPane>
