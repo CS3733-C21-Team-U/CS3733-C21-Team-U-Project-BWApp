@@ -95,10 +95,14 @@ public class SelectUserScreenController {
     }
 
     public void handleKiosk() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/kiosk/KioskContainer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/robot/KioskContainer.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
+
+    public void handleExitButton(){
+        App.getInstance().exitApp();
     }
 }
 

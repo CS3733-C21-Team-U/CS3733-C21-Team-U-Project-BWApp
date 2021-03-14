@@ -1,31 +1,19 @@
-package edu.wpi.u.controllers.mobile;
+package edu.wpi.u.controllers.robot;
 
-
-//import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
-import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-public class MobileCovidSurveyController {
+public class KioskCovidSurveyController {
 
     public JFXCheckBox Q1CheckBox;
     public JFXCheckBox Q2CheckBox;
@@ -35,18 +23,10 @@ public class MobileCovidSurveyController {
     public JFXButton submitSurveyButton;
     public Label errorLabel;
     public String covidRisk;
-    //public StackPane newStackPane;
 
 
-    //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
-    // if requirements are not met, the user should be sent to another page that directs them to seek help or go home.
-    // Will throw an error if any of the check boxes are not completed.
-    /**
 
-     */
-
-    public void handleCovidSurveyFill() throws IOException {
-
+    public void handleCovidSurveyFill() {
         if (!Q1CheckBox.isSelected() && !Q2CheckBox.isSelected() && !Q3CheckBox.isSelected() && !Q4CheckBox.isSelected() && Q5CheckBox.isSelected()){
             covidRisk = "None";
         }else{
@@ -61,42 +41,44 @@ public class MobileCovidSurveyController {
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
             covidRisk = "High";
         }
-
         //Add request here
         Random rand = new Random();
         int requestID = rand.nextInt();
         String ID = Integer.toString(requestID);//make a random id
 
         //make components of specifc request,  then set them
-
-
-
         Comment primaryComment = new Comment("COVID Survey Incoming", (App.userService.getActiveUser().getName() + " is making a request to enter the hospital. Their covid risk is " + covidRisk),
                 App.userService.getActiveUser().getUserName(), CommentType.PRIMARY);
         Timestamp t = new Timestamp(System.currentTimeMillis());
 
-        ArrayList<String>sdofijds = new ArrayList<>();
-        sdofijds.add("UEXIT0010G");
-        sdofijds.add("UEXIT0020G");
+        ArrayList<String> Locations = new ArrayList<>();
+        Locations.add("UEXIT0010G");
+        Locations.add("UEXIT0020G");
 
         Request newRequest = new Request(ID, t,
-                sdofijds, new ArrayList<String>(), primaryComment);
+                Locations, new ArrayList<String>(), primaryComment);
 
-        ArrayList<String>sdofijds3 = new ArrayList<>();
-        sdofijds3.add(covidRisk);
-        SpecificRequest send = new RequestFactory().makeRequest("CovidSurvey").setRequest(newRequest).setSpecificData(sdofijds3);
+        ArrayList<String>specificData = new ArrayList<>();
+        specificData.add(covidRisk);
+        specificData.add("Temperature Not Taken");
+        SpecificRequest send = new RequestFactory().makeRequest("CovidSurvey").setRequest(newRequest).setSpecificData(specificData);
         if(!App.requestService.getRequests().contains(send)){
             App.requestService.addRequest(send);
         }
         else{
             System.out.println("Request already sent, processing");
         }
+        App.requestService.curCovidRequest = send;
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileWaitPage.fxml"));
-        fxmlLoader.load();
+        String fxmlLocation = "/edu/wpi/u/views/robot/KioskTemperatureScanner.fxml";
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         fxmlLoader.getController();
-        MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
-        MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
+        KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+        KioskContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 }

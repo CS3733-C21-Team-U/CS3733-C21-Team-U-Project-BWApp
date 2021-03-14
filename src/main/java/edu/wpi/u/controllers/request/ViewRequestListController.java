@@ -1,29 +1,19 @@
 package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.LinkedList;
 
 public class ViewRequestListController {
 
@@ -35,7 +25,7 @@ public class ViewRequestListController {
     private Group requests;
     @FXML public VBox newRequestVBox;
     ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();
-
+    LinkedList<String> generatedRequests = new LinkedList<>();
     /**
      *Gets each request and attaches it to a NewRequestItem
      * @throws IOException
@@ -45,8 +35,8 @@ public class ViewRequestListController {
         sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
             @Override
             public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
-                if(c.getList().size() == 2){//New list after filtering is emppty
-                    System.out.println("Request list is empty");
+                if(c.getList().size() < 1){//New list after filtering is emppty
+                    System.out.println("Request list is empty");//TODO Debug to fix the little request dude not showing up after making a new request
                     noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     noItemsGraphic.setVisible(true);
                 }else{
@@ -59,9 +49,13 @@ public class ViewRequestListController {
 
         generateRequests();
 
-        App.requestRedrawFlag.addListener(e->{
-            sampleRequestItem.getChildren().clear();
-            generateRequests();
+        App.addNewRequestToList.addListener(e->{
+            listOfRequests = App.requestService.getRequests();
+            try {
+                sampleRequestItem.getChildren().add(new RequestListItemContainerController(listOfRequests.get(listOfRequests.size()-1), sampleRequestItem));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
 
         System.out.println("In Init for View Request");
@@ -78,7 +72,9 @@ public class ViewRequestListController {
                 "All", "Active", "Resolved");
 
         App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
+            //newRequestVBox.getChildren().setAll(App.newReqVBox.getChildren());
             newRequestVBox = App.newReqVBox;
+            System.out.println("Listener in View Request Running");
         });
 
 
@@ -87,7 +83,7 @@ public class ViewRequestListController {
     public void generateRequests() {
         for (SpecificRequest request: listOfRequests) {
             try {
-                sampleRequestItem.getChildren().add(0, new RequestListItemContainerController(request, sampleRequestItem));
+                sampleRequestItem.getChildren().add(new RequestListItemContainerController(request, sampleRequestItem));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,8 +95,14 @@ public class ViewRequestListController {
      * @throws Exception
      */
     @FXML public void handleNewRequestButton() throws Exception {
-        newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
-        App.VBoxChanged.set(!App.VBoxChanged.get());
+        if(newRequestVBox.getChildren().size()<1) {
+            newRequestVBox.getChildren().add(new RequestListItemNewController());
+
+
+            App.newReqVBox = newRequestVBox;
+
+            App.VBoxChanged.set(!App.VBoxChanged.get());
+        }
     }
 
     /**

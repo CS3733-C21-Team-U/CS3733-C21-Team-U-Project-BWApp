@@ -19,6 +19,7 @@ public class RequestService {
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
   public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
   public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
+  public SpecificRequest curCovidRequest;
 
   public RequestService() {
     rd  = new RequestData();

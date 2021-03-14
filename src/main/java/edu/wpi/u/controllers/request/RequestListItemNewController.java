@@ -4,6 +4,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,10 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import lombok.SneakyThrows;
@@ -30,15 +32,12 @@ import java.util.*;
 
 public class RequestListItemNewController extends AnchorPane implements Initializable{
 
-    public RequestListItemContainerController parent;
-    public Region pushDown1;
-
     public JFXTextField editTitleField;
     public JFXTextArea editDescriptionField;
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
-
     public JFXTextField editAssigneesField;
+    public ToggleGroup selectTypeGroup;
 
     @FXML
     public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
@@ -64,10 +63,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String type = App.newNodeType;
-        currSpecificRequest = new RequestFactory().makeRequest(type);
-        specificTextFields = generateSpecificFields();
-
+        currSpecificRequest = new RequestFactory().makeRequest("Maintenance");
         RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
         assigneeValidator.setMessage("Valid Assignee Required");
         RequiredFieldValidator locationValidator = new RequiredFieldValidator();
@@ -115,6 +111,10 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             }
         });
 
+        selectTypeGroup.selectedToggleProperty().addListener((o, oldVal, newVal) -> {
+            switchFields( ((JFXToggleNode)selectTypeGroup.getSelectedToggle()).getText());
+        });
+
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
 
@@ -146,15 +146,12 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
         Request newRequest = new Request(ID, Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
             locationsToAdd, assigneesToAdd, primaryComment);
-
-//        App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
-//        App.newReqVBox.getChildren().clear();
-//        App.VBoxChanged.set(!App.VBoxChanged.get());
-
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
+
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
-            App.requestRedrawFlag.set(!App.requestRedrawFlag.get());
+            App.addNewRequestToList.set(!App.addNewRequestToList.get());
+
         }else if(editTitleField.getText().equals("")){
             editTitleField.validate();
         }else if(editDescriptionField.getText().equals("")){
@@ -212,6 +209,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     public JFXTextField[] generateSpecificFields() {
 
         //specificTitle.setText(currSpecificRequest.getType());
+        extraFieldsVBox.getChildren().clear();
         JFXTextField[] ans = new JFXTextField[ currSpecificRequest.getSpecificFields().length];
         for(int i = 0; i <  currSpecificRequest.getSpecificFields().length; i++) {
 
@@ -278,18 +276,67 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             }
         }
     }
-        public void deleteLocation(){
-            editLocationsListView.getItems().remove(editLocationsField.getText());
-            editLocationsField.setText("");
+    public void deleteLocation(){
+        editLocationsListView.getItems().remove(editLocationsField.getText());
+        editLocationsField.setText("");
 
-        }
+    }
 
-    /*
-    App.mapService.getLongNames(string NodeID);
-
-
-
-
+    /**
+     * Section for new Request Buttons
      */
+    public void switchFields(String type){
+        currSpecificRequest = new RequestFactory().makeRequest(type);
+        specificTextFields = generateSpecificFields();
+    }
+//
+//    public void handleNewMaintenanceRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Maintenance");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewComputerRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Computer");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewMedicineRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Medical");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewGiftRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Gift");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewLaundryRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Laundry");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewAudioVisualRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("AudioVisual");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewFloralRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Floral");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewSanitationRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Sanitation");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewSecurityRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Security");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewReligiousRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Religious");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewFoodRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Food");
+//        specificTextFields = generateSpecificFields();
+//    }
+//    public void handleNewLanguageRequest() throws IOException {
+//        currSpecificRequest = new RequestFactory().makeRequest("Language");
+//        specificTextFields = generateSpecificFields();
+//    }
 
 }
