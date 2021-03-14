@@ -222,9 +222,13 @@
 .jfx-toggle-node:selected{
     -fx-text-fill: -onPrimary;
 }
+.jfx-toggle-node:selected > SVGPath{
+    -fx-fill: -onPrimary;
+}
 .jfx-toggle-node .jfx-rippler{
     -jfx-rippler-fill: -primary;
 }
+
 /* ----------- SLIDER -------------- */
 .jfx-slider {
     -jfx-default-thumb: -primary;
@@ -481,6 +485,11 @@
     -jfx-rippler-fill: -primary;
 }
 
+.settingBlockContainer{
+    -fx-background-color: -backgroundAlt;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+  
 .selectTypeButton{
     -fx-background-color: -background;
     -fx-background-radius: 20px;

@@ -1,8 +1,6 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
@@ -80,10 +78,17 @@ public class SelectUserScreenController {
     }
 
     public void handleKiosk() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/kiosk/KioskContainer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/robot/KioskContainer.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
+
+    public void handleExitButton(){
+        App.getInstance().exitApp();
+    }
+    public void handleExitApp(){
+        App.getInstance().exitApp();
     }
 }
 
