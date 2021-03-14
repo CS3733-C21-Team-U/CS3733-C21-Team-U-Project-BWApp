@@ -9,6 +9,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -28,6 +29,8 @@ import java.io.IOException;
 
 public class SelectUserScreenController {
     public JFXButton skipToAdminButton;
+    public ImageView loadingImage;
+    public VBox loadingFrame;
 
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -88,29 +91,34 @@ public class SelectUserScreenController {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-        Task<Parent> loadTask = new Task<Parent>() {
+        Platform.runLater(new Runnable() {
             @Override
-            protected Parent call() {
-                //todo : try fix loading with the App reference
-                return fxmlLoader.getRoot();
-            }
-        };
-        loadTask.setOnSucceeded(event -> {
-            System.out.println("Loaded!");
-            App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
-        });
+            public void run() {
+                Task<Parent> loadTask = new Task<Parent>() {
+                    @Override
+                    protected Parent call() {
+                        //todo : try fix loading with the App reference
+                        return fxmlLoader.getRoot();
+                    }
+                };
+                loadTask.setOnSucceeded(event -> {
+                    System.out.println("Loaded!");
+                    App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+                });
 
-        loadTask.setOnRunning(event -> {
-            // todo : add spinner here
-            VBox box = new VBox();
-            ImageView imageView = new ImageView();
-            box.getChildren().add(imageView);
-            imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
-            App.getPrimaryStage().setScene(new Scene(box, 500, 500));// todo : put this on top of existing elements
-            App.getPrimaryStage().show(); // todo : correctly resize & center spinner
+                loadTask.setOnRunning(event -> {
+                    // todo : add spinner here
+                    VBox box = new VBox();
+                    ImageView imageView = new ImageView();
+                    box.getChildren().add(imageView);
+                    imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
+                    App.getPrimaryStage().setScene(new Scene(box, 500, 500));// todo : put this on top of existing elements
+                    App.getPrimaryStage().show(); // todo : correctly resize & center spinner
+                });
+                Thread t = new Thread(loadTask);
+                t.start();
+            }
         });
-        Thread t = new Thread(loadTask);
-        t.start();
     }
 
     public void handleMobile() throws IOException {
