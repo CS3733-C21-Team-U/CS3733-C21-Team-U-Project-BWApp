@@ -50,7 +50,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public int currentNode;
     AnchorPane mainMapPane = new AnchorPane();
     Group locationGroup = new Group();
-    public HBox locationUI;
+//    public BorderPane locationUI;
 
 
     private String nodeID = "";
@@ -281,7 +281,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mainMapPane.getChildren().add(locationGroup);
 
         if(parent.request.getGenericRequest().getLocations().size() == 0){
-            //No Locations graphic here
+            //No Locations graphic here KOHMEI TODO
             return;
         }
         //this sets the map image
@@ -321,7 +321,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         imageNode.setPreserveRatio(true);
         mainMapPane.getChildren().add(imageNode);
         locationGroup.toFront();
-        locationUI.toFront();
+        miniMap.toBack();
 
         miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
         SVGPath location = new SVGPath();

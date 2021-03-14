@@ -96,13 +96,20 @@
                         <Insets />
                      </HBox.margin>
                      <children>
-                        <HBox fx:id="locationUI" alignment="CENTER" layoutY="482.0" prefHeight="36.0" prefWidth="440.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="490.0">
-                           <children>
-                              <JFXButton onAction="#previousLocation" styleClass="button-contained" text="Previous" />
-                              <Label fx:id="locationLabel" styleClass="headline-3" text="Label" />
-                              <JFXButton onAction="#nextLocation" styleClass="button-contained" text="Next" />
-                           </children>
-                        </HBox>
+                        <Label fx:id="locationLabel" alignment="CENTER" layoutX="15.0" layoutY="14.0" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: rgba(255,255,255,0.5);" styleClass="headline-3" text="Floor X: Long Name" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding></Label>
+                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="14.0" layoutY="245.0" onAction="#previousLocation" styleClass="fab-mini" text="Previous" AnchorPane.leftAnchor="10.0">
+                           <graphic>
+                              <SVGPath content="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" scaleX="1.5" scaleY="1.5" styleClass="on-primary" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="380.0" layoutY="245.0" onAction="#nextLocation" styleClass="fab-mini" text="Next" AnchorPane.rightAnchor="10.0">
+                           <graphic>
+                              <SVGPath content="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" scaleX="1.5" scaleY="1.5" styleClass="on-primary" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </children>
