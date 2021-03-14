@@ -121,9 +121,6 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             else{
                 disappear();
             }
-        //is my type = , OR is type all
-        //if all - show, if unassigned is assignees empty, if assigned does assignees contain my username or not?
-        //if resolved, am I resolved, if unresolved am I not resolved
     }
 
 //    //Listener here for the global drawerstare variable

@@ -196,7 +196,7 @@
 .jfx-toggle-button:focused,
 .jfx-toggle-button:selected,
 .jfx-toggle-button:focused:selected {
-    -jfx-toggle-color: -primary;
+    /*-jfx-toggle-color: -primary;*/
     -jfx-size: 10;
     -fx-text-fill: -onBackground;
 }
@@ -489,6 +489,35 @@
     -fx-background-color: -backgroundAlt;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
+  
+.selectTypeButton{
+    -fx-background-color: -background;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 3px;
+    -fx-min-height: 40px;
+    -fx-min-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-max-height: 40px;
+    -fx-max-width: 40px;
+    -fx-border-color: -primary;
+}
+
+.selectTypeButton > SVGPath{
+    -fx-fill: -primary;
+}
+
+.selectTypeButton:selected{
+    -fx-background-color: -primary;
+}
+
+.selectTypeButton:selected > SVGPath{
+    -fx-fill: -onPrimary;
+}
+
+.selectTypeButton > .jfx-rippler{
+    -jfx-rippler-fill: white;
 }
 
 
