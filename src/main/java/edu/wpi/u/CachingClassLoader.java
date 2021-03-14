@@ -34,18 +34,18 @@ public class CachingClassLoader extends ClassLoader{
      */
     @Override
     protected Class<?> findClass(String className) {
-    System.out.println("Trying to load: " + className);
+//    System.out.println("Trying to load: " + className);
         if (classes.containsKey(className)) {
-            System.out.println("Already loaded : " + className);
+//            System.out.println("Already loaded : " + className);
             return (Class<?>) classes.get(className);
         } else {
             try {
                 Class<?> result = parent.loadClass(className);
-                System.out.println("Loaded: " + className);
+//                System.out.println("Loaded: " + className);
                 classes.put(className, result);
                 return result;
             } catch (Exception e) {
-                System.out.println(className + " not found, adding to hashmap");
+//                System.out.println(className + " not found, adding to hashmap");
                 classes.put(className, null);
                 return null;
             }

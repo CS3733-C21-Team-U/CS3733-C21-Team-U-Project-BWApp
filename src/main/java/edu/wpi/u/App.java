@@ -181,6 +181,7 @@ public class App extends Application {
   }
 
   public void exitApp() {
+    App.isLoggedIn.set(false);
     System.out.println("Shutting Down");
     //Database.getDB().saveAll();
 //    Database.getDB().stop();

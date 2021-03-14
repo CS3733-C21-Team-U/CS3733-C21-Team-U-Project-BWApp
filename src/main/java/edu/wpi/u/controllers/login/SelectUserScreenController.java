@@ -22,7 +22,6 @@ public class SelectUserScreenController {
 
     public void initialize() throws IOException {
         fxmlLoader.setClassLoader(App.classLoader);
-        System.out.println("Loading in selectUserScreen");
         fxmlLoader.load();
     }
 
@@ -82,7 +81,7 @@ public class SelectUserScreenController {
 //        fxmlLoader.setClassLoader(App.classLoader);
 //        System.out.println("Loading in selectUserScreen");
 //        fxmlLoader.load();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot()); //todo : try to load with the App reference
     }
 
     public void handleMobile() throws IOException {
