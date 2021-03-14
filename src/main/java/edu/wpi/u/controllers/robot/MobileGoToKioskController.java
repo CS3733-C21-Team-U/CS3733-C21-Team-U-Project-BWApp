@@ -15,6 +15,7 @@ public class MobileGoToKioskController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
