@@ -58,7 +58,6 @@ public class SelectUserScreenController {
         App.userService.getActiveUser().setType(Role.GUEST);
         App.isLoggedIn.set(true);
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
