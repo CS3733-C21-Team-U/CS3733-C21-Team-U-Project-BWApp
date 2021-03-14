@@ -222,9 +222,13 @@
 .jfx-toggle-node:selected{
     -fx-text-fill: -onPrimary;
 }
+.jfx-toggle-node:selected > SVGPath{
+    -fx-fill: -onPrimary;
+}
 .jfx-toggle-node .jfx-rippler{
     -jfx-rippler-fill: -primary;
 }
+
 /* ----------- SLIDER -------------- */
 .jfx-slider {
     -jfx-default-thumb: -primary;
