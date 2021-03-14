@@ -3,7 +3,7 @@ package edu.wpi.u;
 import com.jfoenix.controls.JFXTabPane;
 import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
 import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
-import edu.wpi.u.database.CovidData;
+//import edu.wpi.u.database.CovidData;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
 
@@ -58,6 +58,7 @@ public class App extends Application {
   public static Database db = Database.getDB();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
+  public static CovidService covidService = new CovidService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -67,7 +68,7 @@ public class App extends Application {
   public static SVGPath pathFindingPath2;
   public static VBox newReqVBox;
   public static SimpleBooleanProperty VBoxChanged = new SimpleBooleanProperty(true);
-  public static CovidData covidData;
+  //public static CovidData covidData;
 
   public static SVGPath themeSVG;
 
