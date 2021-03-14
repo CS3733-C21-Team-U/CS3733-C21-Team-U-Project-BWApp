@@ -122,7 +122,7 @@
                   </Label>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="408.0" spacing="30.0">
                      <children>
-                        <Label text="Decide where you get notified when a service request is assingged to you">
+                        <Label text="Decide where you get notified when a service request is assigned to you">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

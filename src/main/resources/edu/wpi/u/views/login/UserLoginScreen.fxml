@@ -70,7 +70,7 @@
                         <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
                      </children>
                   </HBox>
-                          <JFXButton fx:id="loginButton" buttonType="RAISED" maxWidth="533.0" minHeight="15.0" onAction="#handleLogin" prefWidth="533.0" styleClass="button-contained" text="Login" />
+                          <JFXButton fx:id="loginButton" buttonType="RAISED" defaultButton="true" maxWidth="533.0" minHeight="15.0" onAction="#handleLogin" prefWidth="533.0" styleClass="button-contained" text="Login" />
                         <HBox prefHeight="41.0" prefWidth="1086.0">
                             <children>
                         <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefWidth="327.0" styleClass="button-outlined" text="Login Without 2FA" />
@@ -84,7 +84,7 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </HBox>
-                  <JFXButton layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
+                  <JFXButton cancelButton="true" layoutX="300.0" layoutY="624.0" onAction="#handleBackButton" prefWidth="313.0" styleClass="button-text" text="Back">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
