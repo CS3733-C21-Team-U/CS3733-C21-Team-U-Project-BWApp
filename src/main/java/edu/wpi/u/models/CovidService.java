@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import edu.wpi.u.database.CovidData;
 import edu.wpi.u.database.UserData;
@@ -20,13 +21,15 @@ public class CovidService {
         cd.insertData(symptomatic);
     }
 
-    public int getSymptomatic(Date targetDate){
+    public void addDataPoint(boolean symptomatic, LocalDate date){cd.insertData(symptomatic,date);}
+
+    public int getSymptomatic(LocalDate targetDate){
         return cd.getNumSymptomaticFromDate(targetDate);
     }
 
-    public int getNonSymptomatic(Date targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
+    public int getNonSymptomatic(LocalDate targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
 
-    public int getDailySurveys(Date targetDate){ return cd.getNumSurveysFromDate(targetDate);}
+    public int getDailySurveys(LocalDate targetDate){ return cd.getNumSurveysFromDate(targetDate);}
 
     public int getWeeklySurveys(){ return cd.getWeeklySurveys();}
 

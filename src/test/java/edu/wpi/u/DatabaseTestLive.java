@@ -27,16 +27,34 @@ public class DatabaseTestLive {
         csMain.addDataPoint(false);
         csMain.addDataPoint(false);
         csMain.addDataPoint(false);
-        System.out.println("Got to main");
 
 //        csMain.getSymptomatic()
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate newDate = LocalDate.now();
-        String todayDate = (newDate.format(dtf));
+        LocalDate nowDate = LocalDate.now(); // Localdate should be inserted to Data, then converted to sql date
+        String todayDate = (nowDate.format(dtf));
+        java.sql.Date sqlDate = java.sql.Date.valueOf(todayDate);
 
-        System.out.println(todayDate);
+        LocalDate yesterday = LocalDate.of(2021,3,13);
+        String yesterdayDate = (yesterday.format(dtf));
+        java.sql.Date sqlDateYesterday = java.sql.Date.valueOf(yesterdayDate);
 
+        System.out.println("Today is " + todayDate);
+        System.out.println("Yesterday was " + yesterdayDate);
+
+        csMain.addDataPoint(true, yesterday);
+        csMain.addDataPoint(false, yesterday);
+        csMain.addDataPoint(false, yesterday);
+
+       System.out.println("Symptomatic today: " + csMain.getSymptomatic(nowDate));
+       System.out.println("Non-symptomatic today: " + csMain.getNonSymptomatic(nowDate));
+       System.out.println("Daily surveys today: " + csMain.getDailySurveys(nowDate));
+       System.out.println("Weekly surveys (total): " + csMain.getWeeklySurveys());
+       System.out.println("Weekly surveys (positive): " + csMain.getWeeklyPositiveSurveys());
+       System.out.println("Need to add weekly positive rates");
+       System.out.println("Monthly surveys (total): " + csMain.getMonthlySurveys());
+       System.out.println("Monthly surveys (positive): " + csMain.getMonthlyPositiveSurveys());
+       System.out.println("Need to add monthly positive rates");
 
     }
 
