@@ -127,7 +127,8 @@ public class KioskLoginController {
                         e.printStackTrace();
                     }
                 }
-                App.getPrimaryStage().getScene().setRoot(root);
+                KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+                KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
             }
         }
     }

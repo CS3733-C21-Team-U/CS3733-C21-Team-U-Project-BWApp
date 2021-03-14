@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskLoginController">
    <children>
       <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1558.0" spacing="10.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -58,12 +57,12 @@
                </VBox.margin>
             </JFXProgressBar>
             <Label fx:id="errorLabel1" prefHeight="15.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
-            <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="314.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
+            <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" defaultButton="true" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="314.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </JFXButton>
-            <JFXButton fx:id="returnButton" buttonType="RAISED" onAction="#handleReturn" prefHeight="50.0" prefWidth="304.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
+            <JFXButton fx:id="returnButton" buttonType="RAISED" cancelButton="true" onAction="#handleReturn" prefHeight="50.0" prefWidth="304.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
             <JFXButton fx:id="debugButton" onAction="#handleDebugLogin" opacity="0.0" prefHeight="0.0" prefWidth="304.0" styleClass="button-outlined" text="Debug Login">
                <VBox.margin>
                   <Insets bottom="10.0" />

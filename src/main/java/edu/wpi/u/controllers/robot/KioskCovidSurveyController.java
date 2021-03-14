@@ -78,6 +78,7 @@ public class KioskCovidSurveyController {
             e.printStackTrace();
         }
         fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+        KioskContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 }

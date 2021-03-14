@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskCovidSurveyController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -119,7 +118,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <JFXButton fx:id="submitSurveyButton" buttonType="RAISED" onAction="#handleCovidSurveyFill" prefHeight="65.0" prefWidth="318.0" styleClass="bigButton" text="Submit">
+                              <JFXButton fx:id="submitSurveyButton" buttonType="RAISED" defaultButton="true" onAction="#handleCovidSurveyFill" prefHeight="65.0" prefWidth="318.0" styleClass="bigButton" text="Submit">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>

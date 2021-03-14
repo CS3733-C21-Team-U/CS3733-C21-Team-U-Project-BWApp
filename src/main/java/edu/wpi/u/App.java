@@ -153,12 +153,12 @@ public class App extends Application {
     App.primaryStage.setFullScreenExitHint("");
     App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     App.primaryStage.show();
-    App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.ESCAPE) {
-        System.out.println("Escape button pressed, exiting");
-          App.getInstance().end();
-      }
-    });
+//    App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
+//      if (e.getCode() == KeyCode.ESCAPE) {
+//        System.out.println("Escape button pressed, exiting");
+//          App.getInstance().end();
+//      }
+//    });
 
 
     //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
@@ -168,7 +168,7 @@ public class App extends Application {
     return primaryStage;
   }
 
-  public void end() {
+  public void exitApp() {
     System.out.println("Shutting Down");
     Database.getDB().saveAll();
 //    Database.getDB().stop();
