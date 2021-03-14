@@ -1,21 +1,39 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
+import edu.wpi.u.CachingClassLoader;
 import edu.wpi.u.users.Role;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class SelectUserScreenController {
+    public JFXButton skipToAdminButton;
 
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
@@ -49,10 +67,7 @@ public class SelectUserScreenController {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
@@ -62,17 +77,40 @@ public class SelectUserScreenController {
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.setClassLoader(App.classLoader);
+//        System.out.println("Loading in selectUserScreen");
+//        fxmlLoader.load();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
+    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+        Task<Parent> loadTask = new Task<Parent>() {
+            @Override
+            protected Parent call() {
+                //todo : try fix loading with the App reference
+                return fxmlLoader.getRoot();
+            }
+        };
+        loadTask.setOnSucceeded(event -> {
+            System.out.println("Loaded!");
+            App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+        });
+
+        loadTask.setOnRunning(event -> {
+            // todo : add spinner here
+            VBox box = new VBox();
+            ImageView imageView = new ImageView();
+            box.getChildren().add(imageView);
+            imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
+            App.getPrimaryStage().setScene(new Scene(box, 500, 500));// todo : put this on top of existing elements
+            App.getPrimaryStage().show(); // todo : correctly resize & center spinner
+        });
+        Thread t = new Thread(loadTask);
+        t.start();
     }
 
     public void handleMobile() throws IOException {
@@ -83,10 +121,18 @@ public class SelectUserScreenController {
     }
 
     public void handleKiosk() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/kiosk/KioskContainer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/robot/KioskContainer.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
+
+    public void handleExitButton(){
+        App.getInstance().exitApp();
+    }
+
+    public void handleExitApp(){
+        App.getInstance().exitApp();
     }
 }
 

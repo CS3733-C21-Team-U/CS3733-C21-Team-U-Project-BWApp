@@ -50,7 +50,7 @@ public class ViewCovidResultsController {
         treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnVisitDate.validateValue(param)){
                 Timestamp d = param.getValue().getValue().getGenericRequest().getDateCreated();
-                String temp = d.toString() + " (" + App.p.format(d) + ")";
+                String temp = d.toString() + " (" + App.prettyTime.format(d) + ")";
                 return new SimpleStringProperty(temp);
             }
             else {

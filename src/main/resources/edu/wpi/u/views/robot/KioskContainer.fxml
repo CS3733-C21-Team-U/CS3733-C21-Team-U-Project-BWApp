@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileContainerController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskContainerController">
    <children>
       <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;">
          <children>
@@ -24,10 +23,7 @@
       </AnchorPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
-            <AnchorPane fx:id="mobileRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
-               <effect>
-                  <DropShadow height="20.0" radius="9.5" width="20.0" />
-               </effect>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefWidth="750.0" BorderPane.alignment="CENTER">
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </opaqueInsets>
@@ -35,7 +31,23 @@
                   <Insets left="300.0" />
                </BorderPane.margin>
                <children>
-                  <fx:include source="KioskSample.fxml" />
+                  <StackPane prefHeight="941.0" prefWidth="750.0">
+                     <children>
+                        <ImageView fitHeight="1233.0" fitWidth="742.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/ipad-frame.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </ImageView>
+                        <AnchorPane fx:id="kioskRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0">
+                           <children>
+                              <fx:include source="KioskLogin.fxml" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
                </children>
             </AnchorPane>
          </left>

@@ -132,12 +132,12 @@ public class MapInteractionModel {
         Coords = coords;
     }
 
-    public void setStartNode(String nodeID){
+    public void setEndNode(String nodeID){
         mapTargetNode.set(!mapTargetNode.get());
         this.nodeID.set(nodeID);
     }
 
-    public void setEndNode(String nodeID){
+    public void setStartNode(String nodeID){
         mapTargetNode2.set(!mapTargetNode2.get());
         this.nodeID.set(nodeID);
     }

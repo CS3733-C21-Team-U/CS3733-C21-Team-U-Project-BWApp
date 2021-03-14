@@ -21,7 +21,7 @@ public abstract class Data {
      */
     public void connect() {
         try {
-            conn = DriverManager.getConnection(testUrl);
+            conn = DriverManager.getConnection(url);
         } catch (Exception e) {
             try {
                 conn = DriverManager.getConnection(url);

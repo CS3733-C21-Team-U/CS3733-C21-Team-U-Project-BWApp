@@ -26,17 +26,17 @@ public class RequestData extends Data{
      * Updates a request by using its ID
      * @param specificRequest the new request object
      */
-    public void updateRequest(SpecificRequest specificRequest) {
-        Request request = specificRequest.getGenericRequest();
+    public void updateRequest(SpecificRequest specificRequest){
+        Request request= specificRequest.getGenericRequest();
 
         String str = "update Requests set dateNeeded=? where requestID=?";
-        try {
+        try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setTimestamp(1, request.getDateNeeded());
-            ps.setString(2, request.getRequestID());
+            ps.setString(2,request.getRequestID());
             ps.execute();
             ps.close();
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
         updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
@@ -45,7 +45,7 @@ public class RequestData extends Data{
         updAssignees(request.getRequestID(), request.getAssignees());
 
         String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
-        try {
+        try{
             PreparedStatement ps = conn.prepareStatement(updComment);
             ps.setString(1, request.getTitle());
             ps.setString(2, request.getDescription());
@@ -55,13 +55,13 @@ public class RequestData extends Data{
             ps.setString(6, request.getRequestID());
             ps.execute();
             ps.close();
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
         //add the latest comment to the database
-        System.out.println(request.getComments().get(request.getComments().size() - 1).getDescription());
-        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size() - 1));
+        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
+        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
     }
 
     /**
@@ -253,6 +253,12 @@ public class RequestData extends Data{
             for(Comment comment : req.getComments()){
                 addCommentToRequest(req.getRequestID(), comment);
             }
+            for(String locationID : req.getLocations()){
+                addLocation(locationID, req.getRequestID());
+            }
+            for(String assignmentID : req.getAssignees()){
+                addAssignee(assignmentID, req.getRequestID());
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -285,11 +291,10 @@ public class RequestData extends Data{
      * @param requestID the request id
      */
     public void addLocation(String nodeID, String requestID){
-        Random rand = new Random();
         String str = "insert into Locations(locationID, request, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,"" + rand.nextInt(100000));
+            ps.setString(1,requestID+"_"+nodeID);
             ps.setString(2,requestID);
             ps.setString(3,nodeID);
             ps.execute();

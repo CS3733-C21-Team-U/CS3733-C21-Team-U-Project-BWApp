@@ -26,8 +26,12 @@ public class Enter2FATokenController {
     @FXML public JFXButton enterAppButton;
 
     SimpleBooleanProperty valid = new SimpleBooleanProperty(false);
-    public void initialize(){
 
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+
+    public void initialize() throws IOException {
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
     }
 
     public void handleTokenSubmit() {
@@ -58,7 +62,8 @@ public class Enter2FATokenController {
     }
 
     public void handleAppEntry() throws IOException {
-        Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
+        //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 }

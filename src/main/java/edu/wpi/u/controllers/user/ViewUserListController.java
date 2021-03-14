@@ -41,6 +41,7 @@ public class ViewUserListController {
         App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             if(!App.userService.getActiveUser().getType().equals(Role.ADMIN)) {
                 addUserButton.setStyle("-fx-opacity: 0");
+                addUserButton.setDisable(true);
             }
         });
 
