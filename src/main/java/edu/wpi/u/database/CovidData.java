@@ -179,11 +179,11 @@ public class CovidData extends Data{
         String lastWeekDate = (newLastWeekDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
-        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between ? and ?) and (symptomatic = true)";
+        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?) and (symptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastWeekDate);
+            ps.setDate(1,sqlLastWeekDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
@@ -203,11 +203,11 @@ public class CovidData extends Data{
         String lastWeekDate = newLastWeekDate.format(dtf);
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
-        String str = "select count(*) from covidSurveyResult where (dateOfResults between ? and ?)";
+        String str = "select count(*) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastWeekDate);
+            ps.setDate(1,sqlLastWeekDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
@@ -227,11 +227,11 @@ public class CovidData extends Data{
         String lastWeekDate = (newLastWeekDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastWeekDate = java.sql.Date.valueOf(lastWeekDate);
-        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between ? and ?) and (nonsymptomatic = true)";
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?) and (nonsymptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastWeekDate);
+            ps.setDate(1,sqlLastWeekDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
@@ -251,11 +251,11 @@ public class CovidData extends Data{
         String lastMonthDate = (newLastMonthDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
-        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between ? and ?)";
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastMonthDate);
+            ps.setDate(1,sqlLastMonthDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
@@ -275,11 +275,11 @@ public class CovidData extends Data{
         String lastMonthDate = (newLastMonthDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
-        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults between ? and ?) and (nonsymptomatic = true)";
+        String str = "select count(nonsymptomatic) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?) and (nonsymptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastMonthDate);
+            ps.setDate(1,sqlLastMonthDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
@@ -300,11 +300,11 @@ public class CovidData extends Data{
         String lastMonthDate = (newLastMonthDate.format(dtf));
         final java.sql.Date sqlTodayDate = java.sql.Date.valueOf(todayDate);
         final java.sql.Date sqlLastMonthDate = java.sql.Date.valueOf(lastMonthDate);
-        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults between ? and ?) and (symptomatic = true)";
+        String str = "select count(symptomatic) from covidSurveyResult where (dateOfResults >= ?) and (dateOfResults <= ?) and (symptomatic = true)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setDate(1,sqlTodayDate);
-            ps.setDate(2,sqlLastMonthDate);
+            ps.setDate(1,sqlLastMonthDate);
+            ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
             return rset.getInt(1);
