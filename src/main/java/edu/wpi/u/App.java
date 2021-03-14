@@ -101,6 +101,7 @@ public class App extends Application {
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
+  public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
 
   public App(){
     System.out.println("App constructor");
@@ -134,7 +135,6 @@ public class App extends Application {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
-
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
 
 //    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");

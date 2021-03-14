@@ -2,13 +2,10 @@ package edu.wpi.u.controllers.login;
 
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
+import edu.wpi.u.CachingClassLoader;
 import edu.wpi.u.users.Role;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,18 +16,14 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 public class SelectUserScreenController {
-    static double ii = 0;
     public JFXButton skipToAdminButton;
-    ProgressIndicator pb = new ProgressIndicator();
-    private Scene createPreloaderScene() {
-        pb = new ProgressBar();
-        BorderPane p = new BorderPane();
-        p.setCenter(pb);
-        return new Scene(p, 300, 150);
-    }
+
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-
+        fxmlLoader.setClassLoader(App.classLoader);
+        System.out.println("Loading in selectUserScreen");
+        fxmlLoader.load();
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
@@ -64,10 +57,8 @@ public class SelectUserScreenController {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
@@ -77,14 +68,22 @@ public class SelectUserScreenController {
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(App.base);
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.setClassLoader(App.classLoader);
+//        System.out.println("Loading in selectUserScreen");
+//        fxmlLoader.load();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
+    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-        App.getPrimaryStage().getScene().setRoot(App.base);
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.setClassLoader(App.classLoader);
+//        System.out.println("Loading in selectUserScreen");
+//        fxmlLoader.load();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleMobile() throws IOException {
@@ -102,6 +101,10 @@ public class SelectUserScreenController {
     }
 
     public void handleExitButton(){
+        App.getInstance().exitApp();
+    }
+
+    public void handleExitApp(){
         App.getInstance().exitApp();
     }
 }
