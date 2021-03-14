@@ -200,7 +200,7 @@
                   <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
                   <JFXButton layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
                   <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
-                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="47.0" prefWidth="575.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely) - New keybaord shortcut is (Control + Esc)" />
+                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="47.0" prefWidth="575.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely) - New keybaord shortcut is (Control + Q)" />
                </children>
                <BorderPane.margin>
                   <Insets />
