@@ -42,6 +42,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label creatorAndDateLabel;
     public Label assigneesLabel;
     public Label completeByLabel;
+    public AnchorPane noLocaitonGraphic;
 
 
     //Map stuff
@@ -281,8 +282,14 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mainMapPane.getChildren().add(locationGroup);
 
         if(parent.request.getGenericRequest().getLocations().size() == 0){
-            //No Locations graphic here KOHMEI TODO
+            noLocaitonGraphic.setVisible(true);
+            noLocaitonGraphic.setMouseTransparent(false);
+            noLocaitonGraphic.toFront();
             return;
+        }else{
+            noLocaitonGraphic.setVisible(false);
+            noLocaitonGraphic.setMouseTransparent(true);
+            noLocaitonGraphic.toFront();
         }
         //this sets the map image
         //add a switch case for each floor

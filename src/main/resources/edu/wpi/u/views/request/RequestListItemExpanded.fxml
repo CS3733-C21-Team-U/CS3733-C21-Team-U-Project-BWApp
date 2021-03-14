@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -110,6 +112,21 @@
                               <SVGPath content="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" scaleX="1.5" scaleY="1.5" styleClass="on-primary" />
                            </graphic>
                         </JFXButton>
+                        <AnchorPane fx:id="noLocaitonGraphic" mouseTransparent="true" prefHeight="530.0" prefWidth="430.0" style="-fx-background-color: -backgroundAlt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="530.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="258.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/undraw_My_location_re_r52x.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label styleClass="headline-1" text="No locations!" />
+                                    <Label style="-fx-text-fill: -primary;" styleClass="headline-3" text="Edit this request and add a location" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </children>
