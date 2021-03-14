@@ -291,111 +291,111 @@ public class NewMainPageController {
     }
 
     public void handleEnablePathFinding(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(false);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(false);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableGoogleMaps(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(false);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(false);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableRequests(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(false);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(false);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableSettings(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(false);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(false);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableHelp(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(false);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(false);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableAdminHelp(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(false);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(false);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableMapBuild(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(false);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(false);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableUser(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(true);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(false);
-        adminTab3.setDisable(true);
+//        pathFindingTab.setDisable(true);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(false);
+//        adminTab3.setDisable(true);
     }
 
     public void handleEnableGuest(ActionEvent actionEvent) {
-        pathFindingTab.setDisable(false);
-        googleTab.setDisable(true);
-        requestTab.setDisable(true);
-        settingsTab.setDisable(true);
-        HelpMainPageTab.setDisable(true);
-        AdminHelpMainPageTab.setDisable(true);
-        adminTab1.setDisable(true);
-        adminTab2.setDisable(true);
-        adminTab3.setDisable(false);
+//        pathFindingTab.setDisable(false);
+//        googleTab.setDisable(true);
+//        requestTab.setDisable(true);
+//        settingsTab.setDisable(true);
+//        HelpMainPageTab.setDisable(true);
+//        AdminHelpMainPageTab.setDisable(true);
+//        adminTab1.setDisable(true);
+//        adminTab2.setDisable(true);
+//        adminTab3.setDisable(false);
     }
 
     public void handleTest(Event event) {

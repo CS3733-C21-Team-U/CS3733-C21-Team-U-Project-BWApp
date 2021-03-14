@@ -37,7 +37,7 @@
                            <font>
                               <Font size="15.0" />
                            </font></JFXTextArea>
-                        <JFXDatePicker fx:id="makeDate2BCompleteDatePicker" prefHeight="40.0" prefWidth="400.0" promptText="Date to Completed By">
+                        <JFXDatePicker fx:id="makeDate2BCompleteDatePicker" prefHeight="38.0" prefWidth="600.0" promptText="Date to Completed By">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -46,12 +46,12 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="550.0">
                                  <children>
-                                    <JFXChipView fx:id="makeLocationChipView" visible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <JFXChipView fx:id="makeLocationChipView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="445.0" promptText="Location" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="550.0">
                                  <children>
-                                    <JFXChipView fx:id="makeStaffChipView" visible="false" layoutX="-14.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                    <JFXChipView fx:id="makeStaffChipView" layoutX="-14.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0" promptText="Staff Name" visible="false" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
                                  </children>
                               </AnchorPane>
                            </children>
