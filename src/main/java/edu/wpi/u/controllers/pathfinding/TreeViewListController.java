@@ -264,18 +264,22 @@ public class TreeViewListController implements Initializable {
             case "CONF":
                 if(confExpanded){
                     rootConf.setExpanded(false);
+                    System.out.println("Conferences Collapsed");
                     confExpanded = false;
                 } else {
                     rootConf.setExpanded(true);
+                    System.out.println("Conferences Expanded");
                     confExpanded = true;
                 }
                 break;
             case "DEPT":
                 if(deptExpanded){
                     rootDept.setExpanded(false);
+                    System.out.println("Departments Collapsed");
                     deptExpanded = false;
                 } else {
                     rootDept.setExpanded(true);
+                    System.out.println("Departments Expanded");
                     deptExpanded = true;
                 }
                 break;
