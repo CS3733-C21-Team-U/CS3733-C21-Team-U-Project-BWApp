@@ -96,7 +96,8 @@ public class ViewRequestListController {
      */
     @FXML public void handleNewRequestButton() throws Exception {
         if(newRequestVBox.getChildren().size()<1) {
-            newRequestVBox.getChildren().add(new RequestListItemChooseNewController());
+            newRequestVBox.getChildren().add(new RequestListItemNewController());
+
 
             App.newReqVBox = newRequestVBox;
 
