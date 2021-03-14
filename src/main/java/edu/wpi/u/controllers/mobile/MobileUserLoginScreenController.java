@@ -54,9 +54,9 @@ public class MobileUserLoginScreenController {
 
     public void initialize() throws IOException {
 
-        App.getPrimaryStage().setFullScreen(false);
-        App.getPrimaryStage().setWidth(412);
-        App.getPrimaryStage().setHeight(732);
+//        App.getPrimaryStage().setFullScreen(false);
+//        App.getPrimaryStage().setWidth(412);
+//        App.getPrimaryStage().setHeight(732);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -184,8 +184,8 @@ public class MobileUserLoginScreenController {
                         e.printStackTrace();
                     }
                 }
-
-                App.getPrimaryStage().getScene().setRoot(root);
+                MobileContainerController.getInstance().getMobileRoot().getChildren().clear();
+                MobileContainerController.getInstance().getMobileRoot().getChildren().add(root);
             }
         }
     }
