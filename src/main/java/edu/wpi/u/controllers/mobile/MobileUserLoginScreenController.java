@@ -197,9 +197,6 @@ public class MobileUserLoginScreenController {
     public boolean searchRequests(){
         for(SpecificRequest r : App.requestService.getRequests()){
             if(r.getGenericRequest().getCreator() != null){
-                System.out.println(App.userService.getActiveUser().getUserName());
-                System.out.println( r.getType());
-                System.out.println(r.getGenericRequest().isResolved());
                 if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
                         r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
                     if(r.getSpecificData().get(0).equals("High")){

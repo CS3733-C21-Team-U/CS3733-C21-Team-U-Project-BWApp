@@ -81,14 +81,21 @@ public class KioskTemperatureScannerController {
     }
 
     public void handelTakeTempButton() {
-        SpecificRequest curRequest = App.requestService.curCovidRequest;
-        ArrayList<String> specificData = curRequest.getSpecificData();
+        ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
         specificData.set(1,String.valueOf(averageLL(rollingAverage)));
-        curRequest.updateRequest(curRequest.getGenericRequest().getTitle(),curRequest.getGenericRequest().getDescription(),curRequest.getGenericRequest().getDateNeeded(),curRequest.getGenericRequest().getLocations(),curRequest.getGenericRequest().getAssignees(),specificData);
-        App.requestService.updateRequest(curRequest);
-        App.requestService.curCovidRequest = curRequest;
-        App.requestService.resolveRequest(curRequest, new Comment("Resolve","CLOSED",App.userService.getActiveUser().getUserName(), CommentType.RESOLVE));
-
+        App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest);
+        SpecificRequest curRequest = null;
+        for(SpecificRequest curReq: App.requestService.getRequests()){
+            if(curReq.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) && curReq.getType().equals("CovidSurvey")){
+                curRequest = curReq;
+            }
+        }
+        if(curRequest != null){
+            App.requestService.resolveRequest(curRequest, new Comment("Resolve","CLOSED",App.userService.getActiveUser().getUserName(), CommentType.RESOLVE));
+        }else{
+            //be mad
+        }
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
         try {
