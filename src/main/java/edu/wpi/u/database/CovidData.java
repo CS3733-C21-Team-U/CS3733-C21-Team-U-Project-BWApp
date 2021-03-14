@@ -3,6 +3,7 @@ package edu.wpi.u.database;
 import org.apache.commons.lang3.StringEscapeUtils;
 import soot.Local;
 
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 
 
 public class CovidData extends Data{
