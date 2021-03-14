@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.WritableFloatValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -98,7 +99,6 @@ public class App extends Application {
   public static String test = "hello there";
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
-
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
 
   public App(){

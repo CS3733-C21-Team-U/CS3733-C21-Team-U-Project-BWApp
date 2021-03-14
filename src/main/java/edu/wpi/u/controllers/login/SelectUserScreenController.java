@@ -22,7 +22,6 @@ public class SelectUserScreenController {
     static double ii = 0;
     public JFXButton skipToAdminButton;
     ProgressIndicator pb = new ProgressIndicator();
-
     private Scene createPreloaderScene() {
         pb = new ProgressBar();
         BorderPane p = new BorderPane();
@@ -85,25 +84,7 @@ public class SelectUserScreenController {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
         App.isLoggedIn.set(true);
-//        App.getPrimaryStage().getScene().setRoot(App.base);
-        Task<Parent> loadTask = new Task<Parent>() {
-            @Override
-            public Parent call() throws IOException, InterruptedException {
-                // simulate long-loading process:
-                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                return fxmlLoader.load();
-            }
-        };
-        loadTask.setOnSucceeded(event -> {
-            System.out.println("Finished task");
-            App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
-        });
-        loadTask.setOnRunning(event -> {
-            App.getPrimaryStage().setScene(createPreloaderScene());
-            App.getPrimaryStage().show();
-        });
-        Thread thread = new Thread(loadTask);
-        thread.start();
+        App.getPrimaryStage().getScene().setRoot(App.base);
     }
 
     public void handleMobile() throws IOException {
