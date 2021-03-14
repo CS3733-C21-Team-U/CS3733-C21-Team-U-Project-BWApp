@@ -95,7 +95,7 @@ public class App extends Application {
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
 
-  public static PrettyTime p = new PrettyTime();
+  public static PrettyTime prettyTime = new PrettyTime();
 
   public static String test = "hello there";
   public static Parent base;
