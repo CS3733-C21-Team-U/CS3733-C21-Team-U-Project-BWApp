@@ -15,12 +15,12 @@ public class CachingClassLoader extends ClassLoader{
     /**
      * Tries to load a class
      * @param className the class to be loaded
-     * @return the loaded classs
+     * @return the loaded class
      * @throws ClassNotFoundException if the class does not exist
      */
     @Override
-    public Class<?> loadClass(String className) throws ClassNotFoundException {
-        Class<?> aClass = findClass(className);
+    public Class loadClass(String className) throws ClassNotFoundException {
+        Class aClass = findClass(className);
         if (aClass == null) {
             throw new ClassNotFoundException(className);
         }
@@ -33,19 +33,15 @@ public class CachingClassLoader extends ClassLoader{
      * @return the found class or if not found, is added to hashmap
      */
     @Override
-    protected Class<?> findClass(String className) {
-//    System.out.println("Trying to load: " + className);
+    protected Class findClass(String className) {
         if (classes.containsKey(className)) {
-//            System.out.println("Already loaded : " + className);
-            return (Class<?>) classes.get(className);
+            return classes.get(className);
         } else {
             try {
-                Class<?> result = parent.loadClass(className);
-//                System.out.println("Loaded: " + className);
+                Class result = parent.loadClass(className);
                 classes.put(className, result);
                 return result;
             } catch (Exception e) {
-//                System.out.println(className + " not found, adding to hashmap");
                 classes.put(className, null);
                 return null;
             }
