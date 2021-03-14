@@ -102,7 +102,7 @@ public class App extends Application {
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
-  public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+  //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
   public App(){
     System.out.println("App constructor");
@@ -118,12 +118,12 @@ public class App extends Application {
 
   @Override
   public void init()  {
-    fxmlLoader.setClassLoader(classLoader);
-    try {
-      fxmlLoader.load();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    fxmlLoader.setClassLoader(classLoader);
+//    try {
+//      fxmlLoader.load();
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
     System.out.println("Starting Up");
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }

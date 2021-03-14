@@ -23,22 +23,7 @@ public class FirstPreloader extends Preloader {
 //        fxmlLoader.getController();
 //        App.base = fxmlLoader.getRoot();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        System.out.println("Location1: " +fxmlLoader.getLocation());
         fxmlLoader.setClassLoader(App.classLoader);
         fxmlLoader.load();
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/mobile/MobileContainer.fxml"));
-//        System.out.println("Location2: " +fxmlLoader.getLocation());
-//        fxmlLoader.load();
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/robot/KioskContainer.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/UserSignupScreen.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-//        fxmlLoader.load();
-//        System.out.println("Loading login screen");
-//        fxmlLoader.setLocation(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-//        fxmlLoader.load();
     }
 }

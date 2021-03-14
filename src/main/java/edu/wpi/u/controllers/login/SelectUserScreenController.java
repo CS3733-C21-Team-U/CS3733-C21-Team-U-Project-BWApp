@@ -15,12 +15,14 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -70,21 +72,78 @@ public class SelectUserScreenController {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
         App.isLoggedIn.set(true);
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Task<Parent> loadTask = new Task<Parent>() {
+                    @Override
+                    protected Parent call() {
+                        return fxmlLoader.getRoot();
+                    }
+                };
+                loadTask.setOnSucceeded(event -> {
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().setFullScreenExitHint("");
+                    App.getPrimaryStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                    App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+                });
+
+                loadTask.setOnRunning(event -> {
+                    VBox box = new VBox();
+                    ImageView imageView = new ImageView();
+                    box.getChildren().add(imageView);
+                    box.setAlignment(Pos.CENTER);
+                    imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
+                    App.getPrimaryStage().setScene(new Scene(box, 1920, 1080));// todo : put this on top of existing elements
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().show();
+                });
+                Thread t = new Thread(loadTask);
+                t.start();
+            }
+        });
+        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
         App.isLoggedIn.set(true);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.setClassLoader(App.classLoader);
-//        System.out.println("Loading in selectUserScreen");
-//        fxmlLoader.load();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Task<Parent> loadTask = new Task<Parent>() {
+                    @Override
+                    protected Parent call() {
+                        return fxmlLoader.getRoot();
+                    }
+                };
+                loadTask.setOnSucceeded(event -> {
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().setFullScreenExitHint("");
+                    App.getPrimaryStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                    App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+                });
+
+                loadTask.setOnRunning(event -> {
+                    VBox box = new VBox();
+                    ImageView imageView = new ImageView();
+                    box.getChildren().add(imageView);
+                    box.setAlignment(Pos.CENTER);
+                    imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
+                    App.getPrimaryStage().setScene(new Scene(box, 1920, 1080));// todo : put this on top of existing elements
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().show();
+                });
+                Thread t = new Thread(loadTask);
+                t.start();
+            }
+        });
+        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
@@ -97,23 +156,27 @@ public class SelectUserScreenController {
                 Task<Parent> loadTask = new Task<Parent>() {
                     @Override
                     protected Parent call() {
-                        //todo : try fix loading with the App reference
                         return fxmlLoader.getRoot();
                     }
                 };
                 loadTask.setOnSucceeded(event -> {
-                    System.out.println("Loaded!");
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().setFullScreenExitHint("");
+                    App.getPrimaryStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                     App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
                 });
 
                 loadTask.setOnRunning(event -> {
-                    // todo : add spinner here
                     VBox box = new VBox();
                     ImageView imageView = new ImageView();
                     box.getChildren().add(imageView);
+                    box.setAlignment(Pos.CENTER);
                     imageView.setImage(new Image(getClass().getResource("/edu/wpi/u/views/Images/spinner.gif").toExternalForm()));
-                    App.getPrimaryStage().setScene(new Scene(box, 500, 500));// todo : put this on top of existing elements
-                    App.getPrimaryStage().show(); // todo : correctly resize & center spinner
+                    App.getPrimaryStage().setScene(new Scene(box, 1920, 1080));// todo : put this on top of existing elements
+                    App.getPrimaryStage().setFullScreen(true);
+                    App.getPrimaryStage().show();
                 });
                 Thread t = new Thread(loadTask);
                 t.start();
