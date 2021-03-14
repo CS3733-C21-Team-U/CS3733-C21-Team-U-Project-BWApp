@@ -5,9 +5,17 @@ import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.u.App;
+import edu.wpi.u.requests.Comment;
+import edu.wpi.u.requests.CommentType;
+import edu.wpi.u.requests.SpecificRequest;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Timer;
 
@@ -73,6 +81,22 @@ public class KioskTemperatureScannerController {
     }
 
     public void handelTakeTempButton() {
-        //move to next and start screen cleaning robot
+        SpecificRequest curRequest = App.requestService.curCovidRequest;
+        ArrayList<String> specificData = curRequest.getSpecificData();
+        specificData.set(1,String.valueOf(averageLL(rollingAverage)));
+        curRequest.updateRequest(curRequest.getGenericRequest().getTitle(),curRequest.getGenericRequest().getDescription(),curRequest.getGenericRequest().getDateNeeded(),curRequest.getGenericRequest().getLocations(),curRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(curRequest);
+        App.requestService.curCovidRequest = curRequest;
+        App.requestService.resolveRequest(curRequest, new Comment("Resolve","CLOSED",App.userService.getActiveUser().getUserName(), CommentType.RESOLVE));
+
+        String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fxmlLoader.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 }
