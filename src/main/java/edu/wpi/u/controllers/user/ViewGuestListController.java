@@ -6,11 +6,8 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.App;
 import edu.wpi.u.users.*;
-import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,7 +57,7 @@ public class ViewGuestListController {
         treeTableColumnVisitDate.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{
             if (treeTableColumnVisitDate.validateValue(param)){
                 Date d = new Date(param.getValue().getValue().visitDatefxProperty().get());
-                String temp = d.toString() + " (" + App.p.format(d) + ")";
+                String temp = d.toString() + " (" + App.prettyTime.format(d) + ")";
                 return new SimpleStringProperty(temp);
             }
             else {
