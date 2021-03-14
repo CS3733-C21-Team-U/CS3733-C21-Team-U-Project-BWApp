@@ -21,7 +21,7 @@ public abstract class Data {
      */
     public void connect() {
         try {
-            conn = DriverManager.getConnection(testUrl);
+            conn = DriverManager.getConnection(url);
         } catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();

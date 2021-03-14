@@ -25,16 +25,16 @@ public class Database {
         createTables();
     }
 
-    /**
-     * Constructor for database that is called in 2nd singleton to create a second DB for testing
-     * @param urlIn - URL of testing db, has to be defined in this file
-     */
-    public Database(String urlIn) {
-        driver();
-        connect(urlIn);
-        makeCSVDependant(false);
-        createTables();
-    }
+//    /**
+//     * Constructor for database that is called in 2nd singleton to create a second DB for testing
+//     * @param urlIn - URL of testing db, has to be defined in this file
+//     */
+//    public Database(String urlIn) {
+//        driver();
+//        connect(urlIn);
+//        makeCSVDependant(false);
+//        createTables();
+//    }
 
     /**
      * Singleton class for live DB (BWDB)
@@ -57,7 +57,7 @@ public class Database {
      */
     private static class SingletonHelperTest {
         //Nested class is referenced after getDB() is called
-        private static final Database dbStaging = new Database(testURL);
+        private static final Database dbStaging = new Database();
     }
 
     /**
@@ -73,7 +73,7 @@ public class Database {
      */
     public static void driver() {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch (Exception e) {
             System.out.println("Driver registration failed");
             e.printStackTrace();
@@ -85,17 +85,17 @@ public class Database {
      */
     public static void connect() {
         try {
-            conn = DriverManager.getConnection(testURL);
+            conn = DriverManager.getConnection(url);
             conn.setAutoCommit(true);
         } catch (Exception e) {
-            try {
-                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-                conn = DriverManager.getConnection(url);
-            }catch (Exception b){
-                System.out.println("Connection to embedded failed");
-                b.printStackTrace();
-            }
-            System.out.println("Connection to remote failed");
+//            try {
+//                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+//                conn = DriverManager.getConnection(url);
+//            }catch (Exception b){
+//                System.out.println("Connection to embedded failed");
+//                b.printStackTrace();
+//            }
+//            System.out.println("Connection to remote failed");
             e.printStackTrace();
         }
     }
