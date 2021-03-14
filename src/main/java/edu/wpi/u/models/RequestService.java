@@ -3,6 +3,7 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.Timestamp;
@@ -19,6 +20,8 @@ public class RequestService {
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
   public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
   public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
+  public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);//assignedToYou, unAssigned, all
+
 
   public RequestService() {
     rd  = new RequestData();
