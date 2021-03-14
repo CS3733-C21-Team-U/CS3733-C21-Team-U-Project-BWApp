@@ -59,14 +59,14 @@ public class HospitalCovidDashPageController {
 
         XYChart.Series totalResultSeries = new XYChart.Series();
         for(LocalDate dataPoint : datesBetweenNowAndLastMonth()){
-            totalResultSeries.getData().add(new XYChart.Data(dataPoint, App.covidService.getDailySurveys(Date.valueOf(dataPoint))));
+            totalResultSeries.getData().add(new XYChart.Data(dataPoint, App.covidService.getDailySurveys(dataPoint)));
         }
 
         TotalResultBarChart.getData().add(totalResultSeries);
 
         XYChart.Series totalPositiveSeries = new XYChart.Series();
         for(LocalDate dataPoint : datesBetweenNowAndLastMonth()){
-            totalResultSeries.getData().add(new XYChart.Data(dataPoint, App.covidService.getSymptomatic(Date.valueOf(dataPoint))));
+            totalResultSeries.getData().add(new XYChart.Data(dataPoint, App.covidService.getSymptomatic(dataPoint)));
         }
 
         TotalPositiveBarChart.getData().add(totalPositiveSeries);

@@ -5,6 +5,7 @@ import edu.wpi.u.database.CovidData;
 import java.math.RoundingMode;
 import java.sql.Date;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
 
 public class CovidService {
@@ -22,13 +23,17 @@ public class CovidService {
         cd.insertData(symptomatic);
     }
 
-    public int getSymptomatic(Date targetDate){
+    public void addDataPoint(boolean symptomatic, LocalDate targetDate){
+        cd.insertData(symptomatic,targetDate);
+    }
+
+    public int getSymptomatic(LocalDate targetDate){
         return cd.getNumSymptomaticFromDate(targetDate);
     }
 
-    public int getNonSymptomatic(Date targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
+    public int getNonSymptomatic(LocalDate targetDate){ return cd.getNumNonSymptomaticFromDate(targetDate);}
 
-    public int getDailySurveys(Date targetDate){ return cd.getNumSurveysFromDate(targetDate);}
+    public int getDailySurveys(LocalDate targetDate){ return cd.getNumSurveysFromDate(targetDate);}
 
     public int getWeeklySurveys(){ return cd.getWeeklySurveys();}
 
