@@ -49,14 +49,8 @@ public class FloatingPathfindingPaneController {
     public Rectangle endFieldFlair;
     public HBox pathContent;
     public VBox btnVBox;
-    @FXML
-    Label endNode;
-    @FXML
-    Label startNode;
-    @FXML
-    AnchorPane treeViewListNodes;
-    @FXML
-    HBox pathContent;
+    public AnchorPane treeViewListNodes;
+
 
 
     SimpleStringProperty targetNode = new SimpleStringProperty("START");//flag for
