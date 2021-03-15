@@ -210,7 +210,6 @@ public class NewMainPageController {
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
         System.out.println("LOGGING OUT");
-        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
@@ -225,6 +224,7 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
+                App.isLoggedIn.set(false);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 fxmlLoader.load();
                 fxmlLoader.getController();
