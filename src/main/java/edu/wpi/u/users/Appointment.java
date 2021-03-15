@@ -3,12 +3,14 @@ package edu.wpi.u.users;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+
+// todo : Remove this class from Patients // not used
 public class Appointment {
     private String appointmentID;
     private String patientID;
     private String employeeID;
     private Timestamp appointmentDate;
-    private String appointmentType; // TODO : Possibly make this an enum ie : Radiology, blood work, etc
+    private String appointmentType;
 
     public Appointment(String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType) {
         this.appointmentID = appointmentID;
@@ -22,24 +24,12 @@ public class Appointment {
         return appointmentID;
     }
 
-    public void setAppointmentID(String appointmentID) {
-        this.appointmentID = appointmentID;
-    }
-
     public String getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
-    }
-
     public String getEmployeeID() {
         return employeeID;
-    }
-
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
     }
 
     public Timestamp getAppointmentDate() {

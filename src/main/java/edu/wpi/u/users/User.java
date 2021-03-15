@@ -7,12 +7,6 @@ import javafx.beans.property.StringProperty;
 
 import java.sql.Timestamp;
 
-/*
-Users table
-Employees id references Users
-Patient id references Users
- */
-
 public abstract class User extends RecursiveTreeObject<User> {
     protected String userID;
     protected String name;
@@ -22,7 +16,6 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected String phoneNumber;
     protected String email;
     protected boolean deleted;
-   // protected String locationNodeID; // TODO MOVE
 
     protected StringProperty userIDfx;
     protected StringProperty namefx;
@@ -32,15 +25,12 @@ public abstract class User extends RecursiveTreeObject<User> {
     protected StringProperty phoneNumberfx;
     protected StringProperty emailfx;
     protected BooleanProperty deletedfx;
-    //protected StringProperty locationNodeIDfx;
 
     private String guestID;
-    private String guestName;
     private Timestamp visitDate;
     private String visitReason;
 
     protected StringProperty guestIDfx;
-    protected StringProperty guestNamefx;;
     protected LongProperty visitDatefx;
     protected StringProperty visitReasonfx;
 
@@ -72,7 +62,6 @@ public abstract class User extends RecursiveTreeObject<User> {
 
     public User(String guestID, String guestName, Timestamp visitDate, String visitReason) {
         this.guestID = guestID;
-        this.guestName = guestName;
         this.visitDate = visitDate;
         this.visitReason = visitReason;
     }
@@ -177,10 +166,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
     public String getName() {
         return name;
     }
@@ -235,5 +220,9 @@ public abstract class User extends RecursiveTreeObject<User> {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

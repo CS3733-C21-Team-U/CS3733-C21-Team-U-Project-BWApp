@@ -1,10 +1,11 @@
 package edu.wpi.u.requests;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.u.App;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public abstract class SpecificRequest {
+public abstract class SpecificRequest extends RecursiveTreeObject<SpecificRequest> {
 
     private Request req;
     private ArrayList<String> specificFields;
@@ -34,7 +35,6 @@ public abstract class SpecificRequest {
         req.addComment(updateComment);
         setSpecificData(specifics);
     }
-
 
     public abstract String[] getSpecificFields();
     public abstract String getType();

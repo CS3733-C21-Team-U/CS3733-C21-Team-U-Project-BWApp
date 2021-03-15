@@ -23,72 +23,20 @@ public class RequestData extends Data{
     }
 
     /**
-     * Returns whether or not a request is active
-     * @param requestID the request id
-     * @return true if the request is active, false if it is complete
-     */
-    public boolean getActiveStatus(String requestID){
-        String str = "select dateCompleted from Requests where requestID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, requestID);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                rs.close();
-                ps.close();
-                return false;
-            }
-            rs.close();
-            ps.close();
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    /**
-     * Returns a list of resolved requests
-     * @return list of resolved requests
-     */
-    public ArrayList<Request> getResolvedRequests(){
-        ArrayList<Request> result = new ArrayList<>();
-        String str = "select * from Requests where dateCompleted is not null";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-//                result.add(new Request(rs.getString("request"), todo : fix
-//                        rs.getTimestamp("dateCreated"),
-//                        rs.getTimestamp("dateNeeded"),
-//                        rs.getTimestamp("dateCompleted"),
-//                        rs.getString("description"),
-//                        rs.getString("title"),
-//                        getAssignees(rs.getString("request")),
-//                        getLocations(rs.getString("request")),
-//                        rs.getString("creator")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
      * Updates a request by using its ID
      * @param specificRequest the new request object
      */
-    public void updateRequest(SpecificRequest specificRequest) {
-        Request request = specificRequest.getGenericRequest();
+    public void updateRequest(SpecificRequest specificRequest){
+        Request request= specificRequest.getGenericRequest();
 
         String str = "update Requests set dateNeeded=? where requestID=?";
-        try {
+        try{
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setTimestamp(1, request.getDateNeeded());
-            ps.setString(2, request.getRequestID());
+            ps.setString(2,request.getRequestID());
             ps.execute();
             ps.close();
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
         updateField("Requests", "requestID", request.getRequestID(), "type", specificRequest.getType());
@@ -97,7 +45,7 @@ public class RequestData extends Data{
         updAssignees(request.getRequestID(), request.getAssignees());
 
         String updComment = "update Comments set title=?, description=?, author=?, created=? where type=? and request=?";
-        try {
+        try{
             PreparedStatement ps = conn.prepareStatement(updComment);
             ps.setString(1, request.getTitle());
             ps.setString(2, request.getDescription());
@@ -107,13 +55,13 @@ public class RequestData extends Data{
             ps.setString(6, request.getRequestID());
             ps.execute();
             ps.close();
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
         //add the latest comment to the database
-        System.out.println(request.getComments().get(request.getComments().size() - 1).getDescription());
-        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size() - 1));
+        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
+        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
     }
 
     /**
@@ -305,6 +253,12 @@ public class RequestData extends Data{
             for(Comment comment : req.getComments()){
                 addCommentToRequest(req.getRequestID(), comment);
             }
+            for(String locationID : req.getLocations()){
+                addLocation(locationID, req.getRequestID());
+            }
+            for(String assignmentID : req.getAssignees()){
+                addAssignee(assignmentID, req.getRequestID());
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -337,11 +291,10 @@ public class RequestData extends Data{
      * @param requestID the request id
      */
     public void addLocation(String nodeID, String requestID){
-        Random rand = new Random();
         String str = "insert into Locations(locationID, request, nodeID) values (?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,"" + rand.nextInt(100000));
+            ps.setString(1,requestID+"_"+nodeID);
             ps.setString(2,requestID);
             ps.setString(3,nodeID);
             ps.execute();
@@ -389,80 +342,5 @@ public class RequestData extends Data{
         catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Deletes a location assignment for a request
-     * @param requestID the request id
-     * @param nodeID the node id
-     */
-    public void deleteLocation(String requestID, String nodeID){
-        String str = "delete from Locations where request=? and nodeID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID);
-            ps.setString(2,nodeID);
-            ps.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Deletes an assignment for a request
-     * @param requestID the request id
-     * @param employeeID the user id
-     */
-    public void deleteAssignment(String requestID, String employeeID){
-        String str = "delete from Assignments where request=? and employeeID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,requestID);
-            ps.setString(2,employeeID);
-            ps.execute();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Updates the type of request of a given requestID
-     * @param requestID the requestId
-     * @param type the new type of request
-     */
-    public void updRequestType(String requestID, String type) {
-        String str = "update Requests set type=? where requestID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,type);
-            ps.setString(2,requestID);
-            ps.execute();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * For debugging
-     * @param tableName the table name
-     * @return number of entries in table
-     */
-    public int getNumTableItems(String tableName) {
-
-        try {
-            String countItems = "select count(*) from " + tableName;
-            PreparedStatement c = conn.prepareStatement(countItems);
-            ResultSet res = c.executeQuery();
-            if(res.next())
-                return res.getInt(1);
-        } catch (Exception e){
-            e.printStackTrace();
-
-        }
-        return -999;
     }
 }

@@ -1,4 +1,4 @@
-package edu.wpi.u.controllers.kiosk;
+package edu.wpi.u.controllers.robot;
 
 
 import edu.wpi.u.App;
@@ -12,10 +12,10 @@ import java.io.IOException;
 
 public class KioskContainerController {
 
-    @FXML
-    public AnchorPane kisokRoot;
-
     public static KioskContainerController mobile_instance = null;
+
+    @FXML
+    public AnchorPane kioskRoot;
 
     public KioskContainerController(){
         System.out.println("Mobile constructor");
@@ -30,7 +30,7 @@ public class KioskContainerController {
     }
 
     public AnchorPane getMobileRoot() {
-        return kisokRoot;
+        return kioskRoot;
     }
 
     public void initialize() throws IOException {
