@@ -69,18 +69,9 @@ public class TreeViewListController implements Initializable {
     private boolean servExpanded;
     private boolean staiExpanded;
 
-    private boolean isStartNode; // TODO: Talk about this
+    private boolean isStartNode = true;
 
     private HashMap<String,String> longToID;
-
-
-    /**
-     * TODO:
-     *      1. (Do last)Bring up the ui component when start or end node text input thing is pressed in pathfinding
-     *          - there should be some boolean passed in that indicates start or end node
-     *          - Supposed to do this with someone or have them do it
-     *      2. How to make the nodes actually clickable
-     */
 
     /**
      * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
@@ -100,8 +91,13 @@ public class TreeViewListController implements Initializable {
         servExpanded = false;
         staiExpanded = false;
 
-        isStartNode = true; // TODO: This should change depending on which search bar is clicked
+        App.mapInteractionModel.mapTargetNode2.addListener(e -> {
+            isStartNode = true;
+        });
 
+        App.mapInteractionModel.mapTargetNode.addListener(e -> {
+            isStartNode = false;
+        });
 
         longToID = new HashMap<>();
         fillAllTrees();
@@ -119,7 +115,6 @@ public class TreeViewListController implements Initializable {
         restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue())));
         servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue())));
         staiTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)staiTree.getSelectionModel().getSelectedItem()).getValue())));
-
 
     }
 
