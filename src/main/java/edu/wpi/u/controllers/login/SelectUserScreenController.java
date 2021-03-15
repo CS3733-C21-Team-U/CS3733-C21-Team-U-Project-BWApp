@@ -160,11 +160,11 @@ public class SelectUserScreenController {
                     }
                 };
                 loadTask.setOnSucceeded(event -> {
-                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-                    App.getPrimaryStage().setFullScreen(true);
-                    App.getPrimaryStage().setFullScreenExitHint("");
-                    App.getPrimaryStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+//                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
+//                    App.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+//                    App.getPrimaryStage().setFullScreen(true);
+//                    App.getPrimaryStage().setFullScreenExitHint("");
+//                    App.getPrimaryStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                     App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
                 });
 
