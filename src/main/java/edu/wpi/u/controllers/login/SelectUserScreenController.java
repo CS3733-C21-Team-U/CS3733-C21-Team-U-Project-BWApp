@@ -48,6 +48,9 @@ public class SelectUserScreenController {
     public void initialize() throws IOException {
         useCacheCheckBox.setSelected(App.useCache.get());
         progressBar.setVisible(false);
+
+        useCacheCheckBox.setSelected(App.useCache.get());
+
         useCacheCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             App.useCache.set(newValue);
         });
