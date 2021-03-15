@@ -540,6 +540,19 @@ public class FloatingPathfindingPaneController {
         handleTestAddTextField("5");
         App.mapInteractionModel.pathfindingFloorController.set("5");
     }
+
+    @FXML
+    public void handleClearStartPoint(){
+        App.mapInteractionModel.setStartNode("");
+        startNodeField.clear();
+    }
+
+    @FXML
+    public void handleClearEndPoint(){
+        App.mapInteractionModel.setEndNode("");
+        endNodeField.clear();
+    }
+
 }
 
 
