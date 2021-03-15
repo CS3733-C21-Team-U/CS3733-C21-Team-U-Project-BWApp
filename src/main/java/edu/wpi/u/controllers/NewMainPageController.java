@@ -68,6 +68,10 @@ public class NewMainPageController {
     public Tab AdminHelpMainPageTab;
     public Tab settingsTab;
 
+    public JFXButton themeSwitchBtn;
+    public JFXButton logoutBtn;
+    public JFXButton powerBtn;
+
 
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
@@ -83,6 +87,11 @@ public class NewMainPageController {
         });
 
         App.throwDialogHerePane = newMainPageStackPane;
+        //setup tooltips
+        themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
+        logoutBtn.setTooltip(new Tooltip("Log Out"));
+        powerBtn.setTooltip(new Tooltip("Power Down"));
+
 
 //        validationFeild
         TextField test = new TextField("test");

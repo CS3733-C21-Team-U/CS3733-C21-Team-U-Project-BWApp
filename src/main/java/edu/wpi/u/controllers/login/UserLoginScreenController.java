@@ -10,6 +10,8 @@ import edu.wpi.u.exceptions.PhoneNumberNotFoundException;
 import edu.wpi.u.users.Role;
 import io.netty.handler.codec.http.HttpHeaders;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +35,8 @@ public class UserLoginScreenController {
     public JFXTextField userNameTextField;
     @FXML
     public JFXPasswordField passWordField;
-    @FXML
-    public JFXButton loginButton;
+//    @FXML
+//    public JFXButton loginButton;
     @FXML
     public JFXButton forgotPasswordButton;
     @FXML
@@ -42,13 +44,8 @@ public class UserLoginScreenController {
     @FXML
     public JFXButton submitButton;
     @FXML
-    public Label errorLabel, wrongPasswordLabel;
-    @FXML
-    public JFXButton debugLoginAdminButton;
-    @FXML
-    public JFXButton debugLoginGuestButton;
-    @FXML
-    public JFXButton submitSkipButton;
+    public Label wrongPasswordLabel;
+
 
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -56,9 +53,8 @@ public class UserLoginScreenController {
         fxmlLoader.setClassLoader(App.classLoader);
         fxmlLoader.load();
 
-        wrongPasswordLabel.setVisible(false);
-
-        passWordField.focusedProperty().addListener(e -> {
+//        wrongPasswordLabel.setVisible(false);
+        passWordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             wrongPasswordLabel.setVisible(false);
         });
 
@@ -115,7 +111,7 @@ public class UserLoginScreenController {
     }
 
     public void handleLogin() throws IOException {
-        progressBar.setStyle("-fx-opacity: 1");
+//        progressBar.setStyle("-fx-opacity: 1");
 
         String username = userNameTextField.getText();
         String password = passWordField.getText();
@@ -130,8 +126,7 @@ public class UserLoginScreenController {
             }
         } else {
             wrongPasswordLabel.setVisible(true);
-        }
-
+            }
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
         try {
@@ -140,8 +135,8 @@ public class UserLoginScreenController {
                     try {
                         Pattern pattern = Pattern.compile("^\\d{10}$");
                         Matcher matcher = pattern.matcher(phonenumber);
-                        if (!matcher.matches()) {
-                            errorLabel.setText("Phonenumber associated with account is invalid");
+                        if (!matcher.matches()){
+//                            errorLabel.setText("Phonenumber associated with account is invalid");
                             throw new PhoneNumberNotFoundException("Phone number is not valid");
                         }
                         URI uri = new URI("https://bw-webapp.herokuapp.com/" + "login?phonenumber=" + "+1" + phonenumber + "&channel=sms");
@@ -168,13 +163,11 @@ public class UserLoginScreenController {
                                         String y = new String(b);
                                         System.out.println(y.contains("pending"));
                                         if (y.contains("pending")) {
-                                            progressBar.setStyle("-fx-opacity: 0");
+                                            //progressBar.setStyle("-fx-opacity: 0");
                                             submitButton.setStyle("-fx-opacity: 1");
-                                            // TODO : Set alignment
                                         }
                                         return State.CONTINUE;
                                     }
-
                                     @Override
                                     public Integer onCompleted() throws Exception {
                                         return status;
@@ -195,8 +188,8 @@ public class UserLoginScreenController {
                 throw new AccountNameNotFoundException();
             }
         } catch (AccountNameNotFoundException | PasswordNotFoundException e) {
-            progressBar.setStyle("-fx-opacity: 0");
-            errorLabel.setText("Username or Password is Invalid");
+//            progressBar.setStyle("-fx-opacity: 0");
+//            errorLabel.setText("Username or Password is Invalid");
             e.printStackTrace();
         }
 

@@ -53,8 +53,21 @@ public class SelectUserScreenController {
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+        //loadingNewMainPage("Login");
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(500);
+                Platform.runLater(() -> {
+                    App.getPrimaryStage().getScene().setRoot(App.loginBase);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Error("Unexpected interruption");
+            }
+        });
+        thread.start();
     }
 
     public void handleGuestButton(ActionEvent actionEvent) throws IOException {
@@ -80,7 +93,7 @@ public class SelectUserScreenController {
     }
 
     private void load() throws IOException {
-        loadingNewMainPage();
+        loadingNewMainPage("");
         Platform.runLater(() -> {
                 Task<Parent> loadTask = new Task<Parent>() {
                     @Override
@@ -107,7 +120,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
-        loadingNewMainPage();
+        loadingNewMainPage("");
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -127,7 +140,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        loadingNewMainPage();
+        loadingNewMainPage("");
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -147,7 +160,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) {
-        loadingNewMainPage();
+        loadingNewMainPage("");
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -166,9 +179,12 @@ public class SelectUserScreenController {
         thread.start();
     }
 
-    private void loadingNewMainPage() {
+    private void loadingNewMainPage(String page) {
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Logging you in...");
+        if (page.equals("Login")){
+            header.setText("Welcome !");
+        }
         header.getStyleClass().add("headline-2");
         content.setHeading(header);
         content.getStyleClass().add("dialogue");

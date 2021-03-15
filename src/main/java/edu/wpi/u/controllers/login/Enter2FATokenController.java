@@ -16,7 +16,6 @@ import org.asynchttpclient.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Future;
 
 public class Enter2FATokenController {
