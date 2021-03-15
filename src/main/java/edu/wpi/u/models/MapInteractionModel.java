@@ -46,6 +46,7 @@ public class MapInteractionModel {
     public SimpleStringProperty currentTargetNode = new SimpleStringProperty("");
 
 
+    public SimpleStringProperty pathfindingFloorController = new SimpleStringProperty(" ");//for start node
 
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){

@@ -192,9 +192,30 @@ public class PathfindingBaseController {
             clearMapItems();
             generateNodes(App.mapInteractionModel.floor);
         });
+        App.mapInteractionModel.pathfindingFloorController.addListener((observable, oldVal, newVal) -> {
+            switch (newVal) {
+                case "G" :
+                    handleFloorGButton();
+                    break;
+                case "1" :
+                    handleFloor1Button();
+                    break;
+                case "2" :
+                    handleFloor2Button();
+                    break;
+                case "3" :
+                    handleFloor3Button();
+                    break;
+                case "4" :
+                    handleFloor4Button();
+                    break;
+                case "5" :
+                    handleFloor5Button();
+                    break;
+            }
+        });
 
-
-    } // End of initialize
+                } // End of initialize
 
     /**
      * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
