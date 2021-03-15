@@ -46,6 +46,7 @@ public class SelectUserScreenController {
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
+        useCacheCheckBox.setSelected(App.useCache.get());
         progressBar.setVisible(false);
 
         useCacheCheckBox.setSelected(App.useCache.get());
