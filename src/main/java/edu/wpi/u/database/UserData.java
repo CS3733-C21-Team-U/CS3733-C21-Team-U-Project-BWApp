@@ -428,6 +428,7 @@ public class UserData extends Data{
         }
         Employee e = new Employee();
         e.setUserID("Debug");
+        e.setUserName("SampleAdmin");
         return e;
     }
 
@@ -458,6 +459,7 @@ public class UserData extends Data{
         }
         Guest g = new Guest();
         g.setUserID("Debug");
+        g.setUserName("SampleGuest");
         return g;
     }
 
@@ -526,6 +528,7 @@ public class UserData extends Data{
         }
         Patient p = new Patient();
         p.setUserID("Debug");
+        p.setUserName("SamplePatient");
         return p;
     }
 
@@ -1040,5 +1043,19 @@ public class UserData extends Data{
             e.printStackTrace();
         }
         return result;
+    }
+
+    public String getPreferredContactMethod(String userName) {
+        String str = "select preferredContactMethod from Employees";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("preferredContactMethod");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "Nothing";
     }
 }

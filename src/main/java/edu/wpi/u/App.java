@@ -101,6 +101,9 @@ public class App extends Application {
 
   public static String test = "hello there";
   public static Parent base;
+  public static Parent loginBase;
+  public static Parent guestBase;
+  public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
@@ -163,6 +166,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
+    System.out.println("App start");
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
