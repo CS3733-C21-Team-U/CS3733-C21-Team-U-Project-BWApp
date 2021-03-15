@@ -35,7 +35,6 @@ public class UserService {
         this.setEmployees();
         this.setGuests();
         this.setPatients();
-        //this.setEasyValidate();
     }
 
     public String getTypedUsername() {
@@ -65,7 +64,6 @@ public class UserService {
         this.setGuests();
     }
 
-    //public void addAuthyUser(String name,)
     /**
      * Sets the list of patients
      */
@@ -90,24 +88,6 @@ public class UserService {
         this.activeGuest = ud.setGuest(name);
         this.activeUser = ud.setGuest(name);
         System.out.println("Guest in us" + ud.setGuest(name));
-    }
-
-    /**
-     * Returns the active Guest object
-     * @return guest object
-     */
-    public Guest getActiveGuest() {
-        return activeGuest;
-    }
-
-    /**
-     * This function if for debugging purposes and assumes the Patient in already in the database
-     * Sets the active user to a patient
-     * @param username username of patient
-     * @param password password of patient
-     */
-    public void setPatient(String username, String password){
-        this.activeUser = ud.setPatient(username,password);
     }
 
     /**
@@ -161,20 +141,6 @@ public class UserService {
      */
     public User getActiveUser() {
         return this.activeUser;
-    }
-
-    /**
-     * Get a patient from an id
-     * @param patientID patient id
-     * @return the patient object
-     */
-    public Patient getPatient(String patientID){
-        for (Patient p: this.patients){
-            if (p.getUserID().equals(patientID)){
-                return p;
-            }
-        }
-        return new Patient();
     }
 
     /**
@@ -306,16 +272,6 @@ public class UserService {
     public boolean checkEmail(String email) { return ud.checkEmail(email);}
 
     /**
-     *  Gets the password of the user
-     * @param userID id of the user
-     * @param type position of user
-     * @return the password of the user
-     */
-    public String getPassword(String userID, String type){
-        return ud.getPassword(userID, type);
-    }
-
-    /**
      * Adds a patient to list and calls database
      * @param name the name
      * @param userName the username
@@ -340,14 +296,6 @@ public class UserService {
     }
 
     /**
-     * Adds a list of appointments
-     * @param appointments the list of appointments
-     */
-    public void addAppointments(ArrayList<Appointment> appointments){
-        ud.addAppointments(appointments);
-    }
-
-    /**
      * Adds a singular appointment
      * @param appointment the appointment
      */
@@ -358,16 +306,6 @@ public class UserService {
         //String appointmentID, String patientID, String employeeID, Timestamp appointmentDate, String appointmentType
         Appointment appointment1 = new Appointment(id, appointment.getPatientID(), appointment.getEmployeeID(), appointment.getAppointmentDate(), appointment.getAppointmentType());
         ud.addAppointment(appointment1);
-    }
-
-    //TODO : CALL THESE NEXT THREE FUNCTIONS AS AN ADMIN/DOCTOR TO UPDATE LOCATIONS
-    /**
-     * Add a location (nodeID) to a patient
-     * @param patientID patient ID
-     * @param locationID node ID
-     */
-    public void addLocationID(String patientID, String locationID){
-        ud.addLocationID(patientID, locationID);
     }
 
     /**
@@ -510,4 +448,26 @@ public class UserService {
         return patient.getUserID();
     }
 
+    /**
+     * Gets a list of employee emails based on a type
+     * @param type all valid role types EXCLUDING DEFAULT
+     * @return the list of emails
+     */
+    public ArrayList<String> getEmployeeEmailByType(String type){
+        return ud.getEmployeeEmailsByType(type);
+    }
+
+    /**
+     * Returns the email associated with the given userName
+     * @param userName the userName
+     * @return the email or "" if no email found/username doesnt exist
+     */
+    public String getEmail(String userName){
+        for (Employee e : this.employees){
+            if (e.getUserName().equals(userName)){
+                return e.getEmail();
+            }
+        }
+        return "";
+    }
 }

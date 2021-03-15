@@ -18,8 +18,6 @@ public class Guest extends User{
     private StringProperty typefx;
     private LongProperty visitDatefx;
     private StringProperty visitReasonfx;
-    //TODO : Maybe add a visitTime field for guest coming to hospital?
-    //TODO : Maybe make Guest only have a phone number for account and use 2fa // maybe not need to store in db
     public Guest() {}
 
     public Guest(String guestID, String name, Role type, Timestamp visitDate, String visitReason, boolean deleted) {

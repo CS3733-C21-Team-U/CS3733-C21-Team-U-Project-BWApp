@@ -51,6 +51,7 @@ public class NewMainPageController {
     public Tab adminTab2;
     public Tab adminTab1;
     public Tab adminTab3;
+    public Tab adminTab4;
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
@@ -136,7 +137,7 @@ public class NewMainPageController {
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
-
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             if(App.userService.getActiveUser().getType() ==  ADMIN){
                 adminTab1.setStyle("-fx-opacity: 1");
                 adminTab1.setDisable(false);
@@ -144,6 +145,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(false);
                 adminTab3.setStyle("-fx-opacity: 1");
                 adminTab3.setDisable(false);
+                adminTab4.setStyle("-fx-opacity: 1");
+                adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
                 HelpMainPageTab.setStyle("-fx-opacity: 0");
                 AdminHelpMainPageTab.setDisable(false);
@@ -156,6 +159,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(true);
                 adminTab3.setStyle("-fx-opacity: 0");
                 adminTab3.setDisable(true);
+                adminTab4.setStyle("-fx-opacity: 0");
+                adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
                 HelpMainPageTab.setStyle("-fx-opacity: 1");
                 AdminHelpMainPageTab.setDisable(true);
@@ -169,6 +174,8 @@ public class NewMainPageController {
                 settingsTab.setStyle("-fx-opacity: 1");
                 settingsTab.setDisable(false);
             }
+        });
+
 
     }
 
@@ -177,6 +184,7 @@ public class NewMainPageController {
     }
 
     public void handleExit() throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
@@ -201,6 +209,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
