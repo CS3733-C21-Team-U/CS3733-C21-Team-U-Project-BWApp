@@ -55,11 +55,10 @@ public class SelectUserScreenController {
         useCacheCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             App.useCache.set(newValue);
             if(newValue){//If chekced
-                App.loadedAlready = true;
 //                try {
 //                    fxmlLoader.setClassLoader(App.classLoader);
 //                    fxmlLoader.load();
-//                } catch (IOException e) {
+//                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
             }
@@ -94,51 +93,51 @@ public class SelectUserScreenController {
     }
 
     private void load() throws IOException {
-        App.isLoggedIn.set(true);
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Logging you in...");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
-        dialog.show();
-        if(App.useCache.get()){
-            fxmlLoader.setClassLoader(App.classLoader);
-            fxmlLoader.load();
-        }
-        Platform.runLater(() -> {
-            Task<Parent> loadTask = new Task<Parent>() {
-                @Override
-                protected Parent call() {
-                    return fxmlLoader.getRoot();
-                }
-            };
-            loadTask.setOnSucceeded(event -> {
-                App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
-            });
-            loadTask.setOnRunning(event -> {
-                //Main function that runs after loading dialogue is animated
+            JFXDialogLayout content = new JFXDialogLayout();
+            Label header = new Label("Logging you in...");
+            header.getStyleClass().add("headline-2");
+            content.setHeading(header);
+            content.getStyleClass().add("dialogue");
+            JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
+            dialog.show();
+            if (App.useCache.get()) {
+                fxmlLoader.setClassLoader(App.classLoader);
+                fxmlLoader.load();
+            }
+            Platform.runLater(() -> {
+                Task<Parent> loadTask = new Task<Parent>() {
+                    @Override
+                    protected Parent call() {
+                        return fxmlLoader.getRoot();
+                    }
+                };
+                loadTask.setOnSucceeded(event -> {
+                    App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
+                });
+                loadTask.setOnRunning(event -> {
+                    //Main function that runs after loading dialogue is animated
 //                if(App.useCache.get()){
 //                    System.out.println("Hello I'm in the setOnRunningTask");
 //                }
+                });
+                Thread t = new Thread(loadTask);
+                Thread thread = new Thread(() -> {
+                    try {
+                        //Wait to allow for dialogue to animate in
+                        Thread.sleep(500);
+                        Platform.runLater(t::start);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+                thread.start();
             });
-            Thread t = new Thread(loadTask);
-            Thread thread = new Thread(() ->{
-                try {
-                    //Wait to allow for dialogue to animate in
-                    Thread.sleep(500);
-                    Platform.runLater(t::start);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            thread.start();
-        });
     }
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
+        App.isLoggedIn.set(true);
         if (App.useCache.get()){
             load();
         }
@@ -153,6 +152,7 @@ public class SelectUserScreenController {
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
+        App.isLoggedIn.set(true);
         if (App.useCache.get()){
             load();
         }
@@ -167,7 +167,9 @@ public class SelectUserScreenController {
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
+        App.isLoggedIn.set(true);
         if (App.useCache.get()){
+            System.out.println("Loading quickly");
             load();
         }
         else {

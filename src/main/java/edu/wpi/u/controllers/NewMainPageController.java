@@ -209,6 +209,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
+        System.out.println("LOGGING OUT");
         App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
@@ -218,27 +219,15 @@ public class NewMainPageController {
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("CANCEL");
         JFXButton button2 = new JFXButton("LOGOUT");
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
+        button1.setOnAction(event -> dialog.close());
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @SneakyThrows
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-
-                /*
-                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyApp.fxml"));
-                 Object obj = fxmlLoader.load();
-                 Object myController = fxmlLoader.getController();
-                 */
-                //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-                Object obj = fxmlLoader.load();
-                Object myController = fxmlLoader.getController();
+                fxmlLoader.load();
+                fxmlLoader.getController();
                 App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }
         });

@@ -35,10 +35,12 @@ public class CachingClassLoader extends ClassLoader{
     protected Class findClass(String className) {
         //System.out.println("Loading : " + className);
         if (classes.containsKey(className)) {
+            System.out.println("HashMap already contains class: " + className);
             return classes.get(className);
         } else {
             try {
                 Class result = parent.loadClass(className);
+                System.out.println("Putting " + className + " into HashMap");
                 classes.put(className, result);
                 return result;
             } catch (Exception e) {

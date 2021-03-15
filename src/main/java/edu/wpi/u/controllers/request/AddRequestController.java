@@ -116,7 +116,7 @@ public class AddRequestController {
             Request newRequest = new Request(ID, new Timestamp(System.currentTimeMillis()), locations, staff, primaryComment);
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(specifics));
             for (String to: App.userService.getEmployeeEmailByType(currSpecificRequest.getType())){
-                App.emailService.sendMail(to, "New" + currSpecificRequest.getType() + " service request !"); // todo : change
+                App.emailService.sendMail(to, currSpecificRequest); // todo : add to also assignees & option to send to all people of a type instead of defaulting to it
             }
             AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
