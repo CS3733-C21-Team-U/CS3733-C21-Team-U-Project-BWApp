@@ -70,7 +70,7 @@
             </HBox>
             <HBox fx:id="pathContent" minWidth="-Infinity" prefHeight="100.0" prefWidth="450.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="85.0">
+                  <VBox fx:id="btnVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="85.0">
                      <children>
                         <JFXButton onAction="#HandleDisplayFloorG" text="Floor G" />
                         <JFXButton onAction="#HandleDisplayFloorOne" text="Floor 1" />
