@@ -68,14 +68,6 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
         App.requestService.requestType.addListener((o, oldVal, newVal)->{
             showOrNottoSHow();
-//           if(parent.request.getType().equals(App.requestService.requestType.getValue()) || App.requestService.requestType.getValue().equals("All")){
-//               appear();
-//               System.out.println("I am a"+parent.request.getType()+"not a "+ App.requestService.requestType + "APPEAR");
-//           }
-//           else{
-//               disappear();
-//               System.out.println("I am a"+parent.request.getType()+"not a"+App.requestService.requestType+"DISAPPEAR");
-//           }
         });
 
         App.requestService.assignedStatus.addListener((o, oldVal, newVal)->{
@@ -86,9 +78,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             showOrNottoSHow();
         });
 
-
-        //System.out.println("MYINFO: " +requestItemRoot.getPrefHeight()+" "+" "+requestItemRoot.getMaxHeight()+ requestItemRoot.isVisible()+ " " + requestItemRoot.getOpacity());
-
+        App.requestService.checkFilters.addListener((o, oldVal, newVal)->{
+            showOrNottoSHow();
+        });
 
     }
 
