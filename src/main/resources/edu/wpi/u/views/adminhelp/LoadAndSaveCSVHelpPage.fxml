@@ -10,36 +10,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1685.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
             </VBox>
-            <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0">
+            <SVGPath content="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Load and Save CSV" wrappingWidth="578.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
+            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use Load and Save CSV">
                <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
-            </Text>
-            <HBox prefHeight="784.0" prefWidth="1283.0">
+            </Label>
+            <HBox prefHeight="784.0" prefWidth="1638.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="600.0">
                      <children>
@@ -62,7 +57,7 @@
                         <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="260.0" wrapText="true" />
                      </children>
                   </VBox>
-                  <ImageView fitHeight="651.0" fitWidth="1017.0" translateY="80.0">
+                  <ImageView fitHeight="644.0" fitWidth="1072.0" translateY="80.0">
                      <image>
                         <Image url="@../Images/csvfile.png" />
                      </image>
