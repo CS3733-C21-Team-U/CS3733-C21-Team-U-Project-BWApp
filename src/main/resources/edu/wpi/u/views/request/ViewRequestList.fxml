@@ -25,7 +25,7 @@
                <children>
                   <Label styleClass="headline-2" text="My Service Requests" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton onAction="#handleNewRequestButton" styleClass="button-contained" text="NEW REQUEST">
+                  <JFXButton fx:id="newRequestButton" onAction="#handleNewRequestButton" styleClass="button-contained" text="NEW REQUEST">
                      <graphic>
                         <SVGPath content="M35,22.143H22.143V35H17.857V22.143H5V17.857H17.857V5h4.286V17.857H35Z" scaleX="0.5" scaleY="0.5" styleClass="on-primary" />
                      </graphic>
