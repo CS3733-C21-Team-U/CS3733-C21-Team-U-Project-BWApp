@@ -10,35 +10,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-6.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-6.0" prefHeight="974.0" prefWidth="1686.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
             </VBox>
-            <SVGPath content="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8zM12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" scaleX="2.0" scaleY="2.0">
+            <SVGPath content="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8zM12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Two Factor Authorization" textAlignment="CENTER" wrappingWidth="592.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
+            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use Two Factor Authorization">
                <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
-            </Text>
+            </Label>
             <HBox prefHeight="784.0" prefWidth="1283.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="600.0">
@@ -66,7 +61,7 @@
                         </ImageView>
                      </children>
                   </VBox>
-                  <ImageView fitHeight="533.0" fitWidth="459.0" translateX="180.0" translateY="90.0">
+                  <ImageView fitHeight="581.0" fitWidth="491.0" translateX="180.0" translateY="90.0">
                      <image>
                         <Image url="@../Images/2fa.png" />
                      </image>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,40 +11,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="CENTER" layoutX="-12.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="CENTER" layoutX="-12.0" prefHeight="974.0" prefWidth="1712.0">
          <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="76.0" prefWidth="1700.0">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
-            </VBox>
-            <SVGPath content="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2zM12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" scaleX="2.0" scaleY="2.0">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="-100.0" />
+               </VBox.margin>
+            </VBox>
+            <SVGPath content="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2zM12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="Contact Us" textAlignment="CENTER" wrappingWidth="174.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
+            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="Contact Us">
                <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
-            </Text>
+            </Label>
             <HBox prefHeight="714.0" prefWidth="1582.0">
                <children>
                   <VBox prefHeight="711.0" prefWidth="657.0">
                      <children>
-                        <TextArea editable="false" prefHeight="670.0" prefWidth="615.0" styleClass="headline-3" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true" />
+                        <TextArea editable="false" prefHeight="670.0" prefWidth="615.0" style="-fx-font-size: 23;" styleClass="headline-3" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="684.0" prefWidth="929.0">
@@ -68,4 +68,8 @@
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

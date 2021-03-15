@@ -10,35 +10,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1685.0">
          <children>
             <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
             </VBox>
-            <SVGPath content="M 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18zM 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" scaleX="2.0" scaleY="2.0">
+            <SVGPath content="M 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18zM 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
             </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Guest List" textAlignment="CENTER" wrappingWidth="385.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
+            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use Guest List">
                <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
-            </Text>
+            </Label>
             <HBox prefHeight="784.0" prefWidth="1283.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="600.0">
@@ -61,7 +56,7 @@
                         <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="490.0" wrapText="true" />
                      </children>
                   </VBox>
-                  <ImageView fitHeight="569.0" fitWidth="995.0" translateY="80.0">
+                  <ImageView fitHeight="630.0" fitWidth="1073.0" translateY="80.0">
                      <image>
                         <Image url="@../Images/guestlist.png" />
                      </image>
