@@ -1,6 +1,7 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
+import edu.wpi.u.controllers.AutoClose;
 import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
 import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
@@ -98,6 +99,7 @@ public class App extends Application {
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
 
+
   public App(){
     System.out.println("App constructor");
     app_instance = this;
@@ -137,6 +139,7 @@ public class App extends Application {
     mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
+    AutoClose autoClose = new AutoClose(stage);
 //    Label label = new Label("Hello World");
 //    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
 //    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
@@ -197,4 +200,6 @@ public class App extends Application {
       App.isLightTheme = true;
     }
   }
+
+
 }

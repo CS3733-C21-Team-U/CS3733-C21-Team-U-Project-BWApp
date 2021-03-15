@@ -284,5 +284,7 @@ public class NewMainPageController {
 
     public void onChipEnter(KeyEvent keyEvent) {
     }
+
+
 }
 
