@@ -40,7 +40,7 @@ public class TreeViewListController implements Initializable {
     @FXML
     private TreeView servTree;
 
-    // Creating roots for each tree
+    // Creating roots for each tree, these are actual TreeItems, while representing the root of the TreeView
     private TreeItem rootConf = new TreeItem("Conference Rooms");
     private TreeItem rootDept = new TreeItem("Departments");
     private TreeItem rootExit = new TreeItem("Entrances and Exits");
@@ -51,6 +51,7 @@ public class TreeViewListController implements Initializable {
     private TreeItem rootRest = new TreeItem("Restrooms");
     private TreeItem rootServ = new TreeItem("Services");
 
+    // Booleans to store if a tree is expanded or not
     private boolean confExpanded;
     private boolean deptExpanded;
     private boolean exitExpanded;
@@ -61,12 +62,19 @@ public class TreeViewListController implements Initializable {
     private boolean restExpanded;
     private boolean servExpanded;
 
+    // Used to decide if start or end node is selected
     private boolean isStartNode = true;
 
+    // Hashmap to store long name to nodeID for each node added to an item
+    // This is needed because a TreeItem can only store one value, which also happens to be what text is being shown
     private HashMap<String,String> longToID;
 
     /**
-     * JavaFX initialize function. Not entirely sure what it should do, but I just have it filling the tree with text
+     * JavaFX initialize function, which:
+     * - Sets variables
+     * - Adds a listener for start/end boxes
+     * - Fills trees with their Items
+     * - Adds listeners to each item
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb){
@@ -81,6 +89,7 @@ public class TreeViewListController implements Initializable {
         restExpanded = false;
         servExpanded = false;
 
+        // Setting listener to check if start or end node will be set
         App.mapInteractionModel.currentTargetNode.addListener((observable, oldVal, newVal) ->{
             if(newVal.equals("START")){
                 isStartNode = true;
@@ -92,7 +101,7 @@ public class TreeViewListController implements Initializable {
         longToID = new HashMap<>();
         fillAllTrees();
 
-        // A little bit janky solution that allows the TreeItems to be clickable because TreeItem.addEventHandler doesn't work
+        // Not my favorite solution, but this is what allows each item in each tree to be clickable
         // Basically it adds a listener to each TreeItem in the tree, and when clicked it calls the method handleMouseClicked, which sets start/end node
         confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue())));
         deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue())));
@@ -178,15 +187,25 @@ public class TreeViewListController implements Initializable {
      */
     private void handleMouseClicked(String value){
 
-        if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) {
+        if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) { // If the item is a node, not a collapsable Item
             collapseAllTrees();
             if(isStartNode) {
-                App.mapInteractionModel.setStartNode(value);
+                App.mapInteractionModel.setStartNode(value); // Add to start
             } else {
-                App.mapInteractionModel.setEndNode(value);
+                App.mapInteractionModel.setEndNode(value); // Add to end
             }
         }
-        confTree.getSelectionModel().getSelectedItems().clear();
+
+        // Removing the ugly grey highlights after an Item is selected
+        confTree.getSelectionModel().select(-1);
+        deptTree.getSelectionModel().select(-1);
+        exitTree.getSelectionModel().select(-1);
+        foodTree.getSelectionModel().select(-1);
+        kiosTree.getSelectionModel().select(-1);
+        labsTree.getSelectionModel().select(-1);
+        parkTree.getSelectionModel().select(-1);
+        restTree.getSelectionModel().select(-1);
+        servTree.getSelectionModel().select(-1);
     }
 
     /**
@@ -327,6 +346,17 @@ public class TreeViewListController implements Initializable {
         rootPark.setExpanded(false);
         rootRest.setExpanded(false);
         rootServ.setExpanded(false);
+
+        confExpanded = false;
+        deptExpanded = false;
+        exitExpanded = false;
+        foodExpanded = false;
+        kiosExpanded = false;
+        labsExpanded = false;
+        parkExpanded = false;
+        restExpanded = false;
+        servExpanded = false;
+
     }
 
     /**
