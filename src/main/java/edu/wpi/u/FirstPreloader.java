@@ -19,9 +19,11 @@ import static edu.wpi.u.App.classLoader;
 public class FirstPreloader extends Preloader {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        fxmlLoader.setClassLoader(App.classLoader);
         fxmlLoader.load();
         fxmlLoader.getController();
         App.base = fxmlLoader.getRoot();
+
 //            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 //            fxmlLoader.setClassLoader(App.classLoader);
 //            fxmlLoader.load();
