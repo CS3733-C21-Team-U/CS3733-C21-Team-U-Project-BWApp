@@ -111,6 +111,15 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             }
         });
 
+//        RequiredFieldValidator validatorType = new RequiredFieldValidator();
+//        validatorType.setMessage("Choose Request Type");
+//        ToggleGroup.getValidators().add(validatorType);
+//        editTimeNeededField.focusedProperty().addListener((o, oldVal, newVal) -> {
+//            if (!newVal) {
+//                editTimeNeededField.validate();
+//            }
+//        });
+
         selectTypeGroup.selectedToggleProperty().addListener((o, oldVal, newVal) -> {
             switchFields( ((JFXToggleNode)selectTypeGroup.getSelectedToggle()).getText());
         });
