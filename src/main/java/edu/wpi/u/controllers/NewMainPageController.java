@@ -94,7 +94,8 @@ public class NewMainPageController {
     public AnchorPane covidDis;
 
     public KeyCombination pathFinding = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
-    public KeyCombination googleAPI = new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN);
+    public KeyCombination googleAPI = new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN);
+    public KeyCombination request = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
     public KeyCombination newRequest = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
     public KeyCombination settings = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     public KeyCombination help = new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN);
@@ -226,7 +227,7 @@ public class NewMainPageController {
 
     }
 
-    public void handleThemeSwitch(ActionEvent actionEvent) {
+    public void handleThemeSwitch() {
         App.getInstance().switchTheme();
     }
 
@@ -255,7 +256,7 @@ public class NewMainPageController {
 
     }
 
-    public void handleLogout(ActionEvent actionEvent) throws IOException {
+    public void handleLogout() throws IOException {
         App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
@@ -494,31 +495,51 @@ public class NewMainPageController {
     }
 
 
-    public void handleShortCuts(KeyEvent keyEvent) {
+    public void handleShortCuts(KeyEvent keyEvent) throws IOException {
          if (pathFinding.match(keyEvent)){
             System.out.println("pathfinding page");
+            mainTabPane.getSelectionModel().select(pathFindingTab);
         }else if (googleAPI.match(keyEvent)){
             System.out.println("googelAPI page");
+             mainTabPane.getSelectionModel().select(googleTab);
         }else if (newRequest.match(keyEvent)){
             System.out.println("new request page");
+             mainTabPane.getSelectionModel().select(requestTab);
+            //handle adding new request
+        }else if (request.match(keyEvent)){
+            System.out.println("new request page");
+             mainTabPane.getSelectionModel().select(requestTab);
         }else if (settings.match(keyEvent)){
             System.out.println("settings page");
+             mainTabPane.getSelectionModel().select(settingsTab);
         }else if (help.match(keyEvent)){
             System.out.println("help page");
+            //handle user logic
+//             mainTabPane.getSelectionModel().select(HelpMainPageTab);
+//             mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
         }else if (mapBuilder.match(keyEvent)){
             System.out.println("map builder page");
+             mainTabPane.getSelectionModel().select(adminTab1);
         }else if (user.match(keyEvent)){
             System.out.println("user man page");
+             mainTabPane.getSelectionModel().select(adminTab2);
         }else if (addUser.match(keyEvent)){
             System.out.println("add user page");
+             mainTabPane.getSelectionModel().select(adminTab2);
+             //scene switch to add user
         }else if (guestList.match(keyEvent)){
             System.out.println("guest list page");
+             mainTabPane.getSelectionModel().select(adminTab3);
         }else if (covidData.match(keyEvent)){
             System.out.println("covid data page");
+             mainTabPane.getSelectionModel().select(adminTab4);
         }else if (logOut.match(keyEvent)){
             System.out.println("log Out");
+            // log out
+             handleLogout();
         }else if (switchTheme.match(keyEvent)){
             System.out.println("Switch Theme");
+            handleThemeSwitch();
         }
     }
 }
