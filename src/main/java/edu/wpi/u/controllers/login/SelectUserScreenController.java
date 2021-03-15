@@ -48,8 +48,8 @@ public class SelectUserScreenController {
     public void initialize() throws IOException {
         App.loadingSpinnerHerePane = loadingStackPane;
         progressBar.setVisible(false);
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
+//        fxmlLoader.setClassLoader(App.classLoader);
+//        fxmlLoader.load();
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
@@ -154,7 +154,7 @@ public class SelectUserScreenController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
             fxmlLoader.load();
             fxmlLoader.getController();
-            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+            App.getPrimaryStage().getScene().setRoot(App.base);
         }
     }
 
