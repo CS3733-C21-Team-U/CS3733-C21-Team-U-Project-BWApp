@@ -18,6 +18,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.util.Callback;
@@ -29,6 +30,12 @@ import java.util.Date;
 
 public class ViewCovidResultsController {
     @FXML public JFXTreeTableView<SpecificRequest> treeTableView = new JFXTreeTableView<>();
+    public Label funnelValue1;
+    public Label funnelSubtitle1;
+    public Label funnelText1;
+    public Label funnelValue2;
+    public Label funnelText2;
+    public Label funnelValue3;
 
     int numInSystem = 0;
     int takenSurvey = 0;
@@ -42,7 +49,6 @@ public class ViewCovidResultsController {
                 requests.add(e);
             }
         });
-        // todo : # of people on campus, taken the survey but haven't entered & taken survey but have entered
 
         numInSystem += App.userService.getUsers().size();
         for (SpecificRequest request: requests){
@@ -54,6 +60,16 @@ public class ViewCovidResultsController {
                 takenSurvey++;
             }
         }
+
+        funnelValue1.setText(String.valueOf(numInSystem));
+        funnelValue2.setText(String.valueOf(takenSurvey));
+        funnelValue3.setText(String.valueOf(completedSurvey));
+
+        if(numInSystem != 0 && takenSurvey != 0 && completedSurvey != 0){
+            funnelText1.setText(String.valueOf((int)Math.floor(((double)takenSurvey/(double)numInSystem)*100.0))+"% have arrvied at a kisosk");
+            funnelText2.setText(String.valueOf((int)Math.floor(((double)completedSurvey/(double)takenSurvey)*100.0))+"% have seen a nurse");
+        }
+
 
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
         treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
