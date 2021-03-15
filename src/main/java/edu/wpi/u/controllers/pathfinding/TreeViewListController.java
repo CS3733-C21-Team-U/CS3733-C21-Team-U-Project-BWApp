@@ -179,14 +179,14 @@ public class TreeViewListController implements Initializable {
     private void handleMouseClicked(String value){
 
         if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) {
+            collapseAllTrees();
             if(isStartNode) {
-                System.out.println("Clicked " + value + " as new start value. Line 206 TreeViewListController");
                 App.mapInteractionModel.setStartNode(value);
             } else {
-                System.out.println("Clicked " + value + " as new end value. Line 206 TreeViewListController");
                 App.mapInteractionModel.setEndNode(value);
             }
         }
+        confTree.getSelectionModel().getSelectedItems().clear();
     }
 
     /**
@@ -195,25 +195,7 @@ public class TreeViewListController implements Initializable {
      */
     private void expandAndCollapse(String treeType){
 
-        confTree.setPrefSize(350.0,32.0);
-        deptTree.setPrefSize(350.0,32.0);
-        exitTree.setPrefSize(350.0,32.0);
-        foodTree.setPrefSize(350.0,32.0);
-        kiosTree.setPrefSize(350.0,32.0);
-        labsTree.setPrefSize(350.0,32.0);
-        parkTree.setPrefSize(350.0,32.0);
-        restTree.setPrefSize(350.0,32.0);
-        servTree.setPrefSize(350.0,32.0);
-
-        rootConf.setExpanded(false);
-        rootDept.setExpanded(false);
-        rootExit.setExpanded(false);
-        rootFood.setExpanded(false);
-        rootKios.setExpanded(false);
-        rootLabs.setExpanded(false);
-        rootPark.setExpanded(false);
-        rootRest.setExpanded(false);
-        rootServ.setExpanded(false);
+        collapseAllTrees();
 
         switch(treeType){
             case "CONF":
@@ -320,6 +302,31 @@ public class TreeViewListController implements Initializable {
                 }
                 break;
         }
+    }
+
+    /**
+     * Collapses all trees and sets their size to be smaller
+     */
+    public void collapseAllTrees(){
+        confTree.setPrefSize(350.0,32.0);
+        deptTree.setPrefSize(350.0,32.0);
+        exitTree.setPrefSize(350.0,32.0);
+        foodTree.setPrefSize(350.0,32.0);
+        kiosTree.setPrefSize(350.0,32.0);
+        labsTree.setPrefSize(350.0,32.0);
+        parkTree.setPrefSize(350.0,32.0);
+        restTree.setPrefSize(350.0,32.0);
+        servTree.setPrefSize(350.0,32.0);
+
+        rootConf.setExpanded(false);
+        rootDept.setExpanded(false);
+        rootExit.setExpanded(false);
+        rootFood.setExpanded(false);
+        rootKios.setExpanded(false);
+        rootLabs.setExpanded(false);
+        rootPark.setExpanded(false);
+        rootRest.setExpanded(false);
+        rootServ.setExpanded(false);
     }
 
     /**
