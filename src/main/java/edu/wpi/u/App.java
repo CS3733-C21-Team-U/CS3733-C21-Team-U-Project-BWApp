@@ -142,6 +142,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
+    System.out.println("App start");
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
