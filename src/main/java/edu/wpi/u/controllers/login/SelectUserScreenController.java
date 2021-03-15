@@ -47,9 +47,11 @@ public class SelectUserScreenController {
 
     public void initialize() throws IOException {
         progressBar.setVisible(false);
-        App.loadingSpinnerHerePane = loadingStackPane;
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
+        if (App.useCache.get()) {
+            App.loadingSpinnerHerePane = loadingStackPane;
+            fxmlLoader.setClassLoader(App.classLoader);
+            fxmlLoader.load();
+        }
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
