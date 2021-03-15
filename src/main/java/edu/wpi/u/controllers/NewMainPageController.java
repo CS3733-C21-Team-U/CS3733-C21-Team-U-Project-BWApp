@@ -16,6 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -89,6 +92,19 @@ public class NewMainPageController {
     public AnchorPane userDis;
     public AnchorPane guestDis;
     public AnchorPane covidDis;
+
+    public KeyCombination pathFinding = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
+    public KeyCombination googleAPI = new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN);
+    public KeyCombination newRequest = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
+    public KeyCombination settings = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    public KeyCombination help = new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN);
+    public KeyCombination mapBuilder = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_DOWN);
+    public KeyCombination user = new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN);
+    public KeyCombination addUser = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
+    public KeyCombination guestList = new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN);
+    public KeyCombination covidData = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
+    public KeyCombination logOut = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
+    public KeyCombination switchTheme = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
 
 
 
@@ -325,6 +341,9 @@ public class NewMainPageController {
     public void onChipEnter(KeyEvent keyEvent) {
     }
 
+
+
+
     public void detectTab()
     {
         if (mainTabPane.getSelectionModel().getSelectedItem() == pathFindingTab){handleEnablePathFinding();}
@@ -475,5 +494,32 @@ public class NewMainPageController {
     }
 
 
+    public void handleShortCuts(KeyEvent keyEvent) {
+         if (pathFinding.match(keyEvent)){
+            System.out.println("pathfinding page");
+        }else if (googleAPI.match(keyEvent)){
+            System.out.println("googelAPI page");
+        }else if (newRequest.match(keyEvent)){
+            System.out.println("new request page");
+        }else if (settings.match(keyEvent)){
+            System.out.println("settings page");
+        }else if (help.match(keyEvent)){
+            System.out.println("help page");
+        }else if (mapBuilder.match(keyEvent)){
+            System.out.println("map builder page");
+        }else if (user.match(keyEvent)){
+            System.out.println("user man page");
+        }else if (addUser.match(keyEvent)){
+            System.out.println("add user page");
+        }else if (guestList.match(keyEvent)){
+            System.out.println("guest list page");
+        }else if (covidData.match(keyEvent)){
+            System.out.println("covid data page");
+        }else if (logOut.match(keyEvent)){
+            System.out.println("log Out");
+        }else if (switchTheme.match(keyEvent)){
+            System.out.println("Switch Theme");
+        }
+    }
 }
 
