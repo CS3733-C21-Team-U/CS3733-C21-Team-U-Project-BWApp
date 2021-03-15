@@ -286,7 +286,6 @@ public class NewMainPageController {
         App.mapInteractionModel.setCurrentAction("SELECT");
         App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
         App.mapInteractionModel.reloadPathfinding.set(!App.mapInteractionModel.reloadPathfinding.get());
-        detectTab();
 //        App.mapInteractionModel.clearPreviousNodeID();
 //        App.mapInteractionModel.setNodeID(" ");
     }

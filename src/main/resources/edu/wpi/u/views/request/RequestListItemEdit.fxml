@@ -84,7 +84,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </JFXTextField>
-                                          <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
+                                          <JFXButton defaultButton="true" maxHeight="-Infinity" minHeight="-Infinity" onAction="#addAssignee" prefWidth="130.0" styleClass="button-contained" text="Add Assignee">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -111,7 +111,7 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </JFXTextField>
-                                          <JFXButton maxHeight="-Infinity" minHeight="-Infinity" onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
+                                          <JFXButton defaultButton="true" maxHeight="-Infinity" minHeight="-Infinity" onAction="#addLocation" prefWidth="130.0" styleClass="button-contained" text="Add Location">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -149,7 +149,7 @@
                <children>
                   <JFXButton onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton onAction="#handleCancelButton" styleClass="button-text" text="Cancel" />
+                  <JFXButton cancelButton="true" onAction="#handleCancelButton" styleClass="button-text" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />

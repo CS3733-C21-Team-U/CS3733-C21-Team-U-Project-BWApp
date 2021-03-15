@@ -86,8 +86,8 @@
             <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1700.0" spacing="100.0">
                <children>
                   <Pane prefHeight="200.0" prefWidth="400.0" />
-                  <JFXButton onAction="#handleSaveNewRequest" prefHeight="45.0" prefWidth="240.0" styleClass="button-contained" text="Save" />
-                  <JFXButton onAction="#HandleMakeCancelButton" opacity="0.5" prefHeight="45.0" prefWidth="240.0" text="Cancel">
+                  <JFXButton defaultButton="true" onAction="#handleSaveNewRequest" prefHeight="45.0" prefWidth="240.0" styleClass="button-contained" text="Save" />
+                  <JFXButton cancelButton="true" onAction="#HandleMakeCancelButton" opacity="0.5" prefHeight="45.0" prefWidth="240.0" text="Cancel">
                      <styleClass>
                         <String fx:value="button-contained" />
                         <String fx:value="secondary-color" />
