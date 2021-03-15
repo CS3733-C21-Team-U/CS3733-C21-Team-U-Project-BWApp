@@ -25,6 +25,7 @@ import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class RequestListItemExpandedController extends AnchorPane implements Initializable {
@@ -86,36 +87,14 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.minHeight(300);
         locationGroup.minWidth(300);
 
-
-
-
+        setFields();
         //add Listener
         parent.needUpdate.addListener((o,oldVal,newVal) -> {
-            titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
-            descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
-            String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
-            creatorAndDateString += " - ";
-            creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
-            creatorAndDateLabel.setText(creatorAndDateString);
-            assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-            completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
-            generateSpecificFields();
-            generateComments();
-            loadLocationsOnMap(0);
+            setFields();
         });
 
         typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
-        titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
-        descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
-        String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
-        creatorAndDateString += " - ";
-        creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
-        creatorAndDateLabel.setText(creatorAndDateString);
-        assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-        completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
-        generateSpecificFields();
-        generateComments();
-        loadLocationsOnMap(0);
+
 
     }
 
@@ -388,5 +367,19 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         App.tabPaneRoot.getSelectionModel().select(0);
         App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
 
+    }
+
+    private void setFields(){
+        titleLabel.setText(this.parent.request.getGenericRequest().getTitle());
+        descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
+        String creatorAndDateString = this.parent.request.getGenericRequest().getCreator() + " on " +
+                parent.request.getGenericRequest().getDateCreated().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        creatorAndDateLabel.setText(creatorAndDateString);
+        assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
+        completeByLabel.setText(parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+                + ", " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+        generateSpecificFields();
+        generateComments();
+        loadLocationsOnMap(0);
     }
 }

@@ -50,7 +50,7 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <Label fx:id="descriptionLabel" prefHeight="79.0" prefWidth="390.0" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
+                              <Label fx:id="descriptionLabel" prefHeight="79.0" prefWidth="390.0" styleClass="subtitle" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -59,7 +59,7 @@
                               <Label styleClass="subtitle" text="Created by: " />
                               <Label fx:id="creatorAndDateLabel" layoutX="10.0" layoutY="164.0" styleClass="headline-3" text="Michael Gary on 3/3/2021" />
                               <Region prefHeight="14.0" prefWidth="430.0" />
-                              <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Asssignees:" />
+                              <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Assignees:" />
                               <Label fx:id="assigneesLabel" layoutX="10.0" layoutY="182.0" styleClass="headline-3" text="John Adams, Empolyee 2, and Securtity Guard" />
                               <Region prefHeight="14.0" prefWidth="430.0" />
                               <Label styleClass="subtitle" text="Requested Completion Date:" />
@@ -75,7 +75,7 @@
                      <children>
                         <VBox fx:id="commentsRoot" layoutX="184.0" layoutY="47.0" prefHeight="365.0" prefWidth="499.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label styleClass="subtitle" text="Interaction Timeline:">
+                              <Label styleClass="headline-3" text="Interaction Timeline:">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>
@@ -140,7 +140,7 @@
                         <Insets />
                      </HBox.margin>
                   </Region>
-                  <JFXTextField fx:id="commentField" prefWidth="190.0">
+                  <JFXTextField fx:id="commentField" prefWidth="228.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
