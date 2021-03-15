@@ -31,6 +31,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,17 +47,23 @@ public class SelectUserScreenController {
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-        useCacheCheckBox.setSelected(App.useCache.get());
+        App.loadingSpinnerHerePane = loadingStackPane;
         progressBar.setVisible(false);
 
         useCacheCheckBox.setSelected(App.useCache.get());
 
         useCacheCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             App.useCache.set(newValue);
+            if(newValue){//If chekced
+                App.loadedAlready = true;
+//                try {
+//                    fxmlLoader.setClassLoader(App.classLoader);
+//                    fxmlLoader.load();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+            }
         });
-        App.loadingSpinnerHerePane = loadingStackPane;
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
@@ -86,7 +93,7 @@ public class SelectUserScreenController {
         App.getPrimaryStage().setHeight(1000);
     }
 
-    private void load() {
+    private void load() throws IOException {
         App.isLoggedIn.set(true);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Logging you in...");
@@ -95,6 +102,10 @@ public class SelectUserScreenController {
         content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
         dialog.show();
+        if(App.useCache.get()){
+            fxmlLoader.setClassLoader(App.classLoader);
+            fxmlLoader.load();
+        }
         Platform.runLater(() -> {
             Task<Parent> loadTask = new Task<Parent>() {
                 @Override
@@ -106,10 +117,15 @@ public class SelectUserScreenController {
                 App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
             });
             loadTask.setOnRunning(event -> {
+                //Main function that runs after loading dialogue is animated
+//                if(App.useCache.get()){
+//                    System.out.println("Hello I'm in the setOnRunningTask");
+//                }
             });
             Thread t = new Thread(loadTask);
             Thread thread = new Thread(() ->{
                 try {
+                    //Wait to allow for dialogue to animate in
                     Thread.sleep(500);
                     Platform.runLater(t::start);
                 } catch (InterruptedException e) {
