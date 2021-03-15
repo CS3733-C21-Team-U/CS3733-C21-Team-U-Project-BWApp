@@ -79,9 +79,9 @@
          <center>
             <JFXTabPane fx:id="mainTabPane" prefHeight="926.0" prefWidth="1901.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab fx:id="pathFindingTab" closable="false" onClosed="#handleTest2" onSelectionChanged="#handleEnablePathFinding">
+                  <Tab fx:id="pathFindingTab" closable="false" onClosed="#handleTest2" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
+                        <AnchorPane fx:id="pathfindingDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
                               <fx:include source="pathfinding/PathfindingBase.fxml" AnchorPane.bottomAnchor="0.0" />
                               <fx:include source="pathfinding/FloatingPathfindingPane.fxml" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
@@ -107,9 +107,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="googleTab" closable="false" disable="true" onSelectionChanged="#handleEnableGoogleMaps">
+                  <Tab fx:id="googleTab" closable="false" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
+                        <AnchorPane fx:id="googleDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1686.0">
                            <children>
                               <fx:include source="pathfinding/EmbenedGoogleMaps.fxml" />
                            </children>
@@ -121,7 +121,7 @@
                               <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
                                  <children>
                                     <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" styleClass="left-nav-icons" />
-                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Google Maps">
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Google Maps ">
                                        <VBox.margin>
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
@@ -135,9 +135,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="requestTab" closable="false" disable="true" onSelectionChanged="#handleEnableRequests">
+                  <Tab fx:id="requestTab" closable="false" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                        <AnchorPane fx:id="requestDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
                               <fx:include source="request/ViewRequestList.fxml" />
                            </children>
@@ -163,9 +163,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="settingsTab" disable="true" onSelectionChanged="#handleEnableSettings">
+                  <Tab fx:id="settingsTab" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="settingsDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <fx:include source="SettingsBase.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
@@ -190,9 +190,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="HelpMainPageTab" disable="true" onSelectionChanged="#handleEnableHelp">
+                  <Tab fx:id="HelpMainPageTab" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="helpDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <fx:include source="MainHelpPage.fxml" />
                            </children></AnchorPane>
@@ -203,7 +203,7 @@
                               <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
                                  <children>
                                     <SVGPath content="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4zM11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" rotate="90.0" styleClass="left-nav-icons" />
-                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Help">
+                                    <Label minWidth="120.0" onMouseClicked="#detectTab" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Help">
                                        <VBox.margin>
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
@@ -217,9 +217,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="AdminHelpMainPageTab" disable="true" onSelectionChanged="#handleEnableAdminHelp">
+                  <Tab fx:id="AdminHelpMainPageTab" onSelectionChanged="#detectTab">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane fx:id="adminHelpDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <fx:include source="AdminMainHelpPage.fxml" />
                            </children></AnchorPane>
@@ -230,7 +230,7 @@
                               <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
                                  <children>
                                     <SVGPath content="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4zM11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" rotate="90.0" styleClass="left-nav-icons" />
-                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Admin Help">
+                                    <Label minWidth="120.0" onMouseClicked="#detectTab" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Admin Help ">
                                        <VBox.margin>
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
@@ -244,9 +244,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab1" closable="false" disable="true" onSelectionChanged="#handleEnableMapBuild" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab1" closable="false" onSelectionChanged="#detectTab" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                        <AnchorPane fx:id="mapBuildDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
                               <fx:include source="mapbuilder/MapBuilderBase.fxml" AnchorPane.bottomAnchor="0.0" />
                            </children></AnchorPane>
@@ -257,7 +257,7 @@
                               <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
                                  <children>
                                     <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" rotate="90.0" styleClass="left-nav-icons" />
-                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Map Builder">
+                                    <Label minWidth="120.0" onMouseClicked="#detectTab" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Map Builder">
                                        <VBox.margin>
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
@@ -271,9 +271,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab2" closable="false" disable="true" onSelectionChanged="#handleEnableUser" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab2" closable="false" onSelectionChanged="#detectTab" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                        <AnchorPane fx:id="userDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
                               <fx:include source="user/ViewUserList.fxml" />
                            </children></AnchorPane>
@@ -298,9 +298,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab3" closable="false" disable="true" onSelectionChanged="#handleEnableGuest" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab3" closable="false" onSelectionChanged="#detectTab" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                        <AnchorPane fx:id="guestDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
                               <fx:include source="user/ViewGuestList.fxml" />
                            </children></AnchorPane>
@@ -325,9 +325,9 @@
                         </Group>
                      </graphic>
                   </Tab>
-                  <Tab fx:id="adminTab4" closable="false" style="fx-opacity: 0;">
+                  <Tab fx:id="adminTab4" closable="false" onSelectionChanged="#detectTab" style="fx-opacity: 0;">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                        <AnchorPane fx:id="covidDis" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
                            <children>
                               <fx:include source="user/ViewCovidResults.fxml" />
                            </children></AnchorPane>
