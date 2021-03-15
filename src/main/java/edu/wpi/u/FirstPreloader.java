@@ -11,10 +11,17 @@ public class FirstPreloader extends Preloader {
         fxmlLoader.load();
         fxmlLoader.getController();
         App.base = fxmlLoader.getRoot();
+
         FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
         fxmlLoader2.setClassLoader(App.classLoader);
         fxmlLoader2.load();
         fxmlLoader2.getController();
         App.loginBase = fxmlLoader2.getRoot();
+
+        FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+        fxmlLoader3.setClassLoader(App.classLoader);
+        fxmlLoader3.load();
+        fxmlLoader3.getController();
+        App.guestBase = fxmlLoader3.getRoot();
     }
 }

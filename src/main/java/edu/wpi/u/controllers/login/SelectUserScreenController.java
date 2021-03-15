@@ -58,7 +58,7 @@ public class SelectUserScreenController {
         //loadingNewMainPage("Login");
         Thread thread = new Thread(() -> {
             try {
-                Thread.sleep(500);
+                //Thread.sleep(100);
                 Platform.runLater(() -> {
                     App.getPrimaryStage().getScene().setRoot(App.loginBase);
                 });
@@ -71,10 +71,21 @@ public class SelectUserScreenController {
     }
 
     public void handleGuestButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+//        App.getPrimaryStage().getScene().setRoot(root);
+        Thread thread = new Thread(() -> {
+            try {
+                //Thread.sleep(100);
+                Platform.runLater(() -> {
+                    App.getPrimaryStage().getScene().setRoot(App.guestBase);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Error("Unexpected interruption");
+            }
+        });
+        thread.start();
     }
-
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/CovidSurveyScreen.fxml"));
