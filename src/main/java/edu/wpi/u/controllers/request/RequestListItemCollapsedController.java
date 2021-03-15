@@ -16,6 +16,8 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class RequestListItemCollapsedController extends AnchorPane implements Initializable {
@@ -39,6 +41,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
+    @FXML public Label requestItemLocationLabel;
+    @FXML public Label requestItemAssigneeLabel;
+
     @FXML public AnchorPane requestItemRoot;
 //    @FXML public SVGPath requestIcon;
     @FXML public SVGPath requestIcon;
@@ -54,16 +59,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         requestIcon.setContent(parent.getIcon(parent.request.getType()));
-        requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
-        requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
-        requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
-        requestItemRequestTypeLabel.setText(parent.request.getType());
+        setFields();
 
         parent.needUpdate.addListener((o,oldVal,newVal) -> {
-            requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
-            requestItemDate2BCompletedLabel.setText(App.p.format(parent.request.getGenericRequest().getDateNeeded()));
-            requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
-            requestItemRequestTypeLabel.setText(parent.request.getType());
+            setFields();
         });
 
         App.requestService.requestType.addListener((o, oldVal, newVal)->{
@@ -115,23 +114,44 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             }
     }
 
-//    //Listener here for the global drawerstare variable
-//    @FXML
-//    public void handleChangeToEditRequest() throws Exception {
-//        App.lastClickedRequestNumber = myID;
-//        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml");
-//    }
-//
-//    @FXML
-//    public void handleDeleteRequest() {
-//        App.requestService.deleteRequest(myRequestID);
-//        App.rightDrawerRoot.set("/edu/wpi/u/views/EditRequest.fxml"); //Fake - Just to refresh
-//        App.rightDrawerRoot.set("/edu/wpi/u/views/Oldfxml/ViewRequest.fxml");
-//    }
-//
-//    public void setTitle(String newTitle){
-//        requestitleLabel.setText(newTitle);
-//    }
-//    public void setLocation(String newLocation){ locationLabel.setText(newLocation); }
+    private void setFields(){
+        requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
+        Timestamp t = parent.request.getGenericRequest().getDateNeeded();
+        if(t.before(new Timestamp(System.currentTimeMillis()))){
+            requestItemDate2BCompletedLabel.setText("Overdue: " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+        }
+        else{
+            requestItemDate2BCompletedLabel.setText("Due: " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+        }
+        requestItemCreatorLabel.setText("By " + parent.request.getGenericRequest().getCreator());
+        requestItemRequestTypeLabel.setText(parent.request.getType());
+        int locationsSize = parent.request.getGenericRequest().getLocations().size();
+        int assigneeSize = parent.request.getGenericRequest().getAssignees().size();
+        if(locationsSize != 0) {
+            if(locationsSize == 1){
+                requestItemLocationLabel.setText(locationsSize + " Location");
+
+            }
+            else{
+                requestItemLocationLabel.setText(locationsSize + " Locations");
+            }
+        }
+        else {
+            requestItemLocationLabel.setText("No Locations");
+        }
+        if(assigneeSize != 0) {
+            if(assigneeSize == 1){
+                requestItemAssigneeLabel.setText(assigneeSize + " Assignee");
+
+            }
+            else{
+                requestItemAssigneeLabel.setText(assigneeSize + " Assignees");
+
+            }
+        }
+        else {
+            requestItemAssigneeLabel.setText("No Assignees");
+        }
+    }
 
 }

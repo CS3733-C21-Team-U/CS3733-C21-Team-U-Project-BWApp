@@ -5,12 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.SVGPath?>
 
 <fx:root fx:id="requestItemRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1330.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7px;" stylesheets="@../css/BaseStyle.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" layoutX="40.0" layoutY="76.0" prefHeight="0.0" prefWidth="1290.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" layoutX="40.0" layoutY="76.0" prefHeight="0.0" prefWidth="1290.0" spacing="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXButton contentDisplay="GRAPHIC_ONLY" maxHeight="57.0" maxWidth="44.0" mouseTransparent="true" prefHeight="57.0" prefWidth="44.0" style="-fx-background-color: -primary;" styleClass="fab-default">
                <graphic>
@@ -22,11 +21,11 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <Region prefHeight="85.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="requestItemRequestTypeLabel" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="subtitle" text="Maintenace" />
-            <Label fx:id="requestItemDate2BCompletedLabel" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="subtitle" text="3-3-2021" />
-            <Label fx:id="requestItemCreatorLabel" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="subtitle" text="Michael Geary" />
-            <Label fx:id="requestItemLocationLabel" layoutX="1231.0" layoutY="44.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="subtitle" text="Atrium Lobby" />
+            <Label fx:id="requestItemRequestTypeLabel" alignment="CENTER" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="subtitle" text="Maintenace" />
+            <Label fx:id="requestItemDate2BCompletedLabel" alignment="CENTER" maxWidth="193.0" minWidth="150.0" prefHeight="18.0" prefWidth="193.0" styleClass="subtitle" text="3-3-2021" />
+            <Label fx:id="requestItemCreatorLabel" alignment="CENTER" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="subtitle" text="Michael Geary" />
+            <Label fx:id="requestItemAssigneeLabel" alignment="CENTER" maxWidth="100.0" minWidth="91.0" prefHeight="18.0" prefWidth="91.0" styleClass="subtitle" text="51 Assignees" />
+            <Label fx:id="requestItemLocationLabel" alignment="CENTER" layoutX="1231.0" layoutY="44.0" maxWidth="100.0" minWidth="91.0" prefHeight="18.0" prefWidth="91.0" styleClass="subtitle" text="21 Locations" />
             <JFXButton onAction="#handleShowDetailButton" styleClass="button-text" text="SHOW DETAILS" />
          </children>
       </HBox>
