@@ -14,27 +14,27 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminMainHelpController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.AdminMainHelpController">
    <children>
       <Pane prefHeight="52.0" prefWidth="240.0" style="-fx-background-color: rgba(255,255,255,0.5);">
          <children>
-            <ImageView fitHeight="52.0" fitWidth="230.0" style="-fx-background-color: rbga(0,0,0,0.5);">
+            <ImageView fitHeight="330.0" fitWidth="1700.0" opacity="0.97">
+               <image>
+                  <Image url="@Images/hospital(2).jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="230.0" preserveRatio="true" style="-fx-background-color: rbga(0,0,0,0.5);">
                <image>
                   <Image url="@Images/logonoback.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <ImageView fitHeight="330.0" fitWidth="1700.0" opacity="0.97" translateY="50.0">
-         <image>
-            <Image url="@Images/hospital(2).jpg" />
-         </image>
-      </ImageView>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="-30.0" layoutY="-26.0" prefHeight="1000.0" prefWidth="1700.0" spacing="75.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="-30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="-26.0">
                <children>
-                  <Label styleClass="headline-3" text="More questions? Call 617-732-5500  " translateX="690.0" translateY="20.0" />
+                  <Label style="-fx-background-color: rgba(255,255,255,0.3); -fx-text-fill: -Onprimary;" styleClass="headline-3" text="More questions? Call 617-732-5500  " translateX="690.0" translateY="20.0" />
                   <Label style="-fx-background-color: rgba(255,255,255,0.3); -fx-text-fill: -Onprimary;" styleClass="headline-1" text="We're here to help" translateY="130.0">
                      <VBox.margin>
                         <Insets bottom="100.0" />
@@ -177,6 +177,14 @@
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
+                                    </JFXButton>
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" layoutX="95.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleMyRequestButton" prefHeight="110.0" prefWidth="400.0" style="-fx-background-color: -primary; -fx-text-fill: -onPrimary;" text="My Request">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <graphic>
+                                          <SVGPath content="M3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29zM3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -onPrimary;" translateY="-10.0" />
+                                       </graphic>
                                     </JFXButton>
                                  </children>
                               </VBox>
