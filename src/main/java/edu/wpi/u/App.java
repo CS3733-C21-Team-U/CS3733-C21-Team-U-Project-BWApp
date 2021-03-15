@@ -9,11 +9,13 @@ import edu.wpi.u.models.*;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
+import edu.wpi.u.web.EmailService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.WritableFloatValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -51,13 +53,16 @@ public class App extends Application {
   public static SimpleBooleanProperty addNewRequestToList = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
+  public static boolean loadedAlready = false;
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
+  public static StackPane loadingSpinnerHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
+  public static EmailService emailService = new EmailService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -97,6 +102,10 @@ public class App extends Application {
   public static String test = "hello there";
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
+  public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
+  //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
   public App(){
     System.out.println("App constructor");
@@ -112,6 +121,12 @@ public class App extends Application {
 
   @Override
   public void init()  {
+//    fxmlLoader.setClassLoader(classLoader);
+//    try {
+//      fxmlLoader.load();
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
     System.out.println("Starting Up");
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
@@ -130,11 +145,11 @@ public class App extends Application {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
-
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
 
-    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllEdges.csv", "Edges");
+
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -156,7 +171,7 @@ public class App extends Application {
     App.primaryStage.show();
 
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.ESCAPE && e.isControlDown()) {
+      if (e.getCode() == KeyCode.Q && e.isControlDown()) {
         App.getInstance().exitApp();
       }
     });
@@ -170,8 +185,9 @@ public class App extends Application {
   }
 
   public void exitApp() {
+    App.isLoggedIn.set(false);
     System.out.println("Shutting Down");
-    Database.getDB().saveAll();
+    //Database.getDB().saveAll();
 //    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();

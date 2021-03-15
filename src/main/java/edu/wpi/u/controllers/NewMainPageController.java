@@ -9,7 +9,6 @@ import edu.wpi.u.models.MapService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,12 +51,7 @@ public class NewMainPageController {
     public Tab adminTab2;
     public Tab adminTab1;
     public Tab adminTab3;
-    public Tab HelpMainPageTab;
-    public Tab AdminHelpMainPageTab;
-    public Tab settingsTab;
-    public Tab pathFindingTab;
-    public Tab googleTab;
-    public Tab requestTab;
+    public Tab adminTab4;
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
@@ -69,7 +63,9 @@ public class NewMainPageController {
     public JFXListView list2;
     public JFXButton expandButton;
     public JFXButton collapseButton;
-
+    public Tab HelpMainPageTab;
+    public Tab AdminHelpMainPageTab;
+    public Tab settingsTab;
 
 
     AnchorPane rightServiceRequestPane;
@@ -141,7 +137,7 @@ public class NewMainPageController {
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
-
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             if(App.userService.getActiveUser().getType() ==  ADMIN){
                 adminTab1.setStyle("-fx-opacity: 1");
                 adminTab1.setDisable(false);
@@ -149,6 +145,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(false);
                 adminTab3.setStyle("-fx-opacity: 1");
                 adminTab3.setDisable(false);
+                adminTab4.setStyle("-fx-opacity: 1");
+                adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
                 HelpMainPageTab.setStyle("-fx-opacity: 0");
                 AdminHelpMainPageTab.setDisable(false);
@@ -161,6 +159,8 @@ public class NewMainPageController {
                 adminTab2.setDisable(true);
                 adminTab3.setStyle("-fx-opacity: 0");
                 adminTab3.setDisable(true);
+                adminTab4.setStyle("-fx-opacity: 0");
+                adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
                 HelpMainPageTab.setStyle("-fx-opacity: 1");
                 AdminHelpMainPageTab.setDisable(true);
@@ -174,6 +174,8 @@ public class NewMainPageController {
                 settingsTab.setStyle("-fx-opacity: 1");
                 settingsTab.setDisable(false);
             }
+        });
+
 
     }
 
@@ -182,6 +184,7 @@ public class NewMainPageController {
     }
 
     public void handleExit() throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
@@ -206,6 +209,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
@@ -288,122 +292,6 @@ public class NewMainPageController {
     }
 
     public void onChipEnter(KeyEvent keyEvent) {
-    }
-
-    public void handleEnablePathFinding(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(false);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableGoogleMaps(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(false);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableRequests(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(false);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableSettings(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(false);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableHelp(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(false);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableAdminHelp(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(false);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableMapBuild(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(false);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableUser(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(true);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(false);
-//        adminTab3.setDisable(true);
-    }
-
-    public void handleEnableGuest(ActionEvent actionEvent) {
-//        pathFindingTab.setDisable(false);
-//        googleTab.setDisable(true);
-//        requestTab.setDisable(true);
-//        settingsTab.setDisable(true);
-//        HelpMainPageTab.setDisable(true);
-//        AdminHelpMainPageTab.setDisable(true);
-//        adminTab1.setDisable(true);
-//        adminTab2.setDisable(true);
-//        adminTab3.setDisable(false);
-    }
-
-    public void handleTest(Event event) {
-        System.out.println("Oh god I love Memes");
-    }
-
-    public void handleTest2(Event event) {
-        System.out.println("God Left me unfinished");
     }
 }
 

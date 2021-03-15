@@ -120,7 +120,9 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             locationsToAdd.add(longNamestoID.get(s));
         }
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
-
+//        for (String r : assigneesToAdd){
+//            App.emailService.sendMail();
+//        }
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
