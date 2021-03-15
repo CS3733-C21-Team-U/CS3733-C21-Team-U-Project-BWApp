@@ -27,6 +27,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
@@ -309,14 +310,7 @@ public class FloatingPathfindingPaneController {
     public void initialize(){
 
         pathContent.setPrefHeight(0);
-
-        if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
-            treeViewListNodes.setVisible(true);
-            pathContent.setVisible(false);
-        } else{
-            treeViewListNodes.setVisible(false);
-            pathContent.setVisible(true);
-        }
+        selectViewOption();
 
         targetNode.addListener((observable, oldVal, newVal) ->{
             if(newVal.equals("START")){
@@ -354,6 +348,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            selectViewOption();
             System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             endNodeField.requestFocus();
             targetNode.set("END");
@@ -374,6 +369,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            selectViewOption();
             System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             targetNode.set("START");
             startNodeField.requestFocus();
@@ -437,17 +433,23 @@ public class FloatingPathfindingPaneController {
 
         App.mapInteractionModel.pathFlag.addListener(observable -> {
             handleTestAddTextField(null);
-            if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
-                treeViewListNodes.setVisible(true);
-                pathContent.setVisible(false);
-            } else{
-                treeViewListNodes.setVisible(false);
-                pathContent.setVisible(true);
-            }
-
         });
 
         startNodeField.requestFocus();
+    }
+
+    public void selectViewOption(){
+        if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
+            treeViewListNodes.setVisible(true);
+            pathContent.setVisible(false);
+            treeViewListNodes.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            pathContent.setPrefHeight(0);
+        } else{
+            treeViewListNodes.setVisible(false);
+            pathContent.setVisible(true);
+            treeViewListNodes.setPrefHeight(0);
+            pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        }
     }
 
     public void handleStartEndSwap(ActionEvent actionEvent) {

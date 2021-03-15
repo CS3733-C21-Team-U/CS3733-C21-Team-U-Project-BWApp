@@ -210,21 +210,45 @@ public class TreeViewListController implements Initializable {
         // TODO: Close TreeViewListController
     }
 
-
     /**
      * Generalized method for expanding/collapsing, handles when the actual tree is pressed
      * Will be called with the treeType/nodeType as in input from the individual methods
      */
     private void expandAndCollapse(String treeType){
-        confTree.setPrefSize(350.0,24.0);
+
+        confTree.setPrefSize(350.0,32.0);
+        deptTree.setPrefSize(350.0,32.0);
+        elevTree.setPrefSize(350.0,32.0);
+        exitTree.setPrefSize(350.0,32.0);
+        foodTree.setPrefSize(350.0,32.0);
+        kiosTree.setPrefSize(350.0,32.0);
+        labsTree.setPrefSize(350.0,32.0);
+        parkTree.setPrefSize(350.0,32.0);
+        restTree.setPrefSize(350.0,32.0);
+        servTree.setPrefSize(350.0,32.0);
+        staiTree.setPrefSize(350.0,32.0);
+
+        rootConf.setExpanded(false);
+        rootDept.setExpanded(false);
+        rootElev.setExpanded(false);
+        rootExit.setExpanded(false);
+        rootFood.setExpanded(false);
+        rootKios.setExpanded(false);
+        rootLabs.setExpanded(false);
+        rootPark.setExpanded(false);
+        rootRest.setExpanded(false);
+        rootServ.setExpanded(false);
+        rootStai.setExpanded(false);
+
         switch(treeType){
             case "CONF":
-                confTree.setPrefSize(350.0, 144);
                 if(confExpanded){
+                    confTree.setPrefSize(350.0, 32.0);
                     rootConf.setExpanded(false);
                     System.out.println("Conferences Collapsed");
                     confExpanded = false;
                 } else {
+                    confTree.setPrefSize(350.0, 144.0);
                     rootConf.setExpanded(true);
                     System.out.println("Conferences Expanded");
                     confExpanded = true;
@@ -232,10 +256,12 @@ public class TreeViewListController implements Initializable {
                 break;
             case "DEPT":
                 if(deptExpanded){
+                    deptTree.setPrefSize(350.0, 32.0);
                     rootDept.setExpanded(false);
                     System.out.println("Departments Collapsed");
                     deptExpanded = false;
                 } else {
+                    deptTree.setPrefSize(350.0, 144.0);
                     rootDept.setExpanded(true);
                     System.out.println("Departments Expanded");
                     deptExpanded = true;
@@ -243,81 +269,99 @@ public class TreeViewListController implements Initializable {
                 break;
             case "ELEV":
                 if(elevExpanded){
+                    elevTree.setPrefSize(350.0, 32.0);
                     rootElev.setExpanded(false);
                     elevExpanded = false;
                 } else {
+                    elevTree.setPrefSize(350.0, 144.0);
                     rootElev.setExpanded(true);
                     elevExpanded = true;
                 }
                 break;
             case "EXIT":
                 if(exitExpanded){
+                    exitTree.setPrefSize(350.0, 32.0);
                     rootExit.setExpanded(false);
                     exitExpanded = false;
                 } else {
+                    exitTree.setPrefSize(350.0, 144.0);
                     rootExit.setExpanded(true);
                     exitExpanded = true;
                 }
                 break;
             case "FOOD":
                 if(foodExpanded){
+                    foodTree.setPrefSize(350.0, 32.0);
                     rootFood.setExpanded(false);
                     foodExpanded = false;
                 } else {
+                    foodTree.setPrefSize(350.0, 144.0);
                     rootFood.setExpanded(true);
                     foodExpanded = true;
                 }
                 break;
             case "KIOS":
                 if(kiosExpanded){
+                    kiosTree.setPrefSize(350.0, 32.0);
                     rootKios.setExpanded(false);
                     kiosExpanded = false;
                 } else {
+                    kiosTree.setPrefSize(350.0, 144.0);
                     rootKios.setExpanded(true);
                     kiosExpanded = true;
                 }
                 break;
             case "LAB":
                 if(labsExpanded){
+                    labsTree.setPrefSize(350.0, 32.0);
                     rootLabs.setExpanded(false);
                     labsExpanded = false;
                 } else {
+                    labsTree.setPrefSize(350.0, 144.0);
                     rootLabs.setExpanded(true);
                     labsExpanded = true;
                 }
                 break;
             case "PARK":
                 if(parkExpanded){
+                    parkTree.setPrefSize(350.0, 32.0);
                     rootPark.setExpanded(false);
                     parkExpanded = false;
                 } else {
+                    parkTree.setPrefSize(350.0, 144.0);
                     rootPark.setExpanded(true);
                     parkExpanded = true;
                 }
                 break;
             case "REST":
                 if(restExpanded){
+                    restTree.setPrefSize(350.0, 32.0);
                     rootRest.setExpanded(false);
                     restExpanded = false;
                 } else {
+                    restTree.setPrefSize(350.0, 144.0);
                     rootRest.setExpanded(true);
                     restExpanded = true;
                 }
                 break;
             case "SERV":
                 if(servExpanded){
+                    servTree.setPrefSize(350.0, 32.0);
                     rootServ.setExpanded(false);
                     servExpanded = false;
                 } else {
+                    servTree.setPrefSize(350.0, 144.0);
                     rootServ.setExpanded(true);
                     servExpanded = true;
                 }
                 break;
             case "STAI":
                 if(staiExpanded){
+                    staiTree.setPrefSize(350.0, 32.0);
                     rootStai.setExpanded(false);
                     staiExpanded = false;
                 } else {
+                    staiTree.setPrefSize(350.0, 144.0);
                     rootStai.setExpanded(true);
                     staiExpanded = true;
                 }
