@@ -76,7 +76,7 @@ public class HospitalCovidDashPageController {
     /**
      * When the Boston Coronavirus Button is clicked, the browser opens to the google coronavirus dashboard for Boston
      */
-    public void accessBostonChart() {
+    public void handleAccessBostonChart() {
         try {
             Desktop.getDesktop().browse(new URL("https://news.google.com/covid19/map?hl=en-US&gl=US&ceid=US%3Aen&mid=%2Fm%2F0k3l5").toURI());
         } catch (URISyntaxException | MalformedURLException e) {
@@ -90,7 +90,7 @@ public class HospitalCovidDashPageController {
      * When the Governer Update Button is clicked, the browser opens to the Massachusetts governer's updates webpage
      */
 
-    public void accessGovernerUpdate() {
+    public void handleAccessGovernerUpdate() {
         try {
             Desktop.getDesktop().browse(new URL("https://www.mass.gov/governor-updates").toURI());
         } catch (URISyntaxException | MalformedURLException e) {
@@ -98,6 +98,8 @@ public class HospitalCovidDashPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
 }

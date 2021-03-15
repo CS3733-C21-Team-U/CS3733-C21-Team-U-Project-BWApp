@@ -141,14 +141,14 @@
                   <Insets />
                </VBox.margin>
             </JFXTextArea>
-            <JFXButton fx:id="BostonCovidButton" buttonType="RAISED" onAction="#accessBostonChart" prefHeight="64.0" prefWidth="211.0" text="Boston Coronavirus Data">
+            <JFXButton fx:id="BostonCovidButton" buttonType="RAISED" onAction="#handleAccessBostonChart" prefHeight="64.0" prefWidth="211.0" text="Boston Coronavirus Data">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <VBox.margin>
                   <Insets left="15.0" top="10.0" />
                </VBox.margin></JFXButton>
-            <JFXButton fx:id="GovernerUpdateButton" buttonType="RAISED" onAction="#accessGovernerUpdate" prefHeight="64.0" prefWidth="149.0" text="Governer Updates">
+            <JFXButton fx:id="GovernerUpdateButton" buttonType="RAISED" onAction="#handleAccessGovernerUpdate" prefHeight="64.0" prefWidth="149.0" text="Governer Updates">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -158,5 +158,10 @@
             </JFXButton>
          </children>
       </VBox>
+      <JFXButton fx:id="returnToMainButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#handleReturnToMain" prefHeight="64.0" prefWidth="149.0" text="Return To Main Page">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </JFXButton>
    </children>
 </AnchorPane>
