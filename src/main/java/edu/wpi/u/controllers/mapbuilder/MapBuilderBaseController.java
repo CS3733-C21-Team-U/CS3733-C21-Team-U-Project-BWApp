@@ -85,6 +85,13 @@ public class MapBuilderBaseController {
         alineButton.setTooltip(new Tooltip("Align Selected Nodes Tool"));
         redoButton.setTooltip(new Tooltip("Redo Edit"));
         undoButton.setTooltip(new Tooltip("Undo Edit"));
+
+        toggle2.setTooltip(new Tooltip("Floor 1"));
+        toggle3.setTooltip(new Tooltip("Floor 2"));
+        toggle4.setTooltip(new Tooltip("Floor 3"));
+        toggle5.setTooltip(new Tooltip("Floor 4"));
+        toggle6.setTooltip(new Tooltip("Floor 5"));
+        toggle1.setTooltip(new Tooltip("Floor G"));
         //handle converting converting clicks on the screen into map space
 
 

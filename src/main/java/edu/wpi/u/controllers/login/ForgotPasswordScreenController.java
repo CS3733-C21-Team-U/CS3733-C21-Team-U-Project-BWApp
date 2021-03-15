@@ -6,9 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.exceptions.AccountNameNotFoundException;
-import edu.wpi.u.exceptions.PasswordNotFoundException;
 import edu.wpi.u.exceptions.PhoneNumberNotFoundException;
-import io.netty.handler.codec.http.HttpHeaders;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -160,6 +158,11 @@ public class ForgotPasswordScreenController {
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+        App.getPrimaryStage().getScene().setRoot(root);
+    }
+
+    public void handleGoBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 }

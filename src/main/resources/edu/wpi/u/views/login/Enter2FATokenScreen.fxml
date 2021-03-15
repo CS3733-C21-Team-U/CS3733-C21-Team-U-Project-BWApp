@@ -3,70 +3,80 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.Enter2FATokenController">
-    <children>
-      <HBox layoutX="590.0" layoutY="44.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.Enter2FATokenController">
+   <children>
+      <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;">
          <children>
-            <VBox prefHeight="1000.0" prefWidth="900.0">
-               <children>
-                  <ImageView fitHeight="120.0" fitWidth="115.0">
-                     <image>
-                        <Image url="@../Images/logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="290.0" top="210.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Label styleClass="headline-1" text="Authenticate">
-                     <VBox.margin>
-                        <Insets left="290.0" />
-                     </VBox.margin></Label>
-                  <Label text="Please Enter the Six Numbers Sent to Your Phone to Enter">
-                     <VBox.margin>
-                        <Insets left="290.0" />
-                     </VBox.margin></Label>
-                    <JFXTextField fx:id="tokenTextFIeld" labelFloat="true" prefHeight="45.0" prefWidth="245.0" promptText="6 Digit Number">
-                     <VBox.margin>
-                        <Insets left="290.0" right="303.0" top="20.0" />
-                     </VBox.margin></JFXTextField>
-                  <JFXProgressBar fx:id="progressBar" opacity="0.0" prefHeight="10.0" prefWidth="308.0">
-                     <VBox.margin>
-                        <Insets left="290.0" top="10.0" />
-                     </VBox.margin>
-                  </JFXProgressBar>
-                  <JFXButton cancelButton="true" onAction="#handleGoBack" prefHeight="63.0" prefWidth="306.0" styleClass="button-outlined" text="BACK TO LOGIN PAGE" textFill="#101c38">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="290.0" top="8.0" />
-                     </VBox.margin></JFXButton>
-                    <JFXButton fx:id="loginButton" buttonType="RAISED" defaultButton="true" onAction="#handleTokenSubmit" prefHeight="47.0" prefWidth="309.0" styleClass="button-contained" text="VERIFY">
-                     <VBox.margin>
-                        <Insets left="290.0" />
-                     </VBox.margin></JFXButton>
-                  <JFXButton fx:id="enterAppButton" buttonType="RAISED" disable="true" onAction="#handleAppEntry" opacity="0.0" prefHeight="47.0" prefWidth="307.0" styleClass="button-contained" text="ENTER" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets left="290.0" top="5.0" />
-                     </VBox.margin></JFXButton>
-               </children>
-            </VBox>
-            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <ImageView fitHeight="1360.0" fitWidth="1030.0" preserveRatio="true">
+            <ImageView fitHeight="1652.0" fitWidth="2668.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/pexels-anthony-shkraba-5215013.jpg" />
+                  <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
                </image>
-               <HBox.margin>
-                  <Insets top="-100.0" />
-               </HBox.margin>
             </ImageView>
          </children>
-      </HBox>
-    </children>
-</AnchorPane>
+      </AnchorPane>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0">
+         <left>
+            <BorderPane prefHeight="1080.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+               <center>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <effect>
+                        <DropShadow height="20.0" radius="9.5" width="20.0" />
+                     </effect>
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </opaqueInsets>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Region prefHeight="4.0" prefWidth="360.0" />
+                              <ImageView fitHeight="75.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="headline-2" text="Authenticate" />
+                              <Label prefHeight="62.0" prefWidth="360.0" styleClass="headline-3" text="Please Enter the Six Numbers Sent to Your Phone to Enter" textAlignment="CENTER" wrapText="true" />
+                              <Region prefHeight="29.0" prefWidth="360.0" />
+                              <JFXTextField fx:id="tokenTextFIeld" labelFloat="true" promptText="Enter 6-Digit Number" />
+                              <JFXProgressBar fx:id="progressBar" opacity="0.0" prefHeight="10.0" prefWidth="308.0" />
+                              <Region prefHeight="21.0" prefWidth="360.0" />
+                              <JFXButton fx:id="loginButton" onAction="#handleTokenSubmit" styleClass="button-contained" text="VERIFY" />
+                              <JFXButton onAction="#handleGoBack" styleClass="button-text" text="BACK TO LOGIN PAGE" />
+                              <JFXButton fx:id="enterAppButton" buttonType="RAISED" onAction="#handleAppEntry" opacity="0.0" prefHeight="47.0" prefWidth="307.0" styleClass="button-contained" text="ENTER" textFill="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </left>
+         <stylesheets>
+            <URL value="@../css/BaseStyle.css" />
+            <URL value="@../css/LightTheme.css" />
+         </stylesheets>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</StackPane>

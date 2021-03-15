@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class UserSignupScreenController {
 
