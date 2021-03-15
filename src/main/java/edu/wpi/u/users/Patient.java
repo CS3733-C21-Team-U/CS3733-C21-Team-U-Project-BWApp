@@ -7,31 +7,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Patient extends User{
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
-    //protected String locationNodeID;
+    protected ArrayList<Appointment> appointments = new ArrayList<>(); // todo : remove
     protected String providerName;
     protected String parkingLocation;
     protected String recommendedParkingLocation;
-    /*
-    Patient table -> Appointment Table <- Employee table
-     */
+
     public Patient() {
     }
-/*
-    String userID,
-    String name,
-    String accountName,
-    String password,
-    String email,
-    Role type,
-    String phoneNumber,
-    String locationNodeID,
-    boolean deleted,
-    ArrayList<Appointment> appointments,
-    String providerName,
-    String parkingLocation,
-    String recommendedParkingLocation) {
- */
+
     public Patient(String userID, String name, String accountName, String password, String email, Role type, String phoneNumber, boolean deleted, ArrayList<Appointment> appointments, String providerName, String parkingLocation, String recommendedParkingLocation) {
         super(userID, name, accountName, password, email, type, phoneNumber, deleted);
         this.appointments = appointments;

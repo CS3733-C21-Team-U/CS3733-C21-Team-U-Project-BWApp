@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +45,7 @@ public class PathfindingBaseController {
     @FXML public JFXToggleNode floor5;
 
 
+
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
@@ -72,6 +74,15 @@ public class PathfindingBaseController {
         pane.getChildren().add(pathBorder);
         pane.getChildren().add(pathFill);
         pane.getChildren().add(pathArrow);
+
+
+        //setup tooltips
+        floor1.setTooltip(new Tooltip("Floor 1"));
+        floor2.setTooltip(new Tooltip("Floor 2"));
+        floor3.setTooltip(new Tooltip("Floor 3"));
+        floor4.setTooltip(new Tooltip("Floor 4"));
+        floor5.setTooltip(new Tooltip("Floor 5"));
+        floorG.setTooltip(new Tooltip("Floor G"));
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -146,6 +157,7 @@ public class PathfindingBaseController {
             }
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
+
         });
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
             if(!App.mapInteractionModel.path.isEmpty()) {

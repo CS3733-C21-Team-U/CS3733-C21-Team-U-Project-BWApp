@@ -8,6 +8,7 @@ public abstract class Data {
     protected ResultSet rset;
     //protected String url = "jdbc:derby:BWdb;bootUser=admin;bootPassword=bwdbpassword";
     protected String url = "jdbc:derby:BWdb";
+    protected String testUrl = "jdbc:derby://localhost:1527/BWdb";
 
     protected static Database db;
 
@@ -22,8 +23,13 @@ public abstract class Data {
         try {
             conn = DriverManager.getConnection(url);
         } catch (Exception e) {
-            System.out.println("Connection failed");
-            e.printStackTrace();
+            try {
+                conn = DriverManager.getConnection(url);
+            }catch (Exception d){
+                d.printStackTrace();
+                System.out.println("Connection failed");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -52,6 +58,7 @@ public abstract class Data {
         }
         return true;
     }
+
     public boolean updateField(String tableName, String idField, String id, String field, int val) {
         try {
             String str = "update "+tableName+" set "+field+"="+val+" where "+idField+"="+id;
@@ -64,6 +71,7 @@ public abstract class Data {
         }
         return true;
     }
+
     public int addToJoinTable(String tableName, String id1, String id2) {
         try {
             System.out.println("Edges are being added to the Database");
@@ -80,6 +88,7 @@ public abstract class Data {
         }
         return 1;
     }
+
     public void updJoinedList(String searchIDName, String joinTable, String searchID, String addID, LinkedList<String> newList){
         String str = "delete from "+joinTable+" where "+searchIDName+"=?";
         try {
@@ -95,6 +104,7 @@ public abstract class Data {
             e.printStackTrace();
         }
     }
+
     public void printTableItem(String tableName, String columnName) {
         try {
             String str = "select * from " + tableName;
@@ -111,8 +121,4 @@ public abstract class Data {
         }
     }
 
-/*
-move readCSV to database
-move saveCSV to database
- */
 }

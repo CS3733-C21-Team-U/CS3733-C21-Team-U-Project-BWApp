@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
-import edu.wpi.u.users.Role;
-import io.netty.handler.codec.http.HttpHeaders;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import org.asynchttpclient.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Future;
 
 public class Enter2FATokenController {
@@ -26,19 +23,20 @@ public class Enter2FATokenController {
     @FXML public JFXButton enterAppButton;
 
     SimpleBooleanProperty valid = new SimpleBooleanProperty(false);
-    public void initialize(){
 
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+
+    public void initialize() throws IOException {
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
     }
 
     public void handleTokenSubmit() {
         String token = tokenTextFIeld.getText();
         String phoneNumber = App.userService.getActiveUser().getPhoneNumber();
         try {
-            System.out.println("Token " + token);
-            System.out.println("Phonenumber " + phoneNumber);
             URI uri2 = new URI("https://bw-webapp.herokuapp.com/" +"verify?phonenumber=" + "+1"+ phoneNumber + "&code=" + token);
             URL url2 = uri2.toURL(); // make GET request
-            System.out.println("URL: " + url2.toString());
             AsyncHttpClient client = Dsl.asyncHttpClient();
             Future<Response> whenResponse = client.prepareGet(url2.toString()).execute();
             Response response = whenResponse.get();
@@ -61,7 +59,8 @@ public class Enter2FATokenController {
     }
 
     public void handleAppEntry() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
+        //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 }
