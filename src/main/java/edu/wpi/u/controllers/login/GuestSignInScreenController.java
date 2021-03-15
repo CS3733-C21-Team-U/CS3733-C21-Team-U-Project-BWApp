@@ -18,8 +18,11 @@ public class GuestSignInScreenController {
     public JFXTextField nameGuestTextField;
     public JFXTextArea visitReasonTextField;
 
-    public void initialize() throws IOException {
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
+    public void initialize() throws IOException {
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
     }
     public void handleSignInButton(ActionEvent actionEvent) throws IOException {
         //TODO: set active user to guest
@@ -27,8 +30,9 @@ public class GuestSignInScreenController {
         App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
 //        System.out.println("Name to be added " + nameGuestTextField.getText());
         App.userService.setGuest(nameGuestTextField.getText());
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.isLoggedIn.set(true);
+        //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {

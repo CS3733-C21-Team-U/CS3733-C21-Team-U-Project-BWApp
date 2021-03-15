@@ -14,7 +14,7 @@ import java.util.Date;
 public class RequestService {
 
 
-  public static RequestData rd;
+  static RequestData rd;
   ArrayList<SpecificRequest> activeRequests = new ArrayList<>();
 
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
@@ -22,14 +22,15 @@ public class RequestService {
   public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
   public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);//assignedToYou, unAssigned, all
 
+  public SpecificRequest curCovidRequest;
 
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
-    for (SpecificRequest x : this.activeRequests){
-
-      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
-    }
+//    for (SpecificRequest x : this.activeRequests){
+//
+//      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
+//    }
   }
 
   /**
@@ -42,20 +43,8 @@ public class RequestService {
     this.activeRequests = rd.loadActiveRequests();
   }
 
-  public ArrayList<String> getAssignees(String requestID){
-    return rd.getAssignees(requestID);
-  }
-
   public ArrayList<String> getLocations(String requestID){
     return rd.getLocations(requestID);
-  }
-
-  public void setAssignees(String requestID, ArrayList<String> assignees){
-    rd.updAssignees(requestID, assignees);
-  }
-
-  public void setLocations(String requestID, ArrayList<String> locations){
-    rd.updLocations(requestID, locations);
   }
 
   public void loadCSVFile(String path, String tableName){

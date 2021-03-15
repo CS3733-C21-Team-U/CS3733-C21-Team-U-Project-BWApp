@@ -1,18 +1,15 @@
 package edu.wpi.u.controllers.request;
 
-import com.jfoenix.controls.JFXChipView;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.SpecificRequest;
+import edu.wpi.u.algorithms.Node;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.SVGPath;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.IOException;
 import java.net.URL;

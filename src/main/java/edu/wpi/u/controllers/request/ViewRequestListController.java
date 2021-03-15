@@ -66,10 +66,13 @@ public class ViewRequestListController {
         typeOption.getItems().addAll(
                 "All", "Maintenance", "Laundry", "Security", "Sanitation", "Computer", "Medical",
                 "AudioVisual", "Religious", "Language", "Gift", "Floral", "CovidSurvey");
+        typeOption.setValue("All");
         assignOption.getItems().addAll(
                 "All", "Assigned to You", "Unassigned");
+        assignOption.setValue("All");
         resolveOption.getItems().addAll(
                 "All", "Active", "Resolved");
+        resolveOption.setValue("All");
 
         App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
             newRequestVBox = App.newReqVBox;

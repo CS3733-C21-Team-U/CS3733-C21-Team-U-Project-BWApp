@@ -9,11 +9,13 @@ import edu.wpi.u.models.*;
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
+import edu.wpi.u.web.EmailService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.WritableFloatValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -51,13 +53,16 @@ public class App extends Application {
   public static SimpleBooleanProperty addNewRequestToList = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
+  public static boolean loadedAlready = false;
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
+  public static StackPane loadingSpinnerHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
+  public static EmailService emailService = new EmailService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -92,11 +97,15 @@ public class App extends Application {
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
 
-  public static PrettyTime p = new PrettyTime();
+  public static PrettyTime prettyTime = new PrettyTime();
 
   public static String test = "hello there";
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
+  public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
+  //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
   public App(){
     System.out.println("App constructor");
@@ -112,6 +121,12 @@ public class App extends Application {
 
   @Override
   public void init()  {
+//    fxmlLoader.setClassLoader(classLoader);
+//    try {
+//      fxmlLoader.load();
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
     System.out.println("Starting Up");
 //    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
@@ -130,11 +145,11 @@ public class App extends Application {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
-
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
 
-    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
+    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllEdges.csv", "Edges");
+
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
 //    Label label = new Label("Hello World");
@@ -154,10 +169,10 @@ public class App extends Application {
     App.primaryStage.setFullScreenExitHint("");
     App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     App.primaryStage.show();
+
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.ESCAPE) {
-        System.out.println("Escape button pressed, exiting");
-          App.getInstance().end();
+      if (e.getCode() == KeyCode.Q && e.isControlDown()) {
+        App.getInstance().exitApp();
       }
     });
 
@@ -169,9 +184,10 @@ public class App extends Application {
     return primaryStage;
   }
 
-  public void end() {
+  public void exitApp() {
+    App.isLoggedIn.set(false);
     System.out.println("Shutting Down");
-    Database.getDB().saveAll();
+    //Database.getDB().saveAll();
 //    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
@@ -192,7 +208,7 @@ public class App extends Application {
       System.out.println("isDarkTheme!");
       App.primaryStage.getScene().getStylesheets().clear();
       App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
       App.themeSVG.setContent("M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12.29 7c-.74 0-1.45.17-2.08.46 1.72.79 2.92 2.53 2.92 4.54s-1.2 3.75-2.92 4.54c.63.29 1.34.46 2.08.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z");
       App.isLightTheme = true;
     }
