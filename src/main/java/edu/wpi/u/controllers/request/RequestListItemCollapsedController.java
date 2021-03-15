@@ -115,10 +115,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
         Timestamp t = parent.request.getGenericRequest().getDateNeeded();
         if(t.before(new Timestamp(System.currentTimeMillis()))){
-            requestItemDate2BCompletedLabel.setText("Overdue: " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+            requestItemDate2BCompletedLabel.setText("Overdue: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
         else{
-            requestItemDate2BCompletedLabel.setText("Due: " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
+            requestItemDate2BCompletedLabel.setText("Due: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
         requestItemCreatorLabel.setText("By " + parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
