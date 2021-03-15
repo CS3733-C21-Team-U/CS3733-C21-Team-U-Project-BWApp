@@ -35,9 +35,14 @@ public class CovidSurveyScreenController {
     //  Intakes a set of checkbox values and will allow the user to go to the next page if the proper requirements are met
     // if requirements are not met, the user should be sent to another page that directs them to seek help or go home.
     // Will throw an error if any of the check boxes are not completed.
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+
+    public void initialize() throws IOException{
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
+    }
 
     public void handleCovidSurveyFill() throws IOException {
-
         if (!Q1CheckBox.isSelected() &! Q2CheckBox.isSelected() &! Q3CheckBox.isSelected() &! Q4CheckBox.isSelected() & Q5CheckBox.isSelected()){
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 App.getPrimaryStage().getScene().setRoot(root);
@@ -63,18 +68,18 @@ public class CovidSurveyScreenController {
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        Object obj = fxmlLoader.load();
-        Object myController = fxmlLoader.getController();
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        Object obj = fxmlLoader.load();
+//        Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        Object obj = fxmlLoader.load();
-        Object myController = fxmlLoader.getController();
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        Object obj = fxmlLoader.load();
+//        Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
@@ -82,9 +87,9 @@ public class CovidSurveyScreenController {
         App.userService.setEmployee("debug");
         System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 

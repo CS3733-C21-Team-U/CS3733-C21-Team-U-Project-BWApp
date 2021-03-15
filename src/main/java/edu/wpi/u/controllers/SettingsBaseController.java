@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
@@ -17,7 +16,6 @@ import edu.wpi.u.App;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -89,15 +87,32 @@ public class SettingsBaseController {
             passwordsDontMatchLabel.setVisible(false);
             succsessfulLabel.setVisible(false);
         });
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
+                onlyAdmin.setStyle("-fx-opacity: 1");
+                onlyAdmin.setDisable(false);
+            }
+            else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
+                onlyAdmin.setStyle("-fx-opacity: 0");
+                onlyAdmin.setDisable(true);
+            }
 
-        if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
-            onlyAdmin.setStyle("-fx-opacity: 1");
-            onlyAdmin.setDisable(false);
-        }
-        else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
-            onlyAdmin.setStyle("-fx-opacity: 0");
-            onlyAdmin.setDisable(true);
-        }
+            if (!(App.userService.getActiveUser().getType() == ADMIN)) {
+                adminText.setStyle("-fx-opacity: 0");
+                subtitleText.setStyle("-fx-opacity: 0");
+                pathfindingText.setStyle("-fx-opacity: 0");
+                filePathTextField.setStyle("-fx-opacity: 0");
+                loadCSVButton.setStyle("-fx-opacity: 0");
+                tableNameOptions.setStyle("-fx-opacity: 0");
+                createTableButton.setStyle("-fx-opacity: 0");
+
+                pathfindingText.setDisable(true);
+                filePathTextField.setDisable(true);
+                createTableButton.setDisable(true);
+                loadCSVButton.setDisable(true);
+
+            }
+        });
 
 
         tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges"));
@@ -112,21 +127,6 @@ public class SettingsBaseController {
             }
         });
 
-        if (!(App.userService.getActiveUser().getType() == ADMIN)) {
-            adminText.setStyle("-fx-opacity: 0");
-            subtitleText.setStyle("-fx-opacity: 0");
-            pathfindingText.setStyle("-fx-opacity: 0");
-            filePathTextField.setStyle("-fx-opacity: 0");
-            loadCSVButton.setStyle("-fx-opacity: 0");
-            tableNameOptions.setStyle("-fx-opacity: 0");
-            createTableButton.setStyle("-fx-opacity: 0");
-
-            pathfindingText.setDisable(true);
-            filePathTextField.setDisable(true);
-            createTableButton.setDisable(true);
-            loadCSVButton.setDisable(true);
-
-        }
 
 
     }

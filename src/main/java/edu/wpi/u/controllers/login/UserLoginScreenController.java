@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
-import java.nio.file.AccessDeniedException;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,7 +46,12 @@ public class UserLoginScreenController {
     @FXML public JFXButton debugLoginGuestButton;
     @FXML public JFXButton submitSkipButton;
 
+    private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+
     public void initialize() throws IOException {
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
+
         wrongPasswordLabel.setVisible(false);
 
         passWordField.focusedProperty().addListener(e->{
@@ -107,18 +111,15 @@ public class UserLoginScreenController {
     }
 
     public void handleLogin() throws IOException {
-        System.out.println("HERE");
         progressBar.setStyle("-fx-opacity: 1");
-//        Scene scene = new Scene(root);
-//        App.getPrimaryStage().setScene(scene);
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/Enter2FATokenScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
+
         String username = userNameTextField.getText();
         String password = passWordField.getText();
 
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
+                App.isLoggedIn.set(true);
                 handleSubmit();
             }else{
                 wrongPasswordLabel.setVisible(true);
@@ -126,7 +127,6 @@ public class UserLoginScreenController {
         }else{
             wrongPasswordLabel.setVisible(true);
         }
-
 
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
@@ -201,21 +201,22 @@ public class UserLoginScreenController {
         }
 
     public void handleSubmit() throws IOException {
-        App.loginFlag.set(!App.loginFlag.get());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.isLoggedIn.set(true);
+        //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot()); // todo : this still makes it load???
     }
 
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("patient", "patient", "Guests");
+        App.userService.setUser("patient", "patient", "Patients");
+        App.isLoggedIn.set(true);
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(root);
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
@@ -223,42 +224,44 @@ public class UserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleSkip(ActionEvent actionEvent) throws IOException {
-        String username = userNameTextField.getText();
-        String password = passWordField.getText();
-        try{
-            if (!App.userService.checkUsername(username).equals("")) {
-                if (!App.userService.checkPassword(password,username).equals("")) {
-                    App.userService.setUser(username, password, App.userService.checkPassword(password,username));
-                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                    App.getPrimaryStage().getScene().setRoot(root);
-                }
-                else {
-                    throw new PasswordNotFoundException();
-                }
-            }
-            else {
-                throw new AccountNameNotFoundException();
-            }
-        }catch (AccountNameNotFoundException | PasswordNotFoundException e){
-            errorLabel.setText("Username or Password is Invalid");
-            e.printStackTrace();
-        }
-
-    }
+//    public void handleSkip(ActionEvent actionEvent) throws IOException {
+//        String username = userNameTextField.getText();
+//        String password = passWordField.getText();
+//        try{
+//            if (!App.userService.checkUsername(username).equals("")) {
+//                if (!App.userService.checkPassword(password,username).equals("")) {
+//                    App.userService.setUser(username, password, App.userService.checkPassword(password,username));
+//                    App.isLoggedIn.set(true);
+////                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+//                    //Parent root = App.base;
+//                    App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//                }
+//                else {
+//                    throw new PasswordNotFoundException();
+//                }
+//            }
+//            else {
+//                throw new AccountNameNotFoundException();
+//            }
+//        }catch (AccountNameNotFoundException | PasswordNotFoundException e){
+//            errorLabel.setText("Username or Password is Invalid");
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     public void handleLonginWithNo2FA(){
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()));
-                Parent root = null;
-                try {
-                    App.loginFlag.set(!App.loginFlag.get());
-                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                App.getPrimaryStage().getScene().setRoot(root);
+                App.isLoggedIn.set(true);
+                //Parent root = null;
+//                try {
+//                    App.loginFlag.set(!App.loginFlag.get());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }else{
                 wrongPasswordLabel.setVisible(true);
             }

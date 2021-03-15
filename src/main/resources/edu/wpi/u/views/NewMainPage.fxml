@@ -327,6 +327,33 @@
                         </Group>
                      </graphic>
                   </Tab>
+                  <Tab fx:id="adminTab4" closable="false" style="fx-opacity: 0;">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">
+                           <children>
+                              <fx:include source="user/ViewCovidResults.fxml" />
+                           </children></AnchorPane>
+                     </content>
+                     <graphic>
+                        <Group>
+                           <children>
+                              <VBox alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="50.0" spacing="20.0">
+                                 <children>
+                                    <SVGPath content="M 14,8 A 4,4 0 0 1 10,12 4,4 0 0 1 6,8 4,4 0 0 1 10,4 4,4 0 0 1 14,8 Z M10.35,14.01C7.62,13.91,2,15.27,2,18v2h9.54C9.07,17.24,10.31,14.11,10.35,14.01z M19.43,18.02C19.79,17.43,20,16.74,20,16c0-2.21-1.79-4-4-4s-4,1.79-4,4c0,2.21,1.79,4,4,4c0.74,0,1.43-0.22,2.02-0.57 L20.59,22L22,20.59L19.43,18.02z M16,18c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C18,17.1,17.1,18,16,18z" rotate="90.0" styleClass="left-nav-icons" />
+                                    <Label minWidth="120.0" prefHeight="25.0" prefWidth="135.0" rotate="90.0" styleClass="left-nav-icons" text="Covid Results">
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Tab>
                   <Tab closable="false" disable="true" style="-fx-opacity: 0;">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1628.0">

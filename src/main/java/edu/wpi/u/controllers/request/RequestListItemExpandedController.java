@@ -1,15 +1,12 @@
 package edu.wpi.u.controllers.request;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
 import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.CommentType;
 import edu.wpi.u.requests.SpecificRequest;
-import edu.wpi.u.requests.Request;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,19 +16,15 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import net.kurobako.gesturefx.GesturePane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RequestListItemExpandedController extends AnchorPane implements Initializable {
@@ -121,10 +114,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
             descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
             String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
             creatorAndDateString += " - ";
-            creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
+            creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
             creatorAndDateLabel.setText(creatorAndDateString);
             assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-            completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
+            completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
             generateSpecificFields();
             generateComments();
         });
@@ -134,10 +127,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         descriptionLabel.setText(this.parent.request.getGenericRequest().getDescription());
         String creatorAndDateString = this.parent.request.getGenericRequest().getCreator();
         creatorAndDateString += " - ";
-        creatorAndDateString += App.p.format(parent.request.getGenericRequest().getDateNeeded());
+        creatorAndDateString += App.prettyTime.format(parent.request.getGenericRequest().getDateNeeded());
         creatorAndDateLabel.setText(creatorAndDateString);
         assigneesLabel.setText(String.join(",",parent.request.getGenericRequest().getAssignees()));
-        completeByLabel.setText(App.p.format(this.parent.request.getGenericRequest().getDateNeeded()));
+        completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
         generateSpecificFields();
         generateComments();
 
@@ -175,7 +168,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         HBox.setHgrow(comExpandRegion,Priority.ALWAYS);
         Label comTypeLabel = new Label("Request Created");
         comTypeLabel.getStyleClass().add("headline-3");
-        Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
+        Label comTimeLabel = new Label(App.prettyTime.format(comment.getTimestamp()));
         comTimeLabel.getStyleClass().add("caption");
         HBox typeDateHBox = new HBox();
         typeDateHBox.getChildren().add(comTypeLabel);
@@ -332,12 +325,21 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
         miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
         SVGPath location = new SVGPath();
-        location.setContent("M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z ");
+        location.setContent("M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z");
+//        location.setScaleX(0.7);
+//        location.setScaleY(0.7);
+        DropShadow ds = new DropShadow();
+//        ds.setRadius(5);
+//        ds.setSpread(5);
+        ds.setOffsetX(1);
+        ds.setOffsetY(1);
+        location.setEffect(ds);
         location.setLayoutX(((node.getCords()[0]-85)*scale));
         location.setLayoutY(((node.getCords()[1]-185)*scale));
         location.setStyle("-fx-fill: -primary");
-        location.setScaleX(1.5);
-        location.setScaleY(1.5);
+//        location.setOpacity(0.8);
+//        location.setScaleX(1.5);
+//        location.setScaleY(1.5);
         location.toFront();
         locationGroup.getChildren().add(location);
         locationLabel.setText("Floor " + node.getFloor() + ": " + node.getLongName());
@@ -364,7 +366,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 break;
         }
         comTypeLabel.getStyleClass().add("headline-3");
-        Label comTimeLabel = new Label(App.p.format(comment.getTimestamp()));
+        Label comTimeLabel = new Label(App.prettyTime.format(comment.getTimestamp()));
         comTimeLabel.getStyleClass().add("caption");
         HBox typeDateHBox = new HBox();
         typeDateHBox.getChildren().add(comTypeLabel);
