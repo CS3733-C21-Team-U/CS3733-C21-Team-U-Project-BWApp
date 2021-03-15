@@ -33,7 +33,7 @@ public class EmailService {
                 .to("", to)
                 .withSubject("New"+ specificRequest.getType() +"Request")
                 .withPlainText(
-                        "New Service Request for " + specificRequest.getGenericRequest().getAuthor() + "\n"+
+                                "New Service Request for " + specificRequest.getGenericRequest().getAuthor() + "\n"+
                                 "Date Needed by : " + specificRequest.getGenericRequest().getDateNeeded() + "\n"+
                                 "Title : " + specificRequest.getGenericRequest().getTitle() + "\n"+
                                 "Description" + specificRequest.getGenericRequest().getDescription()

@@ -33,7 +33,6 @@ public class CachingClassLoader extends ClassLoader{
      */
     @Override
     protected Class findClass(String className) {
-        //System.out.println("Loading : " + className);
         if (classes.containsKey(className)) {
             System.out.println("HashMap already contains class: " + className);
             return classes.get(className);
