@@ -22,8 +22,13 @@ public class FirstPreloader extends Preloader {
 //        fxmlLoader.load();
 //        fxmlLoader.getController();
 //        App.base = fxmlLoader.getRoot();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
+        if (App.useCache.get()){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.setClassLoader(App.classLoader);
+            fxmlLoader.load();
+        }
+        else {
+            System.out.println("Preloading without cache");
+        }
     }
 }

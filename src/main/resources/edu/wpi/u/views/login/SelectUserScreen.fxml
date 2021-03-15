@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -207,7 +208,8 @@
                   <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
                   <JFXButton fx:id="skipToAdminButton" layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
                   <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
-                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="47.0" prefWidth="575.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely) - New keybaord shortcut is (Control + Q)" />
+                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="35.0" prefWidth="349.0" styleClass="bigButtonOutline" text="Exit keybaord shortcut is (Control + Q)" />
+                  <JFXCheckBox fx:id="useCacheCheckBox" prefHeight="30.0" style="-fx-text-fill: white; -fx-background-color: red; -fx-font-size: 20;" text="Super Maximum Light Speed Mode (Don't enable if you have little or slow RAM)" />
                </children>
                <BorderPane.margin>
                   <Insets />
@@ -215,7 +217,7 @@
             </HBox>
          </bottom>
       </BorderPane>
-      <JFXProgressBar fx:id="progressBar" prefHeight="191.0" prefWidth="1074.0" />
+      <JFXProgressBar fx:id="progressBar" prefHeight="40.0" prefWidth="248.0" />
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />

@@ -35,7 +35,7 @@ public class ViewRequestListController {
         sampleRequestItem.getChildren().addListener(new ListChangeListener<Node>() {
             @Override
             public void onChanged(javafx.collections.ListChangeListener.Change<? extends Node> c) {
-                if(c.getList().size() < 1){//New list after filtering is emppty
+                if(c.getList().size() < 1 && newRequestVBox.getChildren().size() < 1){//New list after filtering is emppty
                     System.out.println("Request list is empty");//TODO Debug to fix the little request dude not showing up after making a new request
                     noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
                     noItemsGraphic.setVisible(true);
@@ -75,8 +75,15 @@ public class ViewRequestListController {
         resolveOption.setValue("All");
 
         App.VBoxChanged.addListener((observable, oldValue, newValue) -> {
-            //newRequestVBox.getChildren().setAll(App.newReqVBox.getChildren());
             newRequestVBox = App.newReqVBox;
+            if(sampleRequestItem.getChildren().size() < 1 && newRequestVBox.getChildren().size() < 1){//New list after filtering is emppty
+                System.out.println("Request list is empty");//TODO Debug to fix the little request dude not showing up after making a new request
+                noItemsGraphic.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                noItemsGraphic.setVisible(true);
+            }else{
+                noItemsGraphic.setPrefHeight(0);
+                noItemsGraphic.setVisible(false);
+            }
             System.out.println("Listener in View Request Running");
         });
 
@@ -98,10 +105,12 @@ public class ViewRequestListController {
      * @throws Exception
      */
     @FXML public void handleNewRequestButton() throws Exception {
-        if(newRequestVBox.getChildren().size()<1) {
+        if(newRequestVBox.getChildren().size()<=1) {
+            //Added same functionality as listener
+            noItemsGraphic.setPrefHeight(0);
+            noItemsGraphic.setVisible(false);
+
             newRequestVBox.getChildren().add(new RequestListItemNewController());
-
-
             App.newReqVBox = newRequestVBox;
 
             App.VBoxChanged.set(!App.VBoxChanged.get());
