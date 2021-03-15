@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -170,17 +171,50 @@
                                                         </VBox>
                                                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="425.0" spacing="15.0">
                                                             <children>
-                                                                <Label fx:id="kohmeiKadoyaLabel" onMouseEntered="#showKohmeiKadoya" onMouseExited="#hideIMG" styleClass="headline-3" text="Kohmei Kadoya" />
-                                                                <Label fx:id="nevilleIngramLabel" onMouseEntered="#showNevilleIngram" onMouseExited="#hideIMG" styleClass="headline-3" text="Neville Ingram" />
-                                                                <Label fx:id="kaamilLokhandwalaLabel" onMouseEntered="#showKaamilLokhandwala" onMouseExited="#hideIMG" styleClass="headline-3" text="Kaamil Lokhandwala" />
-                                                                <Label fx:id="charlieKittlerLabel" onMouseEntered="#showCharlieKittler" onMouseExited="#hideIMG" styleClass="headline-3" text="Charles Kittler" />
-                                                                <Label fx:id="lilyDurkinLabel" onMouseEntered="#showLilyDurkin" onMouseExited="#hideIMG" styleClass="headline-3" text="Lily Durkin" />
-                                                                <Label fx:id="tylerSandervilleLabel" onMouseEntered="#showTylerSanderville" onMouseExited="#hideIMG" styleClass="headline-3" text="Tyler Sanderville" />
-                                                                <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacbob Bernard" />
-                                                                <Label fx:id="nickGaoLabel" onMouseEntered="#showNickGao" onMouseExited="#hideIMG" styleClass="headline-3" text="Tianyang Gao" />
-                                                                <Label fx:id="willBurkeLabel" onMouseEntered="#showWillBurke" onMouseExited="#hideIMG" styleClass="headline-3" text="William Burke" />
-                                                                <Label fx:id="michaelGearyLabel" onMouseEntered="#showMichaelGeary" onMouseExited="#hideIMG" styleClass="headline-3" text="Michael Geary" />
-                                                                <Label fx:id="olaJacksonLabel" onMouseEntered="#showOlaJackson" onMouseExited="#hideIMG" styleClass="headline-3" text="Olajumoke Jackson" />
+                                                                <Label fx:id="kohmeiKadoyaLabel" onMouseEntered="#showKohmeiKadoya" onMouseExited="#hideIMG" styleClass="headline-3" text="Kohmei Kadoya">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="nevilleIngramLabel" onMouseEntered="#showNevilleIngram" onMouseExited="#hideIMG" styleClass="headline-3" text="Neville Ingram">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="kaamilLokhandwalaLabel" onMouseEntered="#showKaamilLokhandwala" onMouseExited="#hideIMG" styleClass="headline-3" text="Kaamil Lokhandwala">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="charlieKittlerLabel" onMouseEntered="#showCharlieKittler" onMouseExited="#hideIMG" styleClass="headline-3" text="Charles Kittler">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="lilyDurkinLabel" onMouseEntered="#showLilyDurkin" onMouseExited="#hideIMG" styleClass="headline-3" text="Lily Durkin">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="tylerSandervilleLabel" onMouseEntered="#showTylerSanderville" onMouseExited="#hideIMG" styleClass="headline-3" text="Tyler Sanderville">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacbob Bernard">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="nickGaoLabel" onMouseEntered="#showNickGao" onMouseExited="#hideIMG" styleClass="headline-3" text="Tianyang Gao">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="willBurkeLabel" onMouseEntered="#showWillBurke" onMouseExited="#hideIMG" styleClass="headline-3" text="William Burke">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="michaelGearyLabel" onMouseEntered="#showMichaelGeary" onMouseExited="#hideIMG" styleClass="headline-3" text="Michael Geary">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
+                                                                <Label fx:id="olaJacksonLabel" onMouseEntered="#showOlaJackson" onMouseExited="#hideIMG" styleClass="headline-3" text="Olajumoke Jackson">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Label>
                                                             </children>
                                                             <HBox.margin>
                                                                 <Insets left="25.0" />
