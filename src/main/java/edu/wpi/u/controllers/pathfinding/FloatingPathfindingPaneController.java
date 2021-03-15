@@ -544,12 +544,14 @@ public class FloatingPathfindingPaneController {
     @FXML
     public void handleClearStartPoint(){
         App.mapInteractionModel.setStartNode("");
+        targetNode.set("START");
         startNodeField.clear();
     }
 
     @FXML
     public void handleClearEndPoint(){
         App.mapInteractionModel.setEndNode("");
+        targetNode.set("END");
         endNodeField.clear();
     }
 
