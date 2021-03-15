@@ -8,6 +8,8 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
 import edu.wpi.u.users.Role;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import java.io.IOException;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
@@ -55,6 +58,7 @@ public class SettingsBaseController {
     @FXML public Group onlyAdmin;
     @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
+    @FXML public ToggleGroup themeGroup;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
@@ -62,6 +66,19 @@ public class SettingsBaseController {
         succsessfulLabel.setVisible(false);
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
+
+        themeGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+
+                if (themeGroup.getSelectedToggle() != null) {
+
+                    System.out.println(themeGroup.getSelectedToggle().getUserData().toString());
+                    // Do something here with the userData of newly selected radioButton
+
+                }
+
+            }
+        });
 
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);

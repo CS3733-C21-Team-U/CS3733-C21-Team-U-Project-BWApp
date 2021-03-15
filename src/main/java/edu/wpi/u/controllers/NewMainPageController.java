@@ -189,7 +189,7 @@ public class NewMainPageController {
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
-        App.getInstance().switchTheme();
+//        App.getInstance().switchTheme();
     }
 
     public void handleExit() throws IOException {
