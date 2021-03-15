@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane fx:id="mainAnchor" prefHeight="300.0" prefWidth="450.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.FloatingPathfindingPaneController">
+<AnchorPane fx:id="mainAnchor" prefHeight="300.0" prefWidth="450.0" style="-fx-background-radius: 20; -fx-background-color: -background;" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.FloatingPathfindingPaneController">
    <effect>
       <DropShadow />
    </effect>
@@ -36,7 +36,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <JFXTextField fx:id="startNodeField" promptText="Enter starting point, or click on the map" HBox.hgrow="ALWAYS" />
+                              <JFXTextField fx:id="startNodeField" onInputMethodTextChanged="#handleInputMethodChange" promptText="Enter starting point, or click on the map" HBox.hgrow="ALWAYS" />
                               <Rectangle fx:id="startFieldFlair" fill="DODGERBLUE" height="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: -primary;" width="3.0" HBox.hgrow="NEVER" />
                            </children>
                         </HBox>
@@ -72,15 +72,15 @@
                <children>
                   <VBox fx:id="btnVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="85.0">
                      <children>
-                        <JFXButton fx:id="btnG" onAction="#HandleDisplayFloorG" text="Floor G" />
-                        <JFXButton fx:id="btnOne" onAction="#HandleDisplayFloorOne" text="Floor 1" />
-                        <JFXButton fx:id="btnTwo" onAction="#HandleDisplayFloorTwo" text="Floor 2" />
-                        <JFXButton fx:id="btnThree" onAction="#HandleDisplayFloorThree" text="Floor 3" />
-                        <JFXButton fx:id="btnFour" onAction="#HandleDisplayFloorFour" text="Floor 4" />
-                        <JFXButton fx:id="btnFive" onAction="#HandleDisplayFloorFive" text="Floor 5" />
+                        <JFXButton fx:id="btnG" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorG" text="Floor G" />
+                        <JFXButton fx:id="btnOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorOne" text="Floor 1" />
+                        <JFXButton fx:id="btnTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorTwo" text="Floor 2" />
+                        <JFXButton fx:id="btnThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorThree" text="Floor 3" />
+                        <JFXButton fx:id="btnFour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFour" text="Floor 4" />
+                        <JFXButton fx:id="btnFive" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFive" text="Floor 5" />
                      </children>
                   </VBox>
-                  <ScrollPane fx:id="ScrollPanel" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" vbarPolicy="NEVER">
+                  <ScrollPane fx:id="ScrollPanel" fitToHeight="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" pannable="true" vbarPolicy="NEVER">
                     <content>
                       <AnchorPane fx:id="secondAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="350.0">
                            <children>
