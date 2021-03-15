@@ -50,6 +50,10 @@ public class FloatingPathfindingPaneController {
     Label endNode;
     @FXML
     Label startNode;
+    @FXML
+    AnchorPane treeViewListNodes;
+    @FXML
+    HBox pathContent;
 
 
     SimpleStringProperty targetNode = new SimpleStringProperty("START");//flag for
@@ -281,6 +285,14 @@ public class FloatingPathfindingPaneController {
 
     public void initialize(){
 
+        if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
+            treeViewListNodes.setVisible(true);
+            pathContent.setVisible(false);
+        } else{
+            treeViewListNodes.setVisible(false);
+            pathContent.setVisible(true);
+        }
+
         targetNode.addListener((observable, oldVal, newVal) ->{
             if(newVal.equals("START")){
                 startFieldFlair.setVisible(true);
@@ -399,7 +411,15 @@ public class FloatingPathfindingPaneController {
         });
 
         App.mapInteractionModel.pathFlag.addListener(observable -> {
-                handleTestAddTextField();
+            handleTestAddTextField();
+            if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
+                treeViewListNodes.setVisible(true);
+                pathContent.setVisible(false);
+            } else{
+                treeViewListNodes.setVisible(false);
+                pathContent.setVisible(true);
+            }
+
         });
 
         startNodeField.requestFocus();
