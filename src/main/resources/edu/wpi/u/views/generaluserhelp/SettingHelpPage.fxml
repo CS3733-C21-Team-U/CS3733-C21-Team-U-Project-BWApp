@@ -4,77 +4,127 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.SettingHelpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.SettingHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1687.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
+                  <SVGPath content="M17.41,6.59L15,5.5l2.41-1.09L18.5,2l1.09,2.41L22,5.5l-2.41,1.09L18.5,9L17.41,6.59z M21.28,12.72L20.5,11l-0.78,1.72 L18,13.5l1.72,0.78L20.5,16l0.78-1.72L23,13.5L21.28,12.72z M16.24,14.37l1.94,1.47l-2.5,4.33l-2.24-0.94 c-0.2,0.13-0.42,0.26-0.64,0.37L12.5,22h-5l-0.3-2.41c-0.22-0.11-0.43-0.23-0.64-0.37l-2.24,0.94l-2.5-4.33l1.94-1.47 C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37l-1.94-1.47l2.5-4.33l2.24,0.94c0.2-0.13,0.42-0.26,0.64-0.37L7.5,6h5l0.3,2.41 c0.22,0.11,0.43,0.23,0.64,0.37l2.24-0.94l2.5,4.33l-1.94,1.47c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14 c0-1.66-1.34-3-3-3s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to use Settings" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
-            </VBox>
-            <SVGPath content="M17.41,6.59L15,5.5l2.41-1.09L18.5,2l1.09,2.41L22,5.5l-2.41,1.09L18.5,9L17.41,6.59z M21.28,12.72L20.5,11l-0.78,1.72 L18,13.5l1.72,0.78L20.5,16l0.78-1.72L23,13.5L21.28,12.72z M16.24,14.37l1.94,1.47l-2.5,4.33l-2.24-0.94 c-0.2,0.13-0.42,0.26-0.64,0.37L12.5,22h-5l-0.3-2.41c-0.22-0.11-0.43-0.23-0.64-0.37l-2.24,0.94l-2.5-4.33l1.94-1.47 C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37l-1.94-1.47l2.5-4.33l2.24,0.94c0.2-0.13,0.42-0.26,0.64-0.37L7.5,6h5l0.3,2.41 c0.22,0.11,0.43,0.23,0.64,0.37l2.24-0.94l2.5,4.33l-1.94,1.47c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14 c0-1.66-1.34-3-3-3s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use Settings Tab">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="784.0" prefWidth="1283.0">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="600.0">
-                     <children>
-                        <Label prefHeight="15.0" prefWidth="623.0" styleClass="headline-3" text="1. Selecting Settings Tab" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label prefHeight="56.0" prefWidth="600.0" styleClass="headline-3" text="2. All users are allowed to change their contact information and their passwords" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="25.0" prefHeight="49.0" prefWidth="600.0" styleClass="headline-3" text="3. Phone number will be 10 digits number" wrapText="true">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="550.0" wrapText="true" />
-                        <Label layoutX="10.0" layoutY="150.0" prefHeight="49.0" prefWidth="600.0" styleClass="headline-3" text="4. There is no combination limit for password. However, old password is required for changing a new password" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ImageView fitHeight="155.0" fitWidth="239.0" translateX="100.0">
-                           <image>
-                              <Image url="@../Images/setting1.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
-                  <ImageView fitHeight="730.0" fitWidth="1080.0" translateY="80.0">
-                     <image>
-                        <Image url="@../Images/settingnew.png" />
-                     </image>
-                  </ImageView>
-               </children>
+               <padding>
+                  <Insets left="70.0" right="30.0" />
+               </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="155.0" fitWidth="239.0" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/setting1.png" />
+                                             </image>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="166.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="With settings, only you can access your account on a trusted device or the web. When you want to sign in to a new device for the first time, you'll need to provide two pieces of information—your password and the six-digit verification code that's automatically displayed on your trusted devices or sent to your phone number. By entering the code, you're verifying that you trust the new device." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="What do we have on Settings Page?  " />
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="When you create your account, the US-based phone number you enter will be used as your two-factor authentication device. If you entered an incorrect phone number during the sign up process, log in without two-factor authentication and follow these steps to update your phone number:" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Log in&quot; and enter your credentials" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Select &quot;Log in without 2FA&quot;" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. In the left navigation bar, select the &quot;Settings&quot; tab" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Under the &quot;Basic User Settings&quot; section, update your phone number and click &quot;Update&quot;" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5. From now on you can log in security or reset your password using 2FA" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="649.0" fitWidth="980.0" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/settingnew.png" />
+                                             </image>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1076.0" prefHeight="0.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="335.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="317.0" prefWidth="374.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ContactUS.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />
