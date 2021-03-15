@@ -11,6 +11,7 @@ import edu.wpi.u.requests.SpecificRequest;
 import edu.wpi.u.users.Guest;
 import edu.wpi.u.users.Role;
 import edu.wpi.u.users.User;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -29,10 +30,30 @@ import java.util.Date;
 public class ViewCovidResultsController {
     @FXML public JFXTreeTableView<SpecificRequest> treeTableView = new JFXTreeTableView<>();
 
+    int numInSystem = 0;
+    int takenSurvey = 0;
+    int completedSurvey = 0;
+
     public void initialize() throws IOException {
 
         ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
-        requests.addAll(App.requestService.getRequests());
+        App.requestService.getRequests().forEach(e ->{
+            if (e.getType().equals("CovidSurvey")){
+                requests.add(e);
+            }
+        });
+        // todo : # of people on campus, taken the survey but haven't entered & taken survey but have entered
+
+        numInSystem += App.userService.getUsers().size();
+        for (SpecificRequest request: requests){
+            if (request.getGenericRequest().isResolved()){
+                takenSurvey++;
+                completedSurvey++;
+            }
+            else {
+                takenSurvey++;
+            }
+        }
 
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnName = new JFXTreeTableColumn<>("Name");
         treeTableColumnName.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
@@ -84,11 +105,26 @@ public class ViewCovidResultsController {
         treeTableColumnCovidTemp.setPrefWidth(200);
         treeTableColumnCovidTemp.setEditable(false);
 
+        JFXTreeTableColumn<SpecificRequest, String> treeTableColumnEnteredTheBuilding = new JFXTreeTableColumn<>("Entered the Building");
+        treeTableColumnEnteredTheBuilding.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
+            if (treeTableColumnEnteredTheBuilding.validateValue(param)){
+                SimpleStringProperty s = new SimpleStringProperty("Not Entered");
+                if (param.getValue().getValue().getGenericRequest().isResolved()){
+                    s.set("Entered");
+                }
+                return s;
+            }
+            else {
+                return treeTableColumnEnteredTheBuilding.getComputedValue(param);
+            }
+        });
+        treeTableColumnEnteredTheBuilding.setPrefWidth(200);
+        treeTableColumnEnteredTheBuilding.setEditable(false);
 
         final TreeItem<SpecificRequest> root = new RecursiveTreeItem<>(requests, RecursiveTreeObject::getChildren);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
-        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnCovidTemp);
+        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnEnteredTheBuilding);
     }
 
 }

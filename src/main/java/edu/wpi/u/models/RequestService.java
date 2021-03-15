@@ -24,10 +24,10 @@ public class RequestService {
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
-    for (SpecificRequest x : this.activeRequests){
-
-      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
-    }
+//    for (SpecificRequest x : this.activeRequests){
+//
+//      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
+//    }
   }
 
   /**
