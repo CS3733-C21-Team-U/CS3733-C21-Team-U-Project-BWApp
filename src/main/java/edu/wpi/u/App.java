@@ -102,6 +102,7 @@ public class App extends Application {
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 

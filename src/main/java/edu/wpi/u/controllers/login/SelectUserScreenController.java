@@ -116,21 +116,43 @@ public class SelectUserScreenController {
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
-        load();
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
-        load();
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
-        load();
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleMobile() throws IOException {
