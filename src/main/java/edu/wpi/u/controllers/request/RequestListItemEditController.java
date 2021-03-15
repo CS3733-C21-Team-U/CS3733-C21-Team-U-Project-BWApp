@@ -133,6 +133,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         this.parent.switchFromEditToExpanded();
 
     }
+
     public void handleCancelButton(){
             JFXDialogLayout content = new JFXDialogLayout();
             Label header = new Label("Exit without saving changes?");
@@ -189,7 +190,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         return ans;
     }
 
-
     /**
      * Take the get values from unique fields, put it in a linkedList
      * @return
@@ -201,8 +201,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         }
         return specifics;
     }
-
-
 
     public void makeListView(ArrayList<String> list, JFXListView<String> res){
         ObservableList<String> something = FXCollections.observableList(list);
@@ -217,6 +215,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             editAssigneesField.setText("");
         }
     }
+
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
@@ -235,11 +234,12 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             }
         }
     }
-        public void deleteLocation(){
-            editLocationsListView.getItems().remove(editLocationsField.getText());
-            editLocationsField.setText("");
 
-        }
+    public void deleteLocation(){
+        editLocationsListView.getItems().remove(editLocationsField.getText());
+        editLocationsField.setText("");
+
+    }
 
 
 

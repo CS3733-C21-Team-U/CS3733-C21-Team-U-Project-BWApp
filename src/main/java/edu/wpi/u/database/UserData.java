@@ -1044,4 +1044,18 @@ public class UserData extends Data{
         }
         return result;
     }
+
+    public String getPreferredContactMethod(String userName) {
+        String str = "select preferredContactMethod from Employees";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("preferredContactMethod");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "Nothing";
+    }
 }
