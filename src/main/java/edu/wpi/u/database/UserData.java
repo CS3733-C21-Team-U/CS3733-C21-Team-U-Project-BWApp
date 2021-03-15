@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import soot.G;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -152,24 +153,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Creates a new patient via createAccount portal
-     * @param patient the patient object created
-     * @return Patient with that username already exists or Patient with that password already exists or Patient added
-     */
-    public String createPatient(Patient patient){
-        if (checkUsername(patient.getUserName()).equals("Patients")){
-            return "Patient with that username already exists";
-        }
-        else if (checkPassword(patient.getPassword(), patient.getUserName()).equals("Patients")){
-            return "Patient with that password already exists";
-        }
-        else {
-            addPatient(patient);
-            return "Patient added";
-        }
-    }
-
-    /**
      * Creates a new employee via createAccount portal
      * @param employee the employee object created
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
@@ -185,34 +168,6 @@ public class UserData extends Data{
             addEmployee(employee);
             return "Employee added";
         }
-    }
-
-    /**
-     * Returns the StaffType for a user
-     * @param userID users id
-     * @param type Employees or Guests (table name)
-     * @return the type of the user
-     */
-    public Role getPermissions(String userID, String type){
-        String id = "";
-        if (type.equals("Employees")){
-            id = "employeeID";
-        }
-        else if(type.equals("Guests")){
-            id = "guestID";
-        }
-        String str = "select from " + type + " where " + id +"=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return Role.valueOf(rs.getString("type"));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return Role.DEFAULT;
     }
 
     /**
@@ -471,7 +426,9 @@ public class UserData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Employee();
+        Employee e = new Employee();
+        e.setUserID("Debug");
+        return e;
     }
 
     /**
@@ -499,7 +456,9 @@ public class UserData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Guest();
+        Guest g = new Guest();
+        g.setUserID("Debug");
+        return g;
     }
 
     /**
@@ -560,13 +519,14 @@ public class UserData extends Data{
                 String providerName = rs.getString("providerName");
                 String parkingLocation = rs.getString("parkingLocation");
                 String recommendedParkingLocation = rs.getString("recommendedParkingLocation");
-                // todo : check
                 return new Patient(patientID, name, username, password, email, role, phonenumber, deleted, appointments, providerName, parkingLocation, recommendedParkingLocation);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new Patient();
+        Patient p = new Patient();
+        p.setUserID("Debug");
+        return p;
     }
 
     /**
@@ -592,68 +552,6 @@ public class UserData extends Data{
             e.printStackTrace();
         }
         return results;
-    }
-
-    /**
-     * Retrieves a employees appointments
-     * @param employeeID the id of the employee
-     * @return list of Appointments
-     */
-    private ArrayList<Appointment> getEmployeeAppointments(String employeeID) {
-        ArrayList<Appointment> results = new ArrayList<>();
-        String str = "select * from Appointments where employeeID=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, employeeID);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                String appointmentID = rs.getString("appointmentID");
-                String appointmentType = rs.getString("appointmentType");
-                Timestamp appointmentDate = rs.getTimestamp("appointmentDate");
-                String patientID = rs.getString("patientID");
-                results.add(new Appointment(appointmentID, patientID, employeeID, appointmentDate, appointmentType));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    /**
-     * Function used to find a user in the database based on a userID, used to check if user account is valid
-     * @param userID the user id
-     * @return Employees or Patients (table name) or "" if not found
-     */
-    public String findUser(String userID) {
-        String str = "select * from Employees where employeeID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,userID);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                rs.close();
-                ps.close();
-                return "Employees";
-            }
-            else {
-                str = "select * from Guests where guestID=?";
-                ps = conn.prepareStatement(str);
-                ps.setString(1,userID);
-                rs = ps.executeQuery();
-                if (rs.next()){
-                    rs.close();
-                    ps.close();
-                    return "Guests";
-                }
-                else {
-                    return "";
-                }
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "";
     }
 
     /**
@@ -696,40 +594,6 @@ public class UserData extends Data{
         }
         catch (Exception e){
             System.out.println("Checking username failed");
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * Checks if the database has the phone number matched with the given username
-     * @param phoneNumber phone number to be checked
-     * @return the phone number of the user or "" if the username doesn't exist
-     */
-    public String checkPhoneNumber(String phoneNumber){
-        String str = "select * from Employees where phoneNumber=?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1,phoneNumber);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                ps.close();
-                return "Employees";
-            }
-            else {
-                String str2 = "select * from Patients where phoneNumber=?";
-                PreparedStatement ps2 = conn.prepareStatement(str2);
-                ps2.setString(1,phoneNumber);
-                ResultSet rs2 = ps2.executeQuery();
-                if(rs2.next()){
-                    return "Patients";
-                }
-                else{
-                    return "";
-                }
-            }
-        }
-        catch (Exception e){
             e.printStackTrace();
             return "";
         }
@@ -1155,5 +1019,26 @@ public class UserData extends Data{
         }
     }
 
-
+    /**
+     * Returns a list of employee Emails based on a type of employee
+     * @param type the type, ie: DOCTOR
+     * @return the list of emails
+     */
+    public ArrayList<String> getEmployeeEmailsByType(String type){
+        ArrayList<String> result = new ArrayList<>();
+        String str = "select email from Employees where type=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,type);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(rs.getString("email"));
+            }
+            rs.close();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
