@@ -8,6 +8,7 @@ import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 
 import edu.wpi.u.App;
@@ -37,9 +38,13 @@ public class ViewUserListController {
 
     public void initialize() throws IOException {
 
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             if(!App.userService.getActiveUser().getType().equals(Role.ADMIN)) {
                 addUserButton.setStyle("-fx-opacity: 0");
+                addUserButton.setDisable(true);
             }
+        });
+
 
 
         /*
