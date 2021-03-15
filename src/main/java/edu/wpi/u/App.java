@@ -55,6 +55,7 @@ public class App extends Application {
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
+  public static StackPane loadingSpinnerHerePane;
 
   // We only ever have one primary stage, each time we switch scenes, we swap this out
   public static Database db = Database.getDB();
