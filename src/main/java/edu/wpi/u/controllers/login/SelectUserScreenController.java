@@ -80,14 +80,8 @@ public class SelectUserScreenController {
     }
 
     private void load() throws IOException {
-        JFXDialogLayout content = new JFXDialogLayout();
-            Label header = new Label("Logging you in...");
-            header.getStyleClass().add("headline-2");
-            content.setHeading(header);
-            content.getStyleClass().add("dialogue");
-            JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
-            dialog.show();
-            Platform.runLater(() -> {
+        loadingNewMainPage();
+        Platform.runLater(() -> {
                 Task<Parent> loadTask = new Task<Parent>() {
                     @Override
                     protected Parent call() {
@@ -113,13 +107,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Logging you in...");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
-        dialog.show();
+        loadingNewMainPage();
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -138,13 +126,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Logging you in...");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
-        dialog.show();
+        loadingNewMainPage();
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -163,13 +145,7 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) {
-        JFXDialogLayout content = new JFXDialogLayout();
-        Label header = new Label("Logging you in...");
-        header.getStyleClass().add("headline-2");
-        content.setHeading(header);
-        content.getStyleClass().add("dialogue");
-        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
-        dialog.show();
+        loadingNewMainPage();
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(500);
@@ -185,6 +161,16 @@ public class SelectUserScreenController {
             }
         });
         thread.start();
+    }
+
+    private void loadingNewMainPage() {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Logging you in...");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
+        dialog.show();
     }
 
     public void handleMobile() throws IOException {
