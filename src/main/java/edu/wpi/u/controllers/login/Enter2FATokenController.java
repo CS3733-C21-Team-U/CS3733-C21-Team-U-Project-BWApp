@@ -1,16 +1,16 @@
 package edu.wpi.u.controllers.login;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.users.Role;
 import io.netty.handler.codec.http.HttpHeaders;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import org.asynchttpclient.*;
 
 import java.io.IOException;
@@ -62,8 +62,30 @@ public class Enter2FATokenController {
     }
 
     public void handleAppEntry() throws IOException {
-        App.isLoggedIn.set(!App.isLoggedIn.get());
+        loadingNewMainPage();
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(500);
+                Platform.runLater(() -> {
+                    App.isLoggedIn.set(true);
+                    App.getPrimaryStage().getScene().setRoot(App.base);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Error("Unexpected interruption");
+            }
+        });
+        thread.start();
         //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+    }
+    private void loadingNewMainPage() {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label header = new Label("Logging you in...");
+        header.getStyleClass().add("headline-2");
+        content.setHeading(header);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
+        dialog.show();
     }
 }
