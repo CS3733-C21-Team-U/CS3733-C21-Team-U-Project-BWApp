@@ -85,27 +85,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.toFront();
         locationGroup.minHeight(300);
         locationGroup.minWidth(300);
-        loadLocationsOnMap(0);
 
 
-
-        //------------------------------------------------------------------------------------
-//        ImageView node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResourcePathfinding.get())));
-//        node.setFitWidth(430);
-//        node.setPreserveRatio(true);
-//        //mainMapPane.getChildren().add(node);
-//        //node.toFront();
-//        miniMap = new GesturePane(node);
-//        mainMapPane.setMinSize(300, 300);
-//        mainMapPane.setPrefWidth(300);
-//        mainMapPane.setPrefHeight(300);
-//        mainMapPane.setStyle("-fx-background-color: #000000");
-//        miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
-//        miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
-//        miniMap.setPrefHeight(518);
-//        miniMap.centreOn(new Point2D(170, 90));
-//        miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
-//        mapViewRoot.getChildren().add(miniMap);
 
 
         //add Listener
@@ -120,6 +101,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
             completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
             generateSpecificFields();
             generateComments();
+            loadLocationsOnMap(0);
         });
 
         typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
@@ -133,6 +115,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         completeByLabel.setText(App.prettyTime.format(this.parent.request.getGenericRequest().getDateNeeded()));
         generateSpecificFields();
         generateComments();
+        loadLocationsOnMap(0);
 
     }
 
@@ -323,7 +306,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         locationGroup.toFront();
         miniMap.toBack();
 
-        miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
         SVGPath location = new SVGPath();
         location.setContent("M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z");
 //        location.setScaleX(0.7);
@@ -342,6 +324,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 //        location.setScaleY(1.5);
         location.toFront();
         locationGroup.getChildren().add(location);
+        miniMap.centreOn(new Point2D(((node.getCords()[0]-85)*scale), ((node.getCords()[1]-185)*scale)));
+
         locationLabel.setText("Floor " + node.getFloor() + ": " + node.getLongName());
     }
 
