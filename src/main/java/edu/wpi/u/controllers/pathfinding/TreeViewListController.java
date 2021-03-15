@@ -216,8 +216,10 @@ public class TreeViewListController implements Initializable {
      * Will be called with the treeType/nodeType as in input from the individual methods
      */
     private void expandAndCollapse(String treeType){
+        confTree.setPrefSize(350.0,24.0);
         switch(treeType){
             case "CONF":
+                confTree.setPrefSize(350.0, 144);
                 if(confExpanded){
                     rootConf.setExpanded(false);
                     System.out.println("Conferences Collapsed");
