@@ -38,7 +38,7 @@
                     <children>
                         <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1630.0">
                             <children>
-                                <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="1630.0" style="-fx-background-radius: 7; -fx-background-color: -background;">
+                                <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="1630.0" style="-fx-background-radius: 7; -fx-background-color: -backgroundAlt;">
                                     <children>
                                         <VBox prefHeight="311.0" prefWidth="1630.0">
                                             <children>
@@ -51,40 +51,52 @@
                                                     <children>
                                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <ImageView fitHeight="185.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fitHeight="185.0" fitWidth="171.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@../Images/logo.png" />
                                                                     </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="NONE" />
+                                                   </cursor>
                                                                 </ImageView>
                                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="217.0" styleClass="headline-3" text="Brigham and Women's Hospital Representative Andre Shinn" textAlignment="CENTER" wrapText="true" />
                                                             </children>
                                                         </VBox>
                                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <ImageView fitHeight="185.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fitHeight="185.0" fitWidth="283.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@../Images/WPI.png" />
                                                                     </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="NONE" />
+                                                   </cursor>
                                                                 </ImageView>
                                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="242.0" styleClass="headline-3" text="Worcester Polytechnic Institute's Department of Computer Science" textAlignment="CENTER" wrapText="true" />
                                                             </children>
                                                         </VBox>
                                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <ImageView fitHeight="185.0" fitWidth="283.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fitHeight="185.0" fitWidth="283.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@../Images/WilsonWong.jpg" />
                                                                     </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="NONE" />
+                                                   </cursor>
                                                                 </ImageView>
                                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="302.0" styleClass="headline-3" text="CS3733-C21 Software Engineering Professor Wilson Wong" textAlignment="CENTER" wrapText="true" />
                                                             </children>
                                                         </VBox>
                                                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                                             <children>
-                                                                <ImageView fitHeight="185.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
+                                                                <ImageView fitHeight="185.0" fitWidth="260.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                                                     <image>
                                                                         <Image url="@../Images/AndrewBonaventura.jpg" />
                                                                     </image>
+                                                   <cursor>
+                                                      <Cursor fx:constant="NONE" />
+                                                   </cursor>
                                                                 </ImageView>
                                                                 <Label alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="194.0" styleClass="headline-3" text="Team Coach Andrew Bonaventura" textAlignment="CENTER" wrapText="true" />
                                                             </children>
@@ -110,16 +122,19 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="522.0" prefWidth="1630.0" spacing="25.0">
                     <children>
-                        <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="805.0" style="-fx-background-color: -background; -fx-background-radius: 7;">
+                        <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="805.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7;">
                             <children>
                                 <VBox prefHeight="508.0" prefWidth="820.0">
                                     <children>
                                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="820.0">
                                             <children>
-                                                <ImageView fx:id="aboutImage" fitHeight="314.0" fitWidth="452.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="aboutImage" fitHeight="314.0" fitWidth="452.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@../Images/brigham-health-logo-600x200.png" />
                                                     </image>
+                                       <cursor>
+                                          <Cursor fx:constant="NONE" />
+                                       </cursor>
                                                 </ImageView>
                                             </children>
                                         </HBox>
@@ -140,7 +155,7 @@
                         </Pane>
                         <VBox prefHeight="509.0" prefWidth="820.0" spacing="15.0">
                             <children>
-                                <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="805.0" style="-fx-background-color: -background; -fx-background-radius: 7;">
+                                <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="805.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7;">
                                     <children>
                                         <VBox prefHeight="509.0" prefWidth="807.0">
                                             <children>
