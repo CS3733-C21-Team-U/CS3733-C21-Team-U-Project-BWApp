@@ -43,6 +43,7 @@ public class MapInteractionModel {
     public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
     public String aline = "";
     public double alineValue;
+    public SimpleStringProperty currentTargetNode = new SimpleStringProperty("");
 
 
 
@@ -134,7 +135,9 @@ public class MapInteractionModel {
 
     public void setEndNode(String nodeID){
         mapTargetNode.set(!mapTargetNode.get());
+        System.out.println("I have not crashed yet 138 MapInteractionModel");
         this.nodeID.set(nodeID);
+        // Crashes before
     }
 
     public void setStartNode(String nodeID){

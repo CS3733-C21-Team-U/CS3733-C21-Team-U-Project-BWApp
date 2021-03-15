@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTreeView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -10,7 +11,6 @@
          <children>
             <JFXTreeView fx:id="confTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleConfClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="deptTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleDeptClicked" prefHeight="32.0" />
-            <JFXTreeView fx:id="elevTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleElevClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="exitTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleExitClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="foodTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleFoodClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="kiosTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleKiosClicked" prefHeight="32.0" />
@@ -18,8 +18,10 @@
             <JFXTreeView fx:id="parkTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleParkClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="restTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleRestClicked" prefHeight="32.0" />
             <JFXTreeView fx:id="servTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleServClicked" prefHeight="32.0" />
-            <JFXTreeView fx:id="staiTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleStaiClicked" prefHeight="32.0" />
          </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

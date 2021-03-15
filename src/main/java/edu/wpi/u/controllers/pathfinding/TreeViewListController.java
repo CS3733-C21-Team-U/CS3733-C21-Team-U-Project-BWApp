@@ -26,8 +26,6 @@ public class TreeViewListController implements Initializable {
     @FXML
     private TreeView deptTree;
     @FXML
-    private TreeView elevTree;
-    @FXML
     private TreeView exitTree;
     @FXML
     private TreeView foodTree;
@@ -41,13 +39,10 @@ public class TreeViewListController implements Initializable {
     private TreeView restTree;
     @FXML
     private TreeView servTree;
-    @FXML
-    private TreeView staiTree;
 
     // Creating roots for each tree
     private TreeItem rootConf = new TreeItem("Conference Rooms");
     private TreeItem rootDept = new TreeItem("Departments");
-    private TreeItem rootElev = new TreeItem("Elevators");
     private TreeItem rootExit = new TreeItem("Entrances and Exits");
     private TreeItem rootFood = new TreeItem("Food Services");
     private TreeItem rootKios = new TreeItem("Kiosks");
@@ -55,11 +50,9 @@ public class TreeViewListController implements Initializable {
     private TreeItem rootPark = new TreeItem("Parking Spaces");
     private TreeItem rootRest = new TreeItem("Restrooms");
     private TreeItem rootServ = new TreeItem("Services");
-    private TreeItem rootStai = new TreeItem("Stairways");
 
     private boolean confExpanded;
     private boolean deptExpanded;
-    private boolean elevExpanded;
     private boolean exitExpanded;
     private boolean foodExpanded;
     private boolean kiosExpanded;
@@ -67,7 +60,6 @@ public class TreeViewListController implements Initializable {
     private boolean parkExpanded;
     private boolean restExpanded;
     private boolean servExpanded;
-    private boolean staiExpanded;
 
     private boolean isStartNode = true;
 
@@ -81,7 +73,6 @@ public class TreeViewListController implements Initializable {
         //System.out.println("initialized");
         confExpanded = false;
         deptExpanded = false;
-        elevExpanded = false;
         exitExpanded = false;
         foodExpanded = false;
         kiosExpanded = false;
@@ -89,14 +80,13 @@ public class TreeViewListController implements Initializable {
         parkExpanded = false;
         restExpanded = false;
         servExpanded = false;
-        staiExpanded = false;
 
-        App.mapInteractionModel.mapTargetNode2.addListener(e -> {
-            isStartNode = true;
-        });
-
-        App.mapInteractionModel.mapTargetNode.addListener(e -> {
-            isStartNode = false;
+        App.mapInteractionModel.currentTargetNode.addListener((observable, oldVal, newVal) ->{
+            if(newVal.equals("START")){
+                isStartNode = true;
+            }else{
+                isStartNode = false;
+            }
         });
 
         longToID = new HashMap<>();
@@ -106,7 +96,6 @@ public class TreeViewListController implements Initializable {
         // Basically it adds a listener to each TreeItem in the tree, and when clicked it calls the method handleMouseClicked, which sets start/end node
         confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue())));
         deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue())));
-        elevTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)elevTree.getSelectionModel().getSelectedItem()).getValue())));
         exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue())));
         foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue())));
         kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue())));
@@ -114,8 +103,6 @@ public class TreeViewListController implements Initializable {
         parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue())));
         restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue())));
         servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue())));
-        staiTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)staiTree.getSelectionModel().getSelectedItem()).getValue())));
-
     }
 
     /**
@@ -128,7 +115,6 @@ public class TreeViewListController implements Initializable {
         // Setting the root for each tree
         confTree.setRoot(rootConf);
         deptTree.setRoot(rootDept);
-        elevTree.setRoot(rootElev);
         exitTree.setRoot(rootExit);
         foodTree.setRoot(rootFood);
         kiosTree.setRoot(rootKios);
@@ -136,7 +122,6 @@ public class TreeViewListController implements Initializable {
         parkTree.setRoot(rootPark);
         restTree.setRoot(rootRest);
         servTree.setRoot(rootServ);
-        staiTree.setRoot(rootStai);
 
         // Putting applicable nodes into trees
         // Currently displays long name for applicable nodes
@@ -149,10 +134,6 @@ public class TreeViewListController implements Initializable {
                     break;
                 case "DEPT":
                     rootDept.getChildren().add(temp);
-                    longToID.put(n.getLongName(),n.getNodeID());
-                    break;
-                case "ELEV":
-                    rootElev.getChildren().add(temp);
                     longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "EXIT":
@@ -176,15 +157,13 @@ public class TreeViewListController implements Initializable {
                     longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "REST":
+                    n.setLongName(n.getLongName() + " floor " + n.getFloor());
+                    temp.setValue(n.getLongName());
                     rootRest.getChildren().add(temp);
                     longToID.put(n.getLongName(),n.getNodeID());
                     break;
                 case "SERV":
                     rootServ.getChildren().add(temp);
-                    longToID.put(n.getLongName(),n.getNodeID());
-                    break;
-                case "STAI":
-                    rootStai.getChildren().add(temp);
                     longToID.put(n.getLongName(),n.getNodeID());
                     break;
             }
@@ -198,16 +177,16 @@ public class TreeViewListController implements Initializable {
      * @param value
      */
     private void handleMouseClicked(String value){
+
         if(App.mapService.getNodes().contains(App.mapService.getNodeFromID(value))) {
             if(isStartNode) {
-                System.out.println("Clicked " + value + " as new start value");
+                System.out.println("Clicked " + value + " as new start value. Line 206 TreeViewListController");
                 App.mapInteractionModel.setStartNode(value);
             } else {
-                System.out.println("Clicked " + value + " as new end value");
+                System.out.println("Clicked " + value + " as new end value. Line 206 TreeViewListController");
                 App.mapInteractionModel.setEndNode(value);
             }
         }
-        // TODO: Close TreeViewListController
     }
 
     /**
@@ -218,7 +197,6 @@ public class TreeViewListController implements Initializable {
 
         confTree.setPrefSize(350.0,32.0);
         deptTree.setPrefSize(350.0,32.0);
-        elevTree.setPrefSize(350.0,32.0);
         exitTree.setPrefSize(350.0,32.0);
         foodTree.setPrefSize(350.0,32.0);
         kiosTree.setPrefSize(350.0,32.0);
@@ -226,11 +204,9 @@ public class TreeViewListController implements Initializable {
         parkTree.setPrefSize(350.0,32.0);
         restTree.setPrefSize(350.0,32.0);
         servTree.setPrefSize(350.0,32.0);
-        staiTree.setPrefSize(350.0,32.0);
 
         rootConf.setExpanded(false);
         rootDept.setExpanded(false);
-        rootElev.setExpanded(false);
         rootExit.setExpanded(false);
         rootFood.setExpanded(false);
         rootKios.setExpanded(false);
@@ -238,7 +214,6 @@ public class TreeViewListController implements Initializable {
         rootPark.setExpanded(false);
         rootRest.setExpanded(false);
         rootServ.setExpanded(false);
-        rootStai.setExpanded(false);
 
         switch(treeType){
             case "CONF":
@@ -265,17 +240,6 @@ public class TreeViewListController implements Initializable {
                     rootDept.setExpanded(true);
                     System.out.println("Departments Expanded");
                     deptExpanded = true;
-                }
-                break;
-            case "ELEV":
-                if(elevExpanded){
-                    elevTree.setPrefSize(350.0, 32.0);
-                    rootElev.setExpanded(false);
-                    elevExpanded = false;
-                } else {
-                    elevTree.setPrefSize(350.0, 144.0);
-                    rootElev.setExpanded(true);
-                    elevExpanded = true;
                 }
                 break;
             case "EXIT":
@@ -311,7 +275,7 @@ public class TreeViewListController implements Initializable {
                     kiosExpanded = true;
                 }
                 break;
-            case "LAB":
+            case "LABS":
                 if(labsExpanded){
                     labsTree.setPrefSize(350.0, 32.0);
                     rootLabs.setExpanded(false);
@@ -355,17 +319,6 @@ public class TreeViewListController implements Initializable {
                     servExpanded = true;
                 }
                 break;
-            case "STAI":
-                if(staiExpanded){
-                    staiTree.setPrefSize(350.0, 32.0);
-                    rootStai.setExpanded(false);
-                    staiExpanded = false;
-                } else {
-                    staiTree.setPrefSize(350.0, 144.0);
-                    rootStai.setExpanded(true);
-                    staiExpanded = true;
-                }
-                break;
         }
     }
 
@@ -379,10 +332,6 @@ public class TreeViewListController implements Initializable {
     @FXML
     public void handleDeptClicked(){
         expandAndCollapse("DEPT");
-    }
-    @FXML
-    public void handleElevClicked(){
-        expandAndCollapse("ELEV");
     }
     @FXML
     public void handleExitClicked(){
@@ -412,10 +361,7 @@ public class TreeViewListController implements Initializable {
     public void handleServClicked(){
         expandAndCollapse("SERV");
     }
-    @FXML
-    public void handleStaiClicked(){
-        expandAndCollapse("STAI");
-    }
+
 
 
 }

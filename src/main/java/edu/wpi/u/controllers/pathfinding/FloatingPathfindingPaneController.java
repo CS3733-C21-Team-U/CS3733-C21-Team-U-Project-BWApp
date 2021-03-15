@@ -320,6 +320,7 @@ public class FloatingPathfindingPaneController {
                 startFieldFlair.setVisible(false);
                 endFieldFlair.setVisible(true);
             }
+            App.mapInteractionModel.currentTargetNode.set(newVal);
         });
 
         App.mapInteractionModel.mapTargetNode.addListener((observable, oldVal, newVal) ->{
