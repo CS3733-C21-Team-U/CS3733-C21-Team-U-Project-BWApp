@@ -129,9 +129,9 @@
                         </Label>
                         <HBox prefHeight="0.0" prefWidth="408.0">
                            <children>
-                              <JFXToggleButton selected="true" text="Email Notifications" />
+                              <JFXToggleButton fx:id="emailNotifications" selected="true" text="Email Notifications" />
                               <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                              <JFXToggleButton text="Text Notifications" />
+                              <JFXToggleButton fx:id="textNotifications" text="Text Notifications" />
                            </children>
                         </HBox>
                         <Label text="Theme" />

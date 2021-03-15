@@ -1,9 +1,6 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
@@ -55,6 +52,8 @@ public class SettingsBaseController {
     @FXML public Group onlyAdmin;
     @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
+    public JFXToggleButton emailNotifications;
+    public JFXToggleButton textNotifications;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
