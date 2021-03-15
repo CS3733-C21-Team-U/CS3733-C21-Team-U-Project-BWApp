@@ -27,7 +27,7 @@
       </Pane>
       <ImageView fitHeight="330.0" fitWidth="1700.0" opacity="0.97" translateY="50.0">
          <image>
-            <Image url="@Images/hospital2%20(2).jpg" />
+            <Image url="@Images/hospital(2).jpg" />
          </image>
       </ImageView>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0">
