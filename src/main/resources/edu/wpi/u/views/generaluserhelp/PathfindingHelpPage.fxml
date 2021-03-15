@@ -4,72 +4,157 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.PathFindingHelpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.PathFindingHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1686.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
+                  <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use PathFinding" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
-            </VBox>
-            <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use PathFinding">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="784.0" prefWidth="1283.0">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="600.0">
-                     <children>
-                        <Label prefHeight="15.0" prefWidth="623.0" styleClass="headline-3" text="1. Selecting PathFinding Tab" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label prefHeight="56.0" prefWidth="600.0" styleClass="headline-3" text="2. Selecting the floor number on the left bottom corner, it will display the selected floor map." wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="25.0" prefHeight="83.0" prefWidth="600.0" styleClass="headline-3" text="3. Selecting or typing the current position and desired location. The direction will be displayed on the map. Additionally, users can select text direction." wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="490.0" wrapText="true" />
-                        <ImageView fitHeight="306.0" fitWidth="179.0" translateX="200.0">
-                           <image>
-                              <Image url="@../Images/pathfinding1.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
-                  <ImageView fitHeight="703.0" fitWidth="1072.0" translateY="80.0">
-                     <image>
-                        <Image url="@../Images/pathfindding%20new.png" />
-                     </image>
-                  </ImageView>
-               </children>
+               <padding>
+                  <Insets left="70.0" right="30.0" />
+               </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="2721.0" prefWidth="1700.0" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="-7.0" prefHeight="2293.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="300.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="355.0" prefWidth="587.0">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1251.0" prefHeight="98.0" prefWidth="587.0" styleClass="headline-2" text="What is PathFinding?" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="10.0" maxWidth="1251.0" prefHeight="173.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="PathFinding is one of the major features in our application. It is created to help all users who have issue with finding specific locations inside the hospital. Also, we extend our pathfinding function to the parking lot. Users can start the pathfinding right after they park. Moreover, we implement Google Map to our application. All users are able to use the Google Map to get direction from their current location to the hospital." wrapText="true" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="Use PathFinding within the Hospital" />
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="61.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;PathFinding&quot; and the application will bring you to the page which is shown at right side." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="86.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. You can click side bar with 'G, 1, 2, 3, 4, 5'. Each letter or number represents a floor. After you click one of them, the app will display that specific floor map." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="84.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. On the right top bar, you can enter your location inside the hospital and the location you desired. Then, the path will be generated automatically. You have to follow the direction of the animation." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="124.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. If you are not familar with location names, you can always select a start node (start location) and an end node(end location). Before you click the end node, a preview path will be generated. After you click the end node, the path will be generated and you should follow the direction of the animation" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: Below are the floor representations" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="250.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="G--Outside of the hospital" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="301.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1--First Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="352.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2--Second Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="403.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3--Third Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="454.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4--Fourth Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="505.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5--Fifth Floor" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="629.0" fitWidth="1078.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/pathfinddingnew.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="What If I need direction to the hospital?">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <left>
+                                          <ImageView fitHeight="811.0" fitWidth="1136.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/googlemap.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </left>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="73.0" prefWidth="488.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Google Maps&quot; and the application will bring you to the google map page" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="65.0" prefWidth="488.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Enter your current address and the hospital's location will be autofilled" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Click 'Leave Now'" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1076.0" prefHeight="0.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="335.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="317.0" prefWidth="374.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ContactUS.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />

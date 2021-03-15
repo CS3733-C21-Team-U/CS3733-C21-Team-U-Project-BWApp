@@ -41,38 +41,26 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                              <Label styleClass="headline-2" text="What do we have on Settings Page?  " />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="112.0" prefHeight="150.0" prefWidth="1744.0" spacing="20.0">
                                  <children>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
-                                       <HBox.margin>
-                                          <Insets left="40.0" />
-                                       </HBox.margin>
-                                       <center>
-                                          <ImageView fitHeight="155.0" fitWidth="239.0" preserveRatio="true" BorderPane.alignment="CENTER">
-                                             <image>
-                                                <Image url="@../Images/setting1.png" />
-                                             </image>
-                                          </ImageView>
-                                       </center>
-                                    </BorderPane>
-                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                    <VBox prefHeight="241.0" prefWidth="600.0">
                                        <children>
-                                          <Label maxWidth="1251.0" prefHeight="166.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="With settings, only you can access your account on a trusted device or the web. When you want to sign in to a new device for the first time, you'll need to provide two pieces of information—your password and the six-digit verification code that's automatically displayed on your trusted devices or sent to your phone number. By entering the code, you're verifying that you trust the new device." wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="120.0" prefWidth="600.0" style="-fx-font-size: 18;" styleClass="caption" text="When you select the ‘Settings’ tab, the app will bring you to the Settings page.There are 3 panes which are Basic Account Settings, Other Settings, and Admin Settings." wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label styleClass="headline-2" text="What do we have on Settings Page?  " />
                               <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
                                  <children>
                                     <VBox prefHeight="401.0" prefWidth="587.0">
                                        <children>
-                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="When you create your account, the US-based phone number you enter will be used as your two-factor authentication device. If you entered an incorrect phone number during the sign up process, log in without two-factor authentication and follow these steps to update your phone number:" wrapText="true" />
-                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Log in&quot; and enter your credentials" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Select &quot;Log in without 2FA&quot;" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. In the left navigation bar, select the &quot;Settings&quot; tab" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Under the &quot;Basic User Settings&quot; section, update your phone number and click &quot;Update&quot;" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5. From now on you can log in security or reset your password using 2FA" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="79.0" prefWidth="587.0" style="-fx-font-size: 25;" styleClass="headline-3" text="How to use Basic Account Settings?" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Settings&quot; Tab and enter the settings page" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="62.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. If you would like to update your contact information, Please enter Phone Number and Email Address and Click 'Apply Contact Change'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="77.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. If you would like to update your password, you have to enter the old password, new password, and confirm new password. Then, your password will be updated you click 'Update Password'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 20;" styleClass="caption" text="Warning: Updating Password might fail due to incorrect old password or inconsistent new password." wrapText="true" />
                                        </children>
                                     </VBox>
                                     <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
@@ -82,7 +70,61 @@
                                        <center>
                                           <ImageView fitHeight="649.0" fitWidth="980.0" preserveRatio="true" BorderPane.alignment="CENTER">
                                              <image>
-                                                <Image url="@../Images/settingnew.png" />
+                                                <Image url="@../Images/basicaccountsetting.png" />
+                                             </image>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="112.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="649.0" fitWidth="980.0" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/othersettiongs.png" />
+                                             </image>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="79.0" prefWidth="587.0" style="-fx-font-size: 25;" styleClass="headline-3" text="How to use Other Settings?" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Settings&quot; Tab and enter the settings page" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="73.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. You can click 'Email Notifications' or 'Text Notifications' switches to receive email or text notifications. " wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="67.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. You can choose color theme for your application. If you perfer purple, you can select 'Purple'. Otherwise, you can select 'Blue'." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text=" Notice: It is eligible to receive both types of notifications" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="817.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Settings&quot; Tab and enter the settings page" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click 'Choose CSV', you can select any csv files to load" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="61.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. You can also click 'Select Table Name' to choose the table you want to use." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="58.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Then, if you would like to save the data to the selected CSV, click 'Save to Current Data to CSV'. " wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="63.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5.If you would like you load the existed CSV file and create a new table from it. Click 'Load CSV and Create New Table'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="213.0" maxWidth="1251.0" prefHeight="62.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="6. As an admin, you can choose algorithms for pathfinding. They are A Star, Depth First Search, Breadth First Search, and Dijkstra" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="264.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="7. To General users, the default pathfinding algorithm is always A Star" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="338.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: there will always be only one algorithm applied to pathfinding!" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="649.0" fitWidth="980.0" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/adminsetting.png" />
                                              </image>
                                           </ImageView>
                                        </center>
