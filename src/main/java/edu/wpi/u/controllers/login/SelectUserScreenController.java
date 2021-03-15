@@ -1,10 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.CachingClassLoader;
 import edu.wpi.u.users.Role;
@@ -13,6 +10,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -42,16 +41,18 @@ public class SelectUserScreenController {
     public VBox loadingFrame;
     public StackPane loadingStackPane;
     public JFXProgressBar progressBar;
+    public JFXCheckBox useCacheCheckBox;
 
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
         progressBar.setVisible(false);
-        if (App.useCache.get()) {
-            App.loadingSpinnerHerePane = loadingStackPane;
-            fxmlLoader.setClassLoader(App.classLoader);
-            fxmlLoader.load();
-        }
+        useCacheCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            App.useCache.set(newValue);
+        });
+        App.loadingSpinnerHerePane = loadingStackPane;
+        fxmlLoader.setClassLoader(App.classLoader);
+        fxmlLoader.load();
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
