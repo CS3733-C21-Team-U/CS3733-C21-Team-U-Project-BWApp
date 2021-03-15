@@ -2,78 +2,160 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.coviddashboard.HospitalCovidDashPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1221.0" prefWidth="1780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.coviddashboard.HospitalCovidDashPageController">
    <children>
-      <VBox layoutX="9.0" layoutY="1.0" prefHeight="696.0" prefWidth="941.0">
+      <VBox layoutX="2.0" layoutY="-7.0" prefHeight="1180.0" prefWidth="1145.0">
          <children>
-            <JFXTextArea prefHeight="0.0" prefWidth="476.0" text="COVID DASHBOARD" />
-            <HBox prefHeight="34.0" prefWidth="941.0">
+            <HBox prefHeight="41.0" prefWidth="1243.0" />
+            <HBox prefHeight="67.0" prefWidth="1084.0">
                <children>
-                  <JFXTextArea prefHeight="218.0" prefWidth="302.0" text="Results for the Past 7 days" />
-                  <JFXTextArea prefHeight="218.0" prefWidth="315.0" text="Positive Tests" />
-                  <JFXTextArea prefHeight="218.0" prefWidth="329.0" text="Positive Test Rates" />
+                  <HBox prefHeight="67.0" prefWidth="746.0">
+                     <children>
+                        <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="218.0" prefWidth="302.0" text="Results for the Past 7 days">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </JFXTextArea>
+                        <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="218.0" prefWidth="315.0" text="Positive Tests">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </JFXTextArea>
+                        <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="218.0" prefWidth="329.0" text="Positive Test Rates">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </JFXTextArea>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="200.0" right="200.0" />
+                     </HBox.margin>
+                  </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="139.0" prefWidth="1351.0">
                <children>
-                  <JFXTextArea fx:id="resultsWeekTextBox" prefHeight="100.0" prefWidth="295.0" text="NUMBER" />
-                  <JFXTextArea fx:id="positiveWeekTextBox" prefHeight="100.0" prefWidth="323.0" text="NUMBER" />
-                  <JFXTextArea fx:id="positiveWeekRatesTextBox" prefHeight="100.0" prefWidth="345.0" text="NUMBER" />
+                  <JFXTextArea fx:id="resultsWeekTextBox" editable="false" focusColor="#405aa800" prefHeight="100.0" prefWidth="295.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
+                  <JFXTextArea fx:id="positiveWeekTextBox" editable="false" focusColor="#405aa800" prefHeight="233.0" prefWidth="301.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
+                  <JFXTextArea fx:id="positiveWeekRatesTextBox" editable="false" focusColor="#405aa800" prefHeight="100.0" prefWidth="345.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
                </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="41.0" prefWidth="941.0">
+            <HBox prefHeight="62.0" prefWidth="1351.0">
                <children>
-                  <JFXTextArea prefHeight="241.0" prefWidth="295.0" text="Results for the Past Month" />
-                  <JFXTextArea prefHeight="241.0" prefWidth="306.0" text="Positive Tests" />
-                  <JFXTextArea prefHeight="241.0" prefWidth="357.0" text="Positive Test Rates" />
+                  <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="241.0" prefWidth="295.0" text="Results for the Past Month">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></JFXTextArea>
+                  <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="241.0" prefWidth="320.0" text="Positive Tests">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></JFXTextArea>
+                  <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="42.0" prefWidth="327.0" text="Positive Test Rates">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></JFXTextArea>
                </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="123.0" prefWidth="941.0">
+            <HBox prefHeight="148.0" prefWidth="1351.0">
                <children>
-                  <JFXTextArea fx:id="resultsMonthTextBox" prefHeight="186.0" prefWidth="286.0" text="NUMBER" />
-                  <JFXTextArea fx:id="positiveMonthTextBox" prefHeight="186.0" prefWidth="316.0" text="NUMBER" />
-                  <JFXTextArea fx:id="positiveMonthRatesTextBox" prefHeight="186.0" prefWidth="342.0" text="NUMBER" />
+                  <JFXTextArea fx:id="resultsMonthTextBox" editable="false" focusColor="#405aa800" prefHeight="186.0" prefWidth="286.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
+                  <JFXTextArea fx:id="positiveMonthTextBox" editable="false" focusColor="#405aa800" prefHeight="220.0" prefWidth="308.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
+                  <JFXTextArea fx:id="positiveMonthRatesTextBox" editable="false" focusColor="#405aa800" prefHeight="220.0" prefWidth="366.0">
+                     <font>
+                        <Font size="49.0" />
+                     </font></JFXTextArea>
                </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" />
+               </VBox.margin>
             </HBox>
-            <JFXTextArea prefHeight="33.0" prefWidth="941.0" text="Test Results Per Day" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="254.0" prefWidth="1691.0">
                <children>
-                  <BarChart fx:id="PositiveRateBarChart" prefHeight="150.0" prefWidth="935.0" title="Positive" titleSide="LEFT">
+                  <BarChart fx:id="TotalResultBarChart" prefHeight="254.0" prefWidth="434.0" title="Total Result" titleSide="BOTTOM">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </BarChart>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <BarChart fx:id="NegativeRateBarChart" prefHeight="150.0" prefWidth="947.0" title="Negative" titleSide="LEFT">
+                  <BarChart fx:id="TotalPositiveBarChart" prefHeight="254.0" prefWidth="489.0" title="Total Positive" titleSide="BOTTOM">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </BarChart>
                </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" top="50.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton fx:id="returnToMainButton" text="Return to Main Page" />
-                  <JFXButton fx:id="stateResultsButton" text="State-wide Results" />
-                  <JFXButton fx:id="countryResultsButton" text="Country-wide Results" />
-               </children>
-            </HBox>
+            <HBox prefHeight="43.0" prefWidth="1773.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="1002.0" layoutY="32.0" prefHeight="702.0" prefWidth="263.0">
+         <children>
+            <JFXTextArea editable="false" focusColor="#405aa800" prefHeight="68.0" prefWidth="216.0" text="Additional Resources">
+               <font>
+                  <Font size="27.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXTextArea>
+            <JFXButton fx:id="BostonCovidButton" buttonType="RAISED" onAction="#accessBostonChart" prefHeight="64.0" prefWidth="211.0" text="Boston Coronavirus Data">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="15.0" top="10.0" />
+               </VBox.margin></JFXButton>
+            <JFXButton fx:id="GovernerUpdateButton" buttonType="RAISED" onAction="#accessGovernerUpdate" prefHeight="64.0" prefWidth="149.0" text="Governer Updates">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="50.0" top="10.0" />
+               </VBox.margin>
+            </JFXButton>
          </children>
       </VBox>
    </children>

@@ -7,6 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -32,11 +37,12 @@ public class HospitalCovidDashPageController {
     @FXML
     public BarChart<java.sql.Date, Double> TotalPositiveBarChart;
     @FXML
-    public JFXButton returnToMainButton;
+    public JFXButton WorcesterMobilityButton;
     @FXML
-    public JFXButton stateResultsButton;
+    public JFXButton BostonCovidButton;
     @FXML
-    public JFXButton countryResultsButton;
+    public JFXButton GovernerUpdateButton;
+
 
     public void initialize() {
         resultsWeekTextBox.setText(String.valueOf(App.covidService.getWeeklySurveys()));
@@ -65,10 +71,35 @@ public class HospitalCovidDashPageController {
         }
 
         TotalPositiveBarChart.getData().add(totalPositiveSeries);
-
     }
+
+    /**
+     * When the Boston Coronavirus Button is clicked, the browser opens to the google coronavirus dashboard for Boston
+     */
+    public void accessBostonChart() {
+        try {
+            Desktop.getDesktop().browse(new URL("https://news.google.com/covid19/map?hl=en-US&gl=US&ceid=US%3Aen&mid=%2Fm%2F0k3l5").toURI());
+        } catch (URISyntaxException | MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * When the Governer Update Button is clicked, the browser opens to the Massachusetts governer's updates webpage
+     */
+
+    public void accessGovernerUpdate() {
+        try {
+            Desktop.getDesktop().browse(new URL("https://www.mass.gov/governor-updates").toURI());
+        } catch (URISyntaxException | MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
-
-
 
 
