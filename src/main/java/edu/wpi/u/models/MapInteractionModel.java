@@ -45,6 +45,7 @@ public class MapInteractionModel {
     public double alineValue;
 
 
+    public SimpleStringProperty pathfindingFloorController = new SimpleStringProperty(" ");//for start node
 
     public void addToNodeIdList(String nodeID){
         if(!this.nodeIDList.contains(nodeID)){
