@@ -1,16 +1,9 @@
 package edu.wpi.u.database;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import soot.Local;
-
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -108,8 +101,8 @@ public class CovidData extends Data{
      * @return - Number of symptomatic surveys
      */
     public int getNumSymptomaticFromDate(LocalDate targetDate){
-        String target = (targetDate.format(dtf));
-        java.sql.Date sqlDate = java.sql.Date.valueOf(target);
+
+        java.sql.Date sqlDate = java.sql.Date.valueOf(targetDate.format(dtf));
 
         String str = "select count(symptomatic) from covidSurveyResult where dateOfResults=? and (symptomatic = true)";
         try{

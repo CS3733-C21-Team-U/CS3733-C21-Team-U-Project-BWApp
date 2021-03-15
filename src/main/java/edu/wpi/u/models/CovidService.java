@@ -3,7 +3,6 @@ package edu.wpi.u.models;
 import edu.wpi.u.database.CovidData;
 
 import java.math.RoundingMode;
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
@@ -44,7 +43,7 @@ public class CovidService {
         double posNum = cd.getWeeklySymptomaticSurveys();
         DecimalFormat decform = new DecimalFormat("#.##");
         decform.setRoundingMode(RoundingMode.CEILING);
-        return Double.parseDouble(decform.format(posNum/weekNum));
+        return Double.parseDouble(decform.format((posNum/weekNum) * 100));
     }
 
     public int getMonthlySurveys(){ return cd.getMonthlySurveys();}
@@ -56,7 +55,7 @@ public class CovidService {
         double posNum = cd.getMonthlySymptomaticSurveys();
         DecimalFormat decform = new DecimalFormat("#.##");
         decform.setRoundingMode(RoundingMode.CEILING);
-        return Double.parseDouble(decform.format(posNum/monthNum));
+        return Double.parseDouble(decform.format((posNum/monthNum) * 100));
     }
 
 }
