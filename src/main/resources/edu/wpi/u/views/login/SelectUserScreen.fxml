@@ -41,7 +41,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </opaqueInsets>
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER">
                      <children>
                         <VBox fx:id="loadingFrame" alignment="CENTER" prefHeight="600.0" prefWidth="400.0" spacing="20.0">
                            <children>
@@ -208,7 +208,7 @@
                   <JFXButton onAction="#handleSkipToPatientButton" styleClass="button-contained" text="LOG IN AS PATIENT" />
                   <JFXButton fx:id="skipToAdminButton" layoutX="159.0" layoutY="10.0" onAction="#handleSkipToAdminButton" styleClass="button-contained" text="LOG IN AS ADMIN" />
                   <JFXButton layoutX="308.0" layoutY="10.0" onAction="#handleDebugButton" styleClass="button-contained" text="EXIT FULLSCREEN" />
-                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="35.0" prefWidth="349.0" styleClass="bigButtonOutline" text="Exit keybaord shortcut is (Control + Q)" />
+                  <JFXButton layoutX="469.0" layoutY="10.0" onAction="#handleExitApp" prefHeight="35.0" prefWidth="575.0" styleClass="bigButtonOutline" text="NEW!!! (Exit App safely) - New keybaord shortcut is (Control + Q)" />
                   <JFXCheckBox fx:id="useCacheCheckBox" prefHeight="30.0" style="-fx-text-fill: white; -fx-background-color: red; -fx-font-size: 20;" text="Super Maximum Light Speed Mode (Don't enable if you have little or slow RAM)" />
                </children>
                <BorderPane.margin>
