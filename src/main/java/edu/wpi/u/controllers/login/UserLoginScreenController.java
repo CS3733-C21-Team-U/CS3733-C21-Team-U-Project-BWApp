@@ -242,6 +242,7 @@ public class UserLoginScreenController {
                         Platform.runLater(() -> {
                             App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
                             App.isLoggedIn.set(true);
+                            App.tabPaneRoot.getSelectionModel().selectFirst();
                             App.getPrimaryStage().getScene().setRoot(App.base);
                         });
                     } catch (Exception e) {

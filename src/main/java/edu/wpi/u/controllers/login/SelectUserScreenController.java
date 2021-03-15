@@ -115,6 +115,7 @@ public class SelectUserScreenController {
                     App.userService.setGuest("debug");
                     App.userService.getActiveUser().setType(Role.GUEST);
                     App.isLoggedIn.set(true);
+                    App.tabPaneRoot.getSelectionModel().selectFirst();
                     App.getPrimaryStage().getScene().setRoot(App.base);
                 });
             } catch (Exception e) {
@@ -134,6 +135,7 @@ public class SelectUserScreenController {
                     App.userService.setPatient("debug");
                     App.userService.getActiveUser().setType(Role.PATIENT);
                     App.isLoggedIn.set(true);
+                    App.tabPaneRoot.getSelectionModel().selectFirst();
                     App.getPrimaryStage().getScene().setRoot(App.base);
                 });
             } catch (Exception e) {
@@ -153,6 +155,7 @@ public class SelectUserScreenController {
                     App.userService.setEmployee("debug");
                     App.userService.getActiveUser().setType(Role.ADMIN);
                     App.isLoggedIn.set(true);
+                    App.tabPaneRoot.getSelectionModel().selectFirst();
                     App.getPrimaryStage().getScene().setRoot(App.base);
                 });
             } catch (Exception e) {
