@@ -4,75 +4,52 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
-   <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-6.0" prefHeight="974.0" prefWidth="1686.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
-               <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" translateX="-30.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <SVGPath content="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8zM12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" scaleX="2.0" scaleY="2.0" style="-fx-fill: -primary;" translateY="-5.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="How to Use Two Factor Authorization">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="784.0" prefWidth="1283.0">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="600.0">
-                     <children>
-                        <Label prefHeight="15.0" prefWidth="623.0" styleClass="headline-3" text="1. Selecting Log In" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label prefHeight="56.0" prefWidth="600.0" styleClass="headline-3" text="2. Clicking Login without entering Username or Password" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="25.0" prefHeight="83.0" prefWidth="600.0" styleClass="headline-3" text="3. An confirmation code will be sent to the user's smart device. It will be asked for loging in" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="425.0" prefHeight="27.0" prefWidth="600.0" styleClass="headline-3" text="If there is any issue, Please contact our IT Department!" translateY="490.0" wrapText="true" />
-                        <ImageView fitHeight="387.0" fitWidth="248.0" translateX="100.0">
-                           <image>
-                              <Image url="@../Images/loginscreen.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
-                  <ImageView fitHeight="581.0" fitWidth="491.0" translateX="180.0" translateY="90.0">
-                     <image>
-                        <Image url="@../Images/2fa.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<BorderPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
-      <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
+      <URL value="@../css/BaseStyle.css" />
    </stylesheets>
-</AnchorPane>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primary;" BorderPane.alignment="CENTER">
+         <children>
+            <SVGPath content="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8zM12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </SVGPath>
+            <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use Two Factor Authorization" />
+            <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+            <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
+         </children>
+         <padding>
+            <Insets left="70.0" right="30.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="871.0" prefWidth="1700.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label maxWidth="500.0" prefHeight="120.0" prefWidth="500.0" style="-fx-font-size: 20;" text="Two-factor authentication is an extra layer of security for your Apple ID designed to ensure that you're the only person who can access your account, even if someone knows your password." wrapText="true" />
+                     </children>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
