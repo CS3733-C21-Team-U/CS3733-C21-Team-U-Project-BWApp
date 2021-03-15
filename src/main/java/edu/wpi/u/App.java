@@ -169,7 +169,7 @@ public class App extends Application {
     App.primaryStage.show();
 
     App.getPrimaryStage().getScene().setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.ESCAPE && e.isControlDown()) {
+      if (e.getCode() == KeyCode.Q && e.isControlDown()) {
         App.getInstance().exitApp();
       }
     });
