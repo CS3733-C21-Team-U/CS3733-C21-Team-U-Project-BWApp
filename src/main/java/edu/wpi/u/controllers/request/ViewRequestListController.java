@@ -1,5 +1,6 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
@@ -22,6 +23,7 @@ public class ViewRequestListController {
     public JFXComboBox<String> typeOption;
     public JFXComboBox<String> assignOption;
     public JFXComboBox<String> resolveOption;
+    public JFXButton newRequestButton;
     private Group requests;
     @FXML public VBox newRequestVBox;
     ArrayList<SpecificRequest> listOfRequests = App.requestService.getRequests();

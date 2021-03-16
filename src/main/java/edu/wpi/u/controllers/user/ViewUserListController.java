@@ -377,7 +377,7 @@ public class ViewUserListController {
         handleEditUserList(actionEvent);
     }
 
-    public void handleAddUserButton(ActionEvent actionEvent) throws IOException {
+    public void handleAddUserButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/AddUser.fxml"));
         usersRoot.getChildren().clear();
         usersRoot.getChildren().add(root);
