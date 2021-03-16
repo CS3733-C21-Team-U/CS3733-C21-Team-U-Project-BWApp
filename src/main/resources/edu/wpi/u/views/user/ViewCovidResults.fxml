@@ -3,32 +3,206 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.user.ViewCovidResultsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.user.ViewCovidResultsController">
     <stylesheets>
         <URL value="@../css/LightTheme.css" />
         <URL value="@../css/BaseStyle.css" />
     </stylesheets>
     <children>
-        <VBox layoutX="184.0" layoutY="49.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-            <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1675.0" spacing="100.0">
-                    <children>
-                        <Label styleClass="headline-2" text="Covid Results" />
-                    </children>
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </HBox>
-                <JFXTreeTableView fx:id="treeTableView" prefHeight="400.0" prefWidth="1458.0">
-                    <VBox.margin>
-                        <Insets right="500.0" />
-                    </VBox.margin></JFXTreeTableView>
-            </children>
-        </VBox>
+      <VBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="60.0" left="60.0" right="60.0" top="30.0" />
+         </padding>
+         <children>
+            <Label styleClass="headline-1" text="Covid Dashboard">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="settingBlockContainer">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Negative tests over x days" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart>
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Positive Tests over X days" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart layoutX="10.0" layoutY="54.0">
+                                       <xAxis>
+                                          <CategoryAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis side="LEFT" />
+                                       </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </AnchorPane>
+                        <Region prefHeight="0.0" prefWidth="955.0" VBox.vgrow="ALWAYS" />
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="settingBlockContainer">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Table of all users on campus" textAlignment="CENTER" wrapText="true" />
+                                    <JFXTreeTableView fx:id="treeTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="915.0" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="822.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="590.0" styleClass="settingBlockContainer">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <children>
+                              <VBox prefHeight="295.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label prefHeight="24.0" prefWidth="585.0" styleClass="headline-3" text="Covid survey statistics" textAlignment="CENTER" wrapText="true">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <GridPane alignment="CENTER" prefHeight="295.0" prefWidth="590.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
+                                                <Label styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
+                                                <Label styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
+                                                <Label styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
+                                                <Label styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </AnchorPane>
+                        <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="590.0" styleClass="settingBlockContainer">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <children>
+                              <StackPane prefHeight="487.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefWidth="590.0">
+                                       <children>
+                                          <Label prefHeight="24.0" prefWidth="801.0" styleClass="headline-3" text="Visitors and their their progression through kisosk" textAlignment="CENTER" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Polygon fill="DODGERBLUE" points="-275, 0, 275, 0, 225, 100.0, -225, 100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: derive(-primary,150%); -fx-stroke: -onBackgroundAlt;" />
+                                          <Polygon fill="DODGERBLUE" points="-225,0,-200,50,200,50,225,0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: -background; -fx-stroke: -onBackgroundAlt;" />
+                                          <Polygon fill="DODGERBLUE" points="-200, 0, 200, 0, 150, 100.0, -150, 100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: derive(-primary,110%); -fx-stroke: -onBackgroundAlt;" />
+                                          <Polygon fill="DODGERBLUE" points="-150,0,-125,50,125,50,150,0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: -background; -fx-stroke: -onBackgroundAlt;" />
+                                          <Polygon fill="DODGERBLUE" points="-125, 0, 125, 0, 75, 100.0, -75, 100.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: derive(-primary,90%); -fx-stroke: -onBackgroundAlt;" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Region prefHeight="80.0" prefWidth="590.0" />
+                                          <Label style="-fx-text-fill: black;" styleClass="subtitle" text="Total Users" />
+                                          <Label fx:id="funnelValue1" style="-fx-text-fill: black;" styleClass="headline-2" text="112" />
+                                          <Label fx:id="funnelSubtitle1" layoutX="228.0" layoutY="195.0" style="-fx-text-fill: black;" styleClass="caption" text="X admins, Y patients, Z guests" />
+                                          <Region layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="590.0" />
+                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: black;" styleClass="caption" text="2.5% have arrived at a kisosk" />
+                                          <Region layoutX="10.0" layoutY="156.0" prefHeight="37.0" prefWidth="590.0" />
+                                          <Label layoutX="275.0" layoutY="245.0" style="-fx-text-fill: black;" styleClass="subtitle" text="On Campus" />
+                                          <Label fx:id="funnelValue2" layoutX="276.0" layoutY="260.0" style="-fx-text-fill: black;" styleClass="headline-2" text="31" />
+                                          <Region layoutX="10.0" layoutY="159.0" prefHeight="39.0" prefWidth="590.0" />
+                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: black;" styleClass="caption" text="89% have seen a nurse" />
+                                          <Region layoutX="10.0" layoutY="210.0" prefHeight="38.0" prefWidth="590.0" />
+                                          <Label layoutX="274.0" layoutY="247.0" style="-fx-text-fill: black;" styleClass="subtitle" text="Check-in at entrace" />
+                                          <Label fx:id="funnelValue3" layoutX="286.0" layoutY="262.0" style="-fx-text-fill: black;" styleClass="headline-2" text="27" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

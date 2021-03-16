@@ -1,13 +1,13 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
 import edu.wpi.u.users.Role;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,6 +55,8 @@ public class SettingsBaseController {
     @FXML public Group onlyAdmin;
     @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
+    public JFXToggleButton emailNotifications;
+    public JFXToggleButton textNotifications;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
@@ -62,7 +64,25 @@ public class SettingsBaseController {
         succsessfulLabel.setVisible(false);
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
-
+        
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
+                case "Both":
+                    emailNotifications.setSelected(true);
+                    textNotifications.setSelected(true);
+                    break;
+                case "Email":
+                    emailNotifications.setSelected(true);
+                    break;
+                case "SMS":
+                    textNotifications.setSelected(true);
+                    break;
+                default:
+                    emailNotifications.setSelected(false);
+                    textNotifications.setSelected(false);
+                    break;
+            }
+        });
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);
             errorUpdateContactLabel.setVisible(false);
@@ -224,5 +244,20 @@ public class SettingsBaseController {
             }else{
                 wrongPasswordLable.setVisible(true);
             }
+    }
+
+    public void handleApplyNotificationChange(ActionEvent actionEvent) {
+        if (emailNotifications.isSelected() && textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Both");
+        }
+        else if (emailNotifications.isSelected()) {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Email");
+        }
+        else if (textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "SMS");
+        }
+        else {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Nothing");
+        }
     }
 }

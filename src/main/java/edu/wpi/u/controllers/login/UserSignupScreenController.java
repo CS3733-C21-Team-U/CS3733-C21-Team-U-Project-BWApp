@@ -138,11 +138,11 @@ public class UserSignupScreenController {
     }
 
     public void handleSignUpButton(ActionEvent actionEvent) throws IOException {
-        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), false,new ArrayList<Appointment>(),providerNameTextField.getText(),null,null);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+//        App.userService.addPatient(fullNameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.PATIENT, phonenumberTextField.getText(), false,new ArrayList<Appointment>(),providerNameTextField.getText(),null,null);
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//        fxmlLoader.load();
+//        fxmlLoader.getController();
+//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
 //        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
 //        App.getPrimaryStage().getScene().setRoot(root);
         if(fullNameTextField.getText().equals("")){

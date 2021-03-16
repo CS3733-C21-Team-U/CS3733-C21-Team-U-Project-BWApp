@@ -52,6 +52,7 @@
                         <JFXTextField fx:id="userNameTextField" labelFloat="true" promptText="Enter Username" />
                         <Region prefHeight="11.0" prefWidth="360.0" />
                         <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" />
+                        <Label fx:id="wrongPasswordLabel" style="-fx-text-fill: -error;" text="Username/ Password not matching" />
                         <Region prefHeight="21.0" prefWidth="360.0" />
                         <JFXButton defaultButton="true" onAction="#handleLogin" styleClass="button-contained" text="SIGN IN" />
                         <HBox alignment="CENTER" prefHeight="41.0" prefWidth="1086.0">
