@@ -43,6 +43,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     public ToggleGroup selectTypeGroup;
     public JFXButton saveButton;
     public SVGPath typeIconSVG;
+    public Label titleLabel;
 
     @FXML
     public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
@@ -59,7 +60,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     Set<String> existingAssignee;
     SpecificRequest currSpecificRequest;
 
-    boolean labelSwitch = true;
+    boolean labelSwitch = false;
     public Label selectFieldLabel;
     public Label fieldLabel;
     int msgCounter = 0;
@@ -198,6 +199,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             JFXToggleNode target = ((JFXToggleNode)selectTypeGroup.getSelectedToggle());
             if(target==null){
                 extraFieldsVBox.getChildren().clear();
+                titleLabel.setText("New Request");
                 updateFieldLabel();
                 extraFieldsVBox.getChildren().add(selectFieldGraphic);
                 typeIconSVG.setContent(getIcon("UPDATE"));
@@ -334,8 +336,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
-            j.setStyle("-fx-font-size: 16px");
-           // j.setText( currSpecificRequest.getSpecificData().get(i));
+            j.setStyle("-fx-font-size: 12px");
 
             ans[i] = j;
             extraFieldsVBox.getChildren().add(0,j);
@@ -346,8 +347,9 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         Region r = new Region();
         r.setPrefHeight(40);
         extraFieldsVBox.getChildren().add(r);
-        fieldLabel.setText("You chose the "+currSpecificRequest.getType()+" Request.");
-        extraFieldsVBox.getChildren().add(fieldLabel);
+        titleLabel.setText("New " + currSpecificRequest.getType() + " Request");
+//        fieldLabel.setText("You chose the "+currSpecificRequest.getType()+" Request.");
+//        extraFieldsVBox.getChildren().add(fieldLabel);
         return ans;
     }
 

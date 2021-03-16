@@ -41,6 +41,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
     public JFXTextField editAssigneesField;
+    public Label titleLabel;
 
     @FXML
     public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
@@ -79,6 +80,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         //longNamestoID = App.mapService.getLongNames(parent.request.getGenericRequest().);
         longNamestoID  = App.mapService.getLongNames();
         AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+        titleLabel.setText("Edit " + parent.request.getType() + " Request");
 
 
         //Set Existing values for fields
@@ -178,7 +180,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
-            j.setStyle("-fx-font-size: 16px");
+            j.setStyle("-fx-font-size: 12px");
             j.setText( parent.request.getSpecificData().get(i));
 
             ans[i] = j;
@@ -240,12 +242,5 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editLocationsField.setText("");
 
     }
-
-
-
-
-
-
-
 
 }
