@@ -120,7 +120,7 @@ public class UserLoginScreenController {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
-                App.isLoggedIn.set(true);
+                App.isLoggedIn.set(!App.isLoggedIn.get());
                 handleSubmit();
             } else {
                 wrongPasswordLabel.setVisible(true);
@@ -206,14 +206,14 @@ public class UserLoginScreenController {
 
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
-        App.isLoggedIn.set(true);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
         //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot()); // todo : this still makes it load???
     }
 
     public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
         App.userService.setUser("patient", "patient", "Patients");
-        App.isLoggedIn.set(true);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
@@ -233,7 +233,7 @@ public class UserLoginScreenController {
                             Thread.sleep(500);
                             Platform.runLater(() -> {
                                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
-                                App.isLoggedIn.set(true);
+                                App.isLoggedIn.set(!App.isLoggedIn.get());
                                 App.tabPaneRoot.getSelectionModel().selectFirst();
                                 App.getPrimaryStage().getScene().setRoot(App.base);
                             });
@@ -249,7 +249,7 @@ public class UserLoginScreenController {
                     fxmlLoader.load();
                     fxmlLoader.getController();
                     App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
-                    App.isLoggedIn.set(true);
+                    App.isLoggedIn.set(!App.isLoggedIn.get());
                     App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
                     App.tabPaneRoot.getSelectionModel().selectFirst();
                 }

@@ -56,6 +56,24 @@ public class MapBuilderBaseController {
      * @throws IOException
      */
     public void initialize() throws Exception {
+        switch (App.themeString){
+            case "PURPLE":
+                selectedColor = "6200ee";
+                errorColor = "8862bf";
+                break;
+            case "DARK":
+                selectedColor = "bb86fc";
+                errorColor = "8d52d9";
+                break;
+            case "YELLOW":
+                selectedColor = "B00020";
+                errorColor = "be4b19";
+                break;
+            case "BLUE":
+                selectedColor = "5785d4";
+                errorColor = "00348c";
+                break;
+        }
         App.mapService.loadStuff();
         // Loading the map
         node = new ImageView(String.valueOf(getClass().getResource(App.mapInteractionModel.mapImageResource.get())));
@@ -310,6 +328,7 @@ public class MapBuilderBaseController {
         });
         edge.setOnMouseReleased(event -> {
             try {
+                clickedOnSomethingFlag = true;
                 handleEdgeClicked(ed);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -344,7 +363,7 @@ public class MapBuilderBaseController {
      * @throws IOException
      */
     public void handleEdgeClicked(Edge e) throws IOException {
-
+        clickedOnSomethingFlag = true;
         App.mapInteractionModel.setEdgeID(e.getEdgeID());
         switch (App.mapInteractionModel.getCurrentAction()){
             case "ADDEDGE":
@@ -362,17 +381,16 @@ public class MapBuilderBaseController {
                 //find and set current edge to green
                 ((Line)nodesAndEdges.lookup( "#" + e.getEdgeID())).setStroke(Paint.valueOf(selectedColor));
 
-                //find the old edge and reset its color
-                Line oldEdge = ((Line)nodesAndEdges.lookup( "#" + App.mapInteractionModel.previusEdgeID));
-                if (oldEdge != null){
-                    oldEdge.setStroke(Paint.valueOf(errorColor));
-                }
-
                 EdgeContextAnchor.setLayoutX(e.getStartNode().getCords()[0]+(xdiff/2));
                 EdgeContextAnchor.setLayoutY(e.getStartNode().getCords()[1]+(ydiff/2));
                 pane.getChildren().remove(App.mapInteractionModel.selectedContextBox);
                 pane.getChildren().add(EdgeContextAnchor);
                 App.mapInteractionModel.selectedContextBox = EdgeContextAnchor;
+                //find the old edge and reset its color
+                Line oldEdge = ((Line)nodesAndEdges.lookup( "#" + App.mapInteractionModel.previusEdgeID));
+                if (oldEdge != null){
+                    oldEdge.setStroke(Paint.valueOf(errorColor));
+                }
                 break;
         }
         clickedOnSomethingFlag = true;
