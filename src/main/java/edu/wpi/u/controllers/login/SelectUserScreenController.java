@@ -53,7 +53,6 @@ public class SelectUserScreenController {
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
-
         if (App.useCache.get()){
             loadingNewMainPage("Login");
             Thread thread = new Thread(() -> {
@@ -84,14 +83,18 @@ public class SelectUserScreenController {
     }
 
     public void handleGuestButton(ActionEvent actionEvent) throws IOException {
-
         if (App.useCache.get()){
             Thread thread = new Thread(() -> {
                 try {
                     //Thread.sleep(100);
                     Platform.runLater(() -> {
-                        App.getPrimaryStage().getScene().setRoot(App.guestBase);
-                    });
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        App.getPrimaryStage().getScene().setRoot(root);                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new Error("Unexpected interruption");
