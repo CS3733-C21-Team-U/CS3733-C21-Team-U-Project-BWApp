@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        App.isLoggedIn.addListener((o,oldVal,newVal) -> {
+            showOrNottoSHow();
+        });
+
         requestIcon.setContent(parent.getIcon(parent.request.getType()));
         setFields();
 
@@ -108,6 +113,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     }
 
     public void showOrNottoSHow(){
+        //for user role
+        //Patients only see requests that they are the author of
+        boolean role = (!App.userService.getActiveUser().getType().equals(Role.PATIENT)) || App.userService.getActiveUser().getUserName().equals(parent.request.getGenericRequest().getCreator());
+
         //for requests
         boolean type = parent.request.getType().equals(App.requestService.requestType.getValue())
                 || App.requestService.requestType.getValue().equals("All");
@@ -119,7 +128,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         boolean resolved = (App.requestService.resolveStatus.getValue().equals("Active")&&!parent.request.getGenericRequest().isResolved())
                 ||(App.requestService.resolveStatus.getValue().equals("Resolved")&&parent.request.getGenericRequest().isResolved())||(App.requestService.resolveStatus.getValue().equals("All"));
 
-            if(type && assignee && resolved){
+            if(type && assignee && resolved && role){
                 appear();
             }
             else{
