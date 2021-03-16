@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
+import java.sql.Timestamp;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -197,12 +198,14 @@ public class MobileUserLoginScreenController {
     public boolean searchRequests(){
         for(SpecificRequest r : App.requestService.getRequests()){
             if(r.getGenericRequest().getCreator() != null){
-                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
-                    if(r.getSpecificData().get(0).equals("High")){
-                        App.mapInteractionModel.highRisk = true;
+                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName())
+                        && r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
+                    if((r.getGenericRequest().getDateCompleted().getTime() + 900000) > new Timestamp(System.currentTimeMillis()).getTime()){
+                        if(r.getSpecificData().get(0).equals("High")){
+                            App.mapInteractionModel.highRisk = true;
+                        }
+                        return true;
                     }
-                    return true;
                 }
             }
         }

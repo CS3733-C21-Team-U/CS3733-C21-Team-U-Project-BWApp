@@ -28,11 +28,12 @@ public class KioskTemperatureScannerController {
     public JFXButton submitTempButton;
     private LinkedList<Integer> rollingAverage = new LinkedList<>();
     int savedTemp;
+    private SerialPort comPort;
     SimpleBooleanProperty updateFlag = new SimpleBooleanProperty(true);
     public void initialize(){
         if(iHaveTempSensor){
             submitTempButton.setDisable(true);
-            SerialPort comPort = SerialPort.getCommPort("COM5");
+            comPort = SerialPort.getCommPort("COM5");
             comPort.setBaudRate(9600);
             comPort.openPort();
             comPort.addDataListener(new SerialPortDataListener() {
@@ -91,9 +92,11 @@ public class KioskTemperatureScannerController {
     }
 
     public void handelTakeTempButton() {
-
         ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
         specificData.set(1,String.valueOf(averageLL(rollingAverage)));
+        if(averageLL(rollingAverage) > 100){
+            specificData.set(0, "High");
+        }
         App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
         App.requestService.updateRequest(App.requestService.curCovidRequest);
         SpecificRequest curRequest = null;
@@ -109,6 +112,8 @@ public class KioskTemperatureScannerController {
             //be mad
         }
 
+        comPort.closePort();
+
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
         try {
@@ -122,6 +127,7 @@ public class KioskTemperatureScannerController {
     }
 
     public void handleDebugSkipButton(){
+        comPort.closePort();
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
         try {
