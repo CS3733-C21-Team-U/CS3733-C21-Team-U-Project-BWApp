@@ -202,7 +202,7 @@ public class PathfindingBaseController {
         });
         App.mapInteractionModel.reloadPathfinding.addListener(e -> {
             clearMapItems();
-            generateNodes(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floorPathfinding);
         });
 
 
