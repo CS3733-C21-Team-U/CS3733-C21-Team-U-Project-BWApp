@@ -91,7 +91,6 @@ public class UserService {
     public void setGuest(String name){
         this.activeGuest = ud.setGuest(name);
         this.activeUser = ud.setGuest(name);
-        System.out.println("Guest in us" + ud.setGuest(name));
     }
 
     /**
