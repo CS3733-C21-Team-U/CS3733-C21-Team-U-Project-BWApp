@@ -240,4 +240,6 @@ public class App extends Application {
       App.isLightTheme = true;
     }
   }
+
+
 }
