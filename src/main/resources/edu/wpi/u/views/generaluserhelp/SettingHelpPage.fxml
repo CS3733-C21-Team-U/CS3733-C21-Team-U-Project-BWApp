@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.SettingHelpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.SettingHelpController">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -107,6 +107,7 @@
                                  <children>
                                     <VBox prefHeight="401.0" prefWidth="587.0">
                                        <children>
+                                          <Label maxWidth="1251.0" prefHeight="79.0" prefWidth="587.0" style="-fx-font-size: 25;" styleClass="headline-3" text="How to use Admin Settings?" wrapText="true" />
                                           <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Settings&quot; Tab and enter the settings page" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click 'Choose CSV', you can select any csv files to load" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="61.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. You can also click 'Select Table Name' to choose the table you want to use." wrapText="true" />
