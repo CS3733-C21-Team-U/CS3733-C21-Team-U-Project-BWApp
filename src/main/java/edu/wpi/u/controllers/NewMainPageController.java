@@ -345,6 +345,7 @@ public class NewMainPageController {
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab2){handleEnableUser();}
 //        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab4){handleEnableCovid();}
+
     }
 
 
