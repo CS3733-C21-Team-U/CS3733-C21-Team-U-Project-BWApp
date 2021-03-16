@@ -60,7 +60,14 @@ public class SelectUserScreenController {
                 try {
                     //Thread.sleep(100);
                     Platform.runLater(() -> {
-                        App.getPrimaryStage().getScene().setRoot(App.loginBase);
+//                        App.getPrimaryStage().getScene().setRoot(App.loginBase);
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        App.getPrimaryStage().getScene().setRoot(root);
                     });
                 } catch (Exception e) {
                     e.printStackTrace();

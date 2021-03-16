@@ -108,7 +108,7 @@ public class App extends Application {
   public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
-  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(true);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -154,17 +154,17 @@ public class App extends Application {
       fxmlLoader.getController();
       base = fxmlLoader.getRoot();
 
-      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-      fxmlLoader2.setClassLoader(classLoader);
-      fxmlLoader2.load();
-      fxmlLoader2.getController();
-      loginBase = fxmlLoader2.getRoot();
-
-      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-      fxmlLoader3.setClassLoader(classLoader);
-      fxmlLoader3.load();
-      fxmlLoader3.getController();
-      guestBase = fxmlLoader3.getRoot();
+//      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//      fxmlLoader2.setClassLoader(classLoader);
+//      fxmlLoader2.load();
+//      fxmlLoader2.getController();
+//      loginBase = fxmlLoader2.getRoot();
+//
+//      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+//      fxmlLoader3.setClassLoader(classLoader);
+//      fxmlLoader3.load();
+//      fxmlLoader3.getController();
+//      guestBase = fxmlLoader3.getRoot();
     }
 
     System.out.println("App start");

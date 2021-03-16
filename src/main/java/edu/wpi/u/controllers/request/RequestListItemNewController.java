@@ -247,15 +247,17 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
 
             for (String assignee : assigneesToAdd){
                 System.out.println("Method: " + App.userService.getPreferredContactMethod(assignee));
-                if (App.userService.getPreferredContactMethod(assignee).equals("Both")){
-                    emails.add(App.userService.getEmail(assignee));
-                    sms.add(App.userService.getPhoneNumberFromUserName(assignee));
-                }
-                else if (App.userService.getPreferredContactMethod(assignee).equals("Email")){
-                    emails.add(App.userService.getEmail(assignee));
-                }
-                else if(App.userService.getPreferredContactMethod(assignee).equals("SMS")){
-                    sms.add(App.userService.getPhoneNumberFromUserName(assignee));
+                switch (App.userService.getPreferredContactMethod(assignee)) {
+                    case "Both":
+                        emails.add(App.userService.getEmail(assignee));
+                        sms.add(App.userService.getPhoneNumberFromUserName(assignee));
+                        break;
+                    case "Email":
+                        emails.add(App.userService.getEmail(assignee));
+                        break;
+                    case "SMS":
+                        sms.add(App.userService.getPhoneNumberFromUserName(assignee));
+                        break;
                 }
             }
             Thread t = new Thread(() ->{

@@ -67,8 +67,18 @@ public class Enter2FATokenController {
                 try {
                     Thread.sleep(500);
                     Platform.runLater(() -> {
+//                        App.isLoggedIn.set(true);
+//                        App.getPrimaryStage().getScene().setRoot(App.base);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                        try {
+                            fxmlLoader.load();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        fxmlLoader.getController();
                         App.isLoggedIn.set(true);
-                        App.getPrimaryStage().getScene().setRoot(App.base);
+                        App.tabPaneRoot.getSelectionModel().selectFirst();
+                        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
