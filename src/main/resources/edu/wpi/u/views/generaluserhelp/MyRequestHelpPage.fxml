@@ -58,8 +58,9 @@
                                        <children>
                                           <Label maxWidth="1251.0" prefHeight="63.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;My Request&quot; Tab and Click '+ New Request' button" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="65.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Choose the service type by selecting one of the 12 icons on the right side" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Then, fill all the fields. Click 'calender icon' to select date and click 'clock icon' to select time." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Then, fill all the fields. Click 'calender icon' to select date deadline and click 'clock icon' to select time deadline." wrapText="true" />
                                           <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Click 'Save'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="208.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: If you can not add assginee, please check the assignee's type. It has to be admin" wrapText="true" />
                                        </children>
                                     </VBox>
                                     <BorderPane prefHeight="620.0" prefWidth="1056.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
@@ -69,7 +70,7 @@
                                        <center>
                                           <ImageView fitHeight="612.0" fitWidth="1159.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                                              <image>
-                                                <Image url="@../Images/addreuqestnew.png" />
+                                                <Image url="@../Images/addrequestnew.png" />
                                              </image>
                                              <BorderPane.margin>
                                                 <Insets />
@@ -101,8 +102,8 @@
                                        <children>
                                           <Label maxWidth="1251.0" prefHeight="69.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Click 'Choose Type' and select the type you want to see" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click 'Reslove Status' and select active requests or resloved requests" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="79.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="67.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: All you requests will be displayed in this page" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="79.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Click 'Assign Status' and select unassgined or assgined to you requests " wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="67.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: All you requests will be displayed in this page." wrapText="true" />
                                        </children>
                                        <HBox.margin>
                                           <Insets right="20.0" />
@@ -121,6 +122,7 @@
                                           <Label layoutX="10.0" layoutY="134.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="4. If you would like to cancel the request or the request has been resloved, please click 'Reslove'" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="204.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="5. Also, you can click 'PATHFIND TO LOCAITON' which will display all locations available for your request" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="274.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="6. Click 'Collapse' to collapse the request's detail" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="344.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: All resloved requests can not be edited again!" wrapText="true" />
                                        </children>
                                        <HBox.margin>
                                           <Insets right="20.0" />

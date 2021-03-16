@@ -23,7 +23,7 @@
                   <Image url="@Images/hospital(2).jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="250.0" style="-fx-background-color: rbga(0,0,0,0.5);">
+            <ImageView fitHeight="60.0" fitWidth="250.0" preserveRatio="true" style="-fx-background-color: rbga(0,0,0,0.5);" translateX="10.0" translateY="10.0">
                <image>
                   <Image url="@Images/logonoback.png" />
                </image>
