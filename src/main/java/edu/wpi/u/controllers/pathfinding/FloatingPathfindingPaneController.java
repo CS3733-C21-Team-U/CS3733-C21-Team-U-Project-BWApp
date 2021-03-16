@@ -422,7 +422,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            selectViewOption();
+           selectViewOption();
             System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             endNodeField.requestFocus();
             targetNode.set("END");
@@ -443,7 +443,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-            selectViewOption();
+           selectViewOption();
             System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             targetNode.set("START");
             startNodeField.requestFocus();

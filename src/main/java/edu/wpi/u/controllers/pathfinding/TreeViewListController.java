@@ -44,7 +44,7 @@ public class TreeViewListController implements Initializable {
     private TreeItem rootConf = new TreeItem("Conference Rooms");
     private TreeItem rootDept = new TreeItem("Departments");
     private TreeItem rootExit = new TreeItem("Entrances and Exits");
-    private TreeItem rootFood = new TreeItem("Food Services");
+    private TreeItem rootFood = new TreeItem("Food and Drink");
     private TreeItem rootKios = new TreeItem("Kiosks");
     private TreeItem rootLabs = new TreeItem("Labs");
     private TreeItem rootPark = new TreeItem("Parking Spaces");
@@ -103,15 +103,15 @@ public class TreeViewListController implements Initializable {
 
         // Not my favorite solution, but this is what allows each item in each tree to be clickable
         // Basically it adds a listener to each TreeItem in the tree, and when clicked it calls the method handleMouseClicked, which sets start/end node
-        confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue())));
-        deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue())));
-        exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue())));
-        foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue())));
-        kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue())));
-        labsTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)labsTree.getSelectionModel().getSelectedItem()).getValue())));
-        parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue())));
-        restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue())));
-        servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get((String)((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue())));
+        confTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)confTree.getSelectionModel().getSelectedItem()).getValue())));
+        deptTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)deptTree.getSelectionModel().getSelectedItem()).getValue())));
+        exitTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)exitTree.getSelectionModel().getSelectedItem()).getValue())));
+        foodTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)foodTree.getSelectionModel().getSelectedItem()).getValue())));
+        kiosTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)kiosTree.getSelectionModel().getSelectedItem()).getValue())));
+        labsTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)labsTree.getSelectionModel().getSelectedItem()).getValue())));
+        parkTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)parkTree.getSelectionModel().getSelectedItem()).getValue())));
+        restTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)restTree.getSelectionModel().getSelectedItem()).getValue())));
+        servTree.getSelectionModel().selectedItemProperty().addListener(e -> handleMouseClicked(longToID.get(((TreeItem)servTree.getSelectionModel().getSelectedItem()).getValue())));
     }
 
     /**
@@ -214,19 +214,16 @@ public class TreeViewListController implements Initializable {
      */
     private void expandAndCollapse(String treeType){
 
-        collapseAllTrees();
-
         switch(treeType){
             case "CONF":
                 if(confExpanded){
                     confTree.setPrefSize(350.0, 32.0);
                     rootConf.setExpanded(false);
-                    System.out.println("Conferences Collapsed");
                     confExpanded = false;
                 } else {
+                    collapseAllTrees();
                     confTree.setPrefSize(350.0, 144.0);
                     rootConf.setExpanded(true);
-                    System.out.println("Conferences Expanded");
                     confExpanded = true;
                 }
                 break;
@@ -234,12 +231,11 @@ public class TreeViewListController implements Initializable {
                 if(deptExpanded){
                     deptTree.setPrefSize(350.0, 32.0);
                     rootDept.setExpanded(false);
-                    System.out.println("Departments Collapsed");
                     deptExpanded = false;
                 } else {
+                    collapseAllTrees();
                     deptTree.setPrefSize(350.0, 144.0);
                     rootDept.setExpanded(true);
-                    System.out.println("Departments Expanded");
                     deptExpanded = true;
                 }
                 break;
@@ -249,6 +245,7 @@ public class TreeViewListController implements Initializable {
                     rootExit.setExpanded(false);
                     exitExpanded = false;
                 } else {
+                    collapseAllTrees();
                     exitTree.setPrefSize(350.0, 144.0);
                     rootExit.setExpanded(true);
                     exitExpanded = true;
@@ -260,6 +257,7 @@ public class TreeViewListController implements Initializable {
                     rootFood.setExpanded(false);
                     foodExpanded = false;
                 } else {
+                    collapseAllTrees();
                     foodTree.setPrefSize(350.0, 144.0);
                     rootFood.setExpanded(true);
                     foodExpanded = true;
@@ -271,6 +269,7 @@ public class TreeViewListController implements Initializable {
                     rootKios.setExpanded(false);
                     kiosExpanded = false;
                 } else {
+                    collapseAllTrees();
                     kiosTree.setPrefSize(350.0, 144.0);
                     rootKios.setExpanded(true);
                     kiosExpanded = true;
@@ -282,6 +281,7 @@ public class TreeViewListController implements Initializable {
                     rootLabs.setExpanded(false);
                     labsExpanded = false;
                 } else {
+                    collapseAllTrees();
                     labsTree.setPrefSize(350.0, 144.0);
                     rootLabs.setExpanded(true);
                     labsExpanded = true;
@@ -293,6 +293,7 @@ public class TreeViewListController implements Initializable {
                     rootPark.setExpanded(false);
                     parkExpanded = false;
                 } else {
+                    collapseAllTrees();
                     parkTree.setPrefSize(350.0, 144.0);
                     rootPark.setExpanded(true);
                     parkExpanded = true;
@@ -304,6 +305,7 @@ public class TreeViewListController implements Initializable {
                     rootRest.setExpanded(false);
                     restExpanded = false;
                 } else {
+                    collapseAllTrees();
                     restTree.setPrefSize(350.0, 144.0);
                     rootRest.setExpanded(true);
                     restExpanded = true;
@@ -315,6 +317,7 @@ public class TreeViewListController implements Initializable {
                     rootServ.setExpanded(false);
                     servExpanded = false;
                 } else {
+                    collapseAllTrees();
                     servTree.setPrefSize(350.0, 144.0);
                     rootServ.setExpanded(true);
                     servExpanded = true;
