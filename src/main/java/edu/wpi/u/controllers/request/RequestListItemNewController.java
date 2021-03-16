@@ -57,7 +57,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     Set<String> existingAssignee;
     SpecificRequest currSpecificRequest;
 
-    boolean labelSwitch = true;
+    boolean labelSwitch = false;
     public Label selectFieldLabel;
     public Label fieldLabel;
     int msgCounter = 0;
