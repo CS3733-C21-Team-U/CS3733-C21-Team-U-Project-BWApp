@@ -61,20 +61,31 @@ public class Enter2FATokenController {
     }
 
     public void handleAppEntry() throws IOException {
-        loadingNewMainPage();
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                Platform.runLater(() -> {
-                    App.isLoggedIn.set(true);
-                    App.getPrimaryStage().getScene().setRoot(App.base);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+        if (App.useCache.get()){
+            loadingNewMainPage();
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        App.isLoggedIn.set(true);
+                        App.getPrimaryStage().getScene().setRoot(App.base);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.isLoggedIn.set(true);
+            App.tabPaneRoot.getSelectionModel().selectFirst();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
+
         //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
         //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }

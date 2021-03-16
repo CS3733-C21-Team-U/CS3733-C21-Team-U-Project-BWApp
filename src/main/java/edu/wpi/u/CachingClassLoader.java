@@ -34,6 +34,7 @@ public class CachingClassLoader extends ClassLoader{
     @Override
     protected Class findClass(String className) {
         if (classes.containsKey(className)) {
+            System.out.println(className + " already loaded");
             return classes.get(className);
         } else {
             try {
