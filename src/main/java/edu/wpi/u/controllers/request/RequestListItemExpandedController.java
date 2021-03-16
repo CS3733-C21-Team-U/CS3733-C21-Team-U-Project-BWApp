@@ -175,7 +175,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void addComment() {
       //  System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
-        Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
+        Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getUserName(), CommentType.DEFAULT);
         App.requestService.addComment(this.parent.request, newComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());

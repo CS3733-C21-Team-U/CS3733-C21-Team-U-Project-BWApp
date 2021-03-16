@@ -31,7 +31,7 @@ public abstract class SpecificRequest extends RecursiveTreeObject<SpecificReques
             }
         }
 
-        Comment updateComment = new Comment("UPDATE", updateDescription, App.userService.getActiveUser().getName(), CommentType.UPDATE);
+        Comment updateComment = new Comment("UPDATE", updateDescription, App.userService.getActiveUser().getUserName(), CommentType.UPDATE);
         req.addComment(updateComment);
         setSpecificData(specifics);
     }
