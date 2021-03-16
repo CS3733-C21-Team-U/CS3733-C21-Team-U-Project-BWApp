@@ -90,7 +90,7 @@ public class App extends Application {
   public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
-  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(true);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -173,7 +173,8 @@ public class App extends Application {
     System.out.println("App start");
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewCovidResults.fxml"));
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
 
