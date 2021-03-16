@@ -24,7 +24,7 @@
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox prefHeight="550.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="530.0" prefWidth="411.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <HBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="430.0" style="-fx-background-color: -primary;">
                                  <children>
@@ -52,18 +52,18 @@
                               </HBox>
                               <Label fx:id="descriptionLabel" prefHeight="79.0" prefWidth="390.0" styleClass="subtitle" text="Description &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." wrapText="true">
                                  <VBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets top="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <Region prefHeight="17.0" prefWidth="430.0" />
+                              <Region prefHeight="7.0" prefWidth="430.0" />
                               <Label styleClass="subtitle" text="Created by: " />
                               <Label fx:id="creatorAndDateLabel" layoutX="10.0" layoutY="164.0" styleClass="headline-3" text="Michael Gary on 3/3/2021" />
-                              <Region prefHeight="14.0" prefWidth="430.0" />
-                              <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Assignees:" />
-                              <Label fx:id="assigneesLabel" layoutX="10.0" layoutY="182.0" styleClass="headline-3" text="John Adams, Empolyee 2, and Securtity Guard" />
-                              <Region prefHeight="14.0" prefWidth="430.0" />
+                              <Region prefHeight="7.0" prefWidth="430.0" />
                               <Label styleClass="subtitle" text="Requested Completion Date:" />
                               <Label fx:id="completeByLabel" styleClass="headline-3" text="3/12/2021 9:12 AM EST" />
+                              <Region prefHeight="7.0" prefWidth="430.0" />
+                              <Label layoutX="10.0" layoutY="89.0" styleClass="subtitle" text="Assignees:" />
+                              <Label fx:id="assigneesLabel" layoutX="10.0" layoutY="182.0" prefWidth="390.0" styleClass="headline-3" text="John Adams, Empolyee 2, and Securtity Guard" />
                               <VBox fx:id="mainSpecialFieldVbox" prefHeight="0.0" prefWidth="390.0" VBox.vgrow="ALWAYS" />
                               <Region fx:id="pushDown1" prefHeight="0.0" prefWidth="443.0" VBox.vgrow="ALWAYS" />
                            </children>

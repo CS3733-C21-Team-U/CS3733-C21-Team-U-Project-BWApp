@@ -100,16 +100,27 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void generateSpecificFields(){
         mainSpecialFieldVbox.getChildren().clear();
+        Region region0 = new Region();
+        region0.setPrefHeight(7);
+        mainSpecialFieldVbox.getChildren().add(region0);
+
+        Label fieldTypeTitle = new Label("Request Type");
+        fieldTypeTitle.getStyleClass().add("subtitle");
+
+        Label fieldTypeLabel = new Label(parent.request.getType());
+        fieldTypeLabel.getStyleClass().add("headline-3");
+        mainSpecialFieldVbox.getChildren().add(fieldTypeTitle);
+        mainSpecialFieldVbox.getChildren().add(fieldTypeLabel);
         for(int i = 0; i < this.parent.request.getSpecificFields().length; i++) {
             Region region = new Region();
-            region.setPrefHeight(14);
+            region.setPrefHeight(7);
             mainSpecialFieldVbox.getChildren().add(region);
 
             Label fieldTitle = new Label(this.parent.request.getSpecificFields()[i]);
             fieldTitle.getStyleClass().add("subtitle");
             mainSpecialFieldVbox.getChildren().add(fieldTitle);
 
-            Label fieldLabel = new Label(this.parent.request.getSpecificData().get(i).toString());
+            Label fieldLabel = new Label(this.parent.request.getSpecificData().get(i));
             fieldLabel.getStyleClass().add("headline-3");
             mainSpecialFieldVbox.getChildren().add(fieldLabel);
         }
