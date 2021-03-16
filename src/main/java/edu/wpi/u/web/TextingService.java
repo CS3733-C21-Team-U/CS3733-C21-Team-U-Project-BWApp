@@ -22,7 +22,7 @@ public class TextingService {
         SpecificRequest s = new RequestFactory().makeRequest("Food");
         Comment c = new Comment("title", "desc", "author", CommentType.PRIMARY, new Timestamp(System.currentTimeMillis()));
         s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
-        sendText("+19148394600", s);
+        //sendText("+19148394600", s);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TextingService {
      * @param to the to phone number
      * @param specificRequest the request
      */
-    public static void sendText(String to, SpecificRequest specificRequest){
+    public void sendText(String to, SpecificRequest specificRequest){
         Message message = Message
                 .creator(new PhoneNumber(to),
                         new PhoneNumber(Objects.requireNonNull(dotenv.get("TWILIO_NUMBER"))),

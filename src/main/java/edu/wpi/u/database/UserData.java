@@ -1046,9 +1046,10 @@ public class UserData extends Data{
     }
 
     public String getPreferredContactMethod(String userName) {
-        String str = "select preferredContactMethod from Employees";
+        String str = "select preferredContactMethod from Employees where userName=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 return rs.getString("preferredContactMethod");
