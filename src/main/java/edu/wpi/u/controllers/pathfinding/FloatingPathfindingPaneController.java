@@ -256,32 +256,33 @@ public class FloatingPathfindingPaneController {
 
     private void enableButton(String button) {
         switch(button) {
-            case ("G"):
+            case("G"):
                 btnG.setDisable(false);
                 btnG.setPrefHeight(25);
                 return;
-            case ("1"):
+            case("1"):
                 btnOne.setDisable(false);
                 btnOne.setPrefHeight(25);
                 return;
-            case ("2"):
+            case("2"):
                 btnTwo.setDisable(false);
                 btnTwo.setPrefHeight(25);
                 return;
-            case ("3"):
+            case("3"):
                 btnThree.setDisable(false);
                 btnThree.setPrefHeight(25);
                 return;
-            case ("4"):
+            case("4"):
                 btnFour.setDisable(false);
                 btnFour.setPrefHeight(25);
                 return;
-            case ("5"):
+            case("5"):
                 btnFive.setDisable(false);
                 btnFive.setPrefHeight(25);
                 return;
         }
     }
+
     private double findAngle(Node bNode, Node sNode, Node eNode) {
         if(bNode == null) return 0;
 
@@ -381,7 +382,6 @@ public class FloatingPathfindingPaneController {
 
     public void initialize(){
 
-
         pathContent.setPrefHeight(0);
         selectViewOption();
 
@@ -393,6 +393,7 @@ public class FloatingPathfindingPaneController {
                 startFieldFlair.setVisible(false);
                 endFieldFlair.setVisible(true);
             }
+            App.mapInteractionModel.currentTargetNode.set(newVal);
         });
 
         App.mapInteractionModel.mapTargetNode.addListener((observable, oldVal, newVal) ->{
@@ -567,18 +568,15 @@ public class FloatingPathfindingPaneController {
 
     @FXML
     public void handleClearStartPoint(){
-        App.mapInteractionModel.setStartNode("");
-        targetNode.set("START");
-        startNodeField.clear();
+//        App.mapInteractionModel.setStartNode("");
+//        startNodeField.clear();
     }
 
     @FXML
     public void handleClearEndPoint(){
-        App.mapInteractionModel.setEndNode("");
-        targetNode.set("END");
-        endNodeField.clear();
+//        App.mapInteractionModel.setEndNode("");
+//        endNodeField.clear();
     }
-
 
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) { //TODO: What does this do?
     }
