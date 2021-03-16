@@ -18,11 +18,12 @@ public class TextingService {
     }
 
     public static void main(String[] args) {
-        new TextingService();
-        SpecificRequest s = new RequestFactory().makeRequest("Food");
-        Comment c = new Comment("title", "desc", "author", CommentType.PRIMARY, new Timestamp(System.currentTimeMillis()));
-        s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
-        sendText("+19148394600", s);
+//        new TextingService();
+//        SpecificRequest s = new RequestFactory().makeRequest("Food");
+//        Comment c = new Comment("title", "desc", "author", CommentType.PRIMARY, new Timestamp(System.currentTimeMillis()));
+//        s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
+//        sendText("+17813155706", s);
+//        sendText("+19148394600", s);
     }
 
     /**
@@ -43,15 +44,16 @@ public class TextingService {
      * @param to the to phone number
      * @param specificRequest the request
      */
-    public static void sendText(String to, SpecificRequest specificRequest){
+    public void sendText(String to, SpecificRequest specificRequest){
         Message message = Message
-                .creator(new PhoneNumber(to),
+                .creator(new PhoneNumber("+1"+to),
                         new PhoneNumber(Objects.requireNonNull(dotenv.get("TWILIO_NUMBER"))),
-                        "New " + specificRequest.getType() + " request" +
-                        "\nCreated by : " + specificRequest.getGenericRequest().getAuthor() +
-                        "\nDate Needed : " + specificRequest.getGenericRequest().getDateNeeded() +
-                        "\nTitle : " + specificRequest.getGenericRequest().getTitle() +
-                        "\nDescription : " + specificRequest.getGenericRequest().getDescription())
+                        "New "+ specificRequest.getType() +" Request from " + specificRequest.getGenericRequest().getAuthor()+
+                            "\n\nTitle: " + specificRequest.getGenericRequest().getTitle() + "\n"+
+                            "Requested Completion Date: " + specificRequest.getGenericRequest().getDateNeeded() + "\n"+
+                            "Details: " + specificRequest.getGenericRequest().getDescription() +"\n\n"+
+                            "This notification is from the Brigham & Women's Faulkner Hospital's Service Request system.\n"+
+                            "If you would like to turn these notifications off, please log into the application and change your preferences.")
                 .create();
     }
 }

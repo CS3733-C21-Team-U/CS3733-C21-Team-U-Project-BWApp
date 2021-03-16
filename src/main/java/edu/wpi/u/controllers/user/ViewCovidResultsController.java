@@ -4,29 +4,26 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.twilio.twiml.voice.Sim;
 import edu.wpi.u.App;
-import edu.wpi.u.requests.Comment;
 import edu.wpi.u.requests.SpecificRequest;
-import edu.wpi.u.users.Guest;
-import edu.wpi.u.users.Role;
-import edu.wpi.u.users.User;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ViewCovidResultsController {
     @FXML public JFXTreeTableView<SpecificRequest> treeTableView = new JFXTreeTableView<>();
@@ -36,6 +33,14 @@ public class ViewCovidResultsController {
     public Label funnelValue2;
     public Label funnelText2;
     public Label funnelValue3;
+    public Label resultsWeekTextBox;
+    public Label resultsMonthTextBox;
+    public Label positiveMonthTextBox;
+    public Label positiveWeekRatesTextBox;
+    public Label positiveWeekTextBox;
+    public Label positiveMonthRatesTextBox;
+    public BarChart NegativeTotalTestBarChart;
+    public BarChart PositiveTestBarChart;
 
     int numInSystem = 0;
     int takenSurvey = 0;
@@ -141,6 +146,33 @@ public class ViewCovidResultsController {
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
         treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnEnteredTheBuilding);
+
+        resultsWeekTextBox.setText(String.valueOf(App.covidService.getWeeklySurveys()));
+        positiveWeekTextBox.setText(String.valueOf(App.covidService.getWeeklyPositiveSurveys()));
+        positiveWeekRatesTextBox.setText(App.covidService.getWeeklyPositiveRates() + "%");
+        resultsMonthTextBox.setText(String.valueOf(App.covidService.getMonthlySurveys()));
+        positiveMonthTextBox.setText(String.valueOf(App.covidService.getMonthlyPositiveSurveys()));
+        positiveMonthRatesTextBox.setText(App.covidService.getMonthlyPositiveRates() + "%");
+
+        long interval = ChronoUnit.DAYS.between(LocalDate.now().minusMonths(1), LocalDate.now());
+        List<LocalDate> listOfDates = Stream.iterate(LocalDate.now().minusMonths(1), date -> date.plusDays(1))
+                .limit(interval)
+                .collect(Collectors.toList());
+
+
+        XYChart.Series totalNegSeries = new XYChart.Series();
+        for (LocalDate dataPoint : listOfDates) {
+            totalNegSeries.getData().add(new XYChart.Data(dataPoint.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), App.covidService.getNonSymptomatic(dataPoint)));
+        }
+
+        NegativeTotalTestBarChart.getData().add(totalNegSeries);
+
+        XYChart.Series totalPositiveSeries = new XYChart.Series();
+        for (LocalDate dataPoint : listOfDates) {
+            totalPositiveSeries.getData().add(new XYChart.Data(dataPoint.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), App.covidService.getSymptomatic(dataPoint)));
+        }
+
+        PositiveTestBarChart.getData().add(totalPositiveSeries);
     }
 
 }

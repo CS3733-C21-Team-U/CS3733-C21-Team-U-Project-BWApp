@@ -29,31 +29,41 @@ public class GuestSignInScreenController {
         fxmlLoader.load();
     }
     public void handleSignInButton(ActionEvent actionEvent) throws IOException {
-        //TODO: set active user to guest
         Timestamp t = new Timestamp(System.currentTimeMillis());
-        App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
-//        System.out.println("Name to be added " + nameGuestTextField.getText());
-        App.userService.setGuest(nameGuestTextField.getText());
         App.isLoggedIn.set(true);
-        loadingNewMainPage();
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                Platform.runLater(() -> {
-                    App.userService.setEmployee("debug");
-                    App.userService.getActiveUser().setType(Role.ADMIN);
-                    App.isLoggedIn.set(true);
-                    App.tabPaneRoot.getSelectionModel().selectFirst();
-                    App.getPrimaryStage().getScene().setRoot(App.base);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
-        //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        if (App.useCache.get()){
+            loadingNewMainPage();
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        // todo : fix guest not being set to guest
+                        App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
+                        App.userService.setGuest(nameGuestTextField.getText());
+                        App.userService.getActiveUser().setType(Role.GUEST);
+                        App.isLoggedIn.set(true);
+                        App.tabPaneRoot.getSelectionModel().selectFirst();
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        App.getPrimaryStage().getScene().setRoot(root);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }
+        else {
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            App.getPrimaryStage().getScene().setRoot(root);
+        }
+
+
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {

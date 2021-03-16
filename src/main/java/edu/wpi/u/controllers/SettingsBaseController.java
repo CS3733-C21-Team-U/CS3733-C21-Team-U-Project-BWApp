@@ -61,6 +61,8 @@ public class SettingsBaseController {
     public JFXRadioButton darkRadio;
     public JFXRadioButton yellowRadio;
     public JFXRadioButton blueRadio;
+    public JFXToggleButton emailNotifications;
+    public JFXToggleButton textNotifications;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
@@ -96,6 +98,25 @@ public class SettingsBaseController {
             }
         });
 
+        
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
+                case "Both":
+                    emailNotifications.setSelected(true);
+                    textNotifications.setSelected(true);
+                    break;
+                case "Email":
+                    emailNotifications.setSelected(true);
+                    break;
+                case "SMS":
+                    textNotifications.setSelected(true);
+                    break;
+                default:
+                    emailNotifications.setSelected(false);
+                    textNotifications.setSelected(false);
+                    break;
+            }
+        });
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);
             errorUpdateContactLabel.setVisible(false);
@@ -257,5 +278,20 @@ public class SettingsBaseController {
             }else{
                 wrongPasswordLable.setVisible(true);
             }
+    }
+
+    public void handleApplyNotificationChange(ActionEvent actionEvent) {
+        if (emailNotifications.isSelected() && textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Both");
+        }
+        else if (emailNotifications.isSelected()) {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Email");
+        }
+        else if (textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "SMS");
+        }
+        else {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Nothing");
+        }
     }
 }

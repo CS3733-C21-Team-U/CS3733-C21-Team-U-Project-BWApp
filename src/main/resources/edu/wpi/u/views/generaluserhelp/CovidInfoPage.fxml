@@ -19,6 +19,15 @@
                     <children>
                         <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="8.0" prefHeight="1262.0" prefWidth="1679.0" spacing="50.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
                             <children>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="1660.0">
+                                    <children>
+                              <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
+                                 <graphic>
+                                    <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                 </graphic>
+                              </JFXButton>
+                                    </children>
+                                </HBox>
                                 <Label styleClass="headline-1" text="COVID-19 Information" />
                                 <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1610.0" style="-fx-background-color: -primary; -fx-background-radius: 7;">
                                     <children>
@@ -151,11 +160,6 @@
                                         </VBox>
                                     </children>
                                 </Pane>
-                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1679.0">
-                                    <children>
-                                        <JFXButton onAction="#handleBackToMainPageButton" prefHeight="55.0" prefWidth="330.0" styleClass="button-contained" text="Return to Help Page" />
-                                    </children>
-                                </HBox>
                             </children>
                             <padding>
                                 <Insets top="50.0" />

@@ -4,10 +4,14 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
+import edu.wpi.u.web.EmailService;
+import edu.wpi.u.web.TextingService;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -41,6 +45,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     public ToggleGroup selectTypeGroup;
     public JFXButton saveButton;
     public SVGPath typeIconSVG;
+    public Label titleLabel;
 
     @FXML
     public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
@@ -57,7 +62,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     Set<String> existingAssignee;
     SpecificRequest currSpecificRequest;
 
-    boolean labelSwitch = true;
+    boolean labelSwitch = false;
     public Label selectFieldLabel;
     public Label fieldLabel;
     int msgCounter = 0;
@@ -194,6 +199,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             JFXToggleNode target = ((JFXToggleNode)selectTypeGroup.getSelectedToggle());
             if(target==null){
                 extraFieldsVBox.getChildren().clear();
+                titleLabel.setText("New Request");
                 updateFieldLabel();
                 extraFieldsVBox.getChildren().add(selectFieldGraphic);
                 typeIconSVG.setContent(getIcon("UPDATE"));
@@ -238,6 +244,39 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             locationsToAdd, assigneesToAdd, primaryComment);
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
 
+            ArrayList<String> emails = new ArrayList<>();
+            ArrayList<String> sms = new ArrayList<>();
+
+            for (String assignee : assigneesToAdd){
+                switch (App.userService.getPreferredContactMethod(assignee)) {
+                    case "Both":
+                        emails.add(App.userService.getEmail(assignee));
+                        sms.add(App.userService.getPhoneNumberFromUserName(assignee));
+                        break;
+                    case "Email":
+                        emails.add(App.userService.getEmail(assignee));
+                        break;
+                    case "SMS":
+                        sms.add(App.userService.getPhoneNumberFromUserName(assignee));
+                        break;
+                }
+            }
+            Thread t = new Thread(() ->{
+                try{
+                    Platform.runLater(() -> {
+                        for (String to : emails){
+                            App.emailService.sendMail(to, currSpecificRequest);
+                        }
+                        for (String to : sms){
+                            App.textingService.sendText(to, currSpecificRequest);
+                        }
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
+            t.start();
+
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
             App.addNewRequestToList.set(!App.addNewRequestToList.get());
@@ -253,7 +292,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             editTimeNeededField.validate();
         }
     }
-
 
     private boolean checkSpecialFields(ArrayList<String> input){
         for(String s: input){
@@ -309,8 +347,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
-            j.setStyle("-fx-font-size: 16px");
-           // j.setText( currSpecificRequest.getSpecificData().get(i));
+            j.setStyle("-fx-font-size: 12px");
 
             ans[i] = j;
             extraFieldsVBox.getChildren().add(0,j);
@@ -321,11 +358,11 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         Region r = new Region();
         r.setPrefHeight(40);
         extraFieldsVBox.getChildren().add(r);
-        fieldLabel.setText("You chose the "+currSpecificRequest.getType()+" Request.");
-        extraFieldsVBox.getChildren().add(fieldLabel);
+        titleLabel.setText("New " + currSpecificRequest.getType() + " Request");
+//        fieldLabel.setText("You chose the "+currSpecificRequest.getType()+" Request.");
+//        extraFieldsVBox.getChildren().add(fieldLabel);
         return ans;
     }
-
 
     /**
      * Take the get values from unique fields, put it in a ArrayList
@@ -338,8 +375,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         }
         return specifics;
     }
-
-
 
     public void makeListView(ArrayList<String> list, JFXListView<String> res){
         ObservableList<String> something = FXCollections.observableList(list);
@@ -354,6 +389,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             editAssigneesField.setText("");
         }
     }
+
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
@@ -372,6 +408,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             }
         }
     }
+
     public void deleteLocation(){
         editLocationsListView.getItems().remove(editLocationsField.getText());
         editLocationsField.setText("");

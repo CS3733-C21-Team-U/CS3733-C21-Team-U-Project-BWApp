@@ -1045,10 +1045,34 @@ public class UserData extends Data{
         return result;
     }
 
-    public String getPreferredContactMethod(String userName) {
-        String str = "select preferredContactMethod from Employees";
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        String str = "update Employees set preferredContactMethod=? where userName=?";
         try{
             PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,method);
+            ps.setString(2,userName);
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets a preferred contact method
+     * @param userName the username to get the method from
+     * @return the method of contact either Nothing or Both or SMS or Email
+     */
+    public String getPreferredContactMethod(String userName) {
+        String str = "select preferredContactMethod from Employees where userName=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 return rs.getString("preferredContactMethod");

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.Enter2FATokenController">
    <children>
       <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;">
@@ -56,8 +55,8 @@
                               <JFXTextField fx:id="tokenTextFIeld" labelFloat="true" promptText="Enter 6-Digit Number" />
                               <JFXProgressBar fx:id="progressBar" opacity="0.0" prefHeight="10.0" prefWidth="308.0" />
                               <Region prefHeight="21.0" prefWidth="360.0" />
-                              <JFXButton fx:id="loginButton" onAction="#handleTokenSubmit" styleClass="button-contained" text="VERIFY" />
-                              <JFXButton onAction="#handleGoBack" styleClass="button-text" text="BACK TO LOGIN PAGE" />
+                              <JFXButton fx:id="loginButton" defaultButton="true" onAction="#handleTokenSubmit" styleClass="button-contained" text="VERIFY" />
+                              <JFXButton cancelButton="true" onAction="#handleGoBack" styleClass="button-text" text="BACK TO LOGIN PAGE" />
                               <JFXButton fx:id="enterAppButton" buttonType="RAISED" onAction="#handleAppEntry" opacity="0.0" prefHeight="47.0" prefWidth="307.0" styleClass="button-contained" text="ENTER" textFill="WHITE" />
                            </children>
                            <padding>

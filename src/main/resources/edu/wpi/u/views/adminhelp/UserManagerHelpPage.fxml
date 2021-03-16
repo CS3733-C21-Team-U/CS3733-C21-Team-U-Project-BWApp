@@ -3,96 +3,189 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.TwoFactorAuHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 ZM17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5zM18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z" scaleX="2.0" scaleY="2.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use User Manager" wrappingWidth="475.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
-               <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
-                     <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="1.This page allows you to view all users in the application system&#10;&#10;2.This page includes the add user and edit user functionality&#10;&#10;3.Clicking on the field names will also filter the field that you click on&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department.&#10;" wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="202.0" fitWidth="210.0" translateX="220.0">
-                           <image>
-                              <Image url="@../Images/usermanager.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="50.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="472.0" fitWidth="781.0">
-                           <image>
-                              <Image url="@../Images/User%20manager%20full.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="-30.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </VBox>
+                  <SVGPath content="M 18.12,15.5 A 1.12,1.12 0 0 1 17,16.62 1.12,1.12 0 0 1 15.88,15.5 1.12,1.12 0 0 1 17,14.38 1.12,1.12 0 0 1 18.12,15.5 ZM17,17.5c-0.73,0-2.19,0.36-2.24,1.08c0.5,0.71,1.32,1.17,2.24,1.17 s1.74-0.46,2.24-1.17C19.19,17.86,17.73,17.5,17,17.5zM18,11.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82 c0.55-0.13,1.08-0.32,1.6-0.55C13.18,21.99,14.97,23,17,23c3.31,0,6-2.69,6-6C23,14.03,20.84,11.57,18,11.09z M11,17 c0,0.56,0.08,1.11,0.23,1.62c-0.24,0.11-0.48,0.22-0.73,0.3c-3.17-1-5.5-4.24-5.5-7.74v-3.6l5.5-2.4l5.5,2.4v3.51 C13.16,11.57,11,14.03,11,17z M17,21c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4s4,1.79,4,4C21,19.21,19.21,21,17,21z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use User Manager" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
                <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+                  <Insets left="70.0" right="30.0" />
                </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="8.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <center>
+                                          <ImageView fitHeight="270.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/usermanager.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="371.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="User Manager is designed for Administrators. Admin will have access to all users' accounts. They are in charge of adding, editing ,and viewing users. " wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="How to Add a User?" />
+                              <HBox alignment="CENTER" prefHeight="311.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="317.0" prefWidth="412.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Add User &quot; and fill all the fields for a user" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Then, click 'Add User' button" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="227.0" fitWidth="279.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Adduserhelp.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="How to Edit a User?" />
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="201.0" fitWidth="770.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/edituser.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="389.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select a user you would like to edit" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets top="40.0" />
+                                             </VBox.margin></Label>
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2.Select a field at a time and edit the information" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="How to View a User?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="992.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="562.0" prefWidth="336.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select a user you would like to view" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets top="40.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2.Select any fields you would like to view" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="572.0" fitWidth="969.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Usermanagerfull.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1076.0" prefHeight="0.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="335.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="317.0" prefWidth="374.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ContactUS.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />

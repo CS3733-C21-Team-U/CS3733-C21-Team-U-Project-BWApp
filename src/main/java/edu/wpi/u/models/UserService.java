@@ -91,7 +91,6 @@ public class UserService {
     public void setGuest(String name){
         this.activeGuest = ud.setGuest(name);
         this.activeUser = ud.setGuest(name);
-        System.out.println("Guest in us" + ud.setGuest(name));
     }
 
     /**
@@ -473,6 +472,15 @@ public class UserService {
             }
         }
         return "";
+    }
+    
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        ud.setPreferredContactMethod(userName,method);
     }
 
     /**

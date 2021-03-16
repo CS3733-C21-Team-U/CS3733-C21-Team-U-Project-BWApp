@@ -54,9 +54,9 @@
                               <JFXTextField fx:id="nameGuestTextField" labelFloat="true" promptText="Name" />
                               <JFXTextArea fx:id="visitReasonTextField" labelFloat="true" prefHeight="100.0" prefWidth="360.0" promptText="Reason for Visit" />
                               <Region prefHeight="21.0" prefWidth="360.0" />
-                              <JFXButton onAction="#handleSignInButton" styleClass="button-contained" text="SIGN IN" />
+                              <JFXButton defaultButton="true" onAction="#handleSignInButton" styleClass="button-contained" text="SIGN IN" />
                               <Region prefHeight="0.0" prefWidth="360.0" VBox.vgrow="ALWAYS" />
-                              <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
+                              <JFXButton cancelButton="true" onAction="#handleBackButton" styleClass="button-text" text="BACK" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

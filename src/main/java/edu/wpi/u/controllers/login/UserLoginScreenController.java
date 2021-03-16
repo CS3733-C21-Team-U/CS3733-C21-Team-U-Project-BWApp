@@ -50,12 +50,13 @@ public class UserLoginScreenController {
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
+//        fxmlLoader.setClassLoader(App.classLoader);
+//        fxmlLoader.load();
 
-//        wrongPasswordLabel.setVisible(false);
-        passWordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            wrongPasswordLabel.setVisible(false);
+        wrongPasswordLabel.setVisible(false);
+
+        passWordField.focusedProperty().addListener(e->{
+           wrongPasswordLabel.setVisible(false);
         });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
@@ -145,18 +146,15 @@ public class UserLoginScreenController {
                         Future<Integer> whenStatusCode = client.prepareGet(url.toString())
                                 .execute(new AsyncHandler<Integer>() {
                                     private Integer status;
-
                                     @Override
                                     public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
                                         status = responseStatus.getStatusCode();
                                         return State.CONTINUE;
                                     }
-
                                     @Override
                                     public State onHeadersReceived(HttpHeaders headers) throws Exception {
                                         return State.CONTINUE;
                                     }
-
                                     @Override
                                     public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
                                         byte[] b = bodyPart.getBodyPartBytes();
@@ -225,29 +223,41 @@ public class UserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
-    public void handleLonginWithNo2FA() {
+    public void handleLonginWithNo2FA() throws IOException {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()).equals("")) {
-                loadingNewMainPage();
-                Thread thread = new Thread(() -> {
-                    try {
-                        Thread.sleep(500);
-                        Platform.runLater(() -> {
-                            App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
-                            App.isLoggedIn.set(true);
-                            App.tabPaneRoot.getSelectionModel().selectFirst();
-                            App.getPrimaryStage().getScene().setRoot(App.base);
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        throw new Error("Unexpected interruption");
-                    }
-                });
-                thread.start();
+                if (App.useCache.get()){
+                    loadingNewMainPage();
+                    Thread thread = new Thread(() -> {
+                        try {
+                            Thread.sleep(500);
+                            Platform.runLater(() -> {
+                                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
+                                App.isLoggedIn.set(true);
+                                App.tabPaneRoot.getSelectionModel().selectFirst();
+                                App.getPrimaryStage().getScene().setRoot(App.base);
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            throw new Error("Unexpected interruption");
+                        }
+                    });
+                    thread.start();
+                }
+                else {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+                    fxmlLoader.load();
+                    fxmlLoader.getController();
+                    App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()));
+                    App.isLoggedIn.set(true);
+                    App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+                    App.tabPaneRoot.getSelectionModel().selectFirst();
+                }
+
             } else {
                 wrongPasswordLabel.setVisible(true);
             }
-        } else {
+        }else{
             wrongPasswordLabel.setVisible(true);
         }
     }

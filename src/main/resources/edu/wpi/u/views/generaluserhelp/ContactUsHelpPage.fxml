@@ -1,74 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.ContactUsHelpController">
    <children>
-      <VBox alignment="CENTER" layoutX="-12.0" prefHeight="974.0" prefWidth="1582.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <SVGPath content="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2zM12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" scaleX="2.0" scaleY="2.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="Contact Us" textAlignment="CENTER" wrappingWidth="174.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
-               <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
-                     <children>
-                        <TextArea editable="false" prefHeight="670.0" prefWidth="615.0" styleClass="headline-2" text="BRIGHAM AND WOMEN’S HOSPITAL&#10;&#10;&#10;Address: &#10;75 Francis Street&#10;Boston, MA 02115 USA&#10;&#10;Contact: &#10;(617) 732-5500&#10;(617) 732-6458 TTY/TTD&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="597.0" fitWidth="534.0">
-                           <image>
-                              <Image url="@../Images/logo.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </VBox>
+                  <SVGPath content="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2zM12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="Contact Us" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
                <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+                  <Insets left="70.0" right="30.0" />
                </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/logo.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="64.0" prefWidth="587.0" styleClass="headline-2" text="BRIGHAM AND WOMEN’S HOSPITAL" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="113.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Thank you for your interest in Brigham and Women's Hospital (BWH) – a renowned teaching affiliate of Harvard Medical School that stands at the forefront of clinical care, medical research, and the training and education of physicians." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Region prefHeight="48.0" prefWidth="1700.0" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="64.0" prefWidth="587.0" styleClass="headline-2" text="Address" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="44.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="75 Francis StreetBoston, MA 02115 USA" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="74.0" maxWidth="1251.0" prefHeight="89.0" prefWidth="587.0" styleClass="headline-2" text="Phone" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="187.0" maxWidth="1251.0" prefHeight="39.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="(617) 732-5500(617) 732-6458 TTY/TTD" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="732-6458 TTY/TTD" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <center>
+                                          <ImageView fitHeight="407.0" fitWidth="671.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Region prefHeight="27.0" prefWidth="1700.0" />
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

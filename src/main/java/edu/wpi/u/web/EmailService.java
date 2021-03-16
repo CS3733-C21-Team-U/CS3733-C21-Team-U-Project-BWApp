@@ -16,11 +16,18 @@ public class EmailService {
 
     public static void main(String[] args) {
         //sendMail("nev.ingram30@gmail.com","The return of testy westy");
-        SpecificRequest s = new RequestFactory().makeRequest("Food");
-        Comment c = new Comment("title", "desc", "author", CommentType.PRIMARY, new Timestamp(System.currentTimeMillis()));
-        s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
-        //sendMail("nev.ingram30@gmail.com",s);
+//        SpecificRequest s = new RequestFactory().makeRequest("Food");
+//        Comment c = new Comment("title", "desc", "author", CommentType.PRIMARY, new Timestamp(System.currentTimeMillis()));
+//        s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
+//        sendMail("nev.ingram30@gmail.com",s);
     }
+
+    /**
+     *
+     * Sends an email with a given receiver and a message body
+     * @param to the email receiver
+     * @param body the message body
+     */
     public void sendMail(String to, String body){
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
@@ -35,16 +42,23 @@ public class EmailService {
                 .sendMail(email);
     }
 
+    /**
+     * Sends an email to a given address with a formatted specific requests
+     * @param to the to address
+     * @param specificRequest the request
+     */
     public void sendMail(String to, SpecificRequest specificRequest){
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
                 .to("", to)
-                .withSubject("New "+ specificRequest.getType() +" Request")
+                .withSubject("New "+ specificRequest.getType() +" Request from " + specificRequest.getGenericRequest().getAuthor())
                 .withPlainText(
-                                "New Service Request for " + specificRequest.getGenericRequest().getAuthor() + "\n"+
-                                "Date Needed by : " + specificRequest.getGenericRequest().getDateNeeded() + "\n"+
-                                "Title : " + specificRequest.getGenericRequest().getTitle() + "\n"+
-                                "Description : \n" + specificRequest.getGenericRequest().getDescription()
+                                "By: " + specificRequest.getGenericRequest().getAuthor() + "\n"+
+                                "Title: " + specificRequest.getGenericRequest().getTitle() + "\n"+
+                                "Requested Completion Date: " + specificRequest.getGenericRequest().getDateNeeded() + "\n"+
+                                "Details: " + specificRequest.getGenericRequest().getDescription() +"\n\n"+
+                                "This notification is from the Brigham & Women's Faulkner Hospital's Service Request system.\n"+
+                                "If you would like to turn these notifications off, please log into the application and change your preferences."
                 )
                 .buildEmail();
         try {
