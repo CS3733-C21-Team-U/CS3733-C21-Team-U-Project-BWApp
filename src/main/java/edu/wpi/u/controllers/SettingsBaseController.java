@@ -5,6 +5,9 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
 import edu.wpi.u.users.Role;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,7 +64,25 @@ public class SettingsBaseController {
         succsessfulLabel.setVisible(false);
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
-
+        
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
+                case "Both":
+                    emailNotifications.setSelected(true);
+                    textNotifications.setSelected(true);
+                    break;
+                case "Email":
+                    emailNotifications.setSelected(true);
+                    break;
+                case "SMS":
+                    textNotifications.setSelected(true);
+                    break;
+                default:
+                    emailNotifications.setSelected(false);
+                    textNotifications.setSelected(false);
+                    break;
+            }
+        });
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);
             errorUpdateContactLabel.setVisible(false);
