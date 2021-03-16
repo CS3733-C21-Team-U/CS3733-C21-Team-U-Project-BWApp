@@ -154,19 +154,6 @@ public class SettingsBaseController {
     }
 
     public void handleContactChange() {
-        if (emailNotifications.isSelected() && textNotifications.isSelected()){
-            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Both");
-        }
-        else if (emailNotifications.isSelected()) {
-            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Email");
-        }
-        else if (textNotifications.isSelected()){
-            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "SMS");
-        }
-        else {
-            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Nothing");
-        }
-
         if(phoneNumTextField.getText().equals("") && emailAddressTextField.getText().equals("")){
             errorUpdateContactLabel.setVisible(true);
         }else {
@@ -239,5 +226,17 @@ public class SettingsBaseController {
     }
 
     public void handleApplyNotificationChange(ActionEvent actionEvent) {
+        if (emailNotifications.isSelected() && textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Both");
+        }
+        else if (emailNotifications.isSelected()) {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Email");
+        }
+        else if (textNotifications.isSelected()){
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "SMS");
+        }
+        else {
+            App.userService.setPreferredContactMethod(App.userService.getActiveUser().getUserName(), "Nothing");
+        }
     }
 }
