@@ -192,7 +192,7 @@ public class NewMainPageController {
         JFXDatePicker a = new JFXDatePicker();
         LocalDate b = a.getValue();
         mainTabPane.getStylesheets().add("-fx-text-fill: white;");
-        //App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             if(App.userService.getActiveUser().getType() ==  ADMIN){
                 adminTab1.setStyle("-fx-opacity: 1");
                 adminTab1.setDisable(false);
@@ -229,7 +229,7 @@ public class NewMainPageController {
                 settingsTab.setStyle("-fx-opacity: 1");
                 settingsTab.setDisable(false);
             }
-        //});
+        });
 
 
     }
