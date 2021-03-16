@@ -202,12 +202,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     @FXML
     public void handleEditRequest() throws IOException {
-//        System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
-//
-//        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ModifyRequest.fxml"));
-//        anchor.getChildren().clear();
-//        anchor.getChildren().add(root);
+        parent.editRequestFillFields.set(!parent.editRequestFillFields.getValue());
         parent.switchToEdit();
     }
 
