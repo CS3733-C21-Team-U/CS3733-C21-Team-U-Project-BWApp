@@ -528,3 +528,10 @@
     -fx-background-color: -secondary;
     -fx-text-fill: -onSecondary;
 }
+
+.button-contained-floatingPathPanel{
+    -fx-background-color: -primary;
+    -fx-text-fill: -onPrimary;
+    -fx-padding: 0px 16px;
+    /*-fx-pref-height: 36px;*/
+}
