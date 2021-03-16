@@ -474,6 +474,15 @@ public class UserService {
         }
         return "";
     }
+    
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        ud.setPreferredContactMethod(userName,method);
+    }
 
     /**
      * Gets a preferred contact method

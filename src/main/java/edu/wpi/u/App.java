@@ -10,6 +10,7 @@ import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
 import edu.wpi.u.web.EmailService;
+import edu.wpi.u.web.TextingService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -63,6 +64,7 @@ public class App extends Application {
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
   public static EmailService emailService = new EmailService();
+  public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
@@ -106,7 +108,7 @@ public class App extends Application {
   public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
-  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(true);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -152,17 +154,17 @@ public class App extends Application {
       fxmlLoader.getController();
       base = fxmlLoader.getRoot();
 
-      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-      fxmlLoader2.setClassLoader(classLoader);
-      fxmlLoader2.load();
-      fxmlLoader2.getController();
-      loginBase = fxmlLoader2.getRoot();
-
-      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-      fxmlLoader3.setClassLoader(classLoader);
-      fxmlLoader3.load();
-      fxmlLoader3.getController();
-      guestBase = fxmlLoader3.getRoot();
+//      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+//      fxmlLoader2.setClassLoader(classLoader);
+//      fxmlLoader2.load();
+//      fxmlLoader2.getController();
+//      loginBase = fxmlLoader2.getRoot();
+//
+//      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+//      fxmlLoader3.setClassLoader(classLoader);
+//      fxmlLoader3.load();
+//      fxmlLoader3.getController();
+//      guestBase = fxmlLoader3.getRoot();
     }
 
     System.out.println("App start");
