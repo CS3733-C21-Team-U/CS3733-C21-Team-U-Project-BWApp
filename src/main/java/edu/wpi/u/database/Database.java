@@ -139,7 +139,7 @@ public class Database {
                 ps3.execute();
 
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, preferredContactMethod varchar(50), primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
@@ -174,6 +174,10 @@ public class Database {
                 String commentstbl = "create table Comments(request varchar(50) references Requests, title varchar(100), description varchar(500), author varchar(50), type varchar(50), created timestamp)";
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
+
+                String covidSurveyResult = "create table covidSurveyResult(id int generated always as identity , symptomatic boolean, nonsymptomatic boolean, dateOfResults date)";
+                PreparedStatement covidSurveyResultStatement = conn.prepareStatement(covidSurveyResult);
+                covidSurveyResultStatement.execute();
 
             }
         } catch (Exception e) {
@@ -290,6 +294,8 @@ public class Database {
         try {
             String str;
             Statement s = conn.createStatement();
+            str = "delete from covidSurveyResult";
+            s.execute(str);
             str = "delete from Comments";
             s.execute(str);
             str = "delete from Permissions";
@@ -388,6 +394,8 @@ public class Database {
             str = "drop table Edges";
             s.execute(str);
             str = "drop table Nodes";
+            s.execute(str);
+            str = "drop table covidSurveyResult";
             s.execute(str);
 
         } catch (Exception e) {

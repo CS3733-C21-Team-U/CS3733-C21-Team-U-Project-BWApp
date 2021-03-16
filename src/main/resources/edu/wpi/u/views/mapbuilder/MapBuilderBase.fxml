@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -92,6 +93,7 @@
                   </VBox>
                </children>
             </HBox>
+            <Label layoutX="14.0" layoutY="973.0" style="-fx-background-color: rgba(255,255,255,0.5);" text="© The Brigham &amp; Women's Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." />
          </children>
       </AnchorPane>
    </children>

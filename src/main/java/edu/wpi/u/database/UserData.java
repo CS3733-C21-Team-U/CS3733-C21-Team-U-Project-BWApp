@@ -428,6 +428,7 @@ public class UserData extends Data{
         }
         Employee e = new Employee();
         e.setUserID("Debug");
+        e.setUserName("SampleAdmin");
         return e;
     }
 
@@ -458,6 +459,7 @@ public class UserData extends Data{
         }
         Guest g = new Guest();
         g.setUserID("Debug");
+        g.setUserName("SampleGuest");
         return g;
     }
 
@@ -526,6 +528,7 @@ public class UserData extends Data{
         }
         Patient p = new Patient();
         p.setUserID("Debug");
+        p.setUserName("SamplePatient");
         return p;
     }
 
@@ -1040,5 +1043,43 @@ public class UserData extends Data{
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        String str = "update Employees set preferredContactMethod=? where userName=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,method);
+            ps.setString(2,userName);
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets a preferred contact method
+     * @param userName the username to get the method from
+     * @return the method of contact either Nothing or Both or SMS or Email
+     */
+    public String getPreferredContactMethod(String userName) {
+        String str = "select preferredContactMethod from Employees where userName=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("preferredContactMethod");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "Nothing";
     }
 }

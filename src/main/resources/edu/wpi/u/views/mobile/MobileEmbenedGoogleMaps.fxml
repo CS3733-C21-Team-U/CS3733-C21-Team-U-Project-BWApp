@@ -8,11 +8,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="712.0" maxWidth="412.0" prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileEmbenedGoogleMapsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="525.0" prefWidth="300.0" style="-fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileEmbenedGoogleMapsController">
    <children>
       <VBox prefHeight="712.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <WebView fx:id="googleMapsEmbedded" maxHeight="712.0" maxWidth="412.0" prefHeight="712.0" prefWidth="412.0" />
+            <WebView fx:id="googleMapsEmbedded" maxHeight="600.0" maxWidth="280.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="280.0">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></WebView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="returnButton" onAction="#handleReturn" prefHeight="50.0" prefWidth="172.0" styleClass="bigButtonOutline" text="Log out" />

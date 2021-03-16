@@ -6,6 +6,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.models.MapService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,7 +61,6 @@ public class NewMainPageController {
     public Tab AdminHelpMainPageTab;
     public Tab adminTab1;
     public Tab adminTab2;
-    public Tab adminTab3;
     public Tab adminTab4;
 
     public Tab currentTab;
@@ -90,7 +90,7 @@ public class NewMainPageController {
     public AnchorPane adminHelpDis;
     public AnchorPane mapBuildDis;
     public AnchorPane userDis;
-    public AnchorPane guestDis;
+//    public AnchorPane guestDis;
     public AnchorPane covidDis;
 
     public KeyCombination pathFinding = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
@@ -106,7 +106,7 @@ public class NewMainPageController {
     public KeyCombination covidData = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
     public KeyCombination logOut = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
     public KeyCombination switchTheme = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
-
+    public JFXButton copywriteText;
 
 
     AnchorPane rightServiceRequestPane;
@@ -116,6 +116,12 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
+        System.out.println("Init for New Main Page");
+//        Platform.runLater(()->{
+//            System.out.println("Run Later and select first index");
+//            App.tabPaneRoot.getSelectionModel().clearAndSelect(0);
+//        });
+
         App.throwDialogHerePane = newMainPageStackPane;
 
         detectTab();
@@ -191,8 +197,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(false);
                 adminTab2.setStyle("-fx-opacity: 1");
                 adminTab2.setDisable(false);
-                adminTab3.setStyle("-fx-opacity: 1");
-                adminTab3.setDisable(false);
                 adminTab4.setStyle("-fx-opacity: 1");
                 adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
@@ -205,8 +209,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(true);
                 adminTab2.setStyle("-fx-opacity: 0");
                 adminTab2.setDisable(true);
-                adminTab3.setStyle("-fx-opacity: 0");
-                adminTab3.setDisable(true);
                 adminTab4.setStyle("-fx-opacity: 0");
                 adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
@@ -227,12 +229,11 @@ public class NewMainPageController {
 
     }
 
-    public void handleThemeSwitch() {
-        App.getInstance().switchTheme();
+    public void handleThemeSwitch(ActionEvent actionEvent) {
+//        App.getInstance().switchTheme();
     }
 
     public void handleExit() throws IOException {
-        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
@@ -244,6 +245,7 @@ public class NewMainPageController {
         button1.setOnAction(event -> dialog.close());
         button2.setOnAction(event -> {
             dialog.close();
+            App.isLoggedIn.set(false);
             App.getInstance().exitApp();
         });
         button1.getStyleClass().add("button-text");
@@ -266,27 +268,16 @@ public class NewMainPageController {
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("CANCEL");
         JFXButton button2 = new JFXButton("LOGOUT");
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
+        button1.setOnAction(event -> dialog.close());
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @SneakyThrows
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-
-                /*
-                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyApp.fxml"));
-                 Object obj = fxmlLoader.load();
-                 Object myController = fxmlLoader.getController();
-                 */
-                //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                App.isLoggedIn.set(false);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-                Object obj = fxmlLoader.load();
-                Object myController = fxmlLoader.getController();
+                fxmlLoader.load();
+                fxmlLoader.getController();
                 App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }
         });
@@ -342,9 +333,6 @@ public class NewMainPageController {
     public void onChipEnter(KeyEvent keyEvent) {
     }
 
-
-
-
     public void detectTab()
     {
         if (mainTabPane.getSelectionModel().getSelectedItem() == pathFindingTab){handleEnablePathFinding();}
@@ -355,7 +343,7 @@ public class NewMainPageController {
         else if (mainTabPane.getSelectionModel().getSelectedItem() == AdminHelpMainPageTab){handleEnableAdminHelp();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab1){handleEnableMapBuild();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab2){handleEnableUser();}
-        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
+//        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab4){handleEnableCovid();}
     }
 
@@ -369,7 +357,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -382,7 +370,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -395,7 +383,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -408,7 +396,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -421,7 +409,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -434,7 +422,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(false);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -447,7 +435,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(false);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -460,7 +448,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(false);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -473,7 +461,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(false);
+//        guestDis.setDisable(false);
         covidDis.setDisable(true);
     }
 
@@ -486,7 +474,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(false);
     }
 
@@ -526,10 +514,7 @@ public class NewMainPageController {
         }else if (addUser.match(keyEvent)){
             System.out.println("add user page");
              mainTabPane.getSelectionModel().select(adminTab2);
-             //scene switch to add user
-        }else if (guestList.match(keyEvent)){
-            System.out.println("guest list page");
-             mainTabPane.getSelectionModel().select(adminTab3);
+             //scene switch to add useu
         }else if (covidData.match(keyEvent)){
             System.out.println("covid data page");
              mainTabPane.getSelectionModel().select(adminTab4);
@@ -538,9 +523,24 @@ public class NewMainPageController {
             // log out
              handleLogout();
         }else if (switchTheme.match(keyEvent)){
-            System.out.println("Switch Theme");
-            handleThemeSwitch();
+            System.out.println("Switch Theme Gone");
+//            handleThemeSwitch();
         }
+    }
+
+    public void handleCopywriteText(ActionEvent actionEvent) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label body = new Label("The Brigham & Women\'s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.");
+        content.setBody(body);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
     }
 }
 

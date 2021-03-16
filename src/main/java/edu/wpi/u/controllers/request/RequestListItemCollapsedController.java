@@ -78,6 +78,12 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             showOrNottoSHow();
         });
 
+        parent.isResolved.addListener((o, oldVal, newVal)->{
+            if(parent.request.getGenericRequest().isResolved()){
+                requestItemDate2BCompletedLabel.setText("Request Resolved");
+            }
+        });
+
     }
 
     public void handleShowDetailButton(ActionEvent actionEvent) throws IOException {
@@ -114,13 +120,16 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     private void setFields(){
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
         Timestamp t = parent.request.getGenericRequest().getDateNeeded();
-        if(t.before(new Timestamp(System.currentTimeMillis()))){
+        if(parent.request.getGenericRequest().isResolved()){
+            requestItemDate2BCompletedLabel.setText("Request Resolved");
+        }
+        else if(t.before(new Timestamp(System.currentTimeMillis()))){
             requestItemDate2BCompletedLabel.setText("Overdue: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
         else{
             requestItemDate2BCompletedLabel.setText("Due: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
-        requestItemCreatorLabel.setText("By " + parent.request.getGenericRequest().getCreator());
+        requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
         int locationsSize = parent.request.getGenericRequest().getLocations().size();
         int assigneeSize = parent.request.getGenericRequest().getAssignees().size();

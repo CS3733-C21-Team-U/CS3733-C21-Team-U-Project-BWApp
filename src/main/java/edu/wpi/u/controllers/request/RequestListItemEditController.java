@@ -3,7 +3,9 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class RequestListItemEditController extends AnchorPane implements Initializable {
 
@@ -41,6 +44,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     public JFXDatePicker editDateNeededField;
     public JFXTimePicker editTimeNeededField;
     public JFXTextField editAssigneesField;
+    public Label titleLabel;
 
     @FXML
     public JFXListView<String> editAssigneesListView;// = new JFXListView<String>();
@@ -56,6 +60,9 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     private JFXTextField[] specificTextFields;
     HashMap<String, String> longNamestoID;
     Set<String> existingAssignee;
+    ArrayList<String> oldAssignees;
+    AutoCompletionBinding<String> autoFillAssignees;
+    AutoCompletionBinding<String> autoFillStart;
 
 
     public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
@@ -75,10 +82,11 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
         existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+        autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
         //longNamestoID = App.mapService.getLongNames(parent.request.getGenericRequest().);
         longNamestoID  = App.mapService.getLongNames();
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+        autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+        titleLabel.setText("Edit " + parent.request.getType() + " Request");
 
 
         //Set Existing values for fields
@@ -88,7 +96,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
         editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        //load in name as opposed to Node Ids
         ArrayList<String> locationNames = new ArrayList<>();
         for(String s: parent.request.getGenericRequest().getLocations()){
             locationNames.add(App.mapService.getNodeFromID(s).getLongName());
@@ -100,39 +107,65 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
 
-        /* adding items to the list view */
-        /*making list view horizontal*/
-//        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
-//        /* creating horizontal box to add item objects */
-//        HBox hbox = new HBox(editAssigneesListView);
+        System.out.println("In requestEdit init of" + parent.request.getGenericRequest().getTitle());
+        //listener for filling edit fields
+        parent.editRequestFillFields.addListener((o, q, p) -> {
+            existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
+            autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+            longNamestoID  = App.mapService.getLongNames();
+            autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+            oldAssignees = new ArrayList<>(parent.request.getGenericRequest().getAssignees());
 
-
-
-
+        });
     }
 
     /**
      * Pull from fields, and run update request
      */
     public void handleSaveButton(){
+        //oldAssignees = new ArrayList<>(parent.request.getGenericRequest().getAssignees());
         ArrayList<String> locationsToAdd = new ArrayList<String>();
         for(String s :editLocationsListView.getItems()){
             locationsToAdd.add(longNamestoID.get(s));
         }
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
-//        for (String r : assigneesToAdd){
-//            App.emailService.sendMail();
-//        }
+//        assigneesToAdd.forEach(s -> {
+//            if (oldAssignees.contains(s)){
+//                assigneesToAdd.remove(s);
+//            }
+//        });
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
         App.requestService.updateRequest(parent.request);
 
-
+        //todo : change to observable list thing Kohmei said
+        Thread t = new Thread(() ->{
+            Platform.runLater(() ->{
+                for (String r : assigneesToAdd){
+                    if (!oldAssignees.contains(r)){
+                        System.out.println("New username: " + r);
+                        switch (App.userService.getPreferredContactMethod(r)) {
+                            case "Both":
+                                App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                                App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                                break;
+                            case "Email":
+                                App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                                break;
+                            case "SMS":
+                                App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                                break;
+                        }
+                    }
+                }
+            });
+        });
+        t.start();
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
         this.parent.switchFromEditToExpanded();
-
     }
+
     public void handleCancelButton(){
             JFXDialogLayout content = new JFXDialogLayout();
             Label header = new Label("Exit without saving changes?");
@@ -142,19 +175,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             JFXDialog dialog = new JFXDialog(App.throwDialogHerePane, content, JFXDialog.DialogTransition.CENTER);
             JFXButton button1 = new JFXButton("CANCEL");
             JFXButton button2 = new JFXButton("EXIT");
-            button1.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                }
-            });
-            button2.setOnAction(new EventHandler<ActionEvent>() {
-                @SneakyThrows
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                    parent.switchToCollapsed();
-                }
+            button1.setOnAction(event -> dialog.close());
+            button2.setOnAction(event -> {
+                dialog.close();
+                parent.switchToCollapsed();
             });
             button1.getStyleClass().add("button-text");
             button2.getStyleClass().add("button-contained");
@@ -177,7 +201,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             j.setLabelFloat(true);
             j.setStyle("-fx-pref-width: 400px");
             j.setStyle("-fx-pref-height: 50px");
-            j.setStyle("-fx-font-size: 16px");
+            j.setStyle("-fx-font-size: 12px");
             j.setText( parent.request.getSpecificData().get(i));
 
             ans[i] = j;
@@ -188,7 +212,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         }
         return ans;
     }
-
 
     /**
      * Take the get values from unique fields, put it in a linkedList
@@ -201,8 +224,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         }
         return specifics;
     }
-
-
 
     public void makeListView(ArrayList<String> list, JFXListView<String> res){
         ObservableList<String> something = FXCollections.observableList(list);
@@ -217,6 +238,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             editAssigneesField.setText("");
         }
     }
+
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
@@ -231,21 +253,15 @@ public class RequestListItemEditController extends AnchorPane implements Initial
                 editLocationsListView.getItems().add(editLocationsField.getText());
                 editLocationsField.setText("");
             }catch(Exception e){
-
+                e.printStackTrace();
             }
         }
     }
-        public void deleteLocation(){
-            editLocationsListView.getItems().remove(editLocationsField.getText());
-            editLocationsField.setText("");
 
-        }
+    public void deleteLocation(){
+        editLocationsListView.getItems().remove(editLocationsField.getText());
+        editLocationsField.setText("");
 
-
-
-
-
-
-
+    }
 
 }
