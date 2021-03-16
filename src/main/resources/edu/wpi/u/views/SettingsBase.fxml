@@ -134,6 +134,8 @@
                               <JFXToggleButton fx:id="textNotifications" text="Text Notifications" />
                            </children>
                         </HBox>
+                        <JFXButton onAction="#handleApplyNotificationChange" prefHeight="23.0" prefWidth="427.0" styleClass="button-contained" text="Apply Notification Change" />
+                        <Region prefHeight="23.0" prefWidth="408.0" />
                         <Label text="Theme" />
                         <JFXRadioButton selected="true" text="Purple" />
                         <JFXRadioButton layoutX="10.0" layoutY="274.0" text="Blue" />

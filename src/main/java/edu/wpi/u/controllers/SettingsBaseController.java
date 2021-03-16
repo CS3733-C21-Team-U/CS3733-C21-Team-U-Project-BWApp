@@ -224,4 +224,7 @@ public class SettingsBaseController {
                 wrongPasswordLable.setVisible(true);
             }
     }
+
+    public void handleApplyNotificationChange(ActionEvent actionEvent) {
+    }
 }
