@@ -10,12 +10,16 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -49,10 +53,17 @@ public class NewMainPageController {
     public JFXTextField validationFeild;
     public StackPane newMainPageStackPane;
 
-    public Tab adminTab2;
+    public Tab pathFindingTab;
+    public Tab googleTab;
+    public Tab requestTab;
+    public Tab settingsTab;
+    public Tab HelpMainPageTab;
+    public Tab AdminHelpMainPageTab;
     public Tab adminTab1;
-    public Tab adminTab3;
+    public Tab adminTab2;
     public Tab adminTab4;
+
+    public Tab currentTab;
 
     public SVGPath themeIcon;
     public ToggleGroup group1;
@@ -64,13 +75,38 @@ public class NewMainPageController {
     public JFXListView list2;
     public JFXButton expandButton;
     public JFXButton collapseButton;
-    public Tab HelpMainPageTab;
-    public Tab AdminHelpMainPageTab;
-    public Tab settingsTab;
+
+
 
     public JFXButton themeSwitchBtn;
     public JFXButton logoutBtn;
     public JFXButton powerBtn;
+
+    public AnchorPane pathfindingDis;
+    public AnchorPane googleDis;
+    public AnchorPane requestDis;
+    public AnchorPane settingsDis;
+    public AnchorPane helpDis;
+    public AnchorPane adminHelpDis;
+    public AnchorPane mapBuildDis;
+    public AnchorPane userDis;
+//    public AnchorPane guestDis;
+    public AnchorPane covidDis;
+
+    public KeyCombination pathFinding = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
+    public KeyCombination googleAPI = new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN);
+    public KeyCombination request = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
+    public KeyCombination newRequest = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
+    public KeyCombination settings = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    public KeyCombination help = new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN);
+    public KeyCombination mapBuilder = new KeyCodeCombination(KeyCode.B, KeyCombination.CONTROL_DOWN);
+    public KeyCombination user = new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN);
+    public KeyCombination addUser = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
+    public KeyCombination guestList = new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN);
+    public KeyCombination covidData = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
+    public KeyCombination logOut = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
+    public KeyCombination switchTheme = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
+    public JFXButton copywriteText;
 
 
     AnchorPane rightServiceRequestPane;
@@ -87,6 +123,9 @@ public class NewMainPageController {
 //        });
 
         App.throwDialogHerePane = newMainPageStackPane;
+
+        detectTab();
+
         //setup tooltips
         themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
         logoutBtn.setTooltip(new Tooltip("Log Out"));
@@ -158,8 +197,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(false);
                 adminTab2.setStyle("-fx-opacity: 1");
                 adminTab2.setDisable(false);
-                adminTab3.setStyle("-fx-opacity: 1");
-                adminTab3.setDisable(false);
                 adminTab4.setStyle("-fx-opacity: 1");
                 adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
@@ -172,8 +209,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(true);
                 adminTab2.setStyle("-fx-opacity: 0");
                 adminTab2.setDisable(true);
-                adminTab3.setStyle("-fx-opacity: 0");
-                adminTab3.setDisable(true);
                 adminTab4.setStyle("-fx-opacity: 0");
                 adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
@@ -195,7 +230,7 @@ public class NewMainPageController {
     }
 
     public void handleThemeSwitch(ActionEvent actionEvent) {
-        App.getInstance().switchTheme();
+//        App.getInstance().switchTheme();
     }
 
     public void handleExit() throws IOException {
@@ -223,8 +258,8 @@ public class NewMainPageController {
 
     }
 
-    public void handleLogout(ActionEvent actionEvent) throws IOException {
-        System.out.println("LOGGING OUT");
+    public void handleLogout() throws IOException {
+        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
@@ -296,6 +331,216 @@ public class NewMainPageController {
     }
 
     public void onChipEnter(KeyEvent keyEvent) {
+    }
+
+    public void detectTab()
+    {
+        if (mainTabPane.getSelectionModel().getSelectedItem() == pathFindingTab){handleEnablePathFinding();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == googleTab){handleEnableGoogleMaps();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == requestTab){handleEnableRequests();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == settingsTab){handleEnableSettings();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == HelpMainPageTab){handleEnableHelp();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == AdminHelpMainPageTab){handleEnableAdminHelp();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab1){handleEnableMapBuild();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab2){handleEnableUser();}
+//        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
+        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab4){handleEnableCovid();}
+    }
+
+
+    public void handleEnablePathFinding() {
+        pathfindingDis.setDisable(false);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableGoogleMaps() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(false);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableRequests() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(false);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableSettings() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(false);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableHelp() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(false);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableAdminHelp() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(false);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableMapBuild() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(false);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableUser() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(false);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableGuest() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(false);
+        covidDis.setDisable(true);
+    }
+
+    public void handleEnableCovid() {
+        pathfindingDis.setDisable(true);
+        googleDis.setDisable(true);
+        requestDis.setDisable(true);
+        settingsDis.setDisable(true);
+        helpDis.setDisable(true);
+        adminHelpDis.setDisable(true);
+        mapBuildDis.setDisable(true);
+        userDis.setDisable(true);
+//        guestDis.setDisable(true);
+        covidDis.setDisable(false);
+    }
+
+    public void handleTest2(Event event) {
+
+    }
+
+
+    public void handleShortCuts(KeyEvent keyEvent) throws IOException {
+         if (pathFinding.match(keyEvent)){
+            System.out.println("pathfinding page");
+            mainTabPane.getSelectionModel().select(pathFindingTab);
+        }else if (googleAPI.match(keyEvent)){
+            System.out.println("googelAPI page");
+             mainTabPane.getSelectionModel().select(googleTab);
+        }else if (newRequest.match(keyEvent)){
+            System.out.println("new request page");
+             mainTabPane.getSelectionModel().select(requestTab);
+            //handle adding new request
+        }else if (request.match(keyEvent)){
+            System.out.println("new request page");
+             mainTabPane.getSelectionModel().select(requestTab);
+        }else if (settings.match(keyEvent)){
+            System.out.println("settings page");
+             mainTabPane.getSelectionModel().select(settingsTab);
+        }else if (help.match(keyEvent)){
+            System.out.println("help page");
+            //handle user logic
+//             mainTabPane.getSelectionModel().select(HelpMainPageTab);
+//             mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
+        }else if (mapBuilder.match(keyEvent)){
+            System.out.println("map builder page");
+             mainTabPane.getSelectionModel().select(adminTab1);
+        }else if (user.match(keyEvent)){
+            System.out.println("user man page");
+             mainTabPane.getSelectionModel().select(adminTab2);
+        }else if (addUser.match(keyEvent)){
+            System.out.println("add user page");
+             mainTabPane.getSelectionModel().select(adminTab2);
+             //scene switch to add useu
+        }else if (covidData.match(keyEvent)){
+            System.out.println("covid data page");
+             mainTabPane.getSelectionModel().select(adminTab4);
+        }else if (logOut.match(keyEvent)){
+            System.out.println("log Out");
+            // log out
+             handleLogout();
+        }else if (switchTheme.match(keyEvent)){
+            System.out.println("Switch Theme Gone");
+//            handleThemeSwitch();
+        }
+    }
+
+    public void handleCopywriteText(ActionEvent actionEvent) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label body = new Label("The Brigham & Women\'s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.");
+        content.setBody(body);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
     }
 }
 

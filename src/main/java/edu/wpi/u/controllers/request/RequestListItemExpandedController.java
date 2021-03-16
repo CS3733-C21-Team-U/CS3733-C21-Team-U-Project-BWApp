@@ -322,7 +322,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 comTypeLabel = new Label("Request Edited");
                 break;
             case "DEFAULT":
-                comTypeLabel = new Label("Update Added");
+                comTypeLabel = new Label("Update addLisded");
                 break;
             default:
                 comTypeLabel = new Label("Unknown Comment");

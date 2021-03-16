@@ -1,43 +1,26 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
-import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
-import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
-
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
-
 import edu.wpi.u.web.EmailService;
 import edu.wpi.u.web.TextingService;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.WritableFloatValue;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCombination;
-
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.prettytime.PrettyTime;
-
-import javax.swing.text.html.ImageView;
-import java.awt.*;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 public class App extends Application {
@@ -67,6 +50,7 @@ public class App extends Application {
   public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
+  public static CovidService covidService = new CovidService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
   public static UndoRedoService undoRedoService = new UndoRedoService();
@@ -92,8 +76,6 @@ public class App extends Application {
   public static JFXTabPane tabPaneRoot;
   public static String pathfindingAlgorithm = "ASTAR";//this will be set in the setting to be ASTAR BFS or DFS
 
-
-  public static boolean isLightTheme = true;
 
   public static Integer lastClickedRequestNumber;
   public static Guest selectedGuest;
@@ -126,6 +108,27 @@ public class App extends Application {
 
   @Override
   public void init()  {
+//    themeString.addListener((observable, oldVal, newVal)->{
+//      App.primaryStage.getScene().getStylesheets().remove(1);
+//      switch (newVal){
+//        case "PURPLE":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+//          break;
+//        case "DARK":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+//          break;
+//        case "BLUE":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+//          break;
+//        case "YELLOW":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
+//          break;
+//        default:
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+//          break;
+//      }
+//    });
+
 //    fxmlLoader.setClassLoader(classLoader);
 //    try {
 //      fxmlLoader.load();
@@ -191,7 +194,7 @@ public class App extends Application {
 
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+    loadCorrectThmeme();
     App.primaryStage.setFullScreen(true);
     App.primaryStage.setFullScreenExitHint("");
     App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -205,6 +208,25 @@ public class App extends Application {
 
 
     //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
+  }
+
+  private void loadCorrectThmeme() {
+    switch (App.themeString){
+      case "PURPLE":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+        break;
+      case "DARK":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+        break;
+      case "YELLOW":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
+        break;
+      case "BLUE":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+        break;
+      default:
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+    }
   }
 
   public static Stage getPrimaryStage() {
@@ -222,22 +244,4 @@ public class App extends Application {
 
 
   public int requestClicked;
-
-  public void switchTheme() {
-    if(App.isLightTheme){
-      System.out.println("isLightTheme!");
-      App.primaryStage.getScene().getStylesheets().clear();
-      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
-      App.themeSVG.setContent("M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12 6.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z");
-      App.isLightTheme = false;
-    }else{
-      System.out.println("isDarkTheme!");
-      App.primaryStage.getScene().getStylesheets().clear();
-      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-      App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
-      App.themeSVG.setContent("M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zm-2 5.79V18h-3.52L12 20.48 9.52 18H6v-3.52L3.52 12 6 9.52V6h3.52L12 3.52 14.48 6H18v3.52L20.48 12 18 14.48zM12.29 7c-.74 0-1.45.17-2.08.46 1.72.79 2.92 2.53 2.92 4.54s-1.2 3.75-2.92 4.54c.63.29 1.34.46 2.08.46 2.76 0 5-2.24 5-5s-2.24-5-5-5z");
-      App.isLightTheme = true;
-    }
-  }
 }

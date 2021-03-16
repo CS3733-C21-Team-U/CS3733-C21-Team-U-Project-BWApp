@@ -163,7 +163,7 @@ public class AddUserController {
                 App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
                 App.userService.setPreferredContactMethod(usernameTextField.getText(), "Nothing");
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/UserManager.fxml"));
                 anchor.getChildren().clear();
                 anchor.getChildren().add(root);
             }
@@ -181,7 +181,7 @@ public class AddUserController {
             } else if(App.userService.checkUsername(usernameTextField.getText()).equals("")){
                 App.userService.addPatient(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false, new ArrayList<Appointment>(), providerName.getText(), null, null);
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/UserManager.fxml"));
                 anchor.getChildren().clear();
                 anchor.getChildren().add(root);
             }
@@ -194,7 +194,7 @@ public class AddUserController {
 
     public void handleCancel() throws IOException {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/UserManager.fxml"));
         anchor.getChildren().clear();
         anchor.getChildren().add(root);
     }

@@ -122,7 +122,7 @@
                   </Label>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="408.0" spacing="30.0">
                      <children>
-                        <Label text="Decide where you get notified when a service request is assingged to you">
+                        <Label text="Decide where you get notified when a service request is assigned to you">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -137,8 +137,81 @@
                         <JFXButton onAction="#handleApplyNotificationChange" prefHeight="23.0" prefWidth="427.0" styleClass="button-contained" text="Apply Notification Change" />
                         <Region prefHeight="23.0" prefWidth="408.0" />
                         <Label text="Theme" />
-                        <JFXRadioButton selected="true" text="Purple" />
-                        <JFXRadioButton layoutX="10.0" layoutY="274.0" text="Blue" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #6200ee; -fx-background-radius: 10; -fx-text-fill: white;" styleClass="subtitle" text="Material Design Purple" textAlignment="CENTER" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <JFXRadioButton fx:id="purrpleRadio" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="94.0" text="PURPLE">
+                                       <VBox.margin>
+                                          <Insets top="-100.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="-20.0" left="37.0" />
+                                       </padding>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="themeGroup" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #222; -fx-background-radius: 10; -fx-text-fill: white;" styleClass="subtitle" text="Dark Mode" textAlignment="CENTER" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <JFXRadioButton fx:id="darkRadio" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="94.0" text="DARK" toggleGroup="$themeGroup">
+                                       <VBox.margin>
+                                          <Insets top="-100.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="-20.0" left="37.0" />
+                                       </padding>
+                                    </JFXRadioButton>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="120.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: eed600; -fx-background-radius: 10; -fx-text-fill: white;" styleClass="subtitle" text="Random Yellow" textAlignment="CENTER" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <JFXRadioButton fx:id="yellowRadio" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="94.0" text="YELLOW" toggleGroup="$themeGroup">
+                                       <VBox.margin>
+                                          <Insets top="-100.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="-20.0" left="37.0" />
+                                       </padding>
+                                    </JFXRadioButton>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="230.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #003da6; -fx-background-radius: 10; -fx-text-fill: white;" styleClass="subtitle" text="Brigham Women's Blue" textAlignment="CENTER" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <JFXRadioButton fx:id="blueRadio" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="94.0" text="BLUE" toggleGroup="$themeGroup">
+                                       <VBox.margin>
+                                          <Insets top="-100.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="-20.0" left="37.0" />
+                                       </padding>
+                                    </JFXRadioButton>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
@@ -153,7 +226,7 @@
                <children>
                   <Label fx:id="adminText" styleClass="headline-2" text="Admin Settings" />
                   <Label fx:id="subtitleText" styleClass="headline-3" text="Read and Save CSV File" />
-                  <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" text="test.csv" />
+                  <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" />
                   <HBox alignment="BASELINE_LEFT" prefHeight="52.0" prefWidth="1675.0">
                      <children>
                         <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="38.0" prefWidth="414.0" styleClass="button-outlined" text="Choose CSV">
