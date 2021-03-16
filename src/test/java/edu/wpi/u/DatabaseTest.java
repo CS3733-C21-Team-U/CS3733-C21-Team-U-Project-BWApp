@@ -17,6 +17,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.sql.*;
+
+//import java.sql.Date;
 
 public class DatabaseTest {
     /**
@@ -694,5 +697,19 @@ public class DatabaseTest {
 
     } // TODO: Reevaluate when appointments is talked about
     */
+
+    @Test
+    public void testCovidData(){
+        CovidService cs = new CovidService(testURL);
+        java.sql.Date todayDate = java.sql.Date.valueOf(String.valueOf(java.time.LocalDateTime.now()));
+        todayDate.toLocalDate();
+
+        cs.addDataPoint(true);
+        cs.addDataPoint(true);
+
+        assertEquals(cs.getSymptomatic(todayDate),2);
+
+    }
+
 
 }
