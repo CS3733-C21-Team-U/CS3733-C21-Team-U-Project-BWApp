@@ -1,10 +1,7 @@
 package edu.wpi.u.controllers.login;
 
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.*;
 import edu.wpi.u.App;
 import edu.wpi.u.CachingClassLoader;
 import edu.wpi.u.users.Role;
@@ -13,6 +10,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -32,6 +31,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,14 +42,28 @@ public class SelectUserScreenController {
     public VBox loadingFrame;
     public StackPane loadingStackPane;
     public JFXProgressBar progressBar;
+    public JFXCheckBox useCacheCheckBox;
 
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-        progressBar.setVisible(false);
         App.loadingSpinnerHerePane = loadingStackPane;
-        fxmlLoader.setClassLoader(App.classLoader);
-        fxmlLoader.load();
+        progressBar.setVisible(false);
+
+        useCacheCheckBox.setSelected(App.useCache.get());
+
+        useCacheCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            App.useCache.set(newValue);
+            if(newValue){//If chekced
+                App.loadedAlready = true;
+//                try {
+//                    fxmlLoader.setClassLoader(App.classLoader);
+//                    fxmlLoader.load();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+            }
+        });
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
@@ -79,7 +93,7 @@ public class SelectUserScreenController {
         App.getPrimaryStage().setHeight(1000);
     }
 
-    private void load() {
+    private void load() throws IOException {
         App.isLoggedIn.set(true);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Logging you in...");
@@ -88,6 +102,10 @@ public class SelectUserScreenController {
         content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(App.loadingSpinnerHerePane, content, JFXDialog.DialogTransition.RIGHT);
         dialog.show();
+        if(App.useCache.get()){
+            fxmlLoader.setClassLoader(App.classLoader);
+            fxmlLoader.load();
+        }
         Platform.runLater(() -> {
             Task<Parent> loadTask = new Task<Parent>() {
                 @Override
@@ -99,10 +117,15 @@ public class SelectUserScreenController {
                 App.getPrimaryStage().getScene().setRoot(loadTask.getValue());
             });
             loadTask.setOnRunning(event -> {
+                //Main function that runs after loading dialogue is animated
+//                if(App.useCache.get()){
+//                    System.out.println("Hello I'm in the setOnRunningTask");
+//                }
             });
             Thread t = new Thread(loadTask);
             Thread thread = new Thread(() ->{
                 try {
+                    //Wait to allow for dialogue to animate in
                     Thread.sleep(500);
                     Platform.runLater(t::start);
                 } catch (InterruptedException e) {
@@ -116,21 +139,43 @@ public class SelectUserScreenController {
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
-        load();
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
-        load();
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         App.userService.setEmployee("debug");
         App.userService.getActiveUser().setType(Role.ADMIN);
-        load();
+        if (App.useCache.get()){
+            load();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     public void handleMobile() throws IOException {

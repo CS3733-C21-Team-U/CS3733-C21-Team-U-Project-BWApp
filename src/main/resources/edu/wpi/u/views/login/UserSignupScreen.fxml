@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -11,18 +10,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserSignupScreenController">
-   <right>
-      <ImageView fitHeight="1556.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../Images/pexels-anna-shvets-4421550.jpg" />
-         </image>
-      </ImageView>
-   </right>
-   <left>
-      <BorderPane prefHeight="1080.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserSignupScreenController">
+   <children>
+      <AnchorPane prefHeight="1080.0" prefWidth="1920.0">
+         <children>
+            <ImageView fitHeight="1652.0" fitWidth="2668.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/31817347_10156490250613469_171519235497918464_o.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <BorderPane prefHeight="1080.0" prefWidth="1000.0">
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 5;" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -86,14 +88,11 @@
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding></VBox>
+                     </padding>
+                  </VBox>
                </children>
             </AnchorPane>
          </center>
       </BorderPane>
-   </left>
-   <stylesheets>
-      <URL value="@../css/BaseStyle.css" />
-      <URL value="@../css/LightTheme.css" />
-   </stylesheets>
-</BorderPane>
+   </children>
+</StackPane>

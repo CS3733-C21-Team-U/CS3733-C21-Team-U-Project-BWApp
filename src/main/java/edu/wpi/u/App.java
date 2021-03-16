@@ -53,6 +53,7 @@ public class App extends Application {
   public static SimpleBooleanProperty addNewRequestToList = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
+  public static boolean loadedAlready = false;
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
   public static StackPane loadingSpinnerHerePane;
@@ -102,6 +103,7 @@ public class App extends Application {
   public static Parent base;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 

@@ -151,6 +151,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
             App.addNewRequestToList.set(!App.addNewRequestToList.get());
+            App.requestService.checkFilters.set(!App.requestService.checkFilters.getValue());
 
         }else if(editTitleField.getText().equals("")){
             editTitleField.validate();

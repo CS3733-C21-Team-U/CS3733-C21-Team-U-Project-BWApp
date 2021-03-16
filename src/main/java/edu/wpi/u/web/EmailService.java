@@ -8,7 +8,7 @@ import org.simplejavamail.mailer.MailerBuilder;
 
 public class EmailService {
 
-    private static Dotenv dotenv = Dotenv.load();
+//    private static Dotenv dotenv = Dotenv.load();
     public static void main(String[] args) {
         //sendMail("nev.ingram30@gmail.com","The return of testy westy");
     }
