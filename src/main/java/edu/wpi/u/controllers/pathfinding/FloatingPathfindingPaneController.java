@@ -570,14 +570,14 @@ public class FloatingPathfindingPaneController {
 
     @FXML
     public void handleClearStartPoint(){
-//        App.mapInteractionModel.setStartNode("");
-//        startNodeField.clear();
+        App.mapInteractionModel.setStartNode("");
+        startNodeField.clear();
     }
 
     @FXML
     public void handleClearEndPoint(){
-//        App.mapInteractionModel.setEndNode("");
-//        endNodeField.clear();
+        App.mapInteractionModel.setStartNode("");
+        endNodeField.clear();
     }
 
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) { //TODO: What does this do?
