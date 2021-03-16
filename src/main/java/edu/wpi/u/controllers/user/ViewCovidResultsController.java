@@ -51,7 +51,7 @@ public class ViewCovidResultsController {
 
     public void initialize() throws IOException {
 
-        funnelSubtitle1.setText(App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
+        funnelSubtitle1.setText(App.userService.getGuests()+ " Guests and " + App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
 
         ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
         App.requestService.getRequests().forEach(e ->{
