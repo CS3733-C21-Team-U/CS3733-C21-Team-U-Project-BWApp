@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 
@@ -55,6 +56,11 @@ public class SettingsBaseController {
     @FXML public Group onlyAdmin;
     @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
+    @FXML public ToggleGroup themeGroup;
+    public JFXRadioButton purrpleRadio;
+    public JFXRadioButton darkRadio;
+    public JFXRadioButton yellowRadio;
+    public JFXRadioButton blueRadio;
     public JFXToggleButton emailNotifications;
     public JFXToggleButton textNotifications;
 
@@ -64,6 +70,34 @@ public class SettingsBaseController {
         succsessfulLabel.setVisible(false);
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
+
+        Platform.runLater(()->{
+            switch (App.themeString){
+                case "PURPLE":
+                    purrpleRadio.setSelected(true);
+                    break;
+                case "DARK":
+                    darkRadio.setSelected(true);
+                    break;
+                case "YELLOW":
+                    yellowRadio.setSelected(true);
+                    break;
+                case "BLUE":
+                    blueRadio.setSelected(true);
+                    break;
+            }
+        });
+
+        themeGroup.selectedToggleProperty().addListener((o, oldVal, newVal) -> {
+            JFXRadioButton target = ((JFXRadioButton)themeGroup.getSelectedToggle());
+
+            if(target != null){
+                System.out.println(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
+                App.userService.changeTheme(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
+                //TODO: Prompt restart - KOHMEI
+            }
+        });
+
         
         App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
             switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
