@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -71,7 +72,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        oldAssignees = new ArrayList<>(editAssigneesListView.getItems());
         RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
         assigneeValidator.setMessage("Valid Assignee Required");
         RequiredFieldValidator locationValidator = new RequiredFieldValidator();
@@ -103,52 +103,55 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
-
-        /* adding items to the list view */
-        /*making list view horizontal*/
-//        editAssigneesListView.setOrientation(Orientation.HORIZONTAL);
-//        /* creating horizontal box to add item objects */
-//        HBox hbox = new HBox(editAssigneesListView);
-
-
-
-
+        oldAssignees = new ArrayList<>(editAssigneesListView.getItems());
     }
 
     /**
      * Pull from fields, and run update request
      */
     public void handleSaveButton(){
+        //oldAssignees = new ArrayList<>(parent.request.getGenericRequest().getAssignees());
         ArrayList<String> locationsToAdd = new ArrayList<String>();
         for(String s :editLocationsListView.getItems()){
             locationsToAdd.add(longNamestoID.get(s));
         }
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
+//        assigneesToAdd.forEach(s -> {
+//            if (oldAssignees.contains(s)){
+//                assigneesToAdd.remove(s);
+//            }
+//        });
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
         App.requestService.updateRequest(parent.request);
 
-        for (String r : assigneesToAdd){
-            if (!oldAssignees.contains(r)){
-                System.out.println("Email: " + App.userService.getEmail(r));
-                switch (App.userService.getPreferredContactMethod(r)) {
-                    case "Both":
-                        App.emailService.sendMail(App.userService.getEmail(r), parent.request);
-                        App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
-                        break;
-                    case "Email":
-                        App.emailService.sendMail(App.userService.getEmail(r), parent.request);
-                        break;
-                    case "SMS":
-                        App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
-                        break;
+        //todo : change to observable list thing Kohmei said
+        Thread t = new Thread(() ->{
+            Platform.runLater(() ->{
+                for (String r : assigneesToAdd){
+                    System.out.println("Username to be checked: " + r);
+                    if (!oldAssignees.contains(r)){
+                        System.out.println("New username: " + r);
+                        switch (App.userService.getPreferredContactMethod(r)) {
+                            case "Both":
+                                App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                                App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                                break;
+                            case "Email":
+                                App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                                break;
+                            case "SMS":
+                                App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                                break;
+                        }
+                    }
                 }
-            }
-        }
+            });
+        });
+        t.start();
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
         this.parent.switchFromEditToExpanded();
-
     }
 
     public void handleCancelButton(){
