@@ -6,10 +6,12 @@ import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
 import edu.wpi.u.web.EmailService;
 import edu.wpi.u.web.TextingService;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -258,12 +260,21 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
                     sms.add(App.userService.getPhoneNumberFromUserName(assignee));
                 }
             }
-            for (String to : emails){
-                emailService.sendMail(to, currSpecificRequest);
-            }
-            for (String to : sms){
-                textingService.sendText(to, currSpecificRequest);
-            }
+            Thread t = new Thread(() ->{
+                try{
+                    Platform.runLater(() -> {
+                        for (String to : emails){
+                            emailService.sendMail(to, currSpecificRequest);
+                        }
+                        for (String to : sms){
+                            textingService.sendText(to, currSpecificRequest);
+                        }
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
+            t.start();
 
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
