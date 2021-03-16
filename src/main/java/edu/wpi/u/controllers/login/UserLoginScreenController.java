@@ -53,10 +53,11 @@ public class UserLoginScreenController {
 //        fxmlLoader.setClassLoader(App.classLoader);
 //        fxmlLoader.load();
 
-//        wrongPasswordLabel.setVisible(false);
-//        passWordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-//            wrongPasswordLabel.setVisible(false);
-//        });
+        wrongPasswordLabel.setVisible(false);
+
+        passWordField.focusedProperty().addListener(e->{
+           wrongPasswordLabel.setVisible(false);
+        });
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -122,10 +123,10 @@ public class UserLoginScreenController {
                 App.isLoggedIn.set(true);
                 handleSubmit();
             } else {
-               // wrongPasswordLabel.setVisible(true);
+                wrongPasswordLabel.setVisible(true);
             }
         } else {
-            //wrongPasswordLabel.setVisible(true);
+            wrongPasswordLabel.setVisible(true);
             }
         String phonenumber = App.userService.getActiveUser().getPhoneNumber();
 
@@ -145,18 +146,15 @@ public class UserLoginScreenController {
                         Future<Integer> whenStatusCode = client.prepareGet(url.toString())
                                 .execute(new AsyncHandler<Integer>() {
                                     private Integer status;
-
                                     @Override
                                     public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
                                         status = responseStatus.getStatusCode();
                                         return State.CONTINUE;
                                     }
-
                                     @Override
                                     public State onHeadersReceived(HttpHeaders headers) throws Exception {
                                         return State.CONTINUE;
                                     }
-
                                     @Override
                                     public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
                                         byte[] b = bodyPart.getBodyPartBytes();
@@ -257,10 +255,10 @@ public class UserLoginScreenController {
                 }
 
             } else {
-                //wrongPasswordLabel.setVisible(true);
+                wrongPasswordLabel.setVisible(true);
             }
-        } else {
-           // wrongPasswordLabel.setVisible(true);
+        }else{
+            wrongPasswordLabel.setVisible(true);
         }
     }
 
