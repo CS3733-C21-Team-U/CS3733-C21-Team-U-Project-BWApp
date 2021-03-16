@@ -52,8 +52,9 @@
                         <JFXTextField fx:id="userNameTextField" labelFloat="true" promptText="Enter Username" />
                         <Region prefHeight="11.0" prefWidth="360.0" />
                         <JFXPasswordField fx:id="passWordField" labelFloat="true" promptText="Enter Password" />
+                        <Label fx:id="wrongPasswordLabel" style="-fx-text-fill: -error;" text="Username/ Password not matching" />
                         <Region prefHeight="21.0" prefWidth="360.0" />
-                        <JFXButton onAction="#handleLogin" styleClass="button-contained" text="SIGN IN" />
+                        <JFXButton defaultButton="true" onAction="#handleLogin" styleClass="button-contained" text="SIGN IN" />
                         <HBox alignment="CENTER" prefHeight="41.0" prefWidth="1086.0">
                            <children>
                               <JFXButton fx:id="submitButton" onAction="#handleLonginWithNo2FA" prefHeight="27.0" prefWidth="157.0" styleClass="button-outlined" text="Login Without 2FA" />
@@ -64,7 +65,7 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
+                        <JFXButton cancelButton="true" onAction="#handleBackButton" styleClass="button-text" text="BACK" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

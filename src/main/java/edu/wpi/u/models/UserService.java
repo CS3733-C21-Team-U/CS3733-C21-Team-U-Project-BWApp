@@ -7,6 +7,10 @@ import edu.wpi.u.users.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -87,7 +91,6 @@ public class UserService {
     public void setGuest(String name){
         this.activeGuest = ud.setGuest(name);
         this.activeUser = ud.setGuest(name);
-        System.out.println("Guest in us" + ud.setGuest(name));
     }
 
     /**
@@ -469,5 +472,41 @@ public class UserService {
             }
         }
         return "";
+    }
+    
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        ud.setPreferredContactMethod(userName,method);
+    }
+
+    /**
+     * Gets a preferred contact method
+     * @param userName the username to get the method from
+     * @return the method of contact either Nothing or Both or SMS or Email
+     */
+    public String getPreferredContactMethod (String userName){
+        return ud.getPreferredContactMethod(userName);
+    }
+
+    /**
+     * Changes the app theme
+     * @param themeName the name of the theme
+     */
+    public void changeTheme(String themeName) {
+        File f = new File(String.valueOf(Paths.get("themes.txt")));
+        if (f.delete()) {
+            System.out.println("File deleted when saving");
+            try {
+                FileWriter fw = new FileWriter("themes.txt");
+                fw.write(themeName);
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -90,7 +90,7 @@ public class KioskLoginController {
         });
     }
 
-    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
+    public void handleDebugLogin() throws IOException {
         App.userService.setUser("admin", "admin", "Employees");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
         fxmlLoader.load();
@@ -98,7 +98,7 @@ public class KioskLoginController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleReturn(ActionEvent actionEvent) throws IOException {
+    public void handleReturn() throws IOException {
         App.getPrimaryStage().setFullScreen(true);
         App.getPrimaryStage().setWidth(1920);
         App.getPrimaryStage().setHeight(1080);
@@ -108,50 +108,19 @@ public class KioskLoginController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleLonginWithNo2FA(ActionEvent actionEvent) {
+    public void handleLonginWithNo2FA() {
         if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
             if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
                 App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkUsername(userNameTextField.getText()));
                 Parent root = null;
-                if(searchRequests()){
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
                 KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
             }
         }
-    }
-
-
-    public void handleForgotPassword(ActionEvent actionEvent) {
-    }
-
-    public boolean searchRequests(){
-        for(SpecificRequest r : App.requestService.getRequests()){
-            if(r.getGenericRequest().getCreator() != null){
-                System.out.println(App.userService.getActiveUser().getUserName());
-                System.out.println( r.getType());
-                System.out.println(r.getGenericRequest().isResolved());
-                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
-                    if(r.getSpecificData().get(0).equals("High")){
-                        App.mapInteractionModel.highRisk = true;
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

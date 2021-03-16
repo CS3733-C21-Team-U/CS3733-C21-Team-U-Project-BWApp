@@ -36,7 +36,6 @@ public class MainHelpPageController {
     @FXML public JFXButton ViewUserHelpButton;
     @FXML public JFXButton LoadAndSaveCSVButton;
     @FXML public JFXButton PathFindingHelpButton;
-    @FXML public JFXButton GuestListHelpButton;
     @FXML public JFXButton MyRequestHelpButton;
     @FXML public JFXButton CovidHelpButton;
     @FXML public JFXButton AboutHelpButton;
@@ -123,17 +122,6 @@ public class MainHelpPageController {
 
     }
 
-    public void handleGuestListPageButton(ActionEvent actionEvent) {
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/GuestListHelpPage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
-    }
 
     public void handleMyRequestPageButton(ActionEvent actionEvent) {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
