@@ -136,7 +136,6 @@ public class MapInteractionModel {
 
     public void setEndNode(String nodeID){
         mapTargetNode.set(!mapTargetNode.get());
-        System.out.println("I have not crashed yet 138 MapInteractionModel");
         this.nodeID.set(nodeID);
         // Crashes before
     }

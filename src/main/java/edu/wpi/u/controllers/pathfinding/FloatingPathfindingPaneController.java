@@ -245,13 +245,15 @@ public class FloatingPathfindingPaneController {
             if(textDirectionContainer.getChildren().isEmpty()) {
                 HBox stepHBoxContainer = createDirectionBox("Click on Respective Floor Buttons to Find Path. Begin on floor " + path.get(0).getFloor(), "M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 " +
                         ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"); //Guy walking
+
                 textDirectionContainer.getChildren().add(stepHBoxContainer);
             }
         }
-        double AnchorSize = Math.min(textDirectionContainer.getChildren().size() * 80, 830);
-        mainAnchor.setPrefHeight(AnchorSize);
-        secondAnchor.setPrefHeight(AnchorSize);
-        pathContent.setPrefHeight(AnchorSize);
+        double AnchorSize = Math.min(textDirectionContainer.getChildren().size() * 90, 830);
+        mainAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        secondAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        treeViewListNodes.setPrefHeight(0);
     }
 
     private void enableButton(String button) {
