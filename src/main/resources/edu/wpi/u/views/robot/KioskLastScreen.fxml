@@ -126,7 +126,7 @@
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" AnchorPane.bottomAnchor="30.0">
          <children>
             <JFXButton alignment="CENTER" onAction="#handleLogoutButton" styleClass="button-text" text="Logout and Clean Screen" />
-            <JFXButton onAction="#handleCleanScreen" styleClass="button-text" text="DEBUG (CLEAN SCREEN)" />
+            <JFXButton onAction="#handelCleanScreen" styleClass="button-text" text="DEMO (If Missing robot)" />
          </children>
       </HBox>
    </children>

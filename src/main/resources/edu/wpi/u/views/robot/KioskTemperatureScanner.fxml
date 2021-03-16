@@ -134,7 +134,7 @@
             <VBox alignment="CENTER">
                <children>
                   <JFXButton fx:id="submitTempButton" alignment="CENTER" onAction="#handelTakeTempButton" styleClass="button-text" text="Take Temputure" />
-                  <JFXButton alignment="CENTER" layoutX="239.0" layoutY="72.0" onAction="#handleDebugSkipButton" styleClass="button-text" text="DEBUG Skip to next screen" />
+                  <JFXButton alignment="CENTER" layoutX="239.0" layoutY="72.0" onAction="#handleDebugSkipButton" styleClass="button-text" text="DEMO (If Missing robot)" />
                   <Label fx:id="debugOnLabel" opacity="0.0" prefHeight="84.0" prefWidth="520.0" text="Debug Flag is on, making fake data (change first line of KioskTempatureScannerController to turn off)" textAlignment="CENTER" wrapText="true">
                      <styleClass>
                         <String fx:value="error-label" />
