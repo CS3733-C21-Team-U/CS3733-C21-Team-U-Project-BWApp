@@ -42,7 +42,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </SVGPath>
-                                    <Label fx:id="titleLabel" prefWidth="382.0" text="New Request" wrapText="true">
+                                    <Label fx:id="titleLabel" prefHeight="42.0" prefWidth="777.0" text="New Request" wrapText="true">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
