@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTreeView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.TreeViewListController">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.pathfinding.TreeViewListController">
    <children>
-      <VBox prefHeight="800.0" prefWidth="250.0">
+      <VBox maxHeight="-Infinity" minHeight="-Infinity" prefWidth="350.0">
          <children>
-            <JFXTreeView fx:id="confTree" onMouseClicked="#handleConfClicked" />
-            <JFXTreeView fx:id="deptTree" onMouseClicked="#handleDeptClicked" />
-            <JFXTreeView fx:id="elevTree" onMouseClicked="#handleElevClicked" />
-            <JFXTreeView fx:id="exitTree" onMouseClicked="#handleExitClicked" />
-            <JFXTreeView fx:id="foodTree" onMouseClicked="#handleFoodClicked" />
-            <JFXTreeView fx:id="kiosTree" onMouseClicked="#handleKiosClicked" />
-            <JFXTreeView fx:id="labsTree" onMouseClicked="#handleLabsClicked" />
-            <JFXTreeView fx:id="parkTree" onMouseClicked="#handleParkClicked" />
-            <JFXTreeView fx:id="restTree" onMouseClicked="#handleRestClicked" />
-            <JFXTreeView fx:id="servTree" onMouseClicked="#handleServClicked" />
-            <JFXTreeView fx:id="staiTree" onMouseClicked="#handleStaiClicked" />
+            <JFXTreeView fx:id="confTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleConfClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="deptTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleDeptClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="exitTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleExitClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="foodTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleFoodClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="kiosTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleKiosClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="labsTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleLabsClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="parkTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleParkClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="restTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleRestClicked" prefHeight="32.0" />
+            <JFXTreeView fx:id="servTree" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleServClicked" prefHeight="32.0" />
          </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

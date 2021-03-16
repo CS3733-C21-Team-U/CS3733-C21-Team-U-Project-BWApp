@@ -27,6 +27,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
@@ -46,6 +47,8 @@ public class FloatingPathfindingPaneController {
     public Rectangle endFieldFlair;
     public HBox pathContent;
     public VBox btnVBox;
+    public AnchorPane treeViewListNodes;
+
 
     public JFXButton btnOne;
     public JFXButton btnTwo;
@@ -253,33 +256,32 @@ public class FloatingPathfindingPaneController {
 
     private void enableButton(String button) {
         switch(button) {
-            case("G"):
+            case ("G"):
                 btnG.setDisable(false);
                 btnG.setPrefHeight(25);
                 return;
-            case("1"):
+            case ("1"):
                 btnOne.setDisable(false);
                 btnOne.setPrefHeight(25);
                 return;
-            case("2"):
+            case ("2"):
                 btnTwo.setDisable(false);
                 btnTwo.setPrefHeight(25);
                 return;
-            case("3"):
+            case ("3"):
                 btnThree.setDisable(false);
                 btnThree.setPrefHeight(25);
                 return;
-            case("4"):
+            case ("4"):
                 btnFour.setDisable(false);
                 btnFour.setPrefHeight(25);
                 return;
-            case("5"):
+            case ("5"):
                 btnFive.setDisable(false);
                 btnFive.setPrefHeight(25);
                 return;
         }
     }
-
     private double findAngle(Node bNode, Node sNode, Node eNode) {
         if(bNode == null) return 0;
 
@@ -381,6 +383,7 @@ public class FloatingPathfindingPaneController {
 
 
         pathContent.setPrefHeight(0);
+        selectViewOption();
 
         targetNode.addListener((observable, oldVal, newVal) ->{
             if(newVal.equals("START")){
@@ -418,6 +421,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         endNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            selectViewOption();
             System.out.println("Trag: END - EndNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             endNodeField.requestFocus();
             targetNode.set("END");
@@ -438,6 +442,7 @@ public class FloatingPathfindingPaneController {
             }
         });
         startNodeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            selectViewOption();
             System.out.println("Trag: START - StartNodeField input "+newValue+" which has nodeID "+namesAndIDs.get(newValue));
             targetNode.set("START");
             startNodeField.requestFocus();
@@ -500,10 +505,24 @@ public class FloatingPathfindingPaneController {
         });
 
         App.mapInteractionModel.pathFlag.addListener(observable -> {
-                handleTestAddTextField(null);
+            handleTestAddTextField(null);
         });
 
         startNodeField.requestFocus();
+    }
+
+    public void selectViewOption(){
+        if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
+            treeViewListNodes.setVisible(true);
+            pathContent.setVisible(false);
+            treeViewListNodes.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            pathContent.setPrefHeight(0);
+        } else{
+            treeViewListNodes.setVisible(false);
+            pathContent.setVisible(true);
+            treeViewListNodes.setPrefHeight(0);
+            pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        }
     }
 
     public void handleStartEndSwap(ActionEvent actionEvent) {
@@ -545,6 +564,21 @@ public class FloatingPathfindingPaneController {
         handleTestAddTextField("5");
         App.mapInteractionModel.pathfindingFloorController.set("5");
     }
+
+    @FXML
+    public void handleClearStartPoint(){
+        App.mapInteractionModel.setStartNode("");
+        targetNode.set("START");
+        startNodeField.clear();
+    }
+
+    @FXML
+    public void handleClearEndPoint(){
+        App.mapInteractionModel.setEndNode("");
+        targetNode.set("END");
+        endNodeField.clear();
+    }
+
 
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) { //TODO: What does this do?
     }

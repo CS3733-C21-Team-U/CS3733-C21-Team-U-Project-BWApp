@@ -43,6 +43,7 @@ public class MapInteractionModel {
     public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
     public String aline = "";
     public double alineValue;
+    public SimpleStringProperty currentTargetNode = new SimpleStringProperty("");
 
 
     public SimpleStringProperty pathfindingFloorController = new SimpleStringProperty(" ");//for start node
@@ -136,6 +137,7 @@ public class MapInteractionModel {
     public void setEndNode(String nodeID){
         mapTargetNode.set(!mapTargetNode.get());
         this.nodeID.set(nodeID);
+        // Crashes before
     }
 
     public void setStartNode(String nodeID){
