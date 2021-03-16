@@ -252,8 +252,8 @@ public class FloatingPathfindingPaneController {
         double AnchorSize = Math.min(textDirectionContainer.getChildren().size() * 90, 830);
         mainAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
         secondAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        treeViewListNodes.setPrefHeight(0);
+//        pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//        treeViewListNodes.setPrefHeight(0);
     }
 
     private void enableButton(String button) {
