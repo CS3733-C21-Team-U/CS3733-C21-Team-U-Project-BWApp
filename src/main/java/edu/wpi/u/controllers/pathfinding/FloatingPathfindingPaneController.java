@@ -56,6 +56,12 @@ public class FloatingPathfindingPaneController {
     public JFXButton btnFour;
     public JFXButton btnFive;
     public JFXButton btnG;
+    public HBox floatButtonContainer;
+    public Region regionG1;
+    public Region region12;
+    public Region region23;
+    public Region region34;
+    public Region region45;
     @FXML
     Label endNode;
     @FXML
@@ -70,20 +76,33 @@ public class FloatingPathfindingPaneController {
     HashMap<String, String> namesAndIDs;
 
 
+    public void floatBtnFormat(JFXButton aButton) {
+        aButton.setStyle("-fx-background-color: -primary");
+        aButton.setStyle("-fx-text-fill: -onPrimary");
+        aButton.setStyle("-fx-padding: 0px 16px");
+        //aButton.setStyle("-fx-pref-height: 28px");
+    }
 
     public void handleTestAddTextField(String floor) {
 
+
         btnOne.setDisable(true);
+        btnOne.setPrefWidth(0);
         btnOne.setPrefHeight(0);
         btnTwo.setDisable(true);
+        btnTwo.setPrefWidth(0);
         btnTwo.setPrefHeight(0);
         btnThree.setDisable(true);
+        btnThree.setPrefWidth(0);
         btnThree.setPrefHeight(0);
         btnFive.setDisable(true);
+        btnFive.setPrefWidth(0);
         btnFive.setPrefHeight(0);
         btnFour.setDisable(true);
+        btnFour.setPrefWidth(0);
         btnFour.setPrefHeight(0);
         btnG.setDisable(true);
+        btnG.setPrefWidth(0);
         btnG.setPrefHeight(0);
 
         textDirectionContainer.getChildren().clear();
@@ -252,34 +271,56 @@ public class FloatingPathfindingPaneController {
         double AnchorSize = Math.min(textDirectionContainer.getChildren().size() * 90, 830);
         mainAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
         secondAnchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//        pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
 //        treeViewListNodes.setPrefHeight(0);
     }
 
+
+
     private void enableButton(String button) {
+        floatButtonContainer.setPrefHeight(50);
+        floatButtonContainer.setMinHeight(50);
+
         switch(button) {
             case("G"):
+                floatBtnFormat(btnG);
                 btnG.setDisable(false);
+                btnG.setPrefWidth(75);
                 btnG.setPrefHeight(25);
+                regionG1.setPrefWidth(20);
                 return;
             case("1"):
+                floatBtnFormat(btnOne);
                 btnOne.setDisable(false);
+                btnOne.setPrefWidth(75);
                 btnOne.setPrefHeight(25);
+                region12.setPrefWidth(20);
                 return;
             case("2"):
+                floatBtnFormat(btnTwo);
                 btnTwo.setDisable(false);
+                btnTwo.setPrefWidth(75);
                 btnTwo.setPrefHeight(25);
+                region23.setPrefWidth(20);
                 return;
             case("3"):
+                floatBtnFormat(btnThree);
                 btnThree.setDisable(false);
+                btnThree.setPrefWidth(75);
                 btnThree.setPrefHeight(25);
+                region34.setPrefWidth(20);
                 return;
             case("4"):
+                floatBtnFormat(btnFour);
                 btnFour.setDisable(false);
+                btnFour.setPrefWidth(75);
                 btnFour.setPrefHeight(25);
+                region45.setPrefWidth(20);
                 return;
             case("5"):
+                floatBtnFormat(btnFive);
                 btnFive.setDisable(false);
+                btnFive.setPrefWidth(75);
                 btnFive.setPrefHeight(25);
                 return;
         }
@@ -383,6 +424,8 @@ public class FloatingPathfindingPaneController {
     }
 
     public void initialize(){
+
+        //floatButtonContainer.setPrefHeight(0);
 
         pathContent.setPrefHeight(0);
         selectViewOption();
@@ -511,7 +554,7 @@ public class FloatingPathfindingPaneController {
             handleTestAddTextField(null);
         });
 
-        startNodeField.requestFocus();
+//        startNodeField.requestFocus();
     }
 
     public void selectViewOption(){
@@ -525,6 +568,11 @@ public class FloatingPathfindingPaneController {
             App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
 
         } else{
+            regionG1.setPrefWidth(0);
+            region12.setPrefWidth(0);
+            region23.setPrefWidth(0);
+            region34.setPrefWidth(0);
+            region45.setPrefWidth(0);
             treeViewListNodes.setVisible(false);
             pathContent.setVisible(true);
             treeViewListNodes.setPrefHeight(0);
