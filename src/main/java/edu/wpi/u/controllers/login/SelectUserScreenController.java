@@ -131,63 +131,96 @@ public class SelectUserScreenController {
     }
 
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
-        loadingNewMainPage("");
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                Platform.runLater(() -> {
-                    App.userService.setGuest("debug");
-                    App.userService.getActiveUser().setType(Role.GUEST);
-                    App.isLoggedIn.set(true);
-                    App.tabPaneRoot.getSelectionModel().selectFirst();
-                    App.getPrimaryStage().getScene().setRoot(App.base);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+        if(App.useCache.get()){
+            loadingNewMainPage("");
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        App.userService.setGuest("debug");
+                        App.userService.getActiveUser().setType(Role.GUEST);
+                        App.isLoggedIn.set(true);
+                        App.tabPaneRoot.getSelectionModel().selectFirst();
+                        App.getPrimaryStage().getScene().setRoot(App.base);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.userService.setGuest("debug");
+            App.userService.getActiveUser().setType(Role.GUEST);
+            App.isLoggedIn.set(true);
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
+
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
-        loadingNewMainPage("");
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                Platform.runLater(() -> {
-                    App.userService.setPatient("debug");
-                    App.userService.getActiveUser().setType(Role.PATIENT);
-                    App.isLoggedIn.set(true);
-                    App.tabPaneRoot.getSelectionModel().selectFirst();
-                    App.getPrimaryStage().getScene().setRoot(App.base);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+        if (App.useCache.get()){
+            loadingNewMainPage("");
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        App.userService.setPatient("debug");
+                        App.userService.getActiveUser().setType(Role.PATIENT);
+                        App.isLoggedIn.set(true);
+                        App.tabPaneRoot.getSelectionModel().selectFirst();
+                        App.getPrimaryStage().getScene().setRoot(App.base);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.userService.setPatient("debug");
+            App.userService.getActiveUser().setType(Role.PATIENT);
+            App.isLoggedIn.set(true);
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
+
     }
 
-    public void handleSkipToAdminButton(ActionEvent actionEvent) {
-        loadingNewMainPage("");
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                Platform.runLater(() -> {
-                    App.userService.setEmployee("debug");
-                    App.userService.getActiveUser().setType(Role.ADMIN);
-                    App.isLoggedIn.set(true);
-                    App.tabPaneRoot.getSelectionModel().selectFirst();
-                    App.getPrimaryStage().getScene().setRoot(App.base);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+    public void handleSkipToAdminButton(ActionEvent actionEvent) throws IOException {
+        if (App.useCache.get()){
+            loadingNewMainPage("");
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        App.userService.setEmployee("debug");
+                        App.userService.getActiveUser().setType(Role.ADMIN);
+                        App.isLoggedIn.set(true);
+                        App.tabPaneRoot.getSelectionModel().selectFirst();
+                        App.getPrimaryStage().getScene().setRoot(App.base);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+            fxmlLoader.load();
+            fxmlLoader.getController();
+            App.userService.setEmployee("debug");
+            App.userService.getActiveUser().setType(Role.ADMIN);
+            App.isLoggedIn.set(true);
+            App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
+        }
     }
 
     private void loadingNewMainPage(String page) {

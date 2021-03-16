@@ -81,10 +81,10 @@ public class NewMainPageController {
 
     public void initialize() throws IOException {
         System.out.println("Init for New Main Page");
-        Platform.runLater(()->{
-            System.out.println("Run Later and select first index");
-            App.tabPaneRoot.getSelectionModel().clearAndSelect(0);
-        });
+//        Platform.runLater(()->{
+//            System.out.println("Run Later and select first index");
+//            App.tabPaneRoot.getSelectionModel().clearAndSelect(0);
+//        });
 
         App.throwDialogHerePane = newMainPageStackPane;
         //setup tooltips
