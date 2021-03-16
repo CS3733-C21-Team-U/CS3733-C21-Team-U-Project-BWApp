@@ -106,7 +106,7 @@ public class NewMainPageController {
     public KeyCombination covidData = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
     public KeyCombination logOut = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
     public KeyCombination switchTheme = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
-
+    public JFXButton copywriteText;
 
 
     AnchorPane rightServiceRequestPane;
@@ -526,6 +526,21 @@ public class NewMainPageController {
             System.out.println("Switch Theme Gone");
 //            handleThemeSwitch();
         }
+    }
+
+    public void handleCopywriteText(ActionEvent actionEvent) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Label body = new Label("The Brigham & Women\'s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.");
+        content.setBody(body);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
     }
 }
 
