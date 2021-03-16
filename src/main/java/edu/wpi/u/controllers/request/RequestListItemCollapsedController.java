@@ -120,7 +120,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         else{
             requestItemDate2BCompletedLabel.setText("Due: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
-        requestItemCreatorLabel.setText("By " + parent.request.getGenericRequest().getCreator());
+        requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
         int locationsSize = parent.request.getGenericRequest().getLocations().size();
         int assigneeSize = parent.request.getGenericRequest().getAssignees().size();
