@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -17,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: -background;" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskLoginController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1558.0" spacing="10.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXTextField fx:id="userNameTextField" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Enter Username">
                <VBox.margin>
@@ -29,18 +28,16 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXPasswordField>
-            <JFXProgressBar fx:id="progressBar" prefHeight="13.0" prefWidth="302.0" style="-fx-opacity: 0;">
+            <JFXTextField fx:id="reasonForVisitLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Reason For Visit">
                <VBox.margin>
-                  <Insets />
+                  <Insets top="-60.0" />
                </VBox.margin>
-            </JFXProgressBar>
-            <Label fx:id="errorLabel1" prefHeight="15.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
-            <JFXButton fx:id="debugButton" onAction="#handleDebugLogin" opacity="0.0" prefHeight="0.0" prefWidth="304.0" styleClass="button-outlined" text="Debug Login">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </JFXButton>
+            </JFXTextField>
+            <Label fx:id="errorLabel" style="-fx-text-fill: -error;" text="Username/Password dont match" />
          </children>
+         <padding>
+            <Insets top="-800.0" />
+         </padding>
       </VBox>
       <VBox alignment="TOP_CENTER" prefWidth="600.0">
          <children>
@@ -137,12 +134,16 @@
       </VBox>
       <VBox alignment="BOTTOM_CENTER" layoutY="598.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="598.0">
          <children>
-            <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" defaultButton="true" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="314.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </JFXButton>
-            <JFXButton fx:id="returnButton" buttonType="RAISED" cancelButton="true" onAction="#handleReturn" prefHeight="50.0" prefWidth="304.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
+            <HBox alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" defaultButton="true" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="200.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></JFXButton>
+                  <JFXButton fx:id="guestLoginButton" alignment="CENTER" onAction="#handleToggleGuestLogin" prefHeight="50.0" prefWidth="200.0" styleClass="bigButton" text="Login as Guest" />
+               </children>
+            </HBox>
+            <JFXButton fx:id="returnButton" buttonType="RAISED" cancelButton="true" onAction="#handleReturn" prefHeight="50.0" prefWidth="420.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
          </children>
          <padding>
             <Insets bottom="20.0" />

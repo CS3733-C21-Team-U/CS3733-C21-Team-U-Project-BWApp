@@ -30,7 +30,7 @@ public class GuestSignInScreenController {
     }
     public void handleSignInButton(ActionEvent actionEvent) throws IOException {
         Timestamp t = new Timestamp(System.currentTimeMillis());
-        App.isLoggedIn.set(true);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
         if (App.useCache.get()){
             loadingNewMainPage();
             Thread thread = new Thread(() -> {
@@ -41,7 +41,7 @@ public class GuestSignInScreenController {
                         App.userService.addGuest(nameGuestTextField.getText(), t, visitReasonTextField.getText(), false);
                         App.userService.setGuest(nameGuestTextField.getText());
                         App.userService.getActiveUser().setType(Role.GUEST);
-                        App.isLoggedIn.set(true);
+                        App.isLoggedIn.set(!App.isLoggedIn.get());
                         App.tabPaneRoot.getSelectionModel().selectFirst();
                         Parent root = null;
                         try {

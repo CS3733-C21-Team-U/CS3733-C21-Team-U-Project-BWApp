@@ -14,7 +14,7 @@ public class CovidInfoController {
     public void handleBackToMainPageButton() throws Exception {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         if(App.userService.getActiveUser().getType() ==  ADMIN){
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/AdminMainHelpPage.fxml"));
             anchor.getChildren().clear();
             anchor.getChildren().add(root);
         }

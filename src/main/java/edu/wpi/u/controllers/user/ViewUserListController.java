@@ -30,6 +30,7 @@ import java.io.IOException;
 public class ViewUserListController {
 
     public JFXButton addUserButton;
+    public AnchorPane usersRoot;
 
     Patient myPatient;
     Guest myGuest;
@@ -377,9 +378,8 @@ public class ViewUserListController {
     }
 
     public void handleAddUserButton(ActionEvent actionEvent) throws IOException {
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/AddUser.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        usersRoot.getChildren().clear();
+        usersRoot.getChildren().add(root);
     }
 }

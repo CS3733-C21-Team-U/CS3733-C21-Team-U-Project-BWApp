@@ -55,6 +55,8 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     HashMap<String, String> longNamestoID;
     Set<String> existingAssignee;
     ArrayList<String> oldAssignees;
+    AutoCompletionBinding<String> autoFillAssignees;
+    AutoCompletionBinding<String> autoFillStart;
 
 
     public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
@@ -74,10 +76,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editAssigneesField.getValidators().add(assigneeValidator);//Assignee and location validator setup here
         editLocationsField.getValidators().add(locationValidator);
         existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
-        AutoCompletionBinding<String> autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+        autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
         //longNamestoID = App.mapService.getLongNames(parent.request.getGenericRequest().);
         longNamestoID  = App.mapService.getLongNames();
-        AutoCompletionBinding<String> autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+        autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
         titleLabel.setText("Edit " + parent.request.getType() + " Request");
 
 
@@ -88,7 +90,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         editDateNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalDate());
         editTimeNeededField.setValue( parent.request.getGenericRequest().getDateNeeded().toLocalDateTime().toLocalTime());
         makeListView( parent.request.getGenericRequest().getAssignees(), editAssigneesListView);
-        //load in name as opposed to Node Ids
         ArrayList<String> locationNames = new ArrayList<>();
         for(String s: parent.request.getGenericRequest().getLocations()){
             locationNames.add(App.mapService.getNodeFromID(s).getLongName());
@@ -99,7 +100,17 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
         editAssigneesListView.setOnMouseClicked(event -> editAssigneesField.setText(editAssigneesListView.getItems().get(editAssigneesListView.getSelectionModel().getSelectedIndex())));
         editLocationsListView.setOnMouseClicked(event -> editLocationsField.setText(editLocationsListView.getItems().get(editLocationsListView.getSelectionModel().getSelectedIndex())));
-        oldAssignees = new ArrayList<>(editAssigneesListView.getItems());
+
+        System.out.println("In requestEdit init of" + parent.request.getGenericRequest().getTitle());
+        //listener for filling edit fields
+        parent.editRequestFillFields.addListener((o, q, p) -> {
+            existingAssignee = App.userService.getEmployeeIDByType(parent.request.getRelevantRole()).keySet();
+            autoFillAssignees = TextFields.bindAutoCompletion(editAssigneesField , existingAssignee);
+            longNamestoID  = App.mapService.getLongNames();
+            autoFillStart = TextFields.bindAutoCompletion(editLocationsField , longNamestoID.keySet());
+            oldAssignees = new ArrayList<>(parent.request.getGenericRequest().getAssignees());
+
+        });
     }
 
     /**
