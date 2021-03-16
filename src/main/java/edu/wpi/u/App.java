@@ -91,8 +91,6 @@ public class App extends Application {
   public static String pathfindingAlgorithm = "ASTAR";//this will be set in the setting to be ASTAR BFS or DFS
 
 
-  public static SimpleStringProperty themeString = new SimpleStringProperty("PURPLE");
-
   public static Integer lastClickedRequestNumber;
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
@@ -124,26 +122,26 @@ public class App extends Application {
 
   @Override
   public void init()  {
-    themeString.addListener((observable, oldVal, newVal)->{
-      App.primaryStage.getScene().getStylesheets().remove(1);
-      switch (newVal){
-        case "PURPLE":
-          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-          break;
-        case "DARK":
-          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
-          break;
-        case "BLUE":
-          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
-          break;
-        case "YELLOW":
-          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
-          break;
-        default:
-          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-          break;
-      }
-    });
+//    themeString.addListener((observable, oldVal, newVal)->{
+//      App.primaryStage.getScene().getStylesheets().remove(1);
+//      switch (newVal){
+//        case "PURPLE":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+//          break;
+//        case "DARK":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+//          break;
+//        case "BLUE":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+//          break;
+//        case "YELLOW":
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
+//          break;
+//        default:
+//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+//          break;
+//      }
+//    });
 
 //    fxmlLoader.setClassLoader(classLoader);
 //    try {
@@ -189,7 +187,7 @@ public class App extends Application {
 
 //    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
-    App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+    loadCorrectThmeme();
     App.primaryStage.setFullScreen(true);
     App.primaryStage.setFullScreenExitHint("");
     App.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -203,6 +201,25 @@ public class App extends Application {
 
 
     //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
+  }
+
+  private void loadCorrectThmeme() {
+    switch (App.themeString){
+      case "PURPLE":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+        break;
+      case "DARK":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
+        break;
+      case "YELLOW":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
+        break;
+      case "BLUE":
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
+        break;
+      default:
+        App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
+    }
   }
 
   public static Stage getPrimaryStage() {

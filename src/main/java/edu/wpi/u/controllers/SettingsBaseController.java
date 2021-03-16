@@ -1,13 +1,11 @@
 package edu.wpi.u.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.exceptions.FilePathNotFoundException;
 import edu.wpi.u.users.Role;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -59,6 +57,10 @@ public class SettingsBaseController {
     @FXML public Label passwordsDontMatchLabel, wrongPasswordLable,succsessfulLabel,contactInfoLabel,errorUpdateContactLabel;
     @FXML public JFXTextField oldPasswordFeild,newPasswordFeild1,newPasswordFeild2;
     @FXML public ToggleGroup themeGroup;
+    public JFXRadioButton purrpleRadio;
+    public JFXRadioButton darkRadio;
+    public JFXRadioButton yellowRadio;
+    public JFXRadioButton blueRadio;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
@@ -67,16 +69,30 @@ public class SettingsBaseController {
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
 
-        themeGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+        Platform.runLater(()->{
+            switch (App.themeString){
+                case "PURPLE":
+                    purrpleRadio.setSelected(true);
+                    break;
+                case "DARK":
+                    darkRadio.setSelected(true);
+                    break;
+                case "YELLOW":
+                    yellowRadio.setSelected(true);
+                    break;
+                case "BLUE":
+                    blueRadio.setSelected(true);
+                    break;
+            }
+        });
 
-                if (themeGroup.getSelectedToggle() != null) {
+        themeGroup.selectedToggleProperty().addListener((o, oldVal, newVal) -> {
+            JFXRadioButton target = ((JFXRadioButton)themeGroup.getSelectedToggle());
 
-                    System.out.println(themeGroup.getSelectedToggle().getUserData().toString());
-                    // Do something here with the userData of newly selected radioButton
-
-                }
-
+            if(target != null){
+                System.out.println(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
+                App.userService.changeTheme(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
+                //TODO: Prompt restart - KOHMEI
             }
         });
 

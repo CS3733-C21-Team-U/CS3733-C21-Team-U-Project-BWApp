@@ -31,6 +31,8 @@ public class FirstPreloader extends Preloader {
         fxmlLoader3.load();
         fxmlLoader3.getController();
         App.guestBase = fxmlLoader3.getRoot();
+
+        readTheme();
     }
 
     public void readTheme() {
