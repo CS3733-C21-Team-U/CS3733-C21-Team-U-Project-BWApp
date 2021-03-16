@@ -42,8 +42,8 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Negative tests over x days" textAlignment="CENTER" wrapText="true" />
-                                    <BarChart>
+                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Users Who Responded Negative over The Last Month" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart fx:id="NegativeTotalTestBarChart">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -51,8 +51,8 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Positive Tests over X days" textAlignment="CENTER" wrapText="true" />
-                                    <BarChart layoutX="10.0" layoutY="54.0">
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Users Who Responded Positive over The Last Month" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart fx:id="PositiveTestBarChart" layoutX="10.0" layoutY="54.0">
                                        <xAxis>
                                           <CategoryAxis side="BOTTOM" />
                                        </xAxis>
@@ -117,26 +117,38 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Week" />
+                                                <Label fx:id="resultsWeekTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Month" />
+                                                <Label fx:id="resultsMonthTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
+                                                <Label fx:id="positiveMonthTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
+                                                <Label fx:id="positiveWeekRatesTextBox" styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
+                                                <Label fx:id="positiveWeekTextBox" styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
+                                                <Label fx:id="positiveMonthRatesTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                        </children>

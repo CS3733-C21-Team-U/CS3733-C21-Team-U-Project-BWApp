@@ -1,43 +1,26 @@
 package edu.wpi.u;
 
 import com.jfoenix.controls.JFXTabPane;
-import edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController;
-import edu.wpi.u.controllers.mobile.MobilePathFindingBaseController;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.models.*;
-
 import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
-
 import edu.wpi.u.web.EmailService;
 import edu.wpi.u.web.TextingService;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.WritableFloatValue;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCombination;
-
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.prettytime.PrettyTime;
-
-import javax.swing.text.html.ImageView;
-import java.awt.*;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 public class App extends Application {
@@ -67,6 +50,7 @@ public class App extends Application {
   public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
+  public static CovidService covidService = new CovidService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();
   public static PathHandling PathHandling = new PathHandling();
   public static UndoRedoService undoRedoService = new UndoRedoService();
