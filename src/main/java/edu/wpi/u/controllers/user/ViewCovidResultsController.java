@@ -48,7 +48,7 @@ public class ViewCovidResultsController {
 
     public void initialize() throws IOException {
 
-        funnelSubtitle1.setText(App.userService.getGuests()+ " Guests and " + App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
+        funnelSubtitle1.setText(App.userService.getGuests().size()+ " Guests and " + App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
 
         ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
         App.requestService.getRequests().forEach(e ->{
@@ -57,7 +57,7 @@ public class ViewCovidResultsController {
             }
         });
 
-        numInSystem += App.userService.getUsers().size();
+        numInSystem = App.userService.getUsers().size();
         for (SpecificRequest request: requests){
             if (request.getGenericRequest().isResolved()){
                 takenSurvey++;
@@ -73,8 +73,8 @@ public class ViewCovidResultsController {
         funnelValue3.setText(String.valueOf(completedSurvey));
 
         if(numInSystem != 0 && takenSurvey != 0 && completedSurvey != 0){
-            funnelText1.setText(String.valueOf((int)Math.floor(((double)takenSurvey/(double)numInSystem)*100.0))+"% have arrvied at a kisosk");
-            funnelText2.setText(String.valueOf((int)Math.floor(((double)completedSurvey/(double)takenSurvey)*100.0))+"% have seen a nurse");
+            funnelText1.setText((int) Math.floor(((double) takenSurvey / (double) numInSystem) * 100.0) +"% have arrvied at a kisosk");
+            funnelText2.setText((int) Math.floor(((double) completedSurvey / (double) takenSurvey) * 100.0) +"% have seen a nurse");
         }
 
 
