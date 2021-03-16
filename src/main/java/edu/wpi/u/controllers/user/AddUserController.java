@@ -161,6 +161,7 @@ public class AddUserController {
                 // todo : are only employees ever going to be added this way ?
                 System.out.println("Unique username");
                 App.userService.addEmployee(nameTextField.getText(), usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(), Role.valueOf(userTypeComboBox.getValue().toString()), phoneNumTextField.getText(), false);
+                App.userService.setPreferredContactMethod(usernameTextField.getText(), "Nothing");
                 AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
                 Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewUserList.fxml"));
                 anchor.getChildren().clear();

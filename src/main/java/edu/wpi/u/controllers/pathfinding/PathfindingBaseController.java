@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +45,7 @@ public class PathfindingBaseController {
     @FXML public JFXToggleNode floor5;
 
 
+
     AnchorPane rightServiceRequestPane;
     AnchorPane leftMenuPane;
     AnchorPane pane = new AnchorPane();
@@ -72,6 +74,15 @@ public class PathfindingBaseController {
         pane.getChildren().add(pathBorder);
         pane.getChildren().add(pathFill);
         pane.getChildren().add(pathArrow);
+
+
+        //setup tooltips
+        floor1.setTooltip(new Tooltip("Floor 1"));
+        floor2.setTooltip(new Tooltip("Floor 2"));
+        floor3.setTooltip(new Tooltip("Floor 3"));
+        floor4.setTooltip(new Tooltip("Floor 4"));
+        floor5.setTooltip(new Tooltip("Floor 5"));
+        floorG.setTooltip(new Tooltip("Floor G"));
 
         map = new GesturePane(pane);
         map.setMinScale(0.3);
@@ -146,6 +157,7 @@ public class PathfindingBaseController {
             }
             node.setPreserveRatio(true);
             pane.getChildren().add(node);
+
         });
         App.mapInteractionModel.pathFlag.addListener((observable, oldValue, newValue)  ->{
             if(!App.mapInteractionModel.path.isEmpty()) {
@@ -190,11 +202,51 @@ public class PathfindingBaseController {
         });
         App.mapInteractionModel.reloadPathfinding.addListener(e -> {
             clearMapItems();
-            generateNodes(App.mapInteractionModel.floor);
+            generateNodes(App.mapInteractionModel.floorPathfinding);
+        });
+        App.mapInteractionModel.pathfindingFloorController.addListener((observable, oldVal, newVal) -> {
+            switch (newVal) {
+                case "G" :
+                    handleFloorGButton();
+                    floorG.setSelected(true);
+                    break;
+                case "1" :
+                    handleFloor1Button();
+                    floor1.setSelected(true);
+                    break;
+                case "2" :
+                    handleFloor2Button();
+                    floor2.setSelected(true);
+                    break;
+                case "3" :
+                    handleFloor3Button();
+                    floor3.setSelected(true);
+                    break;
+                case "4" :
+                    handleFloor4Button();
+                    floor4.setSelected(true);
+                    break;
+                case "5" :
+                    handleFloor5Button();
+                    floor5.setSelected(true);
+                    break;
+            }
         });
 
+        App.mapInteractionModel.mapTargetNode.addListener( e -> {
+            if(App.mapInteractionModel.getPreviousNodeID().equals("") ) {
+                clearMapItems();
+                generateNodes(App.mapInteractionModel.floorPathfinding);
+            }
+        });
 
-    } // End of initialize
+        App.mapInteractionModel.mapTargetNode2.addListener( e -> {
+            if(App.mapInteractionModel.getNodeID().equals("") ) {
+                clearMapItems();
+                generateNodes(App.mapInteractionModel.floorPathfinding);
+            }
+        });
+                } // End of initialize
 
     /**
      * Sets the position, radius, id, fill, etc., of the node, and sets its action when clicked
@@ -424,6 +476,7 @@ public class PathfindingBaseController {
             node.setFitWidth(2987);
             generateEdges("G");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floorG.setSelected(true);
         }
@@ -440,6 +493,7 @@ public class PathfindingBaseController {
             loadNewMapAndGenerateHelper("1", "/edu/wpi/u/views/Images/FaulknerFloor1Light.png");
             generateEdges("1");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floor1.setSelected(true);
         }
@@ -456,6 +510,7 @@ public class PathfindingBaseController {
             loadNewMapAndGenerateHelper("2", "/edu/wpi/u/views/Images/FaulknerFloor2Light.png");
             generateEdges("2");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floor2.setSelected(true);
         }
@@ -472,6 +527,7 @@ public class PathfindingBaseController {
             loadNewMapAndGenerateHelper("3", "/edu/wpi/u/views/Images/FaulknerFloor3Light.png");
             generateEdges("3");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floor3.setSelected(true);
         }
@@ -488,6 +544,7 @@ public class PathfindingBaseController {
             loadNewMapAndGenerateHelper("4", "/edu/wpi/u/views/Images/FaulknerFloor4Light.png");
             generateEdges("4");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floor4.setSelected(true);
         }
@@ -504,8 +561,37 @@ public class PathfindingBaseController {
             loadNewMapAndGenerateHelper("5", "/edu/wpi/u/views/Images/FaulknerFloor5Light.png");
             generateEdges("5");
             setMapItemsOrder();
+            setPaneLocation();
         }else{
             floor5.setSelected(true);
         }
+    }
+
+    public double pathAverageLocationX() {
+        double xAvg = 0, size = 0;
+        for(Node n : App.mapInteractionModel.path) {
+            if(!n.getFloor().equals(App.mapInteractionModel.floorPathfinding)) continue;
+            xAvg += n.getCords()[0];
+            size++;
+        }
+        if(size == 0) return -1;
+        return xAvg/size;
+    }
+
+    public double pathAverageLocationY() {
+        double yAvg = 0, size = 0;
+        for(Node n : App.mapInteractionModel.path) {
+            if(!n.getFloor().equals(App.mapInteractionModel.floorPathfinding)) continue;
+            yAvg += n.getCords()[1];
+            size++;
+        }
+        if(size == 0) return -1;
+        return yAvg/size;
+    }
+
+    public void setPaneLocation() {
+        Point2D center = new Point2D(pathAverageLocationX(), pathAverageLocationY());
+        if(center.getX() < 0 || center.getY() < 0) {}
+        else {map.centreOn(center);}
     }
 }
