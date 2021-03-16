@@ -97,7 +97,7 @@ public class KioskLoginController {
             App.userService.setGuest(userNameTextField.getText());
             App.userService.getActiveUser().setType(Role.GUEST);
             App.userService.getActiveUser().setUserName(userNameTextField.getText());
-            App.isLoggedIn.set(true);
+            App.isLoggedIn.set(!App.isLoggedIn.get());
             Parent root = null;
             try {
                 root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));

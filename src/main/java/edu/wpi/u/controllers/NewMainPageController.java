@@ -245,7 +245,7 @@ public class NewMainPageController {
         button1.setOnAction(event -> dialog.close());
         button2.setOnAction(event -> {
             dialog.close();
-            App.isLoggedIn.set(false);
+            App.isLoggedIn.set(!App.isLoggedIn.get());
             App.getInstance().exitApp();
         });
         button1.getStyleClass().add("button-text");
@@ -259,7 +259,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout() throws IOException {
-        App.isLoggedIn.set(false);
+        App.isLoggedIn.set(!App.isLoggedIn.get());
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
@@ -274,7 +274,7 @@ public class NewMainPageController {
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-                App.isLoggedIn.set(false);
+                App.isLoggedIn.set(!App.isLoggedIn.get());
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
                 fxmlLoader.load();
                 fxmlLoader.getController();

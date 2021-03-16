@@ -48,6 +48,8 @@ public class ViewCovidResultsController {
 
     public void initialize() throws IOException {
 
+        funnelSubtitle1.setText(App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
+
         ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
         App.requestService.getRequests().forEach(e ->{
             if (e.getType().equals("CovidSurvey")){
@@ -117,13 +119,13 @@ public class ViewCovidResultsController {
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnCovidTemp = new JFXTreeTableColumn<>("Body Temperature");
         treeTableColumnCovidTemp.setCellValueFactory((TreeTableColumn.CellDataFeatures<SpecificRequest,String> param) ->{
             if (treeTableColumnCovidTemp.validateValue(param)){
-                return new SimpleStringProperty("Temp goes here");
+                return new SimpleStringProperty(param.getValue().getValue().getSpecificData().get(1));
             }
             else {
                 return treeTableColumnCovidTemp.getComputedValue(param);
             }
         });
-        treeTableColumnCovidTemp.setPrefWidth(200);
+        treeTableColumnCovidTemp.setPrefWidth(150);
         treeTableColumnCovidTemp.setEditable(false);
 
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnEnteredTheBuilding = new JFXTreeTableColumn<>("Entered the Building");
@@ -145,7 +147,7 @@ public class ViewCovidResultsController {
         final TreeItem<SpecificRequest> root = new RecursiveTreeItem<>(requests, RecursiveTreeObject::getChildren);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
-        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnEnteredTheBuilding);
+        treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel,treeTableColumnCovidTemp, treeTableColumnEnteredTheBuilding);
 
         resultsWeekTextBox.setText(String.valueOf(App.covidService.getWeeklySurveys()));
         positiveWeekTextBox.setText(String.valueOf(App.covidService.getWeeklyPositiveSurveys()));
