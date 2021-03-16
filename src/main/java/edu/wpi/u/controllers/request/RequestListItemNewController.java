@@ -248,7 +248,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             ArrayList<String> sms = new ArrayList<>();
 
             for (String assignee : assigneesToAdd){
-                System.out.println("Method: " + App.userService.getPreferredContactMethod(assignee));
                 switch (App.userService.getPreferredContactMethod(assignee)) {
                     case "Both":
                         emails.add(App.userService.getEmail(assignee));

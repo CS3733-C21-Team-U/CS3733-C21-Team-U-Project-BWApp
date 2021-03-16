@@ -132,7 +132,6 @@ public class RequestListItemEditController extends AnchorPane implements Initial
         Thread t = new Thread(() ->{
             Platform.runLater(() ->{
                 for (String r : assigneesToAdd){
-                    System.out.println("Username to be checked: " + r);
                     if (!oldAssignees.contains(r)){
                         System.out.println("New username: " + r);
                         switch (App.userService.getPreferredContactMethod(r)) {
