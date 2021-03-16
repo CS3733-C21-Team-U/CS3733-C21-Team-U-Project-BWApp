@@ -542,5 +542,9 @@ public class NewMainPageController {
         content.setActions(actions);
         dialog.show();
     }
+
+    public void handleAPage(ActionEvent actionEvent) {
+        //shows a popup
+    }
 }
 
