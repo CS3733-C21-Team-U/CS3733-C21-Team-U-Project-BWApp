@@ -531,8 +531,8 @@ public class NewMainPageController {
             // log out
              handleLogout();
         }else if (switchTheme.match(keyEvent)){
-            System.out.println("Switch Theme");
-            handleThemeSwitch();
+            System.out.println("Switch Theme Gone");
+//            handleThemeSwitch();
         }
     }
 }

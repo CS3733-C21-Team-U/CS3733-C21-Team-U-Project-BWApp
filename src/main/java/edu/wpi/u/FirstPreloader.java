@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 public class FirstPreloader extends Preloader {
     public void start(Stage stage) throws Exception {
-
+        readTheme();
     }
 
     public void readTheme() {
