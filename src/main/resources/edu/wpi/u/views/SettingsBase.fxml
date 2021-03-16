@@ -226,7 +226,7 @@
                <children>
                   <Label fx:id="adminText" styleClass="headline-2" text="Admin Settings" />
                   <Label fx:id="subtitleText" styleClass="headline-3" text="Read and Save CSV File" />
-                  <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" text="test.csv" />
+                  <JFXTextField fx:id="filePathTextField" labelFloat="true" prefHeight="36.0" prefWidth="127.0" promptText="File Path" />
                   <HBox alignment="BASELINE_LEFT" prefHeight="52.0" prefWidth="1675.0">
                      <children>
                         <JFXButton fx:id="loadCSVButton" onAction="#handleLoadCSV" prefHeight="38.0" prefWidth="414.0" styleClass="button-outlined" text="Choose CSV">

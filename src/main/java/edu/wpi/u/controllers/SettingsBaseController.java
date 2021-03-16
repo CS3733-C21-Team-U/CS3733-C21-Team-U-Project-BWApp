@@ -10,18 +10,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import edu.wpi.u.App;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
+import lombok.SneakyThrows;
 
 import static edu.wpi.u.users.Role.*;
 
@@ -63,6 +68,7 @@ public class SettingsBaseController {
     public JFXRadioButton blueRadio;
     public JFXToggleButton emailNotifications;
     public JFXToggleButton textNotifications;
+    private boolean enableChangeThemePopup = false;
 
     public void initialize() throws IOException, FilePathNotFoundException {
         passwordsDontMatchLabel.setVisible(false);
@@ -86,15 +92,42 @@ public class SettingsBaseController {
                     blueRadio.setSelected(true);
                     break;
             }
+            enableChangeThemePopup = true;
         });
 
         themeGroup.selectedToggleProperty().addListener((o, oldVal, newVal) -> {
             JFXRadioButton target = ((JFXRadioButton)themeGroup.getSelectedToggle());
 
-            if(target != null){
+            if(target != null && enableChangeThemePopup){
+                JFXDialogLayout content = new JFXDialogLayout();
+                Label header = new Label("Restart Now?");
+                header.getStyleClass().add("headline-2");
+                Label body = new Label("Applying the new theme requires a restart. If you decide to restart later, the selected theme will be applied when you launch the app next.");
+                content.setHeading(header);
+                content.setBody(body);
+                content.getStyleClass().add("dialogue");
+                JFXDialog dialog = new JFXDialog(App.throwDialogHerePane, content, JFXDialog.DialogTransition.CENTER);
+                JFXButton button1 = new JFXButton("RESTART LATER");
+                JFXButton button2 = new JFXButton("CLOSE APP");
+                button1.setOnAction(event -> dialog.close());
+                button2.setOnAction(new EventHandler<ActionEvent>() {
+                    @SneakyThrows
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog.close();
+                        App.getInstance().exitApp();
+                    }
+                });
+                button1.getStyleClass().add("button-text");
+                button2.getStyleClass().add("button-contained");
+                ArrayList<Node> actions = new ArrayList<>();
+                actions.add(button1);
+                actions.add(button2);
+                content.setActions(actions);
+                dialog.show();
                 System.out.println(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
                 App.userService.changeTheme(((JFXRadioButton)(themeGroup.getSelectedToggle())).getText());
-                //TODO: Prompt restart - KOHMEI
+
             }
         });
 
@@ -116,6 +149,8 @@ public class SettingsBaseController {
                     textNotifications.setSelected(false);
                     break;
             }
+            phoneNumTextField.setText(App.userService.getActiveUser().getPhoneNumber());
+            emailAddressTextField.setText(App.userService.getActiveUser().getEmail());
         });
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);

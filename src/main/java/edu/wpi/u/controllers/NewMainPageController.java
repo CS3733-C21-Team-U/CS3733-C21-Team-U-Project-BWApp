@@ -61,7 +61,6 @@ public class NewMainPageController {
     public Tab AdminHelpMainPageTab;
     public Tab adminTab1;
     public Tab adminTab2;
-    public Tab adminTab3;
     public Tab adminTab4;
 
     public Tab currentTab;
@@ -91,7 +90,7 @@ public class NewMainPageController {
     public AnchorPane adminHelpDis;
     public AnchorPane mapBuildDis;
     public AnchorPane userDis;
-    public AnchorPane guestDis;
+//    public AnchorPane guestDis;
     public AnchorPane covidDis;
 
     public KeyCombination pathFinding = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
@@ -198,8 +197,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(false);
                 adminTab2.setStyle("-fx-opacity: 1");
                 adminTab2.setDisable(false);
-                adminTab3.setStyle("-fx-opacity: 1");
-                adminTab3.setDisable(false);
                 adminTab4.setStyle("-fx-opacity: 1");
                 adminTab4.setDisable(false);
                 HelpMainPageTab.setDisable(true);
@@ -212,8 +209,6 @@ public class NewMainPageController {
                 adminTab1.setDisable(true);
                 adminTab2.setStyle("-fx-opacity: 0");
                 adminTab2.setDisable(true);
-                adminTab3.setStyle("-fx-opacity: 0");
-                adminTab3.setDisable(true);
                 adminTab4.setStyle("-fx-opacity: 0");
                 adminTab4.setDisable(true);
                 HelpMainPageTab.setDisable(false);
@@ -348,7 +343,7 @@ public class NewMainPageController {
         else if (mainTabPane.getSelectionModel().getSelectedItem() == AdminHelpMainPageTab){handleEnableAdminHelp();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab1){handleEnableMapBuild();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab2){handleEnableUser();}
-        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
+//        else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab3){handleEnableGuest();}
         else if (mainTabPane.getSelectionModel().getSelectedItem() == adminTab4){handleEnableCovid();}
     }
 
@@ -362,7 +357,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -375,7 +370,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -388,7 +383,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -401,7 +396,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -414,7 +409,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -427,7 +422,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(false);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -440,7 +435,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(false);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -453,7 +448,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(false);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(true);
     }
 
@@ -466,7 +461,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(false);
+//        guestDis.setDisable(false);
         covidDis.setDisable(true);
     }
 
@@ -479,7 +474,7 @@ public class NewMainPageController {
         adminHelpDis.setDisable(true);
         mapBuildDis.setDisable(true);
         userDis.setDisable(true);
-        guestDis.setDisable(true);
+//        guestDis.setDisable(true);
         covidDis.setDisable(false);
     }
 
@@ -519,10 +514,7 @@ public class NewMainPageController {
         }else if (addUser.match(keyEvent)){
             System.out.println("add user page");
              mainTabPane.getSelectionModel().select(adminTab2);
-             //scene switch to add user
-        }else if (guestList.match(keyEvent)){
-            System.out.println("guest list page");
-             mainTabPane.getSelectionModel().select(adminTab3);
+             //scene switch to add useu
         }else if (covidData.match(keyEvent)){
             System.out.println("covid data page");
              mainTabPane.getSelectionModel().select(adminTab4);
