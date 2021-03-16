@@ -37,6 +37,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label assigneesLabel;
     public Label completeByLabel;
     public AnchorPane noLocaitonGraphic;
+    public HBox bottomBar;
 
 
     //Map stuff
@@ -94,6 +95,9 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         });
 
         typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
+        if(parent.request.getGenericRequest().isResolved()){
+            resolveUI();
+        }
 
 
     }
@@ -187,24 +191,12 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
         commentField.setText("");
+        parent.isResolved.set(true);
+        resolveUI();
     }
 
     @FXML
     public void handleRequestDetailCancelButton() throws Exception {
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
-    }
-
-    @FXML
-    public void handleResolveRequestButton() throws IOException {
-        //Resolve Request()
-
-        SpecificRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        Comment resolveComment = new Comment("Title", "RESOLVED RESOLVED RESOLVED", "Bichael", CommentType.RESOLVE, new Timestamp(System.currentTimeMillis()));
-        App.requestService.resolveRequest(r, resolveComment);
-
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
         anchor.getChildren().clear();
@@ -387,5 +379,19 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         generateSpecificFields();
         generateComments();
         loadLocationsOnMap(0);
+    }
+
+    /**
+     * Any visual changes go here
+     */
+    private void resolveUI(){
+//        editRequestButton
+//                commentField
+//        commentButton
+        //resolveButton
+
+        for(int i= 0; i<6; i++){
+           bottomBar.getChildren().get(i).setDisable(true);
+        }
     }
 }

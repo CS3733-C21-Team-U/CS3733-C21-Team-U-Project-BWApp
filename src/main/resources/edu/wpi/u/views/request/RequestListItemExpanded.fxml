@@ -132,9 +132,9 @@
                </children>
             </HBox>
             <Separator prefHeight="0.0" prefWidth="1313.0" />
-            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="54.0" prefWidth="1302.0">
+            <HBox fx:id="bottomBar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="54.0" prefWidth="1302.0">
                <children>
-                  <JFXButton onAction="#handleEditRequest" styleClass="button-contained" text="EDIT REQUEST" />
+                  <JFXButton fx:id="editRequestButton" onAction="#handleEditRequest" styleClass="button-contained" text="EDIT REQUEST" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
@@ -145,8 +145,8 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXTextField>
-                  <JFXButton onAction="#addComment" styleClass="button-contained" text="Comment" />
-                  <JFXButton onAction="#resolve" styleClass="button-outlined" text="Resolve">
+                  <JFXButton fx:id="commentButton" onAction="#addComment" styleClass="button-contained" text="Comment" />
+                  <JFXButton fx:id="resolveButton" onAction="#resolve" styleClass="button-outlined" text="Resolve">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
