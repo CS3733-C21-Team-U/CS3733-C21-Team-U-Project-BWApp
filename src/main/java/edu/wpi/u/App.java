@@ -101,6 +101,9 @@ public class App extends Application {
 
   public static String test = "hello there";
   public static Parent base;
+  public static Parent loginBase;
+  public static Parent guestBase;
+  public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
@@ -142,6 +145,27 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
+    if (useCache.get()){
+      FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
+      fxmlLoader.setClassLoader(classLoader);
+      fxmlLoader.load();
+      fxmlLoader.getController();
+      base = fxmlLoader.getRoot();
+
+      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+      fxmlLoader2.setClassLoader(classLoader);
+      fxmlLoader2.load();
+      fxmlLoader2.getController();
+      loginBase = fxmlLoader2.getRoot();
+
+      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+      fxmlLoader3.setClassLoader(classLoader);
+      fxmlLoader3.load();
+      fxmlLoader3.getController();
+      guestBase = fxmlLoader3.getRoot();
+    }
+
+    System.out.println("App start");
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/UserLoginScreen.fxml"));

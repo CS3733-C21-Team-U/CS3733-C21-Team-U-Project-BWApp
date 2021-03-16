@@ -6,6 +6,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.models.MapService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,8 +80,13 @@ public class NewMainPageController {
 
 
     public void initialize() throws IOException {
-        App.throwDialogHerePane = newMainPageStackPane;
+        System.out.println("Init for New Main Page");
+//        Platform.runLater(()->{
+//            System.out.println("Run Later and select first index");
+//            App.tabPaneRoot.getSelectionModel().clearAndSelect(0);
+//        });
 
+        App.throwDialogHerePane = newMainPageStackPane;
         //setup tooltips
         themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
         logoutBtn.setTooltip(new Tooltip("Log Out"));
@@ -193,7 +199,6 @@ public class NewMainPageController {
     }
 
     public void handleExit() throws IOException {
-        App.isLoggedIn.set(false);
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Exit Application?");
         header.getStyleClass().add("headline-2");
@@ -205,6 +210,7 @@ public class NewMainPageController {
         button1.setOnAction(event -> dialog.close());
         button2.setOnAction(event -> {
             dialog.close();
+            App.isLoggedIn.set(false);
             App.getInstance().exitApp();
         });
         button1.getStyleClass().add("button-text");
@@ -218,7 +224,7 @@ public class NewMainPageController {
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {
-        App.isLoggedIn.set(false);
+        System.out.println("LOGGING OUT");
         JFXDialogLayout content = new JFXDialogLayout();
         Label header = new Label("Log out?");
         header.getStyleClass().add("headline-2");
@@ -227,27 +233,16 @@ public class NewMainPageController {
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("CANCEL");
         JFXButton button2 = new JFXButton("LOGOUT");
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dialog.close();
-            }
-        });
+        button1.setOnAction(event -> dialog.close());
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @SneakyThrows
             @Override
             public void handle(ActionEvent event) {
                 dialog.close();
-
-                /*
-                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyApp.fxml"));
-                 Object obj = fxmlLoader.load();
-                 Object myController = fxmlLoader.getController();
-                 */
-                //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                App.isLoggedIn.set(false);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-                Object obj = fxmlLoader.load();
-                Object myController = fxmlLoader.getController();
+                fxmlLoader.load();
+                fxmlLoader.getController();
                 App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
             }
         });

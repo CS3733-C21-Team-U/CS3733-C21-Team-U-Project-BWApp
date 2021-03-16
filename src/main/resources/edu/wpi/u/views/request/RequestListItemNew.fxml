@@ -226,18 +226,23 @@
                               </GridPane>
                               <VBox fx:id="extraFieldsVBox" alignment="CENTER" prefHeight="342.0" prefWidth="430.0">
                                  <children>
-                                    <ImageView fitHeight="226.0" fitWidth="277.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Images/selectTypeImage.png" />
-                                       </image>
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                    <Label style="-fx-text-fill: -primary;" styleClass="headline-2" text="Select a request type to complete your request!" textAlignment="CENTER" wrapText="true">
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin></Label>
+                                    <VBox fx:id="selectFieldGraphic" prefHeight="347.0" prefWidth="430.0">
+                                       <children>
+                                          <ImageView fitHeight="226.0" fitWidth="277.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Images/selectTypeImage.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label fx:id="selectFieldLabel" alignment="CENTER" style="-fx-text-fill: -primary;" styleClass="headline-2" text="Select a request type to complete your request!" textAlignment="CENTER" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>
@@ -249,7 +254,7 @@
             <Separator prefWidth="200.0" />
             <HBox fx:id="pushDown2" alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="1302.0" VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
+                  <JFXButton fx:id="saveButton" disable="true" onAction="#handleSaveButton" prefWidth="100.0" styleClass="button-contained" text="SAVE" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <JFXButton onAction="#handleCancelButton" styleClass="button-text" text="Cancel">
                      <HBox.margin>
