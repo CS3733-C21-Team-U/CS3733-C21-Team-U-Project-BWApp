@@ -10,6 +10,7 @@ import edu.wpi.u.users.Employee;
 import edu.wpi.u.users.Guest;
 
 import edu.wpi.u.web.EmailService;
+import edu.wpi.u.web.TextingService;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -63,6 +64,7 @@ public class App extends Application {
   public static UserService userService = new UserService();
   public static MapService mapService = new MapService();
   public static EmailService emailService = new EmailService();
+  public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
   public static AdminToolStorage AdminStorage = new AdminToolStorage();

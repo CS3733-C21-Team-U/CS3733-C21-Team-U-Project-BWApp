@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class RequestListItemEditController extends AnchorPane implements Initializable {
 
@@ -56,6 +58,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
     private JFXTextField[] specificTextFields;
     HashMap<String, String> longNamestoID;
     Set<String> existingAssignee;
+    ArrayList<String> oldAssignees;
 
 
     public RequestListItemEditController(RequestListItemContainerController parent) throws IOException {
@@ -68,6 +71,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        oldAssignees = new ArrayList<>(editAssigneesListView.getItems());
         RequiredFieldValidator assigneeValidator = new RequiredFieldValidator();
         assigneeValidator.setMessage("Valid Assignee Required");
         RequiredFieldValidator locationValidator = new RequiredFieldValidator();
@@ -120,15 +124,28 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             locationsToAdd.add(longNamestoID.get(s));
         }
         ArrayList<String> assigneesToAdd = new ArrayList<>(editAssigneesListView.getItems());
-        for (String r : assigneesToAdd){
-            App.emailService.sendMail(r,parent.request); // todo : test, maybe change -> repeats emails
-        }
         parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
         App.requestService.updateRequest(parent.request);
 
-
+        for (String r : assigneesToAdd){
+            if (!oldAssignees.contains(r)){
+                System.out.println("Email: " + App.userService.getEmail(r));
+                switch (App.userService.getPreferredContactMethod(r)) {
+                    case "Both":
+                        App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                        App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                        break;
+                    case "Email":
+                        App.emailService.sendMail(App.userService.getEmail(r), parent.request);
+                        break;
+                    case "SMS":
+                        App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
+                        break;
+                }
+            }
+        }
         this.parent.needUpdate.set(!this.parent.needUpdate.get());
         this.parent.switchFromEditToExpanded();
 
@@ -143,19 +160,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
             JFXDialog dialog = new JFXDialog(App.throwDialogHerePane, content, JFXDialog.DialogTransition.CENTER);
             JFXButton button1 = new JFXButton("CANCEL");
             JFXButton button2 = new JFXButton("EXIT");
-            button1.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                }
-            });
-            button2.setOnAction(new EventHandler<ActionEvent>() {
-                @SneakyThrows
-                @Override
-                public void handle(ActionEvent event) {
-                    dialog.close();
-                    parent.switchToCollapsed();
-                }
+            button1.setOnAction(event -> dialog.close());
+            button2.setOnAction(event -> {
+                dialog.close();
+                parent.switchToCollapsed();
             });
             button1.getStyleClass().add("button-text");
             button2.getStyleClass().add("button-contained");
@@ -230,7 +238,7 @@ public class RequestListItemEditController extends AnchorPane implements Initial
                 editLocationsListView.getItems().add(editLocationsField.getText());
                 editLocationsField.setText("");
             }catch(Exception e){
-
+                e.printStackTrace();
             }
         }
     }

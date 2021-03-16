@@ -21,6 +21,13 @@ public class EmailService {
 //        s.setRequest(new Request("the id", new Timestamp(System.currentTimeMillis()), null, null, c));
 //        sendMail("nev.ingram30@gmail.com",s);
     }
+
+    /**
+     *
+     * Sends an email with a given receiver and a message body
+     * @param to the email receiver
+     * @param body the message body
+     */
     public void sendMail(String to, String body){
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
@@ -35,6 +42,11 @@ public class EmailService {
                 .sendMail(email);
     }
 
+    /**
+     * Sends an email to a given address with a formatted specific requests
+     * @param to the to address
+     * @param specificRequest the request
+     */
     public void sendMail(String to, SpecificRequest specificRequest){
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
