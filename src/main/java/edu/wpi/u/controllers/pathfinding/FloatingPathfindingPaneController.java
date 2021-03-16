@@ -74,20 +74,22 @@ public class FloatingPathfindingPaneController {
     public void handleTestAddTextField(String floor) {
 
         btnOne.setDisable(true);
+        btnOne.setPrefHeight(0);
         btnTwo.setDisable(true);
+        btnTwo.setPrefHeight(0);
         btnThree.setDisable(true);
+        btnThree.setPrefHeight(0);
         btnFive.setDisable(true);
+        btnFive.setPrefHeight(0);
         btnFour.setDisable(true);
+        btnFour.setPrefHeight(0);
         btnG.setDisable(true);
+        btnG.setPrefHeight(0);
 
         textDirectionContainer.getChildren().clear();
         LinkedList<Edge> edgePath = getEdgesTest.EdgesFollowed(App.mapInteractionModel.path);
 
-        if(!edgePath.isEmpty()){
-            double AnchorSize = Math.min(edgePath.size() * 80, 830);
-            mainAnchor.setPrefHeight(AnchorSize);
-            pathContent.setPrefHeight(AnchorSize);
-
+        if(!edgePath.isEmpty()) {
 
             Node bNode = null;
             Node eNode = path.get(0);
@@ -130,7 +132,6 @@ public class FloatingPathfindingPaneController {
                     enableButton(sNode.getFloor());
                 }
 
-                 if(!sNode.getFloor().equals(floor)) continue;
 
 
                 if(sNode.getNodeType().equals("ELEV") || eNode.getNodeType().equals("ELEV"))  {
@@ -144,16 +145,20 @@ public class FloatingPathfindingPaneController {
                     moveOutOfText = "Step out of staircase at floor ";
                     iconID = "M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z M18,6h-4.42 v3.33H11v3.33H8.42V16H6v2h4.42v-3.33H13v-3.33h2.58V8H18V6z";
                 }
+                 if(!sNode.getFloor().equals(floor)) continue;
 
                 String sNodeType = sNode.getNodeType();
                 String eNodeType = eNode.getNodeType();
 
                 //function(sNodeType, eNodeType) --> stepBoxContainer
 
-                if(sNodeType.equals("STAI") || eNodeType.equals("ELEV")) {
+                if(eNodeType.equals("STAI") || eNodeType.equals("ELEV")) {
                     if(sNode.getNodeType().equals("STAI") || sNode.getNodeType().equals("ELEV")) { } else {
                     stepHBoxContainer = createDirectionBox(moveIntoText, iconID);
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
+                    HBox endContainer = createDirectionBox(" Switch to next floor", "M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 " +
+                                ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7");
+                    textDirectionContainer.getChildren().add(endContainer);
                 }}
 
                 else if(sNodeType.equals("ELEV")) {
@@ -168,6 +173,9 @@ public class FloatingPathfindingPaneController {
                     else { stepHBoxContainer = createDirectionBox("Go Through Admitting", "M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1" +
                             " .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z");
                     textDirectionContainer.getChildren().add(stepHBoxContainer);
+                        HBox endContainer = createDirectionBox(" Switch to next floor", "M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 " +
+                                ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7");
+                        textDirectionContainer.getChildren().add(endContainer);
                     }}
 
                 else if(eNode.getLongName().equals("Atrium Main Lobby")) {
@@ -175,6 +183,9 @@ public class FloatingPathfindingPaneController {
                     else { stepHBoxContainer = createDirectionBox("Go Through Atrium Main Lobby", "M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1" +
                             " .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z");
                         textDirectionContainer.getChildren().add(stepHBoxContainer);
+                        HBox endContainer = createDirectionBox(" Switch to next floor", "M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 " +
+                                ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7");
+                        textDirectionContainer.getChildren().add(endContainer);
                     }}
 
                 //else if(sNode.getLongName().equals("Admitting") || bNode.getLongName().equals("Admitting")) { }
@@ -221,43 +232,57 @@ public class FloatingPathfindingPaneController {
                 }}
 
                 bNode = sNode;
-            }
-            if(path.get(path.size()-1).getFloor().equals(currentFloor)) { //check if last node is on current floor
-                HBox stepHBoxContainer = createDirectionBox("Arrived at " + path.get(path.size() - 1).getLongName(), "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
-                        + "M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z");
-                textDirectionContainer.getChildren().add(stepHBoxContainer);
+
+                 if(i == edgePath.size() - 1) {
+                     if (path.get(path.size() - 1).getFloor().equals(sNode.getFloor())) { //check if last node is on current floor
+                         HBox endContainer = createDirectionBox("Arrived at " + path.get(path.size() - 1).getLongName(), "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
+                                 + "M 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z");
+                         textDirectionContainer.getChildren().add(endContainer);
+                     }
+                 }
             }
 
             if(textDirectionContainer.getChildren().isEmpty()) {
                 HBox stepHBoxContainer = createDirectionBox("Click on Respective Floor Buttons to Find Path. Begin on floor " + path.get(0).getFloor(), "M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 " +
-                        ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7");
+                        ".6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"); //Guy walking
                 textDirectionContainer.getChildren().add(stepHBoxContainer);
             }
         }
+        double AnchorSize = Math.min(textDirectionContainer.getChildren().size() * 80, 830);
+        mainAnchor.setPrefHeight(AnchorSize);
+        secondAnchor.setPrefHeight(AnchorSize);
+        pathContent.setPrefHeight(AnchorSize);
     }
 
     private void enableButton(String button) {
         switch(button) {
-            case ("G"):
+            case("G"):
                 btnG.setDisable(false);
+                btnG.setPrefHeight(25);
                 return;
-            case ("1"):
+            case("1"):
                 btnOne.setDisable(false);
+                btnOne.setPrefHeight(25);
                 return;
-            case ("2"):
+            case("2"):
                 btnTwo.setDisable(false);
+                btnTwo.setPrefHeight(25);
                 return;
-            case ("3"):
+            case("3"):
                 btnThree.setDisable(false);
+                btnThree.setPrefHeight(25);
                 return;
-            case ("4"):
+            case("4"):
                 btnFour.setDisable(false);
+                btnFour.setPrefHeight(25);
                 return;
-            case ("5"):
+            case("5"):
                 btnFive.setDisable(false);
+                btnFive.setPrefHeight(25);
                 return;
         }
     }
+
     private double findAngle(Node bNode, Node sNode, Node eNode) {
         if(bNode == null) return 0;
 
@@ -543,16 +568,18 @@ public class FloatingPathfindingPaneController {
 
     @FXML
     public void handleClearStartPoint(){
-        App.mapInteractionModel.setStartNode("");
-        startNodeField.clear();
+//        App.mapInteractionModel.setStartNode("");
+//        startNodeField.clear();
     }
 
     @FXML
     public void handleClearEndPoint(){
-        App.mapInteractionModel.setEndNode("");
-        endNodeField.clear();
+//        App.mapInteractionModel.setEndNode("");
+//        endNodeField.clear();
     }
 
+    public void handleInputMethodChange(InputMethodEvent inputMethodEvent) { //TODO: What does this do?
+    }
 }
 
 
