@@ -20,17 +20,13 @@ public class RequestService {
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
   public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
   public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
-  public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);//assignedToYou, unAssigned, all
+  public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);
 
   public SpecificRequest curCovidRequest;
 
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
-//    for (SpecificRequest x : this.activeRequests){
-//
-//      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
-//    }
   }
 
   /**

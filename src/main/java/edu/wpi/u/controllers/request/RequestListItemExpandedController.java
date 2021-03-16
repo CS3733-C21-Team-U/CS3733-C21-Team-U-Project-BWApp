@@ -37,6 +37,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public Label assigneesLabel;
     public Label completeByLabel;
     public AnchorPane noLocaitonGraphic;
+    public HBox bottomBar;
 
 
     //Map stuff
@@ -77,7 +78,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
         miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
         miniMap.setPrefHeight(518);
-        miniMap.centreOn(new Point2D(170, 90));
+      //  miniMap.centreOn(new Point2D(170, 90));
         miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
         mapViewRoot.getChildren().add(miniMap);
         miniMap.toFront();
@@ -94,22 +95,34 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         });
 
         typeIconSVG.setContent(parent.getIcon(parent.request.getType()));
-
-
+        if(parent.request.getGenericRequest().isResolved()){
+            resolveUI();
+        }
     }
 
     public void generateSpecificFields(){
         mainSpecialFieldVbox.getChildren().clear();
+        Region region0 = new Region();
+        region0.setPrefHeight(7);
+        mainSpecialFieldVbox.getChildren().add(region0);
+
+        Label fieldTypeTitle = new Label("Request Type");
+        fieldTypeTitle.getStyleClass().add("subtitle");
+
+        Label fieldTypeLabel = new Label(parent.request.getType());
+        fieldTypeLabel.getStyleClass().add("headline-3");
+        mainSpecialFieldVbox.getChildren().add(fieldTypeTitle);
+        mainSpecialFieldVbox.getChildren().add(fieldTypeLabel);
         for(int i = 0; i < this.parent.request.getSpecificFields().length; i++) {
             Region region = new Region();
-            region.setPrefHeight(14);
+            region.setPrefHeight(7);
             mainSpecialFieldVbox.getChildren().add(region);
 
             Label fieldTitle = new Label(this.parent.request.getSpecificFields()[i]);
             fieldTitle.getStyleClass().add("subtitle");
             mainSpecialFieldVbox.getChildren().add(fieldTitle);
 
-            Label fieldLabel = new Label(this.parent.request.getSpecificData().get(i).toString());
+            Label fieldLabel = new Label(this.parent.request.getSpecificData().get(i));
             fieldLabel.getStyleClass().add("headline-3");
             mainSpecialFieldVbox.getChildren().add(fieldLabel);
         }
@@ -176,6 +189,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
         commentField.setText("");
+        parent.isResolved.set(true);
+        resolveUI();
     }
 
     @FXML
@@ -187,27 +202,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     @FXML
-    public void handleResolveRequestButton() throws IOException {
-        //Resolve Request()
-
-        SpecificRequest r = App.requestService.getRequests().get(App.lastClickedRequestNumber);
-        Comment resolveComment = new Comment("Title", "RESOLVED RESOLVED RESOLVED", "Bichael", CommentType.RESOLVE, new Timestamp(System.currentTimeMillis()));
-        App.requestService.resolveRequest(r, resolveComment);
-
-        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ViewRequestList.fxml"));
-        anchor.getChildren().clear();
-        anchor.getChildren().add(root);
-    }
-
-    @FXML
     public void handleEditRequest() throws IOException {
-//        System.out.println("HERE, attempting delete Request " + App.lastClickedRequestNumber);
-//
-//        AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/ModifyRequest.fxml"));
-//        anchor.getChildren().clear();
-//        anchor.getChildren().add(root);
+        parent.editRequestFillFields.set(!parent.editRequestFillFields.getValue());
         parent.switchToEdit();
     }
 
@@ -216,16 +212,12 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void nextLocation(){
-        System.out.println("Next Location from: "+ currentNode);
         currentNode = (currentNode+1)%parent.request.getGenericRequest().getLocations().size();
-        System.out.println("Next Location : "+ currentNode);
         loadLocationsOnMap(currentNode);
 
     }
     public void previousLocation(){
-        System.out.println("Previous Location from: "+ currentNode);
         currentNode = Math.floorMod(currentNode-1, parent.request.getGenericRequest().getLocations().size());
-        System.out.println("Previous Location: "+ currentNode);
         loadLocationsOnMap(currentNode);
     }
 
@@ -235,6 +227,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mainMapPane.getChildren().clear();
        locationGroup.getChildren().clear();
         mainMapPane.getChildren().add(locationGroup);
+        int offsetx = 0;
+        int offsety = 0;
 
         if(parent.request.getGenericRequest().getLocations().size() == 0){
             noLocaitonGraphic.setVisible(true);
@@ -255,26 +249,38 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         switch (floor){
             case "G":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerCampus.png";
+                offsety = 5;
                 break;
             case "1":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor1Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
+
                 break;
             case "2":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor2Light.png";
-                scale = 0.1753;//this is as correct as it can be, moving it down slightly would make it better
+                scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "3":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor3Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "4":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor4Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "5":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor5Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
         }
 
@@ -295,8 +301,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         ds.setOffsetX(1);
         ds.setOffsetY(1);
         location.setEffect(ds);
-        location.setLayoutX(((node.getCords()[0]-85)*scale));
-        location.setLayoutY(((node.getCords()[1]-185)*scale));
+        location.setLayoutX(((node.getCords()[0]-85)*scale)+offsetx);
+        location.setLayoutY(((node.getCords()[1]-185)*scale)+offsety);
         location.setStyle("-fx-fill: -primary");
 //        location.setOpacity(0.8);
 //        location.setScaleX(1.5);
@@ -381,5 +387,19 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         generateSpecificFields();
         generateComments();
         loadLocationsOnMap(0);
+    }
+
+    /**
+     * Any visual changes go here
+     */
+    private void resolveUI(){
+//        editRequestButton
+//                commentField
+//        commentButton
+        //resolveButton
+
+        for(int i= 0; i<6; i++){
+           bottomBar.getChildren().get(i).setDisable(true);
+        }
     }
 }

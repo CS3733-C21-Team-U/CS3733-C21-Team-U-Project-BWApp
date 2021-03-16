@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1313.0" style="-fx-background-radius: 7px; -fx-background-color: -backgroundAlt;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="1330.0" style="-fx-background-radius: 7px; -fx-background-color: -backgroundAlt;" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
    </stylesheets>
    <children>
-      <VBox prefHeight="589.0" prefWidth="1313.0">
+      <VBox prefHeight="589.0" prefWidth="1330.0">
          <children>
             <HBox prefHeight="590.0" prefWidth="1330.0">
                <children>
@@ -138,7 +138,8 @@
                         <VBox fx:id="extraFieldsVBox" alignment="CENTER" layoutY="534.0" prefHeight="520.0" prefWidth="447.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <padding>
                               <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-                           </padding></VBox>
+                           </padding>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </children>
