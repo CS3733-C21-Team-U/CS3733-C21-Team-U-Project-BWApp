@@ -17,10 +17,13 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -147,12 +150,59 @@ public class ViewCovidResultsController {
         treeTableView.setShowRoot(false);
         treeTableView.getColumns().setAll(treeTableColumnName, treeTableColumnVisitDate, treeTableColumnCovidRiskLevel, treeTableColumnEnteredTheBuilding);
 
-        resultsWeekTextBox.setText(String.valueOf(App.covidService.getWeeklySurveys()));
-        positiveWeekTextBox.setText(String.valueOf(App.covidService.getWeeklyPositiveSurveys()));
-        positiveWeekRatesTextBox.setText(App.covidService.getWeeklyPositiveRates() + "%");
-        resultsMonthTextBox.setText(String.valueOf(App.covidService.getMonthlySurveys()));
-        positiveMonthTextBox.setText(String.valueOf(App.covidService.getMonthlyPositiveSurveys()));
-        positiveMonthRatesTextBox.setText(App.covidService.getMonthlyPositiveRates() + "%");
+
+        //resultsWeekTextBox.setText(String.valueOf(App.covidService.getWeeklySurveys()));
+        ArrayList<SpecificRequest> thisWeek = new ArrayList<>();
+        ArrayList<SpecificRequest> thisMonth = new ArrayList<>();
+
+        for(SpecificRequest covidRequest: App.requestService.getRequests()) {
+            if (covidRequest.getType().equals("CovidSurvey")) {
+                if (covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now()))) && covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now().minusDays(7))))) {
+                    thisWeek.add(covidRequest);
+                }
+            }
+            resultsWeekTextBox.setText(String.valueOf(thisWeek.size()));
+        }
+        for(SpecificRequest covidRequest: App.requestService.getRequests()) {
+            if (covidRequest.getType().equals("CovidSurvey")) {
+                if (covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now()))) && covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now().minusMonths(1))))) {
+                    thisMonth.add(covidRequest);
+                }
+            }
+            resultsMonthTextBox.setText(String.valueOf(thisMonth.size()));
+        }
+
+        for(SpecificRequest covidRequest: thisWeek){
+            int count = 0;
+            if(covidRequest.getSpecificData().contains("positive")){
+                count++;
+            }
+            positiveWeekTextBox.setText(String.valueOf(count));
+        }
+
+
+        for(SpecificRequest covidRequest: thisMonth){
+            int count = 0;
+            if(covidRequest.getSpecificData().contains("positive")){
+                count++;
+            }
+            positiveMonthTextBox.setText(String.valueOf(count));
+        }
+
+        double weekRate = Integer.parseInt(positiveWeekTextBox.getText())/Integer.parseInt(resultsWeekTextBox.getText());
+        DecimalFormat decform = new DecimalFormat("#.##");
+        decform.setRoundingMode(RoundingMode.CEILING);
+        if(weekRate == 0){
+            positiveWeekRatesTextBox.setText(String.valueOf(0));
+        }
+        positiveWeekRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))));
+
+        double monthRate = Integer.parseInt(positiveMonthTextBox.getText())/Integer.parseInt(resultsMonthTextBox.getText());
+        decform.setRoundingMode(RoundingMode.CEILING);
+        if(weekRate == 0){
+            positiveWeekRatesTextBox.setText(String.valueOf(0));
+        }
+        positiveMonthRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))));
 
         long interval = ChronoUnit.DAYS.between(LocalDate.now().minusMonths(1), LocalDate.now());
         List<LocalDate> listOfDates = Stream.iterate(LocalDate.now().minusMonths(1), date -> date.plusDays(1))
