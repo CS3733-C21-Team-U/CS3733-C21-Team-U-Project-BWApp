@@ -99,18 +99,6 @@ public class KioskTemperatureScannerController {
         }
         App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
         App.requestService.updateRequest(App.requestService.curCovidRequest);
-        SpecificRequest curRequest = null;
-        //TODO: This crashes when I toggle the debug flag?
-        for(SpecificRequest curReq: App.requestService.getRequests()){
-            if(curReq.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) && curReq.getType().equals("CovidSurvey")){
-                curRequest = curReq;
-            }
-        }
-        if(curRequest != null){
-            App.requestService.resolveRequest(curRequest, new Comment("Resolve","CLOSED",App.userService.getActiveUser().getUserName(), CommentType.RESOLVE));
-        }else{
-            //be mad
-        }
 
         comPort.closePort();
 
@@ -127,6 +115,10 @@ public class KioskTemperatureScannerController {
     }
 
     public void handleDebugSkipButton(){
+        ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
+        specificData.set(1,String.valueOf(97));
+        App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest);
         comPort.closePort();
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
