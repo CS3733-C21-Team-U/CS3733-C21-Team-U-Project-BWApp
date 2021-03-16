@@ -62,11 +62,11 @@
                   <Insets right="1200.0" top="30.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXButton fx:id="addUserButton" buttonType="RAISED" onAction="#handleAddUser" prefWidth="475.0" styleClass="button-contained" text="Add User">
+            <JFXButton fx:id="addUserButton" buttonType="RAISED" defaultButton="true" onAction="#handleAddUser" prefWidth="475.0" styleClass="button-contained" text="Add User">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></JFXButton>
-            <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#handleCancel" prefWidth="475.0" styleClass="button-contained" text="Cancel">
+            <JFXButton fx:id="cancelButton" buttonType="RAISED" cancelButton="true" onAction="#handleCancel" prefWidth="475.0" styleClass="button-contained" text="Cancel">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></JFXButton>

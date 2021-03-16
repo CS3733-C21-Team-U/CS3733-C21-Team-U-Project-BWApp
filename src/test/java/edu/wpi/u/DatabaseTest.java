@@ -647,6 +647,18 @@ public class DatabaseTest {
     } // TODO: Reevaluate when appointments is talked about
     */
 
+    @Test
+    public void testCovidData(){
+        CovidService cs = new CovidService(testURL);
+        java.sql.Date todayDate = java.sql.Date.valueOf(String.valueOf(java.time.LocalDateTime.now()));
+        todayDate.toLocalDate();
+
+        cs.addDataPoint(true);
+        cs.addDataPoint(true);
+
+        assertEquals(cs.getSymptomatic(todayDate),2);
+
+    }
 
 
 }
