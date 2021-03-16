@@ -18,6 +18,7 @@ import javafx.scene.control.TreeTableColumn;
 
 import java.io.IOException;
 import java.math.RoundingMode;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -51,7 +52,7 @@ public class ViewCovidResultsController {
 
     public void initialize() throws IOException {
 
-        funnelSubtitle1.setText(App.userService.getGuests()+ " Guests and " + App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
+        funnelSubtitle1.setText(App.userService.getGuests().size()+ " Guests and " + App.userService.getPatients().size() + " Patients and " + App.userService.getEmployees().size() + " Employees");
 
         ObservableList<SpecificRequest> requests = FXCollections.observableArrayList();
         App.requestService.getRequests().forEach(e ->{
@@ -159,7 +160,7 @@ public class ViewCovidResultsController {
 
         for(SpecificRequest covidRequest: App.requestService.getRequests()) {
             if (covidRequest.getType().equals("CovidSurvey")) {
-                if (covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now()))) && covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now().minusDays(7))))) {
+                if (covidRequest.getGenericRequest().getDateCreated().before(new Timestamp (System.currentTimeMillis())) && covidRequest.getGenericRequest().getDateCreated().after(new Timestamp(System.currentTimeMillis() - (86400000 * 7)))) {
                     thisWeek.add(covidRequest);
                 }
             }
@@ -167,44 +168,52 @@ public class ViewCovidResultsController {
         }
         for(SpecificRequest covidRequest: App.requestService.getRequests()) {
             if (covidRequest.getType().equals("CovidSurvey")) {
-                if (covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now()))) && covidRequest.getGenericRequest().getDateCreated().before(Timestamp.valueOf(String.valueOf(LocalDate.now().minusMonths(1))))) {
+                if (covidRequest.getGenericRequest().getDateCreated().before(new Timestamp (System.currentTimeMillis())) && covidRequest.getGenericRequest().getDateCreated().after(new Timestamp(System.currentTimeMillis() - (86400000L * 30)))) {
                     thisMonth.add(covidRequest);
                 }
             }
             resultsMonthTextBox.setText(String.valueOf(thisMonth.size()));
         }
-
+        int count = 0;
         for(SpecificRequest covidRequest: thisWeek){
-            int count = 0;
-            if(covidRequest.getSpecificData().contains("positive")){
+            if(!covidRequest.getSpecificData().get(0).equals("None")){
                 count++;
             }
             positiveWeekTextBox.setText(String.valueOf(count));
         }
 
-
+        int count2 = 0;
         for(SpecificRequest covidRequest: thisMonth){
-            int count = 0;
-            if(covidRequest.getSpecificData().contains("positive")){
-                count++;
+            if(!covidRequest.getSpecificData().get(0).equals("None")){
+                count2++;
             }
-            positiveMonthTextBox.setText(String.valueOf(count));
+            positiveMonthTextBox.setText(String.valueOf(count2));
         }
-
-        double weekRate = Integer.parseInt(positiveWeekTextBox.getText())/Integer.parseInt(resultsWeekTextBox.getText());
+        double weekRate = 1;
+        if (thisWeek.size() != 0){
+            weekRate = (double) count/thisWeek.size();
+        }
+        else {
+            weekRate = 0;
+        }
         DecimalFormat decform = new DecimalFormat("#.##");
         decform.setRoundingMode(RoundingMode.CEILING);
         if(weekRate == 0){
             positiveWeekRatesTextBox.setText(String.valueOf(0));
         }
-        positiveWeekRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))));
-
-        double monthRate = Integer.parseInt(positiveMonthTextBox.getText())/Integer.parseInt(resultsMonthTextBox.getText());
-        decform.setRoundingMode(RoundingMode.CEILING);
-        if(weekRate == 0){
-            positiveWeekRatesTextBox.setText(String.valueOf(0));
+        positiveWeekRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))) + "%");
+        double monthRate = 1;
+        if (thisMonth.size() !=0){
+            monthRate = (double) count2 / thisMonth.size();
         }
-        positiveMonthRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))));
+        else {
+            monthRate = 0;
+        }
+        decform.setRoundingMode(RoundingMode.CEILING);
+        if(monthRate == 0){
+            positiveMonthRatesTextBox.setText(String.valueOf(0));
+        }
+        positiveMonthRatesTextBox.setText(String.valueOf(Double.parseDouble(decform.format(weekRate * 100))) + "%");
 
         long interval = ChronoUnit.DAYS.between(LocalDate.now().minusMonths(1), LocalDate.now());
         List<LocalDate> listOfDates = Stream.iterate(LocalDate.now().minusMonths(1), date -> date.plusDays(1))
