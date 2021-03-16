@@ -78,7 +78,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         miniMap.setFitMode(GesturePane.FitMode.UNBOUNDED);
         miniMap.setScrollMode(GesturePane.ScrollMode.ZOOM);
         miniMap.setPrefHeight(518);
-        miniMap.centreOn(new Point2D(170, 90));
+      //  miniMap.centreOn(new Point2D(170, 90));
         miniMap.zoomTo(2.5, miniMap.targetPointAtViewportCentre());
         mapViewRoot.getChildren().add(miniMap);
         miniMap.toFront();
@@ -98,8 +98,6 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         if(parent.request.getGenericRequest().isResolved()){
             resolveUI();
         }
-
-
     }
 
     public void generateSpecificFields(){
@@ -214,16 +212,12 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     }
 
     public void nextLocation(){
-        System.out.println("Next Location from: "+ currentNode);
         currentNode = (currentNode+1)%parent.request.getGenericRequest().getLocations().size();
-        System.out.println("Next Location : "+ currentNode);
         loadLocationsOnMap(currentNode);
 
     }
     public void previousLocation(){
-        System.out.println("Previous Location from: "+ currentNode);
         currentNode = Math.floorMod(currentNode-1, parent.request.getGenericRequest().getLocations().size());
-        System.out.println("Previous Location: "+ currentNode);
         loadLocationsOnMap(currentNode);
     }
 
@@ -233,6 +227,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         mainMapPane.getChildren().clear();
        locationGroup.getChildren().clear();
         mainMapPane.getChildren().add(locationGroup);
+        int offsetx = 0;
+        int offsety = 0;
 
         if(parent.request.getGenericRequest().getLocations().size() == 0){
             noLocaitonGraphic.setVisible(true);
@@ -253,26 +249,38 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         switch (floor){
             case "G":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerCampus.png";
+                offsety = 5;
                 break;
             case "1":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor1Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
+
                 break;
             case "2":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor2Light.png";
-                scale = 0.1753;//this is as correct as it can be, moving it down slightly would make it better
+                scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "3":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor3Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "4":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor4Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
             case "5":
                 resourceURL = "/edu/wpi/u/views/Images/FaulknerFloor5Light.png";
                 scale = 0.1753;
+                offsety = 8;
+                offsetx = 1;
                 break;
         }
 
@@ -293,8 +301,8 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         ds.setOffsetX(1);
         ds.setOffsetY(1);
         location.setEffect(ds);
-        location.setLayoutX(((node.getCords()[0]-85)*scale));
-        location.setLayoutY(((node.getCords()[1]-185)*scale));
+        location.setLayoutX(((node.getCords()[0]-85)*scale)+offsetx);
+        location.setLayoutY(((node.getCords()[1]-185)*scale)+offsety);
         location.setStyle("-fx-fill: -primary");
 //        location.setOpacity(0.8);
 //        location.setScaleX(1.5);
