@@ -245,16 +245,17 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             ArrayList<String> emails = new ArrayList<>();
             ArrayList<String> sms = new ArrayList<>();
 
-            for (String assignees : assigneesToAdd){
-                if (App.userService.getPreferredContactMethod(assignees).equals("Both")){
-                    emails.add(App.userService.getEmail(assignees));
-                    sms.add(App.userService.getPhoneNumberFromUserName(assignees));
+            for (String assignee : assigneesToAdd){
+                System.out.println("Method: " + App.userService.getPreferredContactMethod(assignee));
+                if (App.userService.getPreferredContactMethod(assignee).equals("Both")){
+                    emails.add(App.userService.getEmail(assignee));
+                    sms.add(App.userService.getPhoneNumberFromUserName(assignee));
                 }
-                else if (App.userService.getPreferredContactMethod(assignees).equals("Email")){
-                    emails.add(App.userService.getEmail(assignees));
+                else if (App.userService.getPreferredContactMethod(assignee).equals("Email")){
+                    emails.add(App.userService.getEmail(assignee));
                 }
-                else if(App.userService.getPreferredContactMethod(assignees).equals("SMS")){
-                    sms.add(App.userService.getPhoneNumberFromUserName(assignees));
+                else if(App.userService.getPreferredContactMethod(assignee).equals("SMS")){
+                    sms.add(App.userService.getPhoneNumberFromUserName(assignee));
                 }
             }
             for (String to : emails){
