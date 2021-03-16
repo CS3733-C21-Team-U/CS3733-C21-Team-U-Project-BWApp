@@ -516,15 +516,20 @@ public class FloatingPathfindingPaneController {
 
     public void selectViewOption(){
         if(endNodeField.getText().equals("") || startNodeField.getText().equals("")){
+            if(endNodeField.getText().equals("")) endNodeID = "";
+            if(startNodeField.getText().equals("")) startNodeID = "";
             treeViewListNodes.setVisible(true);
             pathContent.setVisible(false);
             treeViewListNodes.setPrefHeight(Region.USE_COMPUTED_SIZE);
             pathContent.setPrefHeight(0);
+            App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
+
         } else{
             treeViewListNodes.setVisible(false);
             pathContent.setVisible(true);
             treeViewListNodes.setPrefHeight(0);
             pathContent.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            App.mapInteractionModel.mapTargetNode2.set(!App.mapInteractionModel.mapTargetNode2.get());
         }
     }
 
@@ -537,6 +542,7 @@ public class FloatingPathfindingPaneController {
         endNodeField.setText(tempStorage);
         targetNode.set(originalTarget);
     }
+
 
     public void HandleDisplayFloorG(ActionEvent actionEvent) {
         handleTestAddTextField("G");
@@ -570,14 +576,17 @@ public class FloatingPathfindingPaneController {
 
     @FXML
     public void handleClearStartPoint(){
-//        App.mapInteractionModel.setStartNode("");
-//        startNodeField.clear();
+        App.mapInteractionModel.setStartNode("");
+        startNodeField.setText("");
+        startNodeID = "";
     }
 
     @FXML
     public void handleClearEndPoint(){
-//        App.mapInteractionModel.setEndNode("");
-//        endNodeField.clear();
+        App.mapInteractionModel.setEndNode("");
+        endNodeField.setText("");
+        endNodeID = "";
+
     }
 
     public void handleInputMethodChange(InputMethodEvent inputMethodEvent) { //TODO: What does this do?
