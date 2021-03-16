@@ -4,6 +4,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
+import edu.wpi.u.web.EmailService;
+import edu.wpi.u.web.TextingService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -85,6 +87,8 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     public static String UPDATECommentIcon = "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z";
     public static String RESOLVECommentIcon = "M19.77 4.93l1.4 1.4L8.43 19.07l-5.6-5.6 1.4-1.4 4.2 4.2L19.77 4.93m0-2.83L8.43 13.44l-4.2-4.2L0 13.47l8.43 8.43L24 6.33 19.77 2.1z";
 
+    public static EmailService emailService = new EmailService();
+    public static TextingService textingService = new TextingService();
     public static String getIcon(String keyWord){
         switch (keyWord) {
             case "AudioVisual":
@@ -238,6 +242,28 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             locationsToAdd, assigneesToAdd, primaryComment);
             App.requestService.addRequest(currSpecificRequest.setRequest(newRequest).setSpecificData(requestSpecificItems()));
 
+            ArrayList<String> emails = new ArrayList<>();
+            ArrayList<String> sms = new ArrayList<>();
+
+            for (String assignees : assigneesToAdd){
+                if (App.userService.getPreferredContactMethod(assignees).equals("Both")){
+                    emails.add(App.userService.getEmail(assignees));
+                    sms.add(App.userService.getPhoneNumberFromUserName(assignees));
+                }
+                else if (App.userService.getPreferredContactMethod(assignees).equals("Email")){
+                    emails.add(App.userService.getEmail(assignees));
+                }
+                else if(App.userService.getPreferredContactMethod(assignees).equals("SMS")){
+                    sms.add(App.userService.getPhoneNumberFromUserName(assignees));
+                }
+            }
+            for (String to : emails){
+                emailService.sendMail(to, currSpecificRequest);
+            }
+            for (String to : sms){
+                textingService.sendText(to, currSpecificRequest);
+            }
+
             App.newReqVBox.getChildren().clear();
             App.VBoxChanged.set(!App.VBoxChanged.get());
             App.addNewRequestToList.set(!App.addNewRequestToList.get());
@@ -253,7 +279,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             editTimeNeededField.validate();
         }
     }
-
 
     private boolean checkSpecialFields(ArrayList<String> input){
         for(String s: input){
@@ -326,7 +351,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         return ans;
     }
 
-
     /**
      * Take the get values from unique fields, put it in a ArrayList
      * @return
@@ -338,8 +362,6 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
         }
         return specifics;
     }
-
-
 
     public void makeListView(ArrayList<String> list, JFXListView<String> res){
         ObservableList<String> something = FXCollections.observableList(list);
@@ -354,6 +376,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             editAssigneesField.setText("");
         }
     }
+
     public void deleteAssignee(){
         editAssigneesListView.getItems().remove(editAssigneesField.getText());
         editAssigneesField.setText("");
@@ -372,6 +395,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
             }
         }
     }
+
     public void deleteLocation(){
         editLocationsListView.getItems().remove(editLocationsField.getText());
         editLocationsField.setText("");

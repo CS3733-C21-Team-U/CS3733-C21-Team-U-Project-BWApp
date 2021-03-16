@@ -53,38 +53,50 @@ public class SelectUserScreenController {
     }
 
     public void handleLoginButton(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-        //loadingNewMainPage("Login");
-        Thread thread = new Thread(() -> {
-            try {
-                //Thread.sleep(100);
-                Platform.runLater(() -> {
-                    App.getPrimaryStage().getScene().setRoot(App.loginBase);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+
+        if (App.useCache.get()){
+            loadingNewMainPage("Login");
+            Thread thread = new Thread(() -> {
+                try {
+                    //Thread.sleep(100);
+                    Platform.runLater(() -> {
+                        App.getPrimaryStage().getScene().setRoot(App.loginBase);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }
+        else {
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
+                App.getPrimaryStage().getScene().setRoot(root);
+        }
+
     }
 
     public void handleGuestButton(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-        Thread thread = new Thread(() -> {
-            try {
-                //Thread.sleep(100);
-                Platform.runLater(() -> {
-                    App.getPrimaryStage().getScene().setRoot(App.guestBase);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Error("Unexpected interruption");
-            }
-        });
-        thread.start();
+
+        if (App.useCache.get()){
+            Thread thread = new Thread(() -> {
+                try {
+                    //Thread.sleep(100);
+                    Platform.runLater(() -> {
+                        App.getPrimaryStage().getScene().setRoot(App.guestBase);
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Error("Unexpected interruption");
+                }
+            });
+            thread.start();
+        }
+        else {
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
+                App.getPrimaryStage().getScene().setRoot(root);
+        }
+
     }
 
     public void handleBackButton(ActionEvent actionEvent) throws IOException {
