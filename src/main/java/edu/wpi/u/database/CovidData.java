@@ -110,6 +110,9 @@ public class CovidData extends Data{
             ps.setDate(1,sqlDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -133,6 +136,9 @@ public class CovidData extends Data{
             ps.setDate(1, sqlDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -155,6 +161,9 @@ public class CovidData extends Data{
             ps.setDate(1,sqlDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -179,6 +188,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -203,6 +215,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -227,6 +242,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -251,6 +269,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -275,6 +296,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -300,6 +324,9 @@ public class CovidData extends Data{
             ps.setDate(2,sqlTodayDate);
             ResultSet rset = ps.executeQuery();
             rset.next();
+            if(rset.getInt(1) != Integer.parseInt(String.valueOf(rset.getInt(1)))) {
+                return 0;
+            }
             return rset.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

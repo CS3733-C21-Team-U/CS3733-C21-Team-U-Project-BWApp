@@ -395,6 +395,8 @@ public class Database {
             s.execute(str);
             str = "drop table Nodes";
             s.execute(str);
+            str = "drop table covidSurveyResult";
+            s.execute(str);
 
         } catch (Exception e) {
             e.printStackTrace();
