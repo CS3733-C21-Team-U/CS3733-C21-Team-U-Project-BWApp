@@ -30,8 +30,10 @@ public class AdminMainHelpController {
     @FXML public JFXButton PathFindingHelpButton;
     @FXML public JFXButton CovidHelpButton;
     @FXML public JFXButton AboutHelpButton;
-
-
+    public JFXButton UserManagerHelpButton;
+    public JFXButton AboutUsHelpButton;
+    public JFXButton Covid19HelpButton;
+    public JFXButton MapBuilderHelpButton;
 
 
     public void handleContactUsButton(ActionEvent actionEvent) throws IOException {
@@ -53,12 +55,14 @@ public class AdminMainHelpController {
         AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/PathFindingHelpPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/generaluserhelp/PathfindingHelpPage.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         anchor.getChildren().clear();
-        anchor.getChildren().add(root);
+        if (!anchor.getChildren().contains(root)){
+            anchor.getChildren().add(root);
+        }
     }
 
     public void handleSettingPageButton(ActionEvent actionEvent) throws IOException {
