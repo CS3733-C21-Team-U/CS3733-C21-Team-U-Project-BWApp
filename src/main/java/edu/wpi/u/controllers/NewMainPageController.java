@@ -15,6 +15,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.input.KeyCode;
@@ -23,8 +25,10 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
@@ -534,6 +538,7 @@ public class NewMainPageController {
             covidDis.setDisable(true);}
     }
 
+
     public void handleEnableGuest() {
         if (pathfindingDis != null){
             pathfindingDis.setDisable(true);}
@@ -556,6 +561,7 @@ public class NewMainPageController {
         if (covidDis != null){
             covidDis.setDisable(true);}
     }
+
 
     public void handleEnableCovid() {
         if (pathfindingDis != null){
@@ -641,6 +647,28 @@ public class NewMainPageController {
         JFXButton button2 = new JFXButton("DISMISS");
         button2.setOnAction(event -> dialog.close());
         button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
+    }
+
+    public void handleAPage(ActionEvent actionEvent) throws IOException {
+        JFXDialogLayout content = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+
+        //shows a popup
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+
         ArrayList<Node> actions = new ArrayList<>();
         actions.add(button2);
         content.setActions(actions);
