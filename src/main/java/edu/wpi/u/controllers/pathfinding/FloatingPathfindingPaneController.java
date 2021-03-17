@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -62,6 +63,9 @@ public class FloatingPathfindingPaneController {
     public Region region23;
     public Region region34;
     public Region region45;
+    public JFXButton startFieldClear;
+    public JFXButton endFieldClear;
+
     @FXML
     Label endNode;
     @FXML
@@ -425,6 +429,9 @@ public class FloatingPathfindingPaneController {
 
     public void initialize(){
 
+
+        startFieldClear.setTooltip(new Tooltip("Clear Start Node"));
+        endFieldClear.setTooltip(new Tooltip("Clear End Node"));
         //floatButtonContainer.setPrefHeight(0);
 
         pathContent.setPrefHeight(0);

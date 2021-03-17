@@ -21,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -71,6 +72,18 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     String[] reqTypes= new String[]{"Maintenance", "Security",
             "Laundry", "Sanitation", "Religious", "Floral", "Language"};
 
+    public JFXToggleNode soundBtn;
+    public JFXToggleNode screenBtn;
+    public JFXToggleNode giftBtn;
+    public JFXToggleNode languageBtn;
+    public JFXToggleNode washerBtn;
+    public JFXToggleNode toolBtn;
+    public JFXToggleNode medicineBtn;
+    public JFXToggleNode churchBtn;
+    public JFXToggleNode broomBtn;
+    public JFXToggleNode shieldBtn;
+    public JFXToggleNode foodBtn;
+    public JFXToggleNode flowerBtn;
 
     public static String AudioVisualIcon = "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z";
     public static String ComputerIcon = "M3 6h18V4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v-2H3V6zm10 6H9v1.78c-.61.55-1 1.33-1 2.22s.39 1.67 1 2.22V20h4v-1.78c.61-.55 1-1.34 1-2.22s-.39-1.67-1-2.22V12zm-2 5.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM22 8h-6c-.5 0-1 .5-1 1v10c0 .5.5 1 1 1h6c.5 0 1-.5 1-1V9c0-.5-.5-1-1-1zm-1 10h-4v-8h4v8z";
@@ -143,6 +156,21 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currSpecificRequest = new RequestFactory().makeRequest("Maintenance");
+
+        //Tooltips
+        soundBtn.setTooltip(new Tooltip("Audio/Visual Request"));
+        screenBtn.setTooltip(new Tooltip("Computer Request"));
+        giftBtn.setTooltip(new Tooltip("Gift Request"));
+        languageBtn.setTooltip(new Tooltip("Language Request"));
+        washerBtn.setTooltip(new Tooltip("Laundry Request"));
+        toolBtn.setTooltip(new Tooltip("Maintenance Request"));
+        medicineBtn.setTooltip(new Tooltip("Medical Request"));
+        churchBtn.setTooltip(new Tooltip("Religious Request"));
+        broomBtn.setTooltip(new Tooltip("Sanitation Request"));
+        shieldBtn.setTooltip(new Tooltip("Security Request"));
+        foodBtn.setTooltip(new Tooltip("Food Request"));
+        flowerBtn.setTooltip(new Tooltip("Floral Request"));
+
 
         //Graphic init
         typeIconSVG.setContent(getIcon("UPDATE"));
