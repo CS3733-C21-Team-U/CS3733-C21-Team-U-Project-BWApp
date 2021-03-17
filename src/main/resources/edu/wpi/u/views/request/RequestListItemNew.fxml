@@ -95,7 +95,7 @@
                                           </JFXButton>
                                        </children>
                                     </VBox>
-                                    <JFXListView fx:id="editAssigneesListView" prefHeight="198.0" styleClass="mylistview" />
+                                    <JFXListView fx:id="editAssigneesListView" prefHeight="198.0" styleClass="jfx-list-view" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="100.0" />
@@ -125,7 +125,7 @@
                                           </JFXButton>
                                        </children>
                                     </VBox>
-                                    <JFXListView fx:id="editLocationsListView" />
+                                    <JFXListView fx:id="editLocationsListView" styleClass="jfx-list-view" />
                                  </children>
                                  <padding>
                                     <Insets top="15.0" />
