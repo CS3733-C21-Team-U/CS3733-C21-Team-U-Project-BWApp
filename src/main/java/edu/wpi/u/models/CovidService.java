@@ -38,30 +38,8 @@ public class CovidService {
 
     public int getWeeklyPositiveSurveys() { return cd.getWeeklySymptomaticSurveys();}
 
-    public double getWeeklyPositiveRates() {
-        double weekNum = cd.getWeeklySurveys();
-        double posNum = cd.getWeeklySymptomaticSurveys();
-        DecimalFormat decform = new DecimalFormat("#.##");
-        decform.setRoundingMode(RoundingMode.CEILING);
-        if(weekNum == 0 & posNum == 0){
-            return 0;
-        }
-        return Double.parseDouble(decform.format((posNum/weekNum) * 100));
-    }
-
     public int getMonthlySurveys(){ return cd.getMonthlySurveys();}
 
     public int getMonthlyPositiveSurveys() { return cd.getMonthlySymptomaticSurveys();}
-
-    public double getMonthlyPositiveRates() {
-        double monthNum = cd.getMonthlySurveys();
-        double posNum = cd.getMonthlySymptomaticSurveys();
-        DecimalFormat decform = new DecimalFormat("#.##");
-        decform.setRoundingMode(RoundingMode.CEILING);
-        if(monthNum == 0 & posNum == 0){
-            return 0;
-        }
-        return Double.parseDouble(decform.format((posNum/monthNum) * 100));
-    }
 
 }

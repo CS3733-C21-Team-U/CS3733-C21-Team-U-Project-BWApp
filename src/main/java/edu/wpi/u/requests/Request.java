@@ -63,7 +63,7 @@ public class Request {
     public String getRequestID() {
         return requestID;
     }
-    
+
     public Timestamp getDateCreated() {
         return getPrimaryComment().timestamp;
     }

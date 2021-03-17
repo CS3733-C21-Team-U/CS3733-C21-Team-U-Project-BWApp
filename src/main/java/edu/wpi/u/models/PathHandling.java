@@ -45,13 +45,4 @@ public class PathHandling {
         }
 
     }
-
-    public void clearSVGPath(){
-        SVGPathString = "";
-    }
-
-
-
-
-
 }

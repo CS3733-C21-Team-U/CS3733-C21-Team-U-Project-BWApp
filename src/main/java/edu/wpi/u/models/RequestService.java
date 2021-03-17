@@ -43,16 +43,6 @@ public class RequestService {
     return rd.getLocations(requestID);
   }
 
-  public void loadCSVFile(String path, String tableName){
-    Database.getDB().dropValues(tableName);
-    Database.getDB().readCSV(path,tableName);
-    //this.activeRequests = rd.loadActiveRequests();
-  }
-
-  public void saveCSVFile(String path, String tableName){
-    Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
-  }
-
   public void addRequest(SpecificRequest result) {
     rd.addRequest(result);
     this.activeRequests.add(result);

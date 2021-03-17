@@ -560,6 +560,7 @@ public class MapManager {
     Edge edge = this.allEdges.get(edgeID);
     edge.setUserPermission(permissions);
   }
+
   public ArrayList<Node> getAllNodes() {
     Collection<Node> allValues = this.allNodes.values();
     ArrayList<Node> nodeArrayList = new ArrayList<>(allValues);

@@ -17,7 +17,6 @@ public class MapInteractionModel {
     public SimpleStringProperty nodeID = new SimpleStringProperty(" ");
     public SimpleStringProperty nodeIDForHover = new SimpleStringProperty(" ");
     public SimpleBooleanProperty reloadPathfinding = new SimpleBooleanProperty(true);
-    private String previousNodeID = "";
     private String previousPreviousNodeID = "";
     private String edgeID = "";
     public String previusEdgeID = "";
@@ -37,8 +36,6 @@ public class MapInteractionModel {
     public LinkedList<String> nodeIDList = new LinkedList<>();
     public String deselectedNodeID = "";
     public String toggledNodeID = "";
-    public ArrayList<String> edgeIDList = new ArrayList<>();
-    public boolean clickedOnNode = false;
     public SimpleBooleanProperty mapTargetNode = new SimpleBooleanProperty(false);//for start node
     public SimpleBooleanProperty mapTargetNode2 = new SimpleBooleanProperty(false);//for end node
     public String aline = "";
@@ -63,18 +60,6 @@ public class MapInteractionModel {
         LinkedList<String> returnMe = this.nodeIDList;
         this.nodeIDList = new LinkedList<>();
         return returnMe;
-    }
-
-    public double avgSelectedCords(){
-        double xTotal = 0.0, yTotal = 0.0;
-        for (String nodeID: this.nodeIDList ) {
-            //todo finish
-        }
-        return 0.0;
-    }
-
-    public String getPreviousPreviousNodeID() {
-        return previousPreviousNodeID;
     }
 
     public void clearPreviousNodeID() {
