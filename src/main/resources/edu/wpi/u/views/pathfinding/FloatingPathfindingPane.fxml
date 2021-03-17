@@ -83,17 +83,17 @@
             </HBox>
             <HBox fx:id="floatButtonContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="450.0">
                <children>
-                  <JFXButton fx:id="btnG" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onAction="#HandleDisplayFloorG" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor G" />
+                  <JFXButton fx:id="btnG" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onAction="#HandleDisplayFloorG" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="G" />
                   <Region fx:id="regionG1" prefHeight="0.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btnOne" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorOne" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 1" />
+                  <JFXButton fx:id="btnOne" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorOne" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="1" />
                   <Region fx:id="region12" prefHeight="0.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btnTwo" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorTwo" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 2" />
+                  <JFXButton fx:id="btnTwo" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorTwo" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="2" />
                   <Region fx:id="region23" prefHeight="0.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btnThree" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorThree" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 3" />
+                  <JFXButton fx:id="btnThree" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorThree" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="3" />
                   <Region fx:id="region34" prefHeight="0.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btnFour" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFour" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 4" />
+                  <JFXButton fx:id="btnFour" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFour" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="4" />
                   <Region fx:id="region45" prefHeight="0.0" prefWidth="0.0" />
-                  <JFXButton fx:id="btnFive" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFive" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 5" />
+                  <JFXButton fx:id="btnFive" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFive" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="5" />
                </children>
             </HBox>
             <HBox fx:id="pathContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0">
