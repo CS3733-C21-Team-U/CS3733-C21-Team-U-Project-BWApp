@@ -92,7 +92,7 @@ public class KioskLastScreenController {
         comPort.closePort();
     }
 
-    public void handleCleanScreen() {
+    public void handelCleanScreen() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
         try {
             fxmlLoader.load();
