@@ -39,47 +39,33 @@
                <content>
                   <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" layoutX="8.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="0.0">
+                        <VBox alignment="TOP_CENTER" layoutX="19.0" layoutY="-4.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="-19.0" AnchorPane.topAnchor="-4.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="98.0" prefWidth="1700.0" spacing="20.0">
                                  <children>
-                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
-                                       <center>
-                                          <ImageView fitHeight="270.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                                             <image>
-                                                <Image url="@../Images/usermanager.png" />
-                                             </image>
-                                             <BorderPane.margin>
-                                                <Insets />
-                                             </BorderPane.margin>
-                                          </ImageView>
-                                       </center>
-                                       <HBox.margin>
-                                          <Insets left="40.0" />
-                                       </HBox.margin>
-                                    </BorderPane>
-                                    <VBox prefHeight="401.0" prefWidth="371.0">
+                                    <VBox prefHeight="121.0" prefWidth="763.0">
                                        <children>
-                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="User Manager is designed for Administrators. Admin will have access to all users' accounts. They are in charge of adding, editing ,and viewing users. " wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="150.0" prefWidth="443.0" styleClass="headline-3" text="User Manager is designed for Administrators. Admin will have access to all users' accounts. They are in charge of adding, editing ,and viewing users. " wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
                               <Label styleClass="headline-2" text="How to Add a User?" />
-                              <HBox alignment="CENTER" prefHeight="311.0" prefWidth="1700.0" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="248.0" prefWidth="1700.0" spacing="20.0">
                                  <children>
                                     <VBox prefHeight="317.0" prefWidth="412.0">
                                        <children>
-                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;Add User &quot; and fill all the fields for a user" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="66.0" prefWidth="412.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;+ New User &quot; and fill all the fields for a user" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Then, click 'Add User' button" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="76.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. You can click 'Cancel' to go back" wrapText="true" />
                                        </children>
                                     </VBox>
-                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                    <BorderPane maxHeight="-Infinity" prefHeight="51.0" prefWidth="295.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
                                        <HBox.margin>
                                           <Insets left="40.0" />
                                        </HBox.margin>
                                        <center>
-                                          <ImageView fitHeight="227.0" fitWidth="279.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                          <ImageView fitHeight="100.0" fitWidth="313.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                                              <image>
                                                 <Image url="@../Images/Adduserhelp.png" />
                                              </image>
@@ -92,7 +78,7 @@
                                  </children>
                               </HBox>
                               <Label styleClass="headline-2" text="How to Edit a User?" />
-                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="253.0" prefWidth="1700.0" spacing="20.0">
                                  <children>
                                     <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
                                        <HBox.margin>
@@ -138,7 +124,7 @@
                                           <Insets left="40.0" />
                                        </HBox.margin>
                                        <center>
-                                          <ImageView fitHeight="572.0" fitWidth="969.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                          <ImageView fitHeight="751.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                                              <image>
                                                 <Image url="@../Images/Usermanagerfull.png" />
                                              </image>
@@ -148,6 +134,43 @@
                                           </ImageView>
                                        </center>
                                     </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="705.0" layoutY="1427.0" styleClass="headline-1" text="Guest List" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1509.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="713.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Mapmanagerguestlist2.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                    <VBox prefHeight="562.0" prefWidth="336.0">
+                                       <children>
+                                          <Label layoutX="10.0" layoutY="50.0" maxWidth="1251.0" prefHeight="113.0" prefWidth="336.0" style="-fx-font-size: 18;" styleClass="caption" text="Guest List is a list of record of guest log in users. It is used to monitor the hospital's populations. It is also necessary for security purpose." wrapText="true">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select a Guest you would like to view" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="185.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Select &quot;ID&quot; to view the id of the guest" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="185.0" maxWidth="1251.0" prefHeight="63.0" prefWidth="336.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Select 'Name' to view the name of the guest" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="227.0" maxWidth="1251.0" prefHeight="66.0" prefWidth="336.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Select 'Visit Reason' to view the reason to visit the hospital" wrapText="true" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </HBox>
                               <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />

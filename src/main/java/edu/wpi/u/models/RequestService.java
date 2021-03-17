@@ -58,7 +58,8 @@ public class RequestService {
     this.activeRequests.add(result);
   }
 
-  public void updateRequest(SpecificRequest result) {
+  public void updateRequest(SpecificRequest result, Comment comment) {
+    addComment(result, comment);
     rd.updateRequest(result);
     this.activeRequests = rd.loadActiveRequests();
   }

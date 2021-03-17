@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -57,7 +58,6 @@ public class ViewUserListController {
         ObservableList<User> users2 = FXCollections.observableArrayList();
         for (User u : App.userService.getUsers()){ // excludes Guests
             if (u.getType() == Role.PATIENT){
-                // todo : check
                 users2.add(new Patient(new SimpleStringProperty(u.getUserID())
                         , new SimpleStringProperty(u.getName()),new SimpleStringProperty(u.getUserName()), new SimpleStringProperty(u.getPassword())
                         , new SimpleStringProperty(String.valueOf(u.getType())), new SimpleStringProperty(u.getPhoneNumber())
@@ -310,7 +310,6 @@ public class ViewUserListController {
                 }
             }
         });
-
 
 //        JFXTreeTableColumn<User, String> treeTableColumnLocationNodeID = new JFXTreeTableColumn<>("Location (Node ID)");
 //        treeTableColumnLocationNodeID.setCellValueFactory((TreeTableColumn.CellDataFeatures<User,String> param) ->{

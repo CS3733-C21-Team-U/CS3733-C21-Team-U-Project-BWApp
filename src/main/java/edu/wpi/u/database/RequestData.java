@@ -58,10 +58,6 @@ public class RequestData extends Data{
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        //add the latest comment to the database
-        System.out.println(request.getComments().get(request.getComments().size()-1).getDescription());
-        addCommentToRequest(request.getRequestID(), request.getComments().get(request.getComments().size()-1));
     }
 
     /**
@@ -73,7 +69,7 @@ public class RequestData extends Data{
         ArrayList<Comment> result = new ArrayList<>();
         result.add(getPrimaryComment(requestID));
         try {
-            String str = "select * from Comments where request=? and type!=? order by created DESC";
+            String str = "select * from Comments where request=? and type!=? order by created ASC";
             PreparedStatement ps = conn.prepareStatement(str);
             ps.setString(1,requestID);
             ps.setString(2,"PRIMARY");

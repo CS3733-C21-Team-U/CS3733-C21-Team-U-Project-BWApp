@@ -87,10 +87,12 @@ public class App extends Application {
   public static Parent base;
   public static Parent loginBase;
   public static Parent guestBase;
+  public static SimpleBooleanProperty updateEmail = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty updatePhoneNumber= new SimpleBooleanProperty(false);
   public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
-  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(true);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
   //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
@@ -174,7 +176,7 @@ public class App extends Application {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewCovidResults.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
 

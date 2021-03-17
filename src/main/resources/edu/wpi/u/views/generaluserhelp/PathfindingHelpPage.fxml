@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.PathFindingHelpController">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -56,15 +55,15 @@
                                  </children>
                               </HBox>
                               <Label styleClass="headline-2" text="Use PathFinding within the Hospital" />
-                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="840.0" prefWidth="1680.0" spacing="20.0">
                                  <children>
-                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                    <VBox prefHeight="623.0" prefWidth="562.0">
                                        <children>
                                           <Label maxWidth="1251.0" prefHeight="61.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;PathFinding&quot; and the application will bring you to the page which is shown at right side." wrapText="true" />
                                           <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="86.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. You can click side bar with 'G, 1, 2, 3, 4, 5'. Each letter or number represents a floor. After you click one of them, the app will display that specific floor map." wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="84.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. On the right top bar, you can enter your location inside the hospital and the location you desired. Then, the path will be generated automatically. You have to follow the direction of the animation." wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="124.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. If you are not familar with location names, you can always select a start node (start location) and an end node(end location). Before you click the end node, a preview path will be generated. After you click the end node, the path will be generated and you should follow the direction of the animation" wrapText="true" />
-                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: Below are the floor representations" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="129.0" prefWidth="473.0" style="-fx-font-size: 18;" styleClass="caption" text="3. On the right top bar, you can enter your location inside the hospital and the location you desired. We have a list of location for you. Then, the path will be generated automatically. You have to follow the direction of the animation." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="170.0" prefWidth="473.0" style="-fx-font-size: 18;" styleClass="caption" text="4. If you are not familar with location names, you can always select a start node (start location) and an end node(end location). Before you click the end node, a preview path will be generated. After you click the end node, the path will be generated and you should follow the direction of the animation" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: You can delete the selected location by clicking the 'X'. Below are the floor representations" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="250.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="G--Outside of the hospital" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="301.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1--First Floor" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="352.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2--Second Floor" wrapText="true" />
@@ -72,13 +71,16 @@
                                           <Label layoutX="10.0" layoutY="454.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4--Fourth Floor" wrapText="true" />
                                           <Label layoutX="10.0" layoutY="505.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5--Fifth Floor" wrapText="true" />
                                        </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
                                     </VBox>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                    <BorderPane maxHeight="-Infinity" prefHeight="639.0" prefWidth="1127.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
                                        <HBox.margin>
                                           <Insets left="40.0" />
                                        </HBox.margin>
                                        <center>
-                                          <ImageView fitHeight="629.0" fitWidth="1078.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                          <ImageView fitHeight="713.0" fitWidth="1111.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                                              <image>
                                                 <Image url="@../Images/pathfinddingnew.png" />
                                              </image>
@@ -89,6 +91,9 @@
                                        </center>
                                     </BorderPane>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets right="20.0" />
+                                 </VBox.margin>
                               </HBox>
                               <Label styleClass="headline-2" text="What If I need direction to the hospital?">
                                  <VBox.margin>

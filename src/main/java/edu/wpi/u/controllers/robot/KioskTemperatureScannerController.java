@@ -97,8 +97,8 @@ public class KioskTemperatureScannerController {
         if(averageLL(rollingAverage) > 100){
             specificData.set(0, "High");
         }
-        App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
-        App.requestService.updateRequest(App.requestService.curCovidRequest);
+        Comment c = App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest, c);
 
         comPort.closePort();
 
@@ -117,8 +117,8 @@ public class KioskTemperatureScannerController {
     public void handleDebugSkipButton(){
         ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
         specificData.set(1,String.valueOf(97));
-        App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
-        App.requestService.updateRequest(App.requestService.curCovidRequest);
+        Comment c = App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest, c);
         comPort.closePort();
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));

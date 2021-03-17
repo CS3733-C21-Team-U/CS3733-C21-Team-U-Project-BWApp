@@ -68,7 +68,7 @@
             <Insets />
          </VBox.margin>
       </JFXButton>
-      <JFXButton fx:id="cancelButton" buttonType="RAISED" cancelButton="true" onAction="#handleCancel" prefWidth="475.0" styleClass="button-contained" text="Cancel">
+      <JFXButton fx:id="cancelButton" cancelButton="true" onAction="#handleCancel" prefWidth="475.0" styleClass="button-text" text="Cancel">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>
