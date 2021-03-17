@@ -63,18 +63,19 @@ public class Request {
     public String getRequestID() {
         return requestID;
     }
+    
     public Timestamp getDateCreated() {
         return getPrimaryComment().timestamp;
     }
+
     public String getCreator() {
         return getPrimaryComment().author;
     }
+
     public Timestamp getDateNeeded() {
         return dateNeeded;
     }
-    public void setDateNeeded(Timestamp d) {
-        this.dateNeeded = d;
-    }
+
     public Timestamp getDateCompleted() {
         if(isResolved()){
             return comments.get(comments.size()-1).timestamp;
@@ -83,34 +84,36 @@ public class Request {
             return null;
         }
     }
+
     public String getDescription() {
         return getPrimaryComment().description;
     }
+
     public String getTitle() {
         return getPrimaryComment().title;
     }
+
     public ArrayList<String> getLocations() {
         return locations;
     }
+
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-    public void setDateCreated(Timestamp dateCreated) {
-        getPrimaryComment().timestamp = dateCreated;
-    }
+
     public void setDescription(String description) {
         getPrimaryComment().description = description;
     }
+
     public void setTitle(String title) {
         getPrimaryComment().title = title;
     }
+
     public void setLocations(ArrayList<String> locations) {
         this.locations = locations;
     }
+
     public ArrayList<String> getAssignees() {return assignees;}
-    public void setAssignees(ArrayList<String> assignees) {
-        this.assignees = assignees;
-    }
 
     public void resolveRequest(Comment c) {
         addComment(c);

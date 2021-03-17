@@ -52,10 +52,6 @@ public abstract class SpecificRequest extends RecursiveTreeObject<SpecificReques
         this.req = r;
         return this;
     }
-    public void fillObject(Request r, ArrayList<String> l) {
-        setRequest(r);
-        setSpecificData(l);
-    }
     public String specificsStorageString(){
         String str = "";
         for(int i = 0; i < getSpecificFields().length; i++){
