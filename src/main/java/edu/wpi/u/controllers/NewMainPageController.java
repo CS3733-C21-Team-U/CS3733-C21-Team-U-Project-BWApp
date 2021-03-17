@@ -128,6 +128,7 @@ public class NewMainPageController {
 
         //setup tooltips
         themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
+        copywriteText.setTooltip(new Tooltip("Copyright"));
         logoutBtn.setTooltip(new Tooltip("Log Out"));
         powerBtn.setTooltip(new Tooltip("Power Down"));
 
