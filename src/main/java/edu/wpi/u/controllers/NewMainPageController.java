@@ -5,6 +5,8 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.controllers.request.ViewRequestListController;
+import edu.wpi.u.controllers.user.ViewUserListController;
 import edu.wpi.u.models.MapService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -66,6 +68,11 @@ public class NewMainPageController {
     public Tab adminTab1;
     public Tab adminTab2;
     public Tab adminTab4;
+
+    //tab controllers
+
+    @FXML private ViewUserListController userTabContentController ;
+    @FXML private ViewRequestListController requestTabContentController ;
 
     public Tab currentTab;
 
@@ -129,6 +136,7 @@ public class NewMainPageController {
         App.throwDialogHerePane = newMainPageStackPane;
 
         detectTab();
+
 
         //setup tooltips
         themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
@@ -601,18 +609,29 @@ public class NewMainPageController {
         }else if (newRequest.match(keyEvent)){
             System.out.println("new request page");
              mainTabPane.getSelectionModel().select(requestTab);
+             mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+                 try {
+                     requestTabContentController.handleNewRequestButton();
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+             });
             //handle adding new request
         }else if (request.match(keyEvent)){
             System.out.println("new request page");
              mainTabPane.getSelectionModel().select(requestTab);
+
         }else if (settings.match(keyEvent)){
             System.out.println("settings page");
              mainTabPane.getSelectionModel().select(settingsTab);
         }else if (help.match(keyEvent)){
             System.out.println("help page");
             //handle user logic
+             if(App.userService.getActiveUser().getType() ==  ADMIN){
+                 mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
 
-//             mainTabPane.getSelectionModel().select(HelpMainPageTab);
+             }else{
+             mainTabPane.getSelectionModel().select(HelpMainPageTab);}
 //             mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
              //
         }else if (mapBuilder.match(keyEvent)){
@@ -624,7 +643,15 @@ public class NewMainPageController {
         }else if (addUser.match(keyEvent)){
             System.out.println("add user page");
              mainTabPane.getSelectionModel().select(adminTab2);
-             //scene switch to add useu
+             //scene switch to add user
+             mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+                 try {
+                     userTabContentController.handleAddUserButton();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             });
+//             mainTabPane.getSelectionModel().getSelectedItem().
         }else if (covidData.match(keyEvent)){
             System.out.println("covid data page");
              mainTabPane.getSelectionModel().select(adminTab4);
