@@ -3,93 +3,209 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.adminhelp.MapBuilderHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <SVGPath content="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" scaleX="2.0" scaleY="2.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use Map Builder" wrappingWidth="449.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
-               <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
-                     <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="1.Screen for editing the map of nodes and edges&#10;In the top right is a list of tools, hover over them to see the tool name&#10;&#10;2.Clicking on a node allows you to move it across the screen to any location, to confirm the changes select ‘save’ after moving in the menu that will pop up&#10;&#10;3.Selecting multi add allows you to select multiple nodes and simultaneously delete them all or edit all of their permissions&#10;&#10;4.Selecting add node, allows you to add an edge at any location and give it a longname, shortname, and node type&#10;&#10;5.Selecting align will allow you to align multiple selected nodes &#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="230.0" fitWidth="58.0" translateX="300.0">
-                           <image>
-                              <Image url="@../Images/sidebarmap.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="50.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="403.0" fitWidth="718.0">
-                           <image>
-                              <Image url="@../Images/User%20manager%20full.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </VBox>
+                  <SVGPath content="M18.17 4.91L17.1 3.84l-5.55 5.55v1.08h1.08l5.54-5.56zM16 2.74l1.29-1.29a1.49 1.49 0 0 1 2.12 0l1.15 1.15c.59.59.59 1.54 0 2.12l-.68.68-.02.02-.58.58-6 6H10V8.74l6-6zm-2.28-.55l-.55.55-1.27 1.27c-3.3.05-5.9 2.6-5.9 6.2 0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.79 6-9.14v-.1l1.8-1.8c.13.6.2 1.24.2 1.9 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8 0-4.98 3.8-8.2 8-8.2.58 0 1.16.06 1.72.18z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use Map Builder" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
                <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+                  <Insets left="70.0" right="30.0" />
                </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <center>
+                                          <ImageView fitHeight="553.0" fitWidth="983.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Mapbuilder.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Map Builder is designed for Administrators. They can use map builder to reconstrcure the hospital's map. They can create nodes, edges. With the map builder, administrators can block some areas by using map builder under emergency situations." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="How to Add and Delete nodes and Edges?" />
+                              <HBox alignment="CENTER" prefHeight="692.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="1021.0" prefWidth="587.0">
+                                       <children>
+                                          <Label layoutX="10.0" layoutY="10.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" styleClass="headline-3" text="Add a Node" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1.Select the third tool(Add node) on the sidebar" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click on the position you choose on the map" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Enter the long name, short name, and select node type" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Click 'Save' and if you want to reselect the point, click 'Cancel'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="300.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" styleClass="headline-3" text="Delete a Node" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="65.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1.Select the first tool (select) on the side bar" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="297.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click the node you would like to delete" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="352.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Click 'Delete'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="246.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" styleClass="headline-3" text="Add an Edge" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="568.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select the fourth tool(Add Edge) on the side bar" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="407.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2.. Select a starting node and an ending node" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="623.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4.Click 'Save'. If you want to reselect the edge, click 'Cancel'" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="354.0" prefWidth="84.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <top>
+                                          <ImageView fitHeight="481.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Mapbuildersidebar.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </top>
+                                    </BorderPane>
+                                    <VBox layoutX="481.0" layoutY="10.0" prefHeight="1021.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" styleClass="headline-3" text="Delete an Edge" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1.Select the first tool (select) on the side bar" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click the edge you would like to delete" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Click 'Delete'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="10.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" styleClass="headline-3" text="Multi Nodes " wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1.Select the second tool(Multi-Select Tool) on the sidebar" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click on nodes you want to select" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" styleClass="headline-3" text="Nodes Alignment" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="65.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1.Select the second tool(Multi-Select Tool) on the sidebar" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="204.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Select nodes" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="65.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3.Select the fifth tool(Align Selected nodes tool) on the sidebar" wrapText="true" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="Undo and Redo" />
+                              <HBox alignment="CENTER" prefHeight="120.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1. If you would like to undo the last move, click the icon on the left side" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2. If you would like to redo the last move, click the icon on the left side" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="354.0" prefWidth="84.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <top>
+                                          <ImageView fitHeight="145.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Mapbuilderundo.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </top>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="745.0" layoutY="1453.0" styleClass="headline-2" text="Floor Selection" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1535.0" prefHeight="120.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="G--Outside of the building" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="1--First Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="52.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="2--Second Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="94.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="3--Third Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="136.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4--Fourth Floor" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="178.0" maxWidth="1251.0" prefHeight="42.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="5--Fifth Floor" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="354.0" prefWidth="84.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <top>
+                                          <ImageView fitHeight="448.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/Mapbuilderfloor.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </top>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1076.0" prefHeight="0.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="335.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="317.0" prefWidth="374.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ContactUS.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />

@@ -2,12 +2,10 @@ package edu.wpi.u.controllers.robot;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
-import edu.wpi.u.controllers.mobile.MobileContainerController;
-import edu.wpi.u.requests.SpecificRequest;
+import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,28 +13,25 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class KioskLoginController {
 
-
-    // TODO: Properly rename JFX artifacts
-    @FXML
-    public JFXTextField userNameTextField;
-    @FXML
-    public JFXPasswordField passWordField;
-    @FXML
-    public JFXButton loginButton;
-    @FXML
-    public JFXButton forgotPasswordButton;
-    @FXML
-    public JFXProgressBar progressBar;
+    @FXML public JFXTextField userNameTextField, reasonForVisitLabel;
+    @FXML public JFXPasswordField passWordField;
     @FXML public JFXButton submitButton;
-    //public JFXButton loginButton2;
     @FXML public Label errorLabel;
-    @FXML public JFXButton debugLoginAdminButton;
-    public JFXButton debugLoginGuestButton;
+    @FXML public JFXButton guestLoginButton;
 
     public void initialize() throws IOException {
+
+        errorLabel.setVisible(false);
+        reasonForVisitLabel.setVisible(false);
+        reasonForVisitLabel.setDisable(true);
+
+        userNameTextField.focusedProperty().addListener(e -> errorLabel.setVisible(false));
+
+        passWordField.focusedProperty().addListener(e -> errorLabel.setVisible(false));
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -46,6 +41,7 @@ public class KioskLoginController {
                 userNameTextField.validate();
             }
         });
+
         RequiredFieldValidator validator4 = new RequiredFieldValidator();
         validator4.setMessage("Username Invalid");
         userNameTextField.getValidators().add(validator4);
@@ -57,7 +53,6 @@ public class KioskLoginController {
             }
         });
 
-
         RequiredFieldValidator validator2 = new RequiredFieldValidator();
         validator2.setMessage("Password Required");
         passWordField.getValidators().add(validator2);
@@ -66,39 +61,9 @@ public class KioskLoginController {
                 passWordField.validate();
             }
         });
-
-        RequiredFieldValidator validator5 = new RequiredFieldValidator();
-        validator5.setMessage("Username Invalid");
-        userNameTextField.getValidators().add(validator5);
-        userNameTextField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal){
-                if (App.userService.checkUsername(passWordField.getText()).equals("")) {
-                    userNameTextField.validate();
-                }
-            }
-
-        });
-
-
-        RequiredFieldValidator validator3 = new RequiredFieldValidator();
-        validator3.setMessage("Token Required");
-        passWordField.getValidators().add(validator3);
-        passWordField.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                passWordField.validate();
-            }
-        });
     }
 
-    public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-        App.userService.setUser("admin", "admin", "Employees");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
-        fxmlLoader.load();
-        fxmlLoader.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-    }
-
-    public void handleReturn(ActionEvent actionEvent) throws IOException {
+    public void handleReturn() throws IOException {
         App.getPrimaryStage().setFullScreen(true);
         App.getPrimaryStage().setWidth(1920);
         App.getPrimaryStage().setHeight(1080);
@@ -108,50 +73,57 @@ public class KioskLoginController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-    public void handleLonginWithNo2FA(ActionEvent actionEvent) {
-        if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
-            if (!App.userService.checkPassword(passWordField.getText(),userNameTextField.getText()).equals("")) {
-                App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkUsername(userNameTextField.getText()));
-                Parent root = null;
-                if(searchRequests()){
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
+    public void handleLonginWithNo2FA() {
+        if(guestLoginButton.getText().equals("Login as Guest")) {
+            if (!App.userService.checkUsername(userNameTextField.getText()).equals("")) {
+                if (!App.userService.checkPassword(passWordField.getText(), userNameTextField.getText()).equals("")) {
+                    App.userService.setUser(userNameTextField.getText(), passWordField.getText(), App.userService.checkUsername(userNameTextField.getText()));
+                    Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+                    KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
+                } else {
+                    errorLabel.setVisible(true);
                 }
-                KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
-                KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
+            } else {
+                errorLabel.setVisible(true);
             }
+        } else{
+            App.userService.addGuest(userNameTextField.getText(), new Timestamp(System.currentTimeMillis()), passWordField.getText(), false);
+            App.userService.setGuest(userNameTextField.getText());
+            App.userService.getActiveUser().setType(Role.GUEST);
+            App.userService.getActiveUser().setUserName(userNameTextField.getText());
+            App.isLoggedIn.set(!App.isLoggedIn.get());
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/robot/KioskCovidSurvey.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            KioskContainerController.getInstance().getMobileRoot().getChildren().clear();
+            KioskContainerController.getInstance().getMobileRoot().getChildren().add(root);
         }
     }
 
-
-    public void handleForgotPassword(ActionEvent actionEvent) {
-    }
-
-    public boolean searchRequests(){
-        for(SpecificRequest r : App.requestService.getRequests()){
-            if(r.getGenericRequest().getCreator() != null){
-                System.out.println(App.userService.getActiveUser().getUserName());
-                System.out.println( r.getType());
-                System.out.println(r.getGenericRequest().isResolved());
-                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
-                    if(r.getSpecificData().get(0).equals("High")){
-                        App.mapInteractionModel.highRisk = true;
-                    }
-                    return true;
-                }
-            }
+    public void handleToggleGuestLogin() {
+        if (guestLoginButton.getText().equals("Login as Guest")){
+            guestLoginButton.setText("Login with Account");
+            userNameTextField.setPromptText("Full Name");
+            reasonForVisitLabel.setVisible(true);
+            reasonForVisitLabel.setDisable(false);
+            passWordField.setVisible(false);
+            passWordField.setDisable(true);
+        }else{
+            guestLoginButton.setText("Login as Guest");
+            userNameTextField.setPromptText("Enter Username");
+            reasonForVisitLabel.setVisible(false);
+            reasonForVisitLabel.setDisable(true);
+            passWordField.setVisible(true);
+            passWordField.setDisable(false);
         }
-        return false;
     }
 }

@@ -38,23 +38,23 @@ public class Request {
     public String editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee) {
         String result = "";
         if(!title.equals(getTitle())){
-            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"'");
+            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"' \n");
             getPrimaryComment().title = title;
         }
         if(!description.equals(getDescription())){
-            result = result.concat("\nDescription changed from '"+getDescription()+"' to "+description);
+            result = result.concat("Description changed from '"+getDescription()+"' to '"+description+"' \n");
             getPrimaryComment().description = description;
         }
         if(!needDate.equals(dateNeeded)){
-            result = result.concat("\nDue Date changed from '"+dateNeeded.toString()+"' to "+needDate.toString());
+            result = result.concat("Due Date changed from '"+dateNeeded.toString()+"' to '"+needDate.toString()+"' \n");
             this.dateNeeded = needDate;
         }
         if(!location.equals(this.locations)){
-            result = result.concat("\nLocations were updated");
+            result = result.concat("Locations were updated \n");
             this.locations = location;
         }
         if(!assignee.equals(this.assignees)){
-            result = result.concat("\nAssignees were updated");
+            result = result.concat("Assignees were updated \n");
             this.assignees = assignee;
         }
         return result;
@@ -63,18 +63,19 @@ public class Request {
     public String getRequestID() {
         return requestID;
     }
+
     public Timestamp getDateCreated() {
         return getPrimaryComment().timestamp;
     }
+
     public String getCreator() {
         return getPrimaryComment().author;
     }
+
     public Timestamp getDateNeeded() {
         return dateNeeded;
     }
-    public void setDateNeeded(Timestamp d) {
-        this.dateNeeded = d;
-    }
+
     public Timestamp getDateCompleted() {
         if(isResolved()){
             return comments.get(comments.size()-1).timestamp;
@@ -83,34 +84,36 @@ public class Request {
             return null;
         }
     }
+
     public String getDescription() {
         return getPrimaryComment().description;
     }
+
     public String getTitle() {
         return getPrimaryComment().title;
     }
+
     public ArrayList<String> getLocations() {
         return locations;
     }
+
     public void setRequestID(String requestID) {
         this.requestID = requestID;
     }
-    public void setDateCreated(Timestamp dateCreated) {
-        getPrimaryComment().timestamp = dateCreated;
-    }
+
     public void setDescription(String description) {
         getPrimaryComment().description = description;
     }
+
     public void setTitle(String title) {
         getPrimaryComment().title = title;
     }
+
     public void setLocations(ArrayList<String> locations) {
         this.locations = locations;
     }
+
     public ArrayList<String> getAssignees() {return assignees;}
-    public void setAssignees(ArrayList<String> assignees) {
-        this.assignees = assignees;
-    }
 
     public void resolveRequest(Comment c) {
         addComment(c);

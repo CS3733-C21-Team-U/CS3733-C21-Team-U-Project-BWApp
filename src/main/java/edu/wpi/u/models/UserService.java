@@ -7,6 +7,10 @@ import edu.wpi.u.users.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -21,8 +25,6 @@ public class UserService {
     ArrayList<Employee> employees = new ArrayList<>();
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
-
-    //HashMap<String, String> easyValidate; // todo : iteration 4?
 
     public String typedUsername;
 
@@ -87,7 +89,6 @@ public class UserService {
     public void setGuest(String name){
         this.activeGuest = ud.setGuest(name);
         this.activeUser = ud.setGuest(name);
-        System.out.println("Guest in us" + ud.setGuest(name));
     }
 
     /**
@@ -96,16 +97,6 @@ public class UserService {
      */
     public void setPatient(String patientID){
         this.activeUser = ud.setPatient(patientID);
-    }
-
-    /**
-     * This function if for debugging purposes and assumes the Employee in already in the database
-     * Sets the active user to a employee
-     * @param username username of employee
-     * @param password password of employee
-     */
-    public void setEmployee(String username, String password){
-        this.activeUser = ud.setEmployee(username,password);
     }
 
     /**
@@ -174,27 +165,6 @@ public class UserService {
      */
     public ArrayList<Guest> getGuests() {
         return guests;
-    }
-
-    /**
-     * Loads the CSV file into the table
-     * @param path the path to the file
-     * @param tableName the table to be loaded into
-     */
-    public void loadCSVFile(String path, String tableName){
-        Database.getDB().dropValues(tableName);
-        Database.getDB().readCSV(path,tableName);
-        this.setGuests();
-        this.setEmployees();
-    }
-
-    /**
-     * Saves the CSV file to the path
-     * @param path the path to the file
-     * @param tableName the table to be saved
-     */
-    public void saveCSVFile(String path, String tableName){
-        Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
     /**
@@ -449,15 +419,6 @@ public class UserService {
     }
 
     /**
-     * Gets a list of employee emails based on a type
-     * @param type all valid role types EXCLUDING DEFAULT
-     * @return the list of emails
-     */
-    public ArrayList<String> getEmployeeEmailByType(String type){
-        return ud.getEmployeeEmailsByType(type);
-    }
-
-    /**
      * Returns the email associated with the given userName
      * @param userName the userName
      * @return the email or "" if no email found/username doesnt exist
@@ -469,5 +430,41 @@ public class UserService {
             }
         }
         return "";
+    }
+    
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        ud.setPreferredContactMethod(userName,method);
+    }
+
+    /**
+     * Gets a preferred contact method
+     * @param userName the username to get the method from
+     * @return the method of contact either Nothing or Both or SMS or Email
+     */
+    public String getPreferredContactMethod (String userName){
+        return ud.getPreferredContactMethod(userName);
+    }
+
+    /**
+     * Changes the app theme
+     * @param themeName the name of the theme
+     */
+    public void changeTheme(String themeName) {
+        File f = new File(String.valueOf(Paths.get("themes.txt")));
+        if (f.delete()) {
+            System.out.println("File deleted when saving");
+            try {
+                FileWriter fw = new FileWriter("themes.txt");
+                fw.write(themeName);
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

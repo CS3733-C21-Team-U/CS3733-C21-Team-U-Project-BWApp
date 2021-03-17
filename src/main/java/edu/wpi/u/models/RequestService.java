@@ -20,17 +20,13 @@ public class RequestService {
   public SimpleStringProperty requestType = new SimpleStringProperty("All");//all request types
   public SimpleStringProperty resolveStatus= new SimpleStringProperty("All");//resolved, active, both
   public SimpleStringProperty assignedStatus= new SimpleStringProperty("All");//assignedToYou, unAssigned, all
-  public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);//assignedToYou, unAssigned, all
+  public SimpleBooleanProperty checkFilters= new SimpleBooleanProperty(false);
 
   public SpecificRequest curCovidRequest;
 
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
-//    for (SpecificRequest x : this.activeRequests){
-//
-//      System.out.println("Req: "+ x.getGenericRequest().getRequestID());
-//    }
   }
 
   /**
@@ -47,22 +43,13 @@ public class RequestService {
     return rd.getLocations(requestID);
   }
 
-  public void loadCSVFile(String path, String tableName){
-    Database.getDB().dropValues(tableName);
-    Database.getDB().readCSV(path,tableName);
-    //this.activeRequests = rd.loadActiveRequests();
-  }
-
-  public void saveCSVFile(String path, String tableName){
-    Database.getDB().saveCSV(tableName,path , "test"); // TODO: Provide header
-  }
-
   public void addRequest(SpecificRequest result) {
     rd.addRequest(result);
     this.activeRequests.add(result);
   }
 
-  public void updateRequest(SpecificRequest result) {
+  public void updateRequest(SpecificRequest result, Comment comment) {
+    addComment(result, comment);
     rd.updateRequest(result);
     this.activeRequests = rd.loadActiveRequests();
   }

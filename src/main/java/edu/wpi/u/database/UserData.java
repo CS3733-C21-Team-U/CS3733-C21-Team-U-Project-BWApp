@@ -34,125 +34,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Hashmap of password , usernames for easier verification
-     * @return the hashmap of all users passwords and usernames
-     */
-    public HashMap<String,String> setEasyValidate(){
-        HashMap<String, String> result = new HashMap<>();
-        String str = "select userName,password from Patients";
-        String str2 = "select userName,password from Employees";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            PreparedStatement ps2 = conn.prepareStatement(str2);
-            ResultSet rs = ps.executeQuery();
-            ResultSet rs2 = ps.executeQuery();
-            while (rs.next()){
-                result.put(rs.getString("password"), rs.getString("username"));
-            }
-            rs.close();
-            ps.close();
-            while (rs2.next()){
-                result.put(rs2.getString("password"), rs2.getString("username"));
-            }
-            rs2.close();
-            ps2.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
-     * Drop all values from the Employees table
-     */
-    public void dropEmployee() {
-        String str = "delete from Employees";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.execute();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Drop all values from the Guests table
-     */
-    public void dropGuests() {
-        String str = "delete from Guests";
-        try {
-                PreparedStatement ps = conn.prepareStatement(str);
-                ps.execute();
-                ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Prints out the patient ids of all patients
-     */
-    public void printPatients(){
-        String str = "select * from Patients";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rs = ps.executeQuery();
-            System.out.println("===Patients===");
-            while (rs.next()){
-                System.out.println("Patients id: " + rs.getString("patientID"));
-            }
-            rs.close();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Prints out the usernames of all employees
-     */
-    public void printEmployees(){
-        String str = "select * from Employees";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rs = ps.executeQuery();
-            System.out.println("===Employees===");
-            while (rs.next()){
-                System.out.println("Employee userName: " + rs.getString("userName"));
-            }
-            rs.close();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Prints out the usernames of all employees
-     */
-    public void printGuest(){
-        String str = "select * from Guests";
-        try {
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rs = ps.executeQuery();
-            System.out.println("===Guests===");
-            while (rs.next()){
-                System.out.println("Guest ID: " + rs.getString("userName"));
-            }
-            rs.close();
-            ps.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Creates a new employee via createAccount portal
      * @param employee the employee object created
      * @return Employee with that username already exists or Employee with that password already exists or Employee added
@@ -327,33 +208,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Gets the password of a given user based on an ID
-     * @param userID the user id
-     * @param type the users type
-     * @return Employees or Patients (table name) or "" if not found
-     */
-    public String getPassword(String userID, String type)  {
-        String typeID ="";
-        String password = "";
-        if (type.equals("Employees")){
-            typeID = "employeeID"; //TODO: Extract this out to a helper function
-        }
-        else if (type.equals("Guests")){
-            typeID = "guestID";
-        }
-        String str = "select password from" + type + " where " + typeID + "=?";
-        try{
-          PreparedStatement ps = conn.prepareStatement(str);
-          ps.setString(1, userID);
-          rset = ps.executeQuery();
-          password = rset.getString("password");
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        return password;
-    }
-
-    /**
      * Changes a users password
      * @param username username of user
      * @param newPassword the new password
@@ -428,6 +282,7 @@ public class UserData extends Data{
         }
         Employee e = new Employee();
         e.setUserID("Debug");
+        e.setUserName("SampleAdmin");
         return e;
     }
 
@@ -458,6 +313,7 @@ public class UserData extends Data{
         }
         Guest g = new Guest();
         g.setUserID("Debug");
+        g.setUserName("SampleGuest");
         return g;
     }
 
@@ -526,6 +382,7 @@ public class UserData extends Data{
         }
         Patient p = new Patient();
         p.setUserID("Debug");
+        p.setUserName("SamplePatient");
         return p;
     }
 
@@ -739,24 +596,6 @@ public class UserData extends Data{
     }
 
     /**
-     * Adds a location (nodeID) to the patient
-     * @param patientID patient id
-     * @param nodeID node id
-     */
-    public void addLocationID(String patientID, String nodeID){
-        String str = "update Patients set locationNodeID=? where patientID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setString(1, nodeID);
-            ps.setString(2, patientID);
-            ps.executeUpdate();
-            ps.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Adds a parking location to the patient location
      * @param patientID id of the patient
      * @param parkingLocation location of the patient
@@ -900,21 +739,6 @@ public class UserData extends Data{
 
     /**
      * Marks a user as deleted by setting the deleted field to false
-     * @param patient the patient
-     */
-    public void delPatient(Patient patient){
-        String str = "update Patients set deleted=? where patientID=?";
-        try{
-            PreparedStatement ps = conn.prepareStatement(str);
-            ps.setBoolean(1,true);
-            ps.setString(2,patient.getUserID());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Marks a user as deleted by setting the deleted field to false
      * @param employee the object containing all of the information on the user
      */
     public void delEmployee(Employee employee){
@@ -1040,5 +864,43 @@ public class UserData extends Data{
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Sets the preferred method of a given user by userName
+     * @param userName the username of the user
+     * @param method the method to be set-> Nothing or Both or SMS or Email
+     */
+    public void setPreferredContactMethod(String userName, String method){
+        String str = "update Employees set preferredContactMethod=? where userName=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1,method);
+            ps.setString(2,userName);
+            ps.execute();
+            ps.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets a preferred contact method
+     * @param userName the username to get the method from
+     * @return the method of contact either Nothing or Both or SMS or Email
+     */
+    public String getPreferredContactMethod(String userName) {
+        String str = "select preferredContactMethod from Employees where userName=?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(str);
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("preferredContactMethod");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "Nothing";
     }
 }

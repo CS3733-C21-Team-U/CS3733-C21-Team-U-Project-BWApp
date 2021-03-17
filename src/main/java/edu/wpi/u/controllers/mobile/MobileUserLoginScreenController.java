@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
+import java.sql.Timestamp;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,10 +54,6 @@ public class MobileUserLoginScreenController {
     //IF NO, THEY WILL BE TAKEN TO THE COVIDSURVEY PAGE
 
     public void initialize() throws IOException {
-
-//        App.getPrimaryStage().setFullScreen(false);
-//        App.getPrimaryStage().setWidth(412);
-//        App.getPrimaryStage().setHeight(732);
 
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
@@ -112,27 +109,7 @@ public class MobileUserLoginScreenController {
 
 
 
-//    //Throws exceptions if username or password not found
-//    public void handleForgotPassword() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-//
-//    public void handleSubmit() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-
-
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-//        if (//user Covid Status approved = true){
-//        App.userService.setUser("admin", "admin", "Employees");
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileEnter2FATokenScreen.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-       // }
         App.userService.setUser("admin", "admin", "Employees");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
         fxmlLoader.load();
@@ -140,20 +117,6 @@ public class MobileUserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-
-
-
-
-//
-//    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-//        App.userService.setUser("patient", "patient", "Guests");
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-//    public void handleBackButton(ActionEvent actionEvent) throws IOException {
-//
-//    }
 
     public void handleReturn(ActionEvent actionEvent) throws IOException {
         App.getPrimaryStage().setFullScreen(true);
@@ -197,12 +160,26 @@ public class MobileUserLoginScreenController {
     public boolean searchRequests(){
         for(SpecificRequest r : App.requestService.getRequests()){
             if(r.getGenericRequest().getCreator() != null){
-                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) &&
-                        r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
-                    if(r.getSpecificData().get(0).equals("High")){
-                        App.mapInteractionModel.highRisk = true;
+                if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName())
+                        && r.getType().equals("CovidSurvey")){
+                    if(r.getGenericRequest().getDateCompleted() != null) {
+                        if ((r.getGenericRequest().getDateCompleted().getTime() + 900000) > new Timestamp(System.currentTimeMillis()).getTime()) {
+                            if (r.getSpecificData().get(0).equals("High")) {
+                                App.mapInteractionModel.highRisk = true;
+                            }else{
+                                App.mapInteractionModel.highRisk = false;
+                            }
+                            return true;
+                        }
+                    }else{
+                        if (r.getSpecificData().get(0).equals("High")) {
+                            App.mapInteractionModel.highRisk = true;
+                        }else{
+                            App.mapInteractionModel.highRisk = false;
+                        }
+                        return true;
                     }
-                    return true;
+
                 }
             }
         }

@@ -28,11 +28,12 @@ public class KioskTemperatureScannerController {
     public JFXButton submitTempButton;
     private LinkedList<Integer> rollingAverage = new LinkedList<>();
     int savedTemp;
+    private SerialPort comPort;
     SimpleBooleanProperty updateFlag = new SimpleBooleanProperty(true);
     public void initialize(){
         if(iHaveTempSensor){
             submitTempButton.setDisable(true);
-            SerialPort comPort = SerialPort.getCommPort("COM5");
+            comPort = SerialPort.getCommPort("COM5");
             comPort.setBaudRate(9600);
             comPort.openPort();
             comPort.addDataListener(new SerialPortDataListener() {
@@ -91,23 +92,15 @@ public class KioskTemperatureScannerController {
     }
 
     public void handelTakeTempButton() {
-
         ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
         specificData.set(1,String.valueOf(averageLL(rollingAverage)));
-        App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
-        App.requestService.updateRequest(App.requestService.curCovidRequest);
-        SpecificRequest curRequest = null;
-        //TODO: This crashes when I toggle the debug flag?
-        for(SpecificRequest curReq: App.requestService.getRequests()){
-            if(curReq.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName()) && curReq.getType().equals("CovidSurvey")){
-                curRequest = curReq;
-            }
+        if(averageLL(rollingAverage) > 100){
+            specificData.set(0, "High");
         }
-        if(curRequest != null){
-            App.requestService.resolveRequest(curRequest, new Comment("Resolve","CLOSED",App.userService.getActiveUser().getUserName(), CommentType.RESOLVE));
-        }else{
-            //be mad
-        }
+        Comment c = App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest, c);
+
+        comPort.closePort();
 
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
@@ -122,6 +115,11 @@ public class KioskTemperatureScannerController {
     }
 
     public void handleDebugSkipButton(){
+        ArrayList<String> specificData = App.requestService.curCovidRequest.getSpecificData();
+        specificData.set(1,String.valueOf(97));
+        Comment c = App.requestService.curCovidRequest.updateRequest(App.requestService.curCovidRequest.getGenericRequest().getTitle(),App.requestService.curCovidRequest.getGenericRequest().getDescription(),App.requestService.curCovidRequest.getGenericRequest().getDateNeeded(),App.requestService.curCovidRequest.getGenericRequest().getLocations(),App.requestService.curCovidRequest.getGenericRequest().getAssignees(),specificData);
+        App.requestService.updateRequest(App.requestService.curCovidRequest, c);
+        comPort.closePort();
         String fxmlLocation = "/edu/wpi/u/views/robot/KioskLastScreen.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
         try {

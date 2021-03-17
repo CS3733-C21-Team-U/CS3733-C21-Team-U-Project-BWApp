@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserSignupScreenController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.login.UserSignupScreenController">
    <children>
       <AnchorPane prefHeight="1080.0" prefWidth="1920.0">
          <children>
@@ -83,8 +83,8 @@
                               </Label>
                            </children>
                         </VBox>
-                        <JFXButton onAction="#handleSignUpButton" styleClass="button-contained" text="SIGN UP" />
-                        <JFXButton onAction="#handleBackButton" styleClass="button-text" text="BACK" />
+                        <JFXButton defaultButton="true" onAction="#handleSignUpButton" styleClass="button-contained" text="SIGN UP" />
+                        <JFXButton cancelButton="true" onAction="#handleBackButton" styleClass="button-text" text="BACK" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

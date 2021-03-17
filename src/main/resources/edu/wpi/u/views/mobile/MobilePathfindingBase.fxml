@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleNode?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -13,23 +12,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="712.0" maxWidth="412.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobilePathFindingBaseController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="300.0" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobilePathFindingBaseController">
     <children>
-        <AnchorPane fx:id="mainAnchorPane" maxHeight="712.0" maxWidth="412.0" minHeight="0.0" minWidth="0.0" prefHeight="712.0" prefWidth="412.0" style="-fx-background-color: -backgroundAlt;">
+        <AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="300.0" style="-fx-background-color: -backgroundAlt;">
             <children>
-            <VBox prefHeight="200.0" prefWidth="412.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0">
                <children>
                   <Accordion>
                     <panes>
-                      <TitledPane animated="false" prefHeight="255.0" prefWidth="412.0" text="Expand">
+                      <TitledPane animated="false" prefHeight="125.0" prefWidth="300.0" text="Expand">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="373.0">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="300.0">
                                  <children>
-                                    <ScrollPane hbarPolicy="NEVER" prefHeight="189.0" prefWidth="414.0" vbarPolicy="NEVER">
+                                    <ScrollPane hbarPolicy="NEVER" prefHeight="189.0" prefWidth="300.0" vbarPolicy="NEVER">
                                       <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="376.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="300.0">
                                              <children>
-                                                <fx:include source="MobileFloatingPathfindingPane.fxml" />
+                                                <fx:include prefWidth="300.0" source="MobileFloatingPathfindingPane.fxml" />
                                              </children></AnchorPane>
                                       </content>
                                     </ScrollPane>
@@ -51,7 +50,7 @@
                         <SVGPath content="m 0, 0 l 15, 0 l -30 0 l 15, 0 l 0, 16 l 0, -30" stroke="BLACK" strokeWidth="5.0" />
                     </graphic>
                 </Button>
-                <VBox layoutX="11.0" layoutY="744.0" prefWidth="7.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                <VBox layoutX="11.0" layoutY="744.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
                     <children>
                         <JFXToggleNode fx:id="floor5" layoutX="10.0" layoutY="10.0" minHeight="70.0" minWidth="70.0" onAction="#handleFloor5Button" styleClass="floor-toggle" text="5">
                             <toggleGroup>
@@ -81,14 +80,17 @@
                         <JFXToggleNode fx:id="floorG" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                     </children>
                 </VBox>
-            <JFXButton fx:id="backButton" buttonType="RAISED" layoutX="90.0" layoutY="636.0" onAction="#handleBack" prefHeight="56.0" prefWidth="87.0" styleClass="bigButtonOutline" text="Go back" />
-            <JFXButton buttonType="RAISED" layoutX="300.0" layoutY="636.0" onAction="#handleNext" prefHeight="56.0" prefWidth="87.0" styleClass="bigButton" text="Load" />
-            <JFXButton buttonType="RAISED" layoutX="184.0" layoutY="636.0" onAction="#handleSaveParking" prefHeight="56.0" prefWidth="108.0" styleClass="bigButton" text="Save Spot" />
+            <VBox alignment="BOTTOM_RIGHT" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <JFXButton buttonType="RAISED" onAction="#handleNext" styleClass="bigButton" text="Load" />
+                  <JFXButton fx:id="backButton" buttonType="RAISED" onAction="#handleBack" styleClass="bigButtonOutline" text="Go back" />
+                  <JFXButton buttonType="RAISED" onAction="#handleSaveParking" styleClass="bigButton" text="Save Spot" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" right="10.0" />
+               </padding>
+            </VBox>
             </children>
         </AnchorPane>
     </children>
-   <stylesheets>
-      <URL value="@../css/LightTheme.css" />
-      <URL value="@../css/BaseStyle.css" />
-   </stylesheets>
 </AnchorPane>

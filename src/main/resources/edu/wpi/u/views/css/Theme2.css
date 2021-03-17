@@ -1,15 +1,17 @@
 /*Base colors here------------------------*/
 
 .root{
-    -primary: #6200ee;
-    -primaryVariant: #3700b3;
-    -secondary: #03DAC6;
-    -secondaryVairant: #018786;
+    -primary: #eec33d;
+    -primaryVariant: #e5ac3f;
+    -secondary: #da6703;
+    -secondaryVairant: #be4b19;
     -background: #FFFFFF;
     -backgroundAlt: #f3f3f3;
+    -requestResolvedColor: #d7d7d7;
+    -requestResolvedColorReal: #d7d7d7;
     -surface: #FFFFFF;
     -error: #B00020;
-    -onPrimary: #FFFFFF;
+    -onPrimary: #000000;
     -onSecondary: #000000;
     -onBackground: #323232;
     -onBackgroundAlt: #919191;

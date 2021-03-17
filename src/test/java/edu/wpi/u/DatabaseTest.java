@@ -17,14 +17,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.sql.*;
+
+//import java.sql.Date;
 
 public class DatabaseTest {
-    /**
-     * RUN TESTS INDIVIDUALLY
-     * When they are all run at the same time, some WILL fail because of how they are accessed
-     * All tests in this class HAVE been tested indiviudally and should be working as described
-     * DELETE "testDB" file after every run (under resources above .gitignore)
-     */
 
     private static String testURL = "jdbc:derby:testDB";
     private static Database dbTest = Database.getDBTest();
@@ -39,62 +36,15 @@ public class DatabaseTest {
      * Main - Uncomment and run to do any live testing, NOT NEEDED FOR UNIT TESTS
      * @throws InvalidEdgeException
      */
-    /*
+
+
     public void main(String[] args) throws InvalidEdgeException {
-        // Permissions for testing
-        ArrayList<Role> roles = new ArrayList<>();
-        roles.add(Role.ADMIN);
-
-        // Nodes for testing
-        Node node1 = new Node("TESTNODE1", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-        Node node2 = new Node("TESTNODE2", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-        Node node3 = new Node("TESTNODE3", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-        Node node4 = new Node("TESTNODE4", 100, 100, "1", "Faulkner", "HALL", "LOOOOONG", "SHORT","U");
-
-        // Edges for testing
-        Edge edge1 = new Edge("TESTNODE1_TESTNODE2", node1, node2, roles);
-        Edge edge2 = new Edge("TESTNODE3_TESTNODE4", node3, node4, roles);
-
-        // Locations for testing
-        ArrayList<String> locations = new ArrayList<String>();
-        locations.add("TEST1");
-        locations.add("Test2");
-
-        // Date for testing
-        Date testDate = new GregorianCalendar(2022, 1, 1).getTime();
-
-        // Stafflist for testing
-        ArrayList<String> staffList = new ArrayList<String>();
-        staffList.add("PersonName1"); // TODO: does the list of staff represent their names or id's (auto generated)
-
-        // Comment for testing
-        Comment testComment = new Comment("Comment 1", "This comment is for testing purposes", "PersonName1", CommentType.PRIMARY, new Timestamp(testDate.getTime()));
-
-
-        // Request for testing
-        ArrayList<String> specificFields = new ArrayList<>();
-        specificFields.add("Machine 1");
-        specificFields.add("High"); // Is this a valid string for priority??
-        SpecificRequest result = new RequestFactory().makeRequest("Maintenance");
-        Request newRequest = new Request("TestRequest1", new Timestamp(System.currentTimeMillis()), locations, staffList, testComment);
-        result.setRequest(newRequest);
-        result.setSpecificData(specificFields);
-
-        mapServiceTestStaging.addNode(node1.getNodeID(),node1.getCords()[0],node1.getCords()[1], node1.getFloor(),node1.getBuilding(),node1.getNodeType(), node1.getLongName(), node1.getShortName());
-        mapServiceTestStaging.addNode(node2.getNodeID(),node2.getCords()[0],node2.getCords()[1], node2.getFloor(),node2.getBuilding(),node2.getNodeType(), node2.getLongName(), node2.getShortName());
-        mapServiceTestStaging.addNode(node3.getNodeID(),node3.getCords()[0],node3.getCords()[1], node3.getFloor(),node3.getBuilding(),node3.getNodeType(), node3.getLongName(), node3.getShortName());
-        mapServiceTestStaging.addNode(node4.getNodeID(),node4.getCords()[0],node4.getCords()[1], node4.getFloor(),node4.getBuilding(),node4.getNodeType(), node4.getLongName(), node4.getShortName());
-
-        userServiceTest.addEmployee("PersonName1", "UserName1", "password1", "email1", Role.ADMIN, "1111111111", "TEST1",false);
-        userServiceTest.addEmployee("PersonName2", "UserName2", "password2", "email2", Role.MAINTENANCE, "2222222222", "TEST2",false);
-        userServiceTest.addEmployee("PersonName3", "UserName3", "password", "email3", Role.ADMIN, "3333333333", "TEST3",false);
-
-        requestServiceTest.addRequest(result);
-        ArrayList<SpecificRequest> testRequests = requestServiceTest.getRd().loadActiveRequests();
-
+        CovidService csMain = new CovidService(testURL);
+        csMain.addDataPoint(true);
+        csMain.addDataPoint(true);
+        csMain.addDataPoint(false);
+        System.out.println("Got to main");
     }
-
-    */
 
 
     @After
@@ -297,6 +247,7 @@ public class DatabaseTest {
         assertEquals(requestServiceTest.getRequests().get(0).getType(), result.getType());
     }
 
+    /*
     @Test
     public void testUpdateRequest() throws InvalidEdgeException {
         dbTest.dropAllValues();
@@ -331,6 +282,7 @@ public class DatabaseTest {
         //assertEquals(result2.getGenericRequest().getPrimaryComment(), testComment2);
         assertEquals(requestServiceTest.getRequests().get(0).getGenericRequest().getComments().get(1).getAuthor(), testComment2.getAuthor());
     }
+    */ // TODO: Update
 
     @Test
     public void testResolveRequest() {
@@ -694,5 +646,19 @@ public class DatabaseTest {
 
     } // TODO: Reevaluate when appointments is talked about
     */
+
+//    @Test
+//    public void testCovidData(){
+//        CovidService cs = new CovidService(testURL);
+//        java.sql.Date todayDate = java.sql.Date.valueOf(String.valueOf(java.time.LocalDateTime.now()));
+//        todayDate.toLocalDate();
+//
+//        cs.addDataPoint(true);
+//        cs.addDataPoint(true);
+//
+//        assertEquals(cs.getSymptomatic(todayDate),2);
+//
+//    }
+
 
 }

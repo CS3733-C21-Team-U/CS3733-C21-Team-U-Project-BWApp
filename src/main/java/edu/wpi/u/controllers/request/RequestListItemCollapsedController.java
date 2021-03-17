@@ -1,7 +1,9 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,20 +23,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     public RequestListItemContainerController parent;
 
-    //@FXML public Button expandCollapseButton;     DNE
-    //@FXML public Button editRequestButton;        DNE
-    //@FXML public AnchorPane requestItemAnchor;    DNE
-
-    //@FXML public Button deleteRequestButton;      DNE
-
     @FXML public Button viewRequestButton;
     @FXML public Label requestItemDescriptionLabel;
-    //@FXML public TextField title;
-    //@FXML public TextField location;
 
-    //public boolean isCollapsed = true;
     @FXML public Label requestItemTitleLabel;
-//    @FXML public JFXChipView requestItemLocationChipView;
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
@@ -42,8 +34,8 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemAssigneeLabel;
 
     @FXML public AnchorPane requestItemRoot;
-//    @FXML public SVGPath requestIcon;
     @FXML public SVGPath requestIcon;
+    @FXML public JFXButton iconContainer;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
@@ -55,6 +47,11 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        App.isLoggedIn.addListener((o,oldVal,newVal) -> {
+            showOrNottoSHow();
+        });
+
         requestIcon.setContent(parent.getIcon(parent.request.getType()));
         setFields();
 
@@ -78,6 +75,19 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             showOrNottoSHow();
         });
 
+        parent.isResolved.addListener((o, oldVal, newVal)->{
+            if(parent.request.getGenericRequest().isResolved()){
+                requestItemDate2BCompletedLabel.setText("Request Resolved");
+                if(App.themeString.equals("DARK")){
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px; -fx-opacity: 0.8");
+                }else{
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px;");
+                }
+                iconContainer.setStyle("-fx-background-color: -primaryVariant;");
+
+            }
+        });
+
     }
 
     public void handleShowDetailButton(ActionEvent actionEvent) throws IOException {
@@ -92,6 +102,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     }
 
     public void showOrNottoSHow(){
+        //for user role
+        //Patients only see requests that they are the author of
+        boolean role = (!App.userService.getActiveUser().getType().equals(Role.PATIENT)) || App.userService.getActiveUser().getUserName().equals(parent.request.getGenericRequest().getCreator());
+
         //for requests
         boolean type = parent.request.getType().equals(App.requestService.requestType.getValue())
                 || App.requestService.requestType.getValue().equals("All");
@@ -103,7 +117,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         boolean resolved = (App.requestService.resolveStatus.getValue().equals("Active")&&!parent.request.getGenericRequest().isResolved())
                 ||(App.requestService.resolveStatus.getValue().equals("Resolved")&&parent.request.getGenericRequest().isResolved())||(App.requestService.resolveStatus.getValue().equals("All"));
 
-            if(type && assignee && resolved){
+            if(type && assignee && resolved && role){
                 appear();
             }
             else{
@@ -114,13 +128,23 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     private void setFields(){
         requestItemTitleLabel.setText(parent.request.getGenericRequest().getTitle());
         Timestamp t = parent.request.getGenericRequest().getDateNeeded();
-        if(t.before(new Timestamp(System.currentTimeMillis()))){
+        if(parent.request.getGenericRequest().isResolved()){
+            requestItemDate2BCompletedLabel.setText("Request Resolved");
+            requestItemTitleLabel.setText("[RESOLVED] " + parent.request.getGenericRequest().getTitle());
+            if(App.themeString.equals("DARK")){
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px; -fx-opacity: 0.6");
+            }else{
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px;");
+            }
+            iconContainer.setStyle("-fx-background-color: -primaryVariant;");
+        }
+        else if(t.before(new Timestamp(System.currentTimeMillis()))){
             requestItemDate2BCompletedLabel.setText("Overdue: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
         else{
             requestItemDate2BCompletedLabel.setText("Due: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());
         }
-        requestItemCreatorLabel.setText("By " + parent.request.getGenericRequest().getCreator());
+        requestItemCreatorLabel.setText(parent.request.getGenericRequest().getCreator());
         requestItemRequestTypeLabel.setText(parent.request.getType());
         int locationsSize = parent.request.getGenericRequest().getLocations().size();
         int assigneeSize = parent.request.getGenericRequest().getAssignees().size();

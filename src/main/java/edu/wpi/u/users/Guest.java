@@ -84,10 +84,6 @@ public class Guest extends User{
         return guestID;
     }
 
-    public void setGuestID(String guestID) {
-        this.guestID = guestID;
-    }
-
     @Override
     public String getName() {
         return name;
@@ -102,16 +98,8 @@ public class Guest extends User{
         return visitDate;
     }
 
-    public void setVisitDate(Timestamp visitDate) {
-        this.visitDate = visitDate;
-    }
-
     public String getVisitReason() {
         return visitReason;
-    }
-
-    public void setVisitReason(String visitReason) {
-        this.visitReason = visitReason;
     }
 
     @Override

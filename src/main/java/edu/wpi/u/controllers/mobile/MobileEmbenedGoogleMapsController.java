@@ -18,7 +18,7 @@ public class MobileEmbenedGoogleMapsController {
             "&destination=1153+Centre+St+Jamaica+Plain+MA+02130" +
             "&avoid=tolls|highways";
     public void initialize(){
-        googleMapsEmbedded.getEngine().loadContent("<iframe width='412' height='687' src='" + URL + "' />");
+        googleMapsEmbedded.getEngine().loadContent("<iframe width='280' height='425' src='" + URL + "' />");
     }
 
     public void handleNext1() throws IOException {

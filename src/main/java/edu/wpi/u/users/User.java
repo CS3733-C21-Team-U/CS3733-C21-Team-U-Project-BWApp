@@ -45,7 +45,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.deleted = deleted;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        //this.locationNodeID = locationNodeID;
     }
 
     public User(StringProperty userIDfx, StringProperty namefx, StringProperty userNamefx, StringProperty passwordfx, StringProperty typefx, StringProperty phoneNumberfx, StringProperty emailfx, BooleanProperty deletedfx) {
@@ -57,7 +56,6 @@ public abstract class User extends RecursiveTreeObject<User> {
         this.phoneNumberfx = phoneNumberfx;
         this.emailfx = emailfx;
         this.deletedfx = deletedfx;
-        //this.locationNodeIDfx = locationNodeIDfx;
     }
 
     public User(String guestID, String guestName, Timestamp visitDate, String visitReason) {

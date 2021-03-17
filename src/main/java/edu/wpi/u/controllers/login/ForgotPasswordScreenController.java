@@ -77,43 +77,7 @@ public class ForgotPasswordScreenController {
                         validationCodeFeild.setDisable(false);
                         sentCode = true;
                     }
-//                    Future<Integer> whenStatusCode = client.prepareGet(url.toString())
-//                            .execute(new AsyncHandler<Integer>() {
-//                                private Integer status;
-//                                @Override
-//                                public State onStatusReceived(HttpResponseStatus responseStatus) throws Exception {
-//                                    status = responseStatus.getStatusCode();
-//                                    System.out.println("At status code");
-//                                    return State.CONTINUE;
-//                                }
-//                                @Override
-//                                public State onHeadersReceived(HttpHeaders headers) throws Exception {
-//                                    System.out.println("At headers code");
-//                                    return State.CONTINUE;
-//                                }
-//                                @Override
-//                                public State onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
-//                                    byte[] b = bodyPart.getBodyPartBytes();
-//                                    String y = new String(b);
-//                                    System.out.println(y.contains("pending"));
-//                                    if (y.contains("pending")){
-//                                        // TODO : Set alignment
-//                                    }
-//                                    sentCode = true;
-//                                    validationCodeFeild.setDisable(false);
-//                                    resetButton.setText("Verify Code");
-//                                    return State.CONTINUE;
-//                                }
-//
-//                                @Override
-//                                public Integer onCompleted() throws Exception {
-//                                    return status;
-//                                }
-//                                @Override
-//                                public void onThrowable(Throwable t) {
-//                                    t.printStackTrace();
-//                                }
-//                            });
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -10,65 +9,145 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskLoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: -background;" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskLoginController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1558.0" spacing="10.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" style="-fx-background-color: -background;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" maxWidth="325.0" prefHeight="87.0" prefWidth="324.0" spacing="20.0">
-               <children>
-                  <ImageView fitHeight="200.0" fitWidth="150.0" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/logo.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label prefHeight="41.0" prefWidth="183.0" styleClass="headline-3" text="Login Portal">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label prefHeight="31.0" prefWidth="142.0" text="Enter the BWH System" textAlignment="CENTER" wrapText="true">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <JFXTextField fx:id="userNameTextField" labelFloat="true" minWidth="0.0" prefWidth="325.0" promptText="Enter Username">
+            <JFXTextField fx:id="userNameTextField" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Enter Username">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXPasswordField fx:id="passWordField" labelFloat="true" prefHeight="25.0" prefWidth="1508.0" promptText="Enter Password">
+            <JFXPasswordField fx:id="passWordField" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" promptText="Enter Password">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </JFXPasswordField>
-            <JFXProgressBar fx:id="progressBar" prefHeight="13.0" prefWidth="302.0" style="-fx-opacity: 0;">
+            <JFXTextField fx:id="reasonForVisitLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="Reason For Visit">
                <VBox.margin>
-                  <Insets />
+                  <Insets top="-60.0" />
                </VBox.margin>
-            </JFXProgressBar>
-            <Label fx:id="errorLabel1" prefHeight="15.0" prefWidth="0.0" style="-fx-text-fill: -error;" />
-            <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" defaultButton="true" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="314.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </JFXButton>
-            <JFXButton fx:id="returnButton" buttonType="RAISED" cancelButton="true" onAction="#handleReturn" prefHeight="50.0" prefWidth="304.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
-            <JFXButton fx:id="debugButton" onAction="#handleDebugLogin" opacity="0.0" prefHeight="0.0" prefWidth="304.0" styleClass="button-outlined" text="Debug Login">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </JFXButton>
+            </JFXTextField>
+            <Label fx:id="errorLabel" style="-fx-text-fill: -error;" text="Username/Password dont match" />
          </children>
+         <padding>
+            <Insets top="-800.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="100.0" style="-fx-background-color: -primary;">
+               <children>
+                  <VBox prefWidth="600.0" style="-fx-background-color: -primary;">
+                     <children>
+                        <Line endX="250.0" startX="-250.0" stroke="WHITE" strokeWidth="10.0">
+                           <VBox.margin>
+                              <Insets bottom="-25.0" left="50.0" top="20.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox spacing="120.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Circle fill="#2bae41" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Login" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Circle fill="#003da6" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Survey" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Circle fill="#003da6" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Read Tempature" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Circle fill="#003da6" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Clean Screen" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="40.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Pane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <ImageView fitHeight="175.0" fitWidth="150.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label styleClass="headline-2" text="Login Portal">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="BOTTOM_CENTER" layoutY="598.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="598.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="submitButton" alignment="CENTER" buttonType="RAISED" defaultButton="true" onAction="#handleLonginWithNo2FA" prefHeight="50.0" prefWidth="200.0" styleClass="bigButton" text="Login" textOverrun="CLIP">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></JFXButton>
+                  <JFXButton fx:id="guestLoginButton" alignment="CENTER" onAction="#handleToggleGuestLogin" prefHeight="50.0" prefWidth="200.0" styleClass="bigButton" text="Login as Guest" />
+               </children>
+            </HBox>
+            <JFXButton fx:id="returnButton" buttonType="RAISED" cancelButton="true" onAction="#handleReturn" prefHeight="50.0" prefWidth="420.0" styleClass="bigButtonOutline" text="Return to Desktop App" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

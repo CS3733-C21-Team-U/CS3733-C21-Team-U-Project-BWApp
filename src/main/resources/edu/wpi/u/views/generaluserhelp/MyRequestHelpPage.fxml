@@ -3,109 +3,184 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.LogInHelpController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.MyRequestHelpController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="-9.0" prefHeight="974.0" prefWidth="1582.0">
-         <children>
-            <VBox alignment="TOP_RIGHT" prefHeight="69.0" prefWidth="1295.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" onAction="#handleBackToMainPageButton" prefWidth="204.0" styleClass="button-outlined" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page">
-                     <graphic>
-                        <SVGPath content="M0 0h24v24H0zM20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                     </graphic>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <SVGPath content="M3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29zM3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29zM3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29zM3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29z" scaleX="2.0" scaleY="2.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </SVGPath>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline-2" text="How to Use My Request" textAlignment="CENTER" wrappingWidth="390.15234375">
-               <font>
-                  <Font name="Serif Bold" size="41.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="50.0" top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="714.0" prefWidth="1582.0">
-               <children>
-                  <VBox prefHeight="711.0" prefWidth="657.0">
-                     <children>
-                        <TextArea editable="false" prefHeight="677.0" prefWidth="655.0" styleClass="headline-3" text="Within My Requests, the user can click on the new request button in the top right to create a new service request, or select the show details button to view the details of an existing request.&#10;&#10;&#10;&#10;&#10;&#10;If there is any other issues. Please contact the IT department." wrapText="true">
-                           <font>
-                              <Font name="HoloLens MDL2 Assets" size="25.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="684.0" prefWidth="929.0">
-                     <children>
-                        <ImageView fitHeight="153.0" fitWidth="191.0" translateX="220.0">
-                           <image>
-                              <Image url="@../Images/my%20request.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="50.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 1" translateX="310.0" translateY="-50.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="-40.0" />
-                           </VBox.margin>
-                        </Text>
-                        <ImageView fitHeight="292.0" fitWidth="726.0">
-                           <image>
-                              <Image url="@../Images/add%20request.png" />
-                           </image>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 2" translateX="325.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <ImageView fitHeight="201.0" fitWidth="937.0">
-                           <image>
-                              <Image url="@../Images/view%20+add%20request.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets left="-30.0" right="-30.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text layoutX="90.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Figure 3" translateX="330.0">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </VBox>
+                  <SVGPath content="M3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29zM3,21l3.75,0L17.81,9.94l-3.75-3.75L3,17.25L3,21z M5,18.08l9.06-9.06l0.92,0.92L5.92,19L5,19L5,18.08zM18.37,3.29c-0.39-0.39-1.02-0.39-1.41,0l-1.83,1.83l3.75,3.75l1.83-1.83c0.39-0.39,0.39-1.02,0-1.41L18.37,3.29z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use My Request" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
                </children>
                <padding>
-                  <Insets bottom="-40.0" left="80.0" top="10.0" />
+                  <Insets left="70.0" right="30.0" />
                </padding>
             </HBox>
-         </children>
-      </VBox>
+         </top>
+         <center>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefWidth="587.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1251.0" prefHeight="84.0" prefWidth="384.0" styleClass="headline-2" text="What is My Request?" wrapText="true" />
+                                          <Label maxWidth="1251.0" prefHeight="163.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="My Request is another major feature in our application. There are 12 different requests that we are offereing. With my request feature, general users are able to send their request to the hospital. And our employees will reslove your requests. In the meantime, users are able to track their requests' status." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="Create a Service Request" />
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="63.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Select &quot;My Request&quot; Tab and Click '+ New Request' button" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="65.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Choose the service type by selecting one of the 12 icons on the right side" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="494.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Then, fill all the fields. Click 'calender icon' to select date deadline and click 'clock icon' to select time deadline." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="258.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="4. Click 'Save'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="208.0" maxWidth="1251.0" prefHeight="51.0" prefWidth="587.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: If you can not add assginee, please check the assignee's type. It has to be admin" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="620.0" prefWidth="1056.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" right="20.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="612.0" fitWidth="1159.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/addrequestnew.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="headline-2" text="View and Filter your requests" />
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="585.0" fitWidth="1185.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/filterviewrequest.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="69.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Click 'Choose Type' and select the type you want to see" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click 'Reslove Status' and select active requests or resloved requests" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="79.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="3. Click 'Assign Status' and select unassgined or assgined to you requests " wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="216.0" maxWidth="1251.0" prefHeight="67.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: All you requests will be displayed in this page." wrapText="true" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="652.0" layoutY="1089.0" styleClass="headline-2" text="View and Edit your Request Detail" />
+                              <HBox alignment="CENTER" layoutX="30.0" layoutY="1171.0" prefHeight="401.0" prefWidth="1744.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="587.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="69.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="1. Find the Request you would like to see" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="174.0" maxWidth="1251.0" prefHeight="55.0" prefWidth="571.0" style="-fx-font-size: 18;" styleClass="caption" text="2. Click 'Show Detail', all information of the request will be displaed." wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="79.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="3. If you would like to make any comments, you can type any comments and click 'Comment' to submit" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="134.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="4. If you would like to cancel the request or the request has been resloved, please click 'Reslove'" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="204.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="5. Also, you can click 'PATHFIND TO LOCAITON' which will display all locations available for your request" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="274.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="6. Click 'Collapse' to collapse the request's detail" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="344.0" maxWidth="1251.0" prefHeight="70.0" prefWidth="399.0" style="-fx-font-size: 18;" styleClass="caption" text="Notice: All resloved requests can not be edited again!" wrapText="true" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                       <HBox.margin>
+                                          <Insets left="40.0" right="20.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="585.0" fitWidth="1185.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ViewRequestdetail.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                              <Label layoutX="301.0" layoutY="994.0" styleClass="headline-2" text="Need more help?" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="1076.0" prefHeight="0.0" prefWidth="1700.0" spacing="20.0">
+                                 <children>
+                                    <VBox prefHeight="401.0" prefWidth="335.0">
+                                       <children>
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <BorderPane prefHeight="317.0" prefWidth="374.0">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                       <center>
+                                          <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                             <image>
+                                                <Image url="@../Images/ContactUS.png" />
+                                             </image>
+                                             <BorderPane.margin>
+                                                <Insets />
+                                             </BorderPane.margin>
+                                          </ImageView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </children>
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />

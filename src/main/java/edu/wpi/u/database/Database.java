@@ -13,7 +13,6 @@ public class Database {
     private final static String url = "jdbc:derby:BWdb;create=true";
     // Url for testing
     private final static String testURL = "jdbc:derby://localhost:1527/BWdb;create=true";
-    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
     /**
      *  Constructor for database that is used for DB
@@ -24,18 +23,7 @@ public class Database {
         makeCSVDependant(false);
         createTables();
     }
-
-//    /**
-//     * Constructor for database that is called in 2nd singleton to create a second DB for testing
-//     * @param urlIn - URL of testing db, has to be defined in this file
-//     */
-//    public Database(String urlIn) {
-//        driver();
-//        connect(urlIn);
-//        makeCSVDependant(false);
-//        createTables();
-//    }
-
+    
     /**
      * Singleton class for live DB (BWDB)
      */
@@ -139,7 +127,7 @@ public class Database {
                 ps3.execute();
 
                 String tbl4 =
-                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, primary key(employeeID))";
+                        "create table Employees (employeeID varchar(50) not null, name varchar(50), userName varchar(100), password varchar(100), email varchar(250), type varchar(50), phoneNumber varchar(100), locationNodeID varchar(50) references Nodes, deleted boolean, preferredContactMethod varchar(50), primary key(employeeID))";
                 PreparedStatement ps4 = conn.prepareStatement(tbl4);
                 ps4.execute();
 
@@ -251,26 +239,6 @@ public class Database {
     }
 
     /**
-     * This will print all of the requests from a Request table
-     *
-     * @param aTable table name
-     */
-    public void printRequestTable(String aTable) {
-        try {
-            String str = "select * from " + aTable;
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rset = ps.executeQuery();
-            while (rset.next()) {
-                String id = rset.getString("requestID");
-                System.out.println("Request id: " + id);
-            }
-            rset.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Checks to see if the Nodes table is populated and assumes the rest of the tables are created if it is
      *
      * @return true if no tables have been created, false otherwise
@@ -290,6 +258,8 @@ public class Database {
         try {
             String str;
             Statement s = conn.createStatement();
+            str = "delete from covidSurveyResult";
+            s.execute(str);
             str = "delete from Comments";
             s.execute(str);
             str = "delete from Permissions";

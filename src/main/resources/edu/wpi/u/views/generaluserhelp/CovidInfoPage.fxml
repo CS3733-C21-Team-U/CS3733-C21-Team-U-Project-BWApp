@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.CovidInfoController">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.CovidInfoController">
     <children>
-        <ScrollPane layoutX="233.0" layoutY="84.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1262.0" prefWidth="1679.0">
-                    <children>
-                        <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="8.0" prefHeight="1262.0" prefWidth="1679.0" spacing="50.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
+      <BorderPane prefHeight="1000.0" prefWidth="1700.0">
+         <top>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="1700.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="1077.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="COVID-19 Information" />
+                  <Region prefHeight="88.0" prefWidth="168.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
+               </children>
+               <padding>
+                  <Insets left="70.0" right="30.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+              <ScrollPane prefHeight="1000.0" prefWidth="1700.0" BorderPane.alignment="CENTER">
+               <content>
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="1009.0" prefWidth="1700.0" spacing="50.0">
                             <children>
-                                <Label styleClass="headline-1" text="COVID-19 Information" />
                                 <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1610.0" style="-fx-background-color: -primary; -fx-background-radius: 7;">
                                     <children>
                                         <VBox prefHeight="236.0" prefWidth="1610.0" spacing="15.0">
@@ -151,19 +165,18 @@
                                         </VBox>
                                     </children>
                                 </Pane>
-                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1679.0">
-                                    <children>
-                                        <JFXButton onAction="#handleBackToMainPageButton" prefHeight="55.0" prefWidth="330.0" styleClass="button-contained" text="Return to Help Page" />
-                                    </children>
-                                </HBox>
                             </children>
-                            <padding>
-                                <Insets top="50.0" />
-                            </padding>
+                     <padding>
+                        <Insets top="50.0" />
+                     </padding>
                         </VBox>
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
+               </content>
+              </ScrollPane>
+         </center>
+      </BorderPane>
     </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
 </AnchorPane>

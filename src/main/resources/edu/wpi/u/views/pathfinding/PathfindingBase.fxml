@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -51,6 +52,7 @@
                   <JFXToggleNode fx:id="floorG" minHeight="70.0" minWidth="70.0" onAction="#handleFloorGButton" selected="true" styleClass="floor-toggle" text="G" toggleGroup="$Floor" />
                </children>
             </VBox>
+            <Label layoutX="117.0" layoutY="963.0" style="-fx-background-color: rgba(255,255,255,0.5);" text="© The Brigham &amp; Women's Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." />
          </children>
       </AnchorPane>
    </children>

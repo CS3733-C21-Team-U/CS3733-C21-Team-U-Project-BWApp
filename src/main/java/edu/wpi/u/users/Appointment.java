@@ -1,10 +1,7 @@
 package edu.wpi.u.users;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
-
-// todo : Remove this class from Patients // not used
 public class Appointment {
     private String appointmentID;
     private String patientID;
@@ -36,15 +33,7 @@ public class Appointment {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Timestamp appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
     public String getAppointmentType() {
         return appointmentType;
-    }
-
-    public void setAppointmentType(String appointmentType) {
-        this.appointmentType = appointmentType;
     }
 }

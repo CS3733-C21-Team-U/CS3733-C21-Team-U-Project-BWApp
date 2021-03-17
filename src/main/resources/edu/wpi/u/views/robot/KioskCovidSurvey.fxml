@@ -10,135 +10,200 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskCovidSurveyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: -background;" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.robot.KioskCovidSurveyController">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="30.0" layoutY="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane maxHeight="800.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane prefHeight="100.0" style="-fx-background-color: -primary;">
                <children>
-                  <VBox maxHeight="800.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0">
+                  <VBox prefWidth="600.0" style="-fx-background-color: -primary;">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-                           <children>
-                              <ImageView fitHeight="120.0" fitWidth="115.0">
-                                 <image>
-                                    <Image url="@../Images/logo.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="20.0" top="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="headline-2" text="COVID Survey">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
+                        <Line endX="250.0" startX="-250.0" stroke="WHITE" strokeWidth="10.0">
                            <VBox.margin>
-                              <Insets />
+                              <Insets bottom="-25.0" left="50.0" top="20.0" />
                            </VBox.margin>
-                        </HBox>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" prefWidth="600.0" spacing="50.0">
+                        </Line>
+                        <HBox spacing="120.0">
                            <children>
-                              <HBox minHeight="-Infinity" minWidth="-Infinity">
+                              <VBox alignment="TOP_CENTER">
                                  <children>
-                                    <JFXCheckBox fx:id="Q1CheckBox" prefHeight="18.0" prefWidth="9.0" text=" ">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </JFXCheckBox>
-                                    <Label alignment="TOP_LEFT" maxWidth="500.0" text="I have had a symptomatic COVID-19 test or I have recieved positive test result for COVID- 19 in the last 14 days." wrapText="true">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
+                                    <Circle fill="#2bae41" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Login" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
                                     </Label>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox>
+                              </VBox>
+                              <VBox alignment="CENTER">
                                  <children>
-                                    <JFXCheckBox fx:id="Q2CheckBox" text=" ">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </JFXCheckBox>
-                                    <Label maxWidth="500.0" text="I am experiencing COVID-19 like symptoms.">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
+                                    <Circle fill="#2bae41" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Survey" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
                                     </Label>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="35.0" prefWidth="412.0">
+                              </VBox>
+                              <VBox alignment="TOP_CENTER">
                                  <children>
-                                    <JFXCheckBox fx:id="Q3CheckBox" text=" ">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </JFXCheckBox>
-                                    <Label alignment="TOP_LEFT" maxWidth="500.0" text="I have been in close contact with someone diagnosed with COVID-19 in the last 14 days." wrapText="true" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="35.0" prefWidth="319.0">
-                                 <children>
-                                    <JFXCheckBox fx:id="Q4CheckBox" text=" ">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </JFXCheckBox>
-                                    <Label maxWidth="500.0" text="I have been asked to self-isolate or quarantine by a doctor or local public health official in the last 14 days." wrapText="true" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="15.0" prefWidth="616.0">
-                                 <children>
-                                    <JFXCheckBox fx:id="Q5CheckBox" text=" ">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </JFXCheckBox>
-                                    <Label maxWidth="500.0" text="I feel good (No COVID/ No Symptoms)">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
+                                    <Circle fill="#003da6" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Read Tempature" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
                                     </Label>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
-                              <JFXButton fx:id="submitSurveyButton" buttonType="RAISED" defaultButton="true" onAction="#handleCovidSurveyFill" prefHeight="65.0" prefWidth="318.0" styleClass="bigButton" text="Submit">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </JFXButton>
-                              <Label fx:id="errorLabel" styleClass="error-label" />
+                              </VBox>
+                              <VBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Circle fill="#003da6" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Label style="-fx-text-fill: -onPrimary;" text="Clean Screen" textFill="WHITE">
+                                       <VBox.margin>
+                                          <Insets left="-50.0" right="-50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
-                           <VBox.margin>
-                              <Insets top="50.0" />
-                           </VBox.margin>
                            <padding>
-                              <Insets left="20.0" right="20.0" top="20.0" />
+                              <Insets left="40.0" />
                            </padding>
-                        </VBox>
+                        </HBox>
+                        <Line endX="-81.0" fill="#2bae41" layoutX="315.0" startX="-250.0" stroke="#2bae41" strokeWidth="4.0">
+                           <VBox.margin>
+                              <Insets left="50.0" top="-37.0" />
+                           </VBox.margin>
+                        </Line>
                      </children>
+                     <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                     </padding>
                   </VBox>
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Pane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <ImageView fitHeight="175.0" fitWidth="150.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label styleClass="headline-2" text="COVID Survey">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" prefWidth="600.0" spacing="30.0">
+               <children>
+                  <HBox minHeight="-Infinity" minWidth="-Infinity">
+                     <children>
+                        <JFXCheckBox fx:id="Q1CheckBox" prefHeight="18.0" prefWidth="9.0" text=" ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                        <Label alignment="TOP_LEFT" maxWidth="500.0" text="I have had a symptomatic COVID-19 test or I have recieved positive test result for COVID- 19 in the last 14 days." wrapText="true">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <JFXCheckBox fx:id="Q2CheckBox" text=" ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                        <Label maxWidth="500.0" text="I am experiencing COVID-19 like symptoms.">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="35.0" prefWidth="412.0">
+                     <children>
+                        <JFXCheckBox fx:id="Q3CheckBox" text=" ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                        <Label alignment="TOP_LEFT" maxWidth="500.0" text="I have been in close contact with someone diagnosed with COVID-19 in the last 14 days." wrapText="true" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="35.0" prefWidth="319.0">
+                     <children>
+                        <JFXCheckBox fx:id="Q4CheckBox" text=" ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                        <Label maxWidth="500.0" text="I have been asked to self-isolate or quarantine by a doctor or local public health official in the last 14 days." wrapText="true" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="15.0" prefWidth="616.0">
+                     <children>
+                        <JFXCheckBox fx:id="Q5CheckBox" text=" ">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                        <Label maxWidth="500.0" text="I feel good (No COVID/ No Symptoms)">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <JFXButton fx:id="submitSurveyButton" buttonType="RAISED" defaultButton="true" onAction="#handleCovidSurveyFill" prefHeight="65.0" prefWidth="318.0" styleClass="bigButton" text="Submit">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Label fx:id="errorLabel" styleClass="error-label" />
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
          </children>
       </VBox>
    </children>

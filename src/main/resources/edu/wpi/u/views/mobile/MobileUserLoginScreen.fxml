@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileUserLoginScreenController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: -background;" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileUserLoginScreenController">
    <children>
       <HBox alignment="CENTER_LEFT" maxWidth="325.0" prefHeight="87.0" prefWidth="324.0" spacing="20.0">
          <children>
@@ -66,4 +66,7 @@
          </VBox.margin>
       </JFXButton>
    </children>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
 </VBox>

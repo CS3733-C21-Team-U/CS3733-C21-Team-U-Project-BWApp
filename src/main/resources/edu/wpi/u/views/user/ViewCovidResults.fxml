@@ -26,24 +26,19 @@
     <children>
       <VBox prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
-            <Insets bottom="60.0" left="60.0" right="60.0" top="30.0" />
+            <Insets bottom="60.0" left="30.0" right="30.0" top="30.0" />
          </padding>
          <children>
-            <Label styleClass="headline-1" text="Covid Dashboard">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="1116.0" prefWidth="1580.0" spacing="30.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="854.0" prefWidth="955.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="settingBlockContainer">
+                        <AnchorPane prefHeight="482.0" prefWidth="975.0" styleClass="settingBlockContainer">
                            <children>
                               <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Negative tests over x days" textAlignment="CENTER" wrapText="true" />
-                                    <BarChart>
+                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="# of Patients Who Catagorized as No Risk" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart fx:id="NegativeTotalTestBarChart">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -51,8 +46,8 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Positive Tests over X days" textAlignment="CENTER" wrapText="true" />
-                                    <BarChart layoutX="10.0" layoutY="54.0">
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="# of Patients Who Catagorized as High Risk" textAlignment="CENTER" wrapText="true" />
+                                    <BarChart fx:id="PositiveTestBarChart" layoutX="10.0" layoutY="54.0">
                                        <xAxis>
                                           <CategoryAxis side="BOTTOM" />
                                        </xAxis>
@@ -71,9 +66,9 @@
                            </effect>
                         </AnchorPane>
                         <Region prefHeight="0.0" prefWidth="955.0" VBox.vgrow="ALWAYS" />
-                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="settingBlockContainer">
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="369.0" prefWidth="955.0" styleClass="settingBlockContainer">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox alignment="CENTER" layoutX="40.0" layoutY="40.0" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Table of all users on campus" textAlignment="CENTER" wrapText="true" />
                                     <JFXTreeTableView fx:id="treeTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="915.0" VBox.vgrow="ALWAYS" />
@@ -90,9 +85,9 @@
                      </children>
                   </VBox>
                   <Region prefHeight="822.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="590.0" styleClass="settingBlockContainer">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="590.0" styleClass="settingBlockContainer">
                            <effect>
                               <DropShadow />
                            </effect>
@@ -117,26 +112,38 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Week" />
+                                                <Label fx:id="resultsWeekTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Month" />
+                                                <Label fx:id="resultsMonthTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
+                                                <Label fx:id="positiveMonthTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Total Cases" />
-                                                <Label styleClass="headline-2" text="120" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
+                                                <Label fx:id="positiveWeekRatesTextBox" styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
+                                                <Label fx:id="positiveWeekTextBox" styleClass="headline-2" text="120" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
+                                                <Label fx:id="positiveMonthRatesTextBox" styleClass="headline-2" text="120" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -176,19 +183,19 @@
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                        </padding>
                                     </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <VBox alignment="TOP_CENTER" prefHeight="519.0" prefWidth="590.0">
                                        <children>
                                           <Region prefHeight="80.0" prefWidth="590.0" />
                                           <Label style="-fx-text-fill: black;" styleClass="subtitle" text="Total Users" />
                                           <Label fx:id="funnelValue1" style="-fx-text-fill: black;" styleClass="headline-2" text="112" />
                                           <Label fx:id="funnelSubtitle1" layoutX="228.0" layoutY="195.0" style="-fx-text-fill: black;" styleClass="caption" text="X admins, Y patients, Z guests" />
                                           <Region layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: black;" styleClass="caption" text="2.5% have arrived at a kisosk" />
+                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="2.5% have arrived at a kisosk" />
                                           <Region layoutX="10.0" layoutY="156.0" prefHeight="37.0" prefWidth="590.0" />
                                           <Label layoutX="275.0" layoutY="245.0" style="-fx-text-fill: black;" styleClass="subtitle" text="On Campus" />
                                           <Label fx:id="funnelValue2" layoutX="276.0" layoutY="260.0" style="-fx-text-fill: black;" styleClass="headline-2" text="31" />
                                           <Region layoutX="10.0" layoutY="159.0" prefHeight="39.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: black;" styleClass="caption" text="89% have seen a nurse" />
+                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="89% have seen a nurse" />
                                           <Region layoutX="10.0" layoutY="210.0" prefHeight="38.0" prefWidth="590.0" />
                                           <Label layoutX="274.0" layoutY="247.0" style="-fx-text-fill: black;" styleClass="subtitle" text="Check-in at entrace" />
                                           <Label fx:id="funnelValue3" layoutX="286.0" layoutY="262.0" style="-fx-text-fill: black;" styleClass="headline-2" text="27" />

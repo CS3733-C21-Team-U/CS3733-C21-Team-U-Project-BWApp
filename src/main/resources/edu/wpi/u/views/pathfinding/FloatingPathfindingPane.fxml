@@ -2,12 +2,14 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
@@ -52,36 +54,78 @@
                      </HBox.margin>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="79.0" prefWidth="55.0">
-                     <children>
-                        <JFXButton contentDisplay="GRAPHIC_ONLY" mouseTransparent="true" onAction="#handleStartEndSwap" opacity="0.0" prefHeight="56.0" prefWidth="58.0">
-                           <graphic>
-                              <SVGPath content="M9.01 14H2v2h7.01v3L13 15l-3.99-4v3zm5.98-1v-3H22V8h-7.01V5L11 9l3.99 4z" rotate="90.0" scaleX="2.0" scaleY="2.0" />
-                           </graphic>
-                        </JFXButton>
-                     </children>
                      <padding>
                         <Insets top="10.0" />
                      </padding>
+                     <children>
+                        <JFXButton fx:id="startFieldClear" contentDisplay="GRAPHIC_ONLY" onMouseClicked="#handleClearStartPoint">
+                           <graphic>
+                              <SVGPath content="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" style="-fx-fill: -onBackground;" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="endFieldClear" contentDisplay="GRAPHIC_ONLY" onMouseClicked="#handleClearEndPoint">
+                           <graphic>
+                              <SVGPath content="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" style="-fx-fill: -onBackground;" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
                   </VBox>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane fx:id="ScrollPanel" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefWidth="200.0" vbarPolicy="NEVER">
-              <content>
-                <AnchorPane fx:id="secondAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                     <children>
-                        <VBox fx:id="textDirectionContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="450.0" styleClass="headline-3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-250.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="floatButtonContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="450.0">
+               <children>
+                  <JFXButton fx:id="btnG" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onAction="#HandleDisplayFloorG" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor G" />
+                  <Region fx:id="regionG1" prefHeight="0.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btnOne" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorOne" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 1" />
+                  <Region fx:id="region12" prefHeight="0.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btnTwo" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorTwo" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 2" />
+                  <Region fx:id="region23" prefHeight="0.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btnThree" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorThree" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 3" />
+                  <Region fx:id="region34" prefHeight="0.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btnFour" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFour" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 4" />
+                  <Region fx:id="region45" prefHeight="0.0" prefWidth="0.0" />
+                  <JFXButton fx:id="btnFive" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#HandleDisplayFloorFive" prefHeight="0.0" prefWidth="0.0" styleClass="button-contained-floatingPathPanel" text="Floor 5" />
+               </children>
+            </HBox>
+            <HBox fx:id="pathContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0">
+               <children>
+                  <ScrollPane fx:id="ScrollPanel" fitToHeight="true" hbarPolicy="NEVER" maxHeight="700.0" pannable="true" prefWidth="450.0" vbarPolicy="NEVER">
+                    <content>
+                      <AnchorPane fx:id="secondAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0">
                            <children>
-                              <Label text="Text Directions" />
+                              <VBox fx:id="textDirectionContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="450.0" styleClass="headline-3">
+                                 <children>
+                                    <Label text="Choose Floor to Find Path" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <fx:include fx:id="treeViewListNodes" source="TreeViewList.fxml" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
 </AnchorPane>
