@@ -69,6 +69,7 @@
     -jfx-focus-color: -primary;
     -jfx-unfocus-color: -onBackground;
     -fx-prompt-text-fill: -onBackgroundAlt;
+    -fx-text-fill: -onBackgroundAlt;
 }
 
 /* ------------- TEXT FEILD  -----------*/
@@ -76,8 +77,16 @@
     -fx-pref-height: 30;
 }
 
+.input-area{
+    -fx-background-color: -backgroundAlt;
+}
+.text-area{
+    -fx-background-color: -backgroundAlt;
+}
 /* ----------- TEXT AREA -------------- */
 .jfx-text-area {
+  /*  -fx-background-color: -backgroundAlt; */
+    -fx-background-color: -backgroundAlt;
 }
 
 /* ----------- PASSWORD FIELD -------------- */
@@ -113,6 +122,14 @@
 }
 
 /*** Table stuff ****/
+.jfx-tree-table-view{
+    -fx-background-color: -background;
+}
+
+.jfx-tree-table .list-cell:even {
+    -fx-background-color: -background;
+}
+
 
 .table-view:focused{
     -fx-background-color: transparent;
@@ -410,21 +427,69 @@
 }
 
 .jfx-list-view .list-cell:even {
-    -fx-background-color: #e0e0e0;
-    -fx-text-fill: black;
+    -fx-background-color: -background;
+    -fx-text-fill: -onBackground;
 }
 .jfx-list-view .list-cell:odd {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: black;
+    -fx-background-color: -backgroundAlt;
+    -fx-text-fill: -onBackground;
 }
 
 .jfx-list-view {
+    -fx-background-color: -backgroundAlt;
     -fx-background-insets: 0;
     -jfx-cell-horizontal-margin: 0.0;
     -jfx-cell-vertical-margin: 5.0;
     -jfx-vertical-gap: 0;
     -jfx-expanded: true;
     -fx-pref-width: 200;
+}
+
+.jfx-list-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 2em;
+}
+
+.jfx-list-view .scroll-bar:horizontal .track,
+.jfx-list-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 2em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.jfx-list-view .scroll-bar:horizontal .increment-button,
+.jfx-list-view.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.jfx-list-view .scroll-bar:vertical .increment-button,
+.jfx-list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+
+}
+
+.jfx-list-view .scroll-bar .increment-arrow,
+.jfx-list-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.jfx-list-view .scroll-bar:horizontal .thumb,
+.jfx-list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
 }
 
 /* ----------- BASIC COLORS (SVGS) -------------- */

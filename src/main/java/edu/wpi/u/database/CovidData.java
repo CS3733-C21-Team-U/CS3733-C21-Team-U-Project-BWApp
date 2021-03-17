@@ -306,7 +306,6 @@ public class CovidData extends Data{
         return 0;
     }
 
-
     /**
      * Gets the number of symptomatic survey results from the past month
      * @return int, the number of rows with symtomatic marked true

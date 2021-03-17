@@ -37,7 +37,7 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="483.0" prefWidth="955.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Users Who Responded Negative over The Last Month" textAlignment="CENTER" wrapText="true" />
+                                    <Label prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="# of Patients Who Catagorized as No Risk" textAlignment="CENTER" wrapText="true" />
                                     <BarChart fx:id="NegativeTotalTestBarChart">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
@@ -46,7 +46,7 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="Users Who Responded Positive over The Last Month" textAlignment="CENTER" wrapText="true" />
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="24.0" prefWidth="1082.0" styleClass="headline-3" text="# of Patients Who Catagorized as High Risk" textAlignment="CENTER" wrapText="true" />
                                     <BarChart fx:id="PositiveTestBarChart" layoutX="10.0" layoutY="54.0">
                                        <xAxis>
                                           <CategoryAxis side="BOTTOM" />

@@ -5,6 +5,8 @@ package edu.wpi.u.controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.controllers.request.ViewRequestListController;
+import edu.wpi.u.controllers.user.ViewUserListController;
 import edu.wpi.u.models.MapService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.input.KeyCode;
@@ -23,8 +27,10 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import net.kurobako.gesturefx.GesturePane;
@@ -62,6 +68,11 @@ public class NewMainPageController {
     public Tab adminTab1;
     public Tab adminTab2;
     public Tab adminTab4;
+
+    //tab controllers
+
+    @FXML private ViewUserListController userTabContentController ;
+    @FXML private ViewRequestListController requestTabContentController ;
 
     public Tab currentTab;
 
@@ -126,9 +137,10 @@ public class NewMainPageController {
 
         detectTab();
 
+
         //setup tooltips
         themeSwitchBtn.setTooltip(new Tooltip("Switch Themes"));
-        copywriteText.setTooltip(new Tooltip("Copyright"));
+        //copywriteText.setTooltip(new Tooltip("Copyright"));
         logoutBtn.setTooltip(new Tooltip("Log Out"));
         powerBtn.setTooltip(new Tooltip("Power Down"));
 
@@ -534,6 +546,7 @@ public class NewMainPageController {
             covidDis.setDisable(true);}
     }
 
+
     public void handleEnableGuest() {
         if (pathfindingDis != null){
             pathfindingDis.setDisable(true);}
@@ -556,6 +569,7 @@ public class NewMainPageController {
         if (covidDis != null){
             covidDis.setDisable(true);}
     }
+
 
     public void handleEnableCovid() {
         if (pathfindingDis != null){
@@ -595,18 +609,29 @@ public class NewMainPageController {
         }else if (newRequest.match(keyEvent)){
             System.out.println("new request page");
              mainTabPane.getSelectionModel().select(requestTab);
+             mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+                 try {
+                     requestTabContentController.handleNewRequestButton();
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+             });
             //handle adding new request
         }else if (request.match(keyEvent)){
             System.out.println("new request page");
              mainTabPane.getSelectionModel().select(requestTab);
+
         }else if (settings.match(keyEvent)){
             System.out.println("settings page");
              mainTabPane.getSelectionModel().select(settingsTab);
         }else if (help.match(keyEvent)){
             System.out.println("help page");
             //handle user logic
+             if(App.userService.getActiveUser().getType() ==  ADMIN){
+                 mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
 
-//             mainTabPane.getSelectionModel().select(HelpMainPageTab);
+             }else{
+             mainTabPane.getSelectionModel().select(HelpMainPageTab);}
 //             mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
              //
         }else if (mapBuilder.match(keyEvent)){
@@ -618,7 +643,15 @@ public class NewMainPageController {
         }else if (addUser.match(keyEvent)){
             System.out.println("add user page");
              mainTabPane.getSelectionModel().select(adminTab2);
-             //scene switch to add useu
+             //scene switch to add user
+             mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+                 try {
+                     userTabContentController.handleAddUserButton();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             });
+//             mainTabPane.getSelectionModel().getSelectedItem().
         }else if (covidData.match(keyEvent)){
             System.out.println("covid data page");
              mainTabPane.getSelectionModel().select(adminTab4);
@@ -645,6 +678,32 @@ public class NewMainPageController {
         actions.add(button2);
         content.setActions(actions);
         dialog.show();
+    }
+
+    public void handleAPage(ActionEvent actionEvent) throws IOException {
+        //JFXDialogLayout content = new JFXDialogLayout();
+        //JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+//        Parent root1 = (Parent) fxmlLoader.load();
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root1));
+//        stage.show();
+        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+        fxmlLoader2.load();
+        fxmlLoader2.getController();
+        App.getPrimaryStage().getScene().setRoot(fxmlLoader2.getRoot());
+
+        //shows a popup
+//        JFXButton button2 = new JFXButton("DISMISS");
+//       // button2.setOnAction(event -> dialog.close());
+//        button2.getStyleClass().add("button-contained");
+
+//        ArrayList<Node> actions = new ArrayList<>();
+//        actions.add(button2);
+        //content.setActions(actions);
+        //dialog.show();
     }
 }
 

@@ -4,14 +4,9 @@ import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
 import edu.wpi.u.requests.*;
-import edu.wpi.u.web.EmailService;
-import edu.wpi.u.web.TextingService;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
@@ -299,7 +293,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
                             App.emailService.sendMail(to, currSpecificRequest);
                         }
                         for (String to : sms){
-                            App.textingService.sendText(to, currSpecificRequest);
+                            //App.textingService.sendText(to, currSpecificRequest);
                         }
                     });
                 }catch (Exception e){

@@ -38,7 +38,6 @@ public abstract class SpecificRequest extends RecursiveTreeObject<SpecificReques
     public abstract String[] getSpecificFields();
     public abstract String getType();
     public abstract String getRelevantRole();
-
     public ArrayList<String> getSpecificData() {
         return specificFields;
     }

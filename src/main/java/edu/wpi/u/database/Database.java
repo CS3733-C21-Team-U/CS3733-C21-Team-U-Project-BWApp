@@ -175,10 +175,6 @@ public class Database {
                 PreparedStatement commentStatement = conn.prepareStatement(commentstbl);
                 commentStatement.execute();
 
-                String covidSurveyResult = "create table covidSurveyResult(id int generated always as identity , symptomatic boolean, nonsymptomatic boolean, dateOfResults date)";
-                PreparedStatement covidSurveyResultStatement = conn.prepareStatement(covidSurveyResult);
-                covidSurveyResultStatement.execute();
-
             }
         } catch (Exception e) {
             System.out.println("Table creation failed");
@@ -394,8 +390,6 @@ public class Database {
             str = "drop table Edges";
             s.execute(str);
             str = "drop table Nodes";
-            s.execute(str);
-            str = "drop table covidSurveyResult";
             s.execute(str);
 
         } catch (Exception e) {
