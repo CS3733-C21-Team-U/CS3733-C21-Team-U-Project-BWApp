@@ -31,11 +31,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class PathfindingBaseController {
-
-
-    public GesturePane map;
-
-    static final Duration DURATION = Duration.millis(300);
     @FXML public AnchorPane mainAnchorPane;
     @FXML public JFXToggleNode floorG;
     @FXML public JFXToggleNode floor1;
@@ -44,10 +39,8 @@ public class PathfindingBaseController {
     @FXML public JFXToggleNode floor4;
     @FXML public JFXToggleNode floor5;
 
-
-
-    AnchorPane rightServiceRequestPane;
-    AnchorPane leftMenuPane;
+    public GesturePane map;
+    static final Duration DURATION = Duration.millis(300);
     AnchorPane pane = new AnchorPane();
     ImageView node = new ImageView();
     Group edgeNodeGroup = new Group();
@@ -55,12 +48,31 @@ public class PathfindingBaseController {
     Group pathBorder = new Group();
     Group pathFill = new Group();
     Group pathArrow = new Group();
-
+    String mainPathColor = "8862bf";
+    String secondaryColor = "6200ee";
     /**
      * Initializes the admin map screen with map zoom, and all node and edge placement
      * @throws IOException
      */
     public void initialize() throws Exception {
+        switch (App.themeString){
+            case "PURPLE":
+                secondaryColor = "6200ee";
+                mainPathColor = "8862bf";
+                break;
+            case "DARK":
+                secondaryColor = "bb86fc";
+                mainPathColor = "8d52d9";
+                break;
+            case "YELLOW":
+                secondaryColor = "B00020";
+                mainPathColor = "be4b19";
+                break;
+            case "BLUE":
+                secondaryColor = "5785d4";
+                mainPathColor = "00348c";
+                break;
+        }
         clearMapItems();
         floorG.setSelected(true);
         App.mapService.loadStuff();
@@ -260,7 +272,7 @@ public class PathfindingBaseController {
             node1.setRadius(7.0);
 
             node1.setId(n.getNodeID());
-            node1.setStyle("-fx-fill: #6200ee");
+            node1.setFill(Paint.valueOf(mainPathColor));
             node1.setVisible(true);
             node1.setOnMousePressed(event -> {
                 try {
@@ -321,9 +333,6 @@ public class PathfindingBaseController {
      * Sets the x vector, y vector, and other positional fields of the edge, and sets its action when clicked
      * @param ed - Edge that is clicked (variable named e is reserved for the exception thrown)
      */
-
-    String outlineColor = "b187ed";
-    String fillColor = "fffff5";
     public void placeEdgesHelper(Edge ed, boolean forward){
         double xdiff = ed.getEndNode().getCords()[0]-ed.getStartNode().getCords()[0];
         double ydiff = ed.getEndNode().getCords()[1]-ed.getStartNode().getCords()[1];
@@ -336,7 +345,7 @@ public class PathfindingBaseController {
         backround.setEndY(ydiff);
         backround.setId(ed.getEdgeID()+"_back");
         backround.setStrokeWidth(20);
-        backround.setStroke(Paint.valueOf(outlineColor));
+        backround.setStroke(Paint.valueOf(mainPathColor));
         backround.setVisible(true);
         backround.setStrokeLineCap(StrokeLineCap.ROUND);
         pathBorder.getChildren().add(backround);
@@ -348,7 +357,7 @@ public class PathfindingBaseController {
         fill.setEndY(ydiff);
         fill.setId(ed.getEdgeID()+"_fill");
         fill.setStrokeWidth(10);
-        fill.setStroke(Paint.valueOf(fillColor));
+        fill.setStroke(Paint.valueOf(secondaryColor));
         fill.setVisible(true);
         fill.setStrokeLineCap(StrokeLineCap.ROUND);
         fill.getStrokeDashArray().addAll(1d, 20d);
@@ -390,7 +399,7 @@ public class PathfindingBaseController {
         previewEdge.setEndY(ydiff);
         previewEdge.setId(ed.getEdgeID() + "_preview");
         previewEdge.setStrokeWidth(10);
-        previewEdge.setStroke(Paint.valueOf("644491"));
+        previewEdge.setStroke(Paint.valueOf(secondaryColor));
         previewEdge.setStrokeLineCap(StrokeLineCap.ROUND);
         previewEdge.setVisible(true);
         pathPreviewGroup.getChildren().add(previewEdge);
@@ -439,8 +448,6 @@ public class PathfindingBaseController {
         });
         setMapItemsOrder();
     }
-
-
 
     /**
      * Function called when a node is clicked. This brings up the context menu.
