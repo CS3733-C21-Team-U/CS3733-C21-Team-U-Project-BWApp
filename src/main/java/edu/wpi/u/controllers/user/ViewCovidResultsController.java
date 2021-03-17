@@ -113,7 +113,7 @@ public class ViewCovidResultsController {
                 return treeTableColumnCovidRiskLevel.getComputedValue(param);
             }
         });
-        treeTableColumnCovidRiskLevel.setPrefWidth(200);
+        treeTableColumnCovidRiskLevel.setPrefWidth(150);
         treeTableColumnCovidRiskLevel.setEditable(false);
 
         JFXTreeTableColumn<SpecificRequest, String> treeTableColumnCovidTemp = new JFXTreeTableColumn<>("Body Temperature");

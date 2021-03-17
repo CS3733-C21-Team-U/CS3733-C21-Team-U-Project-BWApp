@@ -190,12 +190,12 @@
                                           <Label fx:id="funnelValue1" style="-fx-text-fill: black;" styleClass="headline-2" text="112" />
                                           <Label fx:id="funnelSubtitle1" layoutX="228.0" layoutY="195.0" style="-fx-text-fill: black;" styleClass="caption" text="X admins, Y patients, Z guests" />
                                           <Region layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: black;" styleClass="caption" text="2.5% have arrived at a kisosk" />
+                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="2.5% have arrived at a kisosk" />
                                           <Region layoutX="10.0" layoutY="156.0" prefHeight="37.0" prefWidth="590.0" />
                                           <Label layoutX="275.0" layoutY="245.0" style="-fx-text-fill: black;" styleClass="subtitle" text="On Campus" />
                                           <Label fx:id="funnelValue2" layoutX="276.0" layoutY="260.0" style="-fx-text-fill: black;" styleClass="headline-2" text="31" />
                                           <Region layoutX="10.0" layoutY="159.0" prefHeight="39.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: black;" styleClass="caption" text="89% have seen a nurse" />
+                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="89% have seen a nurse" />
                                           <Region layoutX="10.0" layoutY="210.0" prefHeight="38.0" prefWidth="590.0" />
                                           <Label layoutX="274.0" layoutY="247.0" style="-fx-text-fill: black;" styleClass="subtitle" text="Check-in at entrace" />
                                           <Label fx:id="funnelValue3" layoutX="286.0" layoutY="262.0" style="-fx-text-fill: black;" styleClass="headline-2" text="27" />
