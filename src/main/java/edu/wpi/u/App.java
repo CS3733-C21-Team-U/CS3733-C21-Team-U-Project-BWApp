@@ -148,6 +148,7 @@ public class App extends Application {
   public void exitApp() {
     App.isLoggedIn.set(false);
     System.out.println("Shutting Down");
+    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }

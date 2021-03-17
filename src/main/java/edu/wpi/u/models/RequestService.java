@@ -1,5 +1,6 @@
 package edu.wpi.u.models;
 
+import edu.wpi.u.App;
 import edu.wpi.u.database.Database;
 import edu.wpi.u.database.RequestData;
 import edu.wpi.u.requests.*;
@@ -27,6 +28,9 @@ public class RequestService {
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
+    App.isLoggedIn.addListener((o, p , q) ->{
+      this.activeRequests = rd.loadActiveRequests();
+    });
   }
 
   /**
