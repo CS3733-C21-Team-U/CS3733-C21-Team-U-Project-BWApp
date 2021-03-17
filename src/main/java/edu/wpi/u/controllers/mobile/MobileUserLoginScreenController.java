@@ -55,10 +55,6 @@ public class MobileUserLoginScreenController {
 
     public void initialize() throws IOException {
 
-//        App.getPrimaryStage().setFullScreen(false);
-//        App.getPrimaryStage().setWidth(412);
-//        App.getPrimaryStage().setHeight(732);
-
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Username Required");
         userNameTextField.getValidators().add(validator);
@@ -113,27 +109,7 @@ public class MobileUserLoginScreenController {
 
 
 
-//    //Throws exceptions if username or password not found
-//    public void handleForgotPassword() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/ForgotPasswordScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-//
-//    public void handleSubmit() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/Enter2FATokenScreen.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-
-
     public void handleDebugLogin(ActionEvent actionEvent) throws IOException {
-//        if (//user Covid Status approved = true){
-//        App.userService.setUser("admin", "admin", "Employees");
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/Mobile/MobileEnter2FATokenScreen.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
-//        App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
-       // }
         App.userService.setUser("admin", "admin", "Employees");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/controllers/mobile/MobileEmbenedGoogleMapsController.java"));
         fxmlLoader.load();
@@ -141,20 +117,6 @@ public class MobileUserLoginScreenController {
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
-
-
-
-
-//
-//    public void handleDebugLoginGuest(ActionEvent actionEvent) throws IOException {
-//        App.userService.setUser("patient", "patient", "Guests");
-//        Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        App.getPrimaryStage().getScene().setRoot(root);
-//    }
-
-//    public void handleBackButton(ActionEvent actionEvent) throws IOException {
-//
-//    }
 
     public void handleReturn(ActionEvent actionEvent) throws IOException {
         App.getPrimaryStage().setFullScreen(true);

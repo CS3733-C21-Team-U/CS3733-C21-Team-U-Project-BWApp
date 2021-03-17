@@ -96,8 +96,6 @@ public class Enter2FATokenController {
             App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
         }
 
-        //Parent root = App.base;//FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-        //App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
     private void loadingNewMainPage() {
         JFXDialogLayout content = new JFXDialogLayout();
