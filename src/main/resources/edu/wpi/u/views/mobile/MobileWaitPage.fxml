@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="216.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileWaitPageController">
+<VBox alignment="TOP_CENTER" prefHeight="216.0" prefWidth="354.0" stylesheets="@../css/Theme1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileWaitPageController">
    <children>
       <HBox maxWidth="325.0" prefHeight="120.0" prefWidth="325.0">
          <children>
