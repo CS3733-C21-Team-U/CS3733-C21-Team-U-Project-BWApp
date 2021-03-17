@@ -419,10 +419,24 @@ public class MobileFloatingPathfindingPaneController {
         if(App.mapInteractionModel.highRisk){
             targetNode.set("END");
             App.mapInteractionModel.setNodeID("UEXIT0020G");
+            try {
+                path = App.mapService.runPathfinding(startNodeID,endNodeID);
+            } catch (PathNotFoundException e) {
+                e.printStackTrace();
+            }
+            App.mapInteractionModel.path = path;
+            App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
         }
         else{
             targetNode.set("END");
             App.mapInteractionModel.setNodeID("UEXIT0010G");
+            try {
+                path = App.mapService.runPathfinding(startNodeID,endNodeID);
+            } catch (PathNotFoundException e) {
+                e.printStackTrace();
+            }
+            App.mapInteractionModel.path = path;
+            App.mapInteractionModel.pathFlag.set(String.valueOf(Math.random()));
         }
     }
 
