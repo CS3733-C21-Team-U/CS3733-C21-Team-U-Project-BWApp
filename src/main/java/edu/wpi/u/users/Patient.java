@@ -4,7 +4,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Patient extends User{
     protected ArrayList<Appointment> appointments = new ArrayList<>(); // todo : remove
@@ -34,38 +33,21 @@ public class Patient extends User{
         this.email = email;
         this.type = type;
         this.phoneNumber = phoneNumber;
-        //this.locationNodeID = locationNodeID;
     }
 
     public ArrayList<Appointment> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
     public String getProviderName() {
         return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
     }
 
     public String getParkingLocation() {
         return parkingLocation;
     }
 
-    public void setParkingLocation(String parkingLocation) {
-        this.parkingLocation = parkingLocation;
-    }
-
     public String getRecommendedParkingLocation() {
         return recommendedParkingLocation;
-    }
-
-    public void setRecommendedParkingLocation(String recommendedParkingLocation) {
-        this.recommendedParkingLocation = recommendedParkingLocation;
     }
 }
