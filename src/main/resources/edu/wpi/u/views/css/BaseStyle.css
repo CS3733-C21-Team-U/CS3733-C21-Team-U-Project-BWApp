@@ -123,13 +123,22 @@
 
 /*** Table stuff ****/
 .jfx-tree-table-view{
-    -fx-background-color: -background;
+    -fx-background-color: -backgroundAlt;
 }
 
 .jfx-tree-table .list-cell:even {
-    -fx-background-color: -background;
+    -fx-background-color: -requestResolvedColor;
 }
 
+.jfx-tree-view{
+    -fx-background-color: -background;
+    -fx-text-fill: -onBackground;
+}
+
+.jfx-tree-view .tree-cell{
+    -fx-background-color: -background;
+    -fx-text-fill: -onBackground;
+}
 
 .table-view:focused{
     -fx-background-color: transparent;
@@ -192,6 +201,15 @@
 }
 
 
+
+.combo-box > .list-cell {
+    -jfx-focus-color: -backgroundAlt;
+    -jfx-unfocus-color: -backgroundAlt;
+    -fx-background: -backgroundAlt;
+    -fx-background-color: -backgroundAlt;
+    -fx-text-fill: -onBackground;
+}
+
 /* ----------- CHECK-BOX -------------- */
 .jfx-check-box {
     -jfx-checked-color: -primary;
@@ -242,6 +260,10 @@
 .jfx-toggle-node:selected > SVGPath{
     -fx-fill: -onPrimary;
 }
+.jfx-toggle-node > SVGPath{
+    -fx-fill: -onBackground;
+}
+
 .jfx-toggle-node .jfx-rippler{
     -jfx-rippler-fill: -primary;
 }

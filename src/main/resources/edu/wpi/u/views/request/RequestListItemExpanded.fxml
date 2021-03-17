@@ -93,7 +93,7 @@
                      </children>
                   </AnchorPane>
                   <Separator maxHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="584.0" prefWidth="3.0" />
-                  <AnchorPane fx:id="mapViewRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="mapViewRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="436.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

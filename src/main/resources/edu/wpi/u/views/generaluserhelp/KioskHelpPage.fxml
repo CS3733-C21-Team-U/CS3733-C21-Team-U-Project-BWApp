@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.KioskHelpPageController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: -primaryVariant;" BorderPane.alignment="CENTER">
+               <children>
+                  <SVGPath content="M18.5 0h-14C3.12 0 2 1.12 2 2.5v19C2 22.88 3.12 24 4.5 24h14c1.38 0 2.5-1.12 2.5-2.5v-19C21 1.12 19.88 0 18.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z" scaleX="2.5" scaleY="2.5" style="-fx-fill: -onPrimary;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </SVGPath>
+                  <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1095.0" style="-fx-text-fill: -onPrimary;" styleClass="headline-1" text="How to Use Kiosk" />
+                  <Region prefHeight="73.0" prefWidth="276.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton buttonType="RAISED" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleBackToMainPageButton" prefHeight="32.0" prefWidth="250.0" styleClass="bigButtonOutline" stylesheets="@../css/BaseStyle.css" text="Back to Main Help Page" />
+               </children>
+               <padding>
+                  <Insets left="70.0" right="30.0" />
+               </padding>
+            </HBox>
+         </top>
+         <left>
+            <ScrollPane hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1700.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefWidth="1700.0" spacing="50.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="150.0" prefWidth="1700.0" spacing="300.0">
+                                 <children>
+                                    <VBox prefHeight="150.0" prefWidth="639.0">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1251.0" prefHeight="61.0" prefWidth="587.0" styleClass="headline-2" text="What is the Kiosk For?" wrapText="true" />
+                                          <Label layoutX="10.0" layoutY="10.0" maxWidth="1251.0" prefHeight="93.0" prefWidth="725.0" style="-fx-font-size: 18;" styleClass="caption" text="The Kiosk allows Guests, Patients and Staff to clear themselves into the hospital without the need of a middleman. It will survey indivuiduals for COVID symptoms, along with taking their temperature for them." textAlignment="CENTER" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <Label styleClass="headline-2" text="How to Operate Kiosk" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="401.0" prefWidth="1744.0" spacing="50.0">
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="350.0">
+                                       <children>
+                                          <Label styleClass="headline-3" text="Step 1" />
+                                          <Label alignment="TOP_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="335.0" style="-fx-font-size: 18;" styleClass="caption" text="Begin by logging into an already created account. If a guest, login as one with the button provided." wrapText="true" />
+                                          <BorderPane prefHeight="416.0" prefWidth="329.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                             <center>
+                                                <ImageView fitHeight="450.0" fitWidth="341.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../Images/KioskHelpLogin.png" />
+                                                   </image>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
+                                                </ImageView>
+                                             </center>
+                                          </BorderPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="350.0">
+                                       <children>
+                                          <Label styleClass="headline-3" text="Step 2" />
+                                          <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="353.0" style="-fx-font-size: 18;" styleClass="caption" text="Fill out the COVID survey clarifying symptoms. If symptoms signal there may be covid risk, the pathfinding app with redirect through to use COVID approved entrances and pathways." wrapText="true" />
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                             <top>
+                                                <ImageView fitHeight="452.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../Images/KioskHelpSurvey.png" />
+                                                   </image>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
+                                                </ImageView>
+                                             </top>
+                                          </BorderPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="350.0">
+                                       <children>
+                                          <Label styleClass="headline-3" text="Step 3" />
+                                          <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="348.0" style="-fx-font-size: 18;" styleClass="caption" text="The kiosk will present a temperature reading of the individual. Once it returns a consistant value, the user can confirm this temperature in the app, pathfinding them to through the appropriate entrances" wrapText="true" />
+                                          <BorderPane prefHeight="453.0" prefWidth="315.0" style="-fx-border-color: -primary; -fx-border-width: 8; -fx-border-radius: 5;">
+                                             <center>
+                                                <ImageView fitHeight="449.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../Images/KioskHelpTemperature.png" />
+                                                   </image>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
+                                                </ImageView>
+                                             </center>
+                                          </BorderPane>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label styleClass="headline-2" text="Need more help?" />
+                                          <Label maxWidth="1251.0" prefHeight="164.0" prefWidth="440.0" style="-fx-font-size: 18;" styleClass="caption" text="If you need more help, contact our support team using the &quot;Contact Us&quot; button in the &quot;Help&quot; tab in the left navigation tab." wrapText="true" />
+                                          <BorderPane prefHeight="99.0" prefWidth="389.0">
+                                             <top>
+                                                <ImageView fitHeight="385.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../Images/ContactUS.png" />
+                                                   </image>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
+                                                </ImageView>
+                                             </top>
+                                          </BorderPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </left>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/BaseStyle.css" />
+      <URL value="@../css/LightTheme.css" />
+   </stylesheets>
+</AnchorPane>

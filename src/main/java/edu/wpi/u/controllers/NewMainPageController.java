@@ -681,29 +681,22 @@ public class NewMainPageController {
     }
 
     public void handleAPage(ActionEvent actionEvent) throws IOException {
-        //JFXDialogLayout content = new JFXDialogLayout();
-        //JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+        fxmlLoader2.load();
+        fxmlLoader2.getController();
+        Object root = fxmlLoader2.getRoot();
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setBody((Node) root);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
-//        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
-//        fxmlLoader2.load();
-//        fxmlLoader2.getController();
-//        App.getPrimaryStage().getScene().setRoot(fxmlLoader2.getRoot());
-
-        //shows a popup
-//        JFXButton button2 = new JFXButton("DISMISS");
-//       // button2.setOnAction(event -> dialog.close());
-//        button2.getStyleClass().add("button-contained");
-
-//        ArrayList<Node> actions = new ArrayList<>();
-//        actions.add(button2);
-        //content.setActions(actions);
-        //dialog.show();
     }
 }
 
