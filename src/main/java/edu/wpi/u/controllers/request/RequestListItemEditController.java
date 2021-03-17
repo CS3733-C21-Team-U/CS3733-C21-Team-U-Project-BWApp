@@ -142,13 +142,16 @@ public class RequestListItemEditController extends AnchorPane implements Initial
                         System.out.println("New username: " + r);
                         switch (App.userService.getPreferredContactMethod(r)) {
                             case "Both":
+                                System.out.println("Here at BOTH");
                                 App.emailService.sendMail(App.userService.getEmail(r), parent.request);
                                 App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
                                 break;
                             case "Email":
+                                System.out.println("Here at EMAIL");
                                 App.emailService.sendMail(App.userService.getEmail(r), parent.request);
                                 break;
                             case "SMS":
+                                System.out.println("Here at SMS");
                                 App.textingService.sendText(App.userService.getPhoneNumberFromUserName(r), parent.request);
                                 break;
                         }

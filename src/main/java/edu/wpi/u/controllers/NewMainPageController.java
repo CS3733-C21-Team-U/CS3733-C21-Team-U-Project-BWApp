@@ -685,15 +685,15 @@ public class NewMainPageController {
         //JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
 
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
-//        Parent root1 = (Parent) fxmlLoader.load();
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root1));
-//        stage.show();
-        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
-        fxmlLoader2.load();
-        fxmlLoader2.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader2.getRoot());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+//        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
+//        fxmlLoader2.load();
+//        fxmlLoader2.getController();
+//        App.getPrimaryStage().getScene().setRoot(fxmlLoader2.getRoot());
 
         //shows a popup
 //        JFXButton button2 = new JFXButton("DISMISS");
