@@ -87,6 +87,8 @@ public class App extends Application {
   public static Parent base;
   public static Parent loginBase;
   public static Parent guestBase;
+  public static SimpleBooleanProperty updateEmail = new SimpleBooleanProperty(false);
+  public static SimpleBooleanProperty updatePhoneNumber= new SimpleBooleanProperty(false);
   public static String themeString;
   public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);

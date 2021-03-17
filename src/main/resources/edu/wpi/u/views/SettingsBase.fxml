@@ -18,9 +18,9 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.SettingsBaseController">
    <children>
-      <HBox prefHeight="1000.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="settingsPageHbox" prefHeight="1000.0" prefWidth="1700.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="975.0" prefWidth="432.0" styleClass="settingBlockContainer">
+            <VBox fx:id="basicAccountSettings" prefHeight="975.0" prefWidth="432.0" styleClass="settingBlockContainer">
                <children>
                   <Label styleClass="headline-2" text="Basic Account Settings" />
                   <HBox prefHeight="21.0" prefWidth="600.0" />
@@ -113,7 +113,7 @@
                   <DropShadow />
                </effect>
             </VBox>
-            <VBox layoutX="30.0" layoutY="30.0" prefHeight="975.0" prefWidth="432.0" styleClass="settingBlockContainer">
+            <VBox fx:id="otherSettings" layoutX="30.0" layoutY="30.0" prefHeight="975.0" prefWidth="432.0" styleClass="settingBlockContainer">
                <children>
                   <Label styleClass="headline-2" text="Other Settings">
                      <VBox.margin>
@@ -122,19 +122,19 @@
                   </Label>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="408.0" spacing="30.0">
                      <children>
-                        <Label text="Decide where you get notified when a service request is assigned to you">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Label>
-                        <HBox prefHeight="0.0" prefWidth="408.0">
+                        <Group fx:id="notificationChangeGroup">
                            <children>
-                              <JFXToggleButton fx:id="emailNotifications" selected="true" text="Email Notifications" />
-                              <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                              <JFXToggleButton fx:id="textNotifications" text="Text Notifications" />
+                              <Label text="Decide where you get notified when a service request is assigned to you" />
+                              <HBox layoutY="45.0" prefHeight="0.0" prefWidth="408.0">
+                                 <children>
+                                    <JFXToggleButton fx:id="emailNotifications" selected="true" text="Email Notifications" />
+                                    <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                                    <JFXToggleButton fx:id="textNotifications" text="Text Notifications" />
+                                 </children>
+                              </HBox>
+                              <JFXButton layoutY="133.0" onAction="#handleApplyNotificationChange" prefHeight="23.0" prefWidth="427.0" styleClass="button-contained" text="Apply Notification Change" />
                            </children>
-                        </HBox>
-                        <JFXButton onAction="#handleApplyNotificationChange" prefHeight="23.0" prefWidth="427.0" styleClass="button-contained" text="Apply Notification Change" />
+                        </Group>
                         <Region prefHeight="23.0" prefWidth="408.0" />
                         <Label text="Theme" />
                         <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -222,7 +222,7 @@
                   <DropShadow />
                </effect>
             </VBox>
-            <VBox prefHeight="1000.0" prefWidth="511.0" spacing="20.0" styleClass="settingBlockContainer">
+            <VBox fx:id="adminSettings" prefHeight="1000.0" prefWidth="511.0" spacing="20.0" styleClass="settingBlockContainer">
                <children>
                   <Label fx:id="adminText" styleClass="headline-2" text="Admin Settings" />
                   <Label fx:id="subtitleText" styleClass="headline-3" text="Read and Save CSV File" />
