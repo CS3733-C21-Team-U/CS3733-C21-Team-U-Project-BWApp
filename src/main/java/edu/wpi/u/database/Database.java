@@ -13,7 +13,6 @@ public class Database {
     private final static String url = "jdbc:derby:BWdb;create=true";
     // Url for testing
     private final static String testURL = "jdbc:derby://localhost:1527/BWdb;create=true";
-    //private final static String url = "jdbc:derby:BWdb;create=true;dataEncryption=true;encryptionAlgorithm=Blowfish/CBC/NoPadding;username=app;bootPassword=password";
 
     /**
      *  Constructor for database that is used for DB
@@ -24,18 +23,7 @@ public class Database {
         makeCSVDependant(false);
         createTables();
     }
-
-//    /**
-//     * Constructor for database that is called in 2nd singleton to create a second DB for testing
-//     * @param urlIn - URL of testing db, has to be defined in this file
-//     */
-//    public Database(String urlIn) {
-//        driver();
-//        connect(urlIn);
-//        makeCSVDependant(false);
-//        createTables();
-//    }
-
+    
     /**
      * Singleton class for live DB (BWDB)
      */
@@ -246,26 +234,6 @@ public class Database {
             fw.write(content);
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * This will print all of the requests from a Request table
-     *
-     * @param aTable table name
-     */
-    public void printRequestTable(String aTable) {
-        try {
-            String str = "select * from " + aTable;
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rset = ps.executeQuery();
-            while (rset.next()) {
-                String id = rset.getString("requestID");
-                System.out.println("Request id: " + id);
-            }
-            rset.close();
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }

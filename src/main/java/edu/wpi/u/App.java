@@ -45,7 +45,6 @@ public class App extends Application {
   public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
-  public static CovidService covidService = new CovidService();
   public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
