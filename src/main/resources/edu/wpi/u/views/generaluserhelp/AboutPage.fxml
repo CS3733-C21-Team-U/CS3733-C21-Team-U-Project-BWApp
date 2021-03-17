@@ -203,7 +203,7 @@
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor></Label>
-                                                                <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacbob Bernard">
+                                                                <Label fx:id="jacobBernardLabel" onMouseEntered="#showJacobBernard" onMouseExited="#hideIMG" styleClass="headline-3" text="Jacob Bernard">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor></Label>
