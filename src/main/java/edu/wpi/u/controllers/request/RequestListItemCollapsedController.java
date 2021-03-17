@@ -77,6 +77,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
         parent.isResolved.addListener((o, oldVal, newVal)->{
             if(parent.request.getGenericRequest().isResolved()){
+                requestItemTitleLabel.setText("[RESOLVED] " + parent.request.getGenericRequest().getTitle());
                 requestItemDate2BCompletedLabel.setText("Request Resolved");
                 if(App.themeString.equals("DARK")){
                     requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px; -fx-opacity: 0.8");
