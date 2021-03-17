@@ -601,10 +601,6 @@ public class NewMainPageController {
         }else if (newRequest.match(keyEvent)){
             System.out.println("new request page");
              mainTabPane.getSelectionModel().select(requestTab);
-            //handle adding new request
-        }else if (request.match(keyEvent)){
-            System.out.println("new request page");
-             mainTabPane.getSelectionModel().select(requestTab);
              mainTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
                  try {
                      requestTabContentController.handleNewRequestButton();
@@ -612,6 +608,11 @@ public class NewMainPageController {
                      e.printStackTrace();
                  }
              });
+            //handle adding new request
+        }else if (request.match(keyEvent)){
+            System.out.println("new request page");
+             mainTabPane.getSelectionModel().select(requestTab);
+
         }else if (settings.match(keyEvent)){
             System.out.println("settings page");
              mainTabPane.getSelectionModel().select(settingsTab);
@@ -621,8 +622,8 @@ public class NewMainPageController {
              if(App.userService.getActiveUser().getType() ==  ADMIN){
                  mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
 
-             }
-             mainTabPane.getSelectionModel().select(HelpMainPageTab);
+             }else{
+             mainTabPane.getSelectionModel().select(HelpMainPageTab);}
 //             mainTabPane.getSelectionModel().select(AdminHelpMainPageTab);
              //
         }else if (mapBuilder.match(keyEvent)){
