@@ -199,13 +199,25 @@ public class MobileUserLoginScreenController {
         for(SpecificRequest r : App.requestService.getRequests()){
             if(r.getGenericRequest().getCreator() != null){
                 if(r.getGenericRequest().getCreator().equals(App.userService.getActiveUser().getUserName())
-                        && r.getType().equals("CovidSurvey") && r.getGenericRequest().isResolved()){
-                    if((r.getGenericRequest().getDateCompleted().getTime() + 900000) > new Timestamp(System.currentTimeMillis()).getTime()){
-                        if(r.getSpecificData().get(0).equals("High")){
+                        && r.getType().equals("CovidSurvey")){
+                    if(r.getGenericRequest().getDateCompleted() != null) {
+                        if ((r.getGenericRequest().getDateCompleted().getTime() + 900000) > new Timestamp(System.currentTimeMillis()).getTime()) {
+                            if (r.getSpecificData().get(0).equals("High")) {
+                                App.mapInteractionModel.highRisk = true;
+                            }else{
+                                App.mapInteractionModel.highRisk = false;
+                            }
+                            return true;
+                        }
+                    }else{
+                        if (r.getSpecificData().get(0).equals("High")) {
                             App.mapInteractionModel.highRisk = true;
+                        }else{
+                            App.mapInteractionModel.highRisk = false;
                         }
                         return true;
                     }
+
                 }
             }
         }

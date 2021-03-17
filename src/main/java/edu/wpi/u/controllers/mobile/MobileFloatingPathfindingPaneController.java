@@ -414,7 +414,8 @@ public class MobileFloatingPathfindingPaneController {
         });
 
         startNodeField.requestFocus();
-
+        targetNode.set("START");
+        App.mapInteractionModel.setNodeID("UWALK0200G");
         if(App.mapInteractionModel.highRisk){
             targetNode.set("END");
             App.mapInteractionModel.setNodeID("UEXIT0020G");
