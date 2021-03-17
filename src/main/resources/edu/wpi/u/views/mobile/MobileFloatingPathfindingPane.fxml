@@ -10,28 +10,28 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane fx:id="mainAnchor" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
+<AnchorPane fx:id="mainAnchor" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: -background;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.mobile.MobileFloatingPathfindingPaneController">
    <stylesheets>
       <URL value="@../css/BaseStyle.css" />
       <URL value="@../css/LightTheme.css" />
    </stylesheets>
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="450.0">
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="73.0">
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="73.0" spacing="5.0">
                      <children>
                         <SVGPath content="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z" />
                         <SVGPath content="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">
                            <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </SVGPath>
                         <SVGPath content="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9zM 14.5,9 A 2.5,2.5 0 0 1 12,11.5 2.5,2.5 0 0 1 9.5,9 2.5,2.5 0 0 1 12,6.5 2.5,2.5 0 0 1 14.5,9 Z" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="308.0" spacing="20.0">
+                  <VBox prefHeight="100.0" prefWidth="250.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -47,10 +47,10 @@
                         </HBox>
                      </children>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets right="10.0" top="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="79.0" prefWidth="55.0">
+                  <VBox alignment="CENTER" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0">
                      <children>
                         <JFXButton contentDisplay="GRAPHIC_ONLY" mouseTransparent="true" onAction="#handleStartEndSwap" opacity="0.0" prefHeight="56.0" prefWidth="58.0">
                            <graphic>
@@ -64,7 +64,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
          </children>

@@ -81,8 +81,8 @@ public class MobilePathFindingBaseController {
         map.centreOn(new Point2D(700, 4000));
         map.zoomTo(0.1, map.targetPointAtViewportCentre());
 
-        map.setPrefWidth(412);
-        map.setPrefHeight(712);
+        map.setPrefWidth(300);
+        map.setPrefHeight(500);
         map.setFitMode(GesturePane.FitMode.UNBOUNDED);
         map.setScrollMode(GesturePane.ScrollMode.ZOOM);
 
