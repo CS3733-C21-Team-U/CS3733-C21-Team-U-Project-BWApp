@@ -20,7 +20,7 @@
                <children>
                   <Accordion>
                     <panes>
-                      <TitledPane animated="false" prefHeight="255.0" prefWidth="412.0" text="Expand">
+                      <TitledPane animated="false" prefHeight="125.0" prefWidth="300.0" text="Expand">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="300.0">
                                  <children>
