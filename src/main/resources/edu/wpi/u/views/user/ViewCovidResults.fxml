@@ -113,37 +113,37 @@
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Week" />
-                                                <Label fx:id="resultsWeekTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="resultsWeekTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Last Month" />
-                                                <Label fx:id="resultsMonthTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="resultsMonthTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
-                                                <Label fx:id="positiveMonthTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="positiveMonthTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
-                                                <Label fx:id="positiveWeekRatesTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="positiveWeekRatesTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symptomatic" />
-                                                <Label fx:id="positiveWeekTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="positiveWeekTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" styleClass="headline-3" text="Symp. Rate" />
-                                                <Label fx:id="positiveMonthRatesTextBox" styleClass="headline-2" text="120" />
+                                                <Label fx:id="positiveMonthRatesTextBox" styleClass="headline-2" text="0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -187,18 +187,18 @@
                                        <children>
                                           <Region prefHeight="80.0" prefWidth="590.0" />
                                           <Label style="-fx-text-fill: black;" styleClass="subtitle" text="Total Users" />
-                                          <Label fx:id="funnelValue1" style="-fx-text-fill: black;" styleClass="headline-2" text="112" />
+                                          <Label fx:id="funnelValue1" style="-fx-text-fill: black;" styleClass="headline-2" text="0" />
                                           <Label fx:id="funnelSubtitle1" layoutX="228.0" layoutY="195.0" style="-fx-text-fill: black;" styleClass="caption" text="X admins, Y patients, Z guests" />
                                           <Region layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="2.5% have arrived at a kisosk" />
+                                          <Label fx:id="funnelText1" layoutX="275.0" layoutY="99.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="0% have arrived at a kisosk" />
                                           <Region layoutX="10.0" layoutY="156.0" prefHeight="37.0" prefWidth="590.0" />
                                           <Label layoutX="275.0" layoutY="245.0" style="-fx-text-fill: black;" styleClass="subtitle" text="On Campus" />
-                                          <Label fx:id="funnelValue2" layoutX="276.0" layoutY="260.0" style="-fx-text-fill: black;" styleClass="headline-2" text="31" />
+                                          <Label fx:id="funnelValue2" layoutX="276.0" layoutY="260.0" style="-fx-text-fill: black;" styleClass="headline-2" text="0" />
                                           <Region layoutX="10.0" layoutY="159.0" prefHeight="39.0" prefWidth="590.0" />
-                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="89% have seen a nurse" />
+                                          <Label fx:id="funnelText2" layoutX="214.0" layoutY="192.0" style="-fx-text-fill: -onBackground;" styleClass="caption" text="0% have seen a nurse" />
                                           <Region layoutX="10.0" layoutY="210.0" prefHeight="38.0" prefWidth="590.0" />
                                           <Label layoutX="274.0" layoutY="247.0" style="-fx-text-fill: black;" styleClass="subtitle" text="Check-in at entrace" />
-                                          <Label fx:id="funnelValue3" layoutX="286.0" layoutY="262.0" style="-fx-text-fill: black;" styleClass="headline-2" text="27" />
+                                          <Label fx:id="funnelValue3" layoutX="286.0" layoutY="262.0" style="-fx-text-fill: black;" styleClass="headline-2" text="0" />
                                        </children>
                                     </VBox>
                                  </children>
