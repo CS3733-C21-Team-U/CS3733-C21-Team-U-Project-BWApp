@@ -192,7 +192,6 @@ public class TextualDirections {
         return angleInDegrees;
     }
 
-
     /**
      * takes in two nodes and returns the distance between them in feet
      * @param start the start node

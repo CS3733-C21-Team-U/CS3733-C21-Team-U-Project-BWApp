@@ -26,8 +26,6 @@ public class UserService {
     ArrayList<Guest> guests = new ArrayList<>();
     ArrayList<Patient> patients = new ArrayList<>();
 
-    //HashMap<String, String> easyValidate; // todo : iteration 4?
-
     public String typedUsername;
 
     User activeUser;
@@ -102,16 +100,6 @@ public class UserService {
     }
 
     /**
-     * This function if for debugging purposes and assumes the Employee in already in the database
-     * Sets the active user to a employee
-     * @param username username of employee
-     * @param password password of employee
-     */
-    public void setEmployee(String username, String password){
-        this.activeUser = ud.setEmployee(username,password);
-    }
-
-    /**
      * Sets the employee based on an id
      * @param employeeID the id
      */
@@ -177,27 +165,6 @@ public class UserService {
      */
     public ArrayList<Guest> getGuests() {
         return guests;
-    }
-
-    /**
-     * Loads the CSV file into the table
-     * @param path the path to the file
-     * @param tableName the table to be loaded into
-     */
-    public void loadCSVFile(String path, String tableName){
-        Database.getDB().dropValues(tableName);
-        Database.getDB().readCSV(path,tableName);
-        this.setGuests();
-        this.setEmployees();
-    }
-
-    /**
-     * Saves the CSV file to the path
-     * @param path the path to the file
-     * @param tableName the table to be saved
-     */
-    public void saveCSVFile(String path, String tableName){
-        Database.getDB().saveCSV(tableName,path , "User"); // TODO: Provide header
     }
 
     /**
@@ -449,15 +416,6 @@ public class UserService {
             }
         }
         return patient.getUserID();
-    }
-
-    /**
-     * Gets a list of employee emails based on a type
-     * @param type all valid role types EXCLUDING DEFAULT
-     * @return the list of emails
-     */
-    public ArrayList<String> getEmployeeEmailByType(String type){
-        return ud.getEmployeeEmailsByType(type);
     }
 
     /**

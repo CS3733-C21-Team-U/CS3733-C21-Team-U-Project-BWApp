@@ -59,15 +59,6 @@ public class MapService {
   public Edge getEdgeFromID(String edgeId){ return mm.getEdgeFromID(edgeId);}
 
   /**
-   * saves the currtent database to a csv
-   * @param path
-   * @param tableName
-   */
-  public static void saveCSVFile(String path, String tableName){
-    Database.getDB().saveCSV(tableName,path, "test"); // TODO: Provide header
-  }
-
-  /**
    * loads a csv into the database the database handles updating the model
    * @param path
    * @param tableName

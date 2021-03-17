@@ -1,9 +1,6 @@
 package edu.wpi.u.controllers.mobile;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.u.App;
-import edu.wpi.u.requests.Request;
-import edu.wpi.u.requests.SpecificRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,17 +14,9 @@ public class MobileWaitPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //check if man is  good
-
-
     }
 
-    public void enablePathFinding(){
-        pathFindButton.setStyle("-fx-opacity: 1");
-        pathFindButton.setDisable(false);
-    }
-
-    public void handlePathFInd(ActionEvent actionEvent) throws IOException {
+    public void handlePathFInd() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
@@ -35,7 +24,7 @@ public class MobileWaitPageController implements Initializable {
         MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
-    public void handleDebug(ActionEvent actionEvent) throws IOException {
+    public void handleDebug() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobilePathfindingBase.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();
@@ -43,7 +32,7 @@ public class MobileWaitPageController implements Initializable {
         MobileContainerController.getInstance().getMobileRoot().getChildren().add(fxmlLoader.getRoot());
     }
 
-    public void handleReturnLogin(ActionEvent actionEvent) throws IOException {
+    public void handleReturnLogin() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/mobile/MobileUserLoginScreen.fxml"));
         fxmlLoader.load();
         fxmlLoader.getController();

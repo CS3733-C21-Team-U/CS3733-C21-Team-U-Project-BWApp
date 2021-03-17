@@ -9,7 +9,6 @@ import edu.wpi.u.web.EmailService;
 import edu.wpi.u.web.TextingService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,14 +29,10 @@ public class App extends Application {
   // Can be accessed by all controllers and classes by calling App.getInstance();
   public static App app_instance = null;
 
-  public static int leftMenuScreenNum = 1; //Start on the 1st screen (Path Planning)
-  public static SimpleStringProperty leftDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/Oldfxml/LeftDrawerMenu.fxml");
-  public static SimpleStringProperty rightDrawerRoot = new SimpleStringProperty("/edu/wpi/u/views/ViewRequest.fxml");//This is where we store what scene the right drawer is in.
   // DO NOT CALL THIS UNLESS ADDING NEW REQUEST
   public static SimpleBooleanProperty addNewRequestToList = new SimpleBooleanProperty(false);
   public static boolean isEdtingGuest;
   public static SimpleBooleanProperty mobileUpdateParkingSpot = new SimpleBooleanProperty(true);
-  public static boolean loadedAlready = false;
   private static Stage primaryStage;
   public static StackPane throwDialogHerePane;
   public static StackPane loadingSpinnerHerePane;
@@ -50,9 +45,6 @@ public class App extends Application {
   public static TextingService textingService = new TextingService();
   public static MapInteractionModel mapInteractionModel = new MapInteractionModel();
   public static RequestService requestService = new RequestService();
-  public static CovidService covidService = new CovidService();
-  public static AdminToolStorage AdminStorage = new AdminToolStorage();
-  public static PathHandling PathHandling = new PathHandling();
   public static UndoRedoService undoRedoService = new UndoRedoService();
   public static SVGPath pathFindingPath;
   public static SVGPath pathFindingPath2;
@@ -61,23 +53,11 @@ public class App extends Application {
 
   public static SVGPath themeSVG;
 
-  public static String newNodeType;
-
   public static SimpleBooleanProperty mobileUpdateDestinationField = new SimpleBooleanProperty(false);
-
-
-  public static String lastSelectedNode;
-  public static String nodeField1;
-  public static String nodeField2;
-  public static String lastSelectedEdge;
-  public static String edgeField1;
-  public static String edgeField2;
 
   public static JFXTabPane tabPaneRoot;
   public static String pathfindingAlgorithm = "ASTAR";//this will be set in the setting to be ASTAR BFS or DFS
 
-
-  public static Integer lastClickedRequestNumber;
   public static Guest selectedGuest;
   public static Employee selectedEmployee;
 
@@ -85,16 +65,12 @@ public class App extends Application {
 
   public static String test = "hello there";
   public static Parent base;
-  public static Parent loginBase;
-  public static Parent guestBase;
   public static SimpleBooleanProperty updateEmail = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty updatePhoneNumber= new SimpleBooleanProperty(false);
   public static String themeString;
-  public static SimpleBooleanProperty loginFlag = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty isLoggedIn = new SimpleBooleanProperty(false);
   public static SimpleBooleanProperty useCache = new SimpleBooleanProperty(true);
   public static ClassLoader classLoader = new CachingClassLoader(FXMLLoader.getDefaultClassLoader());
-  //public static FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
   public App(){
     System.out.println("App constructor");
@@ -110,45 +86,8 @@ public class App extends Application {
 
   @Override
   public void init()  {
-//    themeString.addListener((observable, oldVal, newVal)->{
-//      App.primaryStage.getScene().getStylesheets().remove(1);
-//      switch (newVal){
-//        case "PURPLE":
-//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-//          break;
-//        case "DARK":
-//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/DarkTheme.css").toExternalForm());
-//          break;
-//        case "BLUE":
-//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme1.css").toExternalForm());
-//          break;
-//        case "YELLOW":
-//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/Theme2.css").toExternalForm());
-//          break;
-//        default:
-//          App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/LightTheme.css").toExternalForm());
-//          break;
-//      }
-//    });
-
-//    fxmlLoader.setClassLoader(classLoader);
-//    try {
-//      fxmlLoader.load();
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
     System.out.println("Starting Up");
-//    Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-VariableFont_wght.ttf").toExternalForm(), 12);
   }
-
-
-
-//      @Override
-//      public void init() throws Exception {
-//
-//      }
-
-//  Font.loadFont(getClass().getResourceAsStream("/resources/fonts/marck.ttf"), 14);
 
   @Override
   public void start(Stage stage) throws Exception {
@@ -158,44 +97,17 @@ public class App extends Application {
       fxmlLoader.load();
       fxmlLoader.getController();
       base = fxmlLoader.getRoot();
-
-//      FXMLLoader fxmlLoader2 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/UserLoginScreen.fxml"));
-//      fxmlLoader2.setClassLoader(classLoader);
-//      fxmlLoader2.load();
-//      fxmlLoader2.getController();
-//      loginBase = fxmlLoader2.getRoot();
-//
-//      FXMLLoader fxmlLoader3 = new FXMLLoader(App.class.getResource("/edu/wpi/u/views/login/GuestSigninScreen.fxml"));
-//      fxmlLoader3.setClassLoader(classLoader);
-//      fxmlLoader3.load();
-//      fxmlLoader3.getController();
-//      guestBase = fxmlLoader3.getRoot();
     }
 
     System.out.println("App start");
-    // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
 
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
-    mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllEdges.csv", "Edges");
+    mapService.loadCSVFile("MapUAllNodes.csv", "Nodes");
+    mapService.loadCSVFile("MapUAllEdges.csv", "Edges");
 
     Scene scene = new Scene(root);
     App.primaryStage.setScene(scene);
-//    Label label = new Label("Hello World");
-//    label.setStyle("-fx-font-family: Akaya Telivigala; -fx-font-size: 100;");
-//    label.setFont(Font.font("Rubik", FontWeight.NORMAL, 50));
-//    Scene scene = new Scene(label);
-//    scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap");
-
-//    scene.getStylesheets().add("/edu/wpi/u/views/css/LightTheme.css");
-
-
-
-//    scene.getStylesheets().add("/edu/wpi/u/views/css/BaseStyle.css");
     App.primaryStage.getScene().getStylesheets().add(getClass().getResource("/edu/wpi/u/views/css/BaseStyle.css").toExternalForm());
     loadCorrectThmeme();
     App.primaryStage.setFullScreen(true);
@@ -208,9 +120,6 @@ public class App extends Application {
         App.getInstance().exitApp();
       }
     });
-
-
-    //Font.loadFont(App.class.getResource("/edu/wpi/u/views/css/Rubik-Regular.ttf").toExternalForm(), 10);
   }
 
   private void loadCorrectThmeme() {
@@ -239,12 +148,7 @@ public class App extends Application {
   public void exitApp() {
     App.isLoggedIn.set(false);
     System.out.println("Shutting Down");
-    //Database.getDB().saveAll();
-//    Database.getDB().stop();
     Stage stage = (Stage) App.primaryStage.getScene().getWindow();
     stage.close();
   }
-
-
-  public int requestClicked;
 }

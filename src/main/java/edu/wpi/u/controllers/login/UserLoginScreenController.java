@@ -35,8 +35,6 @@ public class UserLoginScreenController {
     public JFXTextField userNameTextField;
     @FXML
     public JFXPasswordField passWordField;
-//    @FXML
-//    public JFXButton loginButton;
     @FXML
     public JFXButton forgotPasswordButton;
     @FXML
@@ -50,8 +48,7 @@ public class UserLoginScreenController {
     private FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
 
     public void initialize() throws IOException {
-//        fxmlLoader.setClassLoader(App.classLoader);
-//        fxmlLoader.load();
+
 
         wrongPasswordLabel.setVisible(false);
 
@@ -112,7 +109,6 @@ public class UserLoginScreenController {
     }
 
     public void handleLogin() throws IOException {
-//        progressBar.setStyle("-fx-opacity: 1");
 
         String username = userNameTextField.getText();
         String password = passWordField.getText();
@@ -137,7 +133,6 @@ public class UserLoginScreenController {
                         Pattern pattern = Pattern.compile("^\\d{10}$");
                         Matcher matcher = pattern.matcher(phonenumber);
                         if (!matcher.matches()){
-//                            errorLabel.setText("Phonenumber associated with account is invalid");
                             throw new PhoneNumberNotFoundException("Phone number is not valid");
                         }
                         URI uri = new URI("https://bw-webapp.herokuapp.com/" + "login?phonenumber=" + "+1" + phonenumber + "&channel=sms");

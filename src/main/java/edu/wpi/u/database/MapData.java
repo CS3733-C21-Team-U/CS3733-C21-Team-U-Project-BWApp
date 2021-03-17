@@ -269,21 +269,6 @@ public class MapData extends Data{
         return false;
     }
 
-    public Node getNode(String node_id){
-        try {
-            String str = "select * from Nodes where nodeID=?";
-            PreparedStatement ps = conn.prepareStatement(str);
-            ResultSet rs = ps.executeQuery();
-            Node n = new Node(rs.getString("nodeId"), rs.getDouble("xcoord"), rs.getDouble("ycoord"), rs.getString("floor"), rs.getString("building"), rs.getString("node_type"), rs.getString("longname"), rs.getString("shortname"), "u");
-            rs.close();
-            return n;
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     /**
      * Updates Returns list of users who have permission to inputted edge
      * @param edgeID - Desired edge

@@ -39,14 +39,11 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public AnchorPane noLocaitonGraphic;
     public HBox bottomBar;
 
-
-    //Map stuff
     ImageView imageNode;
     public Label locationLabel;
     public int currentNode;
     AnchorPane mainMapPane = new AnchorPane();
     Group locationGroup = new Group();
-//    public BorderPane locationUI;
 
 
     private String nodeID = "";

@@ -177,20 +177,9 @@ public class NewMainPageController {
         }
 
         listViewTesting.getStyleClass().clear();
-//        list2.getStyleClass().clear();
-//        list2.getStyleClass().add("mylistview2");
-
-//        list2.expandedProperty().set(true);
-
-
-
         chipView.getChips().addAll("Start with one item");
         chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
-//        chipView.setSelectionHandler();
-
         chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
-
-//        listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
@@ -310,30 +299,6 @@ public class NewMainPageController {
 //        App.mapInteractionModel.clearPreviousNodeID();
 //        App.mapInteractionModel.setNodeID(" ");
     }
-
-//    public void onChipEnter(KeyEvent keyEvent) {
-//////        System.out.println("In function");
-////        if(keyEvent.getCode() == KeyCode.ENTER){
-////            ObservableList<String> currently = chipView.getChips();
-////            ObservableList<String> options = chipView.getSuggestions();
-////
-////            for(int i = 0; i < currently.size(); i++){
-////                boolean isValid = false;
-////                for(String option : options){
-////                    if(option.equals(currently.get(i))){
-////                        isValid = true;
-////                    }
-////                }
-////                if(!isValid){
-////                    currently.remove(i);
-////                    i--;
-////                }
-////            }
-////
-////            chipView.getChips().clear();
-////            chipView.getChips().addAll(currently);
-////        }
-//    }
 
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);
@@ -681,22 +646,11 @@ public class NewMainPageController {
     }
 
     public void handleAPage(ActionEvent actionEvent) throws IOException {
-        //JFXDialogLayout content = new JFXDialogLayout();
-        //JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
-
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
-//        Parent root1 = (Parent) fxmlLoader.load();
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root1));
-//        stage.show();
         FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
         fxmlLoader2.load();
         fxmlLoader2.getController();
         Object root = fxmlLoader2.getRoot();
-
         JFXDialogLayout content = new JFXDialogLayout();
-//        Label body = new Label("The Brigham & Women\'s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.");
         content.setBody((Node) root);
         content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
