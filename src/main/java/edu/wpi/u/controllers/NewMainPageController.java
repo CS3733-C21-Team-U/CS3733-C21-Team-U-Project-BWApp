@@ -693,17 +693,21 @@ public class NewMainPageController {
         FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/generaluserhelp/APIpage.fxml"));
         fxmlLoader2.load();
         fxmlLoader2.getController();
-        App.getPrimaryStage().getScene().setRoot(fxmlLoader2.getRoot());
+        Object root = fxmlLoader2.getRoot();
 
-        //shows a popup
-//        JFXButton button2 = new JFXButton("DISMISS");
-//       // button2.setOnAction(event -> dialog.close());
-//        button2.getStyleClass().add("button-contained");
+        JFXDialogLayout content = new JFXDialogLayout();
+//        Label body = new Label("The Brigham & Women\'s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes.");
+        content.setBody((Node) root);
+        content.getStyleClass().add("dialogue");
+        JFXDialog dialog = new JFXDialog(newMainPageStackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button2 = new JFXButton("DISMISS");
+        button2.setOnAction(event -> dialog.close());
+        button2.getStyleClass().add("button-contained");
+        ArrayList<Node> actions = new ArrayList<>();
+        actions.add(button2);
+        content.setActions(actions);
+        dialog.show();
 
-//        ArrayList<Node> actions = new ArrayList<>();
-//        actions.add(button2);
-        //content.setActions(actions);
-        //dialog.show();
     }
 }
 
