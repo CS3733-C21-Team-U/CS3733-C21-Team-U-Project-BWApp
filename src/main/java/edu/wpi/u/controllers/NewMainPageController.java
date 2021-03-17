@@ -177,20 +177,9 @@ public class NewMainPageController {
         }
 
         listViewTesting.getStyleClass().clear();
-//        list2.getStyleClass().clear();
-//        list2.getStyleClass().add("mylistview2");
-
-//        list2.expandedProperty().set(true);
-
-
-
         chipView.getChips().addAll("Start with one item");
         chipView.getSuggestions().addAll("Suggestion1","Suggestion2","Suggestion3");
-//        chipView.setSelectionHandler();
-
         chipViewOnly.getChips().addAll("You", "Can't","Edit","This!");
-
-//        listViewDemo.setItems(listView);
         App.tabPaneRoot = mainTabPane;
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Input Required");
@@ -310,30 +299,6 @@ public class NewMainPageController {
 //        App.mapInteractionModel.clearPreviousNodeID();
 //        App.mapInteractionModel.setNodeID(" ");
     }
-
-//    public void onChipEnter(KeyEvent keyEvent) {
-//////        System.out.println("In function");
-////        if(keyEvent.getCode() == KeyCode.ENTER){
-////            ObservableList<String> currently = chipView.getChips();
-////            ObservableList<String> options = chipView.getSuggestions();
-////
-////            for(int i = 0; i < currently.size(); i++){
-////                boolean isValid = false;
-////                for(String option : options){
-////                    if(option.equals(currently.get(i))){
-////                        isValid = true;
-////                    }
-////                }
-////                if(!isValid){
-////                    currently.remove(i);
-////                    i--;
-////                }
-////            }
-////
-////            chipView.getChips().clear();
-////            chipView.getChips().addAll(currently);
-////        }
-//    }
 
     public void handleCollapseButton(ActionEvent actionEvent) {
 //        this.list2.expandedProperty().set(true);

@@ -23,20 +23,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     public RequestListItemContainerController parent;
 
-    //@FXML public Button expandCollapseButton;     DNE
-    //@FXML public Button editRequestButton;        DNE
-    //@FXML public AnchorPane requestItemAnchor;    DNE
-
-    //@FXML public Button deleteRequestButton;      DNE
-
     @FXML public Button viewRequestButton;
     @FXML public Label requestItemDescriptionLabel;
-    //@FXML public TextField title;
-    //@FXML public TextField location;
 
-    //public boolean isCollapsed = true;
     @FXML public Label requestItemTitleLabel;
-//    @FXML public JFXChipView requestItemLocationChipView;
     @FXML public Label requestItemDate2BCompletedLabel;
     @FXML public Label requestItemCreatorLabel;
     @FXML public Label requestItemRequestTypeLabel;
@@ -44,7 +34,6 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public Label requestItemAssigneeLabel;
 
     @FXML public AnchorPane requestItemRoot;
-//    @FXML public SVGPath requestIcon;
     @FXML public SVGPath requestIcon;
     @FXML public JFXButton iconContainer;
 

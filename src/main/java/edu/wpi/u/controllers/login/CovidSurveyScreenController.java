@@ -57,7 +57,6 @@ public class CovidSurveyScreenController {
                     "For more information on how to take care of yourself: CDC COVID Care Resource. \n" +
                     "\n" +
                     "If you have an emergency, please call campus police/5555 or 9-1-1.\n");
-            //App.covidService.addDataPoint(true);
         }
     }
 
@@ -70,18 +69,12 @@ public class CovidSurveyScreenController {
     public void handleSkipToGuestButton(ActionEvent actionEvent) throws IOException {
         App.userService.setGuest("debug");
         App.userService.getActiveUser().setType(Role.GUEST);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        Object obj = fxmlLoader.load();
-//        Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
     public void handleSkipToPatientButton(ActionEvent actionEvent) throws IOException {
         App.userService.setPatient("debug");
         App.userService.getActiveUser().setType(Role.PATIENT);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        Object obj = fxmlLoader.load();
-//        Object myController = fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
@@ -89,9 +82,6 @@ public class CovidSurveyScreenController {
         App.userService.setEmployee("debug");
         System.out.println(App.userService.getActiveUser().getName());
         App.userService.getActiveUser().setType(Role.ADMIN);
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/u/views/NewMainPage.fxml"));
-//        fxmlLoader.load();
-//        fxmlLoader.getController();
         App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
     }
 
@@ -105,21 +95,7 @@ public class CovidSurveyScreenController {
         content.getStyleClass().add("dialogue");
         JFXDialog dialog = new JFXDialog(newStackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button1 = new JFXButton("Cancel");
-        //JFXButton button2 = new JFXButton("Proceed to Help Page");
         button1.setOnAction(event -> dialog.close());
-        /*button2.setOnAction(event -> {
-            AnchorPane anchor = (AnchorPane) App.tabPaneRoot.getSelectionModel().getSelectedItem().getContent();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/MainHelpPage.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            anchor.getChildren().clear();
-            anchor.getChildren().add(root);
-            dialog.close();
-
-            });*/
         button1.getStyleClass().add("button-text");
         ArrayList<Node> actions = new ArrayList<>();
         actions.add(button1);
