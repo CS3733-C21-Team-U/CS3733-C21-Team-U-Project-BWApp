@@ -45,6 +45,7 @@ public class TextingService {
      * @param specificRequest the request
      */
     public void sendText(String to, SpecificRequest specificRequest){
+        System.out.println("Sending text to " +to);
         Message message = Message
                 .creator(new PhoneNumber("+1"+to),
                         new PhoneNumber(Objects.requireNonNull(dotenv.get("TWILIO_NUMBER"))),

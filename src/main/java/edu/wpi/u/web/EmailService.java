@@ -48,6 +48,7 @@ public class EmailService {
      * @param specificRequest the request
      */
     public void sendMail(String to, SpecificRequest specificRequest){
+        System.out.println("Sending mail to " +to);
         Email email = EmailBuilder.startingBlank()
                 .from("Brigham & Women's Service Request Notifier", "cs3733teamu@gmail.com")
                 .to("", to)

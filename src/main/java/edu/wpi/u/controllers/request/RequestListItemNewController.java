@@ -293,7 +293,7 @@ public class RequestListItemNewController extends AnchorPane implements Initiali
                             App.emailService.sendMail(to, currSpecificRequest);
                         }
                         for (String to : sms){
-                            //App.textingService.sendText(to, currSpecificRequest);
+                            App.textingService.sendText(to, currSpecificRequest);
                         }
                     });
                 }catch (Exception e){
