@@ -38,23 +38,23 @@ public class Request {
     public String editRequest(Timestamp needDate, String description, String title, ArrayList<String> location, ArrayList<String> assignee) {
         String result = "";
         if(!title.equals(getTitle())){
-            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"'");
+            result = result.concat("Title changed from '"+getTitle()+"' to '"+title+"' \n");
             getPrimaryComment().title = title;
         }
         if(!description.equals(getDescription())){
-            result = result.concat("\nDescription changed from '"+getDescription()+"' to "+description);
+            result = result.concat("Description changed from '"+getDescription()+"' to '"+description+"' \n");
             getPrimaryComment().description = description;
         }
         if(!needDate.equals(dateNeeded)){
-            result = result.concat("\nDue Date changed from '"+dateNeeded.toString()+"' to "+needDate.toString());
+            result = result.concat("Due Date changed from '"+dateNeeded.toString()+"' to '"+needDate.toString()+"' \n");
             this.dateNeeded = needDate;
         }
         if(!location.equals(this.locations)){
-            result = result.concat("\nLocations were updated");
+            result = result.concat("Locations were updated \n");
             this.locations = location;
         }
         if(!assignee.equals(this.assignees)){
-            result = result.concat("\nAssignees were updated");
+            result = result.concat("Assignees were updated \n");
             this.assignees = assignee;
         }
         return result;

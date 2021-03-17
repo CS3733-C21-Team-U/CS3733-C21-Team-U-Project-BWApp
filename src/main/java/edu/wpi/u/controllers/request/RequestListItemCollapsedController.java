@@ -1,7 +1,9 @@
 package edu.wpi.u.controllers.request;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.u.App;
 import edu.wpi.u.algorithms.Node;
+import edu.wpi.u.users.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     @FXML public AnchorPane requestItemRoot;
 //    @FXML public SVGPath requestIcon;
     @FXML public SVGPath requestIcon;
+    @FXML public JFXButton iconContainer;
 
     public RequestListItemCollapsedController(RequestListItemContainerController parent) throws IOException {
         this.parent = parent;
@@ -55,6 +58,11 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        App.isLoggedIn.addListener((o,oldVal,newVal) -> {
+            showOrNottoSHow();
+        });
+
         requestIcon.setContent(parent.getIcon(parent.request.getType()));
         setFields();
 
@@ -81,6 +89,13 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         parent.isResolved.addListener((o, oldVal, newVal)->{
             if(parent.request.getGenericRequest().isResolved()){
                 requestItemDate2BCompletedLabel.setText("Request Resolved");
+                if(App.themeString.equals("DARK")){
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px; -fx-opacity: 0.8");
+                }else{
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px;");
+                }
+                iconContainer.setStyle("-fx-background-color: -primaryVariant;");
+
             }
         });
 
@@ -98,6 +113,10 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
     }
 
     public void showOrNottoSHow(){
+        //for user role
+        //Patients only see requests that they are the author of
+        boolean role = (!App.userService.getActiveUser().getType().equals(Role.PATIENT)) || App.userService.getActiveUser().getUserName().equals(parent.request.getGenericRequest().getCreator());
+
         //for requests
         boolean type = parent.request.getType().equals(App.requestService.requestType.getValue())
                 || App.requestService.requestType.getValue().equals("All");
@@ -109,7 +128,7 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         boolean resolved = (App.requestService.resolveStatus.getValue().equals("Active")&&!parent.request.getGenericRequest().isResolved())
                 ||(App.requestService.resolveStatus.getValue().equals("Resolved")&&parent.request.getGenericRequest().isResolved())||(App.requestService.resolveStatus.getValue().equals("All"));
 
-            if(type && assignee && resolved){
+            if(type && assignee && resolved && role){
                 appear();
             }
             else{
@@ -122,6 +141,13 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
         Timestamp t = parent.request.getGenericRequest().getDateNeeded();
         if(parent.request.getGenericRequest().isResolved()){
             requestItemDate2BCompletedLabel.setText("Request Resolved");
+            requestItemTitleLabel.setText("[RESOLVED] " + parent.request.getGenericRequest().getTitle());
+            if(App.themeString.equals("DARK")){
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px; -fx-opacity: 0.6");
+            }else{
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px;");
+            }
+            iconContainer.setStyle("-fx-background-color: -primaryVariant;");
         }
         else if(t.before(new Timestamp(System.currentTimeMillis()))){
             requestItemDate2BCompletedLabel.setText("Overdue: " + t.toLocalDateTime().toLocalDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + ", " + t.toLocalDateTime().toLocalTime());

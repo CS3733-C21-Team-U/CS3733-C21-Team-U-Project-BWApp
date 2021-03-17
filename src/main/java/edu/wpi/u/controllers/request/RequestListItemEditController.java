@@ -3,6 +3,7 @@ package edu.wpi.u.controllers.request;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import edu.wpi.u.App;
+import edu.wpi.u.requests.Comment;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -134,10 +135,10 @@ public class RequestListItemEditController extends AnchorPane implements Initial
 //                assigneesToAdd.remove(s);
 //            }
 //        });
-        parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
+        Comment c = parent.request.updateRequest(editTitleField.getText(), editDescriptionField.getText(),
                 Timestamp.valueOf(LocalDateTime.of(editDateNeededField.getValue(), editTimeNeededField.getValue())),
                 locationsToAdd, assigneesToAdd, requestSpecificItems());
-        App.requestService.updateRequest(parent.request);
+        App.requestService.updateRequest(parent.request, c);
 
         //todo : change to observable list thing Kohmei said
         Thread t = new Thread(() ->{

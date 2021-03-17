@@ -25,6 +25,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import lombok.SneakyThrows;
 
@@ -68,6 +70,11 @@ public class SettingsBaseController {
     public JFXRadioButton blueRadio;
     public JFXToggleButton emailNotifications;
     public JFXToggleButton textNotifications;
+    public HBox settingsPageHbox;
+    public VBox basicAccountSettings;
+    public VBox adminSettings;
+    public Group notificationChangeGroup;
+    public VBox otherSettings;
     private boolean enableChangeThemePopup = false;
 
     public void initialize() throws IOException, FilePathNotFoundException {
@@ -76,6 +83,47 @@ public class SettingsBaseController {
         succsessfulLabel.setVisible(false);
         contactInfoLabel.setVisible(false);
         errorUpdateContactLabel.setVisible(false);
+
+        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
+            if (App.userService.getActiveUser().getType() == PATIENT){
+                otherSettings.getChildren().remove(notificationChangeGroup);
+            }
+            else if (!otherSettings.getChildren().contains(notificationChangeGroup)){
+                otherSettings.getChildren().add(0,notificationChangeGroup);
+            }
+            if (!settingsPageHbox.getChildren().contains(basicAccountSettings)){
+                settingsPageHbox.getChildren().add(basicAccountSettings);
+            }
+            if (!settingsPageHbox.getChildren().contains(adminSettings)){
+                settingsPageHbox.getChildren().add(adminSettings);
+            }
+            if (App.userService.getActiveUser().getType() == ADMIN){
+                settingsPageHbox.getChildren().remove(basicAccountSettings);
+            }
+            if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
+                settingsPageHbox.getChildren().remove(adminSettings);
+//                onlyAdmin.setStyle("-fx-opacity: 0");
+//                onlyAdmin.setDisable(true);
+            }
+            switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
+                case "Both":
+                    emailNotifications.setSelected(true);
+                    textNotifications.setSelected(true);
+                    break;
+                case "Email":
+                    emailNotifications.setSelected(true);
+                    break;
+                case "SMS":
+                    textNotifications.setSelected(true);
+                    break;
+                default:
+                    emailNotifications.setSelected(false);
+                    textNotifications.setSelected(false);
+                    break;
+            }
+            phoneNumTextField.setText(App.userService.getActiveUser().getPhoneNumber());
+            emailAddressTextField.setText(App.userService.getActiveUser().getEmail());
+        });
 
         Platform.runLater(()->{
             switch (App.themeString){
@@ -131,27 +179,6 @@ public class SettingsBaseController {
             }
         });
 
-        
-        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
-            switch (App.userService.getPreferredContactMethod(App.userService.getActiveUser().getUserName())) {
-                case "Both":
-                    emailNotifications.setSelected(true);
-                    textNotifications.setSelected(true);
-                    break;
-                case "Email":
-                    emailNotifications.setSelected(true);
-                    break;
-                case "SMS":
-                    textNotifications.setSelected(true);
-                    break;
-                default:
-                    emailNotifications.setSelected(false);
-                    textNotifications.setSelected(false);
-                    break;
-            }
-            phoneNumTextField.setText(App.userService.getActiveUser().getPhoneNumber());
-            emailAddressTextField.setText(App.userService.getActiveUser().getEmail());
-        });
         phoneNumTextField.focusedProperty().addListener(e->{
             contactInfoLabel.setVisible(false);
             errorUpdateContactLabel.setVisible(false);
@@ -176,33 +203,6 @@ public class SettingsBaseController {
             passwordsDontMatchLabel.setVisible(false);
             succsessfulLabel.setVisible(false);
         });
-        App.isLoggedIn.addListener((observable, oldValue, newValue) -> {
-            if(App.userService.getActiveUser().getType() ==  Role.ADMIN){
-                onlyAdmin.setStyle("-fx-opacity: 1");
-                onlyAdmin.setDisable(false);
-            }
-            else if(!(App.userService.getActiveUser().getType() ==  Role.ADMIN)){
-                onlyAdmin.setStyle("-fx-opacity: 0");
-                onlyAdmin.setDisable(true);
-            }
-
-            if (!(App.userService.getActiveUser().getType() == ADMIN)) {
-                adminText.setStyle("-fx-opacity: 0");
-                subtitleText.setStyle("-fx-opacity: 0");
-                pathfindingText.setStyle("-fx-opacity: 0");
-                filePathTextField.setStyle("-fx-opacity: 0");
-                loadCSVButton.setStyle("-fx-opacity: 0");
-                tableNameOptions.setStyle("-fx-opacity: 0");
-                createTableButton.setStyle("-fx-opacity: 0");
-
-                pathfindingText.setDisable(true);
-                filePathTextField.setDisable(true);
-                createTableButton.setDisable(true);
-                loadCSVButton.setDisable(true);
-
-            }
-        });
-
 
         tableNameOptions.setItems(FXCollections.observableArrayList("Nodes","Edges"));
 
@@ -254,10 +254,14 @@ public class SettingsBaseController {
                         App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
                         App.userService.getActiveUser().getType() == TRANSLATORS) {
                     userType = "Employees";
-                } else {
+                } else if (App.userService.getActiveUser().getType() == PATIENT){
+                    userType = "Patients";
+                }
+                else {
                     userType = "Guests";
                 }
                 App.userService.changePhoneNumber(App.userService.getActiveUser().getUserID(), phoneNumTextField.getText(), userType);
+                App.updatePhoneNumber.set(!App.updatePhoneNumber.get());
             }
             if(!emailAddressTextField.getText().equals("")){
                 String userType = "";
@@ -266,10 +270,14 @@ public class SettingsBaseController {
                         App.userService.getActiveUser().getType() == SECURITY_GUARD || App.userService.getActiveUser().getType() == TECHNICAL_SUPPORT ||
                         App.userService.getActiveUser().getType() == TRANSLATORS) {
                     userType = "Employees";
-                } else {
+                } else if (App.userService.getActiveUser().getType() == PATIENT){
+                    userType = "Patients";
+                }
+                else {
                     userType = "Guests";
                 }
                 App.userService.changeEmail(App.userService.getActiveUser().getUserID(), emailAddressTextField.getText(), userType);
+                App.updateEmail.set(!App.updateEmail.get());
             }
         }
 

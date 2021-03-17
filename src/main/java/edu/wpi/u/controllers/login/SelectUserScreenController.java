@@ -161,7 +161,7 @@ public class SelectUserScreenController {
                     Platform.runLater(() -> {
                         App.userService.setGuest("debug");
                         App.userService.getActiveUser().setType(Role.GUEST);
-                        App.isLoggedIn.set(true);
+                        App.isLoggedIn.set(!App.isLoggedIn.get());
                         App.tabPaneRoot.getSelectionModel().selectFirst();
                         App.getPrimaryStage().getScene().setRoot(App.base);
                     });
@@ -177,7 +177,7 @@ public class SelectUserScreenController {
             fxmlLoader.getController();
             App.userService.setGuest("debug");
             App.userService.getActiveUser().setType(Role.GUEST);
-            App.isLoggedIn.set(true);
+            App.isLoggedIn.set(!App.isLoggedIn.get());
             App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
         }
 
@@ -192,7 +192,7 @@ public class SelectUserScreenController {
                     Platform.runLater(() -> {
                         App.userService.setPatient("debug");
                         App.userService.getActiveUser().setType(Role.PATIENT);
-                        App.isLoggedIn.set(true);
+                        App.isLoggedIn.set(!App.isLoggedIn.get());
                         App.tabPaneRoot.getSelectionModel().selectFirst();
                         App.getPrimaryStage().getScene().setRoot(App.base);
                     });
@@ -208,7 +208,7 @@ public class SelectUserScreenController {
             fxmlLoader.getController();
             App.userService.setPatient("debug");
             App.userService.getActiveUser().setType(Role.PATIENT);
-            App.isLoggedIn.set(true);
+            App.isLoggedIn.set(!App.isLoggedIn.get());
             App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
         }
 
@@ -223,7 +223,7 @@ public class SelectUserScreenController {
                     Platform.runLater(() -> {
                         App.userService.setEmployee("debug");
                         App.userService.getActiveUser().setType(Role.ADMIN);
-                        App.isLoggedIn.set(true);
+                        App.isLoggedIn.set(!App.isLoggedIn.get());
                         App.tabPaneRoot.getSelectionModel().selectFirst();
                         App.getPrimaryStage().getScene().setRoot(App.base);
                     });
@@ -240,7 +240,7 @@ public class SelectUserScreenController {
             fxmlLoader.getController();
             App.userService.setEmployee("debug");
             App.userService.getActiveUser().setType(Role.ADMIN);
-            App.isLoggedIn.set(true);
+            App.isLoggedIn.set(!App.isLoggedIn.get());
             App.getPrimaryStage().getScene().setRoot(fxmlLoader.getRoot());
         }
     }

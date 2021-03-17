@@ -131,7 +131,10 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
     public void generateComments(){
         commentsRoot.getChildren().clear();
         generateFirstComment();
-        for(int i = this.parent.request.getGenericRequest().getComments().size()-1; i >= 1; i--){
+//        for(int i = this.parent.request.getGenericRequest().getComments().size()-1; i >= 1; i--){
+//            generateCommentHelper(i);
+//        }
+        for(int i = 1; i < this.parent.request.getGenericRequest().getComments().size(); i++){
             generateCommentHelper(i);
         }
     }
@@ -167,7 +170,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         iconButton.setMouseTransparent(true);
         HBox mainHBox = new HBox();
         HBox.setMargin(iconButton,new Insets(10,10,10,10));
-        HBox.setMargin(textVBox,new Insets(10,10,10,10));
+        HBox.setMargin(textVBox,new Insets(10,20,10,10));
         mainHBox.getChildren().add(iconButton);
         mainHBox.getChildren().add(textVBox);
         commentsRoot.getChildren().add(mainHBox);
@@ -175,7 +178,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
 
     public void addComment() {
       //  System.out.println("The start size is: "+this.parent.request.getGenericRequest().getComments().size());
-        Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getName(), CommentType.DEFAULT);
+        Comment newComment = new Comment("Status", commentField.getText(), App.userService.getActiveUser().getUserName(), CommentType.DEFAULT);
         App.requestService.addComment(this.parent.request, newComment);
         generateCommentHelper(this.parent.request.getGenericRequest().getComments().size()-1);
         //System.out.println("The end size is: "+this.parent.request.getGenericRequest().getComments().size());
@@ -328,7 +331,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
                 comTypeLabel = new Label("Request Edited");
                 break;
             case "DEFAULT":
-                comTypeLabel = new Label("Update addLisded");
+                comTypeLabel = new Label("Status Update");
                 break;
             default:
                 comTypeLabel = new Label("Unknown Comment");
@@ -344,6 +347,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         Label comTitleLabel = new Label(comment.getAuthor());
         comTitleLabel.getStyleClass().add("subtitle");
         Label comDescLabel = new Label(comment.getDescription());
+        comDescLabel.setWrapText(true);
         SVGPath iconSVG = new SVGPath();
         iconSVG.setContent(parent.getIcon(comment.getType().toString()));
         iconSVG.getStyleClass().add("on-primary");
@@ -359,7 +363,7 @@ public class RequestListItemExpandedController extends AnchorPane implements Ini
         iconButton.setMouseTransparent(true);
         HBox mainHBox = new HBox();
         HBox.setMargin(iconButton,new Insets(10,10,10,10));
-        HBox.setMargin(textVBox,new Insets(10,10,10,10));
+        HBox.setMargin(textVBox,new Insets(10,20,10,10));
         mainHBox.getChildren().add(iconButton);
         mainHBox.getChildren().add(textVBox);
         commentsRoot.getChildren().add(mainHBox);
