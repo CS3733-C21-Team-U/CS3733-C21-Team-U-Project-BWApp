@@ -79,9 +79,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             if(parent.request.getGenericRequest().isResolved()){
                 requestItemDate2BCompletedLabel.setText("Request Resolved");
                 if(App.themeString.equals("DARK")){
-                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px; -fx-opacity: 0.8");
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px; -fx-opacity: 0.8");
                 }else{
-                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px;");
+                    requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px;");
                 }
                 iconContainer.setStyle("-fx-background-color: -primaryVariant;");
 
@@ -132,9 +132,9 @@ public class RequestListItemCollapsedController extends AnchorPane implements In
             requestItemDate2BCompletedLabel.setText("Request Resolved");
             requestItemTitleLabel.setText("[RESOLVED] " + parent.request.getGenericRequest().getTitle());
             if(App.themeString.equals("DARK")){
-                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px; -fx-opacity: 0.6");
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px; -fx-opacity: 0.6");
             }else{
-                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColor; -fx-background-radius: 7px;");
+                requestItemRoot.setStyle("-fx-background-color: -requestResolvedColorReal; -fx-background-radius: 7px;");
             }
             iconContainer.setStyle("-fx-background-color: -primaryVariant;");
         }
