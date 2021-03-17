@@ -28,9 +28,9 @@ public class RequestService {
   public RequestService() {
     rd  = new RequestData();
     this.activeRequests = rd.loadActiveRequests();
-    App.isLoggedIn.addListener((o, p , q) ->{
-      this.activeRequests = rd.loadActiveRequests();
-    });
+//    App.isLoggedIn.addListener((o, p , q) ->{
+//      this.activeRequests = rd.loadActiveRequests();
+//    });
   }
 
   /**
