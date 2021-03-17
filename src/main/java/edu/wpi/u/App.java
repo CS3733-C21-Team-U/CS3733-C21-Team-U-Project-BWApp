@@ -174,8 +174,8 @@ public class App extends Application {
     // App.getPrimaryStage.setScene(scene)
     App.primaryStage = stage; // stage is the window given to us
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/request/RequestListItemEdit.fxml"));
-    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewCovidResults.fxml"));
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/user/ViewCovidResults.fxml"));
+    //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/login/SelectUserScreen.fxml"));
     //Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/u/views/pathfinding/TreeViewList.fxml"));
 
     mapService.loadCSVFile("src/main/resources/edu/wpi/u/MapUAllNodes.csv", "Nodes");
