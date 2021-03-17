@@ -10,23 +10,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.APIpageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.u.controllers.generaluserhelp.APIpageController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="161.0" layoutY="-7.0" prefHeight="1000.0" prefWidth="1700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="161.0" layoutY="-7.0" prefHeight="910.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label styleClass="headline-1" text="API's Used for this Application" />
+            <Label alignment="CENTER" prefHeight="89.0" prefWidth="600.0" styleClass="headline-1" text="APIs Used" textAlignment="CENTER" wrapText="true" />
             <Label styleClass="headline-2" text="Project Software and Services">
                <VBox.margin>
-                  <Insets top="45.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <Pane prefHeight="154.0" prefWidth="600.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7;">
                <VBox.margin>
-                  <Insets left="550.0" right="550.0" top="15.0" />
+                  <Insets />
                </VBox.margin>
                <children>
-                  <HBox prefHeight="153.0" prefWidth="600.0">
+                  <HBox prefHeight="153.0" prefWidth="660.0">
                      <children>
                         <VBox prefHeight="187.0" prefWidth="203.0">
                            <children>
@@ -96,7 +95,7 @@
             </Pane>
             <Label styleClass="headline-2" text="Project Communication Services">
                <VBox.margin>
-                  <Insets top="45.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <Pane prefHeight="145.0" prefWidth="600.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7;">
@@ -170,7 +169,7 @@
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets left="550.0" right="550.0" top="15.0" />
+                  <Insets />
                </VBox.margin>
                <effect>
                   <DropShadow />
@@ -178,15 +177,15 @@
             </Pane>
             <Label styleClass="headline-2" text="Project Libraries / API's">
                <VBox.margin>
-                  <Insets top="45.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <Pane prefHeight="246.0" prefWidth="600.0" style="-fx-background-color: -backgroundAlt; -fx-background-radius: 7;">
                <VBox.margin>
-                  <Insets left="550.0" right="550.0" top="15.0" />
+                  <Insets />
                </VBox.margin>
                <children>
-                  <HBox prefHeight="246.0" prefWidth="600.0">
+                  <HBox prefHeight="246.0" prefWidth="676.0">
                      <children>
                         <VBox prefHeight="203.0" prefWidth="203.0">
                            <children>
