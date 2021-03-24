@@ -11,9 +11,9 @@ process.
 * Robust, automated, multiplatform, Handling of COVID-19 risk before allowing users to enter the campus.
 * Advanced and customizable service request management, creation, and delegation.
 * Simple to use pathfinding navigation system.
-* Map editing portal allowing full control of function of pathfinding system.
+* Map editing portal allowing full control of the pathfinding system.
 * User account management functionality that is integrated within every system in the app.
-* Several different application experiences and functions depending on type of user account.
+* Several different application experiences and functions depending on the type of user account.
 * Mobile implementation of Pathfinding feature that is integrated into the COVID-19 facility admittance risk feature.
 
 **Watch a video of our [final presentation](https://youtu.be/84nr0pFNmIE) on Youtube**
@@ -59,7 +59,7 @@ Download the bin distribution – the first link ending in .zip. Then double-cli
    ```sh
    git clone https://github.com/Kohmei358/BrighamWomens-Hospital-App
    ```
-3. Install Depencies Using Gradle
+3. Install Dependencies Using Gradle
    ```sh
    gradle build
    ```
@@ -77,7 +77,7 @@ _For detailed instructions, please refer to the [User Manual](https://docs.googl
 ## Acknowledgements
 * Proffessor **Wilson Wong** for creating an amazing course that changed so many of us
 * Brigham and Women's Faulkner Hospital and **Andrew Shinn** for their time and input
-* **Andrew Bonaventura** for beeing an amazing TA and for being aviable whenever we needed him
+* **Andrew Bonaventura** for beeing an amazing TA and for being available whenever we needed him
 * **Kohmei K.**	Lead Software Engineer [@Kohmei358](https://github.com/Kohmei358)
 * **Neville I.**	Asst. Lead Software Engineer [@beast-nev](https://github.com/beast-nev)
 * **Kaamil L.**	Asst. Lead Software Engineer [@kslokhandwala2022](https://github.com/kslokhandwala2022)
