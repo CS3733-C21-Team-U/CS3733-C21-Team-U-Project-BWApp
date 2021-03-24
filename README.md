@@ -92,7 +92,7 @@ _For detailed instructions, please refer to the [User Manual](https://docs.googl
 * **Tyler S.**	Product Owner	[@tsanderv](https://github.com/tsanderv)
 * **Lily D.**	Documentation Analyst	[@LilyDurkin](https://github.com/LilyDurkin)
 
-## Discalmer
+## Disclaimer 
 This was forked so that I could link this code in [my website](https://kohmeik.com). Please do not reference any of the code or UX design if you are currently enrolled in Software Engineering! The learning experience is so much better if you do not look at examples of previous work and your team will end up with a better final product if you brainstorm based on your surveys and interviews.
 
 [product-screenshot]: BWHeathFinalPoster.jpg
